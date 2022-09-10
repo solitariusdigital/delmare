@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import classes from "./MainNavigation.module.css";
+import classes from "./MainNavigation.module.scss";
 
 function MainNavigation() {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>React Meetups</div>
+      <div className={classes.logo}>DELMARE</div>
       <nav>
         <ul>
           <li>
