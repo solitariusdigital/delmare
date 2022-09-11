@@ -1,3 +1,5 @@
+@use "config" as config;
+
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 576px;
 
@@ -35,5 +37,29 @@ $screen-xl-min: 1200px;
 @mixin xl {
   @media (max-width: #{$screen-xl-min}) {
     @content;
+  }
+}
+
+@mixin button($color, $subColor, $size) {
+  width: $size;
+  height: 30px;
+  background: $color;
+  border-radius: 5px;
+  color: $subColor;
+  font-size: 14px;
+  margin: auto;
+  border: none;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-shadow: config.$button-shadow;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $color;
+    background: $subColor;
   }
 }

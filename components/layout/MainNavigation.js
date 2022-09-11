@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -25,25 +25,23 @@ function MainNavigation() {
   ];
 
   return (
-    <Fragment>
-      <div className={classes.container}>
-        <div className={classes.header}>
-          <div className={classes.bar}>
-            <ShoppingCartIcon className="icon" />
-            <p>DELMARE</p>
-            <MenuIcon className="icon" onClick={() => setMenu(true)} />
-          </div>
-          <div className={classes.navigation}>
-            {navigation.map((nav, index) => (
-              <div key={index}>
-                <Link href={nav.link}>{nav.title}</Link>
-              </div>
-            ))}
-          </div>
+    <div className={classes.container}>
+      <div className={classes.header}>
+        <div className={classes.bar}>
+          <ShoppingCartIcon className="icon" />
+          <p className="brand">DELMARE</p>
+          <MenuIcon className="icon" onClick={() => setMenu(true)} />
         </div>
-        {menu && <BurgerMenu />}
+        <div className={classes.navigation}>
+          {navigation.map((nav, index) => (
+            <div key={index}>
+              <Link href={nav.link}>{nav.title}</Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </Fragment>
+      {menu && <BurgerMenu />}
+    </div>
   );
 }
 

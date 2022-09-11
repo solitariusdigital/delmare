@@ -1,5 +1,4 @@
 @use "styles/_config.scss" as config;
-@use "styles/_mixins.scss" as mixins;
 
 .container {
   position: relative;
@@ -20,11 +19,6 @@
     font-family: config.$englishFont;
     margin: 0px;
     padding: 10px;
-
-    p {
-      font-size: config.$brand-font;
-      margin: 0px;
-    }
   }
 
   .navigation {
