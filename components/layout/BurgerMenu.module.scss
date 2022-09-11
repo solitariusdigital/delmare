@@ -1,0 +1,33 @@
+@use "styles/_config.scss" as config;
+
+.menu {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50%;
+  max-width: 300px;
+  padding: 10px;
+  background: config.$white;
+  box-shadow: config.$display-shadow;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    p {
+      font-size: config.$small-font;
+      margin: 10px 0px;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      p {
+        margin-right: 20px;
+      }
+    }
+  }
+}

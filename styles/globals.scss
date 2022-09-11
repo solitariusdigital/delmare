@@ -8,7 +8,7 @@
 }
 
 body {
-  max-width: 900px;
+  max-width: config.$max-width;
   margin: auto;
   font-family: config.$farsiFont;
   background: config.$cream;
@@ -17,4 +17,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.icon {
+  cursor: pointer;
 }
