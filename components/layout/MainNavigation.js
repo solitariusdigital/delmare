@@ -11,16 +11,16 @@ function MainNavigation() {
 
   const navigation = [
     {
+      title: "New",
+      link: "/new",
+    },
+    {
       title: "Home",
       link: "/",
     },
     {
       title: "Profile",
       link: "/profile",
-    },
-    {
-      title: "New",
-      link: "/new",
     },
   ];
 

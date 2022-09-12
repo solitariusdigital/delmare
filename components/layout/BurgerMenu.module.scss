@@ -1,32 +1,41 @@
 @use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
 
-.menu {
+.container {
   position: absolute;
   right: 0px;
   top: 0px;
-  width: 50%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row-reverse;
+  backdrop-filter: blur(3px);
+  @include mixins.transparentBackground(0.3, config.$black);
+  // @include mixins.slide();
+}
+
+.menu {
+  width: 80%;
   max-width: 300px;
-  padding: 10px;
+  overflow-y: scroll;
   background: config.$white;
   box-shadow: config.$display-shadow;
+  padding: 10px;
 
   .list {
     display: flex;
     flex-direction: column;
     text-align: right;
-    margin-top: 20px;
-
-    p {
-      font-size: config.$small-font;
-      margin: 10px 0px;
-    }
+    margin: 20px 0px;
 
     .item {
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
+      margin: 15px 0px;
 
       p {
+        font-size: config.$med-font;
         margin-right: 10px;
       }
 
@@ -45,10 +54,9 @@
 }
 
 .brandContainer {
-  margin-top: 50px;
-  text-align: center;
   display: flex;
   flex-direction: column;
+  text-align: center;
 
   button {
     margin-bottom: 20px;

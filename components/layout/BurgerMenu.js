@@ -30,28 +30,30 @@ export default function BurgerMenu() {
       icon: <LocalShippingIcon />,
     },
     {
-      title: "تراکنش ها",
+      title: "تراکنش",
       icon: <ChangeCircleIcon />,
     },
   ];
 
   return (
-    <div className={classes.menu}>
-      <div className={classes.cross}>
-        <CloseIcon className="icon" onClick={() => setMenu(false)} />
-      </div>
-      <div className={classes.list}>
-        {navigation.map((nav, index) => (
-          <div className={classes.item} key={index}>
-            {nav.icon}
-            <p>{nav.title}</p>
-          </div>
-        ))}
-      </div>
-      <div className={classes.brandContainer}>
-        <button className="subButton">Log in</button>
-        <button className="mainButton">Sign up</button>
-        <p className="brand">DELMARE</p>
+    <div className={classes.container}>
+      <div className={classes.menu}>
+        <div className={classes.cross}>
+          <CloseIcon className="icon" onClick={() => setMenu(false)} />
+        </div>
+        <div className={classes.list}>
+          {navigation.map((nav, index) => (
+            <div className={classes.item} key={index}>
+              {nav.icon}
+              <p>{nav.title}</p>
+            </div>
+          ))}
+        </div>
+        <div className={classes.brandContainer}>
+          <button className="subButton">Log in</button>
+          <button className="mainButton">Sign up</button>
+          <p className="brand">DELMARE</p>
+        </div>
       </div>
     </div>
   );
