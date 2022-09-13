@@ -9,6 +9,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
+import Image from "next/image";
+import logo from "../../assets/logo.png";
+
 export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
 
@@ -36,23 +39,28 @@ export default function BurgerMenu() {
   ];
 
   return (
-    <div className={classes.container}>
+    <div className={classes.slider}>
       <div className={classes.menu}>
-        <div className={classes.cross}>
-          <CloseIcon className="icon" onClick={() => setMenu(false)} />
+        <div>
+          <div className={classes.cross}>
+            <CloseIcon className="icon" onClick={() => setMenu(false)} />
+          </div>
+          <div className={classes.list}>
+            {navigation.map((nav, index) => (
+              <div className={classes.item} key={index}>
+                {nav.icon}
+                <p>{nav.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={classes.list}>
-          {navigation.map((nav, index) => (
-            <div className={classes.item} key={index}>
-              {nav.icon}
-              <p>{nav.title}</p>
-            </div>
-          ))}
-        </div>
-        <div className={classes.brandContainer}>
+
+        <div className={classes.container}>
           <button className="subButton">Log in</button>
           <button className="mainButton">Sign up</button>
-          <p className="brand">DELMARE</p>
+          <div className={classes.logo}>
+            <Image width={100} height={140} src={logo} alt="logo" />
+          </div>
         </div>
       </div>
     </div>

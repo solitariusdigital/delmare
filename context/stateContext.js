@@ -4,13 +4,13 @@ export const StateContext = createContext();
 
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [bar, setBar] = useState(true);
 
   const stateContext = {
     menu,
     setMenu,
-    admin,
-    setAdmin,
+    bar,
+    setBar,
   };
 
   return (

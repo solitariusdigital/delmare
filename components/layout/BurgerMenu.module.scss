@@ -1,7 +1,7 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
+.slider {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -20,7 +20,11 @@
   overflow-y: scroll;
   background: config.$white;
   box-shadow: config.$display-shadow;
-  padding: 10px;
+  padding: 10px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .list {
     display: flex;
@@ -32,7 +36,8 @@
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
-      margin: 15px 0px;
+      margin: 10px 0px;
+      height: 30px;
 
       p {
         font-size: config.$med-font;
@@ -53,12 +58,17 @@
   }
 }
 
-.brandContainer {
+.container {
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
 
   button {
     margin-bottom: 20px;
+  }
+
+  .logo {
+    width: 100%;
   }
 }
