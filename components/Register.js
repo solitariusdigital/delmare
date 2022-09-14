@@ -19,8 +19,9 @@ function Register({ props }) {
         <form className={classes.form} name="login" onSubmit={handleLogin}>
           <p className={classes.title}>Log in</p>
           <div className={classes.input}>
+            <p className={classes.label}>Your email</p>
             <input
-              placeholder="Email"
+              placeholder="sara@delmare.com"
               type="email"
               id="email"
               name="email"
@@ -31,6 +32,7 @@ function Register({ props }) {
           </div>
 
           <div className={classes.input}>
+            <p className={classes.label}>Your password</p>
             <input
               placeholder="Password"
               type="password"
