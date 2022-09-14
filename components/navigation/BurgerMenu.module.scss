@@ -22,10 +22,6 @@
   box-shadow: config.$display-shadow;
   padding: 10px 20px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
   .list {
     display: flex;
     flex-direction: column;
