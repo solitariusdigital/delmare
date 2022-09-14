@@ -14,6 +14,11 @@
   @include mixins.transparentBackground(0.3, config.$black);
 }
 
+.close {
+  width: 20%;
+  min-width: 120px;
+}
+
 .menu {
   width: 80%;
   max-width: 300px;

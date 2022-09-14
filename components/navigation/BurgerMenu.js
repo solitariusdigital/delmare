@@ -92,6 +92,7 @@ export default function BurgerMenu() {
           <Image width={100} height={140} src={logo} alt="logo" />
         </div>
       </div>
+      <div className={classes.close} onClick={() => setMenu(false)}></div>
     </div>
   );
 }
