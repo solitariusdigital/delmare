@@ -30,11 +30,6 @@ a {
   z-index: 99;
 }
 
-.brand {
-  font-family: config.$englishFont;
-  font-size: config.$brand-font;
-}
-
 .mainButton {
   @include mixins.button(config.$brand, config.$black, 120px);
 }

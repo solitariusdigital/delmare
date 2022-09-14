@@ -1,0 +1,53 @@
+@use "styles/_config.scss" as config;
+
+.form {
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  //   align-items: center;
+
+  .title {
+    font-size: config.$big-font;
+    margin-bottom: 20px;
+  }
+
+  .subTitle {
+    font-size: config.$small-font;
+    text-decoration: underline;
+  }
+}
+
+.formAction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
+
+  button {
+    margin: 20px;
+  }
+}
+
+.input {
+  display: grid;
+  border: 1px;
+  margin: 10px 0;
+
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid config.$grey;
+    background: config.$white;
+    color: config.$black;
+    font-family: config.$farsiFont;
+
+    &:focus {
+      outline: none;
+      border: 1px solid config.$black;
+    }
+  }
+}
