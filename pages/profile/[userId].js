@@ -5,7 +5,7 @@ function UserProfile() {
 
   let id = router.query.userId;
 
-  return <h1>The user page</h1>;
+  return <p>The user page</p>;
 }
 
 // export async function getServerSideProps(context) {

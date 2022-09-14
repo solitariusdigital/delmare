@@ -9,7 +9,7 @@ function ProfilePage(props) {
 
   return (
     <Fragment>
-      <h1>The profile page</h1>
+      <p>The profile page</p>
       <button onClick={getUser}>get user</button>
     </Fragment>
   );

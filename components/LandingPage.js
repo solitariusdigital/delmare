@@ -3,13 +3,13 @@ import Router from "next/router";
 
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
-import image from "../assets/home.png";
+import image from "../assets/home.jpg";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 function LandingPage() {
   return (
     <div className={classes.container}>
-      <div className={classes.banner}>
+      <div className={classes.banner} onClick={() => Router.push("/new")}>
         <p>متفاوت بپوشیم</p>
       </div>
       <Image

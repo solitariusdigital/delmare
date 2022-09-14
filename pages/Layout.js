@@ -4,7 +4,9 @@ import MainNavigation from "../components/navigation/MainNavigation";
 function Layout(props) {
   return (
     <Fragment>
-      <MainNavigation />
+      <div className="navigation">
+        <MainNavigation />
+      </div>
       <main>{props.children}</main>
     </Fragment>
   );

@@ -24,6 +24,12 @@ a {
   cursor: pointer;
 }
 
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
 .brand {
   font-family: config.$englishFont;
   font-size: config.$brand-font;

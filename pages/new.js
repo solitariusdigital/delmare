@@ -8,7 +8,7 @@ function NewPage() {
     setBar(true);
   }, [setBar]);
 
-  return <h1>The new page</h1>;
+  return <p>The new page</p>;
 }
 
 export default NewPage;

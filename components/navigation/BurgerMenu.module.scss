@@ -12,7 +12,6 @@
   flex-direction: row-reverse;
   backdrop-filter: blur(3px);
   @include mixins.transparentBackground(0.3, config.$black);
-  // @include mixins.slide();
 }
 
 .menu {

@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   top: 0px;
-  height: calc(100vh - 50px);
+  height: 100vh;
 }
 
 .image {
@@ -35,6 +35,7 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   @include mixins.transparentBackground(0.8, config.$brand);
+  box-shadow: config.$display-shadow;
 
   p {
     font-size: config.$big-font;
