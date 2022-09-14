@@ -1,0 +1,63 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  position: relative;
+  width: 100%;
+  top: 0px;
+  height: calc(100vh - 50px);
+}
+
+.image {
+  @include mixins.background-anime();
+}
+
+.icon {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  @include mixins.scale-in();
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  position: relative;
+  top: 30px;
+  z-index: 1;
+  width: 150px;
+  height: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  @include mixins.transparentBackground(0.8, config.$brand);
+
+  p {
+    font-size: config.$big-font;
+  }
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  min-width: 250px;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  @include mixins.transparentBackground(0.8, config.$cream);
+
+  p {
+    font-size: config.$med-font;
+  }
+}
