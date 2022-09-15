@@ -50,46 +50,48 @@ export default function BurgerMenu() {
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
         </div>
 
-        {!login && !signup && (
-          <div>
-            <div className={classes.list}>
-              {navigation.map((nav, index) => (
-                <div className={classes.item} key={index}>
-                  {nav.icon}
-                  <p>{nav.title}</p>
-                </div>
-              ))}
-            </div>
+        <div className={classes.slide}>
+          {!login && !signup && (
+            <div>
+              <div className={classes.list}>
+                {navigation.map((nav, index) => (
+                  <div className={classes.item} key={index}>
+                    {nav.icon}
+                    <p>{nav.title}</p>
+                  </div>
+                ))}
+              </div>
 
-            <div className={classes.container}>
-              <button
-                className="subButton"
-                onClick={() => {
-                  setLogin(true);
-                  setSignup(false);
-                }}
-              >
-                Log in
-              </button>
-              <button
-                className="mainButton"
-                onClick={() => {
-                  setSignup(true);
-                  setLogin(false);
-                }}
-              >
-                Sign up
-              </button>
+              <div className={classes.container}>
+                <button
+                  className="subButton"
+                  onClick={() => {
+                    setLogin(true);
+                    setSignup(false);
+                  }}
+                >
+                  Log in
+                </button>
+                <button
+                  className="mainButton"
+                  onClick={() => {
+                    setSignup(true);
+                    setLogin(false);
+                  }}
+                >
+                  Sign up
+                </button>
+              </div>
             </div>
+          )}
+
+          <div className={classes.register}>
+            <Register props={{ login, signup, setLogin, setSignup }}></Register>
           </div>
-        )}
 
-        <div className={classes.register}>
-          <Register props={{ login, signup, setLogin, setSignup }}></Register>
-        </div>
-
-        <div className={classes.logo}>
-          <Image width={100} height={140} src={logo} alt="logo" />
+          <div className={classes.logo}>
+            <Image width={100} height={140} src={logo} alt="logo" />
+          </div>
         </div>
       </div>
       <div className={classes.close} onClick={() => setMenu(false)}></div>
