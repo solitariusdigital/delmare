@@ -40,6 +40,10 @@
   p {
     font-size: config.$big-font;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .message {

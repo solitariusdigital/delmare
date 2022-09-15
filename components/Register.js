@@ -6,22 +6,33 @@ import classes from "./Register.module.scss";
 function Register({ props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
     setEmail("");
     setPassword("");
+    setName("");
     console.log("login");
+  };
+
+  const handleSignup = (event) => {
+    event.preventDefault();
+    setEmail("");
+    setPassword("");
+    setName("");
+    console.log("signup");
   };
 
   return (
     <Fragment>
       {props.login && (
         <form className={classes.form} name="login" onSubmit={handleLogin}>
-          <p className={classes.title}>Log in</p>
+          <p className={classes.title}>ورود به حساب کاربری</p>
           <div className={classes.input}>
-            <p className={classes.label}>Your email</p>
+            <p className={classes.label}>Email</p>
             <input
               placeholder="sara@delmare.com"
               type="email"
@@ -35,7 +46,7 @@ function Register({ props }) {
           </div>
 
           <div className={classes.input}>
-            <p className={classes.label}>Your password</p>
+            <p className={classes.label}>Password</p>
             <input
               placeholder="Password"
               type="password"
@@ -67,7 +78,67 @@ function Register({ props }) {
           </div>
         </form>
       )}
-      {props.signup && <div>Signup</div>}
+
+      {props.signup && (
+        <form className={classes.form} name="signup" onSubmit={handleSignup}>
+          <p className={classes.title}>ثبت نام در دلماره</p>
+          <div className={classes.input}>
+            <p className={classes.label}>Name</p>
+            <input
+              placeholder="دلارام ایرانی"
+              type="name"
+              id="name"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>Email</p>
+            <input
+              placeholder="sara@delmare.com"
+              type="email"
+              id="email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              autoComplete="off"
+              required
+            />
+          </div>
+
+          <div className={classes.input}>
+            <p className={classes.label}>Password</p>
+            <input
+              placeholder="Password"
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+          </div>
+
+          <div className={classes.formAction}>
+            <p>{errorMessage}</p>
+            <button className="mainButton" type="submit" disabled={false}>
+              Sign up
+            </button>
+            <p
+              className={classes.subTitle}
+              onClick={() => {
+                props.setSignup(false);
+                props.setLogin(true);
+              }}
+            >
+              Log in
+            </p>
+          </div>
+        </form>
+      )}
     </Fragment>
   );
 }
