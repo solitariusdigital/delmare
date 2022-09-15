@@ -6,6 +6,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./MainNavigation.module.scss";
 
+import Image from "next/image";
+import brand from "../../assets/brand.svg";
+
 function MainNavigation() {
   const { menu, setMenu } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
@@ -31,7 +34,7 @@ function MainNavigation() {
         <div className={classes.bar}>
           <ShoppingCartIcon className={classes.container} />
           <div className={classes.brand}>
-            <p>DELMARE</p>
+            <Image src={brand} alt="brand" />
           </div>
           <MenuIcon className="icon" onClick={() => setMenu(true)} />
         </div>

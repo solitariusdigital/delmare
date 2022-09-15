@@ -19,13 +19,9 @@
     padding: 0px 10px;
 
     .brand {
-      width: 120px;
-
-      p {
-        width: 100%;
-        font-size: config.$brand-font;
-        font-family: config.$englishFont;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
