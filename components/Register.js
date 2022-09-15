@@ -30,7 +30,7 @@ function Register({ props }) {
     <Fragment>
       {props.login && (
         <form className={classes.form} name="login" onSubmit={handleLogin}>
-          <p className={classes.title}>ورود به حساب کاربری</p>
+          <p className={classes.title}>ورود به دلماره</p>
           <div className={classes.input}>
             <p className={classes.label}>Email</p>
             <input
