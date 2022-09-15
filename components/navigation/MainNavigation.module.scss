@@ -19,9 +19,13 @@
     padding: 0px 10px;
 
     .brand {
-      font-family: config.$englishFont;
-      font-size: config.$brand-font;
       width: 120px;
+
+      p {
+        width: 100%;
+        font-size: config.$brand-font;
+        font-family: config.$englishFont;
+      }
     }
   }
 
