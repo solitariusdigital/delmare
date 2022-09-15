@@ -16,15 +16,11 @@
     justify-content: space-between;
     height: 50px;
     margin: 0px;
-    padding: 10px;
-    border: 1px solid red;
+    padding: 0px 10px;
 
     .brand {
       font-family: config.$englishFont;
       font-size: config.$brand-font;
-      width: 110px;
-      height: 30px;
-      border: 1px solid blue;
     }
   }
 
@@ -34,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 0px 10px;
   }
 }
 

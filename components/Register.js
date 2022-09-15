@@ -28,8 +28,8 @@ function Register({ props }) {
               id="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               autoComplete="off"
-              defaultValue={email}
               required
             />
           </div>
@@ -42,7 +42,7 @@ function Register({ props }) {
               id="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              defaultValue={password}
+              value={password}
               required
             />
           </div>
