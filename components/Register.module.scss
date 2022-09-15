@@ -48,6 +48,7 @@
     color: config.$black;
     font-family: config.$farsiFont;
     font-size: config.$small-font;
+    z-index: 1000;
 
     &:focus {
       outline: none;

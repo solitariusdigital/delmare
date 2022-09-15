@@ -30,7 +30,9 @@ function MainNavigation() {
       <div className={classes.header}>
         <div className={classes.bar}>
           <ShoppingCartIcon className={classes.container} />
-          <p className={classes.brand}>DELMARE</p>
+          <div className={classes.brand}>
+            <p>DELMARE</p>
+          </div>
           <MenuIcon className="icon" onClick={() => setMenu(true)} />
         </div>
         {bar && (
