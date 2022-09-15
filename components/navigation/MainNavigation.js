@@ -12,7 +12,6 @@ import brand from "../../assets/brand.svg";
 function MainNavigation() {
   const { menu, setMenu } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-
   const navigation = [
     {
       title: "New",
