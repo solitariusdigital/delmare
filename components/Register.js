@@ -15,7 +15,7 @@ function Register({ props }) {
     setEmail("");
     setPassword("");
     setName("");
-    console.log("login");
+    console.log(email, password);
   };
 
   const handleSignup = (event) => {
@@ -23,7 +23,7 @@ function Register({ props }) {
     setEmail("");
     setPassword("");
     setName("");
-    console.log("signup");
+    console.log(email, password, name);
   };
 
   return (
