@@ -10,6 +10,8 @@ function Register({ props }) {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    setEmail("");
+    setPassword("");
     console.log("login");
   };
 
@@ -25,9 +27,9 @@ function Register({ props }) {
               type="email"
               id="email"
               name="email"
-              autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              autoComplete="off"
+              defaultValue={email}
               required
             />
           </div>
@@ -40,7 +42,7 @@ function Register({ props }) {
               id="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              value={password}
+              defaultValue={password}
               required
             />
           </div>
