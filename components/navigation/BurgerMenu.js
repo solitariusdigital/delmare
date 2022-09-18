@@ -85,9 +85,7 @@ export default function BurgerMenu() {
             </div>
           )}
 
-          <div className={classes.register}>
-            <Register props={{ login, signup, setLogin, setSignup }}></Register>
-          </div>
+          <Register props={{ login, signup, setLogin, setSignup }}></Register>
 
           <div className={classes.logo}>
             <Image width={100} height={140} src={logo} alt="logo" />
