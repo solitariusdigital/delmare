@@ -1,4 +1,4 @@
-import Layout from "./Layout";
+import Layout from "../components/Layout";
 import { StateProvider } from "../context/stateContext";
 
 import "../styles/globals.scss";
