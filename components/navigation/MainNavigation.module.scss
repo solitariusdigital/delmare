@@ -6,7 +6,6 @@
 
 .header {
   width: 100%;
-  background: config.$brand;
   text-align: center;
   background: linear-gradient(to bottom, config.$brand, config.$cream);
 
@@ -22,6 +21,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -39,14 +42,12 @@
   text-decoration: none;
   font-size: config.$med-font;
   color: config.$black;
-  padding: 5px;
 }
 
 .header a:hover,
 .header a:active,
 .header a.active {
   color: config.$black;
-  padding: 5px;
   border-radius: 5px;
-  border-bottom: 3px solid config.$brand;
+  border-bottom: 2px solid config.$brand;
 }

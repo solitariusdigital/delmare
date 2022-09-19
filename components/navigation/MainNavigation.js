@@ -5,6 +5,7 @@ import BurgerMenu from "./BurgerMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./MainNavigation.module.scss";
+import Router from "next/router";
 
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
@@ -14,16 +15,20 @@ function MainNavigation() {
   const { bar, setBar } = useContext(StateContext);
   const navigation = [
     {
-      title: "New",
-      link: "/new",
+      title: "new",
+      link: "/collections/new",
     },
     {
-      title: "Home",
-      link: "/",
+      title: "sale",
+      link: "/collections/sale",
     },
     {
-      title: "Profile",
-      link: "/profile",
+      title: "brands",
+      link: "/collections",
+    },
+    {
+      title: "loggers",
+      link: "/collections",
     },
   ];
 
@@ -33,7 +38,7 @@ function MainNavigation() {
         <div className={classes.bar}>
           <ShoppingCartIcon className={classes.container} />
           <div className={classes.brand}>
-            <Image src={brand} alt="brand" />
+            <Image src={brand} alt="brand" onClick={() => Router.push("/")} />
           </div>
           <MenuIcon className="icon" onClick={() => setMenu(true)} />
         </div>

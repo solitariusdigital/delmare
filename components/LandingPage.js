@@ -23,7 +23,10 @@ function LandingPage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.banner} onClick={() => Router.push("/new")}>
+      <div
+        className={classes.banner}
+        onClick={() => Router.push("/collections")}
+      >
         <p>متفاوت بپوشیم</p>
       </div>
       <Image
@@ -32,7 +35,6 @@ function LandingPage() {
         alt="image"
         layout="fill"
         objectFit="cover"
-        priority="true"
       />
       <div className={classes.message}>
         <p>
@@ -45,7 +47,7 @@ function LandingPage() {
           className="icon"
           fontSize="large"
           sx={{ color: "#b2ffef", fontSize: 50 }}
-          onClick={() => Router.push("/new")}
+          onClick={() => Router.push("/collections")}
         />
       </div>
     </div>
