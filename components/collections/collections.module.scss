@@ -1,0 +1,46 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.new {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  padding: 10px;
+
+  .item {
+    position: relative;
+    width: 100%;
+    height: 224px;
+    border-radius: 10px;
+    box-shadow: config.$display-shadow;
+
+    .image {
+      border-radius: 10px;
+    }
+
+    .banner {
+      display: flex;
+      flex-direction: column;
+
+      position: absolute;
+      bottom: 10px;
+      right: 0px;
+      z-index: 1;
+      width: 60%;
+      max-width: 120px;
+      max-height: 100px;
+      padding: 5px;
+      @include mixins.transparentBackground(0.8, config.$cream);
+    }
+
+    .list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      p {
+        font-size: config.$tiny-font;
+      }
+    }
+  }
+}
