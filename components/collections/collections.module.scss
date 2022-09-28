@@ -11,12 +11,7 @@
     position: relative;
     width: 100%;
     height: 224px;
-    border-radius: 10px;
     box-shadow: config.$display-shadow;
-
-    .image {
-      border-radius: 10px;
-    }
 
     .banner {
       display: flex;
