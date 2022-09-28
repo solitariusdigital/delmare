@@ -13,86 +13,49 @@ function CollectionsPage() {
     setBar(true);
   }, [setBar]);
 
+  const collections = [
+    {
+      title: "New",
+      link: "/collections/new",
+      imageSrc: one,
+    },
+    {
+      title: "Sale",
+      link: "/collections/sale",
+      imageSrc: two,
+    },
+    {
+      title: "Brands",
+      link: "/collections/brands",
+      imageSrc: one,
+    },
+    {
+      title: "Bloggers",
+      link: "/collections/bloggers",
+      imageSrc: two,
+    },
+  ];
+
   return (
     <div className="collections-container">
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
+      {collections.map((collection, index) => (
+        <div key={index} className="collections-card">
+          <div
+            className="banner"
+            onClick={() => Router.push(`${collection.link}`)}
+          >
+            <p>{collection.title}</p>
+          </div>
+          <Image
+            src={collection.imageSrc}
+            alt="image"
+            onClick={() => Router.push(`${collection.link}`)}
+            layout="fill"
+            objectFit="cover"
+            className={"image"}
+          />
         </div>
-        <Image
-          src={one}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
-        </div>
-        <Image
-          src={two}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
-        </div>
-        <Image
-          src={one}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
-        </div>
-        <Image
-          src={two}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
-        </div>
-        <Image
-          src={one}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
-      <div className="collections-card">
-        <div className="banner" onClick={() => Router.push("/collections/new")}>
-          <p>new</p>
-        </div>
-        <Image
-          src={two}
-          alt="image"
-          onClick={() => Router.push("/collections/new")}
-          layout="fill"
-          objectFit="cover"
-          className={"image"}
-        />
-      </div>
+      ))}
     </div>
   );
 }
