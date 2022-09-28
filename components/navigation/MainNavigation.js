@@ -15,20 +15,20 @@ function MainNavigation() {
   const { bar, setBar } = useContext(StateContext);
   const navigation = [
     {
-      title: "new",
+      title: "New",
       link: "/collections/new",
     },
     {
-      title: "sale",
+      title: "Sale",
       link: "/collections/sale",
     },
     {
-      title: "brands",
-      link: "/collections",
+      title: "Brands",
+      link: "/collections/brands",
     },
     {
-      title: "loggers",
-      link: "/collections",
+      title: "Bloggers",
+      link: "/collections/bloggers",
     },
   ];
 
