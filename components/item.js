@@ -16,7 +16,7 @@ function Item({ props }) {
       <div className={classes.imageContainer}>
         <ArrowBackIosNewIcon
           className={classes.icon}
-          sx={{ color: "#b2ffef", fontSize: 40 }}
+          sx={{ color: "#b2ffef", fontSize: 30 }}
           onClick={() => {
             props.setDisplayItem(false);
             setBar(true);
