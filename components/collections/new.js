@@ -6,11 +6,11 @@ import two from "../../assets/two.jpg";
 import three from "../../assets/three.jpg";
 
 import classes from "./collections.module.scss";
-import Item from "../item";
+import Product from "../product";
 
 function New() {
-  const [displayItem, setDisplayItem] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({
+  const [displayProduct, setDisplayProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({
     id: null,
     image: null,
     items: null,
@@ -21,14 +21,17 @@ function New() {
       imageSrc: one,
       items: [
         {
+          id: "0000",
           title: "شلوار",
           price: "550,000",
         },
         {
+          id: "0000",
           title: "شال",
           price: "350,000",
         },
         {
+          id: "0000",
           title: "شومیز",
           price: "1,550,000",
         },
@@ -38,10 +41,12 @@ function New() {
       imageSrc: three,
       items: [
         {
+          id: "0000",
           title: "شلوار",
           price: "550,000",
         },
         {
+          id: "0000",
           title: "شال",
           price: "350,000",
         },
@@ -51,10 +56,12 @@ function New() {
       imageSrc: two,
       items: [
         {
+          id: "0000",
           title: "شلوار",
           price: "550,000",
         },
         {
+          id: "0000",
           title: "شال",
           price: "350,000",
         },
@@ -64,10 +71,12 @@ function New() {
       imageSrc: three,
       items: [
         {
+          id: "0000",
           title: "شلوار",
           price: "550,000",
         },
         {
+          id: "0000",
           title: "شال",
           price: "350,000",
         },
@@ -75,43 +84,45 @@ function New() {
     },
   ];
 
-  const selectItem = (item) => {
-    setDisplayItem(true);
-    setSelectedItem({
-      id: item.id || "0000",
-      image: item.imageSrc,
-      items: item.items,
+  const selectProduct = (product) => {
+    setDisplayProduct(true);
+    setSelectedProduct({
+      id: product.id || "0000",
+      image: product.imageSrc,
+      items: product.items,
     });
   };
 
   return (
     <Fragment>
-      <div className={classes.new}>
-        {!displayItem &&
-          newCollection.map((item, index) => (
+      <div className={classes.newCollection}>
+        {!displayProduct &&
+          newCollection.map((product, index) => (
             <div
               key={index}
-              className={classes.item}
-              onClick={() => selectItem(item)}
+              className={classes.product}
+              onClick={() => selectProduct(product)}
             >
               <div className={classes.banner}>
-                {item.items.map((item, index) => (
+                {product.items.map((product, index) => (
                   <div key={index} className={classes.list}>
-                    <p>{item.price} T</p>
-                    <p>{item.title}</p>
+                    <p>{product.price} T</p>
+                    <p>{product.title}</p>
                   </div>
                 ))}
               </div>
               <Image
                 className={classes.image}
-                src={item.imageSrc}
+                src={product.imageSrc}
                 alt="image"
                 layout="fill"
                 objectFit="cover"
               />
             </div>
           ))}
-        {displayItem && <Item props={{ selectedItem, setDisplayItem }} />}
+        {displayProduct && (
+          <Product props={{ selectedProduct, setDisplayProduct }} />
+        )}
       </div>
     </Fragment>
   );
