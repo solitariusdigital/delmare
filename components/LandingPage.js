@@ -45,7 +45,6 @@ function LandingPage() {
       <div className={classes.icon}>
         <ExpandCircleDownIcon
           className="icon"
-          fontSize="large"
           sx={{ color: "#b2ffef", fontSize: 50 }}
           onClick={() => Router.push("/collections")}
         />

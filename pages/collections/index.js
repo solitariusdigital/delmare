@@ -47,12 +47,12 @@ function CollectionsPage() {
             <p>{collection.title}</p>
           </div>
           <Image
+            className={"image"}
             src={collection.imageSrc}
             alt="image"
             onClick={() => Router.push(`${collection.link}`)}
             layout="fill"
             objectFit="cover"
-            className={"image"}
           />
         </div>
       ))}

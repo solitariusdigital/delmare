@@ -1,15 +1,22 @@
 @use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
 
 .imageContainer {
   position: relative;
   width: 100%;
   height: 50vh;
+  @include mixins.border-radius();
+}
+
+.image {
+  @include mixins.border-radius();
 }
 
 .icon {
   position: absolute;
   cursor: pointer;
   z-index: 1;
+  top: 10px;
 }
 
 .items {

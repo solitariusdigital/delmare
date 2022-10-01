@@ -103,6 +103,7 @@ function New() {
                 ))}
               </div>
               <Image
+                className={classes.image}
                 src={item.imageSrc}
                 alt="image"
                 layout="fill"

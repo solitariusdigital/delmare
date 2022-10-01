@@ -12,6 +12,7 @@
     width: 100%;
     height: 224px;
     box-shadow: config.$display-shadow;
+    @include mixins.border-radius();
 
     .banner {
       display: flex;
@@ -38,4 +39,8 @@
       }
     }
   }
+}
+
+.image {
+  @include mixins.border-radius();
 }

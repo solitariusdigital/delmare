@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./item.module.scss";
 import Image from "next/image";
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 function Item({ props }) {
   const { bar, setBar } = useContext(StateContext);
@@ -14,16 +14,16 @@ function Item({ props }) {
   return (
     <div>
       <div className={classes.imageContainer}>
-        <ExpandCircleDownIcon
+        <ArrowBackIosNewIcon
           className={classes.icon}
-          fontSize="large"
-          sx={{ color: "#b2ffef", fontSize: 50 }}
+          sx={{ color: "#b2ffef", fontSize: 40 }}
           onClick={() => {
             props.setDisplayItem(false);
             setBar(true);
           }}
         />
         <Image
+          className={classes.image}
           src={props.selectedItem.image}
           alt="image"
           layout="fill"
