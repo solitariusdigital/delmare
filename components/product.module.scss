@@ -53,6 +53,7 @@
 .itemContainer {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .topBar,
@@ -172,4 +173,16 @@
     height: 40px;
     border-radius: 50px;
   }
+}
+
+.popUp {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: config.$white;
+  box-shadow: config.$display-shadow;
+  @include mixins.border-radius();
 }

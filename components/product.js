@@ -3,6 +3,7 @@ import { StateContext } from "../context/stateContext";
 import classes from "./product.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import CloseIcon from "@mui/icons-material/Close";
 
 import item from "../assets/mainItem.jpg";
 import one from "../assets/itemOne.jpg";
@@ -28,6 +29,10 @@ function Product({ props }) {
   const [itemOneDisplay, setitemOneDisplay] = useState(false);
   const [itemTwoDisplay, setitemTwoDisplay] = useState(false);
   const [itemThreeDisplay, setitemThreeDisplay] = useState(false);
+  // to control extra information
+  const [extraInfo, setExtraInfo] = useState(
+    "return" || "size" || "shipment" || ""
+  );
 
   const [colors, setColors] = useState([
     "red",
@@ -45,6 +50,7 @@ function Product({ props }) {
 
   useEffect(() => {
     setBar(false);
+    setExtraInfo("");
   }, [setBar]);
 
   const selectItem = (item) => {
@@ -166,6 +172,7 @@ function Product({ props }) {
                 setDisplayDetails(false);
                 setSelectedColor("");
                 setSelectedSize("");
+                setExtraInfo("");
               }}
             />
             <div className={classes.details}>
@@ -270,16 +277,37 @@ function Product({ props }) {
           </button>
 
           <div className={classes.information}>
-            <div>
+            <div
+              onClick={() => {
+                setExtraInfo("size");
+              }}
+            >
               <p>Size guide</p>
             </div>
-            <div>
+            <div
+              onClick={() => {
+                setExtraInfo("shipment");
+              }}
+            >
               <p>Shipment methods</p>
             </div>
-            <div>
+            <div
+              onClick={() => {
+                setExtraInfo("return");
+              }}
+            >
               <p>Return policy</p>
             </div>
           </div>
+
+          {extraInfo !== "" && (
+            <div className={classes.popUp}>
+              <CloseIcon className="icon" onClick={() => setExtraInfo("")} />
+              {extraInfo === "size" && <p>Size guide</p>}
+              {extraInfo === "shipment" && <p>Shimpment info</p>}
+              {extraInfo === "return" && <p>Return policy</p>}
+            </div>
+          )}
         </div>
       )}
     </Fragment>
