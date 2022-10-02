@@ -24,6 +24,10 @@ function Product({ props }) {
   const [itemOne, setItemOne] = useState(one);
   const [itemTwo, setItemTwo] = useState(two);
   const [itemThree, setItemThree] = useState(three);
+  // to control image display
+  const [itemOneDisplay, setitemOneDisplay] = useState(false);
+  const [itemTwoDisplay, setitemTwoDisplay] = useState(false);
+  const [itemThreeDisplay, setitemThreeDisplay] = useState(false);
 
   const [colors, setColors] = useState([
     "red",
@@ -54,23 +58,49 @@ function Product({ props }) {
   const toggleItems = (type) => {
     switch (type) {
       case "one":
-        setItemOne(item);
-        setMainItem(one);
         setItemTwo(two);
         setItemThree(three);
-        console.log(itemOne);
+        setitemTwoDisplay(false);
+        setitemThreeDisplay(false);
+        if (itemOneDisplay) {
+          setItemOne(one);
+          setMainItem(item);
+          setitemOneDisplay(false);
+        } else {
+          setItemOne(item);
+          setMainItem(one);
+          setitemOneDisplay(true);
+        }
         break;
       case "two":
-        setItemTwo(item);
-        setMainItem(two);
         setItemOne(one);
         setItemThree(three);
+        setitemOneDisplay(false);
+        setitemThreeDisplay(false);
+        if (itemTwoDisplay) {
+          setItemTwo(two);
+          setMainItem(item);
+          setitemTwoDisplay(false);
+        } else {
+          setItemTwo(item);
+          setMainItem(two);
+          setitemTwoDisplay(true);
+        }
         break;
       case "three":
-        setItemThree(item);
-        setMainItem(three);
         setItemOne(one);
         setItemTwo(two);
+        setitemOneDisplay(false);
+        setitemTwoDisplay(false);
+        if (itemThreeDisplay) {
+          setItemThree(three);
+          setMainItem(item);
+          setitemThreeDisplay(false);
+        } else {
+          setItemThree(item);
+          setMainItem(three);
+          setitemThreeDisplay(true);
+        }
         break;
     }
   };
