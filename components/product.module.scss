@@ -70,30 +70,62 @@
   flex-direction: row;
   justify-content: space-between;
   height: 40vh;
+
+  .item {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    max-width: 260px;
+    max-height: 390px;
+    @include mixins.border-radius();
+  }
+
+  .subItemContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .subItem {
+      width: 70px;
+      // box-shadow: config.$display-shadow;
+      // @include mixins.border-radius();
+
+      .detail {
+        @include mixins.border-radius();
+        height: 100%;
+      }
+    }
+  }
 }
 
-.item {
-  position: relative;
-  width: 70%;
-  height: 100%;
-  max-width: 260px;
-  max-height: 390px;
-  @include mixins.border-radius();
-}
-
-.subItemContainer {
+.details {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  margin: 10px 0px;
 
-  .subItem {
-    width: 70px;
-    // box-shadow: config.$display-shadow;
-    // @include mixins.border-radius();
+  .box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 260px;
 
-    .detail {
-      @include mixins.border-radius();
-      height: 100%;
+    .color,
+    .size {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 5px;
+      box-shadow: config.$display-shadow;
+    }
+
+    .size {
+      border: 1px solid config.$black;
     }
   }
 }

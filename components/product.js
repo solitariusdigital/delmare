@@ -4,24 +4,39 @@ import classes from "./product.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-import itemDetail from "../assets/mainItem.jpg";
+import item from "../assets/mainItem.jpg";
 import one from "../assets/itemOne.jpg";
 import two from "../assets/itemTwo.jpg";
 import three from "../assets/itemThree.jpg";
 
 function Product({ props }) {
   const { bar, setBar } = useContext(StateContext);
+
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
     id: null,
     image: null,
     items: null,
   });
-  const [mainItem, setMainItem] = useState(itemDetail);
+
+  // item image variables
+  const [mainItem, setMainItem] = useState(item);
   const [itemOne, setItemOne] = useState(one);
   const [itemTwo, setItemTwo] = useState(two);
   const [itemThree, setItemThree] = useState(three);
-  const [toggle, setToggle] = useState(true);
+
+  const [colors, setColors] = useState([
+    "red",
+    "blue",
+    "orange",
+    "red",
+    "blue",
+  ]);
+  const [sizes, setSizes] = useState(["S", "M", "L", "XL"]);
+
+  // customer selections
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
     setBar(false);
@@ -39,43 +54,23 @@ function Product({ props }) {
   const toggleItems = (type) => {
     switch (type) {
       case "one":
+        setItemOne(item);
         setMainItem(one);
         setItemTwo(two);
         setItemThree(three);
-        if (toggle) {
-          setItemOne(itemDetail);
-          setToggle(false);
-        } else {
-          setMainItem(itemDetail);
-          setItemOne(one);
-          setToggle(true);
-        }
+        console.log(itemOne);
         break;
       case "two":
+        setItemTwo(item);
         setMainItem(two);
         setItemOne(one);
         setItemThree(three);
-        if (toggle) {
-          setItemTwo(itemDetail);
-          setToggle(false);
-        } else {
-          setMainItem(itemDetail);
-          setItemTwo(two);
-          setToggle(true);
-        }
         break;
       case "three":
+        setItemThree(item);
         setMainItem(three);
         setItemOne(one);
         setItemTwo(two);
-        if (toggle) {
-          setItemThree(itemDetail);
-          setToggle(false);
-        } else {
-          setMainItem(itemDetail);
-          setItemThree(three);
-          setToggle(true);
-        }
         break;
     }
   };
@@ -134,6 +129,7 @@ function Product({ props }) {
               <p>{selectedItem.title}</p>
             </div>
           </div>
+
           <div className={classes.itemContainer}>
             <div className={classes.item}>
               <Image
@@ -187,6 +183,34 @@ function Product({ props }) {
                   // objectFit="cover"
                 />
               </div>
+            </div>
+          </div>
+
+          <div className={classes.details}>
+            <div className={classes.box}>
+              {colors.map((color, index) => (
+                <div
+                  key={index}
+                  className={classes.color}
+                  style={{ backgroundColor: color }}
+                  onClick={() => {
+                    setSelectedColor(color);
+                  }}
+                ></div>
+              ))}
+            </div>
+            <div className={classes.box}>
+              {sizes.map((size, index) => (
+                <div
+                  key={index}
+                  className={classes.size}
+                  onClick={() => {
+                    setSelectedSize(size);
+                  }}
+                >
+                  {size}
+                </div>
+              ))}
             </div>
           </div>
         </div>

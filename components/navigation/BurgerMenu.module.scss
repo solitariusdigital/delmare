@@ -1,7 +1,7 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.slider {
+.background {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -19,7 +19,7 @@
   min-width: 120px;
 }
 
-.slide {
+.items {
   height: 100%;
   overflow-y: scroll;
   padding-bottom: 20px;
@@ -27,7 +27,7 @@
 }
 
 .menu {
-  width: 80%;
+  width: 100%;
   max-width: 300px;
   background: config.$white;
   box-shadow: config.$display-shadow;
@@ -74,7 +74,7 @@
   }
 }
 
-.container {
+.buttonContainer {
   display: flex;
   flex-direction: column;
   text-align: center;

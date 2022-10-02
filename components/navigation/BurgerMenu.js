@@ -44,13 +44,13 @@ export default function BurgerMenu() {
   ];
 
   return (
-    <div className={classes.slider}>
+    <div className={classes.background}>
       <div className={classes.menu}>
         <div className={classes.cross}>
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
         </div>
 
-        <div className={classes.slide}>
+        <div className={classes.items}>
           {!login && !signup && (
             <div>
               <div className={classes.list}>
@@ -62,7 +62,7 @@ export default function BurgerMenu() {
                 ))}
               </div>
 
-              <div className={classes.container}>
+              <div className={classes.buttonContainer}>
                 <button
                   className="subButton"
                   onClick={() => {

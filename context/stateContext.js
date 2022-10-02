@@ -4,6 +4,8 @@ export const StateContext = createContext();
 
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
+  const [card, setCard] = useState(false);
+
   const [bar, setBar] = useState(true);
 
   const stateContext = {
@@ -11,6 +13,8 @@ export const StateProvider = (props) => {
     setMenu,
     bar,
     setBar,
+    card,
+    setCard,
   };
 
   return (
