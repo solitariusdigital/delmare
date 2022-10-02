@@ -33,10 +33,11 @@ function Product({ props }) {
     "red",
     "blue",
     "orange",
-    "red",
-    "blue",
+    "pink",
+    "green",
   ]);
   const [sizes, setSizes] = useState(["S", "M", "L", "XL"]);
+  const [alert, setAlert] = useState("");
 
   // customer selections
   const [selectedColor, setSelectedColor] = useState("");
@@ -105,6 +106,17 @@ function Product({ props }) {
     }
   };
 
+  const addToCard = () => {
+    if (selectedColor === "" || selectedSize === "") {
+      setAlert("Please select a color or size");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+    console.log(selectedColor, selectedSize);
+  };
+
   return (
     <Fragment>
       {/* product */}
@@ -146,12 +158,14 @@ function Product({ props }) {
       )}
       {/* item details */}
       {displayDetails && (
-        <div>
+        <div className={classes.itemContainer}>
           <div className={classes.topBar}>
             <ArrowBackIosNewIcon
               sx={{ color: "#000000", fontSize: 30 }}
               onClick={() => {
                 setDisplayDetails(false);
+                setSelectedColor("");
+                setSelectedSize("");
               }}
             />
             <div className={classes.details}>
@@ -160,7 +174,7 @@ function Product({ props }) {
             </div>
           </div>
 
-          <div className={classes.itemContainer}>
+          <div className={classes.itemDetails}>
             <div className={classes.item}>
               <Image
                 className={classes.image}
@@ -170,7 +184,7 @@ function Product({ props }) {
                 objectFit="cover"
               />
             </div>
-            <div className={classes.subItemContainer}>
+            <div className={classes.subItemDetail}>
               <div
                 className={classes.subItem}
                 onClick={() => {
@@ -241,6 +255,29 @@ function Product({ props }) {
                   {size}
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className={classes.alert}>{alert}</div>
+
+          <button
+            className={`mainButton ${classes.button}`}
+            onClick={() => {
+              addToCard();
+            }}
+          >
+            Add to card
+          </button>
+
+          <div className={classes.information}>
+            <div>
+              <p>Size guide</p>
+            </div>
+            <div>
+              <p>Shipment methods</p>
+            </div>
+            <div>
+              <p>Return policy</p>
             </div>
           </div>
         </div>

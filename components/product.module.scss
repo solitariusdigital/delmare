@@ -33,12 +33,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 
     background: config.$white;
     margin-bottom: 10px;
     padding: 10px 20px;
     border-radius: 50px;
+    height: 50px;
     box-shadow: config.$display-shadow;
   }
 
@@ -48,6 +50,11 @@
 }
 
 // item details
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .topBar,
 .details {
   width: 100%;
@@ -65,7 +72,7 @@
   }
 }
 
-.itemContainer {
+.itemDetails {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -80,7 +87,7 @@
     @include mixins.border-radius();
   }
 
-  .subItemContainer {
+  .subItemDetail {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -124,8 +131,45 @@
       box-shadow: config.$display-shadow;
     }
 
+    .border {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
     .size {
       border: 1px solid config.$black;
     }
+  }
+}
+
+.button {
+  width: 100%;
+  max-width: 500px;
+  height: 40px;
+  font-size: config.$med-font;
+  margin: 10px 0px;
+}
+
+.alert {
+  color: config.$red;
+  margin-bottom: 5px;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+
+  div {
+    display: flex;
+    align-items: center;
+    background: config.$white;
+    margin: 5px 0px;
+    padding: 10px 20px;
+    box-shadow: config.$display-shadow;
+    height: 40px;
+    border-radius: 50px;
   }
 }
