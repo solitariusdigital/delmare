@@ -175,7 +175,7 @@ function Product({ props }) {
                 setExtraInfo("");
               }}
             />
-            <div className={classes.details}>
+            <div className={classes.item}>
               <p>{selectedItem.price} T</p>
               <p>{selectedItem.title}</p>
             </div>
