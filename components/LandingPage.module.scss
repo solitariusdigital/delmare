@@ -35,7 +35,7 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   @include mixins.transparentBackground(0.8, config.$brand);
-  box-shadow: config.$display-shadow;
+  box-shadow: config.$card-shadow;
 
   p {
     font-size: config.$big-font;

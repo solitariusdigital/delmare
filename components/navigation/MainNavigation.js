@@ -16,6 +16,9 @@ function MainNavigation() {
   const { menu, setMenu } = useContext(StateContext);
   const { card, setCard } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+
+  const { shoppingCard, setShoppingCard } = useContext(StateContext);
+
   const navigation = [
     {
       title: "New",
@@ -39,7 +42,10 @@ function MainNavigation() {
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.bar}>
-          <ShoppingCartIcon className="icon" onClick={() => setCard(true)} />
+          <div className={classes.card}>
+            <ShoppingCartIcon className="icon" onClick={() => setCard(true)} />
+            <p>{shoppingCard.length === 0 ? "" : shoppingCard.length}</p>
+          </div>
           <div className={classes.brand}>
             <Image src={brand} alt="brand" onClick={() => Router.push("/")} />
           </div>

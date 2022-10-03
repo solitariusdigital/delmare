@@ -14,35 +14,56 @@
   @include mixins.transparentBackground(0.3, config.$black);
 }
 
-.items {
-  height: 100%;
-  overflow-y: scroll;
-  padding-bottom: 20px;
-  position: relative;
-}
-
 .menu {
   width: 100%;
   max-width: 500px;
-  background: config.$white;
-  box-shadow: config.$display-shadow;
-  padding-bottom: 20px;
-  padding-top: 10px;
+  background: config.$cream;
+  box-shadow: config.$card-shadow;
+  padding: 10px 0px;
 
-  .cross {
+  .topBar {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
+    justify-content: space-between;
     padding: 0px 10px;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        font-size: config.$big-font;
+      }
+
+      .count {
+        color: config.$red;
+        margin-left: 10px;
+      }
+    }
   }
 
-  .card {
+  .items {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 10px;
 
     p {
       font-size: config.$big-font;
+    }
+
+    .item {
+      width: 100%;
+      background: config.$white;
+      box-shadow: config.$card-shadow;
+      margin-bottom: 20px;
+      padding: 10px;
+      @include mixins.border-radius();
     }
   }
 }

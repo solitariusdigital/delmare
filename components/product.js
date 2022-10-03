@@ -12,6 +12,7 @@ import three from "../assets/itemThree.jpg";
 
 function Product({ props }) {
   const { bar, setBar } = useContext(StateContext);
+  const { shoppingCard, setShoppingCard } = useContext(StateContext);
 
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
@@ -120,7 +121,18 @@ function Product({ props }) {
       }, 3000);
       return;
     }
-    console.log(selectedColor, selectedSize);
+    setShoppingCard([
+      ...shoppingCard,
+      {
+        id: "0000",
+        size: selectedSize,
+        color: selectedColor,
+        price: selectedItem.price,
+        shipping: "",
+      },
+    ]);
+
+    localStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
   };
 
   return (
@@ -302,7 +314,9 @@ function Product({ props }) {
 
           {extraInfo !== "" && (
             <div className={classes.popUp}>
-              <CloseIcon className="icon" onClick={() => setExtraInfo("")} />
+              <div className={classes.cross}>
+                <CloseIcon className="icon" onClick={() => setExtraInfo("")} />
+              </div>
               {extraInfo === "size" && <p>Size guide</p>}
               {extraInfo === "shipment" && <p>Shimpment info</p>}
               {extraInfo === "return" && <p>Return policy</p>}
