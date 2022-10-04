@@ -8,8 +8,16 @@ import three from "../../assets/three.jpg";
 import classes from "./collections.module.scss";
 import Product from "../product";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 function New() {
   const [displayProduct, setDisplayProduct] = useState(false);
+  const [favouriteProduct, setFavouriteProduct] = useState(
+    <FavoriteBorderIcon className={classes.icon} />
+  );
+
   const [selectedProduct, setSelectedProduct] = useState({
     id: null,
     image: null,
@@ -19,6 +27,8 @@ function New() {
   const newCollection = [
     {
       imageSrc: one,
+      like: 122,
+      views: 578,
       items: [
         {
           id: "0000",
@@ -39,6 +49,8 @@ function New() {
     },
     {
       imageSrc: three,
+      like: 122,
+      views: 578,
       items: [
         {
           id: "0000",
@@ -54,6 +66,8 @@ function New() {
     },
     {
       imageSrc: two,
+      like: 122,
+      views: 578,
       items: [
         {
           id: "0000",
@@ -69,6 +83,8 @@ function New() {
     },
     {
       imageSrc: three,
+      like: 122,
+      views: 578,
       items: [
         {
           id: "0000",
@@ -84,6 +100,10 @@ function New() {
     },
   ];
 
+  const favourProduct = () => {
+    setFavouriteProduct(<FavoriteIcon className={classes.iconRed} />);
+  };
+
   const selectProduct = (product) => {
     setDisplayProduct(true);
     setSelectedProduct({
@@ -98,20 +118,19 @@ function New() {
       <div className={classes.newCollection}>
         {!displayProduct &&
           newCollection.map((product, index) => (
-            <div
-              key={index}
-              className={classes.product}
-              onClick={() => selectProduct(product)}
-            >
+            <div key={index} className={classes.product}>
               <div className={classes.banner}>
-                {product.items.map((product, index) => (
-                  <div key={index} className={classes.list}>
-                    <p>{product.price} T</p>
-                    <p>{product.title}</p>
-                  </div>
-                ))}
+                <div className={classes.social}>
+                  <p>{product.views}</p>
+                  <VisibilityIcon className={classes.icon} />
+                </div>
+                <div className={classes.social}>
+                  <p>{product.like}</p>
+                  <div onClick={() => favourProduct()}>{favouriteProduct}</div>
+                </div>
               </div>
               <Image
+                onClick={() => selectProduct(product)}
                 className={classes.image}
                 src={product.imageSrc}
                 alt="image"

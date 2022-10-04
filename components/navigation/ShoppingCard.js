@@ -7,6 +7,15 @@ export default function ShoppingCard() {
   const { card, setCard } = useContext(StateContext);
   const { shoppingCard, setShoppingCard } = useContext(StateContext);
 
+  const deleteCard = (index) => {
+    setShoppingCard(
+      shoppingCard.filter((card, i) => {
+        return i !== index;
+      })
+    );
+    localStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
+  };
+
   return (
     <div className={classes.background}>
       <div className={classes.menu}>
@@ -20,6 +29,12 @@ export default function ShoppingCard() {
         <div className={classes.items}>
           {shoppingCard.map((card, index) => (
             <div key={index} className={classes.item}>
+              <div className={classes.close}>
+                <CloseIcon
+                  className="icon icon-red"
+                  onClick={() => deleteCard(index)}
+                />
+              </div>
               <p>{card.price}</p>
               <p>{card.size}</p>
               <p>{card.color}</p>

@@ -7,6 +7,10 @@
   gap: 10px;
   padding: 10px;
 
+  .image {
+    @include mixins.border-radius();
+  }
+
   .product {
     position: relative;
     width: 100%;
@@ -16,7 +20,9 @@
 
     .banner {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
 
       position: absolute;
       bottom: 10px;
@@ -24,23 +30,35 @@
       z-index: 1;
       width: 60%;
       max-width: 120px;
-      max-height: 100px;
-      padding: 5px;
+      height: 25px;
+      padding: 10px;
       @include mixins.transparentBackground(0.8, config.$cream);
-    }
+      border-bottom-left-radius: 50px;
+      border-top-left-radius: 50px;
 
-    .list {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      .social {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
-      p {
-        font-size: config.$tiny-font;
+        div {
+          display: flex;
+        }
+
+        p {
+          font-size: config.$tiny-font;
+          margin-right: 5px;
+        }
+
+        .icon,
+        .iconRed {
+          font-size: config.$med-font;
+        }
+
+        .iconRed {
+          color: config.$red;
+        }
       }
     }
   }
-}
-
-.image {
-  @include mixins.border-radius();
 }

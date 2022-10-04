@@ -25,6 +25,11 @@ a {
   cursor: pointer;
 }
 
+.icon-red {
+  cursor: pointer;
+  color: config.$red;
+}
+
 .navigation {
   position: sticky;
   top: 0;

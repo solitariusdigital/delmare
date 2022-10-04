@@ -133,6 +133,8 @@ function Product({ props }) {
     ]);
 
     localStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
+    setSelectedColor("");
+    setSelectedSize("");
   };
 
   return (
