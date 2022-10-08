@@ -12,7 +12,7 @@ import three from "../assets/itemThree.jpg";
 
 function Product({ props }) {
   const { bar, setBar } = useContext(StateContext);
-  const { shoppingCard, setShoppingCard } = useContext(StateContext);
+  const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
@@ -121,8 +121,8 @@ function Product({ props }) {
       }, 3000);
       return;
     }
-    setShoppingCard([
-      ...shoppingCard,
+    setShoppingCart([
+      ...shoppingCart,
       {
         id: "0000",
         size: selectedSize,
@@ -132,7 +132,7 @@ function Product({ props }) {
       },
     ]);
 
-    localStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     setSelectedColor("");
     setSelectedSize("");
   };
@@ -287,7 +287,7 @@ function Product({ props }) {
               addToCard();
             }}
           >
-            Add to card
+            Add to cart
           </button>
 
           <div className={classes.information}>

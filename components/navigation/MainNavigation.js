@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
-import ShoppingCard from "./ShoppingCard";
+import ShoppingCart from "./ShoppingCart";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -17,7 +17,7 @@ function MainNavigation() {
   const { card, setCard } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
 
-  const { shoppingCard, setShoppingCard } = useContext(StateContext);
+  const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
   const navigation = [
     {
@@ -44,7 +44,7 @@ function MainNavigation() {
         <div className={classes.bar}>
           <div className={classes.card}>
             <ShoppingCartIcon className="icon" onClick={() => setCard(true)} />
-            <p>{shoppingCard.length === 0 ? "" : shoppingCard.length}</p>
+            <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
           <div className={classes.brand}>
             <Image src={brand} alt="brand" onClick={() => Router.push("/")} />
@@ -62,7 +62,7 @@ function MainNavigation() {
         )}
       </div>
       {menu && <BurgerMenu />}
-      {card && <ShoppingCard />}
+      {card && <ShoppingCart />}
     </div>
   );
 }

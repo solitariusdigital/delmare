@@ -1,19 +1,19 @@
 import { useState, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
-import classes from "./ShoppingCard.module.scss";
+import classes from "./ShoppingCart.module.scss";
 
-export default function ShoppingCard() {
+export default function ShoppingCart() {
   const { card, setCard } = useContext(StateContext);
-  const { shoppingCard, setShoppingCard } = useContext(StateContext);
+  const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
   const deleteCard = (index) => {
-    setShoppingCard(
-      shoppingCard.filter((card, i) => {
+    setShoppingCart(
+      shoppingCart.filter((card, i) => {
         return i !== index;
       })
     );
-    localStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   };
 
   return (
@@ -22,12 +22,12 @@ export default function ShoppingCard() {
         <div className={classes.topBar}>
           <CloseIcon className="icon" onClick={() => setCard(false)} />
           <div className={classes.title}>
-            <p>Shopping card</p>
-            <p className={classes.count}>{shoppingCard.length}</p>
+            <p>Shopping cart</p>
+            <p className={classes.count}>{shoppingCart.length}</p>
           </div>
         </div>
         <div className={classes.items}>
-          {shoppingCard.map((card, index) => (
+          {shoppingCart.map((card, index) => (
             <div key={index} className={classes.item}>
               <div className={classes.close}>
                 <CloseIcon
