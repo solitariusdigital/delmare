@@ -205,6 +205,7 @@ function Product({ props }) {
       ...shoppingCart,
       {
         id: "0000",
+        title: selectedItem.title,
         size: selectedSize,
         color: selectedColor,
         price: selectedItem.price,

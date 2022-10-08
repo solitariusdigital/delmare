@@ -161,7 +161,7 @@
   max-width: 500px;
   height: 40px;
   font-size: config.$med-font;
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .alert {
@@ -170,7 +170,7 @@
   flex-direction: row-reverse;
   justify-content: center;
   color: config.$red;
-  margin-bottom: 5px;
+  height: 0px;
 }
 
 .information {
@@ -190,6 +190,10 @@
     box-shadow: config.$card-shadow;
     height: 40px;
     border-radius: 50px;
+
+    p {
+      color: config.$grey;
+    }
   }
 }
 

@@ -52,12 +52,8 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 0px 10px;
-    height: calc(100% - 50px);
+    height: calc(100% - 110px);
     overflow-y: scroll;
-
-    p {
-      font-size: config.$big-font;
-    }
 
     .item {
       width: 100%;
@@ -66,13 +62,57 @@
       margin: 10px 0px;
       padding: 10px;
       @include mixins.border-radius();
+      position: relative;
+
+      p {
+        font-size: config.$med-font;
+      }
 
       .close {
         display: flex;
         flex-direction: row-reverse;
-        // align-items: center;
-        // justify-content: space-between;
       }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0px;
+      }
+
+      .color,
+      .size {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+
+      .size {
+        border: 1px solid config.$black;
+      }
+    }
+  }
+
+  .btnContainer {
+    position: absolute;
+    bottom: 0px;
+    height: 60px;
+    width: 100%;
+    padding: 0px 10px;
+    @include mixins.border-radius();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      width: 100%;
+      max-width: 500px;
+      height: 40px;
+      font-size: config.$med-font;
     }
   }
 }
