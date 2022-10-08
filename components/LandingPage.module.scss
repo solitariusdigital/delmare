@@ -56,7 +56,6 @@
   right: 0px;
   width: 100%;
   padding: 10px;
-  // @include mixins.border-radius();
   @include mixins.transparentBackground(0.8, config.$cream);
   box-shadow: config.$card-shadow;
 
