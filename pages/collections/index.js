@@ -8,6 +8,7 @@ import two from "../../assets/two.jpg";
 
 function CollectionsPage() {
   const { bar, setBar } = useContext(StateContext);
+  const { navigation, setNavigation } = useContext(StateContext);
 
   useEffect(() => {
     setBar(true);
@@ -36,21 +37,33 @@ function CollectionsPage() {
     },
   ];
 
+  const activateNav = (link, index) => {
+    Router.push(`${link}`);
+    navigation.map((nav, i) => {
+      if (i === index) {
+        nav.active = !nav.active;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
+  };
+
   return (
     <div className="collections-container">
       {collections.map((collection, index) => (
-        <div key={index} className="collections-card">
-          <div
-            className="banner"
-            onClick={() => Router.push(`${collection.link}`)}
-          >
+        <div
+          key={index}
+          className="collections-card"
+          onClick={() => activateNav(collection.link, index)}
+        >
+          <div className="banner">
             <p>{collection.title}</p>
           </div>
           <Image
             className={"image"}
             src={collection.imageSrc}
             alt="image"
-            onClick={() => Router.push(`${collection.link}`)}
             layout="fill"
             objectFit="cover"
           />

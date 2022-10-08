@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -16,27 +16,26 @@ function MainNavigation() {
   const { menu, setMenu } = useContext(StateContext);
   const { card, setCard } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
+  const { navigation, setNavigation } = useContext(StateContext);
 
-  const navigation = [
-    {
-      title: "New",
-      link: "/collections/new",
-    },
-    {
-      title: "Sale",
-      link: "/collections/sale",
-    },
-    {
-      title: "Brands",
-      link: "/collections/brands",
-    },
-    {
-      title: "Bloggers",
-      link: "/collections/bloggers",
-    },
-  ];
+  const activateNav = (index) => {
+    navigation.map((nav, i) => {
+      if (i === index) {
+        nav.active = !nav.active;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
+  };
+
+  const navigateLandingPage = () => {
+    Router.push("/");
+    navigation.map((nav, i) => {
+      nav.active = false;
+    });
+  };
 
   return (
     <div className={classes.container}>
@@ -47,14 +46,22 @@ function MainNavigation() {
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
           <div className={classes.brand}>
-            <Image src={brand} alt="brand" onClick={() => Router.push("/")} />
+            <Image
+              src={brand}
+              alt="brand"
+              onClick={() => navigateLandingPage()}
+            />
           </div>
           <MenuIcon className="icon" onClick={() => setMenu(true)} />
         </div>
         {bar && (
           <div className={classes.navigation}>
             {navigation.map((nav, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className={!nav.active ? classes.nav : classes.navActive}
+                onClick={() => activateNav(index)}
+              >
                 <Link href={nav.link}>{nav.title}</Link>
               </div>
             ))}

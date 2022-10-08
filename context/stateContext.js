@@ -7,6 +7,28 @@ export const StateProvider = (props) => {
   const [card, setCard] = useState(false);
   const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [navigation, setNavigation] = useState([
+    {
+      title: "New",
+      link: "/collections/new",
+      active: false,
+    },
+    {
+      title: "Sale",
+      link: "/collections/sale",
+      active: false,
+    },
+    {
+      title: "Brands",
+      link: "/collections/brands",
+      active: false,
+    },
+    {
+      title: "Bloggers",
+      link: "/collections/bloggers",
+      active: false,
+    },
+  ]);
 
   const stateContext = {
     menu,
@@ -17,6 +39,8 @@ export const StateProvider = (props) => {
     setCard,
     shoppingCart,
     setShoppingCart,
+    navigation,
+    setNavigation,
   };
 
   return (

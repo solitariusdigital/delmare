@@ -49,19 +49,16 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 10px;
+
+    .nav {
+      font-size: config.$small-font;
+      color: config.$black;
+    }
+
+    .navActive {
+      font-size: config.$small-font;
+      color: config.$black;
+      border-bottom: 2px solid config.$brand;
+    }
   }
-}
-
-.header a {
-  text-decoration: none;
-  font-size: config.$small-font !important;
-  color: config.$black;
-}
-
-.header a:hover,
-.header a:active,
-.header a.active {
-  color: config.$black;
-  border-radius: 5px;
-  border-bottom: 2px solid config.$brand;
 }
