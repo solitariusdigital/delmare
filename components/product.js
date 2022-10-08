@@ -36,13 +36,45 @@ function Product({ props }) {
   );
 
   const [colors, setColors] = useState([
-    "red",
-    "blue",
-    "orange",
-    "pink",
-    "green",
+    {
+      type: "red",
+      selected: false,
+    },
+    {
+      type: "blue",
+      selected: false,
+    },
+    {
+      type: "orange",
+      selected: false,
+    },
+    {
+      type: "pink",
+      selected: false,
+    },
+    {
+      type: "green",
+      selected: false,
+    },
   ]);
-  const [sizes, setSizes] = useState(["S", "M", "L", "XL"]);
+  const [sizes, setSizes] = useState([
+    {
+      type: "S",
+      selected: false,
+    },
+    {
+      type: "M",
+      selected: false,
+    },
+    {
+      type: "L",
+      selected: false,
+    },
+    {
+      type: "XL",
+      selected: false,
+    },
+  ]);
   const [alert, setAlert] = useState("");
 
   // customer selections
@@ -113,14 +145,62 @@ function Product({ props }) {
     }
   };
 
+  const back = () => {
+    setDisplayDetails(false);
+    setSelectedColor("");
+    setSelectedSize("");
+    setExtraInfo("");
+    clearDetails();
+  };
+
+  const clearDetails = () => {
+    colors.map((color, index) => {
+      color.selected = false;
+    });
+    sizes.map((size, index) => {
+      size.selected = false;
+    });
+  };
+
+  const selectDetails = (detail, type, i) => {
+    switch (detail) {
+      case "color":
+        setSelectedColor(type);
+        colors.map((color, index) => {
+          if (i === index) {
+            color.selected = true;
+          } else {
+            color.selected = false;
+          }
+        });
+        break;
+      case "size":
+        setSelectedSize(type);
+        sizes.map((size, index) => {
+          if (i === index) {
+            size.selected = true;
+          } else {
+            size.selected = false;
+          }
+        });
+    }
+  };
+
   const addToCard = () => {
     if (selectedColor === "" || selectedSize === "") {
-      setAlert("Please select a color or size");
+      setAlert("رنگ یا اندازه را انتخاب کنید");
       setTimeout(() => {
         setAlert("");
       }, 3000);
       return;
+    } else {
+      clearDetails();
+      setAlert("کالا به سبد خرید اضافه شد");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
     }
+
     setShoppingCart([
       ...shoppingCart,
       {
@@ -183,10 +263,7 @@ function Product({ props }) {
             <ArrowBackIosNewIcon
               sx={{ color: "#000000", fontSize: 30 }}
               onClick={() => {
-                setDisplayDetails(false);
-                setSelectedColor("");
-                setSelectedSize("");
-                setExtraInfo("");
+                back();
               }}
             />
             <div className={classes.item}>
@@ -256,10 +333,12 @@ function Product({ props }) {
               {colors.map((color, index) => (
                 <div
                   key={index}
-                  className={classes.color}
-                  style={{ backgroundColor: color }}
+                  className={
+                    color.selected ? classes.selectedColor : classes.color
+                  }
+                  style={{ backgroundColor: color.type }}
                   onClick={() => {
-                    setSelectedColor(color);
+                    selectDetails("color", color.type, index);
                   }}
                 ></div>
               ))}
@@ -268,12 +347,14 @@ function Product({ props }) {
               {sizes.map((size, index) => (
                 <div
                   key={index}
-                  className={classes.size}
+                  className={
+                    size.selected ? classes.selectedSize : classes.size
+                  }
                   onClick={() => {
-                    setSelectedSize(size);
+                    selectDetails("size", size.type, index);
                   }}
                 >
-                  {size}
+                  {size.type}
                 </div>
               ))}
             </div>

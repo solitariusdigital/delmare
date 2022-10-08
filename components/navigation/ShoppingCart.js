@@ -22,8 +22,8 @@ export default function ShoppingCart() {
         <div className={classes.topBar}>
           <CloseIcon className="icon" onClick={() => setCard(false)} />
           <div className={classes.title}>
-            <p>سبد خرید</p>
             <p className={classes.count}>{shoppingCart.length}</p>
+            <p>سبد خرید</p>
           </div>
         </div>
         <div className={classes.items}>

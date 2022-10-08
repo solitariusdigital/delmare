@@ -127,7 +127,9 @@
     max-width: 260px;
 
     .color,
-    .size {
+    .size,
+    .selectedSize,
+    .selectedColor {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -135,16 +137,20 @@
       height: 30px;
       border-radius: 50%;
       margin: 5px;
-      box-shadow: config.$card-shadow;
-    }
-
-    .border {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
     }
 
     .size {
+      border: 1px solid config.$black;
+    }
+
+    .selectedColor,
+    .selectedSize {
+      width: 35px;
+      height: 35px;
+      box-shadow: config.$image-shadow;
+    }
+
+    .selectedSize {
       border: 1px solid config.$black;
     }
   }
@@ -159,6 +165,10 @@
 }
 
 .alert {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: center;
   color: config.$red;
   margin-bottom: 5px;
 }
