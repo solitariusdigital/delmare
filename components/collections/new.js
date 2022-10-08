@@ -14,21 +14,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function New() {
   const [displayProduct, setDisplayProduct] = useState(false);
-  const [favouriteProduct, setFavouriteProduct] = useState(
-    <FavoriteBorderIcon className={classes.icon} />
-  );
-
   const [selectedProduct, setSelectedProduct] = useState({
     id: null,
     image: null,
     items: null,
   });
 
-  const newCollection = [
+  const [newCollection, setNewCollection] = useState([
     {
       imageSrc: one,
       like: 122,
       views: 578,
+      favoured: true,
       items: [
         {
           id: "0000",
@@ -51,6 +48,7 @@ function New() {
       imageSrc: three,
       like: 122,
       views: 578,
+      favoured: false,
       items: [
         {
           id: "0000",
@@ -68,6 +66,7 @@ function New() {
       imageSrc: two,
       like: 122,
       views: 578,
+      favoured: true,
       items: [
         {
           id: "0000",
@@ -85,6 +84,7 @@ function New() {
       imageSrc: three,
       like: 122,
       views: 578,
+      favoured: true,
       items: [
         {
           id: "0000",
@@ -98,10 +98,15 @@ function New() {
         },
       ],
     },
-  ];
+  ]);
 
-  const favourProduct = () => {
-    setFavouriteProduct(<FavoriteIcon className={classes.iconRed} />);
+  const favourProduct = (index) => {
+    newCollection.map((product, i) => {
+      if (i === index) {
+        product.favoured = !product.favoured;
+      }
+    });
+    setNewCollection([...newCollection]);
   };
 
   const selectProduct = (product) => {
@@ -126,7 +131,19 @@ function New() {
                 </div>
                 <div className={classes.social}>
                   <p>{product.like}</p>
-                  <div onClick={() => favourProduct()}>{favouriteProduct}</div>
+                  <div>
+                    {product.favoured ? (
+                      <FavoriteIcon
+                        className={classes.iconRed}
+                        onClick={() => favourProduct(index)}
+                      />
+                    ) : (
+                      <FavoriteBorderIcon
+                        className={classes.icon}
+                        onClick={() => favourProduct(index)}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
               <Image
