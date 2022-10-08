@@ -22,11 +22,11 @@ function LandingPage() {
   }, []);
 
   return (
-    <div className={classes.container}>
-      <div
-        className={classes.banner}
-        onClick={() => Router.push("/collections")}
-      >
+    <div
+      className={classes.container}
+      onClick={() => Router.push("/collections")}
+    >
+      <div className={classes.banner}>
         <p>متفاوت بپوشیم</p>
       </div>
       <Image
@@ -41,13 +41,6 @@ function LandingPage() {
           یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی متنوع،
           باکیفیت و دارای قیمت مناسب را به دست مشتریان خود برساند
         </p>
-      </div>
-      <div className={classes.icon}>
-        <ExpandCircleDownIcon
-          className="icon"
-          sx={{ color: "#b2ffef", fontSize: 50 }}
-          onClick={() => Router.push("/collections")}
-        />
       </div>
     </div>
   );

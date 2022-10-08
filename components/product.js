@@ -287,7 +287,7 @@ function Product({ props }) {
               addToCard();
             }}
           >
-            Add to cart
+            افزودن به سبد خرید
           </button>
 
           <div className={classes.information}>
@@ -296,21 +296,21 @@ function Product({ props }) {
                 setExtraInfo("size");
               }}
             >
-              <p>Size guide</p>
+              <p>راهنمای اندازه</p>
             </div>
             <div
               onClick={() => {
                 setExtraInfo("shipment");
               }}
             >
-              <p>Shipment methods</p>
+              <p>روش ارسال</p>
             </div>
             <div
               onClick={() => {
                 setExtraInfo("return");
               }}
             >
-              <p>Return policy</p>
+              <p>شرایط بازگرداندن</p>
             </div>
           </div>
 

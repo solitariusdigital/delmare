@@ -173,6 +173,7 @@
   div {
     display: flex;
     align-items: center;
+    flex-direction: row-reverse;
     background: config.$white;
     margin: 5px 0px;
     padding: 10px 20px;
