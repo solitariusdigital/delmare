@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
@@ -17,19 +17,22 @@ export default function ShoppingCart() {
   const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+  }, [shoppingCart]);
+
   const deleteCard = (index) => {
     setShoppingCart(
       shoppingCart.filter((card, i) => {
         return i !== index;
       })
     );
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   };
 
   const calculateTotal = () => {
     let prices = [];
     shoppingCart.map((card) => {
-      prices.push(parseFloat(card.price));
+      prices.push(card.price);
     });
     const total = prices.reduce((partialSum, a) => partialSum + a, 0);
     return convertNumber(total);

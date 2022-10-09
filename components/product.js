@@ -90,7 +90,8 @@ function Product({ props }) {
   useEffect(() => {
     setBar(false);
     setExtraInfo("");
-  }, [setBar]);
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+  }, [setBar, shoppingCart]);
 
   const selectItem = (item) => {
     setDisplayDetails(true);
@@ -192,7 +193,7 @@ function Product({ props }) {
     }
   };
 
-  const addToCard = () => {
+  const addToCart = () => {
     if (selectedColor === "" || selectedSize === "") {
       setAlert("رنگ یا اندازه را انتخاب کنید");
       setTimeout(() => {
@@ -219,7 +220,6 @@ function Product({ props }) {
       },
     ]);
 
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     setSelectedColor("");
     setSelectedSize("");
   };
@@ -396,7 +396,7 @@ function Product({ props }) {
           <button
             className={`mainButton ${classes.button}`}
             onClick={() => {
-              addToCard();
+              addToCart();
             }}
           >
             افزودن به سبد خرید
