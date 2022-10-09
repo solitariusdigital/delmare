@@ -189,8 +189,7 @@
 
     .selectedColor,
     .selectedSize {
-      width: 35px;
-      height: 35px;
+      transform: scale(1.2);
       box-shadow: config.$image-shadow;
     }
 
