@@ -60,6 +60,23 @@ $screen-xl-min: 1200px;
   }
 }
 
+@mixin input() {
+  padding: 10px;
+  border-radius: 5px;
+  height: 40px;
+  border: 1px solid config.$grey;
+  background: config.$white;
+  color: config.$black;
+  font-family: config.$font;
+  font-size: config.$small-font;
+  z-index: 1000;
+
+  &:focus {
+    outline: none;
+    border: 1px solid config.$black;
+  }
+}
+
 @mixin border-radius() {
   border-radius: 10px;
 }
@@ -82,8 +99,8 @@ $screen-xl-min: 1200px;
       opacity: 1;
     }
     100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
       opacity: 1;
     }
   }
@@ -94,8 +111,8 @@ $screen-xl-min: 1200px;
       opacity: 1;
     }
     100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
       opacity: 1;
     }
   }

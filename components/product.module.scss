@@ -145,8 +145,6 @@
 
     .subItem {
       width: 70px;
-      // box-shadow: config.$card-shadow;
-      // @include mixins.border-radius();
 
       .detail {
         @include mixins.border-radius();
@@ -189,8 +187,8 @@
 
     .selectedColor,
     .selectedSize {
-      transform: scale(1.3);
       box-shadow: config.$image-shadow;
+      @include mixins.scale-in();
     }
 
     .selectedSize {

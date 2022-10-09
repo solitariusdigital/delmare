@@ -128,7 +128,7 @@ export default function ShoppingCart() {
             </div>
             <div className={classes.input}>
               <p className={classes.label}>آدرس تحویل</p>
-              <input
+              <textarea
                 type="text"
                 id="address"
                 name="address"
@@ -137,7 +137,7 @@ export default function ShoppingCart() {
                 autoComplete="off"
                 required
                 dir="rtl"
-              />
+              ></textarea>
             </div>
             <div className={classes.input}>
               <p className={classes.label}>کد پستی</p>

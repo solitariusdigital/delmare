@@ -56,13 +56,13 @@
     overflow-y: scroll;
 
     .item {
+      position: relative;
       width: 100%;
       background: config.$white;
       box-shadow: config.$card-shadow;
       margin: 10px 0px;
       padding: 10px;
       @include mixins.border-radius();
-      position: relative;
 
       p {
         font-size: config.$med-font;
@@ -159,21 +159,14 @@
     width: 70%;
     margin: 10px 0;
 
-    input {
-      padding: 10px;
-      border-radius: 5px;
-      height: 40px;
-      border: 1px solid config.$grey;
-      background: config.$white;
-      color: config.$black;
-      font-family: config.$font;
-      font-size: config.$small-font;
-      z-index: 1000;
+    input,
+    textarea {
+      @include mixins.input();
+    }
 
-      &:focus {
-        outline: none;
-        border: 1px solid config.$black;
-      }
+    textarea {
+      height: 80px;
+      resize: none;
     }
   }
 
