@@ -26,17 +26,17 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550.000",
+          price: 550000,
         },
         {
           id: "0000",
           title: "شال",
-          price: "350.000",
+          price: 350000,
         },
         {
           id: "0000",
           title: "شومیز",
-          price: "1.550.000",
+          price: 1550000,
         },
       ],
     },
@@ -49,12 +49,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550.000",
+          price: 550000,
         },
         {
           id: "0000",
           title: "شال",
-          price: "350.000",
+          price: 350000,
         },
       ],
     },
@@ -67,12 +67,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550.000",
+          price: 550000,
         },
         {
           id: "0000",
           title: "شال",
-          price: "350.000",
+          price: 350000,
         },
       ],
     },
@@ -85,12 +85,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550.000",
+          price: 550000,
         },
         {
           id: "0000",
           title: "شال",
-          price: "350.000",
+          price: 350000,
         },
       ],
     },

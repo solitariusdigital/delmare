@@ -14,6 +14,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import { convertNumber } from "./services/utility";
+
 function Product({ props }) {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -199,7 +201,7 @@ function Product({ props }) {
       return;
     } else {
       clearDetails();
-      setAlert("کالا به سبد خرید اضافه شد");
+      setAlert("آیتم به سبد خرید اضافه شد");
       setTimeout(() => {
         setAlert("");
       }, 3000);
@@ -278,7 +280,7 @@ function Product({ props }) {
                   selectItem(item);
                 }}
               >
-                <p>{item.price} T</p>
+                <p>{convertNumber(item.price)} T</p>
                 <p>{item.title}</p>
               </div>
             ))}
@@ -296,7 +298,7 @@ function Product({ props }) {
               }}
             />
             <div className={classes.item}>
-              <p>{selectedItem.price} T</p>
+              <p>{convertNumber(selectedItem.price)} T</p>
               <p>{selectedItem.title}</p>
             </div>
           </div>

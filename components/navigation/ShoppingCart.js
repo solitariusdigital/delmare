@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { convertNumber } from "../services/utility";
 
 export default function ShoppingCart() {
   const { card, setCard } = useContext(StateContext);
@@ -31,10 +32,7 @@ export default function ShoppingCart() {
       prices.push(parseFloat(card.price));
     });
     const total = prices.reduce((partialSum, a) => partialSum + a, 0);
-    return total.toLocaleString(undefined, {
-      minimumFractionDigits: 3,
-      maximumFractionDigits: 3,
-    });
+    return convertNumber(total);
   };
 
   const handleCheckOut = () => {
@@ -82,7 +80,7 @@ export default function ShoppingCart() {
                     />
                   </div>
                   <div className={classes.row}>
-                    <p>{card.price} T</p>
+                    <p>{convertNumber(card.price)} T</p>
                     <p>{card.title}</p>
                   </div>
                   <div className={classes.row}>
