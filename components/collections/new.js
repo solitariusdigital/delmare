@@ -14,11 +14,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function New() {
   const [displayProduct, setDisplayProduct] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState({
-    id: null,
-    image: null,
-    items: null,
-  });
+  const [selectedProduct, setSelectedProduct] = useState({});
 
   const [newCollection, setNewCollection] = useState([
     {
@@ -30,17 +26,17 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550,000",
+          price: "550.000",
         },
         {
           id: "0000",
           title: "شال",
-          price: "350,000",
+          price: "350.000",
         },
         {
           id: "0000",
           title: "شومیز",
-          price: "1,550,000",
+          price: "1.550.000",
         },
       ],
     },
@@ -53,12 +49,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550,000",
+          price: "550.000",
         },
         {
           id: "0000",
           title: "شال",
-          price: "350,000",
+          price: "350.000",
         },
       ],
     },
@@ -71,12 +67,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550,000",
+          price: "550.000",
         },
         {
           id: "0000",
           title: "شال",
-          price: "350,000",
+          price: "350.000",
         },
       ],
     },
@@ -89,12 +85,12 @@ function New() {
         {
           id: "0000",
           title: "شلوار",
-          price: "550,000",
+          price: "550.000",
         },
         {
           id: "0000",
           title: "شال",
-          price: "350,000",
+          price: "350.000",
         },
       ],
     },
@@ -115,6 +111,9 @@ function New() {
       id: product.id || "0000",
       image: product.imageSrc,
       items: product.items,
+      like: product.like,
+      views: product.views,
+      favoured: product.favoured,
     });
   };
 

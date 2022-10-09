@@ -10,6 +10,10 @@ import one from "../assets/itemOne.jpg";
 import two from "../assets/itemTwo.jpg";
 import three from "../assets/itemThree.jpg";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 function Product({ props }) {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -218,6 +222,8 @@ function Product({ props }) {
     setSelectedSize("");
   };
 
+  const favourProduct = () => {};
+
   return (
     <Fragment>
       {/* product */}
@@ -225,7 +231,7 @@ function Product({ props }) {
         <div>
           <div className={classes.productContainer}>
             <ArrowBackIosNewIcon
-              className={classes.icon}
+              className={classes.back}
               sx={{ color: "#000000", fontSize: 30 }}
               onClick={() => {
                 props.setDisplayProduct(false);
@@ -239,9 +245,31 @@ function Product({ props }) {
               layout="fill"
               objectFit="cover"
             />
+            <div className={classes.banner}>
+              <div className={classes.social}>
+                <p>{props.selectedProduct.views}</p>
+                <VisibilityIcon className={classes.icon} />
+              </div>
+              <div className={classes.social}>
+                <p>{props.selectedProduct.like}</p>
+                <div>
+                  {props.selectedProduct.favoured ? (
+                    <FavoriteIcon
+                      className={classes.iconRed}
+                      onClick={() => favourProduct()}
+                    />
+                  ) : (
+                    <FavoriteBorderIcon
+                      className={classes.icon}
+                      onClick={() => favourProduct()}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
           <div className={classes.product}>
-            <p className={classes.description}>کالای مورد نظر را انتخاب کنید</p>
+            <p className={classes.description}>آیتم مورد نظر را انتخاب کنید</p>
             {props.selectedProduct.items.map((item, index) => (
               <div
                 key={index}

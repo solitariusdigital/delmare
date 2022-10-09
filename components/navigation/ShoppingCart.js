@@ -16,6 +16,18 @@ export default function ShoppingCart() {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   };
 
+  const calculateTotal = () => {
+    let prices = [];
+    shoppingCart.map((card) => {
+      prices.push(parseFloat(card.price));
+    });
+    const total = prices.reduce((partialSum, a) => partialSum + a, 0);
+    return total.toLocaleString(undefined, {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+  };
+
   return (
     <div className={classes.background}>
       <div className={classes.menu}>
@@ -32,7 +44,7 @@ export default function ShoppingCart() {
               <div key={index} className={classes.item}>
                 <div className={classes.close}>
                   <CloseIcon
-                    className="icon icon-red"
+                    className="icon icon-grey"
                     onClick={() => deleteCard(index)}
                   />
                 </div>
@@ -51,12 +63,20 @@ export default function ShoppingCart() {
             ))
             .reverse()}
         </div>
-        <div className={classes.btnContainer}>
+        <div className={classes.details}>
+          <div className={classes.detail}>
+            <p>{shoppingCart.length}</p>
+            <p>تعداد آیتم ها</p>
+          </div>
+          <div className={classes.detail}>
+            <p>{calculateTotal()} T</p>
+            <p>جمع سبد خرید</p>
+          </div>
           <button
             className={`mainButton ${classes.button}`}
             disabled={shoppingCart.length === 0}
           >
-            {shoppingCart.length > 0 ? "افزودن به سبد خرید" : "empty"}
+            {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
           </button>
         </div>
       </div>

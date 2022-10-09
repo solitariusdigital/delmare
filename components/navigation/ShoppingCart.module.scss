@@ -52,7 +52,7 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 0px 10px;
-    height: calc(100% - 110px);
+    height: calc(100% - 180px);
     overflow-y: scroll;
 
     .item {
@@ -96,22 +96,29 @@
     }
   }
 
-  .btnContainer {
+  .details {
     position: absolute;
     bottom: 0px;
-    height: 60px;
+    height: 130px;
     width: 100%;
     padding: 0px 10px;
     @include mixins.border-radius();
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     .button {
       width: 100%;
       max-width: 500px;
       height: 40px;
+      font-size: config.$med-font;
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      margin: 5px 0px;
       font-size: config.$med-font;
     }
   }
