@@ -5,6 +5,8 @@ import classes from "./ShoppingCart.module.scss";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber } from "../services/utility";
+import Image from "next/image";
+import brand from "../../assets/brand.svg";
 
 export default function ShoppingCart() {
   const { card, setCard } = useContext(StateContext);
@@ -58,6 +60,11 @@ export default function ShoppingCart() {
             <div className={classes.title}>
               <p className={classes.count}>{shoppingCart.length}</p>
               <p>سبد خرید</p>
+            </div>
+          )}
+          {checkOut && (
+            <div className={classes.brand}>
+              <Image src={brand} alt="brand" />
             </div>
           )}
           {checkOut && (
