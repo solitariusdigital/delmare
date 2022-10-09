@@ -122,4 +122,63 @@
       font-size: config.$med-font;
     }
   }
+
+  .form {
+    width: 100%;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      font-size: config.$big-font;
+      margin: 20px 0px;
+    }
+
+    .subTitle {
+      font-size: config.$small-font;
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .label {
+      display: flex;
+      flex-direction: row-reverse;
+      font-size: config.$small-font;
+      margin-bottom: 10px;
+      color: config.$grey;
+    }
+  }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 10px 0;
+
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      height: 40px;
+      border: 1px solid config.$grey;
+      background: config.$white;
+      color: config.$black;
+      font-family: config.$font;
+      font-size: config.$small-font;
+      z-index: 1000;
+
+      &:focus {
+        outline: none;
+        border: 1px solid config.$black;
+      }
+    }
+  }
+
+  .alert {
+    color: config.$red;
+    margin-top: 20px;
+  }
 }

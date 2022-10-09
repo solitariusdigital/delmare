@@ -86,7 +86,7 @@ function Register({ props }) {
             <p className={classes.label}>Name</p>
             <input
               placeholder="دلارام ایرانی"
-              type="name"
+              type="text"
               id="name"
               name="name"
               onChange={(e) => setName(e.target.value)}
@@ -108,7 +108,6 @@ function Register({ props }) {
               required
             />
           </div>
-
           <div className={classes.input}>
             <p className={classes.label}>Password</p>
             <input
@@ -121,7 +120,6 @@ function Register({ props }) {
               required
             />
           </div>
-
           <div className={classes.formAction}>
             <p>{errorMessage}</p>
             <button className="mainButton" type="submit" disabled={false}>
