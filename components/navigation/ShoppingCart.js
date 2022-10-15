@@ -8,8 +8,11 @@ import { convertNumber } from "../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 
+// import item from "../../assets/mainItem.jpg";
+import item from "../../assets/two.jpg";
+
 export default function ShoppingCart() {
-  const { card, setCard } = useContext(StateContext);
+  const { cart, setCart } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
   const [checkOut, setCheckout] = useState(false);
@@ -23,9 +26,9 @@ export default function ShoppingCart() {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart]);
 
-  const deleteCard = (index) => {
+  const deletecart = (index) => {
     setShoppingCart(
-      shoppingCart.filter((card, i) => {
+      shoppingCart.filter((cart, i) => {
         return i !== index;
       })
     );
@@ -33,8 +36,8 @@ export default function ShoppingCart() {
 
   const calculateTotal = () => {
     let prices = [];
-    shoppingCart.map((card) => {
-      prices.push(card.price);
+    shoppingCart.map((cart) => {
+      prices.push(cart.price);
     });
     const total = prices.reduce((partialSum, a) => partialSum + a, 0);
     return convertNumber(total);
@@ -55,7 +58,7 @@ export default function ShoppingCart() {
     <div className={classes.background}>
       <div className={classes.menu}>
         <div className={classes.topBar}>
-          <CloseIcon className="icon" onClick={() => setCard(false)} />
+          <CloseIcon className="icon" onClick={() => setCart(false)} />
           {!checkOut && (
             <div className={classes.title}>
               <p className={classes.count}>{shoppingCart.length}</p>
@@ -79,32 +82,45 @@ export default function ShoppingCart() {
         </div>
 
         {!checkOut ? (
+          // items list
           <div className={classes.items}>
             {shoppingCart
-              .map((card, index) => (
+              .map((cart, index) => (
                 <div key={index} className={classes.item}>
+                  <div className={classes.cart}>
+                    <Image
+                      className={classes.image}
+                      width={110}
+                      height={140}
+                      src={item}
+                      alt="image"
+                    />
+                    <div className={classes.information}>
+                      <div className={classes.title}>
+                        <p>{convertNumber(cart.price)} T</p>
+                        <p>{cart.title}</p>
+                      </div>
+                      <div className={classes.options}>
+                        <div className={classes.size}>{cart.size}</div>
+                        <div
+                          className={classes.color}
+                          style={{ backgroundColor: cart.color }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
                   <div className={classes.close}>
                     <CloseIcon
                       className="icon icon-grey"
-                      onClick={() => deleteCard(index)}
+                      onClick={() => deletecart(index)}
                     />
-                  </div>
-                  <div className={classes.row}>
-                    <p>{convertNumber(card.price)} T</p>
-                    <p>{card.title}</p>
-                  </div>
-                  <div className={classes.row}>
-                    <div className={classes.size}>{card.size}</div>
-                    <div
-                      className={classes.color}
-                      style={{ backgroundColor: card.color }}
-                    ></div>
                   </div>
                 </div>
               ))
               .reverse()}
           </div>
         ) : (
+          // checkout from
           <div className={classes.form}>
             <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
             <div className={classes.input}>

@@ -16,6 +16,7 @@ import Register from "../Register";
 
 export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
+  const { cart, setCart } = useContext(StateContext);
 
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
@@ -28,6 +29,10 @@ export default function BurgerMenu() {
     {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,
+      call: () => {
+        setCart(true);
+        setMenu(false);
+      },
     },
     {
       title: "سبد آرزوها",
@@ -55,7 +60,7 @@ export default function BurgerMenu() {
             <div>
               <div className={classes.list}>
                 {navigation.map((nav, index) => (
-                  <div className={classes.item} key={index}>
+                  <div className={classes.item} key={index} onClick={nav.call}>
                     {nav.icon}
                     <p>{nav.title}</p>
                   </div>

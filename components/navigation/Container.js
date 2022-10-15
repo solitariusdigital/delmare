@@ -6,15 +6,15 @@ import ShoppingCart from "./ShoppingCart";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import classes from "./MainNavigation.module.scss";
+import classes from "./Container.module.scss";
 import Router from "next/router";
 
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 
-function MainNavigation() {
+function Container() {
   const { menu, setMenu } = useContext(StateContext);
-  const { card, setCard } = useContext(StateContext);
+  const { cart, setCart } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
@@ -42,7 +42,7 @@ function MainNavigation() {
       <div className={classes.header}>
         <div className={classes.bar}>
           <div className={classes.card}>
-            <ShoppingCartIcon className="icon" onClick={() => setCard(true)} />
+            <ShoppingCartIcon className="icon" onClick={() => setCart(true)} />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
           <div className={classes.brand}>
@@ -69,9 +69,10 @@ function MainNavigation() {
         )}
       </div>
       {menu && <BurgerMenu />}
-      {card && <ShoppingCart />}
+      {cart && <ShoppingCart />}
+      {cart && <ShoppingCart />}
     </div>
   );
 }
 
-export default MainNavigation;
+export default Container;

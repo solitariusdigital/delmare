@@ -71,27 +71,55 @@
       .close {
         display: flex;
         flex-direction: row-reverse;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
       }
 
-      .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 10px 0px;
-      }
+      .cart {
+        position: relative;
 
-      .color,
-      .size {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-      }
+        .image {
+          @include mixins.border-radius();
+        }
 
-      .size {
-        border: 1px solid config.$black;
+        .information {
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          width: 50%;
+
+          .title,
+          .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            p {
+              font-weight: bold;
+            }
+          }
+
+          .options {
+            position: absolute;
+            right: 0px;
+            width: 40%;
+          }
+
+          .color,
+          .size {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+
+          .size {
+            border: 1px solid config.$black;
+          }
+        }
       }
     }
   }
