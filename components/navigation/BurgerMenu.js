@@ -39,7 +39,7 @@ export default function BurgerMenu() {
       },
     },
     {
-      title: "سبد آرزوها",
+      title: "سبد آرزو",
       icon: <FavoriteIcon />,
       call: () => {
         setToggleContainer("wish");

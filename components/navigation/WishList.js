@@ -146,7 +146,7 @@ export default function WishList() {
             }}
           />
           <div className={ShoppingCart.title}>
-            <p>سبد آرزوها</p>
+            <p>سبد آرزو</p>
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon
