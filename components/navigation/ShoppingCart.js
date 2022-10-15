@@ -17,7 +17,7 @@ export default function ShoppingCart() {
 
   const [checkOut, setCheckout] = useState(false);
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
@@ -44,14 +44,14 @@ export default function ShoppingCart() {
   };
 
   const handleCheckOut = () => {
-    if (name === "" || number === "" || address === "" || post === "") {
+    if (name === "" || phone === "" || address === "" || post === "") {
       setAlert("همه اطلاعات را وارد کنید");
       setTimeout(() => {
         setAlert("");
       }, 3000);
       return;
     }
-    console.log(name, number, address, post);
+    console.log(name, phone, address, post);
   };
 
   return (
@@ -140,13 +140,12 @@ export default function ShoppingCart() {
               <p className={classes.label}>شماره موبایل</p>
               <input
                 type="number"
-                id="number"
-                name="number"
-                onChange={(e) => setNumber(e.target.value)}
-                value={number}
+                id="phone"
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
                 autoComplete="off"
                 required
-                dir="rtl"
               />
             </div>
             <div className={classes.input}>
@@ -172,7 +171,6 @@ export default function ShoppingCart() {
                 value={post}
                 autoComplete="off"
                 required
-                dir="rtl"
               />
             </div>
             <div className={classes.alert}>{alert}</div>

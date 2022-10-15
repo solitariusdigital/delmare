@@ -7,6 +7,7 @@ function Register({ props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -83,7 +84,7 @@ function Register({ props }) {
         <form className={classes.form} name="signup" onSubmit={handleSignup}>
           <p className={classes.title}>ثبت نام در دلماره</p>
           <div className={classes.input}>
-            <p className={classes.label}>Name</p>
+            <p className={classes.label}>نام و نام خانوادگی</p>
             <input
               placeholder="دلارام ایرانی"
               type="text"
@@ -91,6 +92,20 @@ function Register({ props }) {
               name="name"
               onChange={(e) => setName(e.target.value)}
               value={name}
+              autoComplete="off"
+              required
+              dir="rtl"
+            />
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>شماره موبایل</p>
+            <input
+              placeholder="0123456789"
+              type="number"
+              id="phone"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
               autoComplete="off"
               required
             />
