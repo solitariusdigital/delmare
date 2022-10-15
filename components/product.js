@@ -4,12 +4,13 @@ import classes from "./Product.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import item from "../assets/mainItem.jpg";
 import one from "../assets/itemOne.jpg";
 import two from "../assets/itemTwo.jpg";
 import three from "../assets/itemThree.jpg";
-
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -39,10 +40,10 @@ function Product() {
   const [itemTwoDisplay, setitemTwoDisplay] = useState(false);
   const [itemThreeDisplay, setitemThreeDisplay] = useState(false);
   // to control extra information
-  const [extraInfo, setExtraInfo] = useState(
-    "return" || "size" || "shipment" || ""
-  );
-
+  const [sizeGuide, setSizeGuide] = useState(false);
+  const [shipmentMethod, setShipmentMethod] = useState(false);
+  const [returnPolicy, setReturnPolicy] = useState(false);
+  // item options
   const [colors, setColors] = useState([
     {
       type: "red",
@@ -84,14 +85,12 @@ function Product() {
     },
   ]);
   const [alert, setAlert] = useState("");
-
   // customer selections
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
     setBar(false);
-    setExtraInfo("");
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [setBar, shoppingCart]);
 
@@ -406,38 +405,55 @@ function Product() {
 
           <div className={classes.information}>
             <div
+              className={classes.item}
               onClick={() => {
-                setExtraInfo("size");
+                setSizeGuide(!sizeGuide);
+                setShipmentMethod(false);
+                setReturnPolicy(false);
               }}
             >
               <p>راهنمای اندازه</p>
+              {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
+            {sizeGuide && (
+              <div className={classes.info}>
+                <p>Size</p>
+              </div>
+            )}
             <div
+              className={classes.item}
               onClick={() => {
-                setExtraInfo("shipment");
+                setShipmentMethod(!shipmentMethod);
+                setSizeGuide(false);
+                setReturnPolicy(false);
               }}
             >
               <p>روش ارسال</p>
+              {shipmentMethod ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
+            {shipmentMethod && (
+              <div className={classes.info}>
+                <p>Shimpment</p>
+              </div>
+            )}
+
             <div
+              className={classes.item}
               onClick={() => {
-                setExtraInfo("return");
+                setReturnPolicy(!returnPolicy);
+                setSizeGuide(false);
+                setShipmentMethod(false);
               }}
             >
               <p>شرایط بازگرداندن</p>
+              {returnPolicy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
-          </div>
-
-          {extraInfo !== "" && (
-            <div className={classes.popUp}>
-              <div className={classes.cross}>
-                <CloseIcon className="icon" onClick={() => setExtraInfo("")} />
+            {returnPolicy && (
+              <div className={classes.info}>
+                <p>Return</p>
               </div>
-              {extraInfo === "size" && <p>Size guide</p>}
-              {extraInfo === "shipment" && <p>Shimpment info</p>}
-              {extraInfo === "return" && <p>Return policy</p>}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
     </Fragment>
