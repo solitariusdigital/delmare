@@ -14,7 +14,7 @@ export default function Orders() {
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
-            <p>پیگیری سفارش</p>
+            <p>کمد من</p>
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon

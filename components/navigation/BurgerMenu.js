@@ -6,8 +6,8 @@ import classes from "./BurgerMenu.module.scss";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
 
 import Image from "next/image";
 import logo from "../../assets/logo.png";
@@ -31,6 +31,14 @@ export default function BurgerMenu() {
       },
     },
     {
+      title: "کمد من",
+      icon: <CheckroomIcon />,
+      call: () => {
+        setToggleContainer("orders");
+        setMenu(false);
+      },
+    },
+    {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,
       call: () => {
@@ -43,14 +51,6 @@ export default function BurgerMenu() {
       icon: <FavoriteIcon />,
       call: () => {
         setToggleContainer("wish");
-        setMenu(false);
-      },
-    },
-    {
-      title: "پیگیری سفارش",
-      icon: <LocalShippingIcon />,
-      call: () => {
-        setToggleContainer("orders");
         setMenu(false);
       },
     },
