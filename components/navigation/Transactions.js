@@ -3,7 +3,7 @@ import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
 
-export default function WishList() {
+export default function Transactions() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
   return (
@@ -13,7 +13,7 @@ export default function WishList() {
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
         </div>
 
-        <div>Wish list</div>
+        <div>Transactions</div>
       </div>
     </div>
   );

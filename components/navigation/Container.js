@@ -2,7 +2,11 @@ import { useContext, useState } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
+import Account from "./Account";
 import ShoppingCart from "./ShoppingCart";
+import WishList from "./WishList";
+import Orders from "./Orders";
+import Transactions from "./Transactions";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -14,7 +18,8 @@ import brand from "../../assets/brand.svg";
 
 function Container() {
   const { menu, setMenu } = useContext(StateContext);
-  const { cart, setCart } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
+
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
@@ -42,7 +47,10 @@ function Container() {
       <div className={classes.header}>
         <div className={classes.bar}>
           <div className={classes.card}>
-            <ShoppingCartIcon className="icon" onClick={() => setCart(true)} />
+            <ShoppingCartIcon
+              className="icon"
+              onClick={() => setToggleContainer("cart")}
+            />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
           <div className={classes.brand}>
@@ -69,8 +77,12 @@ function Container() {
         )}
       </div>
       {menu && <BurgerMenu />}
-      {cart && <ShoppingCart />}
-      {cart && <ShoppingCart />}
+      {/* container layouts / pages navigated from burger menu */}
+      {toggleContainer === "account" && <Account />}
+      {toggleContainer === "cart" && <ShoppingCart />}
+      {toggleContainer === "wish" && <WishList />}
+      {toggleContainer === "orders" && <Orders />}
+      {toggleContainer === "transactions" && <Transactions />}
     </div>
   );
 }

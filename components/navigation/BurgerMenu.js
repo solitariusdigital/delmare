@@ -16,7 +16,7 @@ import Register from "../Register";
 
 export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
-  const { cart, setCart } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
@@ -25,26 +25,42 @@ export default function BurgerMenu() {
     {
       title: "حساب من",
       icon: <AccountBoxIcon />,
+      call: () => {
+        setToggleContainer("account");
+        setMenu(false);
+      },
     },
     {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,
       call: () => {
-        setCart(true);
+        setToggleContainer("cart");
         setMenu(false);
       },
     },
     {
       title: "سبد آرزوها",
       icon: <FavoriteIcon />,
+      call: () => {
+        setToggleContainer("wish");
+        setMenu(false);
+      },
     },
     {
       title: "پیگیری سفارش",
       icon: <LocalShippingIcon />,
+      call: () => {
+        setToggleContainer("orders");
+        setMenu(false);
+      },
     },
     {
       title: "تراکنش",
       icon: <ChangeCircleIcon />,
+      call: () => {
+        setToggleContainer("transactions");
+        setMenu(false);
+      },
     },
   ];
 

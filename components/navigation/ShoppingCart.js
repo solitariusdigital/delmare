@@ -12,8 +12,8 @@ import brand from "../../assets/brand.svg";
 import item from "../../assets/two.jpg";
 
 export default function ShoppingCart() {
-  const { cart, setCart } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
   const [checkOut, setCheckout] = useState(false);
   const [name, setName] = useState("");
@@ -58,7 +58,7 @@ export default function ShoppingCart() {
     <div className={classes.background}>
       <div className={classes.menu}>
         <div className={classes.topBar}>
-          <CloseIcon className="icon" onClick={() => setCart(false)} />
+          <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           {!checkOut && (
             <div className={classes.title}>
               <p className={classes.count}>{shoppingCart.length}</p>

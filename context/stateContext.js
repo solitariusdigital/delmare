@@ -4,7 +4,10 @@ export const StateContext = createContext();
 
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [toggleContainer, setToggleContainer] = useState(
+    "account" || "cart" || "wish" || "orders" || "transactions" || ""
+  );
+
   const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
   const [navigation, setNavigation] = useState([
@@ -35,12 +38,12 @@ export const StateProvider = (props) => {
     setMenu,
     bar,
     setBar,
-    cart,
-    setCart,
     shoppingCart,
     setShoppingCart,
     navigation,
     setNavigation,
+    toggleContainer,
+    setToggleContainer,
   };
 
   return (
