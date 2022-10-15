@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
-import classes from "./Product.module.scss";
+import classes from "./ProductPage.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
@@ -157,7 +157,6 @@ function Product() {
     setDisplayDetails(false);
     setSelectedColor("");
     setSelectedSize("");
-    setExtraInfo("");
     clearDetails();
   };
 
@@ -395,7 +394,7 @@ function Product() {
           <div className={classes.alert}>{alert}</div>
 
           <button
-            className={`mainButton ${classes.addCartBtn}`}
+            className={classes.button}
             onClick={() => {
               addToCart();
             }}

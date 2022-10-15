@@ -197,8 +197,8 @@
   }
 }
 
-.addCartBtn {
-  width: 100%;
+.button {
+  @include mixins.button(config.$brand, config.$black, 100%);
   max-width: 500px;
   height: 40px;
   font-size: config.$med-font;

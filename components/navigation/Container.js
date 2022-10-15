@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -23,6 +23,10 @@ function Container() {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+
+  useEffect(() => {
+    setToggleContainer("");
+  }, [setToggleContainer]);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {

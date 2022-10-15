@@ -14,7 +14,7 @@ import one from "../../assets/one.jpg";
 import two from "../../assets/two.jpg";
 import three from "../../assets/three.jpg";
 
-import Product from "../Product";
+import Product from "../ProductPage";
 
 export default function WishList() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
