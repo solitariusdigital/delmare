@@ -1,4 +1,5 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
+import { StateContext } from "../../context/stateContext";
 
 import Image from "next/image";
 import one from "../../assets/one.jpg";
@@ -6,15 +7,16 @@ import two from "../../assets/two.jpg";
 import three from "../../assets/three.jpg";
 
 import classes from "./collections.module.scss";
-import Product from "../product";
+import Product from "../Product";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function New() {
-  const [displayProduct, setDisplayProduct] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState({});
+  const { displayProduct, setDisplayProduct } = useContext(StateContext);
+  const { selectedProduct, setSelectedProduct } = useContext(StateContext);
+  const { bar, setBar } = useContext(StateContext);
 
   const [newCollection, setNewCollection] = useState([
     {
@@ -96,6 +98,12 @@ function New() {
     },
   ]);
 
+  useEffect(() => {
+    setSelectedProduct({});
+    setDisplayProduct(false);
+    setBar(true);
+  }, [setSelectedProduct, setDisplayProduct, setBar]);
+
   const favourProduct = (index) => {
     newCollection.map((product, i) => {
       if (i === index) {
@@ -119,26 +127,26 @@ function New() {
 
   return (
     <Fragment>
-      <div className={classes.newCollection}>
+      <div className="collection-grid">
         {!displayProduct &&
           newCollection.map((product, index) => (
-            <div key={index} className={classes.product}>
-              <div className={classes.banner}>
-                <div className={classes.social}>
+            <div key={index} className="product">
+              <div className="banner">
+                <div className="social">
                   <p>{product.views}</p>
-                  <VisibilityIcon className={classes.icon} />
+                  <VisibilityIcon className="icon" />
                 </div>
-                <div className={classes.social}>
+                <div className="social">
                   <p>{product.like}</p>
                   <div>
                     {product.favoured ? (
                       <FavoriteIcon
-                        className={classes.iconRed}
+                        className="iconRed"
                         onClick={() => favourProduct(index)}
                       />
                     ) : (
                       <FavoriteBorderIcon
-                        className={classes.icon}
+                        className="icon"
                         onClick={() => favourProduct(index)}
                       />
                     )}
@@ -147,7 +155,7 @@ function New() {
               </div>
               <Image
                 onClick={() => selectProduct(product)}
-                className={classes.image}
+                className="image"
                 src={product.imageSrc}
                 alt="image"
                 layout="fill"
@@ -155,9 +163,7 @@ function New() {
               />
             </div>
           ))}
-        {displayProduct && (
-          <Product props={{ selectedProduct, setDisplayProduct }} />
-        )}
+        {displayProduct && <Product />}
       </div>
     </Fragment>
   );

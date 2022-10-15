@@ -7,6 +7,8 @@ export const StateProvider = (props) => {
   const [toggleContainer, setToggleContainer] = useState(
     "account" || "cart" || "wish" || "orders" || "transactions" || ""
   );
+  const [displayProduct, setDisplayProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
 
   const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -44,6 +46,10 @@ export const StateProvider = (props) => {
     setNavigation,
     toggleContainer,
     setToggleContainer,
+    displayProduct,
+    setDisplayProduct,
+    selectedProduct,
+    setSelectedProduct,
   };
 
   return (

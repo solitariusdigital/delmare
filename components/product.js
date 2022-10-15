@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
-import classes from "./product.module.scss";
+import classes from "./Product.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
@@ -16,9 +16,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { convertNumber } from "./services/utility";
 
-function Product({ props }) {
-  const { bar, setBar } = useContext(StateContext);
+function Product() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
+  const { displayProduct, setDisplayProduct } = useContext(StateContext);
+  const { selectedProduct, setSelectedProduct } = useContext(StateContext);
+  const { bar, setBar } = useContext(StateContext);
 
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
@@ -236,26 +238,26 @@ function Product({ props }) {
               className={classes.back}
               sx={{ color: "#000000", fontSize: 30 }}
               onClick={() => {
-                props.setDisplayProduct(false);
+                setDisplayProduct(false);
                 setBar(true);
               }}
             />
             <Image
               className={classes.image}
-              src={props.selectedProduct.image}
+              src={selectedProduct.image}
               alt="image"
               layout="fill"
               objectFit="cover"
             />
             <div className={classes.banner}>
               <div className={classes.social}>
-                <p>{props.selectedProduct.views}</p>
+                <p>{selectedProduct.views}</p>
                 <VisibilityIcon className={classes.icon} />
               </div>
               <div className={classes.social}>
-                <p>{props.selectedProduct.like}</p>
+                <p>{selectedProduct.like}</p>
                 <div>
-                  {props.selectedProduct.favoured ? (
+                  {selectedProduct.favoured ? (
                     <FavoriteIcon
                       className={classes.iconRed}
                       onClick={() => favourProduct()}
@@ -272,7 +274,7 @@ function Product({ props }) {
           </div>
           <div className={classes.product}>
             <p className={classes.description}>آیتم مورد نظر را انتخاب کنید</p>
-            {props.selectedProduct.items.map((item, index) => (
+            {selectedProduct.items.map((item, index) => (
               <div
                 key={index}
                 className={classes.list}
@@ -394,7 +396,7 @@ function Product({ props }) {
           <div className={classes.alert}>{alert}</div>
 
           <button
-            className={`mainButton ${classes.button}`}
+            className={`mainButton ${classes.addCartBtn}`}
             onClick={() => {
               addToCart();
             }}

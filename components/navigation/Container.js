@@ -46,7 +46,7 @@ function Container() {
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.bar}>
-          <div className={classes.card}>
+          <div className="shoppingcart-icon">
             <ShoppingCartIcon
               className="icon"
               onClick={() => setToggleContainer("cart")}

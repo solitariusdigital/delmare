@@ -26,20 +26,6 @@
         cursor: pointer;
       }
     }
-
-    .card {
-      display: flex;
-      align-items: center;
-      position: relative;
-
-      p {
-        position: absolute;
-        left: 25px;
-        bottom: 15px;
-        color: config.$red;
-        font-size: config.$small-font;
-      }
-    }
   }
 
   .navigation {

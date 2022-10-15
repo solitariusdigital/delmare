@@ -50,11 +50,11 @@ function CollectionsPage() {
   };
 
   return (
-    <div className="collections-container">
+    <div className="collections-type">
       {collections.map((collection, index) => (
         <div
           key={index}
-          className="collections-card"
+          className="card"
           onClick={() => activateNav(collection.link, index)}
         >
           <div className="banner">
