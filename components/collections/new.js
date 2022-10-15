@@ -7,7 +7,7 @@ import two from "../../assets/two.jpg";
 import three from "../../assets/three.jpg";
 
 import classes from "./collections.module.scss";
-import Product from "../ProductPage";
+import Product from "../Product";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
