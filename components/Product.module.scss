@@ -221,23 +221,25 @@
   max-width: 500px;
   margin-top: 10px;
 
+  .section {
+    background: config.$white;
+    margin: 5px 0px;
+    @include mixins.border-radius();
+  }
+
   .item {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
     background: config.$white;
-    margin: 5px 0px;
     padding: 10px 20px;
     box-shadow: config.$card-shadow;
     height: 40px;
-    border-radius: 50px;
+    @include mixins.border-radius();
   }
 
   .info {
-    background: config.$white;
     padding: 10px;
-    @include mixins.border-radius();
     height: 200px;
-    margin: 5px 0px;
   }
 }

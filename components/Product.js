@@ -403,55 +403,60 @@ function Product() {
           </button>
 
           <div className={classes.information}>
-            <div
-              className={classes.item}
-              onClick={() => {
-                setSizeGuide(!sizeGuide);
-                setShipmentMethod(false);
-                setReturnPolicy(false);
-              }}
-            >
-              <p>راهنمای اندازه</p>
-              {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </div>
-            {sizeGuide && (
-              <div className={classes.info}>
-                <p>Size</p>
+            <div className={classes.section}>
+              <div
+                className={classes.item}
+                onClick={() => {
+                  setSizeGuide(!sizeGuide);
+                  setShipmentMethod(false);
+                  setReturnPolicy(false);
+                }}
+              >
+                <p>راهنمای اندازه</p>
+                {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-            )}
-            <div
-              className={classes.item}
-              onClick={() => {
-                setShipmentMethod(!shipmentMethod);
-                setSizeGuide(false);
-                setReturnPolicy(false);
-              }}
-            >
-              <p>روش ارسال</p>
-              {shipmentMethod ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              {sizeGuide && (
+                <div className={classes.info}>
+                  <p>Size</p>
+                </div>
+              )}
             </div>
-            {shipmentMethod && (
-              <div className={classes.info}>
-                <p>Shimpment</p>
+            <div className={classes.section}>
+              <div
+                className={classes.item}
+                onClick={() => {
+                  setShipmentMethod(!shipmentMethod);
+                  setSizeGuide(false);
+                  setReturnPolicy(false);
+                }}
+              >
+                <p>روش ارسال</p>
+                {shipmentMethod ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-            )}
-
-            <div
-              className={classes.item}
-              onClick={() => {
-                setReturnPolicy(!returnPolicy);
-                setSizeGuide(false);
-                setShipmentMethod(false);
-              }}
-            >
-              <p>شرایط بازگرداندن</p>
-              {returnPolicy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              {shipmentMethod && (
+                <div className={classes.info}>
+                  <p>Shimpment</p>
+                </div>
+              )}
             </div>
-            {returnPolicy && (
-              <div className={classes.info}>
-                <p>Return</p>
+            <div className={classes.section}>
+              <div
+                className={classes.item}
+                onClick={() => {
+                  setReturnPolicy(!returnPolicy);
+                  setSizeGuide(false);
+                  setShipmentMethod(false);
+                }}
+              >
+                <p>شرایط بازگرداندن</p>
+                {returnPolicy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-            )}
+              {returnPolicy && (
+                <div className={classes.info}>
+                  <p>Return</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
