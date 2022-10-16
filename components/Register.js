@@ -33,7 +33,7 @@ function Register({ props }) {
         <form className={classes.form} name="login" onSubmit={handleLogin}>
           <p className={classes.title}>ورود به دلماره</p>
           <div className={classes.input}>
-            <p className={classes.label}>Email</p>
+            <p className={classes.label}>ایمیل</p>
             <input
               placeholder="sara@delmare.com"
               type="email"
@@ -47,7 +47,7 @@ function Register({ props }) {
           </div>
 
           <div className={classes.input}>
-            <p className={classes.label}>Password</p>
+            <p className={classes.label}>کلمه عبور</p>
             <input
               placeholder="Password"
               type="password"
@@ -61,7 +61,7 @@ function Register({ props }) {
 
           <div className={classes.formAction}>
             <p className={classes.subTitle} href="/resetpassword">
-              Forgot password?
+              کلمه عبور فراموش شده
             </p>
             <p>{errorMessage}</p>
             <button className="mainButton" type="submit" disabled={false}>
@@ -111,7 +111,7 @@ function Register({ props }) {
             />
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>Email</p>
+            <p className={classes.label}>ایمیل</p>
             <input
               placeholder="sara@delmare.com"
               type="email"
@@ -124,7 +124,7 @@ function Register({ props }) {
             />
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>Password</p>
+            <p className={classes.label}>کلمه عبور</p>
             <input
               placeholder="Password"
               type="password"
