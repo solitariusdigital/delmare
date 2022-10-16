@@ -16,7 +16,6 @@
 
   .subTitle {
     font-size: config.$small-font;
-    text-decoration: underline;
     margin-bottom: 10px;
 
     &:hover {
@@ -42,7 +41,7 @@
 }
 
 .input {
-  margin: 10px 0;
+  margin: 5px 0;
 
   input {
     @include mixins.input();
