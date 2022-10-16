@@ -3,7 +3,6 @@ import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
 import classes from "./Account.module.scss";
-
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function Account() {

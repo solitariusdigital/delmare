@@ -1,156 +1,183 @@
-import { ClassNames } from "@emotion/react";
 import { useState, useContext } from "react";
 import { Fragment } from "react";
 import classes from "./Register.module.scss";
+import Kavenegar from "kavenegar";
+import { tokenGenerator } from "../services/utility";
 
 function Register({ props }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [token, setToken] = useState("");
+  const [userToken, setUserToken] = useState("");
+  const [alert, setAlert] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const verifyPhone = () => {
+    if (phone !== "") {
+      let id = tokenGenerator();
+      setToken(id);
+      console.log(id);
+      setAlert("رمز پویا ارسال شد");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    setEmail("");
-    setPassword("");
-    setName("");
-    console.log(email, password);
+      // const api = Kavenegar.KavenegarApi({
+      //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
+      // });
+      // api.VerifyLookup(
+      //   {
+      //     receptor: "09121089341",
+      //     token: token,
+      //     template: "registerverify",
+      //   },
+      //   function (response, status) {
+      //     console.log(response);
+      //     console.log(status);
+      //   }
+      // );
+    } else {
+      setAlert("موبایل را وارد کنید");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+    }
   };
 
-  const handleSignup = (event) => {
-    event.preventDefault();
-    setEmail("");
-    setPassword("");
-    setName("");
-    console.log(email, password, name);
+  const handleRegister = (type) => {
+    console.log(token, Number(userToken));
+    if (token === Number(userToken)) {
+      console.log(type);
+      setName("");
+      setPhone("");
+      setUserToken("");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+    } else {
+      setUserToken("");
+      setAlert("رمز پویا اشتباه است");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+    }
   };
 
   return (
     <Fragment>
       {props.login && (
-        <form className={classes.form} name="login" onSubmit={handleLogin}>
+        <div className={classes.form}>
           <p className={classes.title}>ورود به دلماره</p>
           <div className={classes.input}>
-            <p className={classes.label}>ایمیل</p>
+            <p className={classes.label}>موبایل</p>
             <input
-              placeholder="sara@delmare.com"
-              type="email"
-              id="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              autoComplete="off"
-              required
-            />
-          </div>
-
-          <div className={classes.input}>
-            <p className={classes.label}>کلمه عبور</p>
-            <input
-              placeholder="Password"
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-          </div>
-
-          <div className={classes.formAction}>
-            <p className={classes.subTitle} href="/resetpassword">
-              کلمه عبور فراموش شده
-            </p>
-            <p>{errorMessage}</p>
-            <button className="mainButton" type="submit" disabled={false}>
-              Log in
-            </button>
-            <p
-              className={classes.subTitle}
-              onClick={() => {
-                props.setSignup(true);
-                props.setLogin(false);
-              }}
-            >
-              Sign up
-            </p>
-          </div>
-        </form>
-      )}
-
-      {props.signup && (
-        <form className={classes.form} name="signup" onSubmit={handleSignup}>
-          <p className={classes.title}>ثبت نام در دلماره</p>
-          <div className={classes.input}>
-            <p className={classes.label}>نام و نام خانوادگی</p>
-            <input
-              placeholder="دلارام ایرانی"
-              type="text"
-              id="name"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              autoComplete="off"
-              required
-              dir="rtl"
-            />
-          </div>
-          <div className={classes.input}>
-            <p className={classes.label}>شماره موبایل</p>
-            <input
-              placeholder="0123456789"
               type="tel"
               id="phone"
               name="phone"
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
               autoComplete="off"
-              required
             />
           </div>
+          <button className="mainButton" onClick={() => verifyPhone()}>
+            رمز پویا
+          </button>
           <div className={classes.input}>
-            <p className={classes.label}>ایمیل</p>
+            <p className={classes.label}>رمز پویا</p>
             <input
-              placeholder="sara@delmare.com"
-              type="email"
-              id="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              type="number"
+              id="number"
+              name="number"
+              onChange={(e) => setUserToken(e.target.value)}
+              value={userToken}
               autoComplete="off"
-              required
-            />
-          </div>
-          <div className={classes.input}>
-            <p className={classes.label}>کلمه عبور</p>
-            <input
-              placeholder="Password"
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
             />
           </div>
           <div className={classes.formAction}>
-            <p>{errorMessage}</p>
-            <button className="mainButton" type="submit" disabled={false}>
+            <p className={classes.alert}>{alert}</p>
+            {userToken.length === 6 && (
+              <button
+                className="mainButton"
+                onClick={() => handleRegister("signin")}
+              >
+                Log in
+              </button>
+            )}
+            <p
+              className={classes.subTitle}
+              onClick={() => {
+                props.setSignup(true);
+                props.setLogin(false);
+                setAlert("");
+              }}
+            >
               Sign up
-            </button>
+            </p>
+          </div>
+        </div>
+      )}
+
+      {props.signup && (
+        <div className={classes.form}>
+          <p className={classes.title}>ثبت نام در دلماره</p>
+          <div className={classes.input}>
+            <p className={classes.label}>نام و نام خانوادگی</p>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              autoComplete="off"
+              dir="rtl"
+            />
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>موبایل</p>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              autoComplete="off"
+            />
+          </div>
+          <button className="mainButton" onClick={() => verifyPhone()}>
+            رمز پویا
+          </button>
+          <div className={classes.input}>
+            <p className={classes.label}>رمز پویا</p>
+            <input
+              type="number"
+              id="number"
+              name="number"
+              onChange={(e) => setUserToken(e.target.value)}
+              value={userToken}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.formAction}>
+            <p className={classes.alert}>{alert}</p>
+            {userToken.length === 6 && (
+              <button
+                className="mainButton"
+                onClick={() => handleRegister("signup")}
+              >
+                ورود
+              </button>
+            )}
             <p
               className={classes.subTitle}
               onClick={() => {
                 props.setSignup(false);
                 props.setLogin(true);
+                setAlert("");
               }}
             >
               Log in
             </p>
           </div>
-        </form>
+        </div>
       )}
     </Fragment>
   );

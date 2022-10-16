@@ -1,17 +1,14 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
+import Product from "../Product";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import Image from "next/image";
 import one from "../../assets/one.jpg";
 import two from "../../assets/two.jpg";
 import three from "../../assets/three.jpg";
-
-import classes from "./collections.module.scss";
-import Product from "../Product";
-
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function New() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);

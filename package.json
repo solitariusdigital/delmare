@@ -15,6 +15,7 @@
     "@mui/material": "^5.10.4",
     "@mui/styled-engine-sc": "^5.10.3",
     "get-node-cli": "^8.1.0",
+    "kavenegar": "^1.1.4",
     "next": "12.2.5",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",

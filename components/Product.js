@@ -3,7 +3,6 @@ import { StateContext } from "../context/stateContext";
 import classes from "./Product.module.scss";
 import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
@@ -15,7 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-import { convertNumber } from "./services/utility";
+import { convertNumber } from "../services/utility";
 
 function Product() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);

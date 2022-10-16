@@ -2,9 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
-
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { convertNumber } from "../services/utility";
+import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 

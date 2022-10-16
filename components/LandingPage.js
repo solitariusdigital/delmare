@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import Router from "next/router";
-
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 import imageOne from "../assets/one.jpg";
 import imageTwo from "../assets/two.jpg";
