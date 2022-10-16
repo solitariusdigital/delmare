@@ -101,7 +101,7 @@ function Register({ props }) {
             <p className={classes.label}>شماره موبایل</p>
             <input
               placeholder="0123456789"
-              type="number"
+              type="tel"
               id="phone"
               name="phone"
               onChange={(e) => setPhone(e.target.value)}

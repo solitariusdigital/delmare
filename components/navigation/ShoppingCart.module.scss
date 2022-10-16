@@ -19,6 +19,7 @@
   max-width: 500px;
   background: config.$cream;
   box-shadow: config.$card-shadow;
+  overflow-y: scroll;
 
   .topBar {
     display: flex;

@@ -139,7 +139,7 @@ export default function ShoppingCart() {
             <div className={classes.input}>
               <p className={classes.label}>شماره موبایل</p>
               <input
-                type="number"
+                type="tel"
                 id="phone"
                 name="phone"
                 onChange={(e) => setPhone(e.target.value)}

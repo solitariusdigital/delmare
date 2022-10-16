@@ -104,14 +104,9 @@ export default function WishList() {
   ]);
 
   useEffect(() => {
-    clearProduct();
-  }, [clearProduct]);
-
-  const clearProduct = () => {
-    setBar(true);
     setSelectedProduct({});
     setDisplayProduct(false);
-  };
+  }, [setSelectedProduct, setDisplayProduct]);
 
   const favourProduct = (index) => {
     wishList.map((product, i) => {
@@ -138,13 +133,7 @@ export default function WishList() {
     <div className={ShoppingCart.background}>
       <div className={ShoppingCart.menu}>
         <div className={ShoppingCart.topBar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setToggleContainer("");
-              clearProduct();
-            }}
-          />
+          <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
             <p>سبد آرزو</p>
           </div>
