@@ -123,46 +123,44 @@ function New() {
   };
 
   return (
-    <Fragment>
-      <div className="collection-grid">
-        {!displayProduct &&
-          newCollection.map((product, index) => (
-            <div key={index} className="product">
-              <div className="banner">
-                <div className="social">
-                  <p>{product.views}</p>
-                  <VisibilityIcon className="icon" />
-                </div>
-                <div className="social">
-                  <p>{product.like}</p>
-                  <div>
-                    {product.favoured ? (
-                      <FavoriteIcon
-                        className="iconRed"
-                        onClick={() => favourProduct(index)}
-                      />
-                    ) : (
-                      <FavoriteBorderIcon
-                        className="icon"
-                        onClick={() => favourProduct(index)}
-                      />
-                    )}
-                  </div>
+    <div className="collection-grid">
+      {!displayProduct &&
+        newCollection.map((product, index) => (
+          <div key={index} className="product">
+            <div className="banner">
+              <div className="social">
+                <p>{product.views}</p>
+                <VisibilityIcon className="icon" />
+              </div>
+              <div className="social">
+                <p>{product.like}</p>
+                <div>
+                  {product.favoured ? (
+                    <FavoriteIcon
+                      className="iconRed"
+                      onClick={() => favourProduct(index)}
+                    />
+                  ) : (
+                    <FavoriteBorderIcon
+                      className="icon"
+                      onClick={() => favourProduct(index)}
+                    />
+                  )}
                 </div>
               </div>
-              <Image
-                onClick={() => selectProduct(product)}
-                className="image"
-                src={product.imageSrc}
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-              />
             </div>
-          ))}
-        {displayProduct && <Product />}
-      </div>
-    </Fragment>
+            <Image
+              onClick={() => selectProduct(product)}
+              className="image"
+              src={product.imageSrc}
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+        ))}
+      {displayProduct && <Product />}
+    </div>
   );
 }
 

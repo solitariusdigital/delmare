@@ -144,7 +144,7 @@ export default function WishList() {
           </div>
         </div>
 
-        <div className="collection-grid">
+        <div className="collection-grid wish-list">
           {!displayProduct &&
             wishList.map((product, index) => (
               <div key={index} className="product">

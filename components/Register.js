@@ -8,11 +8,19 @@ function Register({ props }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [token, setToken] = useState("");
-  const [userToken, setUserToken] = useState("");
+  const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
 
   const verifyPhone = () => {
-    if (phone !== "") {
+    if (phone.length === 0) {
+      setAlert("موبایل را وارد کنید");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+
+    if (phone.length === 11 && phone.slice(0, 2) === "09") {
       let id = tokenGenerator();
       setToken(id);
       console.log(id);
@@ -36,7 +44,7 @@ function Register({ props }) {
       //   }
       // );
     } else {
-      setAlert("موبایل را وارد کنید");
+      setAlert("شماره موبایل اشتباه است");
       setTimeout(() => {
         setAlert("");
       }, 3000);
@@ -44,17 +52,17 @@ function Register({ props }) {
   };
 
   const handleRegister = (type) => {
-    console.log(token, Number(userToken));
-    if (token === Number(userToken)) {
+    console.log(token, Number(checkToken));
+    if (token === Number(checkToken)) {
       console.log(type);
       setName("");
       setPhone("");
-      setUserToken("");
+      setCheckToken("");
       setTimeout(() => {
         setAlert("");
       }, 3000);
     } else {
-      setUserToken("");
+      setCheckToken("");
       setAlert("رمز پویا اشتباه است");
       setTimeout(() => {
         setAlert("");
@@ -84,17 +92,17 @@ function Register({ props }) {
           <div className={classes.input}>
             <p className={classes.label}>رمز پویا</p>
             <input
-              type="number"
+              type="tel"
               id="number"
               name="number"
-              onChange={(e) => setUserToken(e.target.value)}
-              value={userToken}
+              onChange={(e) => setCheckToken(e.target.value)}
+              value={checkToken}
               autoComplete="off"
             />
           </div>
           <div className={classes.formAction}>
             <p className={classes.alert}>{alert}</p>
-            {userToken.length === 6 && (
+            {checkToken.length === 6 && (
               <button
                 className="mainButton"
                 onClick={() => handleRegister("signin")}
@@ -148,17 +156,17 @@ function Register({ props }) {
           <div className={classes.input}>
             <p className={classes.label}>رمز پویا</p>
             <input
-              type="number"
+              type="tel"
               id="number"
               name="number"
-              onChange={(e) => setUserToken(e.target.value)}
-              value={userToken}
+              onChange={(e) => setCheckToken(e.target.value)}
+              value={checkToken}
               autoComplete="off"
             />
           </div>
           <div className={classes.formAction}>
             <p className={classes.alert}>{alert}</p>
-            {userToken.length === 6 && (
+            {checkToken.length === 6 && (
               <button
                 className="mainButton"
                 onClick={() => handleRegister("signup")}

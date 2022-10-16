@@ -163,7 +163,7 @@ export default function ShoppingCart() {
             <div className={classes.input}>
               <p className={classes.label}>کد پستی</p>
               <input
-                type="number"
+                type="tel"
                 id="post"
                 name="post"
                 onChange={(e) => setPost(e.target.value)}
