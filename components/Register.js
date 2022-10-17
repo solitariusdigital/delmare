@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { Fragment } from "react";
 import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
@@ -10,6 +10,28 @@ function Register({ props }) {
   const [token, setToken] = useState("");
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
+  const [displayCounter, setDisplayCounter] = useState(false);
+  const [counter, setCounter] = useState(59);
+
+  let intervalRef = useRef(null);
+  const startCounter = () => {
+    intervalRef.current = setInterval(() => {
+      setCounter(counter--);
+      setDisplayCounter(true);
+      if (counter === 0o0) {
+        resetCounter();
+        setDisplayCounter(false);
+        setCounter(59);
+        setToken("");
+        setCheckToken("");
+      }
+    }, 1000);
+  };
+
+  const resetCounter = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  };
 
   const verifyPhone = () => {
     if (phone.length === 0) {
@@ -24,10 +46,8 @@ function Register({ props }) {
       let id = tokenGenerator();
       setToken(id);
       console.log(id);
-      setAlert("رمز پویا ارسال شد");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      setAlert("کد فعال سازی ارسال شد");
+      startCounter();
 
       // const api = Kavenegar.KavenegarApi({
       //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
@@ -45,29 +65,29 @@ function Register({ props }) {
       // );
     } else {
       setAlert("شماره موبایل اشتباه است");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
     }
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   const handleRegister = (type) => {
     console.log(token, Number(checkToken));
     if (token === Number(checkToken)) {
       console.log(type);
-      setName("");
-      setPhone("");
-      setCheckToken("");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      setDisplayCounter(false);
+      resetCounter();
+      setCounter(59);
     } else {
-      setCheckToken("");
-      setAlert("رمز پویا اشتباه است");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      setAlert("کد فعال سازی اشتباه است");
     }
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+    setToken("");
+    setCheckToken("");
+    setName("");
+    setPhone("");
   };
 
   return (
@@ -86,11 +106,15 @@ function Register({ props }) {
               autoComplete="off"
             />
           </div>
-          <button className="mainButton" onClick={() => verifyPhone()}>
-            رمز پویا
-          </button>
+          {displayCounter ? (
+            <p className={classes.alert}>{counter}</p>
+          ) : (
+            <button className="mainButton" onClick={() => verifyPhone()}>
+              کد فعال سازی
+            </button>
+          )}
           <div className={classes.input}>
-            <p className={classes.label}>رمز پویا</p>
+            <p className={classes.label}>کد فعال سازی</p>
             <input
               type="tel"
               id="number"
@@ -150,11 +174,15 @@ function Register({ props }) {
               autoComplete="off"
             />
           </div>
-          <button className="mainButton" onClick={() => verifyPhone()}>
-            رمز پویا
-          </button>
+          {displayCounter ? (
+            <p className={classes.alert}>{counter}</p>
+          ) : (
+            <button className="mainButton" onClick={() => verifyPhone()}>
+              کد فعال سازی
+            </button>
+          )}
           <div className={classes.input}>
-            <p className={classes.label}>رمز پویا</p>
+            <p className={classes.label}>کد فعال سازی</p>
             <input
               type="tel"
               id="number"
