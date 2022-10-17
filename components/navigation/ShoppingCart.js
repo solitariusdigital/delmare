@@ -188,11 +188,11 @@ export default function ShoppingCart() {
 
         <div className={classes.details}>
           <div className={classes.detail}>
-            <p>{shoppingCart.length}</p>
+            <p className={classes.value}>{shoppingCart.length}</p>
             <p>تعداد آیتم ها</p>
           </div>
           <div className={classes.detail}>
-            <p>{calculateTotal()} T</p>
+            <p className={classes.value}>{calculateTotal()} T</p>
             <p>جمع سبد خرید</p>
           </div>
 

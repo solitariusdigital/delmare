@@ -65,8 +65,9 @@ $screen-xl-min: 1200px;
   color: config.$black;
   font-family: config.$font;
   font-size: config.$small-font;
-  z-index: 1000;
   border: none;
+  outline: none;
+  border-radius: 0px;
   border-bottom: 1px solid config.$grey;
 
   &:focus {
