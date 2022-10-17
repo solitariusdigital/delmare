@@ -107,7 +107,10 @@ function Register({ props }) {
             />
           </div>
           {displayCounter ? (
-            <p className={classes.alert}>{counter}</p>
+            <div className={classes.activationCode}>
+              <p className={classes.alert}>{counter}</p>
+              <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
+            </div>
           ) : (
             <button className="mainButton" onClick={() => verifyPhone()}>
               کد فعال سازی
@@ -175,7 +178,10 @@ function Register({ props }) {
             />
           </div>
           {displayCounter ? (
-            <p className={classes.alert}>{counter}</p>
+            <div className={classes.activationCode}>
+              <p className={classes.alert}>{counter}</p>
+              <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
+            </div>
           ) : (
             <button className="mainButton" onClick={() => verifyPhone()}>
               کد فعال سازی
