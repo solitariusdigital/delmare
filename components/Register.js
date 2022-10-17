@@ -18,7 +18,7 @@ function Register({ props }) {
     intervalRef.current = setInterval(() => {
       setCounter(counter--);
       setDisplayCounter(true);
-      if (counter === 0o0) {
+      if (counter < 0) {
         resetCounter();
         setDisplayCounter(false);
         setCounter(59);
@@ -43,26 +43,27 @@ function Register({ props }) {
     }
 
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
-      let id = tokenGenerator();
-      setToken(id);
-      console.log(id);
-      setAlert("کد فعال سازی ارسال شد");
-      startCounter();
+      let tokenId = tokenGenerator();
+      setToken(tokenId);
 
-      // const api = Kavenegar.KavenegarApi({
-      //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
-      // });
-      // api.VerifyLookup(
-      //   {
-      //     receptor: "09121089341",
-      //     token: token,
-      //     template: "registerverify",
-      //   },
-      //   function (response, status) {
-      //     console.log(response);
-      //     console.log(status);
-      //   }
-      // );
+      const api = Kavenegar.KavenegarApi({
+        apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
+      });
+      api.VerifyLookup(
+        {
+          receptor: "09121089341",
+          token: tokenId.toString(),
+          template: "registerverify",
+        },
+        function (response, status) {
+          if (status === 200) {
+            setAlert("کد فعال سازی ارسال شد");
+          } else {
+            setAlert("خطا در سامانه ارسال کد فعال سازی");
+          }
+          startCounter();
+        }
+      );
     } else {
       setAlert("شماره موبایل اشتباه است");
     }
@@ -72,7 +73,6 @@ function Register({ props }) {
   };
 
   const handleRegister = (type) => {
-    console.log(token, Number(checkToken));
     if (token === Number(checkToken)) {
       console.log(type);
       setDisplayCounter(false);
