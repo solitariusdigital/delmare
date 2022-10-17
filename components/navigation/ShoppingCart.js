@@ -149,6 +149,7 @@ export default function ShoppingCart() {
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 autoComplete="off"
+                dir="rtl"
               />
             </div>
             <div className={classes.input}>
@@ -178,6 +179,7 @@ export default function ShoppingCart() {
                 onChange={(e) => setPost(e.target.value)}
                 value={post}
                 autoComplete="off"
+                dir="rtl"
               />
             </div>
             <div className={classes.alert}>{alert}</div>
