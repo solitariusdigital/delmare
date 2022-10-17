@@ -38,10 +38,12 @@ a {
 
 .mainButton {
   @include mixins.button(config.$brand, config.$black, 120px);
+  font-family: config.$font;
 }
 
 .subButton {
   @include mixins.button(config.$black, config.$brand, 120px);
+  font-family: config.$font;
 }
 
 .collections-type {
