@@ -11,7 +11,7 @@ function Register({ props }) {
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
-  const [counter, setCounter] = useState(59);
+  const [counter, setCounter] = useState(10);
 
   let intervalRef = useRef(null);
   const startCounter = () => {
@@ -21,7 +21,7 @@ function Register({ props }) {
       if (counter < 0) {
         resetCounter();
         setDisplayCounter(false);
-        setCounter(59);
+        setCounter(10);
         setToken("");
         setCheckToken("");
       }
@@ -46,24 +46,28 @@ function Register({ props }) {
       let tokenId = tokenGenerator();
       setToken(tokenId);
 
-      const api = Kavenegar.KavenegarApi({
-        apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
-      });
-      api.VerifyLookup(
-        {
-          receptor: "09121089341",
-          token: tokenId.toString(),
-          template: "registerverify",
-        },
-        function (response, status) {
-          if (status === 200) {
-            setAlert("کد فعال سازی ارسال شد");
-          } else {
-            setAlert("خطا در سامانه ارسال کد فعال سازی");
-          }
-          startCounter();
-        }
-      );
+      setAlert("کد فعال سازی ارسال شد");
+      startCounter();
+      console.log(tokenId);
+
+      // const api = Kavenegar.KavenegarApi({
+      //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
+      // });
+      // api.VerifyLookup(
+      //   {
+      //     receptor: "09121089341",
+      //     token: tokenId.toString(),
+      //     template: "registerverify",
+      //   },
+      //   function (response, status) {
+      //     if (status === 200) {
+      //       setAlert("کد فعال سازی ارسال شد");
+      //     } else {
+      //       setAlert("خطا در سامانه ارسال کد فعال سازی");
+      //     }
+      //     startCounter();
+      //   }
+      // );
     } else {
       setAlert("شماره موبایل اشتباه است");
     }
@@ -72,12 +76,12 @@ function Register({ props }) {
     }, 3000);
   };
 
-  const handleRegister = (type) => {
+  const handleRegister = () => {
     if (token === Number(checkToken)) {
-      console.log(type);
+      console.log("works");
       setDisplayCounter(false);
       resetCounter();
-      setCounter(59);
+      setCounter(10);
     } else {
       setAlert("کد فعال سازی اشتباه است");
     }
@@ -92,68 +96,9 @@ function Register({ props }) {
 
   return (
     <Fragment>
-      {props.login && (
+      {props.register && (
         <div className={classes.form}>
-          <p className={classes.title}>ورود به دلماره</p>
-          <div className={classes.input}>
-            <p className={classes.label}>موبایل</p>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              onChange={(e) => setPhone(e.target.value)}
-              value={phone}
-              autoComplete="off"
-            />
-          </div>
-          {displayCounter ? (
-            <div className={classes.activationCode}>
-              <p className={classes.alert}>{counter}</p>
-              <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
-            </div>
-          ) : (
-            <button className="mainButton" onClick={() => verifyPhone()}>
-              کد فعال سازی
-            </button>
-          )}
-          <div className={classes.input}>
-            <p className={classes.label}>کد فعال سازی</p>
-            <input
-              type="tel"
-              id="number"
-              name="number"
-              onChange={(e) => setCheckToken(e.target.value)}
-              value={checkToken}
-              autoComplete="off"
-            />
-          </div>
-          <div className={classes.formAction}>
-            <p className={classes.alert}>{alert}</p>
-            {checkToken.length === 6 && (
-              <button
-                className="mainButton"
-                onClick={() => handleRegister("signin")}
-              >
-                Log in
-              </button>
-            )}
-            <p
-              className={classes.subTitle}
-              onClick={() => {
-                props.setSignup(true);
-                props.setLogin(false);
-                setAlert("");
-              }}
-            >
-              Sign up
-            </p>
-          </div>
-        </div>
-      )}
-
-      {props.signup && (
-        <div className={classes.form}>
-          <p className={classes.title}>ثبت نام در دلماره</p>
+          <p className={classes.title}>به دلماره خوش آمدید</p>
           <div className={classes.input}>
             <p className={classes.label}>نام و نام خانوادگی</p>
             <input
@@ -201,23 +146,10 @@ function Register({ props }) {
           <div className={classes.formAction}>
             <p className={classes.alert}>{alert}</p>
             {checkToken.length === 6 && (
-              <button
-                className="mainButton"
-                onClick={() => handleRegister("signup")}
-              >
+              <button className="mainButton" onClick={() => handleRegister()}>
                 ورود
               </button>
             )}
-            <p
-              className={classes.subTitle}
-              onClick={() => {
-                props.setSignup(false);
-                props.setLogin(true);
-                setAlert("");
-              }}
-            >
-              Log in
-            </p>
           </div>
         </div>
       )}

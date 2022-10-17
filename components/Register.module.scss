@@ -14,16 +14,6 @@
     text-align: center;
   }
 
-  .subTitle {
-    font-size: config.$small-font;
-    margin-bottom: 10px;
-    text-decoration: underline;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
   .label {
     font-size: config.$small-font;
     margin-bottom: 10px;
@@ -43,6 +33,10 @@
 
 .input {
   margin: 10px 0;
+
+  .label {
+    color: config.$grey;
+  }
 
   input {
     @include mixins.input();

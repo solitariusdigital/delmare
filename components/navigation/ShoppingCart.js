@@ -131,7 +131,6 @@ export default function ShoppingCart() {
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 autoComplete="off"
-                required
                 dir="rtl"
               />
             </div>
@@ -144,7 +143,6 @@ export default function ShoppingCart() {
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 autoComplete="off"
-                required
               />
             </div>
             <div className={classes.input}>
@@ -156,7 +154,6 @@ export default function ShoppingCart() {
                 onChange={(e) => setAddress(e.target.value)}
                 value={address}
                 autoComplete="off"
-                required
                 dir="rtl"
               ></textarea>
             </div>
@@ -169,7 +166,6 @@ export default function ShoppingCart() {
                 onChange={(e) => setPost(e.target.value)}
                 value={post}
                 autoComplete="off"
-                required
               />
             </div>
             <div className={classes.alert}>{alert}</div>

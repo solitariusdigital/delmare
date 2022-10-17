@@ -16,8 +16,7 @@ export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
-  const [login, setLogin] = useState(false);
-  const [signup, setSignup] = useState(false);
+  const [register, setRegister] = useState(false);
 
   const navigation = [
     {
@@ -52,14 +51,14 @@ export default function BurgerMenu() {
         setMenu(false);
       },
     },
-    {
-      title: "تراکنش",
-      icon: <ChangeCircleIcon />,
-      call: () => {
-        setToggleContainer("transactions");
-        setMenu(false);
-      },
-    },
+    // {
+    //   title: "تراکنش",
+    //   icon: <ChangeCircleIcon />,
+    //   call: () => {
+    //     setToggleContainer("transactions");
+    //     setMenu(false);
+    //   },
+    // },
   ];
 
   return (
@@ -70,7 +69,7 @@ export default function BurgerMenu() {
         </div>
 
         <div className={classes.items}>
-          {!login && !signup && (
+          {!register && (
             <div>
               <div className={classes.list}>
                 {navigation.map((nav, index) => (
@@ -83,28 +82,18 @@ export default function BurgerMenu() {
 
               <div className={classes.buttonContainer}>
                 <button
-                  className="subButton"
-                  onClick={() => {
-                    setLogin(true);
-                    setSignup(false);
-                  }}
-                >
-                  Log in
-                </button>
-                <button
                   className="mainButton"
                   onClick={() => {
-                    setSignup(true);
-                    setLogin(false);
+                    setRegister(true);
                   }}
                 >
-                  Sign up
+                  ثبت نام
                 </button>
               </div>
             </div>
           )}
 
-          <Register props={{ login, signup, setLogin, setSignup }}></Register>
+          <Register props={{ register, setRegister }}></Register>
 
           <div className={classes.logo}>
             <Image width={100} height={140} src={logo} alt="logo" />

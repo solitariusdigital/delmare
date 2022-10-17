@@ -1,2 +1,55 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: config.$white;
+  box-shadow: config.$card-shadow;
+  @include mixins.border-radius();
+  padding: 20px 10px;
+  margin: 10px;
+
+  button {
+    margin-top: 20px;
+  }
+
+  .input {
+    margin-bottom: 20px;
+
+    .label {
+      color: config.$grey;
+    }
+
+    input,
+    textarea {
+      @include mixins.input();
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid config.$grey;
+      border-radius: 0px;
+
+      &:focus {
+        background: transparent;
+        border: transparent;
+        border-bottom: 1px solid config.$black;
+      }
+    }
+
+    textarea {
+      height: 70px;
+      resize: none;
+    }
+
+    p {
+      display: flex;
+      flex-direction: row-reverse;
+      margin-bottom: 10px;
+    }
+  }
+
+  .input:last-child {
+    margin: 0px;
+  }
+}

@@ -9,6 +9,15 @@ export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
+  const [name, setName] = useState("pouyan");
+  const [phone, setPhone] = useState("09121089341");
+  const [address, setAddress] = useState(
+    "تهران آزادی خ انقلاب کوچه رهایی پ ۶۹"
+  );
+  const [post, setPost] = useState("123456789");
+
+  const saveAccount = () => {};
+
   return (
     <div className={ShoppingCart.background}>
       <div className={ShoppingCart.menu}>
@@ -27,24 +36,58 @@ export default function Account() {
         </div>
 
         <div className="slide-menu">
-          <div>
-            <p className={classes.label}>نام و نام خانوادگی</p>
-            <p></p>
-          </div>
-          <div>
-            <p className={classes.label}>شماره موبایل</p>
-
-            <p></p>
-          </div>
-          <div>
-            <p className={classes.label}>آدرس تحویل</p>
-
-            <p></p>
-          </div>
-          <div>
-            <p className={classes.label}>کد پستی</p>
-
-            <p></p>
+          <div className={classes.card}>
+            <div className={classes.input}>
+              <p className={classes.label}>نام و نام خانوادگی</p>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                autoComplete="off"
+                dir="rtl"
+              />
+            </div>
+            <div className={classes.input}>
+              <p className={classes.label}>موبایل</p>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+                autoComplete="off"
+                dir="rtl"
+              />
+            </div>
+            <div className={classes.input}>
+              <p className={classes.label}>آدرس تحویل</p>
+              <textarea
+                type="text"
+                id="address"
+                name="address"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+            <div className={classes.input}>
+              <p className={classes.label}>کد پستی</p>
+              <input
+                type="tel"
+                id="post"
+                name="post"
+                onChange={(e) => setPost(e.target.value)}
+                value={post}
+                autoComplete="off"
+                dir="rtl"
+              />
+            </div>
+            <button className="mainButton" onClick={() => saveAccount()}>
+              ذخیره
+            </button>
           </div>
         </div>
       </div>
