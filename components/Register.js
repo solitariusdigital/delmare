@@ -123,17 +123,22 @@ function Register({ props }) {
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
               autoComplete="off"
+              dir="rtl"
             />
           </div>
           {displayCounter ? (
-            <div className={classes.activationCode}>
-              <p className={classes.alert}>{counter}</p>
-              <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
+            <div className={classes.activationContainer}>
+              <div className={classes.activationCode}>
+                <p className={classes.alert}>{counter}</p>
+                <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
+              </div>
             </div>
           ) : (
-            <button className="mainButton" onClick={() => verifyPhone()}>
-              کد فعال سازی
-            </button>
+            <div className={classes.activationContainer}>
+              <button className="mainButton" onClick={() => verifyPhone()}>
+                کد فعال سازی
+              </button>
+            </div>
           )}
           <div className={classes.input}>
             <p className={classes.label}>
@@ -147,6 +152,7 @@ function Register({ props }) {
               onChange={(e) => setCheckToken(e.target.value)}
               value={checkToken}
               autoComplete="off"
+              dir="rtl"
             />
           </div>
           <div className={classes.formAction}>

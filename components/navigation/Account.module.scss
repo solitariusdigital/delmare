@@ -38,15 +38,6 @@
     textarea {
       @include mixins.input();
       width: 100%;
-      border: none;
-      border-bottom: 1px solid config.$grey;
-      border-radius: 0px;
-
-      &:focus {
-        background: transparent;
-        border: transparent;
-        border-bottom: 1px solid config.$black;
-      }
     }
 
     textarea {

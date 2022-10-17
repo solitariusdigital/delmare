@@ -42,7 +42,7 @@ $screen-xl-min: 1200px;
 
 @mixin button($color, $subColor, $size) {
   width: $size;
-  height: 30px;
+  height: 35px;
   background: $color;
   border-radius: 5px;
   color: $subColor;
@@ -60,18 +60,19 @@ $screen-xl-min: 1200px;
 
 @mixin input() {
   padding: 10px;
-  border-radius: 5px;
   height: 40px;
-  border: 1px solid config.$grey;
   background: config.$white;
   color: config.$black;
   font-family: config.$font;
   font-size: config.$small-font;
   z-index: 1000;
+  border: none;
+  border-bottom: 1px solid config.$grey;
 
   &:focus {
     outline: none;
-    border: 1px solid config.$black;
+    background: transparent;
+    border-bottom: 1px solid config.$black;
   }
 }
 

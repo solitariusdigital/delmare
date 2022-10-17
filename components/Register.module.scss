@@ -13,11 +13,6 @@
     margin-bottom: 10px;
     text-align: center;
   }
-
-  .label {
-    font-size: config.$small-font;
-    margin-bottom: 10px;
-  }
 }
 
 .formAction {
@@ -36,6 +31,8 @@
 
   .label {
     color: config.$grey;
+    font-size: config.$small-font;
+    margin-bottom: 5px;
 
     span {
       color: config.$red;
@@ -54,14 +51,19 @@
   }
 }
 
+.activationContainer {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
 .activationCode {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
-  margin-bottom: 20px;
 
   p {
     margin: 0px 5px;
+    height: 35px;
   }
 }
 
