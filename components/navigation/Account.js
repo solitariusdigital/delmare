@@ -26,7 +26,7 @@ export default function Account() {
           </div>
         </div>
 
-        <div>
+        <div className="slide-menu">
           <div>
             <p className={classes.label}>نام و نام خانوادگی</p>
             <p></p>
