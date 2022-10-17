@@ -9,14 +9,24 @@ export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
-  const [name, setName] = useState("pouyan");
+  const [name, setName] = useState("شاهین عقابی");
   const [phone, setPhone] = useState("09121089341");
   const [address, setAddress] = useState(
-    "تهران آزادی خ انقلاب کوچه رهایی پ ۶۹"
+    "تهران آزادی خ انقلاب کوچه رهایی پ ۶۹ زنگ ۵۷"
   );
   const [post, setPost] = useState("123456789");
+  const [alert, setAlert] = useState("");
 
-  const saveAccount = () => {};
+  const saveAccount = () => {
+    if (name === "" || phone === "" || address === "" || post === "") {
+      setAlert("همه اطلاعات را وارد کنید");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+    console.log(name, phone, address, post);
+  };
 
   return (
     <div className={ShoppingCart.background}>
@@ -38,7 +48,10 @@ export default function Account() {
         <div className="slide-menu">
           <div className={classes.card}>
             <div className={classes.input}>
-              <p className={classes.label}>نام و نام خانوادگی</p>
+              <p className={classes.label}>
+                نام و نام خانوادگی
+                <span>*</span>
+              </p>
               <input
                 type="text"
                 id="name"
@@ -50,7 +63,10 @@ export default function Account() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>موبایل</p>
+              <p className={classes.label}>
+                موبایل
+                <span>*</span>
+              </p>
               <input
                 type="tel"
                 id="phone"
@@ -62,7 +78,10 @@ export default function Account() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>آدرس تحویل</p>
+              <p className={classes.label}>
+                آدرس تحویل
+                <span>*</span>
+              </p>
               <textarea
                 type="text"
                 id="address"
@@ -74,7 +93,10 @@ export default function Account() {
               ></textarea>
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>کد پستی</p>
+              <p className={classes.label}>
+                کد پستی
+                <span>*</span>
+              </p>
               <input
                 type="tel"
                 id="post"
@@ -85,6 +107,7 @@ export default function Account() {
                 dir="rtl"
               />
             </div>
+            <div className={classes.alert}>{alert}</div>
             <button className="mainButton" onClick={() => saveAccount()}>
               ذخیره
             </button>

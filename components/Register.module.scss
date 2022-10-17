@@ -36,6 +36,11 @@
 
   .label {
     color: config.$grey;
+
+    span {
+      color: config.$red;
+      font-size: config.$tiny-font;
+    }
   }
 
   input {

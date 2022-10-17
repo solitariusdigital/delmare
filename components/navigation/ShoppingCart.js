@@ -123,7 +123,10 @@ export default function ShoppingCart() {
           <div className={classes.form}>
             <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
             <div className={classes.input}>
-              <p className={classes.label}>نام و نام خانوادگی</p>
+              <p className={classes.label}>
+                نام و نام خانوادگی
+                <span>*</span>
+              </p>
               <input
                 type="text"
                 id="name"
@@ -135,7 +138,10 @@ export default function ShoppingCart() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>شماره موبایل</p>
+              <p className={classes.label}>
+                موبایل
+                <span>*</span>
+              </p>
               <input
                 type="tel"
                 id="phone"
@@ -146,7 +152,10 @@ export default function ShoppingCart() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>آدرس تحویل</p>
+              <p className={classes.label}>
+                آدرس تحویل
+                <span>*</span>
+              </p>
               <textarea
                 type="text"
                 id="address"
@@ -158,7 +167,10 @@ export default function ShoppingCart() {
               ></textarea>
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>کد پستی</p>
+              <p className={classes.label}>
+                کد پستی
+                <span>*</span>
+              </p>
               <input
                 type="tel"
                 id="post"

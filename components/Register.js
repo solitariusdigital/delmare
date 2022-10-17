@@ -112,7 +112,10 @@ function Register({ props }) {
             />
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>موبایل</p>
+            <p className={classes.label}>
+              موبایل
+              <span>*</span>
+            </p>
             <input
               type="tel"
               id="phone"
@@ -133,7 +136,10 @@ function Register({ props }) {
             </button>
           )}
           <div className={classes.input}>
-            <p className={classes.label}>کد فعال سازی</p>
+            <p className={classes.label}>
+              کد فعال سازی
+              <span>*</span>
+            </p>
             <input
               type="tel"
               id="number"

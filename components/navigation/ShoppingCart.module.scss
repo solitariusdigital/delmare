@@ -182,6 +182,11 @@
       font-size: config.$small-font;
       margin-bottom: 10px;
       color: config.$grey;
+
+      span {
+        color: config.$red;
+        font-size: config.$tiny-font;
+      }
     }
   }
 
