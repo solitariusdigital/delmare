@@ -30,7 +30,7 @@ function LandingPage() {
     <div
       className={classes.container}
       onClick={() => Router.push("/collections")}
-      onWheel={handleScroll}
+      onTouchMove={handleScroll}
     >
       <div className={classes.banner}>
         <p>متفاوت بپوشیم</p>
