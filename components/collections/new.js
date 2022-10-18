@@ -95,12 +95,6 @@ function New() {
     },
   ]);
 
-  useEffect(() => {
-    setSelectedProduct({});
-    setDisplayProduct(false);
-    setBar(true);
-  }, [setSelectedProduct, setDisplayProduct, setBar]);
-
   const favourProduct = (index) => {
     newCollection.map((product, i) => {
       if (i === index) {

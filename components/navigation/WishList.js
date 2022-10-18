@@ -99,12 +99,67 @@ export default function WishList() {
         },
       ],
     },
+    {
+      imageSrc: one,
+      like: 122,
+      views: 578,
+      favoured: true,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
+    {
+      imageSrc: one,
+      like: 122,
+      views: 578,
+      favoured: true,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
+    {
+      imageSrc: one,
+      like: 122,
+      views: 578,
+      favoured: true,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
   ]);
 
   useEffect(() => {
     setSelectedProduct({});
     setDisplayProduct(false);
-  }, [setSelectedProduct, setDisplayProduct]);
+    setBar(true);
+  }, [setSelectedProduct, setDisplayProduct, setBar]);
 
   const favourProduct = (index) => {
     wishList.map((product, i) => {
