@@ -22,10 +22,15 @@ function LandingPage() {
     return () => clearInterval(timerId);
   });
 
+  const handleScroll = () => {
+    Router.push("/collections");
+  };
+
   return (
     <div
       className={classes.container}
       onClick={() => Router.push("/collections")}
+      onWheel={handleScroll}
     >
       <div className={classes.banner}>
         <p>متفاوت بپوشیم</p>
