@@ -20,12 +20,14 @@ export default function Account() {
   const saveAccount = () => {
     if (name === "" || phone === "" || address === "" || post === "") {
       setAlert("همه اطلاعات را وارد کنید");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
-      return;
+    } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
+      setAlert("شماره موبایل اشتباه است");
+    } else {
+      console.log(name, phone, address, post);
     }
-    console.log(name, phone, address, post);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   return (
@@ -48,10 +50,17 @@ export default function Account() {
         <div className="slide-menu">
           <div className={classes.card}>
             <div className={classes.input}>
-              <p className={classes.label}>
-                نام و نام خانوادگی
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  نام و نام خانوادگی
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setName("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <input
                 type="text"
                 id="name"
@@ -63,10 +72,18 @@ export default function Account() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                موبایل
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  موبایل
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPhone("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+
               <input
                 type="tel"
                 id="phone"
@@ -78,10 +95,17 @@ export default function Account() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                آدرس تحویل
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  آدرس تحویل
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setAddress("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <textarea
                 type="text"
                 id="address"
@@ -93,10 +117,17 @@ export default function Account() {
               ></textarea>
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                کد پستی
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  کد پستی
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPost("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <input
                 type="tel"
                 id="post"

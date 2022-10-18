@@ -14,12 +14,13 @@ export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
-  const [checkOut, setCheckout] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
+
   const [alert, setAlert] = useState("");
+  const [checkOut, setCheckout] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
@@ -45,12 +46,14 @@ export default function ShoppingCart() {
   const handleCheckOut = () => {
     if (name === "" || phone === "" || address === "" || post === "") {
       setAlert("همه اطلاعات را وارد کنید");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
-      return;
+    } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
+      setAlert("شماره موبایل اشتباه است");
+    } else {
+      console.log(name, phone, address, post);
     }
-    console.log(name, phone, address, post);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   return (
@@ -123,10 +126,17 @@ export default function ShoppingCart() {
           <div className={classes.form}>
             <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
             <div className={classes.input}>
-              <p className={classes.label}>
-                نام و نام خانوادگی
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  نام و نام خانوادگی
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setName("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <input
                 type="text"
                 id="name"
@@ -138,10 +148,18 @@ export default function ShoppingCart() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                موبایل
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  موبایل
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPhone("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+
               <input
                 type="tel"
                 id="phone"
@@ -153,10 +171,17 @@ export default function ShoppingCart() {
               />
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                آدرس تحویل
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  آدرس تحویل
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setAddress("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <textarea
                 type="text"
                 id="address"
@@ -168,10 +193,17 @@ export default function ShoppingCart() {
               ></textarea>
             </div>
             <div className={classes.input}>
-              <p className={classes.label}>
-                کد پستی
-                <span>*</span>
-              </p>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  کد پستی
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPost("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
               <input
                 type="tel"
                 id="post"

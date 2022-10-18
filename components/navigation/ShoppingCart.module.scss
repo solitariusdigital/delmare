@@ -195,6 +195,12 @@
     }
   }
 
+  .bar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
   .input {
     display: flex;
     flex-direction: column;

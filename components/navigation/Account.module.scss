@@ -25,6 +25,12 @@
   .input {
     margin-bottom: 20px;
 
+    .bar {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
     .label {
       color: config.$grey;
 
