@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment, useContext } from "react";
+import { useState, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import Product from "../Product";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -13,8 +13,6 @@ import three from "../../assets/three.jpg";
 function New() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
-  const { bar, setBar } = useContext(StateContext);
-
   const [newCollection, setNewCollection] = useState([
     {
       imageSrc: one,

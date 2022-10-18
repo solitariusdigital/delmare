@@ -5,22 +5,16 @@ export const StateContext = createContext();
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
   const [toggleContainer, setToggleContainer] = useState(
-    "account" || "cart" || "wish" || "orders" || "transactions" || ""
+    "load" || "wish" || "account" || "cart" || "orders" || "transactions"
   );
   const [displayProduct, setDisplayProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
-
   const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
   const [navigation, setNavigation] = useState([
     {
       title: "New",
       link: "/collections/new",
-      active: false,
-    },
-    {
-      title: "Sale",
-      link: "/collections/sale",
       active: false,
     },
     {

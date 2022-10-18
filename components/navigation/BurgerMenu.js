@@ -15,7 +15,6 @@ import logo from "../../assets/logo.png";
 export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-
   const [register, setRegister] = useState(false);
 
   const navigation = [

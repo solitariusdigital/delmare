@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
@@ -11,13 +12,15 @@ function LandingPage() {
   const [count, setCount] = useState(0);
   const imagesArray = [imageOne, imageTwo, imageThree];
   const image = imagesArray[count % imagesArray.length];
+  const { bar, setBar } = useContext(StateContext);
 
   useEffect(() => {
+    setBar(false);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
     return () => clearInterval(timerId);
-  }, []);
+  });
 
   return (
     <div

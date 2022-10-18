@@ -19,7 +19,6 @@ import brand from "../../assets/brand.svg";
 function Container() {
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
@@ -82,6 +81,7 @@ function Container() {
       </div>
       {menu && <BurgerMenu />}
       {/* container layouts / pages navigated from burger menu */}
+      {toggleContainer === "load" && <p></p>}
       {toggleContainer === "account" && <Account />}
       {toggleContainer === "cart" && <ShoppingCart />}
       {toggleContainer === "wish" && <WishList />}
