@@ -74,5 +74,6 @@
 
   button {
     margin-bottom: 20px;
+    @include mixins.heartbeat();
   }
 }
