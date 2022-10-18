@@ -57,7 +57,7 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div className={classes.background}>
+    <div className={classes.slider}>
       <div className={classes.menu}>
         <div className={classes.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />

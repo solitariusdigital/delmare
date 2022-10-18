@@ -61,7 +61,7 @@ export default function BurgerMenu() {
   ];
 
   return (
-    <div className={classes.background}>
+    <div className={classes.slider}>
       <div className={classes.menu}>
         <div className={classes.cross}>
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
@@ -91,15 +91,12 @@ export default function BurgerMenu() {
               </div>
             </div>
           )}
-
           <Register props={{ register, setRegister }}></Register>
-
           <div className={classes.logo}>
             <Image width={100} height={140} src={logo} alt="logo" />
           </div>
         </div>
       </div>
-      <div className={classes.close} onClick={() => setMenu(false)}></div>
     </div>
   );
 }

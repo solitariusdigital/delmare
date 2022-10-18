@@ -9,7 +9,7 @@ export default function Orders() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
 
   return (
-    <div className={ShoppingCart.background}>
+    <div className={ShoppingCart.slider}>
       <div className={ShoppingCart.menu}>
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />

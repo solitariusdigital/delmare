@@ -1,7 +1,7 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.background {
+.slider {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -10,8 +10,7 @@
   height: 100vh;
   display: flex;
   flex-direction: row-reverse;
-  backdrop-filter: blur(3px);
-  @include mixins.transparentBackground(0.3, config.$black);
+  @include mixins.slide-top();
 }
 
 .menu {

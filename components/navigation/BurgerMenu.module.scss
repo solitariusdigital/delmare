@@ -1,7 +1,7 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.background {
+.slider {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -10,13 +10,7 @@
   height: 100vh;
   display: flex;
   flex-direction: row-reverse;
-  backdrop-filter: blur(3px);
-  @include mixins.transparentBackground(0.3, config.$black);
-}
-
-.close {
-  width: 20%;
-  min-width: 120px;
+  @include mixins.slide-top();
 }
 
 .items {
@@ -28,7 +22,6 @@
 
 .menu {
   width: 100%;
-  max-width: 300px;
   background: config.$white;
   box-shadow: config.$card-shadow;
   padding-bottom: 20px;
@@ -44,8 +37,7 @@
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
-      margin: 10px 0px;
-      height: 30px;
+      height: 50px;
 
       p {
         font-size: config.$med-font;
