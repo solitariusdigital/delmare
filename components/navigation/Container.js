@@ -24,8 +24,9 @@ function Container() {
   const { navigation, setNavigation } = useContext(StateContext);
 
   useEffect(() => {
+    setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
     setToggleContainer("");
-  }, [setToggleContainer]);
+  }, [setToggleContainer, setShoppingCart]);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {
