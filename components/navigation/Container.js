@@ -22,7 +22,7 @@ function Container() {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
-
+  //
   useEffect(() => {
     setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
     setToggleContainer("");
