@@ -3,7 +3,7 @@ import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
-
+import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import imageOne from "../assets/one.jpg";
 import imageTwo from "../assets/two.jpg";
 import imageThree from "../assets/three.jpg";
@@ -47,6 +47,13 @@ function LandingPage() {
           یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی متنوع،
           باکیفیت و دارای قیمت مناسب را به دست مشتریان خود برساند
         </p>
+      </div>
+      <div className={classes.icon}>
+        <ExpandCircleDownIcon
+          className="icon"
+          sx={{ color: "#b2ffef", fontSize: 50 }}
+          onClick={() => Router.push("/collections")}
+        />
       </div>
     </div>
   );
