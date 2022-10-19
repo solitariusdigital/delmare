@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
 import { tokenGenerator } from "../services/utility";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Register({ props }) {
   const [name, setName] = useState("");
@@ -100,7 +101,17 @@ function Register({ props }) {
         <div className={classes.form}>
           <p className={classes.title}>به دلماره خوش آمدید</p>
           <div className={classes.input}>
-            <p className={classes.label}>نام و نام خانوادگی</p>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                نام و نام خانوادگی
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setName("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
             <input
               type="text"
               id="name"
@@ -112,10 +123,18 @@ function Register({ props }) {
             />
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>
-              موبایل
-              <span>*</span>
-            </p>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                موبایل
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPhone("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+
             <input
               type="tel"
               id="phone"

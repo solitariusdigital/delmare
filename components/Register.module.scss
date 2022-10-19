@@ -29,6 +29,12 @@
 .input {
   margin: 10px 0;
 
+  .bar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
   .label {
     color: config.$grey;
     font-size: config.$small-font;
