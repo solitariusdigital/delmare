@@ -134,7 +134,6 @@ function Register({ props }) {
                 sx={{ fontSize: 16 }}
               />
             </div>
-
             <input
               type="tel"
               id="phone"
@@ -160,10 +159,18 @@ function Register({ props }) {
             </div>
           )}
           <div className={classes.input}>
-            <p className={classes.label}>
-              کد فعال سازی
-              <span>*</span>
-            </p>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                کد فعال سازی
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setCheckToken("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+
             <input
               type="tel"
               id="number"
