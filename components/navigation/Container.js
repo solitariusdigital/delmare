@@ -24,13 +24,13 @@ function Container() {
   const { navigation, setNavigation } = useContext(StateContext);
 
   useEffect(() => {
-    if (!!setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")))) {
+    if (JSON.parse(localStorage.getItem("shoppingCart"))) {
       setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
     } else {
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
     setToggleContainer("");
-  }, [setToggleContainer, setShoppingCart, shoppingCart]);
+  }, []);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {
