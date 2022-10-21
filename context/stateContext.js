@@ -3,6 +3,7 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
+  const [userLogIn, setUserLogin] = useState(false);
   const [menu, setMenu] = useState(false);
   const [toggleContainer, setToggleContainer] = useState(
     "load" || "wish" || "account" || "cart" || "orders" || "transactions"
@@ -44,6 +45,8 @@ export const StateProvider = (props) => {
     setDisplayProduct,
     selectedProduct,
     setSelectedProduct,
+    userLogIn,
+    setUserLogin,
   };
 
   return (

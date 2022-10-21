@@ -13,52 +13,61 @@ import Image from "next/image";
 import logo from "../../assets/logo.png";
 
 export default function BurgerMenu() {
+  const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const [register, setRegister] = useState(false);
+  const [alert, setAlert] = useState("");
 
   const navigation = [
     {
       title: "حساب من",
       icon: <AccountBoxIcon />,
       call: () => {
-        setToggleContainer("account");
-        setMenu(false);
+        navigateMenu("account");
       },
     },
     {
       title: "کمد من",
       icon: <CheckroomIcon />,
       call: () => {
-        setToggleContainer("orders");
-        setMenu(false);
+        navigateMenu("orders");
       },
     },
     {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,
       call: () => {
-        setToggleContainer("cart");
-        setMenu(false);
+        navigateMenu("cart");
       },
     },
     {
       title: "سبد آرزو",
       icon: <FavoriteIcon />,
       call: () => {
-        setToggleContainer("wish");
-        setMenu(false);
+        navigateMenu("wish");
       },
     },
     // {
     //   title: "تراکنش",
     //   icon: <ChangeCircleIcon />,
     //   call: () => {
-    //     setToggleContainer("transactions");
-    //     setMenu(false);
+    //     navigateMenu("transactions");
     //   },
     // },
   ];
+
+  const navigateMenu = (action) => {
+    if (userLogIn || action === "cart") {
+      setToggleContainer(action);
+      setMenu(false);
+    } else {
+      setAlert("جهت استفاده ثبت نام کنید");
+    }
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+  };
 
   return (
     <div className={classes.slider}>
@@ -68,7 +77,7 @@ export default function BurgerMenu() {
         </div>
 
         <div className={classes.items}>
-          {!register && (
+          {!register ? (
             <div>
               <div className={classes.list}>
                 {navigation.map((nav, index) => (
@@ -79,19 +88,24 @@ export default function BurgerMenu() {
                 ))}
               </div>
 
-              <div className={classes.buttonContainer}>
-                <button
-                  className="mainButton"
-                  onClick={() => {
-                    setRegister(true);
-                  }}
-                >
-                  ثبت نام
-                </button>
-              </div>
+              {!userLogIn && (
+                <div className={classes.buttonContainer}>
+                  <button
+                    className="mainButton"
+                    onClick={() => {
+                      setRegister(true);
+                    }}
+                  >
+                    ثبت نام
+                  </button>
+                  <p className={classes.alert}>{alert}</p>
+                </div>
+              )}
             </div>
+          ) : (
+            // login form
+            <Register></Register>
           )}
-          <Register props={{ register, setRegister }}></Register>
           <div className={classes.logo}>
             <Image width={100} height={140} src={logo} alt="logo" />
           </div>

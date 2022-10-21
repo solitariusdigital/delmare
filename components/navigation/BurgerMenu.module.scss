@@ -77,4 +77,8 @@
     margin-bottom: 20px;
     @include mixins.heartbeat();
   }
+
+  .alert {
+    color: config.$red;
+  }
 }

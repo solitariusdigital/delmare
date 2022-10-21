@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -17,6 +17,7 @@ import Image from "next/image";
 import brand from "../../assets/brand.svg";
 
 function Container() {
+  const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
@@ -24,13 +25,18 @@ function Container() {
   const { navigation, setNavigation } = useContext(StateContext);
 
   useEffect(() => {
+    setToggleContainer("");
+
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
       setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
     } else {
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
-    setToggleContainer("");
-  }, []);
+
+    if (JSON.parse(localStorage.getItem("userSession"))) {
+      setUserLogin(JSON.parse(localStorage.getItem("userSession")));
+    }
+  }, [setUserLogin]);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {
