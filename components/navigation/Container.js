@@ -26,23 +26,20 @@ function Container() {
 
   useEffect(() => {
     setToggleContainer("");
-  }, [setToggleContainer]);
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("shoppingCart"))) {
-      let cart = JSON.parse(localStorage.getItem("shoppingCart"));
-      setShoppingCart(cart);
-    } else {
-      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-    }
-  }, []);
-
-  useEffect(() => {
     if (JSON.parse(localStorage.getItem("userSession"))) {
       let session = JSON.parse(localStorage.getItem("userSession"));
       setUserLogin(session);
     }
-  });
+  }, [setToggleContainer, setUserLogin]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("shoppingCart"))) {
+      setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
+    } else {
+      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {

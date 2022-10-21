@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("09123456789");
   const [token, setToken] = useState("");
@@ -50,6 +51,8 @@ function Register() {
 
       setAlert("کد فعال سازی ارسال شد");
       startCounter();
+      setMenu(false);
+
       console.log(tokenId);
 
       setUserLogin(true);
