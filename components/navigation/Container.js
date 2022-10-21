@@ -26,17 +26,15 @@ function Container() {
 
   useEffect(() => {
     setToggleContainer("");
-
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
       setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
     } else {
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
-
     if (JSON.parse(localStorage.getItem("userSession"))) {
       setUserLogin(JSON.parse(localStorage.getItem("userSession")));
     }
-  }, [setUserLogin]);
+  }, []);
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {
