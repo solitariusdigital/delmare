@@ -26,15 +26,23 @@ function Container() {
 
   useEffect(() => {
     setToggleContainer("");
+  }, [setToggleContainer]);
+
+  useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
-      setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
+      let cart = JSON.parse(localStorage.getItem("shoppingCart"));
+      setShoppingCart(cart);
     } else {
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
-    if (JSON.parse(localStorage.getItem("userSession"))) {
-      setUserLogin(JSON.parse(localStorage.getItem("userSession")));
-    }
   }, []);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("userSession"))) {
+      let session = JSON.parse(localStorage.getItem("userSession"));
+      setUserLogin(session);
+    }
+  });
 
   const activateNav = (index) => {
     navigation.map((nav, i) => {
