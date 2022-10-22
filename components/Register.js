@@ -51,12 +51,9 @@ function Register() {
 
       setAlert("کد فعال سازی ارسال شد");
       startCounter();
-      setMenu(false);
+      // setMenu(false);
 
       console.log(tokenId);
-
-      setUserLogin(true);
-      localStorage.setItem("userSession", JSON.stringify(true));
 
       // const api = Kavenegar.KavenegarApi({
       //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
@@ -84,23 +81,51 @@ function Register() {
     }, 3000);
   };
 
-  const handleRegister = () => {
+  // const handleRegister = () => {
+  //   if (token === Number(checkToken)) {
+  //     console.log("works");
+  //     setDisplayCounter(false);
+  //     resetCounter();
+  //     setCounter(10);
+  //   } else {
+  //     setAlert("کد فعال سازی اشتباه است");
+  //   }
+  //   setTimeout(() => {
+  //     setAlert("");
+  //   }, 3000);
+  //   setToken("");
+  //   setCheckToken("");
+  //   setName("");
+  //   setPhone("");
+  // };
+
+  async function handleRegister() {
     if (token === Number(checkToken)) {
-      console.log("works");
-      setDisplayCounter(false);
+      const user = {
+        name: "Pouyan",
+        phone: "09121576992",
+        address: "asdasdasd",
+        postCode: "2121121",
+      };
+
+      const response = await fetch("/api/user", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data), setDisplayCounter(false);
+
+      setUserLogin(true);
+      localStorage.setItem("userSession", JSON.stringify(true));
       resetCounter();
       setCounter(10);
     } else {
       setAlert("کد فعال سازی اشتباه است");
     }
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
-    setToken("");
-    setCheckToken("");
-    setName("");
-    setPhone("");
-  };
+  }
 
   return (
     <Fragment>
