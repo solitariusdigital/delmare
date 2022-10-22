@@ -29,7 +29,6 @@ function Container() {
     if (JSON.parse(localStorage.getItem("userSession"))) {
       setUserLogin(JSON.parse(localStorage.getItem("userSession")));
     }
-
     // check if user is using pwa
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       setToggleContainer("screen");
