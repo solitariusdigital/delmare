@@ -62,7 +62,7 @@ export default function BurgerMenu() {
       setToggleContainer(action);
       setMenu(false);
     } else {
-      setAlert("جهت استفاده ثبت نام کنید");
+      setAlert("برای دسترسی ثبت نام کنید");
     }
     setTimeout(() => {
       setAlert("");

@@ -1,4 +1,4 @@
-import classes from "./BrandsCollection.module.scss";
+import classes from "./Collections.module.scss";
 
 function Brands() {
   const brands = [

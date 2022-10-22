@@ -27,8 +27,7 @@ function Container() {
   useEffect(() => {
     setToggleContainer("");
     if (JSON.parse(localStorage.getItem("userSession"))) {
-      let session = JSON.parse(localStorage.getItem("userSession"));
-      setUserLogin(session);
+      setUserLogin(JSON.parse(localStorage.getItem("userSession")));
     }
   }, [setToggleContainer, setUserLogin]);
 
