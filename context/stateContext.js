@@ -6,7 +6,13 @@ export const StateProvider = (props) => {
   const [userLogIn, setUserLogin] = useState(false);
   const [menu, setMenu] = useState(false);
   const [toggleContainer, setToggleContainer] = useState(
-    "load" || "wish" || "account" || "cart" || "orders" || "transactions"
+    "empty" ||
+      "screen" ||
+      "wish" ||
+      "account" ||
+      "cart" ||
+      "orders" ||
+      "transactions"
   );
   const [displayProduct, setDisplayProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});

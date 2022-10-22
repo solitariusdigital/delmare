@@ -7,6 +7,7 @@ import ShoppingCart from "./ShoppingCart";
 import WishList from "./WishList";
 import Orders from "./Orders";
 import Transactions from "./Transactions";
+import AddHomeScreen from "./AddHomeScreen";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -25,9 +26,13 @@ function Container() {
   const { navigation, setNavigation } = useContext(StateContext);
 
   useEffect(() => {
-    setToggleContainer("");
     if (JSON.parse(localStorage.getItem("userSession"))) {
       setUserLogin(JSON.parse(localStorage.getItem("userSession")));
+    }
+
+    // check if user is using pwa
+    if (!window.matchMedia("(display-mode: standalone)").matches) {
+      setToggleContainer("screen");
     }
   }, [setToggleContainer, setUserLogin]);
 
@@ -94,7 +99,8 @@ function Container() {
       </div>
       {menu && <BurgerMenu />}
       {/* container layouts / pages navigated from burger menu */}
-      {toggleContainer === "load" && <p></p>}
+      {toggleContainer === "empty" && <p></p>}
+      {toggleContainer === "screen" && <AddHomeScreen />}
       {toggleContainer === "account" && <Account />}
       {toggleContainer === "cart" && <ShoppingCart />}
       {toggleContainer === "wish" && <WishList />}
