@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import New from "../../components/collections/New";
-import Brands from "../../components/collections/Brands";
-import Bloggers from "../../components/collections/Bloggers";
+import New from "../../components/collections/NewCollection";
+import Brands from "../../components/collections/BrandsCollection";
+import Bloggers from "../../components/collections/BloggersCollection";
 
 function CollectionPage() {
   const router = useRouter();
