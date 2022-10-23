@@ -73,9 +73,18 @@
   text-align: center;
   justify-content: center;
 
-  button {
+  .button {
     margin-bottom: 20px;
     @include mixins.heartbeat();
+  }
+
+  .logout {
+    display: flex;
+    justify-content: center;
+
+    p {
+      border-bottom: 1px solid config.$black;
+    }
   }
 
   .alert {

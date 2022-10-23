@@ -88,10 +88,10 @@ export default function BurgerMenu() {
                 ))}
               </div>
 
-              {!userLogIn && (
+              {!userLogIn ? (
                 <div className={classes.buttonContainer}>
                   <button
-                    className="mainButton"
+                    className={`mainButton ${classes.button}`}
                     onClick={() => {
                       setRegister(true);
                     }}
@@ -99,6 +99,18 @@ export default function BurgerMenu() {
                     ثبت نام
                   </button>
                   <p className={classes.alert}>{alert}</p>
+                </div>
+              ) : (
+                <div className={classes.buttonContainer}>
+                  <div
+                    className={classes.logout}
+                    onClick={() => {
+                      setUserLogin(false);
+                      localStorage.removeItem("userSession");
+                    }}
+                  >
+                    <p>خروج</p>
+                  </div>
                 </div>
               )}
             </div>
