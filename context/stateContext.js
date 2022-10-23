@@ -18,6 +18,7 @@ export const StateProvider = (props) => {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [navigation, setNavigation] = useState([
     {
       title: "New",
@@ -53,6 +54,8 @@ export const StateProvider = (props) => {
     setSelectedProduct,
     userLogIn,
     setUserLogin,
+    isLoading,
+    setIsLoading,
   };
 
   return (

@@ -4,10 +4,14 @@ import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
 import { tokenGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
+import Image from "next/image";
+import loadingImage from "../assets/loader.png";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
+  const { isLoading, setIsLoading } = useContext(StateContext);
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("09123456789");
   const [token, setToken] = useState("");
@@ -81,26 +85,10 @@ function Register() {
     }, 3000);
   };
 
-  // const handleRegister = () => {
-  //   if (token === Number(checkToken)) {
-  //     console.log("works");
-  //     setDisplayCounter(false);
-  //     resetCounter();
-  //     setCounter(10);
-  //   } else {
-  //     setAlert("کد فعال سازی اشتباه است");
-  //   }
-  //   setTimeout(() => {
-  //     setAlert("");
-  //   }, 3000);
-  //   setToken("");
-  //   setCheckToken("");
-  //   setName("");
-  //   setPhone("");
-  // };
-
-  async function handleRegister() {
+  const handleRegister = async () => {
     if (token === Number(checkToken)) {
+      setIsLoading(true);
+
       const user = {
         name: "Pouyan",
         phone: "09121576992",
@@ -116,16 +104,23 @@ function Register() {
         },
       });
       const data = await response.json();
-      console.log(data), setDisplayCounter(false);
 
-      setUserLogin(true);
-      localStorage.setItem("userSession", JSON.stringify(true));
+      setIsLoading(false);
+      // setUserLogin(true);
+      // localStorage.setItem("userSession", JSON.stringify(true));
+
+      setDisplayCounter(false);
       resetCounter();
       setCounter(10);
     } else {
       setAlert("کد فعال سازی اشتباه است");
+      setToken("");
+      setCheckToken("");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
     }
-  }
+  };
 
   return (
     <Fragment>
@@ -216,6 +211,9 @@ function Register() {
             <button className="mainButton" onClick={() => handleRegister()}>
               ورود
             </button>
+          )}
+          {isLoading && (
+            <Image width={50} height={50} src={loadingImage} alt="isLoading" />
           )}
         </div>
       </div>
