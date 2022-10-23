@@ -5,7 +5,7 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { getMobileOperatingSystem } from "../../services/utility";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import AddToHomeScreenIcon from "@mui/icons-material/AddToHomeScreen";
 export default function AddHomeScreen() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
@@ -47,7 +47,7 @@ export default function AddHomeScreen() {
           </div>
           <div className={classes.items}>
             <p>را انتخاب کنید Add to Home Screen گزینه</p>
-            <AddBoxIcon className="icon" sx={{ fontSize: 18 }} />
+            <AddToHomeScreenIcon className="icon" sx={{ fontSize: 18 }} />
           </div>
           <div className={classes.items}>
             <p>کلیک کنید Add روی</p>

@@ -8,6 +8,7 @@
 }
 
 body {
+  position: relative;
   max-width: config.$max-width;
   margin: auto;
   font-family: config.$font;

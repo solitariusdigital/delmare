@@ -10,15 +10,14 @@
   @include mixins.transparentBackground(0.4, config.$brand);
 
   .content {
-    position: absolute;
-    top: 50px;
+    position: relative;
     transform: translateY(50%);
     padding: 10px;
     background: config.$white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 260px;
+    align-items: center;
+    height: 280px;
     margin: 10px;
     @include mixins.border-radius();
   }
@@ -44,7 +43,8 @@
   }
 
   button {
-    width: 100%;
-    margin-top: 20px;
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
   }
 }
