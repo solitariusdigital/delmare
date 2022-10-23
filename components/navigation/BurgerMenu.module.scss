@@ -27,6 +27,7 @@
   box-shadow: config.$card-shadow;
   padding-bottom: 20px;
   padding-top: 10px;
+  min-height: 600px;
 
   .list {
     display: flex;
