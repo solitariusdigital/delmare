@@ -8,6 +8,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
 
   const [name, setName] = useState("شاهین عقابی");
   const [phone, setPhone] = useState("09121089341");
@@ -142,6 +143,16 @@ export default function Account() {
             <button className="mainButton" onClick={() => saveAccount()}>
               ذخیره
             </button>
+            <div
+              className={classes.logout}
+              onClick={() => {
+                setUserLogin(false);
+                setToggleContainer("");
+                localStorage.removeItem("userSession");
+              }}
+            >
+              <p>خروج از حساب</p>
+            </div>
           </div>
         </div>
       </div>

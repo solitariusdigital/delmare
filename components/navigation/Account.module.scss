@@ -57,4 +57,14 @@
       margin-bottom: 10px;
     }
   }
+
+  .logout {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    p {
+      border-bottom: 1px solid config.$black;
+    }
+  }
 }

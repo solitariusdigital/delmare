@@ -78,15 +78,6 @@
     @include mixins.heartbeat();
   }
 
-  .logout {
-    display: flex;
-    justify-content: center;
-
-    p {
-      border-bottom: 1px solid config.$black;
-    }
-  }
-
   .alert {
     color: config.$red;
   }

@@ -62,7 +62,7 @@ export default function BurgerMenu() {
       setToggleContainer(action);
       setMenu(false);
     } else {
-      setAlert("برای دسترسی ثبت نام کنید");
+      setAlert("برای دسترسی وارد شوید");
     }
     setTimeout(() => {
       setAlert("");
@@ -88,7 +88,7 @@ export default function BurgerMenu() {
                 ))}
               </div>
 
-              {!userLogIn ? (
+              {!userLogIn && (
                 <div className={classes.buttonContainer}>
                   <button
                     className={`mainButton ${classes.button}`}
@@ -96,21 +96,9 @@ export default function BurgerMenu() {
                       setRegister(true);
                     }}
                   >
-                    ثبت نام
+                    ورود
                   </button>
                   <p className={classes.alert}>{alert}</p>
-                </div>
-              ) : (
-                <div className={classes.buttonContainer}>
-                  <div
-                    className={classes.logout}
-                    onClick={() => {
-                      setUserLogin(false);
-                      localStorage.removeItem("userSession");
-                    }}
-                  >
-                    <p>خروج</p>
-                  </div>
                 </div>
               )}
             </div>
