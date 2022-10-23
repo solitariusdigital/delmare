@@ -41,6 +41,7 @@ function LandingPage() {
         alt="image"
         layout="fill"
         objectFit="cover"
+        priority={true}
       />
       <div className={classes.message}>
         <p>

@@ -148,6 +148,7 @@ function New() {
               alt="image"
               layout="fill"
               objectFit="cover"
+              priority={true}
             />
           </div>
         ))}
