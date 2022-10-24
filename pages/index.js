@@ -16,9 +16,14 @@ function HomePage({ users }) {
 }
 
 export async function getServerSideProps(context) {
-  const hostname = context.req.headers.host;
+  let URL = null;
+  if (process.env.NODE_ENV == "development") {
+    URL = process.env.NEXT_PUBLIC_URL;
+  } else if (process.env.NODE_ENV == "production") {
+    URL = process.env.NEXT_PUBLIC_URL_PRO;
+  }
 
-  let res = await fetch("http://" + hostname + "/api/user", {
+  let res = await fetch(`${URL}/api/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
