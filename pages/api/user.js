@@ -2,17 +2,30 @@ import dbConnect from "../../services/dbConnect";
 import User from "../../models/User";
 
 export default async function user(req, res) {
-  try {
-    console.log("connecting");
-    await dbConnect();
-    console.log("connected");
+  const { method } = req;
 
-    const user = await User.create(req.body);
-    console.log("created");
+  console.log("connecting");
+  await dbConnect();
+  console.log("connected");
 
-    res.json({ user });
-  } catch (error) {
-    res.json({ error });
-    console.log(error);
+  switch (method) {
+    case "POST":
+      try {
+        const user = await User.create(req.body);
+        res.status(201).json(user);
+        console.log("created");
+      } catch (err) {
+        res.status(500).json(err);
+      }
+      break;
+    case "GET":
+      try {
+        const users = await User.find();
+        res.status(200).json(users);
+        console.log("fetched");
+      } catch (err) {
+        res.status(500).json(err);
+      }
+      break;
   }
 }
