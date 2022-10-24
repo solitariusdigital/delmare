@@ -90,10 +90,8 @@ function Register() {
       setIsLoading(true);
 
       const user = {
-        name: "Pouyan",
-        phone: "09121576992",
-        address: "asdasdasd",
-        postCode: "2121121",
+        name: name,
+        phone: phone,
       };
 
       const response = await fetch("/api/user", {
