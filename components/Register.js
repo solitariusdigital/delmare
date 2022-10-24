@@ -13,7 +13,7 @@ function Register() {
   const { isLoading, setIsLoading } = useContext(StateContext);
 
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("09123456789");
+  const [phone, setPhone] = useState("");
   const [token, setToken] = useState("");
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
@@ -102,22 +102,28 @@ function Register() {
         },
       });
       const data = await response.json();
+      console.log(data);
+
+      if (data.hasOwnProperty("error")) {
+        setAlert("خطا در برقراری ارتباط");
+      } else {
+        setUserLogin(true);
+        localStorage.setItem("userSession", JSON.stringify(true));
+      }
 
       setIsLoading(false);
-      // setUserLogin(true);
-      // localStorage.setItem("userSession", JSON.stringify(true));
-
       setDisplayCounter(false);
       resetCounter();
       setCounter(10);
     } else {
       setAlert("کد فعال سازی اشتباه است");
-      setToken("");
-      setCheckToken("");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
     }
+
+    setToken("");
+    setCheckToken("");
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   return (
@@ -156,7 +162,6 @@ function Register() {
             />
           </div>
           <input
-            placeholder="09123456789"
             type="tel"
             id="phone"
             name="phone"
