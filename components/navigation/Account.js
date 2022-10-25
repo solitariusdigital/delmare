@@ -12,27 +12,47 @@ export default function Account() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
 
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [post, setPost] = useState("");
+  const [name, setName] = useState(currentUser.name);
+  const [phone, setPhone] = useState(currentUser.phone);
+  const [address, setAddress] = useState(currentUser.address);
+  const [post, setPost] = useState(currentUser.post);
   const [alert, setAlert] = useState("");
 
   const logOut = () => {
     setUserLogin(false);
     setToggleContainer("");
     localStorage.removeItem("currentUser");
-    seCurrentUser({});
+    seCurrentUser(null);
     Router.push("/");
   };
 
-  const saveAccount = () => {
-    if (name === "" || phone === "" || address === "" || post === "") {
+  const saveAccount = async () => {
+    if (!name || !phone || !address || !post) {
       setAlert("همه اطلاعات را وارد کنید");
     } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
       setAlert("شماره موبایل اشتباه است");
+    } else if (post.length !== 10) {
+      setAlert("کد پستی اشتباه است");
     } else {
-      console.log(name, phone, address, post);
+      // update users info into db/state/localstorage
+      const user = {
+        name: name,
+        phone: phone,
+        address: address,
+        post: post,
+        id: currentUser["_id"],
+      };
+      const response = await fetch("/api/user", {
+        method: "PUT",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      seCurrentUser(data);
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      setAlert("اطلاعات با موفقیت ذخیره شد");
     }
     setTimeout(() => {
       setAlert("");
@@ -75,7 +95,7 @@ export default function Account() {
                 id="name"
                 name="name"
                 onChange={(e) => setName(e.target.value)}
-                value={currentUser.name}
+                value={name}
                 autoComplete="off"
                 dir="rtl"
               />
@@ -86,21 +106,16 @@ export default function Account() {
                   موبایل
                   <span>*</span>
                 </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setPhone("")}
-                  sx={{ fontSize: 16 }}
-                />
               </div>
-
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 onChange={(e) => setPhone(e.target.value)}
-                value={currentUser.phone}
+                value={phone}
                 autoComplete="off"
                 dir="rtl"
+                disabled={true}
               />
             </div>
             <div className={classes.input}>

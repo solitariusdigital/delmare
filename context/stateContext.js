@@ -39,7 +39,7 @@ export const StateProvider = (props) => {
 
   // application context
   const [appUsers, setAppUsers] = useState([]);
-  const [currentUser, seCurrentUser] = useState({});
+  const [currentUser, seCurrentUser] = useState(null);
 
   const stateContext = {
     menu,

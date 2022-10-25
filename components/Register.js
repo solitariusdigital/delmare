@@ -6,6 +6,7 @@ import { tokenGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
+import Router from "next/router";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -126,6 +127,7 @@ function Register() {
           setUserLogin(true);
           seCurrentUser(data);
           localStorage.setItem("currentUser", JSON.stringify(data));
+          Router.push("/");
         }
 
         setDisplayCounter(false);

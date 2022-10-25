@@ -6,9 +6,9 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import Person4Icon from "@mui/icons-material/Person4";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import Register from "../Register";
-
 import Image from "next/image";
 import logo from "../../assets/logo.png";
 
@@ -76,9 +76,14 @@ export default function BurgerMenu() {
       <div className={classes.menu}>
         <div className={classes.cross}>
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
-          <p>
-            {currentUser.name === "" ? currentUser.phone : currentUser.name}
-          </p>
+          {currentUser && (
+            <div className={classes.user}>
+              <Person4Icon className="icon" />
+              <p>
+                {currentUser.name === "" ? currentUser.phone : currentUser.name}
+              </p>
+            </div>
+          )}
         </div>
 
         <div className={classes.items}>

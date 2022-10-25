@@ -67,8 +67,14 @@
     justify-content: space-between;
     padding: 0px 10px;
 
-    p {
-      font-size: config.$med-font;
+    .user {
+      display: flex;
+      flex-direction: row;
+
+      p {
+        font-size: config.$med-font;
+        margin-left: 10px;
+      }
     }
   }
 }
