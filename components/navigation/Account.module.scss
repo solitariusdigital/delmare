@@ -18,7 +18,7 @@
   .alert {
     display: flex;
     justify-content: center;
-    color: config.$red;
+    color: config.$orange;
     height: 20px;
   }
 
@@ -35,7 +35,7 @@
       color: config.$grey;
 
       span {
-        color: config.$red;
+        color: config.$orange;
         font-size: config.$tiny-font;
       }
     }

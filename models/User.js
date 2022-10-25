@@ -12,6 +12,16 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
+    address: {
+      type: String,
+      required: false,
+      maxlength: 150,
+    },
+    post: {
+      type: String,
+      required: false,
+      maxlength: 20,
+    },
   },
   { timestamps: true }
 );

@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, Fragment } from "react";
+import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
@@ -11,6 +11,8 @@ function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { isLoading, setIsLoading } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { appUsers, setAppUsers } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -55,8 +57,6 @@ function Register() {
 
       setAlert("کد فعال سازی ارسال شد");
       startCounter();
-      // setMenu(false);
-
       console.log(tokenId);
 
       // const api = Kavenegar.KavenegarApi({
@@ -89,38 +89,56 @@ function Register() {
     if (token === Number(checkToken)) {
       setIsLoading(true);
 
-      const user = {
-        name: name,
-        phone: phone,
-      };
-
-      const response = await fetch("/api/user", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      let userExist = false;
+      // check if user already exist in db
+      appUsers.forEach((user) => {
+        if (user.phone === phone) {
+          userExist = true;
+          setUserLogin(true);
+          seCurrentUser(user);
+          localStorage.setItem("currentUser", JSON.stringify(user));
+          setMenu(false);
+        }
       });
-      const data = await response.json();
-      console.log(data);
 
-      if (data.hasOwnProperty("error")) {
-        setAlert("خطا در برقراری ارتباط");
-      } else {
-        setUserLogin(true);
-        localStorage.setItem("userSession", JSON.stringify(true));
+      // if user does not exist create a new one
+      if (!userExist) {
+        const user = {
+          name: name,
+          phone: phone,
+          address: "",
+          post: "",
+        };
+
+        const response = await fetch("/api/user", {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        if (data.hasOwnProperty("error")) {
+          setAlert("خطا در برقراری ارتباط");
+        } else {
+          setMenu(false);
+          setUserLogin(true);
+          seCurrentUser(data);
+          localStorage.setItem("currentUser", JSON.stringify(data));
+        }
+
+        setDisplayCounter(false);
+        resetCounter();
+        setCounter(10);
       }
-
-      setIsLoading(false);
-      setDisplayCounter(false);
-      resetCounter();
-      setCounter(10);
     } else {
       setAlert("کد فعال سازی اشتباه است");
     }
 
     setToken("");
     setCheckToken("");
+    setIsLoading(false);
     setTimeout(() => {
       setAlert("");
     }, 3000);

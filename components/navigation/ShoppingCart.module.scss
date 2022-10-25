@@ -46,7 +46,7 @@
       }
 
       .count {
-        color: config.$red;
+        color: config.$orange;
         margin-right: 10px;
       }
     }
@@ -190,7 +190,7 @@
       color: config.$grey;
 
       span {
-        color: config.$red;
+        color: config.$orange;
         font-size: config.$tiny-font;
       }
     }
@@ -221,7 +221,7 @@
   }
 
   .alert {
-    color: config.$red;
+    color: config.$orange;
     margin-top: 20px;
   }
 }

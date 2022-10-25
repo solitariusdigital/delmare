@@ -6,17 +6,18 @@ import dbConnect from "../services/dbConnect";
 import User from "../models/User";
 
 function HomePage({ users }) {
-  console.log(users);
-
   const { bar, setBar } = useContext(StateContext);
+  const { appUsers, setAppUsers } = useContext(StateContext);
 
   useEffect(() => {
+    setAppUsers(users);
     setBar(false);
-  }, [setBar]);
+  }, [setBar, setAppUsers, users]);
 
   return <LandingPage></LandingPage>;
 }
 
+// to fetch all available data from db
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
@@ -27,8 +28,11 @@ export async function getServerSideProps(context) {
         users: JSON.parse(JSON.stringify(users)),
       },
     };
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
   }
 }
 

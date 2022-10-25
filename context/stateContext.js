@@ -37,6 +37,10 @@ export const StateProvider = (props) => {
     },
   ]);
 
+  // application context
+  const [appUsers, setAppUsers] = useState([]);
+  const [currentUser, seCurrentUser] = useState({});
+
   const stateContext = {
     menu,
     setMenu,
@@ -56,6 +60,10 @@ export const StateProvider = (props) => {
     setUserLogin,
     isLoading,
     setIsLoading,
+    currentUser,
+    seCurrentUser,
+    appUsers,
+    setAppUsers,
   };
 
   return (

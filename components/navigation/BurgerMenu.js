@@ -16,6 +16,8 @@ export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
+
   const [register, setRegister] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -74,6 +76,9 @@ export default function BurgerMenu() {
       <div className={classes.menu}>
         <div className={classes.cross}>
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
+          <p>
+            {currentUser.name === "" ? currentUser.phone : currentUser.name}
+          </p>
         </div>
 
         <div className={classes.items}>

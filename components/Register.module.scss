@@ -41,7 +41,7 @@
     margin-bottom: 5px;
 
     span {
-      color: config.$red;
+      color: config.$orange;
       font-size: config.$tiny-font;
     }
   }
@@ -76,7 +76,7 @@
 .alert {
   display: flex;
   justify-content: center;
-  color: config.$red;
+  color: config.$orange;
   height: 10px;
   margin-bottom: 20px;
 }

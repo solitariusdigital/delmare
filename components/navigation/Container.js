@@ -25,16 +25,18 @@ function Container() {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("userSession"))) {
-      setUserLogin(JSON.parse(localStorage.getItem("userSession")));
+    if (JSON.parse(localStorage.getItem("currentUser"))) {
+      setUserLogin(true);
+      seCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     }
     // check if user is using pwa
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       setToggleContainer("screen");
     }
-  }, [setToggleContainer, setUserLogin]);
+  }, [setToggleContainer, setUserLogin, seCurrentUser]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {

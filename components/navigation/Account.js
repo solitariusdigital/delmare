@@ -4,19 +4,27 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
 import classes from "./Account.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Router from "next/router";
 
 export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
 
-  const [name, setName] = useState("شاهین عقابی");
-  const [phone, setPhone] = useState("09121089341");
-  const [address, setAddress] = useState(
-    "تهران آزادی خ انقلاب کوچه رهایی پ ۶۹ زنگ ۵۷"
-  );
-  const [post, setPost] = useState("123456789");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
+
+  const logOut = () => {
+    setUserLogin(false);
+    setToggleContainer("");
+    localStorage.removeItem("currentUser");
+    seCurrentUser({});
+    Router.push("/");
+  };
 
   const saveAccount = () => {
     if (name === "" || phone === "" || address === "" || post === "") {
@@ -67,7 +75,7 @@ export default function Account() {
                 id="name"
                 name="name"
                 onChange={(e) => setName(e.target.value)}
-                value={name}
+                value={currentUser.name}
                 autoComplete="off"
                 dir="rtl"
               />
@@ -90,7 +98,7 @@ export default function Account() {
                 id="phone"
                 name="phone"
                 onChange={(e) => setPhone(e.target.value)}
-                value={phone}
+                value={currentUser.phone}
                 autoComplete="off"
                 dir="rtl"
               />
@@ -143,14 +151,7 @@ export default function Account() {
             <button className="mainButton" onClick={() => saveAccount()}>
               ذخیره
             </button>
-            <div
-              className={classes.logout}
-              onClick={() => {
-                setUserLogin(false);
-                setToggleContainer("");
-                localStorage.removeItem("userSession");
-              }}
-            >
+            <div className={classes.logout} onClick={() => logOut()}>
               <p>خروج از حساب</p>
             </div>
           </div>
