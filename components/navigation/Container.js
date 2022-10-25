@@ -100,7 +100,7 @@ function Container() {
         )}
       </div>
       {menu && <BurgerMenu />}
-      {/* container layouts / pages navigated from burger menu */}
+      {/* container layouts / pages navigation from menu */}
       {toggleContainer === "empty" && <p></p>}
       {toggleContainer === "screen" && <AddHomeScreen />}
       {toggleContainer === "account" && <Account />}

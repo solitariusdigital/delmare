@@ -77,7 +77,10 @@ export default function BurgerMenu() {
         <div className={classes.cross}>
           <CloseIcon className="icon" onClick={() => setMenu(false)} />
           {currentUser && (
-            <div className={classes.user}>
+            <div
+              className={classes.user}
+              onClick={() => navigateMenu("account")}
+            >
               <Person4Icon className="icon" />
               <p>
                 {currentUser.name === "" ? currentUser.phone : currentUser.name}

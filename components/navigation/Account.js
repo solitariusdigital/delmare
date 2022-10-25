@@ -11,6 +11,7 @@ export default function Account() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
 
   const [name, setName] = useState(currentUser.name);
   const [phone, setPhone] = useState(currentUser.phone);
@@ -53,6 +54,10 @@ export default function Account() {
       seCurrentUser(data);
       localStorage.setItem("currentUser", JSON.stringify(data));
       setAlert("اطلاعات با موفقیت ذخیره شد");
+      setTimeout(() => {
+        setToggleContainer("");
+        setMenu(true);
+      }, 1000);
     }
     setTimeout(() => {
       setAlert("");
