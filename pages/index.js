@@ -2,15 +2,11 @@ import { useEffect, useContext } from "react";
 import { StateContext } from "../context/stateContext";
 
 import LandingPage from "../components/LandingPage";
+import dbConnect from "../services/dbConnect";
+import User from "../models/User";
 
 function HomePage({ users }) {
   console.log(users);
-
-  if (process.env.NODE_ENV == "development") {
-    console.log("development");
-  } else if (process.env.NODE_ENV == "production") {
-    console.log("production");
-  }
 
   const { bar, setBar } = useContext(StateContext);
 
@@ -22,23 +18,18 @@ function HomePage({ users }) {
 }
 
 export async function getServerSideProps(context) {
-  let URL = null;
-  if (process.env.NODE_ENV == "development") {
-    URL = process.env.NEXT_PUBLIC_URL;
-  } else if (process.env.NODE_ENV == "production") {
-    URL = process.env.NEXT_PUBLIC_URL_PRO;
-  }
+  try {
+    await dbConnect();
+    const users = await User.find();
 
-  let res = await fetch(`${URL}/api/user`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  let users = await res.json();
-  return {
-    props: { users },
-  };
+    return {
+      props: {
+        users: JSON.parse(JSON.stringify(users)),
+      },
+    };
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
 export default HomePage;
