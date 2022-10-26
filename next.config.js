@@ -5,7 +5,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-    MONGO_URI: process.env.NEXT_PUBLIC_MONGO_URI,
+    MONGO_URI:
+      "mongodb://root:a9qtXAqgTkKI4QvIphVzHu8N@gina.iran.liara.ir:34251/delmare?authSource=admin&replicaSet=rs0&directConnection=true",
   },
 };
 
