@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
+import { createUserApi } from "../services/user";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -45,7 +46,7 @@ function Register() {
 
   const verifyPhone = () => {
     if (phone.length === 0) {
-      setAlert("موبایل را وارد کنید");
+      setAlert("شماره موبایل را وارد کنید");
       setTimeout(() => {
         setAlert("");
       }, 3000);
@@ -89,7 +90,6 @@ function Register() {
   const handleRegister = async () => {
     if (token === Number(checkToken)) {
       setIsLoading(true);
-
       let userExist = false;
       // check if user already exist in db
       appUsers.forEach((user) => {
@@ -101,49 +101,41 @@ function Register() {
           setMenu(false);
         }
       });
-
       // if user does not exist create a new one
       if (!userExist) {
-        const user = {
-          name: name,
-          phone: phone,
-          address: "",
-          post: "",
-        };
-
-        const response = await fetch("/api/user", {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-
-        if (data.hasOwnProperty("error")) {
-          setAlert("خطا در برقراری ارتباط");
-        } else {
-          setMenu(false);
-          setUserLogin(true);
-          seCurrentUser(data);
-          localStorage.setItem("currentUser", JSON.stringify(data));
-          Router.push("/");
-        }
-
-        setDisplayCounter(false);
-        resetCounter();
-        setCounter(10);
+        await createUser();
       }
     } else {
       setAlert("کد فعال سازی اشتباه است");
     }
-
     setToken("");
     setCheckToken("");
     setIsLoading(false);
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+  // create new user into db/state/localstorage
+  const createUser = async () => {
+    const user = {
+      name: name,
+      phone: phone,
+      address: "",
+      post: "",
+    };
+    let data = await createUserApi(user);
+    if (data.hasOwnProperty("error")) {
+      setAlert("خطا در برقراری ارتباط");
+    } else {
+      setMenu(false);
+      setUserLogin(true);
+      seCurrentUser(data);
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      Router.push("/");
+    }
+    setDisplayCounter(false);
+    resetCounter();
+    setCounter(10);
   };
 
   return (

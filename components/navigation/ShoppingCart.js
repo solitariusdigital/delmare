@@ -9,22 +9,29 @@ import brand from "../../assets/brand.svg";
 
 // import item from "../../assets/mainItem.jpg";
 import item from "../../assets/two.jpg";
+import { updateUserApi } from "../../services/user";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
-
   const [alert, setAlert] = useState("");
   const [checkOut, setCheckout] = useState(false);
 
   useEffect(() => {
+    if (currentUser) {
+      setName(currentUser.name);
+      setPhone(currentUser.phone);
+      setAddress(currentUser.address);
+      setPost(currentUser.post);
+    }
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-  }, [shoppingCart]);
+  }, [shoppingCart, currentUser]);
 
   const deletecart = (index) => {
     setShoppingCart(
@@ -43,17 +50,33 @@ export default function ShoppingCart() {
     return convertNumber(total);
   };
 
-  const handleCheckOut = () => {
-    if (name === "" || phone === "" || address === "" || post === "") {
+  const handleCheckOut = async () => {
+    if (!name || !phone || !address || !post) {
       setAlert("همه اطلاعات را وارد کنید");
     } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
       setAlert("شماره موبایل اشتباه است");
     } else {
-      console.log(name, phone, address, post);
+      await updateUser();
     }
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+
+  // update user info into db/state/localstorage
+  const updateUser = async () => {
+    const user = {
+      name: name,
+      phone: phone,
+      address: address,
+      post: post,
+      id: currentUser["_id"],
+    };
+    let data = await updateUserApi(user);
+    seCurrentUser(data);
+    localStorage.setItem("currentUser", JSON.stringify(data));
+    setAlert("اطلاعات با موفقیت ذخیره شد");
+    setTimeout(() => {}, 1000);
   };
 
   return (
@@ -153,13 +176,7 @@ export default function ShoppingCart() {
                   موبایل
                   <span>*</span>
                 </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setPhone("")}
-                  sx={{ fontSize: 16 }}
-                />
               </div>
-
               <input
                 type="tel"
                 id="phone"
@@ -168,6 +185,7 @@ export default function ShoppingCart() {
                 value={phone}
                 autoComplete="off"
                 dir="rtl"
+                disabled={true}
               />
             </div>
             <div className={classes.input}>

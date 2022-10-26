@@ -5,13 +5,14 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import classes from "./Account.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Router from "next/router";
+import { updateUserApi } from "../../services/user";
 
 export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
-  const { menu, setMenu } = useContext(StateContext);
 
   const [name, setName] = useState(currentUser.name);
   const [phone, setPhone] = useState(currentUser.phone);
@@ -27,7 +28,7 @@ export default function Account() {
     Router.push("/");
   };
 
-  const saveAccount = async () => {
+  const handleUpdate = async () => {
     if (!name || !phone || !address || !post) {
       setAlert("همه اطلاعات را وارد کنید");
     } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
@@ -35,33 +36,30 @@ export default function Account() {
     } else if (post.length !== 10) {
       setAlert("کد پستی اشتباه است");
     } else {
-      // update users info into db/state/localstorage
-      const user = {
-        name: name,
-        phone: phone,
-        address: address,
-        post: post,
-        id: currentUser["_id"],
-      };
-      const response = await fetch("/api/user", {
-        method: "PUT",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      seCurrentUser(data);
-      localStorage.setItem("currentUser", JSON.stringify(data));
-      setAlert("اطلاعات با موفقیت ذخیره شد");
-      setTimeout(() => {
-        setToggleContainer("");
-        setMenu(true);
-      }, 1000);
+      await updateUser();
     }
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+
+  // update user info into db/state/localstorage
+  const updateUser = async () => {
+    const user = {
+      name: name,
+      phone: phone,
+      address: address,
+      post: post,
+      id: currentUser["_id"],
+    };
+    let data = await updateUserApi(user);
+    seCurrentUser(data);
+    localStorage.setItem("currentUser", JSON.stringify(data));
+    setAlert("اطلاعات با موفقیت ذخیره شد");
+    setTimeout(() => {
+      setToggleContainer("");
+      setMenu(true);
+    }, 1000);
   };
 
   return (
@@ -168,7 +166,7 @@ export default function Account() {
               />
             </div>
             <div className={classes.alert}>{alert}</div>
-            <button className="mainButton" onClick={() => saveAccount()}>
+            <button className="mainButton" onClick={() => handleUpdate()}>
               ذخیره
             </button>
             <div className={classes.logout} onClick={() => logOut()}>

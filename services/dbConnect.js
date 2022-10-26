@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const dbConnect = async () =>
-  mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI, {
+  mongoose.connect(process.env.MONGO_URI, {
     authSource: "admin",
   });
 

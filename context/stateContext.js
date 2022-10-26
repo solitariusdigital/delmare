@@ -3,8 +3,8 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
-  const [userLogIn, setUserLogin] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [bar, setBar] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -16,7 +16,6 @@ export const StateProvider = (props) => {
   );
   const [displayProduct, setDisplayProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
-  const [bar, setBar] = useState(true);
   const [shoppingCart, setShoppingCart] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [navigation, setNavigation] = useState([
@@ -38,6 +37,7 @@ export const StateProvider = (props) => {
   ]);
 
   // application context
+  const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, seCurrentUser] = useState(null);
 
