@@ -7,7 +7,7 @@ const conn = {
 async function dbConnect() {
   if (conn.isConneted) return;
 
-  const db = await connect(process.env.MONGO_URI, {
+  const db = await connect(process.env.NEXT_PUBLIC_MONGO_URI, {
     authSource: "admin",
   });
   conn.isConneted = db.connections[0].readyState;
