@@ -57,7 +57,7 @@ function Register() {
       let tokenId = tokenGenerator();
       setToken(tokenId);
 
-      setAlert("کد فعال سازی ارسال شد");
+      setAlert("کد تایید ارسال شد");
       startCounter();
       console.log(tokenId);
 
@@ -72,9 +72,9 @@ function Register() {
       //   },
       //   function (response, status) {
       //     if (status === 200) {
-      //       setAlert("کد فعال سازی ارسال شد");
+      //       setAlert("کد تایید ارسال شد");
       //     } else {
-      //       setAlert("خطا در سامانه ارسال کد فعال سازی");
+      //       setAlert("خطا در سامانه ارسال کد تایید");
       //     }
       //     startCounter();
       //   }
@@ -106,7 +106,7 @@ function Register() {
         await createUser();
       }
     } else {
-      setAlert("کد فعال سازی اشتباه است");
+      setAlert("کد تایید اشتباه است");
     }
     setToken("");
     setCheckToken("");
@@ -193,14 +193,14 @@ function Register() {
         ) : (
           <div className={classes.activationContainer}>
             <button className="mainButton" onClick={() => verifyPhone()}>
-              کد فعال سازی
+              کد تایید
             </button>
           </div>
         )}
         <div className={classes.input}>
           <div className={classes.bar}>
             <p className={classes.label}>
-              کد فعال سازی
+              کد تایید
               <span>*</span>
             </p>
             <CloseIcon
