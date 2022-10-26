@@ -15,7 +15,6 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
   },
-  output: "standalone",
 });
 
 module.exports = nextConfig;
