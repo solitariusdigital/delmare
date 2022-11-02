@@ -160,7 +160,8 @@
     }
   }
 
-  .form {
+  .form,
+  .register {
     width: 100%;
     padding: 0px 20px;
     display: flex;
@@ -193,6 +194,19 @@
         color: config.$orange;
         font-size: config.$tiny-font;
       }
+    }
+  }
+
+  .register {
+    margin-top: 70px;
+
+    p {
+      font-size: config.$med-font;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 20px;
     }
   }
 

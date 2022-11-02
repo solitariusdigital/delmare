@@ -122,6 +122,7 @@ function Register() {
       phone: phone,
       address: "",
       post: "",
+      permission: "customer",
     };
     let data = await createUserApi(user);
     if (data.hasOwnProperty("error")) {
@@ -224,7 +225,7 @@ function Register() {
           <p className={classes.alert}>{alert}</p>
           {checkToken.length === 6 && (
             <button className="mainButton" onClick={() => handleRegister()}>
-              ورود
+              ورود / ​ثبت نام
             </button>
           )}
           {isLoading && (

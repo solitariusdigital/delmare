@@ -109,7 +109,7 @@ export default function BurgerMenu() {
                       setRegister(true);
                     }}
                   >
-                    ورود
+                    ورود / ​ثبت نام
                   </button>
                   <p className={classes.alert}>{alert}</p>
                 </div>

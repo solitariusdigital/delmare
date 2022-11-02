@@ -22,6 +22,11 @@ const UserSchema = new Schema(
       required: false,
       maxlength: 20,
     },
+    permission: {
+      type: String,
+      required: false,
+      maxlength: 20,
+    },
   },
   { timestamps: true }
 );

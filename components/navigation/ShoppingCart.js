@@ -15,13 +15,15 @@ export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
-  const [checkOut, setCheckout] = useState(false);
+  const [checkout, setCheckout] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -50,13 +52,24 @@ export default function ShoppingCart() {
     return convertNumber(total);
   };
 
-  const handleCheckOut = async () => {
+  const checkoutConfirmation = async () => {
     if (!name || !phone || !address || !post) {
       setAlert("همه اطلاعات را وارد کنید");
     } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
       setAlert("شماره موبایل اشتباه است");
+    } else if (post.length !== 10) {
+      setAlert("کد پستی صحیح ده رقمی وارد کنید");
     } else {
       await updateUser();
+    }
+  };
+
+  const handlecheckout = async () => {
+    if (userLogIn) {
+      checkoutConfirmation();
+    } else {
+      setToggleContainer("");
+      setMenu(true);
     }
     setTimeout(() => {
       setAlert("");
@@ -75,8 +88,7 @@ export default function ShoppingCart() {
     let data = await updateUserApi(user);
     seCurrentUser(data);
     localStorage.setItem("currentUser", JSON.stringify(data));
-    setAlert("اطلاعات با موفقیت ذخیره شد");
-    setTimeout(() => {}, 1000);
+    setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
   };
 
   return (
@@ -84,18 +96,18 @@ export default function ShoppingCart() {
       <div className={classes.menu}>
         <div className={classes.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
-          {!checkOut && (
+          {!checkout && (
             <div className={classes.title}>
               <p className={classes.count}>{shoppingCart.length}</p>
               <p>سبد خرید</p>
             </div>
           )}
-          {checkOut && (
+          {checkout && (
             <div className={classes.brand}>
               <Image src={brand} alt="brand" />
             </div>
           )}
-          {checkOut && (
+          {checkout && (
             <ArrowBackIosNewIcon
               className={classes.back}
               sx={{ color: "#000000", fontSize: 30 }}
@@ -106,8 +118,8 @@ export default function ShoppingCart() {
           )}
         </div>
 
-        {!checkOut ? (
-          // items list
+        {!checkout && (
+          // cart list
           <div className={classes.items}>
             {shoppingCart
               .map((cart, index) => (
@@ -144,95 +156,113 @@ export default function ShoppingCart() {
               ))
               .reverse()}
           </div>
-        ) : (
+        )}
+
+        {checkout && (
           // checkout from
-          <div className={classes.form}>
-            <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  نام و نام خانوادگی
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setName("")}
-                  sx={{ fontSize: 16 }}
-                />
+          <div>
+            {userLogIn ? (
+              <div className={classes.form}>
+                <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>
+                      نام و نام خانوادگی
+                      <span>*</span>
+                    </p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setName("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    autoComplete="off"
+                    dir="rtl"
+                  />
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>
+                      موبایل
+                      <span>*</span>
+                    </p>
+                  </div>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone}
+                    autoComplete="off"
+                    dir="rtl"
+                    disabled={true}
+                  />
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>
+                      آدرس تحویل
+                      <span>*</span>
+                    </p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setAddress("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <textarea
+                    type="text"
+                    id="address"
+                    name="address"
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
+                    autoComplete="off"
+                    dir="rtl"
+                  ></textarea>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>
+                      کد پستی
+                      <span>*</span>
+                    </p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setPost("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    type="tel"
+                    id="post"
+                    name="post"
+                    onChange={(e) => setPost(e.target.value)}
+                    value={post}
+                    autoComplete="off"
+                    dir="rtl"
+                  />
+                </div>
+                <div className={classes.alert}>{alert}</div>
               </div>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                autoComplete="off"
-                dir="rtl"
-              />
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  موبایل
-                  <span>*</span>
-                </p>
+            ) : (
+              <div className={classes.register}>
+                <p>جهت تکمیل کردن خرید</p>
+                <p>وارد حساب کاربری شوید یا ثبت نام کنید</p>
+                <button
+                  className={`mainButton ${classes.button}`}
+                  disabled={shoppingCart.length === 0}
+                  onClick={() => handlecheckout()}
+                >
+                  ورود ​/ ثبت نام
+                </button>
               </div>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
-                autoComplete="off"
-                dir="rtl"
-                disabled={true}
-              />
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  آدرس تحویل
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setAddress("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <textarea
-                type="text"
-                id="address"
-                name="address"
-                onChange={(e) => setAddress(e.target.value)}
-                value={address}
-                autoComplete="off"
-                dir="rtl"
-              ></textarea>
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  کد پستی
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setPost("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                type="tel"
-                id="post"
-                name="post"
-                onChange={(e) => setPost(e.target.value)}
-                value={post}
-                autoComplete="off"
-                dir="rtl"
-              />
-            </div>
-            <div className={classes.alert}>{alert}</div>
+            )}
           </div>
         )}
 
@@ -246,7 +276,7 @@ export default function ShoppingCart() {
             <p>جمع سبد خرید</p>
           </div>
 
-          {!checkOut ? (
+          {!checkout ? (
             <button
               className={`mainButton ${classes.button}`}
               disabled={shoppingCart.length === 0}
@@ -258,9 +288,9 @@ export default function ShoppingCart() {
             <button
               className={`mainButton ${classes.button}`}
               disabled={shoppingCart.length === 0}
-              onClick={() => handleCheckOut()}
+              onClick={() => handlecheckout()}
             >
-              پرداخت
+              {userLogIn ? "پرداخت" : "ورود ​/ ثبت نام"}
             </button>
           )}
         </div>

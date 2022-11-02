@@ -34,7 +34,7 @@ export default function Account() {
     } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
       setAlert("شماره موبایل اشتباه است");
     } else if (post.length !== 10) {
-      setAlert("کد پستی اشتباه است");
+      setAlert("کد پستی صحیح ده رقمی وارد کنید");
     } else {
       await updateUser();
     }
