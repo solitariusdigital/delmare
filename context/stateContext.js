@@ -5,6 +5,7 @@ export const StateContext = createContext();
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
   const [bar, setBar] = useState(true);
+  const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -64,6 +65,8 @@ export const StateProvider = (props) => {
     seCurrentUser,
     appUsers,
     setAppUsers,
+    container,
+    setContainer,
   };
 
   return (
