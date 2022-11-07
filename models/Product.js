@@ -28,6 +28,8 @@ const ProductSchema = new Schema(
       XXL: {},
     },
     price: String,
+    views: Number,
+    likes: Number,
   },
   { timestamps: true }
 );

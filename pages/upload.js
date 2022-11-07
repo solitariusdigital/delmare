@@ -116,6 +116,8 @@ function Upload() {
         price: price,
         images: images,
         size: size,
+        views: 0,
+        likes: 0,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -123,6 +125,7 @@ function Upload() {
     });
 
     if (upload.ok) {
+      setUploadClicked(false);
       setAlert("Data saved successfully");
       // reset all variables/data after upload into db
       setTitle("");
@@ -147,7 +150,6 @@ function Upload() {
 
     setTimeout(() => {
       setAlert("");
-      setUploadClicked(false);
       Router.push("/upload");
     }, 3000);
   };
