@@ -215,6 +215,9 @@ function Product() {
               alt="image"
               layout="fill"
               objectFit="cover"
+              onClick={() => {
+                setDisplayDetails(true);
+              }}
             />
             <div className={classes.banner}>
               <div className={classes.social}>

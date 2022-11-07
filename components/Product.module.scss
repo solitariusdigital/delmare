@@ -57,6 +57,10 @@
 .image {
   @include mixins.border-radius();
   object-position: 50% 0%;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .back {
@@ -69,6 +73,10 @@
 .product {
   width: 100%;
   text-align: right;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   .description {
     margin: 20px 0px;
@@ -152,6 +160,10 @@
       .detailImage {
         @include mixins.border-radius();
         object-position: 50% 0%;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -170,6 +182,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 260px;
+
     .color,
     .size,
     .selectedSize,
@@ -182,6 +195,10 @@
       border-radius: 50%;
       margin: 5px;
       font-size: config.$tiny-font;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .color,
