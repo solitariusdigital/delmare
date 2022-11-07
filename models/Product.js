@@ -2,24 +2,32 @@ import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema(
   {
-    imageId: {
-      type: String,
-      unique: true,
-    },
     title: {
       type: String,
-      required: false,
+      required: true,
       maxlength: 20,
-    },
-    link: {
-      type: String,
-      required: false,
     },
     description: {
       type: String,
       required: false,
       maxlength: 250,
     },
+    images: {
+      main: String,
+      one: String,
+      two: String,
+      three: String,
+      table: String,
+    },
+    size: {
+      XS: {},
+      S: {},
+      M: {},
+      L: {},
+      XL: {},
+      XXL: {},
+    },
+    price: String,
   },
   { timestamps: true }
 );

@@ -163,3 +163,25 @@ a {
     font-size: config.$small-font;
   }
 }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+  .input {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    margin: 10px 0px;
+
+    input {
+      margin-top: 10px;
+    }
+  }
+}

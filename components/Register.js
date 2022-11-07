@@ -210,7 +210,6 @@ function Register() {
               sx={{ fontSize: 16 }}
             />
           </div>
-
           <input
             type="tel"
             id="number"

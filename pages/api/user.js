@@ -1,7 +1,7 @@
 import dbConnect from "../../services/dbConnect";
 import User from "../../models/User";
 
-export default async function user(req, res) {
+export default async function userHandler(req, res) {
   const { method, body } = req;
   await dbConnect();
 
