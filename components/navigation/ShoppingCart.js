@@ -79,10 +79,10 @@ export default function ShoppingCart() {
   // update user info into db/state/localstorage
   const updateUser = async () => {
     const user = {
-      name: name,
-      phone: phone,
-      address: address,
-      post: post,
+      name: name.trim(),
+      phone: phone.trim(),
+      address: address.trim(),
+      post: post.trim(),
       id: currentUser["_id"],
     };
     let data = await updateUserApi(user);
@@ -110,7 +110,7 @@ export default function ShoppingCart() {
           {checkout && (
             <ArrowBackIosNewIcon
               className={classes.back}
-              sx={{ color: "#000000", fontSize: 30 }}
+              sx={{ color: "#1b1b1b", fontSize: 30 }}
               onClick={() => {
                 setCheckout(false);
               }}
@@ -141,7 +141,7 @@ export default function ShoppingCart() {
                         <div className={classes.size}>{cart.size}</div>
                         <div
                           className={classes.color}
-                          style={{ backgroundColor: cart.color }}
+                          style={{ backgroundColor: `#${cart.color}` }}
                         ></div>
                       </div>
                     </div>

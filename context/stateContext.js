@@ -41,6 +41,7 @@ export const StateProvider = (props) => {
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, seCurrentUser] = useState(null);
+  const [productsCollection, setProductsCollection] = useState([]);
 
   const stateContext = {
     menu,
@@ -67,6 +68,8 @@ export const StateProvider = (props) => {
     setAppUsers,
     container,
     setContainer,
+    productsCollection,
+    setProductsCollection,
   };
 
   return (

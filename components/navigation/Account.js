@@ -46,10 +46,10 @@ export default function Account() {
   // update user info into db/state/localstorage
   const updateUser = async () => {
     const user = {
-      name: name,
-      phone: phone,
-      address: address,
-      post: post,
+      name: name.trim(),
+      phone: phone.trim(),
+      address: address.trim(),
+      post: post.trim(),
       id: currentUser["_id"],
     };
     let data = await updateUserApi(user);

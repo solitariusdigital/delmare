@@ -118,8 +118,8 @@ function Register() {
   // create new user into db/state/localstorage
   const createUser = async () => {
     const user = {
-      name: name,
-      phone: phone,
+      name: name.trim(),
+      phone: phone.trim(),
       address: "",
       post: "",
       permission: "customer",

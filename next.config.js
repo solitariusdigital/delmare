@@ -2,7 +2,7 @@
 const withPWA = require("next-pwa");
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
     domains: ["delmare.storage.iran.liara.space"],

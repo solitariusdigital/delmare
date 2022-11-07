@@ -10,12 +10,12 @@ import dbConnect from "../services/dbConnect";
 
 function Upload() {
   const sizeInitialState = {
-    XS: {},
-    S: {},
-    M: {},
-    L: {},
-    XL: {},
-    XXL: {},
+    XS: { colors: {} },
+    S: { colors: {} },
+    M: { colors: {} },
+    L: { colors: {} },
+    XL: { colors: {} },
+    XXL: { colors: {} },
   };
   const imageInitialState = {
     main: "",
@@ -59,7 +59,8 @@ function Upload() {
       return item.trim();
     });
     items.forEach((item) => {
-      if (item != "") size[type][item.split(" ")[0]] = item.split(" ")[1];
+      if (item != "")
+        size[type]["colors"][item.split(" ")[0]] = Number(item.split(" ")[1]);
     });
   };
 
@@ -111,9 +112,9 @@ function Upload() {
     const upload = await fetch(`/api/product`, {
       method: "POST",
       body: JSON.stringify({
-        title: title,
-        description: description,
-        price: price,
+        title: title.trim(),
+        description: description.trim(),
+        price: price.trim(),
         images: images,
         size: size,
         views: 0,
@@ -125,32 +126,15 @@ function Upload() {
     });
 
     if (upload.ok) {
-      setUploadClicked(false);
       setAlert("Data saved successfully");
-      // reset all variables/data after upload into db
-      setTitle("");
-      setDescription("");
-      setPrice("");
-      setImages(imageInitialState);
-      setSize(sizeInitialState);
-      setMainImage("");
-      setImageOne("");
-      setImageTwo("");
-      setImageThree("");
-      setTable("");
-      setXS("");
-      setS("");
-      setM("");
-      setL("");
-      setXL("");
-      setXXL("");
     } else {
       setAlert("Data save failed, try again");
     }
 
     setTimeout(() => {
       setAlert("");
-      Router.push("/upload");
+      setUploadClicked(false);
+      Router.reload(window.location.pathname);
     }, 3000);
   };
 

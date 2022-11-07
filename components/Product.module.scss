@@ -56,6 +56,7 @@
 
 .image {
   @include mixins.border-radius();
+  object-position: 50% 0%;
 }
 
 .back {
@@ -126,15 +127,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 40vh;
+  height: 50vh;
   margin: 10px 0px;
+  max-height: 380px;
 
   .item {
     position: relative;
     width: 70%;
     height: 100%;
     max-width: 260px;
-    max-height: 390px;
+    max-height: 380px;
     @include mixins.border-radius();
   }
 
@@ -144,11 +146,12 @@
     justify-content: space-between;
 
     .subItem {
-      width: 70px;
+      width: 100px;
+      @include mixins.border-radius();
 
-      .detail {
+      .detailImage {
         @include mixins.border-radius();
-        height: 100%;
+        object-position: 50% 0%;
       }
     }
   }
@@ -156,18 +159,17 @@
 
 .details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   margin: 10px 0px;
+  height: 100px;
 
   .box {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 50%;
     max-width: 260px;
-
     .color,
     .size,
     .selectedSize,
@@ -175,10 +177,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 33px;
+      height: 33px;
       border-radius: 50%;
       margin: 5px;
+      font-size: config.$tiny-font;
+    }
+
+    .color,
+    .selectedColor {
+      p {
+        color: config.$white;
+      }
     }
 
     .size {
@@ -236,9 +246,14 @@
     box-shadow: config.$card-shadow;
     height: 40px;
     @include mixins.border-radius();
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .info {
+    position: relative;
     padding: 10px;
     height: 200px;
   }

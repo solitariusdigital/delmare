@@ -27,7 +27,7 @@ const ProductSchema = new Schema(
       XL: {},
       XXL: {},
     },
-    price: String,
+    price: Number,
     views: Number,
     likes: Number,
   },
