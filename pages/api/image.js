@@ -2,7 +2,7 @@ import aws from "aws-sdk";
 // upload images to s3 bucket on liara
 export default async function imageHandler(req, res) {
   aws.config.update({
-    endpoint: process.env.LIARA_ENDPOINT,
+    endpoint: process.env.NEXT_PUBLIC_LIARA_ENDPOINT,
     accessKeyId: process.env.LIARA_ACCESS_KEY,
     secretAccessKey: process.env.LIARA_SECRET_KEY,
     region: "default",
@@ -10,7 +10,7 @@ export default async function imageHandler(req, res) {
 
   const client = new aws.S3();
   const post = await client.createPresignedPost({
-    Bucket: process.env.LIARA_BUCKET_NAME,
+    Bucket: process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME,
     Fields: {
       key: req.query.file,
     },

@@ -1,14 +1,12 @@
 import { useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
-
 import Image from "next/image";
-import one from "../../assets/one.jpg";
-import two from "../../assets/two.jpg";
 
 function CollectionsPage() {
   const { bar, setBar } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     setBar(true);
@@ -18,22 +16,22 @@ function CollectionsPage() {
     {
       title: "New",
       link: "/collections/new",
-      imageSrc: one,
+      imageSrc: `${sourceLink}three.jpg`,
     },
     {
       title: "Sale",
       link: "/collections/sale",
-      imageSrc: two,
+      imageSrc: `${sourceLink}four.jpg`,
     },
     {
       title: "Brands",
       link: "/collections/brands",
-      imageSrc: one,
+      imageSrc: `${sourceLink}six.jpg`,
     },
     {
       title: "Bloggers",
       link: "/collections/bloggers",
-      imageSrc: two,
+      imageSrc: `${sourceLink}seven.jpg`,
     },
   ];
 
@@ -66,6 +64,8 @@ function CollectionsPage() {
             alt="image"
             layout="fill"
             objectFit="cover"
+            priority={true}
+            loading="eager"
           />
         </div>
       ))}

@@ -5,11 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collections.module.scss";
-
 import Image from "next/image";
-import one from "../../assets/one.jpg";
-import two from "../../assets/two.jpg";
-import three from "../../assets/three.jpg";
 
 function New() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
@@ -17,94 +13,14 @@ function New() {
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
 
-  const [newCollection, setNewCollection] = useState([
-    {
-      imageSrc: one,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-        {
-          id: "0000",
-          title: "شومیز",
-          price: 1550000,
-        },
-      ],
-    },
-    {
-      imageSrc: three,
-      like: 122,
-      views: 578,
-      favoured: false,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: two,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: three,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-  ]);
-
-  const favourProduct = (index) => {
-    newCollection.map((product, i) => {
-      if (i === index) {
-        product.favoured = !product.favoured;
-      }
-    });
-    setNewCollection([...newCollection]);
-  };
+  // const favourProduct = (index) => {
+  //   newCollection.map((product, i) => {
+  //     if (i === index) {
+  //       product.favoured = !product.favoured;
+  //     }
+  //   });
+  //   setNewCollection([...newCollection]);
+  // };
 
   const selectProduct = (product) => {
     setDisplayProduct(true);
@@ -155,7 +71,7 @@ function New() {
               alt="image"
               layout="fill"
               objectFit="cover"
-              priority
+              priority={true}
             />
           </div>
         ))}

@@ -42,6 +42,11 @@
   }
 }
 
+.image {
+  @include mixins.border-radius();
+  object-position: 50% 0%;
+}
+
 .alert {
   display: flex;
   justify-content: center;

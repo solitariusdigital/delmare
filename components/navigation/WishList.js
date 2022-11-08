@@ -6,12 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import Image from "next/image";
-import one from "../../assets/one.jpg";
-import two from "../../assets/two.jpg";
-import three from "../../assets/three.jpg";
-
 import Product from "../Product";
 
 export default function WishList() {
@@ -20,10 +15,11 @@ export default function WishList() {
   const { bar, setBar } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
+  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   const [wishList, setWishList] = useState([
     {
-      imageSrc: three,
+      imageSrc: `${sourceLink}three.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -46,7 +42,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: one,
+      imageSrc: `${sourceLink}four.jpg`,
       like: 122,
       views: 578,
       favoured: false,
@@ -64,7 +60,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: two,
+      imageSrc: `${sourceLink}six.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -82,7 +78,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: one,
+      imageSrc: `${sourceLink}seven.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -100,7 +96,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: one,
+      imageSrc: `${sourceLink}eight.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -118,7 +114,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: one,
+      imageSrc: `${sourceLink}two.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -136,7 +132,7 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: one,
+      imageSrc: `${sourceLink}five.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -232,6 +228,8 @@ export default function WishList() {
                   alt="image"
                   layout="fill"
                   objectFit="cover"
+                  priority={true}
+                  loading="eager"
                 />
               </div>
             ))}

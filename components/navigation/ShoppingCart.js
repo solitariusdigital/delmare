@@ -8,7 +8,6 @@ import Image from "next/image";
 import brand from "../../assets/brand.svg";
 
 // import item from "../../assets/mainItem.jpg";
-import item from "../../assets/two.jpg";
 import { updateUserApi } from "../../services/user";
 
 export default function ShoppingCart() {
@@ -129,7 +128,8 @@ export default function ShoppingCart() {
                       className={classes.image}
                       width={110}
                       height={140}
-                      src={item}
+                      objectFit="cover"
+                      src={cart.image}
                       alt="image"
                     />
                     <div className={classes.information}>

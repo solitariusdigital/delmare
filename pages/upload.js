@@ -82,30 +82,32 @@ function Upload() {
     transformDataSize(XL, "XL");
     transformDataSize(XXL, "XXL");
 
+    let productFolder = `product${tokenGenerator()}`;
+
     if (mainImage !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${imageId}.jpg`;
-      await uploadImages(mainImage, imageId);
+      images.main = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
+      await uploadImages(mainImage, imageId, productFolder);
     }
     if (imageOne !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${imageId}.jpg`;
-      await uploadImages(imageOne, imageId);
+      images.one = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
+      await uploadImages(imageOne, imageId, productFolder);
     }
     if (imageTwo !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${imageId}.jpg`;
-      await uploadImages(imageTwo, imageId);
+      images.two = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
+      await uploadImages(imageTwo, imageId, productFolder);
     }
     if (imageThree !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${imageId}.jpg`;
-      await uploadImages(imageThree, imageId);
+      images.three = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
+      await uploadImages(imageThree, imageId, productFolder);
     }
     if (table !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.table = `https://delmare.storage.iran.liara.space/${imageId}.jpg`;
-      await uploadImages(table, imageId);
+      images.table = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
+      await uploadImages(table, imageId, productFolder);
     }
 
     // upload product data into db
@@ -139,9 +141,9 @@ function Upload() {
   };
 
   // upload images into s3 bucket
-  const uploadImages = async (image, imageId) => {
+  const uploadImages = async (image, imageId, productFolder) => {
     const file = image;
-    const res = await fetch(`/api/image?file=${imageId}.jpg`);
+    const res = await fetch(`/api/image?file=${productFolder}/${imageId}.jpg`);
     const { url, fields } = await res.json();
 
     const formData = new FormData();
@@ -373,8 +375,10 @@ function Upload() {
         </div>
         {mainImage !== "" && (
           <Image
+            className={classes.image}
             width={50}
             height={70}
+            objectFit="cover"
             src={URL.createObjectURL(mainImage)}
             alt="mainImage"
           />
@@ -393,8 +397,10 @@ function Upload() {
         </div>
         {imageOne !== "" && (
           <Image
+            className={classes.image}
             width={50}
             height={70}
+            objectFit="cover"
             src={URL.createObjectURL(imageOne)}
             alt="image"
           />
@@ -413,8 +419,10 @@ function Upload() {
         </div>
         {imageTwo !== "" && (
           <Image
+            className={classes.image}
             width={50}
             height={70}
+            objectFit="cover"
             src={URL.createObjectURL(imageTwo)}
             alt="image"
           />
@@ -433,8 +441,10 @@ function Upload() {
         </div>
         {imageThree !== "" && (
           <Image
+            className={classes.image}
             width={50}
             height={70}
+            objectFit="cover"
             src={URL.createObjectURL(imageThree)}
             alt="image"
           />
@@ -455,6 +465,7 @@ function Upload() {
           <Image
             width={150}
             height={70}
+            objectFit="cover"
             src={URL.createObjectURL(table)}
             alt="image"
           />

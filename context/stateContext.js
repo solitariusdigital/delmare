@@ -1,5 +1,4 @@
 import { useState, createContext } from "react";
-
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
@@ -36,7 +35,6 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
-
   // application context
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);

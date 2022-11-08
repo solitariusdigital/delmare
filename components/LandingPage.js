@@ -4,15 +4,23 @@ import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import imageOne from "../assets/one.jpg";
-import imageTwo from "../assets/two.jpg";
-import imageThree from "../assets/three.jpg";
 
 function LandingPage() {
-  const [count, setCount] = useState(0);
-  const imagesArray = [imageOne, imageTwo, imageThree];
-  const image = imagesArray[count % imagesArray.length];
   const { bar, setBar } = useContext(StateContext);
+  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
+  const [count, setCount] = useState(0);
+  const imagesArray = [
+    `${sourceLink}one.jpg`,
+    `${sourceLink}two.jpg`,
+    `${sourceLink}three.jpg`,
+    `${sourceLink}four.jpg`,
+    `${sourceLink}five.jpg`,
+    `${sourceLink}six.jpg`,
+    `${sourceLink}seven.jpg`,
+    `${sourceLink}eight.jpg`,
+  ];
+
+  const image = imagesArray[count % imagesArray.length];
 
   useEffect(() => {
     setBar(false);
@@ -41,7 +49,8 @@ function LandingPage() {
         alt="image"
         layout="fill"
         objectFit="cover"
-        priority
+        priority={true}
+        loading="eager"
       />
       <div className={classes.message}>
         <p>

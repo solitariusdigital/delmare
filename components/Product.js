@@ -20,11 +20,6 @@ function Product() {
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({
-    id: null,
-    image: null,
-    items: null,
-  });
 
   // item image variables
   const [mainItem, setMainItem] = useState(selectedProduct.images.main);
@@ -39,10 +34,9 @@ function Product() {
   const [sizeGuide, setSizeGuide] = useState(false);
   const [shipmentMethod, setShipmentMethod] = useState(false);
   const [returnPolicy, setReturnPolicy] = useState(false);
-  // item options
+  // product options
   const [colors, setColors] = useState([]);
   const [productSizes, setProductSizes] = useState(selectedProduct.size);
-
   // customer selections
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -141,13 +135,6 @@ function Product() {
         Object.keys(productSizes).forEach((size, index) => {
           if (i === index) {
             productSizes[size].selected = true;
-          } else {
-            productSizes[size].selected = false;
-          }
-        });
-
-        for (const [size, value] of Object.entries(productSizes)) {
-          if (productSizes[size].selected) {
             for (const [color, count] of Object.entries(
               productSizes[size].colors
             )) {
@@ -157,40 +144,36 @@ function Product() {
                 selected: false,
               });
             }
+          } else {
+            productSizes[size].selected = false;
           }
-        }
+        });
     }
   };
 
   const addToCart = () => {
     if (selectedColor === "" || selectedSize === "") {
       setAlert("رنگ یا اندازه را انتخاب کنید");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
-      return;
     } else {
-      clearDetails();
       setAlert("آیتم به سبد خرید اضافه شد");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      setShoppingCart([
+        ...shoppingCart,
+        {
+          id: selectedProduct.id,
+          title: selectedProduct.title,
+          size: selectedSize,
+          color: selectedColor,
+          price: selectedProduct.price,
+          image: selectedProduct.images.main,
+        },
+      ]);
+      clearDetails();
+      setSelectedColor("");
+      setSelectedSize("");
     }
-
-    setShoppingCart([
-      ...shoppingCart,
-      {
-        id: selectedProduct.id,
-        title: selectedProduct.title,
-        size: selectedSize,
-        color: selectedColor,
-        price: selectedProduct.price,
-        shipping: "",
-      },
-    ]);
-
-    setSelectedColor("");
-    setSelectedSize("");
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   const favourProduct = () => {};
@@ -218,6 +201,7 @@ function Product() {
               onClick={() => {
                 setDisplayDetails(true);
               }}
+              priority={true}
             />
             <div className={classes.banner}>
               <div className={classes.social}>
@@ -280,6 +264,7 @@ function Product() {
                 alt="image"
                 layout="fill"
                 objectFit="cover"
+                priority={true}
               />
             </div>
             <div className={classes.subItemDetail}>
@@ -296,6 +281,7 @@ function Product() {
                   width={100}
                   height={115}
                   objectFit="cover"
+                  priority={true}
                 />
               </div>
               <div
@@ -311,6 +297,7 @@ function Product() {
                   width={100}
                   height={115}
                   objectFit="cover"
+                  priority={true}
                 />
               </div>
               <div
@@ -326,6 +313,7 @@ function Product() {
                   width={100}
                   height={115}
                   objectFit="cover"
+                  priority={true}
                 />
               </div>
             </div>
@@ -398,6 +386,7 @@ function Product() {
                     alt="image"
                     layout="fill"
                     objectFit="contain"
+                    priority={true}
                   />
                 </div>
               )}

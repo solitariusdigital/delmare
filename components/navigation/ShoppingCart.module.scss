@@ -87,6 +87,7 @@
 
         .image {
           @include mixins.border-radius();
+          object-position: 50% 0%;
         }
 
         .information {
@@ -117,9 +118,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 33px;
+            height: 33px;
             border-radius: 50%;
+            font-size: config.$tiny-font;
           }
 
           .size {
