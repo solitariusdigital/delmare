@@ -6,6 +6,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collections.module.scss";
 import Image from "next/image";
+import { getProductApi, updateProductApi } from "../../services/api";
 
 function New() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
@@ -22,19 +23,17 @@ function New() {
   //   setNewCollection([...newCollection]);
   // };
 
-  const selectProduct = (product) => {
+  const selectProduct = async (product) => {
+    // on each click update views count
+    const getData = await getProductApi(product["_id"]);
+    let updateData = {
+      ...getData,
+      views: product.views + 1,
+    };
+    let data = await updateProductApi(updateData);
+    setSelectedProduct(data);
+    console.log(productsCollection);
     setDisplayProduct(true);
-    setSelectedProduct({
-      id: product["_id"],
-      description: product.description,
-      images: product.images,
-      like: product.likes,
-      price: product.price,
-      size: product.size,
-      title: product.title,
-      views: product.views,
-      favoured: true,
-    });
   };
 
   return (

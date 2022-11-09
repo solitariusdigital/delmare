@@ -5,7 +5,7 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import classes from "./Account.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Router from "next/router";
-import { updateUserApi } from "../../services/user";
+import { updateUserApi } from "../../services/api";
 
 export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);

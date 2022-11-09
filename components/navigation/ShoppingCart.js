@@ -6,9 +6,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-
-// import item from "../../assets/mainItem.jpg";
-import { updateUserApi } from "../../services/user";
+import { updateUserApi } from "../../services/api";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);

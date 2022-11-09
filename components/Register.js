@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
-import { createUserApi } from "../services/user";
+import { createUserApi } from "../services/api";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);

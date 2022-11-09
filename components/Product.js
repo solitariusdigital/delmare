@@ -198,9 +198,6 @@ function Product() {
               alt="image"
               layout="fill"
               objectFit="cover"
-              onClick={() => {
-                setDisplayDetails(true);
-              }}
               priority={true}
             />
             <div className={classes.banner}>

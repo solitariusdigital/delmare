@@ -19,3 +19,24 @@ export const createUserApi = async (data) => {
   });
   return await response.json();
 };
+
+export const getProductApi = async (id) => {
+  const response = await fetch(`/api/product?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+export const updateProductApi = async (data) => {
+  const response = await fetch("/api/product", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
