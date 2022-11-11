@@ -22,10 +22,14 @@ export default async function userHandler(req, res) {
       }
     case "PUT":
       try {
-        const updateUser = await User.findByIdAndUpdate(body.id, body, {
-          new: true,
-          runValidators: true,
-        });
+        const updateUser = await User.findByIdAndUpdate(
+          body.id || body["_id"],
+          body,
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
         if (!updateUser) {
           return res.status(400).json({ msg: err.message });
         }

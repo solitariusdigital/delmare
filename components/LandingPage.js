@@ -19,8 +19,9 @@ function LandingPage() {
     `${sourceLink}seven.jpg`,
     `${sourceLink}eight.jpg`,
   ];
-
-  const image = imagesArray[count % imagesArray.length];
+  const image = imagesArray.sort(() => Math.random() - 0.5)[
+    count % imagesArray.length
+  ];
 
   useEffect(() => {
     setBar(false);

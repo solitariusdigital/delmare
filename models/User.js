@@ -27,6 +27,7 @@ const UserSchema = new Schema(
       required: false,
       maxlength: 20,
     },
+    favourites: [String],
   },
   { timestamps: true }
 );

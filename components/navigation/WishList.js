@@ -19,7 +19,7 @@ export default function WishList() {
 
   const [wishList, setWishList] = useState([
     {
-      imageSrc: `${sourceLink}three.jpg`,
+      imageSrc: `${sourceLink}one.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -42,10 +42,64 @@ export default function WishList() {
       ],
     },
     {
-      imageSrc: `${sourceLink}four.jpg`,
+      imageSrc: `${sourceLink}two.jpg`,
       like: 122,
       views: 578,
       favoured: false,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
+    {
+      imageSrc: `${sourceLink}three.jpg`,
+      like: 122,
+      views: 578,
+      favoured: true,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
+    {
+      imageSrc: `${sourceLink}four.jpg`,
+      like: 122,
+      views: 578,
+      favoured: true,
+      items: [
+        {
+          id: "0000",
+          title: "شلوار",
+          price: 550000,
+        },
+        {
+          id: "0000",
+          title: "شال",
+          price: 350000,
+        },
+      ],
+    },
+    {
+      imageSrc: `${sourceLink}five.jpg`,
+      like: 122,
+      views: 578,
+      favoured: true,
       items: [
         {
           id: "0000",
@@ -97,42 +151,6 @@ export default function WishList() {
     },
     {
       imageSrc: `${sourceLink}eight.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}two.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}five.jpg`,
       like: 122,
       views: 578,
       favoured: true,
@@ -205,7 +223,6 @@ export default function WishList() {
                     <VisibilityIcon className="icon" />
                   </div>
                   <div className="social">
-                    <p>{product.like}</p>
                     <div>
                       {product.favoured ? (
                         <FavoriteIcon

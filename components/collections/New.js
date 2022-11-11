@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { StateContext } from "../../context/stateContext";
 import Product from "../Product";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -6,34 +6,58 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collections.module.scss";
 import Image from "next/image";
-import { getProductApi, updateProductApi } from "../../services/api";
+import {
+  getProductApi,
+  updateProductApi,
+  updateUserApi,
+} from "../../services/api";
 
 function New() {
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const [like, setLike] = useState(false);
 
-  // const favourProduct = (index) => {
-  //   newCollection.map((product, i) => {
-  //     if (i === index) {
-  //       product.favoured = !product.favoured;
-  //     }
-  //   });
-  //   setNewCollection([...newCollection]);
-  // };
+  const favourProduct = async (product) => {
+    if (currentUser) {
+      if (currentUser.favourites.includes(product["_id"])) {
+        currentUser.favourites.splice(
+          currentUser.favourites.indexOf(product["_id"]),
+          1
+        );
+        setLike(false);
+      } else {
+        currentUser.favourites.push(product["_id"]);
+        setLike(true);
+      }
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      await updateUserApi(currentUser);
+    }
+  };
+
+  useEffect(() => {
+    setDisplayProduct(false);
+  }, [setDisplayProduct]);
 
   const selectProduct = async (product) => {
+    setSelectedProduct(product);
+    setDisplayProduct(true);
+
     // on each click update views count
     const getData = await getProductApi(product["_id"]);
     let updateData = {
       ...getData,
       views: product.views + 1,
     };
-    let data = await updateProductApi(updateData);
-    setSelectedProduct(data);
-    console.log(productsCollection);
-    setDisplayProduct(true);
+    await updateProductApi(updateData);
+  };
+
+  const checFavourites = (product) => {
+    if (currentUser) {
+      return currentUser.favourites.includes(product["_id"]);
+    }
   };
 
   return (
@@ -47,20 +71,19 @@ function New() {
                 <VisibilityIcon className="icon" />
               </div>
               <div className="social">
-                <p>{product.likes}</p>
-                {/* <div>
-                  {product.favoured ? (
+                <div>
+                  {checFavourites(product) ? (
                     <FavoriteIcon
                       className="iconRed"
-                      onClick={() => favourProduct(index)}
+                      onClick={() => favourProduct(product)}
                     />
                   ) : (
                     <FavoriteBorderIcon
                       className="icon"
-                      onClick={() => favourProduct(index)}
+                      onClick={() => favourProduct(product)}
                     />
                   )}
-                </div> */}
+                </div>
               </div>
             </div>
             <Image
@@ -74,7 +97,7 @@ function New() {
             />
           </div>
         ))}
-      {displayProduct && <Product />}
+      {displayProduct && <Product favourite={like} />}
     </div>
   );
 }

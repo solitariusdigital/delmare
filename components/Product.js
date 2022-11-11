@@ -11,12 +11,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { convertNumber } from "../services/utility";
+import { updateUserApi } from "../services/api";
 
-function Product() {
+function Product({ favourite }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -40,6 +42,7 @@ function Product() {
   // customer selections
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [like, setLike] = useState(favourite);
 
   useEffect(() => {
     setBar(false);
@@ -131,6 +134,7 @@ function Product() {
         break;
       case "size":
         colors.length = 0;
+        setSelectedColor("");
         setSelectedSize(type);
         Object.keys(productSizes).forEach((size, index) => {
           if (i === index) {
@@ -176,7 +180,22 @@ function Product() {
     }, 3000);
   };
 
-  const favourProduct = () => {};
+  const favourProduct = async (product) => {
+    if (currentUser) {
+      if (currentUser.favourites.includes(product["_id"])) {
+        currentUser.favourites.splice(
+          currentUser.favourites.indexOf(product["_id"]),
+          1
+        );
+        setLike(false);
+      } else {
+        currentUser.favourites.push(product["_id"]);
+        setLike(true);
+      }
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      await updateUserApi(currentUser);
+    }
+  };
 
   return (
     <Fragment>
@@ -202,21 +221,20 @@ function Product() {
             />
             <div className={classes.banner}>
               <div className={classes.social}>
-                <p>{selectedProduct.views}</p>
                 <VisibilityIcon className={classes.icon} />
+                <p>{selectedProduct.views}</p>
               </div>
               <div className={classes.social}>
-                <p>{selectedProduct.like}</p>
                 <div>
-                  {selectedProduct.favoured ? (
+                  {like ? (
                     <FavoriteIcon
                       className={classes.iconRed}
-                      onClick={() => favourProduct()}
+                      onClick={() => favourProduct(selectedProduct)}
                     />
                   ) : (
                     <FavoriteBorderIcon
                       className={classes.icon}
-                      onClick={() => favourProduct()}
+                      onClick={() => favourProduct(selectedProduct)}
                     />
                   )}
                 </div>

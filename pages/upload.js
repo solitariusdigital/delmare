@@ -119,8 +119,7 @@ function Upload() {
         price: price.trim(),
         images: images,
         size: size,
-        views: 0,
-        likes: 0,
+        views: 10,
       }),
       headers: {
         "Content-Type": "application/json",

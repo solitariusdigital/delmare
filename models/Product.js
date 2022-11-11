@@ -29,7 +29,6 @@ const ProductSchema = new Schema(
     },
     price: Number,
     views: Number,
-    likes: Number,
   },
   { timestamps: true }
 );
