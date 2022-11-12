@@ -167,7 +167,7 @@ function Product({ favourite }) {
       setShoppingCart([
         ...shoppingCart,
         {
-          id: selectedProduct.id,
+          _id: selectedProduct["_id"],
           title: selectedProduct.title,
           size: selectedSize,
           color: selectedColor,

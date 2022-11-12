@@ -83,7 +83,7 @@ export default function ShoppingCart() {
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      id: currentUser["_id"],
+      _id: currentUser["_id"],
     };
     let data = await updateUserApi(user);
     seCurrentUser(data);
