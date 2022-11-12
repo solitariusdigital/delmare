@@ -40,3 +40,14 @@ export const updateProductApi = async (data) => {
   });
   return await response.json();
 };
+
+export const createInvoiceApi = async (data) => {
+  const response = await fetch("/api/invoice", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

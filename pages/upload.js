@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/stateContext";
 import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
-import classes from "./upload.module.scss";
+import classes from "./page.module.scss";
 import { tokenGenerator } from "../services/utility";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 
-function Upload() {
+export default function Upload() {
   const sizeInitialState = {
     XS: { colors: {} },
     S: { colors: {} },
@@ -508,5 +508,3 @@ export async function getServerSideProps(context) {
     };
   }
 }
-
-export default Upload;

@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { updateUserApi } from "../../services/api";
+import { createInvoiceApi, updateUserApi } from "../../services/api";
 import emptyCart from "../../assets/emptyCart.png";
 
 export default function ShoppingCart() {
@@ -60,6 +60,7 @@ export default function ShoppingCart() {
       setAlert("کد پستی صحیح ده رقمی وارد کنید");
     } else {
       await updateUser();
+      await createInvoice();
     }
   };
 
@@ -89,6 +90,25 @@ export default function ShoppingCart() {
     seCurrentUser(data);
     localStorage.setItem("currentUser", JSON.stringify(data));
     setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
+  };
+
+  const createInvoice = () => {
+    shoppingCart.forEach(async (product) => {
+      const invoice = {
+        name: name.trim(),
+        phone: phone.trim(),
+        address: address.trim(),
+        post: post.trim(),
+        productId: product["_id"],
+        odinId: "random id",
+        title: product.title,
+        price: product.price,
+        color: product.color,
+        size: product.size,
+      };
+      let data = await createInvoiceApi(invoice);
+      console.log(data, "xxx");
+    });
   };
 
   return (

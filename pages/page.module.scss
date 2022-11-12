@@ -54,3 +54,35 @@
   height: 10px;
   margin-bottom: 20px;
 }
+
+.invoice {
+  background: config.$white;
+  box-shadow: config.$card-shadow;
+  margin: 10px;
+  padding: 10px;
+  @include mixins.border-radius();
+  user-select: text;
+
+  .row {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0px;
+    padding: 5px 0px;
+    border-bottom: 1px solid config.$cream;
+
+    .title {
+      color: config.$grey;
+      font-size: config.$tiny-font;
+      margin-left: 10px;
+    }
+
+    .color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+  }
+}

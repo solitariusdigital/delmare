@@ -9,8 +9,15 @@ export default async function productHandler(req, res) {
   switch (method) {
     case "POST":
       try {
-        const newProduct = await Product.create(req.body);
+        const newProduct = await Product.create(body);
         return res.status(200).json(newProduct);
+      } catch (err) {
+        return res.status(400).json({ msg: err.message });
+      }
+    case "GET":
+      try {
+        const product = await Product.findById(req.query.id);
+        return res.status(200).json(product);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
@@ -28,13 +35,6 @@ export default async function productHandler(req, res) {
           return res.status(400).json({ msg: err.message });
         }
         return res.status(200).json(updateProduct);
-      } catch (err) {
-        return res.status(400).json({ msg: err.message });
-      }
-    case "GET":
-      try {
-        const product = await Product.findById(req.query.id);
-        return res.status(200).json(product);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
