@@ -164,6 +164,13 @@ export default function ShoppingCart() {
                   objectFit="contain"
                   layout="fill"
                 />
+                <a
+                  href="https://www.vecteezy.com/free-png/shopping-cart"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Shopping Cart PNGs by Vecteezy
+                </a>
               </div>
             )}
           </div>

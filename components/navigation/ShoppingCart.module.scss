@@ -134,6 +134,17 @@
 
   .emptyCart {
     opacity: 0.5;
+    height: 100%;
+    position: relative;
+
+    a {
+      position: absolute;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: config.$grey;
+    }
   }
 
   .details {
