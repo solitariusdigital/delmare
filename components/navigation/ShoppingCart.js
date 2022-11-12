@@ -7,6 +7,7 @@ import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import { updateUserApi } from "../../services/api";
+import emptyCart from "../../assets/emptyCart.png";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -155,6 +156,16 @@ export default function ShoppingCart() {
                 </div>
               ))
               .reverse()}
+            {shoppingCart.length === 0 && (
+              <div className={classes.emptyCart}>
+                <Image
+                  src={emptyCart}
+                  alt="image"
+                  objectFit="contain"
+                  layout="fill"
+                />
+              </div>
+            )}
           </div>
         )}
 
