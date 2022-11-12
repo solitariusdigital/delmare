@@ -8,166 +8,22 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
 import Product from "../Product";
+import classes from "./WishList.module.scss";
+import { updateUserApi } from "../../services/api";
 
 export default function WishList() {
+  const { menue, setMenu } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
+  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { productsCollection, setProductsCollection } =
+    useContext(StateContext);
 
-  const [wishList, setWishList] = useState([
-    {
-      imageSrc: `${sourceLink}one.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-        {
-          id: "0000",
-          title: "شومیز",
-          price: 1550000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}two.jpg`,
-      like: 122,
-      views: 578,
-      favoured: false,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}three.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}four.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}five.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}six.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}seven.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-    {
-      imageSrc: `${sourceLink}eight.jpg`,
-      like: 122,
-      views: 578,
-      favoured: true,
-      items: [
-        {
-          id: "0000",
-          title: "شلوار",
-          price: 550000,
-        },
-        {
-          id: "0000",
-          title: "شال",
-          price: 350000,
-        },
-      ],
-    },
-  ]);
+  const [wishList, setWishList] = useState([]);
+  const [like, setLike] = useState(false);
 
   useEffect(() => {
     setSelectedProduct({});
@@ -175,25 +31,34 @@ export default function WishList() {
     setBar(true);
   }, [setSelectedProduct, setDisplayProduct, setBar]);
 
-  const favourProduct = (index) => {
-    wishList.map((product, i) => {
-      if (i === index) {
-        product.favoured = !product.favoured;
-      }
-    });
-    setWishList([...wishList]);
-  };
+  useEffect(() => {
+    setWishList(
+      productsCollection.filter((product) =>
+        currentUser.favourites.includes(product["_id"])
+      )
+    );
+  }, [productsCollection, currentUser]);
 
-  const selectProduct = (product) => {
-    setDisplayProduct(true);
-    setSelectedProduct({
-      id: product.id || "0000",
-      image: product.imageSrc,
-      items: product.items,
-      like: product.like,
-      views: product.views,
-      favoured: product.favoured,
-    });
+  const favourProduct = async (product) => {
+    if (currentUser) {
+      if (currentUser.favourites.includes(product["_id"])) {
+        currentUser.favourites.splice(
+          currentUser.favourites.indexOf(product["_id"]),
+          1
+        );
+        setLike(false);
+      } else {
+        currentUser.favourites.push(product["_id"]);
+        setLike(true);
+      }
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      await updateUserApi(currentUser);
+    }
+  };
+  const checFavourites = (product) => {
+    if (currentUser) {
+      return currentUser.favourites.includes(product["_id"]);
+    }
   };
 
   return (
@@ -224,24 +89,27 @@ export default function WishList() {
                   </div>
                   <div className="social">
                     <div>
-                      {product.favoured ? (
+                      {checFavourites(product) ? (
                         <FavoriteIcon
                           className="iconRed"
-                          onClick={() => favourProduct(index)}
+                          onClick={() => favourProduct(product)}
                         />
                       ) : (
                         <FavoriteBorderIcon
                           className="icon"
-                          onClick={() => favourProduct(index)}
+                          onClick={() => favourProduct(product)}
                         />
                       )}
                     </div>
                   </div>
                 </div>
                 <Image
-                  onClick={() => selectProduct(product)}
-                  className="image"
-                  src={product.imageSrc}
+                  onClick={() => {
+                    setDisplayProduct(true);
+                    setSelectedProduct(product);
+                  }}
+                  className={classes.image}
+                  src={product.images.main}
                   alt="image"
                   layout="fill"
                   objectFit="cover"
@@ -250,7 +118,7 @@ export default function WishList() {
                 />
               </div>
             ))}
-          {displayProduct && <Product />}
+          {displayProduct && <Product favourite={like} />}
         </div>
       </div>
     </div>

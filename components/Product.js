@@ -19,6 +19,9 @@ function Product({ favourite }) {
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { menue, setMenu } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -109,6 +112,7 @@ function Product({ favourite }) {
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
+    colors.length = 0;
   };
 
   const clearDetails = () => {
@@ -181,6 +185,12 @@ function Product({ favourite }) {
   };
 
   const favourProduct = async (product) => {
+    if (!userLogIn) {
+      setMenu(true);
+      setRegister(true);
+      return;
+    }
+
     if (currentUser) {
       if (currentUser.favourites.includes(product["_id"])) {
         currentUser.favourites.splice(
@@ -194,6 +204,11 @@ function Product({ favourite }) {
       }
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
+    }
+  };
+  const checFavourites = (product) => {
+    if (currentUser) {
+      return currentUser.favourites.includes(product["_id"]);
     }
   };
 
@@ -226,7 +241,7 @@ function Product({ favourite }) {
               </div>
               <div className={classes.social}>
                 <div>
-                  {like ? (
+                  {checFavourites(selectedProduct) ? (
                     <FavoriteIcon
                       className={classes.iconRed}
                       onClick={() => favourProduct(selectedProduct)}
@@ -335,38 +350,46 @@ function Product({ favourite }) {
           </div>
 
           <div className={classes.details}>
-            <div className={classes.box}>
-              {Object.keys(productSizes).map((size, index) => (
-                <div
-                  key={index}
-                  className={
-                    productSizes[size].selected
-                      ? classes.selectedSize
-                      : classes.size
-                  }
-                  onClick={() => {
-                    selectDetails("size", productSizes[size].type, index);
-                  }}
-                >
-                  <p>{size}</p>
-                </div>
-              ))}
+            <div className={classes.section}>
+              <div className={classes.box}>
+                {Object.keys(productSizes).map((size, index) => (
+                  <div
+                    key={index}
+                    className={
+                      productSizes[size].selected
+                        ? classes.selectedSize
+                        : classes.size
+                    }
+                    onClick={() => {
+                      selectDetails("size", productSizes[size].type, index);
+                    }}
+                  >
+                    <p>{size}</p>
+                  </div>
+                ))}
+              </div>
+              <p className={classes.title}>اندازه</p>
             </div>
-            <div className={classes.box}>
-              {colors.map((color, index) => (
-                <div
-                  key={index}
-                  className={
-                    color.selected ? classes.selectedColor : classes.color
-                  }
-                  style={{ backgroundColor: `#${color.type}` }}
-                  onClick={() => {
-                    selectDetails("color", color.type, index);
-                  }}
-                >
-                  <p>{color.count}</p>
-                </div>
-              ))}
+            <div className={classes.section}>
+              <div className={classes.box}>
+                {colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className={
+                      color.selected ? classes.selectedColor : classes.color
+                    }
+                    style={{ backgroundColor: `#${color.type}` }}
+                    onClick={() => {
+                      selectDetails("color", color.type, index);
+                    }}
+                  >
+                    <p>{color.count}</p>
+                  </div>
+                ))}
+              </div>
+              {colors.length > 0 && (
+                <p className={classes.title}>رنگ و موجودی</p>
+              )}
             </div>
           </div>
 

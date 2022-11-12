@@ -17,8 +17,8 @@ export default function BurgerMenu() {
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
 
-  const [register, setRegister] = useState(false);
   const [alert, setAlert] = useState("");
 
   const navigation = [
@@ -75,7 +75,13 @@ export default function BurgerMenu() {
     <div className={classes.slider}>
       <div className={classes.menu}>
         <div className={classes.cross}>
-          <CloseIcon className="icon" onClick={() => setMenu(false)} />
+          <CloseIcon
+            className="icon"
+            onClick={() => {
+              setMenu(false);
+              setRegister(false);
+            }}
+          />
           {currentUser && (
             <div
               className={classes.user}

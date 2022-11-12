@@ -14,6 +14,7 @@ export default function ShoppingCart() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -67,6 +68,7 @@ export default function ShoppingCart() {
     } else {
       setToggleContainer("");
       setMenu(true);
+      setRegister(true);
     }
     setTimeout(() => {
       setAlert("");

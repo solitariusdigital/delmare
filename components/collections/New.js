@@ -13,29 +13,15 @@ import {
 } from "../../services/api";
 
 function New() {
+  const { menue, setMenu } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
   const [like, setLike] = useState(false);
-
-  const favourProduct = async (product) => {
-    if (currentUser) {
-      if (currentUser.favourites.includes(product["_id"])) {
-        currentUser.favourites.splice(
-          currentUser.favourites.indexOf(product["_id"]),
-          1
-        );
-        setLike(false);
-      } else {
-        currentUser.favourites.push(product["_id"]);
-        setLike(true);
-      }
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      await updateUserApi(currentUser);
-    }
-  };
+  const { register, setRegister } = useContext(StateContext);
 
   useEffect(() => {
     setDisplayProduct(false);
@@ -54,6 +40,28 @@ function New() {
     await updateProductApi(updateData);
   };
 
+  const favourProduct = async (product) => {
+    if (!userLogIn) {
+      setMenu(true);
+      setRegister(true);
+      return;
+    }
+
+    if (currentUser) {
+      if (currentUser.favourites.includes(product["_id"])) {
+        currentUser.favourites.splice(
+          currentUser.favourites.indexOf(product["_id"]),
+          1
+        );
+        setLike(false);
+      } else {
+        currentUser.favourites.push(product["_id"]);
+        setLike(true);
+      }
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      await updateUserApi(currentUser);
+    }
+  };
   const checFavourites = (product) => {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);

@@ -26,6 +26,7 @@ function Upload() {
   };
 
   const { container, setContainer } = useContext(StateContext);
+  const { currentUser, seCurrentUser } = useContext(StateContext);
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -50,7 +51,16 @@ function Upload() {
   const [images, setImages] = useState(imageInitialState);
 
   useEffect(() => {
-    setContainer(false);
+    if (
+      !JSON.parse(localStorage.getItem("currentUser")) ||
+      JSON.parse(localStorage.getItem("currentUser"))["permission"] ===
+        "customer"
+    ) {
+      Router.push("/");
+      return;
+    } else {
+      setContainer(false);
+    }
   }, [setContainer]);
 
   const transformDataSize = (value, type) => {

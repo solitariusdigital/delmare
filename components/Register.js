@@ -15,6 +15,7 @@ function Register() {
   const { isLoading, setIsLoading } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -99,6 +100,7 @@ function Register() {
           seCurrentUser(user);
           localStorage.setItem("currentUser", JSON.stringify(user));
           setMenu(false);
+          setRegister(false);
         }
       });
       // if user does not exist create a new one
@@ -129,6 +131,7 @@ function Register() {
       setAlert("خطا در برقراری ارتباط");
     } else {
       setMenu(false);
+      setRegister(false);
       setUserLogin(true);
       seCurrentUser(data);
       localStorage.setItem("currentUser", JSON.stringify(data));
