@@ -22,13 +22,18 @@ const InvoiceSchema = new Schema(
       required: true,
       maxlength: 20,
     },
+    userId: {
+      type: String,
+      required: true,
+      maxlength: 30,
+    },
     // product info
     productId: {
       type: String,
       required: true,
       maxlength: 30,
     },
-    odinId: {
+    delmareId: {
       type: String,
       required: true,
       maxlength: 30,
@@ -38,6 +43,7 @@ const InvoiceSchema = new Schema(
       required: true,
       maxlength: 20,
     },
+    image: String,
     price: Number,
     color: String,
     size: String,

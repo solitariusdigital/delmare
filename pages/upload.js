@@ -47,6 +47,8 @@ export default function Upload() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [delmareId, setDelmareId] = useState("");
+
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
 
@@ -75,7 +77,7 @@ export default function Upload() {
   };
 
   const handleUpload = async () => {
-    if (!title && !description && !price) {
+    if (!title && !description && !price && !delmareId) {
       setAlert("Fill in all fields");
       setTimeout(() => {
         setAlert("");
@@ -92,32 +94,32 @@ export default function Upload() {
     transformDataSize(XL, "XL");
     transformDataSize(XXL, "XXL");
 
-    let productFolder = `product${tokenGenerator()}`;
+    let delmareIdFolder = `${delmareId}${tokenGenerator()}`;
 
     if (mainImage !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
-      await uploadImages(mainImage, imageId, productFolder);
+      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(mainImage, imageId, delmareIdFolder);
     }
     if (imageOne !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
-      await uploadImages(imageOne, imageId, productFolder);
+      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageOne, imageId, delmareIdFolder);
     }
     if (imageTwo !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
-      await uploadImages(imageTwo, imageId, productFolder);
+      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageTwo, imageId, delmareIdFolder);
     }
     if (imageThree !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
-      await uploadImages(imageThree, imageId, productFolder);
+      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageThree, imageId, delmareIdFolder);
     }
     if (table !== "") {
       let imageId = `img${tokenGenerator()}`;
-      images.table = `https://delmare.storage.iran.liara.space/${productFolder}/${imageId}.jpg`;
-      await uploadImages(table, imageId, productFolder);
+      images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(table, imageId, delmareIdFolder);
     }
 
     // upload product data into db
@@ -127,6 +129,7 @@ export default function Upload() {
         title: title.trim(),
         description: description.trim(),
         price: price.trim(),
+        delmareId: delmareIdFolder,
         images: images,
         size: size,
         views: 10,
@@ -137,22 +140,22 @@ export default function Upload() {
     });
 
     if (upload.ok) {
-      setAlert("Data saved successfully");
+      setAlert(delmareIdFolder);
     } else {
       setAlert("Data save failed, try again");
     }
 
     setTimeout(() => {
-      setAlert("");
-      setUploadClicked(false);
       Router.reload(window.location.pathname);
-    }, 3000);
+    }, 30000);
   };
 
   // upload images into s3 bucket
-  const uploadImages = async (image, imageId, productFolder) => {
+  const uploadImages = async (image, imageId, delmareIdFolder) => {
     const file = image;
-    const res = await fetch(`/api/image?file=${productFolder}/${imageId}.jpg`);
+    const res = await fetch(
+      `/api/image?file=${delmareIdFolder}/${imageId}.jpg`
+    );
     const { url, fields } = await res.json();
 
     const formData = new FormData();
@@ -212,6 +215,24 @@ export default function Upload() {
           name="price"
           onChange={(e) => setPrice(e.target.value)}
           value={price}
+          autoComplete="off"
+        />
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <p className={classes.label}>Delmare Id</p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setDelmareId("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          type="text"
+          id="delmareId"
+          name="delmareId"
+          onChange={(e) => setDelmareId(e.target.value)}
+          value={delmareId}
           autoComplete="off"
         />
       </div>

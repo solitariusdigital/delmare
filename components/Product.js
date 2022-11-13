@@ -168,6 +168,7 @@ function Product({ favourite }) {
         ...shoppingCart,
         {
           _id: selectedProduct["_id"],
+          delmareId: selectedProduct.delmareId,
           title: selectedProduct.title,
           size: selectedSize,
           color: selectedColor,

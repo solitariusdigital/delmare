@@ -7,7 +7,7 @@ import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import { createInvoiceApi, updateUserApi } from "../../services/api";
-import emptyCart from "../../assets/emptyCart.png";
+import graphic from "../../assets/shoppingCart.png";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -80,12 +80,13 @@ export default function ShoppingCart() {
   // update user info into db/state/localstorage
   const updateUser = async () => {
     const user = {
+      _id: currentUser["_id"],
       name: name.trim(),
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      _id: currentUser["_id"],
     };
+
     let data = await updateUserApi(user);
     seCurrentUser(data);
     localStorage.setItem("currentUser", JSON.stringify(data));
@@ -99,15 +100,16 @@ export default function ShoppingCart() {
         phone: phone.trim(),
         address: address.trim(),
         post: post.trim(),
+        userId: currentUser["_id"],
         productId: product["_id"],
-        odinId: "random id",
+        delmareId: product.delmareId,
         title: product.title,
         price: product.price,
         color: product.color,
         size: product.size,
+        image: product.image,
       };
-      let data = await createInvoiceApi(invoice);
-      console.log(data, "xxx");
+      await createInvoiceApi(invoice);
     });
   };
 
@@ -137,7 +139,6 @@ export default function ShoppingCart() {
             />
           )}
         </div>
-
         {!checkout && (
           // cart list
           <div className={classes.items}>
@@ -177,9 +178,9 @@ export default function ShoppingCart() {
               ))
               .reverse()}
             {shoppingCart.length === 0 && (
-              <div className={classes.emptyCart}>
+              <div className={classes.graphic}>
                 <Image
-                  src={emptyCart}
+                  src={graphic}
                   alt="image"
                   objectFit="contain"
                   layout="fill"
@@ -189,13 +190,12 @@ export default function ShoppingCart() {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Shopping Cart PNGs by Vecteezy
+                  Graphic by Vecteezy
                 </a>
               </div>
             )}
           </div>
         )}
-
         {checkout && (
           // checkout from
           <div>
@@ -303,7 +303,6 @@ export default function ShoppingCart() {
             )}
           </div>
         )}
-
         <div className={classes.details}>
           <div className={classes.detail}>
             <p className={classes.value}>{shoppingCart.length}</p>
@@ -313,7 +312,6 @@ export default function ShoppingCart() {
             <p className={classes.value}>{calculateTotal()} T</p>
             <p>جمع سبد خرید</p>
           </div>
-
           {!checkout ? (
             <button
               className={`mainButton ${classes.button}`}

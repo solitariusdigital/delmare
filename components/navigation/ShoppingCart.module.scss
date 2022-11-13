@@ -132,7 +132,61 @@
     }
   }
 
-  .emptyCart {
+  .orders {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px 10px;
+    height: calc(100% - 50px);
+    margin-top: 50px;
+    overflow-y: scroll;
+
+    .order {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      background: config.$white;
+      box-shadow: config.$card-shadow;
+      margin: 10px 0px;
+      padding: 10px;
+      @include mixins.border-radius();
+
+      .rows {
+        width: 100%;
+        margin-left: 20px;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5px 0px;
+        padding: 5px 0px;
+        border-bottom: 1px solid config.$cream;
+
+        p {
+          font-size: config.$small-font;
+        }
+
+        .title {
+          color: config.$grey;
+          font-size: config.$tiny-font;
+          margin-left: 10px;
+        }
+
+        .color {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .graphic {
     opacity: 0.5;
     height: 100%;
     position: relative;

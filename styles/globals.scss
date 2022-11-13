@@ -101,7 +101,7 @@ a {
   .product {
     position: relative;
     width: 100%;
-    height: 230px;
+    height: 250px;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
 

@@ -10,6 +10,7 @@ import Image from "next/image";
 import Product from "../Product";
 import classes from "./WishList.module.scss";
 import { updateUserApi } from "../../services/api";
+import graphic from "../../assets/wishlist.png";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -77,7 +78,6 @@ export default function WishList() {
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
         </div>
-
         <div className="collection-grid slide-menu">
           {!displayProduct &&
             wishList.map((product, index) => (
@@ -118,6 +118,23 @@ export default function WishList() {
                 />
               </div>
             ))}
+          {wishList.length === 0 && (
+            <div className={classes.graphic}>
+              <Image
+                src={graphic}
+                alt="image"
+                objectFit="contain"
+                layout="fill"
+              />
+              <a
+                href="https://www.vecteezy.com/free-png/shopping-cart"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Graphic by Vecteezy
+              </a>
+            </div>
+          )}
           {displayProduct && <Product favourite={like} />}
         </div>
       </div>

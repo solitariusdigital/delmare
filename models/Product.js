@@ -2,6 +2,11 @@ import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema(
   {
+    delmareId: {
+      type: String,
+      required: true,
+      maxlength: 30,
+    },
     title: {
       type: String,
       required: true,
@@ -9,7 +14,7 @@ const ProductSchema = new Schema(
     },
     description: {
       type: String,
-      required: false,
+      required: true,
       maxlength: 250,
     },
     images: {

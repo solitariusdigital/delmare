@@ -59,7 +59,7 @@ export default function Invoice({ invoices }) {
           </div>
           <div className={classes.row}>
             <p className={classes.title}>کد آیتم</p>
-            <p>{invoice.odinId}</p>
+            <p>{invoice.delmareId}</p>
           </div>
           <div className={classes.row}>
             <p className={classes.title}>آیتم</p>

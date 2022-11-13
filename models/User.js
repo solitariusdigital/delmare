@@ -28,7 +28,6 @@ const UserSchema = new Schema(
       maxlength: 20,
     },
     favourites: [String],
-    purchases: [String],
   },
   { timestamps: true }
 );

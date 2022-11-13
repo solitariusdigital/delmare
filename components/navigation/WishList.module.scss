@@ -7,3 +7,19 @@
   object-position: 100% 0%;
   @include mixins.border-radius();
 }
+
+.graphic {
+  opacity: 0.5;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
+
+  a {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: config.$grey;
+  }
+}
