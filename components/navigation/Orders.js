@@ -17,7 +17,6 @@ export default function Orders() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getInvoiceApi();
-
       setOrders(
         data.filter((item, i) => {
           return item.userId === currentUser["_id"];

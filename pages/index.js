@@ -15,7 +15,6 @@ function HomePage({ users, products }) {
   useEffect(() => {
     setAppUsers(users);
     setProductsCollection(products);
-    console.log(products);
     setBar(false);
   }, [setBar, setAppUsers, users, setProductsCollection, products]);
 
