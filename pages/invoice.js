@@ -26,10 +26,7 @@ export default function Invoice({ invoices, deliveredInvoices }) {
   }, [setContainer]);
 
   const convertDate = (date) => {
-    return new Date(date).toLocaleString("en-AU", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
+    return new Date(date).toLocaleDateString("fa-IR");
   };
 
   const deliverInvoice = async (invoice) => {
@@ -136,6 +133,10 @@ export default function Invoice({ invoices, deliveredInvoices }) {
               <div className={classes.row}>
                 <p className={classes.title}>تاریخ خرید</p>
                 <p suppressHydrationWarning>{convertDate(invoice.createdAt)}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>تاریخ ارسال</p>
+                <p suppressHydrationWarning>{convertDate(invoice.updatedAt)}</p>
               </div>
               <div className={classes.row}>
                 <p className={classes.title}>نام مشتری</p>

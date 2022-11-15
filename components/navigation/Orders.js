@@ -27,10 +27,7 @@ export default function Orders() {
   }, [setOrders, currentUser]);
 
   const convertDate = (date) => {
-    return new Date(date).toLocaleString("en-AU", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
+    return new Date(date).toLocaleDateString("fa-IR");
   };
 
   return (

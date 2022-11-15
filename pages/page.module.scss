@@ -69,6 +69,10 @@
       background: config.$white;
       padding: 10px;
       @include mixins.border-radius();
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .navActive {
