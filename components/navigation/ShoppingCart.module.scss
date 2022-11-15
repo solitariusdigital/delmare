@@ -134,7 +134,6 @@
   .orders {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     padding: 0px 10px;
     height: calc(100% - 50px);
     margin-top: 50px;
@@ -143,8 +142,7 @@
     .order {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       position: relative;
       background: config.$white;
       box-shadow: config.$card-shadow;
@@ -162,7 +160,6 @@
         flex-direction: row-reverse;
         align-items: center;
         justify-content: space-between;
-        margin: 5px 0px;
         padding: 5px 0px;
         border-bottom: 1px solid config.$cream;
 
@@ -176,10 +173,19 @@
           margin-left: 10px;
         }
 
-        .color {
-          width: 20px;
-          height: 20px;
+        .color,
+        .size {
+          width: 25px;
+          height: 25px;
           border-radius: 50%;
+        }
+
+        .size {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid config.$black;
+          font-size: config.$tiny-font;
         }
       }
     }

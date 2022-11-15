@@ -50,7 +50,7 @@ export default function Orders() {
           {orders
             .map((order, index) => (
               <div key={index} className={ShoppingCart.order}>
-                <div className={ShoppingCart.image}>
+                <div>
                   <Image
                     src={order.image}
                     objectFit="contain"
@@ -58,6 +58,13 @@ export default function Orders() {
                     height={140}
                     alt="image"
                   />
+                  <div className={ShoppingCart.row}>
+                    <p className={ShoppingCart.size}>{order.size}</p>
+                    <div
+                      className={ShoppingCart.color}
+                      style={{ backgroundColor: `#${order.color}` }}
+                    ></div>
+                  </div>
                 </div>
                 <div className={ShoppingCart.rows}>
                   <div className={ShoppingCart.row}>
@@ -72,17 +79,7 @@ export default function Orders() {
                     <p className={ShoppingCart.title}>قیمت</p>
                     <p>{convertNumber(order.price)} T</p>
                   </div>
-                  <div className={ShoppingCart.row}>
-                    <p className={ShoppingCart.title}>رنگ</p>
-                    <div
-                      className={ShoppingCart.color}
-                      style={{ backgroundColor: `#${order.color}` }}
-                    ></div>
-                  </div>
-                  <div className={ShoppingCart.row}>
-                    <p className={ShoppingCart.title}>اندازه</p>
-                    <p>{order.size}</p>
-                  </div>
+
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>تاریخ خرید</p>
                     <p suppressHydrationWarning>
