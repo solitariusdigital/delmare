@@ -55,34 +55,66 @@
   margin-bottom: 20px;
 }
 
-.invoice {
-  background: config.$white;
-  box-shadow: config.$card-shadow;
-  margin: 10px;
+.invoiceContainer {
   padding: 10px;
-  @include mixins.border-radius();
-  user-select: text;
 
-  .row {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
+  .navigation {
     width: 100%;
-    margin: 5px 0px;
-    padding: 5px 0px;
-    border-bottom: 1px solid config.$cream;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-    .title {
-      color: config.$grey;
-      font-size: config.$tiny-font;
-      margin-left: 10px;
+    .nav,
+    .navActive {
+      background: config.$white;
+      padding: 10px;
+      @include mixins.border-radius();
     }
 
-    .color {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
+    .navActive {
+      background: config.$brand;
+    }
+  }
+
+  .info {
+    margin: 20px 0px;
+    font-size: config.$med-font;
+  }
+
+  .invoice {
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    margin: 10px 0px;
+    padding: 10px;
+    @include mixins.border-radius();
+    user-select: text;
+
+    .row {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 5px 0px;
+      padding: 5px 0px;
+      border-bottom: 1px solid config.$cream;
+
+      .title {
+        color: config.$grey;
+        font-size: config.$tiny-font;
+        margin-left: 10px;
+      }
+
+      .color {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+      }
+    }
+
+    .button {
+      @include mixins.button(config.$brand, config.$black, 100%);
+      margin-top: 20px;
     }
   }
 }

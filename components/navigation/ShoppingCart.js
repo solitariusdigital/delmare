@@ -23,6 +23,7 @@ export default function ShoppingCart() {
   const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
+  const [checkoutClicked, setCheckoutClicked] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -51,19 +52,6 @@ export default function ShoppingCart() {
     return convertNumber(total);
   };
 
-  const checkoutConfirmation = async () => {
-    if (!name || !phone || !address || !post) {
-      setAlert("همه اطلاعات را وارد کنید");
-    } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
-      setAlert("شماره موبایل اشتباه است");
-    } else if (post.length !== 10) {
-      setAlert("کد پستی صحیح ده رقمی وارد کنید");
-    } else {
-      await updateUser();
-      await createInvoice();
-    }
-  };
-
   const handlecheckout = async () => {
     if (userLogIn) {
       checkoutConfirmation();
@@ -75,6 +63,20 @@ export default function ShoppingCart() {
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+
+  const checkoutConfirmation = async () => {
+    if (!name || !phone || !address || !post) {
+      setAlert("همه اطلاعات را وارد کنید");
+    } else if (phone.length !== 11 || phone.slice(0, 2) !== "09") {
+      setAlert("شماره موبایل اشتباه است");
+    } else if (post.length !== 10) {
+      setAlert("کد پستی صحیح ده رقمی وارد کنید");
+    } else {
+      setCheckoutClicked(true);
+      await updateUser();
+      await createInvoice();
+    }
   };
 
   // update user info into db/state/localstorage
@@ -108,8 +110,13 @@ export default function ShoppingCart() {
         color: product.color,
         size: product.size,
         image: product.image,
+        delivered: false,
       };
       await createInvoiceApi(invoice);
+
+      setTimeout(() => {
+        setCheckoutClicked(false);
+      }, 3000);
     });
   };
 
@@ -323,7 +330,7 @@ export default function ShoppingCart() {
           ) : (
             <button
               className={`mainButton ${classes.button}`}
-              disabled={shoppingCart.length === 0}
+              disabled={checkoutClicked}
               onClick={() => handlecheckout()}
             >
               {userLogIn ? "پرداخت" : "ورود ​/ ثبت نام"}

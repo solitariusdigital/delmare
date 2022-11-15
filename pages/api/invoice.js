@@ -21,5 +21,22 @@ export default async function invoiceHandler(req, res) {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    case "PUT":
+      try {
+        const updateInvoice = await Invoice.findByIdAndUpdate(
+          body["_id"],
+          body,
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        if (!updateInvoice) {
+          return res.status(400).json({ msg: err.message });
+        }
+        return res.status(200).json(updateInvoice);
+      } catch (err) {
+        return res.status(400).json({ msg: err.message });
+      }
   }
 }

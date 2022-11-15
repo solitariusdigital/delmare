@@ -7,21 +7,8 @@ import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
-  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
   const [count, setCount] = useState(0);
-  const imagesArray = [
-    `${sourceLink}one.jpg`,
-    `${sourceLink}two.jpg`,
-    `${sourceLink}three.jpg`,
-    `${sourceLink}four.jpg`,
-    `${sourceLink}five.jpg`,
-    `${sourceLink}six.jpg`,
-    `${sourceLink}seven.jpg`,
-    `${sourceLink}eight.jpg`,
-  ];
-  const image = imagesArray.sort(() => Math.random() - 0.5)[
-    count % imagesArray.length
-  ];
+  const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     setBar(false);
@@ -30,6 +17,26 @@ function LandingPage() {
     }, 5000);
     return () => clearInterval(timerId);
   });
+
+  const assignImage = () => {
+    const imagesArray = [
+      `${sourceLink}one.jpg`,
+      `${sourceLink}two.jpg`,
+      `${sourceLink}three.jpg`,
+      `${sourceLink}four.jpg`,
+      `${sourceLink}five.jpg`,
+      `${sourceLink}six.jpg`,
+      `${sourceLink}seven.jpg`,
+      `${sourceLink}eight.jpg`,
+      `${sourceLink}nine.jpg`,
+      `${sourceLink}ten.jpg`,
+      `${sourceLink}eleven.jpg`,
+    ];
+    const image = imagesArray.sort(() => Math.random() - 0.5)[
+      count % imagesArray.length
+    ];
+    return image;
+  };
 
   const handleScroll = () => {
     Router.push("/collections");
@@ -46,7 +53,7 @@ function LandingPage() {
       </div>
       <Image
         className={classes.image}
-        src={image}
+        src={assignImage()}
         alt="image"
         layout="fill"
         objectFit="cover"

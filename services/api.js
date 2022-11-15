@@ -61,3 +61,14 @@ export const getInvoiceApi = async () => {
   });
   return await response.json();
 };
+
+export const updateInvoiceApi = async (data) => {
+  const response = await fetch("/api/invoice", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
