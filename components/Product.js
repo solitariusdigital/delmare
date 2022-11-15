@@ -286,7 +286,6 @@ function Product({ favourite }) {
               <p>{selectedProduct.title}</p>
             </div>
           </div>
-
           <div className={classes.itemDetails}>
             <div className={classes.item}>
               <Image
@@ -351,6 +350,10 @@ function Product({ favourite }) {
           </div>
 
           <div className={classes.details}>
+            <div className={classes.sectionId}>
+              <p>{selectedProduct.delmareId}</p>
+              <p className={classes.title}>کد آیتم</p>
+            </div>
             <div className={classes.section}>
               <div className={classes.box}>
                 {Object.keys(productSizes).map((size, index) => (

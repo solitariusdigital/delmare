@@ -69,10 +69,6 @@
       padding: 10px;
       @include mixins.border-radius();
 
-      p {
-        font-size: config.$med-font;
-      }
-
       .close {
         display: flex;
         flex-direction: row-reverse;
@@ -103,6 +99,7 @@
 
             p {
               font-weight: bold;
+              font-size: config.$med-font;
             }
           }
 
@@ -110,6 +107,15 @@
             position: absolute;
             right: 0px;
             width: 40%;
+          }
+
+          .id {
+            font-size: config.$small-font;
+
+            .code {
+              color: config.$grey;
+              font-size: config.$tiny-font;
+            }
           }
 
           .color,
@@ -120,7 +126,7 @@
             width: 33px;
             height: 33px;
             border-radius: 50%;
-            font-size: config.$tiny-font;
+            font-size: config.$small-font;
           }
 
           .size {

@@ -174,12 +174,17 @@
   width: 100%;
   margin: 10px 0px;
 
-  .section {
+  .section,
+  .sectionId {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
     align-items: center;
+    width: 100%;
+  }
+
+  .sectionId {
+    margin-bottom: 10px;
   }
 
   .box {
@@ -187,7 +192,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 260px;
-    margin: 5px 0px;
 
     .color,
     .size,

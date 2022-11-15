@@ -173,6 +173,10 @@ export default function ShoppingCart() {
                           style={{ backgroundColor: `#${cart.color}` }}
                         ></div>
                       </div>
+                      <div className={classes.id}>
+                        <p className={classes.code}>کد آیتم</p>
+                        <p>{cart.delmareId}</p>
+                      </div>
                     </div>
                   </div>
                   <div className={classes.close}>
