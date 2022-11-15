@@ -58,7 +58,7 @@ export default function Orders() {
                     height={140}
                     alt="image"
                   />
-                  <div className={ShoppingCart.row}>
+                  <div className={ShoppingCart.features}>
                     <p className={ShoppingCart.size}>{order.size}</p>
                     <div
                       className={ShoppingCart.color}

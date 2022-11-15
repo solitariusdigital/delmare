@@ -155,7 +155,8 @@
         margin-left: 20px;
       }
 
-      .row {
+      .row,
+      .features {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
@@ -187,6 +188,11 @@
           border: 1px solid config.$black;
           font-size: config.$tiny-font;
         }
+      }
+
+      .features {
+        justify-content: space-around;
+        border: none;
       }
     }
   }
