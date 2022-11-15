@@ -61,6 +61,7 @@ function Register() {
       setAlert("کد تایید ارسال شد");
       startCounter();
       console.log(tokenId);
+      setAlert(tokenId);
 
       // const api = Kavenegar.KavenegarApi({
       //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
