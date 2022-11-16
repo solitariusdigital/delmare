@@ -40,6 +40,18 @@ export default function ShoppingCart() {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart, currentUser]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      shoppingCart.forEach(async (product) => {
+        let getProduct = await getProductApi(product["_id"]);
+        if (getProduct.size[product.size].colors[product.color] === 0) {
+          product.message = "اتمام موجودی";
+        }
+      });
+    };
+    fetchData().catch(console.error);
+  }, [shoppingCart]);
+
   const deletecart = (index) => {
     setShoppingCart(
       shoppingCart.filter((cart, i) => {
@@ -202,6 +214,9 @@ export default function ShoppingCart() {
                       <div className={classes.id}>
                         <p className={classes.code}>کد آیتم</p>
                         <p>{cart.delmareId}</p>
+                      </div>
+                      <div className={classes.message}>
+                        <p>{cart.message}</p>
                       </div>
                     </div>
                   </div>

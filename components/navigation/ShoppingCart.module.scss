@@ -118,6 +118,11 @@
             }
           }
 
+          .message {
+            margin-top: 10px;
+            color: config.$orange;
+          }
+
           .color,
           .size {
             display: flex;

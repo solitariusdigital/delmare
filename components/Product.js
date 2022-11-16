@@ -392,7 +392,7 @@ function Product({ favourite }) {
                     onClick={() =>
                       color.count > 0
                         ? selectDetails("color", color.type, index)
-                        : setAlert("نا موجود")
+                        : setAlert("اتمام موجودی")
                     }
                   >
                     <p>{color.count}</p>
