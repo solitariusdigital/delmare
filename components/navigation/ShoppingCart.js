@@ -6,7 +6,12 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { createInvoiceApi, updateUserApi } from "../../services/api";
+import {
+  createInvoiceApi,
+  updateUserApi,
+  updateProductApi,
+  getProductApi,
+} from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 
 export default function ShoppingCart() {
@@ -74,8 +79,7 @@ export default function ShoppingCart() {
       setAlert("کد پستی صحیح ده رقمی وارد کنید");
     } else {
       setCheckoutClicked(true);
-      await updateUser();
-      await createInvoice();
+      await updateProduct();
     }
   };
 
@@ -95,6 +99,7 @@ export default function ShoppingCart() {
     setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
   };
 
+  // create invoice with customer and product info
   const createInvoice = () => {
     shoppingCart.forEach(async (product) => {
       const invoice = {
@@ -117,6 +122,27 @@ export default function ShoppingCart() {
       setTimeout(() => {
         setCheckoutClicked(false);
       }, 3000);
+    });
+  };
+
+  // update and change product count based on size and color in size object
+  const updateProduct = async () => {
+    shoppingCart.forEach(async (product) => {
+      let getProduct = await getProductApi(product["_id"]);
+      if (getProduct.size[product.size].colors[product.color] > 0) {
+        getProduct.size[product.size].colors[product.color]--;
+        await updateProductApi(getProduct);
+        // await updateUser();
+        // await createInvoice();
+      } else {
+        setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
+      }
+
+      setTimeout(() => {
+        setCheckout(false);
+        setCheckoutClicked(false);
+        setAlert("");
+      }, 5000);
     });
   };
 

@@ -50,14 +50,12 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-
   position: absolute;
-  bottom: 60px;
-  right: 0px;
+  bottom: 70px;
   width: 100%;
   padding: 10px;
-  @include mixins.transparentBackground(0.8, config.$cream);
   box-shadow: config.$card-shadow;
+  @include mixins.transparentBackground(0.8, config.$cream);
 
   p {
     font-size: config.$med-font;

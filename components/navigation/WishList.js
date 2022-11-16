@@ -83,10 +83,6 @@ export default function WishList() {
             wishList.map((product, index) => (
               <div key={index} className="product">
                 <div className="banner">
-                  <div className="social">
-                    <p>{product.views}</p>
-                    <VisibilityIcon className="icon" />
-                  </div>
                   <p>{product.title}</p>
                   <div className="social">
                     <div>
@@ -101,6 +97,10 @@ export default function WishList() {
                           onClick={() => favourProduct(product)}
                         />
                       )}
+                    </div>
+                    <div className="social">
+                      <VisibilityIcon className="icon" />
+                      <p>{product.views}</p>
                     </div>
                   </div>
                 </div>

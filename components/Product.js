@@ -125,6 +125,8 @@ function Product({ favourite }) {
   };
 
   const selectDetails = (detail, type, i) => {
+    setAlert("");
+
     switch (detail) {
       case "color":
         setSelectedColor(type);
@@ -387,9 +389,11 @@ function Product({ favourite }) {
                       color.selected ? classes.selectedColor : classes.color
                     }
                     style={{ backgroundColor: `#${color.type}` }}
-                    onClick={() => {
-                      selectDetails("color", color.type, index);
-                    }}
+                    onClick={() =>
+                      color.count > 0
+                        ? selectDetails("color", color.type, index)
+                        : setAlert("نا موجود")
+                    }
                   >
                     <p>{color.count}</p>
                   </div>
