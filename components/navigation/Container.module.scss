@@ -33,18 +33,20 @@
     height: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0px 10px;
 
     .nav {
       font-size: config.$small-font;
       color: config.$black;
+      margin: 0px 50px;
     }
 
     .navActive {
       font-size: config.$small-font;
       color: config.$black;
       border-bottom: 2px solid config.$brand;
+      margin: 0px 50px;
     }
   }
 }

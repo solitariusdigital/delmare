@@ -78,6 +78,12 @@
 
   .description {
     margin: 20px 0px;
+    font-size: config.$small-font;
+
+    span {
+      font-size: config.$big-font;
+      font-weight: bold;
+    }
   }
 
   .list {
@@ -86,7 +92,6 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
     background: config.$white;
     margin-bottom: 10px;
     padding: 10px 20px;
@@ -115,7 +120,7 @@
   justify-content: space-between;
 
   .item {
-    width: 220px;
+    width: 250px;
 
     p {
       font-size: config.$big-font;
@@ -260,7 +265,9 @@
 
   .section {
     background: config.$white;
+    box-shadow: config.$card-shadow;
     margin: 5px 0px;
+    padding: 10px;
     @include mixins.border-radius();
   }
 
@@ -268,11 +275,8 @@
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    background: config.$white;
-    padding: 10px 20px;
-    box-shadow: config.$card-shadow;
-    height: 40px;
     @include mixins.border-radius();
+    color: config.$grey;
 
     &:hover {
       cursor: pointer;
@@ -281,7 +285,12 @@
 
   .info {
     position: relative;
-    padding: 10px;
-    height: 200px;
+    height: 120px;
+  }
+
+  .description {
+    text-align: right;
+    font-size: config.$small-font;
+    margin: 10px 0px;
   }
 }

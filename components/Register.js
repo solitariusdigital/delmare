@@ -16,6 +16,7 @@ function Register() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -61,7 +62,6 @@ function Register() {
       setAlert("کد تایید ارسال شد");
       startCounter();
       console.log(tokenId);
-      setAlert(tokenId);
 
       // const api = Kavenegar.KavenegarApi({
       //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
@@ -100,7 +100,6 @@ function Register() {
           setUserLogin(true);
           seCurrentUser(user);
           localStorage.setItem("currentUser", JSON.stringify(user));
-          setMenu(false);
           setRegister(false);
         }
       });
@@ -131,12 +130,10 @@ function Register() {
     if (data.hasOwnProperty("error")) {
       setAlert("خطا در برقراری ارتباط");
     } else {
-      setMenu(false);
       setRegister(false);
       setUserLogin(true);
       seCurrentUser(data);
       localStorage.setItem("currentUser", JSON.stringify(data));
-      Router.push("/");
     }
     setDisplayCounter(false);
     resetCounter();

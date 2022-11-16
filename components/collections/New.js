@@ -71,40 +71,43 @@ function New() {
   return (
     <div className="collection-grid">
       {!displayProduct &&
-        productsCollection.map((product, index) => (
-          <div key={index} className="product">
-            <div className="banner">
-              <div className="social">
-                <p>{product.views}</p>
-                <VisibilityIcon className="icon" />
-              </div>
-              <div className="social">
-                <div>
-                  {checFavourites(product) ? (
-                    <FavoriteIcon
-                      className="iconRed"
-                      onClick={() => favourProduct(product)}
-                    />
-                  ) : (
-                    <FavoriteBorderIcon
-                      className="icon"
-                      onClick={() => favourProduct(product)}
-                    />
-                  )}
+        productsCollection
+          .map((product, index) => (
+            <div key={index} className="product">
+              <div className="banner">
+                <div className="social">
+                  <p>{product.views}</p>
+                  <VisibilityIcon className="icon" />
+                </div>
+                <p>{product.title}</p>
+                <div className="social">
+                  <div>
+                    {checFavourites(product) ? (
+                      <FavoriteIcon
+                        className="iconRed"
+                        onClick={() => favourProduct(product)}
+                      />
+                    ) : (
+                      <FavoriteBorderIcon
+                        className="icon"
+                        onClick={() => favourProduct(product)}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
+              <Image
+                onClick={() => selectProduct(product)}
+                className={classes.image}
+                src={product.images.main}
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority={true}
+              />
             </div>
-            <Image
-              onClick={() => selectProduct(product)}
-              className={classes.image}
-              src={product.images.main}
-              alt="image"
-              layout="fill"
-              objectFit="cover"
-              priority={true}
-            />
-          </div>
-        ))}
+          ))
+          .reverse()}
       {displayProduct && <Product favourite={like} />}
     </div>
   );

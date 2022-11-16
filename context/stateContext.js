@@ -31,11 +31,6 @@ export const StateProvider = (props) => {
       link: "/collections/brands",
       active: false,
     },
-    {
-      title: "Bloggers",
-      link: "/collections/bloggers",
-      active: false,
-    },
   ]);
   // application context
   const [userLogIn, setUserLogin] = useState(false);

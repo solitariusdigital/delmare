@@ -16,23 +16,23 @@ function CollectionsPage() {
     {
       title: "New",
       link: "/collections/new",
-      imageSrc: `${sourceLink}three.jpg`,
-    },
-    {
-      title: "Sale",
-      link: "/collections/sale",
-      imageSrc: `${sourceLink}four.jpg`,
+      imageSrc: `${sourceLink}one.jpg`,
     },
     {
       title: "Brands",
       link: "/collections/brands",
-      imageSrc: `${sourceLink}six.jpg`,
+      imageSrc: `${sourceLink}ten.jpg`,
     },
-    {
-      title: "Bloggers",
-      link: "/collections/bloggers",
-      imageSrc: `${sourceLink}seven.jpg`,
-    },
+    // {
+    //   title: "Sale",
+    //   link: "/collections/sale",
+    //   imageSrc: `${sourceLink}four.jpg`,
+    // },
+    // {
+    //   title: "Bloggers",
+    //   link: "/collections/bloggers",
+    //   imageSrc: `${sourceLink}seven.jpg`,
+    // },
   ];
 
   const activateNav = (link, index) => {

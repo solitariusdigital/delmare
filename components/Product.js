@@ -259,6 +259,10 @@ function Product({ favourite }) {
           </div>
           <div className={classes.product}>
             <p className={classes.description}>{selectedProduct.description}</p>
+            <p className={classes.description}>
+              طرح <span></span>
+              <span>{selectedProduct.designer}</span>
+            </p>
             <div
               className={classes.list}
               onClick={() => {
@@ -422,14 +426,18 @@ function Product({ favourite }) {
                 {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
               {sizeGuide && (
-                <div className={classes.info}>
-                  <Image
-                    src={selectedProduct.images.table}
-                    alt="image"
-                    layout="fill"
-                    objectFit="contain"
-                    priority={true}
-                  />
+                <div>
+                  <p className={classes.description}>اندازه به سانتی متر است</p>
+                  <p className={classes.description}>FS: Free Size</p>
+                  <div className={classes.info}>
+                    <Image
+                      src={selectedProduct.images.table}
+                      alt="image"
+                      layout="fill"
+                      objectFit="contain"
+                      priority={true}
+                    />
+                  </div>
                 </div>
               )}
             </div>

@@ -52,6 +52,7 @@ $screen-xl-min: 1200px;
   padding-left: 8px;
   padding-right: 8px;
   box-shadow: config.$button-shadow;
+  font-family: config.$font;
 
   &:hover {
     cursor: pointer;

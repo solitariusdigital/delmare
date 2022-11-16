@@ -16,6 +16,7 @@ export default function Upload() {
     L: { colors: {} },
     XL: { colors: {} },
     XXL: { colors: {} },
+    FS: { colors: {} },
   };
   const imageInitialState = {
     main: "",
@@ -42,12 +43,15 @@ export default function Upload() {
   const [L, setL] = useState("");
   const [XL, setXL] = useState("");
   const [XXL, setXXL] = useState("");
+  const [FS, setFS] = useState("");
+  const [freeSize, setFreeSize] = useState(false);
 
   // data to save into db
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [delmareId, setDelmareId] = useState("");
+  const [designer, setDesigner] = useState("");
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
@@ -66,6 +70,8 @@ export default function Upload() {
   }, [setContainer]);
 
   const transformDataSize = (value, type) => {
+    console.log(value);
+
     let split = value.split(",");
     let items = split.map((item) => {
       return item.trim();
@@ -77,7 +83,7 @@ export default function Upload() {
   };
 
   const handleUpload = async () => {
-    if (!title && !description && !price && !delmareId) {
+    if (!title && !description && !price && !delmareId && !designer) {
       setAlert("Fill in all fields");
       setTimeout(() => {
         setAlert("");
@@ -92,7 +98,7 @@ export default function Upload() {
     transformDataSize(M, "M");
     transformDataSize(L, "L");
     transformDataSize(XL, "XL");
-    transformDataSize(XXL, "XXL");
+    transformDataSize(FS, "FS");
 
     let delmareIdFolder = `${delmareId}${tokenGenerator()}`;
 
@@ -129,6 +135,7 @@ export default function Upload() {
         title: title.trim(),
         description: description.trim(),
         price: price.trim(),
+        designer: designer.trim(),
         delmareId: delmareIdFolder,
         images: images,
         size: size,
@@ -202,6 +209,24 @@ export default function Upload() {
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
+          <p className={classes.label}>Designer</p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setDesigner("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          type="text"
+          id="designer"
+          name="designer"
+          onChange={(e) => setDesigner(e.target.value)}
+          value={designer}
+          autoComplete="off"
+        />
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
           <p className={classes.label}>Price Toman</p>
           <CloseIcon
             className="icon"
@@ -258,139 +283,180 @@ export default function Upload() {
       </div>
 
       <h3>Size, color, count</h3>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>XS</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setXS("");
-              size["XS"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          placeholder="b21c1c 5, 514242 45"
-          className={classes.size}
-          type="tel"
-          id="XS"
-          name="XS"
-          onChange={(e) => setXS(e.target.value)}
-          value={XS}
-          autoComplete="off"
-        />
+      <div className={classes.sizeNav}>
+        {freeSize ? (
+          <p onClick={() => setFreeSize(false)}>Add size</p>
+        ) : (
+          <b onClick={() => setFreeSize(true)}>Free size</b>
+        )}
       </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>S</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setS("");
-              size["S"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
+
+      {freeSize && (
+        <div className={classes.sizeContainer}>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>Free Size - FS</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setFS("");
+                  size["FS"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              placeholder="b21c1c 5, 514242 45"
+              className={classes.size}
+              type="tel"
+              id="FS"
+              name="FS"
+              onChange={(e) => setFS(e.target.value)}
+              value={FS}
+              autoComplete="off"
+            />
+          </div>
         </div>
-        <input
-          className={classes.size}
-          type="tel"
-          id="S"
-          name="S"
-          onChange={(e) => setS(e.target.value)}
-          value={S}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>M</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setM("");
-              size["M"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
+      )}
+
+      {!freeSize && (
+        <div className={classes.sizeContainer}>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>XS</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setXS("");
+                  size["XS"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              placeholder="b21c1c 5, 514242 45"
+              className={classes.size}
+              type="tel"
+              id="XS"
+              name="XS"
+              onChange={(e) => setXS(e.target.value)}
+              value={XS}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>S</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setS("");
+                  size["S"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              className={classes.size}
+              type="tel"
+              id="S"
+              name="S"
+              onChange={(e) => setS(e.target.value)}
+              value={S}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>M</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setM("");
+                  size["M"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              className={classes.size}
+              type="tel"
+              id="M"
+              name="M"
+              onChange={(e) => setM(e.target.value)}
+              value={M}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>L</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setL("");
+                  size["L"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              className={classes.size}
+              type="tel"
+              id="L"
+              name="L"
+              onChange={(e) => setL(e.target.value)}
+              value={L}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>XL</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setXL("");
+                  size["XL"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              className={classes.size}
+              type="tel"
+              id="XL"
+              name="XL"
+              onChange={(e) => setXL(e.target.value)}
+              value={XL}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>XXL</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  setXXL("");
+                  size["XXL"] = {};
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              className={classes.size}
+              type="tel"
+              id="XXL"
+              name="XXL"
+              onChange={(e) => setXXL(e.target.value)}
+              value={XXL}
+              autoComplete="off"
+            />
+          </div>
         </div>
-        <input
-          className={classes.size}
-          type="tel"
-          id="M"
-          name="M"
-          onChange={(e) => setM(e.target.value)}
-          value={M}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>L</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setL("");
-              size["L"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          className={classes.size}
-          type="tel"
-          id="L"
-          name="L"
-          onChange={(e) => setL(e.target.value)}
-          value={L}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>XL</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setXL("");
-              size["XL"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          className={classes.size}
-          type="tel"
-          id="XL"
-          name="XL"
-          onChange={(e) => setXL(e.target.value)}
-          value={XL}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>XXL</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => {
-              setXXL("");
-              size["XXL"] = {};
-            }}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          className={classes.size}
-          type="tel"
-          id="XXL"
-          name="XXL"
-          onChange={(e) => setXXL(e.target.value)}
-          value={XXL}
-          autoComplete="off"
-        />
-      </div>
+      )}
+
       <h3>Upload images</h3>
       <div className="input">
         <div>

@@ -122,3 +122,14 @@
     }
   }
 }
+
+.sizeContainer {
+  width: 100%;
+}
+
+.sizeNav {
+  margin: 20px 0px;
+  background: config.$brand;
+  padding: 10px;
+  @include mixins.border-radius();
+}

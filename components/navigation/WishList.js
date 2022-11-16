@@ -87,6 +87,7 @@ export default function WishList() {
                     <p>{product.views}</p>
                     <VisibilityIcon className="icon" />
                   </div>
+                  <p>{product.title}</p>
                   <div className="social">
                     <div>
                       {checFavourites(product) ? (
