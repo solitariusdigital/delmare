@@ -260,7 +260,7 @@ function Product({ favourite }) {
           <div className={classes.product}>
             <p className={classes.description}>{selectedProduct.description}</p>
             <p className={classes.description}>
-              طرح <span></span>
+              طراح <span></span>
               <span>{selectedProduct.designer}</span>
             </p>
             <div
