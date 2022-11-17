@@ -79,12 +79,23 @@ export default function Orders() {
                     <p className={ShoppingCart.title}>قیمت</p>
                     <p>{convertNumber(order.price)} T</p>
                   </div>
-
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>تاریخ خرید</p>
                     <p suppressHydrationWarning>
                       {convertDate(order.createdAt)}
                     </p>
+                  </div>
+                  <div className={ShoppingCart.row}>
+                    <p className={ShoppingCart.title}>وضعیت</p>
+                    {order.posted ? (
+                      <div className={ShoppingCart.row}>
+                        <p suppressHydrationWarning>
+                          ارسال شد <span>{convertDate(order.updatedAt)}</span>
+                        </p>
+                      </div>
+                    ) : (
+                      <p>آماده سازی</p>
+                    )}
                   </div>
                 </div>
               </div>

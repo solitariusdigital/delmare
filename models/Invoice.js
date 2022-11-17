@@ -47,7 +47,7 @@ const InvoiceSchema = new Schema(
     price: Number,
     color: String,
     size: String,
-    delivered: Boolean,
+    posted: Boolean,
   },
   { timestamps: true }
 );

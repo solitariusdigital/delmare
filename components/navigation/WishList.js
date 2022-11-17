@@ -49,7 +49,7 @@ export default function WishList() {
         );
         setLike(false);
       } else {
-        currentUser.favourites.push(product["_id"]);
+        currentUser.favourites.unshift(product["_id"]);
         setLike(true);
       }
       localStorage.setItem("currentUser", JSON.stringify(currentUser));

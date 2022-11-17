@@ -8,9 +8,9 @@ import { convertNumber } from "../services/utility";
 import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
-export default function Invoice({ invoices, deliveredInvoices }) {
+export default function Invoice({ invoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
-  const [delivered, setDelivered] = useState(false);
+  const [posted, setposted] = useState(false);
 
   useEffect(() => {
     if (
@@ -32,7 +32,7 @@ export default function Invoice({ invoices, deliveredInvoices }) {
   const deliverInvoice = async (invoice) => {
     let data = {
       ...invoice,
-      delivered: true,
+      posted: true,
     };
     await updateInvoiceApi(data);
     Router.push("/invoice");
@@ -42,16 +42,16 @@ export default function Invoice({ invoices, deliveredInvoices }) {
     <div className={classes.invoiceContainer}>
       <div className={classes.navigation}>
         <p
-          onClick={() => setDelivered(false)}
-          className={delivered ? classes.nav : classes.navActive}
+          onClick={() => setposted(false)}
+          className={posted ? classes.nav : classes.navActive}
         >
-          To deliver
+          To post
         </p>
         <p
-          onClick={() => setDelivered(true)}
-          className={!delivered ? classes.nav : classes.navActive}
+          onClick={() => setposted(true)}
+          className={!posted ? classes.nav : classes.navActive}
         >
-          Delivered
+          Posted
         </p>
         <RefreshIcon
           className="icon"
@@ -60,9 +60,9 @@ export default function Invoice({ invoices, deliveredInvoices }) {
         />
       </div>
 
-      {!delivered && (
+      {!posted && (
         <div>
-          <p className={classes.info}>Orders to deliver {invoices.length}</p>
+          <p className={classes.info}>Orders to post {invoices.length}</p>
           {invoices.map((invoice, index) => (
             <div key={index} className={classes.invoice}>
               <div className={classes.row}>
@@ -116,19 +116,17 @@ export default function Invoice({ invoices, deliveredInvoices }) {
                 className={classes.button}
                 onClick={() => deliverInvoice(invoice)}
               >
-                Mark as delivered
+                Mark posted
               </button>
             </div>
           ))}
         </div>
       )}
 
-      {delivered && (
+      {posted && (
         <div>
-          <p className={classes.info}>
-            Delivered orders {deliveredInvoices.length}
-          </p>
-          {deliveredInvoices.map((invoice, index) => (
+          <p className={classes.info}>Posted orders {postedInvoices.length}</p>
+          {postedInvoices.map((invoice, index) => (
             <div key={index} className={classes.invoice}>
               <div className={classes.row}>
                 <p className={classes.title}>تاریخ خرید</p>
@@ -195,16 +193,16 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const data = await invoiceModel.find();
     const invoices = data.reverse().filter((invoice) => {
-      return !invoice.delivered;
+      return !invoice.posted;
     });
-    const deliveredInvoices = data.filter((invoice) => {
-      return invoice.delivered;
+    const postedInvoices = data.filter((invoice) => {
+      return invoice.posted;
     });
 
     return {
       props: {
         invoices: JSON.parse(JSON.stringify(invoices)),
-        deliveredInvoices: JSON.parse(JSON.stringify(deliveredInvoices)),
+        postedInvoices: JSON.parse(JSON.stringify(postedInvoices)),
       },
     };
   } catch (error) {

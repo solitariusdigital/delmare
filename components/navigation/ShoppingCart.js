@@ -112,29 +112,28 @@ export default function ShoppingCart() {
   };
 
   // create invoice with customer and product info
-  const createInvoice = () => {
-    shoppingCart.forEach(async (product) => {
-      const invoice = {
-        name: name.trim(),
-        phone: phone.trim(),
-        address: address.trim(),
-        post: post.trim(),
-        userId: currentUser["_id"],
-        productId: product["_id"],
-        delmareId: product.delmareId,
-        title: product.title,
-        price: product.price,
-        color: product.color,
-        size: product.size,
-        image: product.image,
-        delivered: false,
-      };
-      await createInvoiceApi(invoice);
+  const createInvoice = async (product) => {
+    const invoice = {
+      name: name.trim(),
+      phone: phone.trim(),
+      address: address.trim(),
+      post: post.trim(),
+      userId: currentUser["_id"],
+      productId: product["_id"],
+      delmareId: product.delmareId,
+      title: product.title,
+      price: product.price,
+      color: product.color,
+      size: product.size,
+      image: product.image,
+      posted: false,
+    };
 
-      setTimeout(() => {
-        setCheckoutClicked(false);
-      }, 3000);
-    });
+    await createInvoiceApi(invoice);
+
+    setTimeout(() => {
+      setCheckoutClicked(false);
+    }, 3000);
   };
 
   // update and change product count based on size and color in size object
@@ -145,7 +144,8 @@ export default function ShoppingCart() {
         getProduct.size[product.size].colors[product.color]--;
         await updateProductApi(getProduct);
         // await updateUser();
-        // await createInvoice();
+        await createInvoice(product);
+        setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
       } else {
         setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
       }
