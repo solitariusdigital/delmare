@@ -5,7 +5,7 @@ import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-
+import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -430,10 +430,18 @@ function Product({ favourite }) {
                 {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
               {sizeGuide && (
-                <div>
-                  <p className={classes.description}>اندازه به سانتی متر است</p>
-                  <p className={classes.description}>FS: Free Size</p>
-                  <div className={classes.info}>
+                <div className={classes.information}>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اندازه به سانتی متر است
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>FS : Free Size</p>
+                  </div>
+                  <div className={classes.table}>
                     <Image
                       src={selectedProduct.images.table}
                       alt="image"
@@ -458,8 +466,31 @@ function Product({ favourite }) {
                 {shipmentMethod ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
               {shipmentMethod && (
-                <div className={classes.info}>
-                  <p>Shimpment</p>
+                <div className={classes.information}>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      ارسال رایگان سفارش تهران وشهرستان در صورتی که جمع کل مبلغ
+                      پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
+                      بیشتر باشد، سفارش مشتری رایگان ارسال خواهد شد
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      ارسال سفارش از طریق تیپاکس برای خریدهای پایین 1,000,000
+                      تومان به عهده مشتری خواهد بود و در درب منزل قابل پرداخت
+                      خواهد بود
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      ارسال سفارش از طریق پیک در تهران برای خریدهای پایین
+                      1,000,000 تومان به عهده مشتری خواهد بود و در درب منزل قابل
+                      پرداخت خواهد بود
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -476,8 +507,182 @@ function Product({ favourite }) {
                 {returnPolicy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
               {returnPolicy && (
-                <div className={classes.info}>
-                  <p>Return</p>
+                <div className={classes.information}>
+                  <p className={classes.title}> رویه‌های بازگرداندن کالا</p>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      رضایت‌مندی مشتریان همواره از اولویت‏‌های دلماره است. ما در
+                      این راستا می‏‌کوشیم تا هر سفارش در شرایط مطلوب به دست
+                      مشتری برسد. با وجود این ممکن است مشتریان عزیز پس از خرید،
+                      با مسایلی روبرو شوند که درچنین مواردی خدماتی در چارچوب
+                      خدمات پس از فروش در نظر گرفته شده است. مدت زمان لازم جهت
+                      استفاده از این امکان 24ساعت است
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر کالای خریداری شده، ایراد، زدگی یا پارگی داشته باشد در
+                      صورت تایید کارشناسان ما هزینه ارسال کالا به مشتری قابل
+                      بازگشت خواهد بود
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر کالای خریداری شده از نظر مشخصات یا ظاهر با اطلاعات
+                      محصول مغایرت داشته باشد
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر مغایرت، بدون استفاده از کالا قابل مشاهده است، مثل رنگ
+                      یا مشخصات درج شده روی آن، باید کالا در شرایط اولیه خود
+                      باشد و از آن استفاده نشده باشد
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      در صورتی که امکان تشخیص مغایرت تنها با باز کردن بسته بندی
+                      ممکن باشد، لازم است کارتن و جعبه اصلی محصولات نگهداری شود
+                      و از دور ریختن آن جداً خودداری شود
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      استفاده از این سرویس تنها در صورتی امکان‌پذیر است که کالا
+                      در کارتن یا جعبه اصلی خود به دلماره بازگردانده شود. برچسب
+                      زدن یا نوشتن توضیحات، آدرس یا هر مورد دیگری روی کارتن یا
+                      جعبه اصلی کالا و یا پاره و مخدوش کردن آن، امکان استفاده از
+                      ضمانت بازگشت را از بین خواهد برد
+                    </p>
+                  </div>
+                  <p className={classes.title}>
+                    اگر مشتری از خرید خود منصرف شود
+                  </p>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر هنوز سفارش ارسال نشده باشد، باید هر چه سریع‏‌تر به
+                      واحد پیگیری سفارش دلماره اطلاع داده شود
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر پس از دریافت کالا مشتری از خرید خود منصرف شود، حداکثر
+                      تا 12ساعت ‏، باید انصراف خود را به واحد خدمات پس از فروش
+                      اطلاع دهد
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اگر پس از دریافت کالا مشتری از خرید خود منصرف شود، حداکثر
+                      تا 12ساعت ‏، باید انصراف خود را به واحد خدمات پس از فروش
+                      .اطلاع دهد
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      در این حالت، برگرداندن کالا پس از تایید کارشناس خدمات پس
+                      از فروش، تنها در صورتی امکان‌پذیر است که در شرایط اولیه
+                      خود (پلمپ) باشد، از آن استفاده نشده باشد. همچنین اگر کالا
+                      به‌ همراه هدیه فروخته شده باشد، بازگرداندن هدیه همراه آن
+                      نیز الزامی است. لازم به ذکر است کالاهایی که به دلیل ماهیت
+                      خاص یا استفاده شخصی و با توجه به لزوم رعایت مسایل بهداشتی
+                      نمی‌توانند بازپس داده شوند، از شمول این بند خارج هستند
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      لطفاً توجه داشته باشید که هرگونه تغییر در شرایط اولیه
+                      کالا، امکان استفاده از این سرویس را از بین خواهد برد
+                    </p>
+                  </div>
+                  <p className={classes.title}>اگر سایز کالا مناسب نباشد</p>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      درخواست بازگشت کالا تنها در صورتی پذیرفته می‌شود، اندازه
+                      محصول با جدول سایزکالا منطبق نباشد و کفش یا پوشاک تنها تست
+                      شده باشند و در وضعیت اولیه و نو باشند، و روی پوشاک هیچگونه
+                      آثار استفاده مانند لکه، رنگ پریدگی یا بوی عطر و بدن وجود
+                      نداشته باشد، و برچسب، مارک، دکمه و سایر ملحقات جدا نشده
+                      باشد
+                    </p>
+                  </div>
+                  <p className={classes.title}>
+                    ضوابط مربوط به فروش محصولات آرایشی و بهداشتی
+                  </p>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      اطلاعات هر محصول آرایشی بهداشتی در دلماره ، صرفاً برای
+                      اطلاع‌رسانی است و جنبه مشاوره ندارد. خریدار باید قبل از
+                      استفاده از مواد آرایشی بهداشتی نسبت به کسب اطلاعات حرفه‌ای
+                      و اخذ مشاوره از متخصص مربوط اقدام کند. همچنین، نظراتی که
+                      کاربران در خصوص کالا در اپلیکیشن درج کرده‌اند، تجربه یا
+                      اطلاعات شخصی افراد است و برای آنها و دلماره مسئولیتی ایجاد
+                      نمی‌کند. همچنین دلماره مسئولیتی در قبال درستی اطلاعات
+                      فراهم شده روی بسته‌بندی کالا ندارد و مسئولیت آن با شرکت
+                      تولیدکننده کالاست
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      درصورت عدم آگاهی، اطلاع و ناتوانی مشتری در استفاده از
+                      محصولات آرایشی و بهداشتی و یا ایجاد خسارت نسبت به خود یا
+                      محصول، تمامی مسئولیت‌‌های آن بر عهده مشتری است و فروشگاه
+                      دلماره در این خصوص هیچگونه تعهدی نخواهد داشت. - در صورت
+                      تایید معیوب بودن کالای مرجوعی توسط شرکت تامین یا
+                      تولیدکننده، دلماره صرفاً هزینه کالا یا سرویس را مطابق
+                      فاکتور (حداکثر تا یک هفته از تاریخ فاکتور) به مشتری
+                      برمی‌گرداند
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      دلماره نسبت به عوارض جسمی و بیماری‌های ناشی از استفاده
+                      محصولات آرایشی و بهداشتی (از قبیل حساسیت‌های پوستی، جراحات
+                      و ...) مسئولیت و پاسخگویی ندارد. انجام پیگیری‌های لازم
+                      باید توسط مشتری و از طریق شرکت‌های مربوط ( نمایندگی‌ها و
+                      تامین‌کنندگان رسمی کالا) انجام شود
+                    </p>
+                  </div>
+                  <p className={classes.title}>
+                    کدام کالاها قابل بازگشت نیستند؟
+                  </p>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      زیورآلات و اکسسوری ها مانند گوشواره و اکسسوری های مشابه که
+                      تماس مستقیم با پوست دارند امکان بازگشت سلیقه ای ندارند
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      لوازم آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
+                      به صورت پلمپ فروخته شده و امکان بازگشت ندارند. - لباس های
+                      نوزادی به دلیل مسایل بهداشتی قابل بازگشت ندارند
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      لباس های زیر مانند شورت های مردانه، زنانه یا بچه گانه به
+                      دلیل مسایل بهداشتی قابل بازگشت نیستند
+                    </p>
+                  </div>
                 </div>
               )}
             </div>

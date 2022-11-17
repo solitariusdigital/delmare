@@ -284,14 +284,32 @@
     }
   }
 
-  .info {
+  .table {
     position: relative;
     height: 120px;
   }
 
   .description {
     text-align: right;
-    font-size: config.$small-font;
+    font-size: config.$tiny-font;
     margin: 10px 0px;
+  }
+
+  .information {
+    .title {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row-reverse;
+      margin: 10px 0px;
+
+      .description {
+        margin: 0px;
+        margin-right: 5px;
+      }
+    }
   }
 }
