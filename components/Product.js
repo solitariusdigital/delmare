@@ -202,7 +202,7 @@ function Product({ favourite }) {
         );
         setLike(false);
       } else {
-        currentUser.favourites.push(product["_id"]);
+        currentUser.favourites.unshift(product["_id"]);
         setLike(true);
       }
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -239,10 +239,6 @@ function Product({ favourite }) {
             />
             <div className={classes.banner}>
               <div className={classes.social}>
-                <VisibilityIcon className={classes.icon} />
-                <p>{selectedProduct.views}</p>
-              </div>
-              <div className={classes.social}>
                 <div>
                   {checFavourites(selectedProduct) ? (
                     <FavoriteIcon
@@ -256,6 +252,10 @@ function Product({ favourite }) {
                     />
                   )}
                 </div>
+              </div>
+              <div className={classes.social}>
+                <p>{selectedProduct.views}</p>
+                <VisibilityIcon className={classes.icon} />
               </div>
             </div>
           </div>

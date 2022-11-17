@@ -29,6 +29,7 @@
       display: flex;
       flex-direction: row-reverse;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
       margin: 0px 5px;
       div {
@@ -37,7 +38,7 @@
 
       p {
         font-size: config.$small-font;
-        margin-right: 10px;
+        margin-left: 10px;
       }
 
       .icon,

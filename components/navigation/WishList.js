@@ -78,12 +78,12 @@ export default function WishList() {
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
         </div>
-        <div className="collection-grid slide-menu">
+        <div className="collection-grid wish-list">
           {!displayProduct &&
             wishList.map((product, index) => (
               <div key={index} className="product">
                 <div className="banner">
-                  <p>{product.title}</p>
+                  <p className="title">{product.title}</p>
                   <div className="social">
                     <div>
                       {checFavourites(product) ? (

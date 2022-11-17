@@ -89,7 +89,7 @@ a {
 
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
   gap: 10px;
   padding: 10px;
 
@@ -122,6 +122,16 @@ a {
       width: 100%;
       @include mixins.transparentBackground(0.8, config.$cream);
 
+      p {
+        font-size: config.$tiny-font;
+        margin-left: 10px;
+      }
+
+      .title {
+        min-width: 45%;
+        margin: 0px;
+      }
+
       .social {
         display: flex;
         flex-direction: row;
@@ -130,11 +140,6 @@ a {
 
         div {
           display: flex;
-        }
-
-        p {
-          font-size: config.$small-font;
-          margin-left: 10px;
         }
 
         .icon,
@@ -153,7 +158,9 @@ a {
   }
 }
 
-.slide-menu {
+.wish-list {
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
   margin-top: 50px;
 }
 

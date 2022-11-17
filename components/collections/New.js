@@ -55,7 +55,7 @@ function New() {
         );
         setLike(false);
       } else {
-        currentUser.favourites.push(product["_id"]);
+        currentUser.favourites.unshift(product["_id"]);
         setLike(true);
       }
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -75,7 +75,7 @@ function New() {
           .map((product, index) => (
             <div key={index} className="product">
               <div className="banner">
-                <p>{product.title}</p>
+                <p className="title">{product.title}</p>
                 <div className="social">
                   <div>
                     {checFavourites(product) ? (

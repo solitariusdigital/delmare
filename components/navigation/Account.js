@@ -79,7 +79,7 @@ export default function Account() {
           </div>
         </div>
 
-        <div className="slide-menu">
+        <div className="wish-list">
           <div className={classes.card}>
             <div className={classes.input}>
               <div className={classes.bar}>
