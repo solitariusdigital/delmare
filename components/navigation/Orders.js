@@ -88,7 +88,7 @@ export default function Orders() {
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>وضعیت</p>
                     {order.posted ? (
-                      <div className={ShoppingCart.row}>
+                      <div className={ShoppingCart.status}>
                         <p suppressHydrationWarning>
                           ارسال شد <span>{convertDate(order.updatedAt)}</span>
                         </p>
