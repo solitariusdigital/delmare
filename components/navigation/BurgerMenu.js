@@ -5,7 +5,7 @@ import classes from "./BurgerMenu.module.scss";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import CallIcon from "@mui/icons-material/Call";
 import Person4Icon from "@mui/icons-material/Person4";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import Register from "../Register";
@@ -20,6 +20,7 @@ export default function BurgerMenu() {
   const { register, setRegister } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
+  const [contact, setContact] = useState(false);
 
   const navigation = [
     {
@@ -27,6 +28,7 @@ export default function BurgerMenu() {
       icon: <AccountBoxIcon />,
       call: () => {
         navigateMenu("account");
+        setContact(false);
       },
     },
     {
@@ -34,6 +36,7 @@ export default function BurgerMenu() {
       icon: <CheckroomIcon />,
       call: () => {
         navigateMenu("orders");
+        setContact(false);
       },
     },
     {
@@ -41,6 +44,7 @@ export default function BurgerMenu() {
       icon: <ShoppingCartIcon />,
       call: () => {
         navigateMenu("cart");
+        setContact(false);
       },
     },
     {
@@ -48,15 +52,16 @@ export default function BurgerMenu() {
       icon: <FavoriteIcon />,
       call: () => {
         navigateMenu("wish");
+        setContact(false);
       },
     },
-    // {
-    //   title: "تراکنش",
-    //   icon: <ChangeCircleIcon />,
-    //   call: () => {
-    //     navigateMenu("transactions");
-    //   },
-    // },
+    {
+      title: "تماس با دلماره",
+      icon: <CallIcon />,
+      call: () => {
+        setContact(!contact);
+      },
+    },
   ];
 
   const navigateMenu = (action) => {
@@ -94,7 +99,6 @@ export default function BurgerMenu() {
             </div>
           )}
         </div>
-
         <div className={classes.items}>
           {!register ? (
             <div>
@@ -106,13 +110,13 @@ export default function BurgerMenu() {
                   </div>
                 ))}
               </div>
-
               {!userLogIn && (
                 <div className={classes.buttonContainer}>
                   <button
                     className={`mainButton ${classes.button}`}
                     onClick={() => {
                       setRegister(true);
+                      setContact(false);
                     }}
                   >
                     ورود / ​ثبت نام
@@ -124,6 +128,11 @@ export default function BurgerMenu() {
           ) : (
             // login form
             <Register></Register>
+          )}
+          {contact && (
+            <div className={classes.contact}>
+              <p>call</p>
+            </div>
           )}
           <div className={classes.logo}>
             <Image width={100} height={140} src={logo} alt="logo" />
