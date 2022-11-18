@@ -66,7 +66,7 @@ export default function ShoppingCart() {
       prices.push(cart.price);
     });
     const total = prices.reduce((partialSum, a) => partialSum + a, 0);
-    return convertNumber(total);
+    return total;
   };
 
   const handlecheckout = async () => {
@@ -356,13 +356,23 @@ export default function ShoppingCart() {
           </div>
         )}
         <div className={classes.details}>
-          <div className={classes.detail}>
+          <div className={classes.row}>
             <p className={classes.value}>{shoppingCart.length}</p>
-            <p>تعداد آیتم ها</p>
+            <p className={classes.title}>تعداد آیتم ها</p>
           </div>
-          <div className={classes.detail}>
-            <p className={classes.value}>{calculateTotal()} T</p>
-            <p>جمع سبد خرید</p>
+          <div className={classes.row}>
+            <p className={classes.value}>{convertNumber(calculateTotal())} T</p>
+            <p className={classes.title}>جمع سبد خرید</p>
+          </div>
+          <div className={classes.row}>
+            {calculateTotal() >= 1000000 ? (
+              <p className={classes.value}>رایگان</p>
+            ) : (
+              <p className={classes.value}>
+                {shoppingCart.length > 0 ? "پرداخت درب منزل" : ""}
+              </p>
+            )}
+            <p className={classes.title}>هزینه ارسال</p>
           </div>
           {!checkout ? (
             <button

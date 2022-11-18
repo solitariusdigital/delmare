@@ -133,7 +133,7 @@ export default function BurgerMenu() {
           )}
           {contact && (
             <div className={classes.contact}>
-              <InstagramIcon className="icon" sx={{ fontSize: 40 }} />
+              {/* <InstagramIcon className="icon" sx={{ fontSize: 40 }} /> */}
               <div className={classes.row}>
                 <p>
                   خیابان ولیعصر، پایین‌تر از توانیر، بخشندگان، مجتمع بخشندگان،
