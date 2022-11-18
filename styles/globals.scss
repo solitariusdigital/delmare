@@ -21,6 +21,14 @@ a {
   text-decoration: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+main {
+  overflow: hidden;
+}
+
 .icon {
   cursor: pointer;
 }
