@@ -93,12 +93,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: config.$white;
+    background: config.$brand;
     margin-bottom: 10px;
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 5px;
     height: 50px;
-    box-shadow: config.$card-shadow;
+    box-shadow: config.$button-shadow;
   }
 
   p {

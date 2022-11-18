@@ -8,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CallIcon from "@mui/icons-material/Call";
 import Person4Icon from "@mui/icons-material/Person4";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import Register from "../Register";
 import Image from "next/image";
 import logo from "../../assets/logo.png";
@@ -60,6 +61,7 @@ export default function BurgerMenu() {
       icon: <CallIcon />,
       call: () => {
         setContact(!contact);
+        setAlert("");
       },
     },
   ];
@@ -131,7 +133,18 @@ export default function BurgerMenu() {
           )}
           {contact && (
             <div className={classes.contact}>
-              <p>call</p>
+              <InstagramIcon className="icon" sx={{ fontSize: 40 }} />
+              <div className={classes.row}>
+                <p>
+                  خیابان ولیعصر، پایین‌تر از توانیر، بخشندگان، مجتمع بخشندگان،
+                  واحد ۵
+                </p>
+                <p className={classes.title}>گالری</p>
+              </div>
+              <div className={classes.row}>
+                <p>0912 022 1526</p>
+                <p className={classes.title}>تلفن</p>
+              </div>
             </div>
           )}
           <div className={classes.logo}>

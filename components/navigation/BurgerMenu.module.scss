@@ -47,7 +47,6 @@
       }
 
       &:hover {
-        background: config.$cream;
         cursor: pointer;
       }
     }
@@ -101,7 +100,21 @@
 
 .contact {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 0px 10px;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 10px;
+
+    .title {
+      color: config.$grey;
+    }
+  }
 }

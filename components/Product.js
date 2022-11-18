@@ -472,13 +472,13 @@ function Product({ favourite }) {
                     <p className={classes.description}>
                       ارسال رایگان سفارش تهران وشهرستان در صورتی که جمع کل مبلغ
                       پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
-                      بیشتر باشد، سفارش مشتری رایگان ارسال خواهد شد
+                      بیشتر باشد
                     </p>
                   </div>
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      ارسال سفارش از طریق تیپاکس برای خریدهای پایین 1,000,000
+                      ارسال سفارش از طریق تیپاکس برای خریدهای کمتر از 1,000,000
                       تومان به عهده مشتری خواهد بود و در درب منزل قابل پرداخت
                       خواهد بود
                     </p>
@@ -486,7 +486,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      ارسال سفارش از طریق پیک در تهران برای خریدهای پایین
+                      ارسال سفارش از طریق پیک در تهران برای خریدهای کمتر از
                       1,000,000 تومان به عهده مشتری خواهد بود و در درب منزل قابل
                       پرداخت خواهد بود
                     </p>
@@ -672,8 +672,13 @@ function Product({ favourite }) {
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
                       لوازم آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
-                      به صورت پلمپ فروخته شده و امکان بازگشت ندارند. - لباس های
-                      نوزادی به دلیل مسایل بهداشتی قابل بازگشت ندارند
+                      به صورت پلمپ فروخته شده و امکان بازگشت ندارند
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      لباس های نوزادی به دلیل مسایل بهداشتی قابل بازگشت ندارند
                     </p>
                   </div>
                   <div className={classes.row}>

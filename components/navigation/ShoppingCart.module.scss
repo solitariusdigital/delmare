@@ -56,7 +56,7 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 0px 10px;
-    height: calc(100% - 180px);
+    height: calc(100% - 190px);
     margin-top: 50px;
     overflow-y: scroll;
 
@@ -65,7 +65,7 @@
       width: 100%;
       background: config.$white;
       box-shadow: config.$card-shadow;
-      margin: 10px 0px;
+      margin-top: 10px;
       padding: 10px;
       @include mixins.border-radius();
 
@@ -145,7 +145,8 @@
   .orders {
     display: flex;
     flex-direction: column;
-    padding: 0px 10px;
+    padding: 10px;
+    padding-top: 0px;
     height: calc(100% - 50px);
     margin-top: 50px;
     overflow-y: scroll;
@@ -157,7 +158,7 @@
       position: relative;
       background: config.$white;
       box-shadow: config.$card-shadow;
-      margin: 10px 0px;
+      margin-top: 10px;
       padding: 10px;
       @include mixins.border-radius();
 
@@ -233,7 +234,7 @@
 
   .details {
     position: absolute;
-    bottom: 0px;
+    bottom: 5px;
     height: 130px;
     width: 100%;
     padding: 0px 10px;
