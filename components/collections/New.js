@@ -27,14 +27,13 @@ function New() {
     setDisplayProduct(false);
   }, [setDisplayProduct]);
 
-  const selectProduct = async (product) => {
+  const selectProduct = async (id) => {
+    const product = await getProductApi(id);
     setSelectedProduct(product);
     setDisplayProduct(true);
-
     // on each click update views count
-    const getData = await getProductApi(product["_id"]);
     let updateData = {
-      ...getData,
+      ...product,
       views: product.views + 1,
     };
     await updateProductApi(updateData);
@@ -97,7 +96,7 @@ function New() {
                 </div>
               </div>
               <Image
-                onClick={() => selectProduct(product)}
+                onClick={() => selectProduct(product["_id"])}
                 className={classes.image}
                 src={product.images.main}
                 alt="image"

@@ -1,6 +1,5 @@
 import Product from "../../models/Product";
 import dbConnect from "../../services/dbConnect";
-// save data with images link to db after images upload
 export default async function productHandler(req, res) {
   const { method, body } = req;
 
@@ -8,6 +7,7 @@ export default async function productHandler(req, res) {
 
   switch (method) {
     case "POST":
+      // save data with images link to db after images upload
       try {
         const newProduct = await Product.create(body);
         return res.status(200).json(newProduct);

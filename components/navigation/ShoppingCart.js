@@ -358,7 +358,7 @@ export default function ShoppingCart() {
         <div className={classes.details}>
           <div className={classes.row}>
             <p className={classes.value}>{shoppingCart.length}</p>
-            <p className={classes.title}>تعداد آیتم ها</p>
+            <p className={classes.title}>تعداد آیتم</p>
           </div>
           <div className={classes.row}>
             <p className={classes.value}>{convertNumber(calculateTotal())} T</p>
@@ -369,10 +369,10 @@ export default function ShoppingCart() {
               <p className={classes.value}>رایگان</p>
             ) : (
               <p className={classes.value}>
-                {shoppingCart.length > 0 ? "پرداخت درب منزل" : ""}
+                {shoppingCart.length > 0 ? "پرداخت موقع تحویل" : ""}
               </p>
             )}
-            <p className={classes.title}>هزینه ارسال</p>
+            <p className={classes.title}>ارسال</p>
           </div>
           {!checkout ? (
             <button
