@@ -260,10 +260,10 @@ function Product({ favourite }) {
           </div>
           <div className={classes.product}>
             <p className={classes.description}>{selectedProduct.description}</p>
-            <p className={classes.row}>
+            <div className={classes.row}>
               <p className={classes.title}>{selectedProduct.designer}</p>
               <p>طراح</p>
-            </p>
+            </div>
             <div
               className={classes.list}
               onClick={() => {
