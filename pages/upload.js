@@ -7,6 +7,8 @@ import { tokenGenerator } from "../services/utility";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import dbConnect from "../services/dbConnect";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -70,8 +72,6 @@ export default function Upload() {
   }, [setContainer]);
 
   const transformDataSize = (value, type) => {
-    console.log(value);
-
     let split = value.split(",");
     let items = split.map((item) => {
       return item.trim();
@@ -187,7 +187,18 @@ export default function Upload() {
 
   return (
     <div className="upload-form">
-      <h3>Product information</h3>
+      <div className="bar">
+        <ArrowBackIosNewIcon
+          sx={{ color: "#1b1b1b", fontSize: 30 }}
+          onClick={() => Router.push("/")}
+        />
+        <h3>Product information</h3>
+        <RefreshIcon
+          className="icon"
+          onClick={() => Router.push("/upload")}
+          sx={{ fontSize: 30 }}
+        />
+      </div>
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>Title</p>

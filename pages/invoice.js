@@ -7,6 +7,7 @@ import invoiceModel from "../models/Invoice";
 import { convertNumber } from "../services/utility";
 import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function Invoice({ invoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
@@ -41,6 +42,10 @@ export default function Invoice({ invoices, postedInvoices }) {
   return (
     <div className={classes.invoiceContainer}>
       <div className={classes.navigation}>
+        <ArrowBackIosNewIcon
+          sx={{ color: "#1b1b1b", fontSize: 30 }}
+          onClick={() => Router.push("/")}
+        />
         <p
           onClick={() => setposted(false)}
           className={posted ? classes.nav : classes.navActive}
@@ -56,7 +61,7 @@ export default function Invoice({ invoices, postedInvoices }) {
         <RefreshIcon
           className="icon"
           onClick={() => Router.push("/invoice")}
-          sx={{ fontSize: 24 }}
+          sx={{ fontSize: 30 }}
         />
       </div>
 

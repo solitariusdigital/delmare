@@ -7,11 +7,13 @@ import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
+  const { container, setContainer } = useContext(StateContext);
   const [count, setCount] = useState(0);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     setBar(false);
+    setContainer(true);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);

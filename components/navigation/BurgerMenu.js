@@ -9,9 +9,11 @@ import CallIcon from "@mui/icons-material/Call";
 import Person4Icon from "@mui/icons-material/Person4";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import StarsIcon from "@mui/icons-material/Stars";
 import Register from "../Register";
 import Image from "next/image";
 import logo from "../../assets/logo.png";
+import Router from "next/router";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -22,6 +24,7 @@ export default function BurgerMenu() {
 
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const navigation = [
     {
@@ -111,6 +114,15 @@ export default function BurgerMenu() {
                     <p>{nav.title}</p>
                   </div>
                 ))}
+                {userLogIn && currentUser.permission === "admin" && (
+                  <div
+                    className={classes.item}
+                    onClick={() => setAdmin(!admin)}
+                  >
+                    <StarsIcon />
+                    <p>ادمین</p>
+                  </div>
+                )}
               </div>
               {!userLogIn && (
                 <div className={classes.buttonContainer}>
@@ -132,7 +144,7 @@ export default function BurgerMenu() {
             <Register></Register>
           )}
           {contact && (
-            <div className={classes.contact}>
+            <div className={classes.box}>
               {/* <InstagramIcon className="icon" sx={{ fontSize: 40 }} /> */}
               <div className={classes.row}>
                 <p>
@@ -144,6 +156,24 @@ export default function BurgerMenu() {
               <div className={classes.row}>
                 <p>0912 022 1526</p>
                 <p className={classes.title}>تلفن</p>
+              </div>
+            </div>
+          )}
+          {admin && (
+            <div className={classes.box}>
+              <div className={classes.row}>
+                <button
+                  className="mainButton"
+                  onClick={() => Router.push("/upload")}
+                >
+                  Upload
+                </button>
+                <button
+                  className="mainButton"
+                  onClick={() => Router.push("/invoice")}
+                >
+                  Invoice
+                </button>
               </div>
             </div>
           )}
