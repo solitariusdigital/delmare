@@ -261,9 +261,9 @@ function Product({ favourite }) {
           </div>
           <div className={classes.product}>
             <p className={classes.description}>{selectedProduct.description}</p>
-            <p className={classes.description}>
-              طراح <span></span>
-              <span>{selectedProduct.designer}</span>
+            <p className={classes.row}>
+              <p className={classes.title}>{selectedProduct.designer}</p>
+              <p>طراح</p>
             </p>
             <div
               className={classes.list}

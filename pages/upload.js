@@ -287,7 +287,7 @@ export default function Upload() {
         {freeSize ? (
           <p onClick={() => setFreeSize(false)}>Add size</p>
         ) : (
-          <b onClick={() => setFreeSize(true)}>Free size</b>
+          <p onClick={() => setFreeSize(true)}>Free size</p>
         )}
       </div>
 

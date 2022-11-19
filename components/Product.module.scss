@@ -79,9 +79,16 @@
 
   .description {
     margin: 20px 0px;
-    font-size: config.$small-font;
+    font-size: config.$med-font;
+  }
 
-    span {
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0px;
+
+    .title {
       font-size: config.$big-font;
       font-weight: bold;
     }
@@ -214,6 +221,12 @@
 
       &:hover {
         cursor: pointer;
+      }
+
+      p {
+        width: 20px;
+        height: 20px;
+        text-align: center;
       }
     }
 

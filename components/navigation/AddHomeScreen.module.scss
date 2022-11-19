@@ -6,7 +6,6 @@
   width: 100%;
   height: calc(100vh - 50px);
   background: config.$white;
-
   @include mixins.transparentBackground(0.4, config.$brand);
 
   .content {
@@ -23,14 +22,13 @@
   }
 
   .title {
-    font-size: config.$big-font;
+    font-size: config.$med-font;
     text-align: center;
     margin-bottom: 20px;
   }
 
   p {
-    font-size: config.$med-font;
-
+    font-size: config.$small-font;
     text-align: right;
   }
 
@@ -46,5 +44,6 @@
     position: absolute;
     bottom: 10px;
     width: 90%;
+    font-size: config.$med-font;
   }
 }
