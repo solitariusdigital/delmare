@@ -147,14 +147,14 @@ export default function Upload() {
     });
 
     if (upload.ok) {
-      setAlert(delmareIdFolder);
+      setAlert("Product saved successfully");
     } else {
       setAlert("Data save failed, try again");
     }
 
     setTimeout(() => {
       Router.reload(window.location.pathname);
-    }, 30000);
+    }, 10000);
   };
 
   // upload images into s3 bucket
@@ -285,9 +285,13 @@ export default function Upload() {
       <h3>Size, color, count</h3>
       <div className={classes.sizeNav}>
         {freeSize ? (
-          <p onClick={() => setFreeSize(false)}>Add size</p>
+          <button className="mainButton" onClick={() => setFreeSize(false)}>
+            Add size
+          </button>
         ) : (
-          <p onClick={() => setFreeSize(true)}>Free size</p>
+          <button className="mainButton" onClick={() => setFreeSize(true)}>
+            Free size
+          </button>
         )}
       </div>
 
