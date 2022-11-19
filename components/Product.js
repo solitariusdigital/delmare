@@ -195,15 +195,14 @@ function Product({ favourite }) {
     }
 
     if (currentUser) {
+      setLike(!like);
       if (currentUser.favourites.includes(product["_id"])) {
         currentUser.favourites.splice(
           currentUser.favourites.indexOf(product["_id"]),
           1
         );
-        setLike(false);
       } else {
         currentUser.favourites.unshift(product["_id"]);
-        setLike(true);
       }
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
