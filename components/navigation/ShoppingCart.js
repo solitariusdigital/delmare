@@ -372,7 +372,7 @@ export default function ShoppingCart() {
                 {shoppingCart.length > 0 ? "پرداخت موقع تحویل" : ""}
               </p>
             )}
-            <p className={classes.title}>ارسال</p>
+            <p className={classes.title}>هزینه ارسال</p>
           </div>
           {!checkout ? (
             <button

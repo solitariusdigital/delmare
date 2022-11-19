@@ -99,7 +99,7 @@ export default function WishList() {
                     </div>
                     <div className="social">
                       <VisibilityIcon className="icon" />
-                      <p>{product.views}</p>
+                      <p>{Math.round(product.views)}</p>
                     </div>
                   </div>
                 </div>

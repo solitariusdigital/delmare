@@ -34,7 +34,7 @@ function New() {
     // on each click update views count
     let updateData = {
       ...product,
-      views: product.views + 1,
+      views: product.views + 1.5,
     };
     await updateProductApi(updateData);
   };
@@ -90,7 +90,7 @@ function New() {
                   </div>
                   <div className="social">
                     <VisibilityIcon className="icon" />
-                    <p>{product.views}</p>
+                    <p>{Math.round(product.views)}</p>
                   </div>
                 </div>
               </div>

@@ -139,7 +139,7 @@ export default function Upload() {
         delmareId: delmareIdFolder,
         images: images,
         size: size,
-        views: 10,
+        views: Math.floor(Math.random() * 10) + 1,
       }),
       headers: {
         "Content-Type": "application/json",

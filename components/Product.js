@@ -253,7 +253,7 @@ function Product({ favourite }) {
                 </div>
               </div>
               <div className={classes.social}>
-                <p>{selectedProduct.views}</p>
+                <p>{Math.round(selectedProduct.views)}</p>
                 <VisibilityIcon className={classes.icon} />
               </div>
             </div>
