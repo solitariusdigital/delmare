@@ -183,10 +183,12 @@ a {
 .shoppingcart-icon {
   display: flex;
   align-items: center;
+  height: 25px;
 
   p {
     font-size: config.$small-font;
-    margin-left: 5px;
+    width: 20px;
+    height: 100%;
   }
 }
 
