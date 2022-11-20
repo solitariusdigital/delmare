@@ -26,7 +26,8 @@
   }
 
   input,
-  textarea {
+  textarea,
+  select {
     @include mixins.input();
     width: 100%;
     background: config.$cream;
@@ -35,6 +36,10 @@
   textarea {
     height: 90px;
     resize: none;
+  }
+
+  select {
+    height: 50px;
   }
 
   .size {

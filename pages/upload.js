@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/stateContext";
 import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
@@ -9,6 +9,7 @@ import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -30,8 +31,29 @@ export default function Upload() {
 
   const { container, setContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
+
+  const [categories, setCategories] = useState([
+    "اکسسوری",
+    "بارونی",
+    "بلوز",
+    "پالتو",
+    "تاپ",
+    "جین",
+    "روسری",
+    "شال",
+    "شلوار",
+    "شومیز",
+    "عینک",
+    "کاپشن",
+    "کت",
+    "کفش",
+    "کلاه",
+    "کیف",
+    "هودی",
+  ]);
 
   const [mainImage, setMainImage] = useState("");
   const [imageOne, setImageOne] = useState("");
@@ -52,8 +74,12 @@ export default function Upload() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [percentage, setPercentage] = useState("");
+  const [sale, setSale] = useState(false);
   const [delmareId, setDelmareId] = useState("");
   const [designer, setDesigner] = useState("");
+  const [category, setCategory] = useState("");
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
@@ -83,7 +109,14 @@ export default function Upload() {
   };
 
   const handleUpload = async () => {
-    if (!title && !description && !price && !delmareId && !designer) {
+    if (
+      !title &&
+      !description &&
+      !price &&
+      !delmareId &&
+      !designer &&
+      !category
+    ) {
       setAlert("Fill in all fields");
       setTimeout(() => {
         setAlert("");
@@ -132,13 +165,17 @@ export default function Upload() {
     const upload = await fetch(`/api/product`, {
       method: "POST",
       body: JSON.stringify({
+        delmareId: delmareIdFolder,
         title: title.trim(),
         description: description.trim(),
-        price: price.trim(),
-        designer: designer.trim(),
-        delmareId: delmareIdFolder,
         images: images,
         size: size,
+        category: category.trim(),
+        designer: designer.trim(),
+        price: price.trim(),
+        discount: discount.trim(),
+        percentage: percentage.trim(),
+        sale: sale,
         views: Math.floor(Math.random() * 10) + 1,
       }),
       headers: {
@@ -154,7 +191,7 @@ export default function Upload() {
 
     setTimeout(() => {
       Router.reload(window.location.pathname);
-    }, 10000);
+    }, 5000);
   };
 
   // upload images into s3 bucket
@@ -221,7 +258,7 @@ export default function Upload() {
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Designer</p>
+          <p className={classes.label}>Designer Name</p>
           <CloseIcon
             className="icon"
             onClick={() => setDesigner("")}
@@ -240,6 +277,11 @@ export default function Upload() {
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>Price Toman</p>
+          <AttachMoneyIcon
+            className="icon"
+            onClick={() => setSale(!sale)}
+            sx={{ fontSize: 22 }}
+          />
           <CloseIcon
             className="icon"
             onClick={() => setPrice("")}
@@ -255,6 +297,46 @@ export default function Upload() {
           autoComplete="off"
         />
       </div>
+      {sale && (
+        <Fragment>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>Discount Price Toman</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setDiscount("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              type="tel"
+              id="discount"
+              name="discount"
+              onChange={(e) => setDiscount(e.target.value)}
+              value={discount}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>Discount Percentage</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPercentage("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              type="tel"
+              id="percentage"
+              name="percentage"
+              onChange={(e) => setPercentage(e.target.value)}
+              value={percentage}
+              autoComplete="off"
+            />
+          </div>
+        </Fragment>
+      )}
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>Delmare Id</p>
@@ -273,6 +355,25 @@ export default function Upload() {
           autoComplete="off"
         />
       </div>
+
+      <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="default" disabled>
+            Choose category
+          </option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>Description</p>

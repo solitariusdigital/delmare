@@ -33,8 +33,12 @@ const ProductSchema = new Schema(
       XXL: {},
       FS: {},
     },
+    category: String,
     designer: String,
     price: Number,
+    discount: Number,
+    percentage: Number,
+    sale: Boolean,
     views: Number,
   },
   { timestamps: true }

@@ -77,6 +77,19 @@
         bottom: 10px;
       }
 
+      .sale {
+        font-size: config.$small-font;
+        color: config.$green;
+      }
+
+      .message {
+        margin-top: 10px;
+        color: config.$orange;
+        position: absolute;
+        right: 0px;
+        bottom: 5px;
+      }
+
       .cart {
         position: relative;
 
@@ -116,11 +129,6 @@
               color: config.$grey;
               font-size: config.$tiny-font;
             }
-          }
-
-          .message {
-            margin-top: 10px;
-            color: config.$orange;
           }
 
           .color,

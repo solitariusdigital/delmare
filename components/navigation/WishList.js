@@ -116,6 +116,11 @@ export default function WishList() {
                   priority={true}
                   loading="eager"
                 />
+                {product.sale && (
+                  <div className="sale">
+                    <p>{product.percentage}%</p>
+                  </div>
+                )}
               </div>
             ))}
           {wishList.length === 0 && (

@@ -213,6 +213,11 @@ export default function ShoppingCart() {
                         <p className={classes.code}>کد آیتم</p>
                         <p>{cart.delmareId}</p>
                       </div>
+                      {cart.sale && (
+                        <div className={classes.sale}>
+                          <p>Save {cart.percentage}%</p>
+                        </div>
+                      )}
                       <div className={classes.message}>
                         <p>{cart.message}</p>
                       </div>

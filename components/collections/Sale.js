@@ -12,11 +12,12 @@ import {
   updateUserApi,
 } from "../../services/api";
 
-function New() {
+function Sale() {
   const { menue, setMenu } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
-  const { newCollection, setNewCollection } = useContext(StateContext);
+  const { saleProductsCollection, setSaleProductsCollection } =
+    useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const [like, setLike] = useState(false);
@@ -68,7 +69,7 @@ function New() {
   return (
     <div className="collection-grid">
       {!displayProduct &&
-        newCollection
+        saleProductsCollection
           .map((product, index) => (
             <div key={index} className="product">
               <div className="banner">
@@ -102,6 +103,9 @@ function New() {
                 objectFit="cover"
                 priority={true}
               />
+              <div className="sale">
+                <p>{product.percentage}%</p>
+              </div>
             </div>
           ))
           .reverse()}
@@ -110,4 +114,4 @@ function New() {
   );
 }
 
-export default New;
+export default Sale;

@@ -174,8 +174,12 @@ function Product({ favourite }) {
           title: selectedProduct.title,
           size: selectedSize,
           color: selectedColor,
-          price: selectedProduct.price,
+          price: selectedProduct.sale
+            ? selectedProduct.discount
+            : selectedProduct.price,
           image: selectedProduct.images.main,
+          percentage: selectedProduct.percentage,
+          sale: selectedProduct.sale,
         },
       ]);
       clearDetails();
@@ -228,6 +232,11 @@ function Product({ favourite }) {
                 setBar(true);
               }}
             />
+            {selectedProduct.sale && (
+              <div className={classes.sale}>
+                <p>{selectedProduct.percentage}%</p>
+              </div>
+            )}
             <Image
               className={classes.image}
               src={selectedProduct.images.main}
@@ -265,12 +274,23 @@ function Product({ favourite }) {
               <p>طراح</p>
             </div>
             <div
-              className={classes.list}
+              className={classes.action}
               onClick={() => {
                 setDisplayDetails(true);
               }}
             >
-              <p>{convertNumber(selectedProduct.price)} T</p>
+              {selectedProduct.sale ? (
+                <Fragment>
+                  <p className={classes.price}>
+                    {convertNumber(selectedProduct.price)} T
+                  </p>
+                  <p className={classes.discount}>
+                    {convertNumber(selectedProduct.discount)} T
+                  </p>
+                </Fragment>
+              ) : (
+                <p>{convertNumber(selectedProduct.price)} T</p>
+              )}
               <p>{selectedProduct.title}</p>
             </div>
           </div>
@@ -287,9 +307,9 @@ function Product({ favourite }) {
               }}
               sx={{ fontSize: 30 }}
             />
-            <div className={classes.item}>
-              <p>{convertNumber(selectedProduct.price)} T</p>
-              <p>{selectedProduct.title}</p>
+            <div className={classes.sectionId}>
+              <p>{selectedProduct.delmareId}</p>
+              <p className={classes.title}>کد آیتم</p>
             </div>
           </div>
           <div className={classes.itemDetails}>
@@ -356,10 +376,22 @@ function Product({ favourite }) {
           </div>
 
           <div className={classes.details}>
-            <div className={classes.sectionId}>
-              <p>{selectedProduct.delmareId}</p>
-              <p className={classes.title}>کد آیتم</p>
+            <div className={classes.priceContainer}>
+              {selectedProduct.sale ? (
+                <Fragment>
+                  <p className={classes.price}>
+                    {convertNumber(selectedProduct.price)} T
+                  </p>
+                  <p className={classes.discount}>
+                    {convertNumber(selectedProduct.discount)} T
+                  </p>
+                </Fragment>
+              ) : (
+                <p>{convertNumber(selectedProduct.price)} T</p>
+              )}
+              <p>{selectedProduct.title}</p>
             </div>
+
             <div className={classes.section}>
               <div className={classes.box}>
                 {Object.keys(productSizes).map((size, index) => (
@@ -512,7 +544,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      رضایت‌مندی مشتریان همواره از اولویت‏‌های دلماره است. ما در
+                      رضایتمندی مشتریان همواره از اولویت‏‌های دلماره است. ما در
                       این راستا می‏‌کوشیم تا هر سفارش در شرایط مطلوب به دست
                       مشتری برسد. با وجود این ممکن است مشتریان عزیز پس از خرید،
                       با مسایلی روبرو شوند که درچنین مواردی خدماتی در چارچوب

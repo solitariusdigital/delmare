@@ -19,15 +19,15 @@ function CollectionsPage() {
       imageSrc: `${sourceLink}one.jpg`,
     },
     {
+      title: "Sale",
+      link: "/collections/sale",
+      imageSrc: `${sourceLink}seven.jpg`,
+    },
+    {
       title: "Brands",
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
     },
-    // {
-    //   title: "Sale",
-    //   link: "/collections/sale",
-    //   imageSrc: `${sourceLink}four.jpg`,
-    // },
     // {
     //   title: "Bloggers",
     //   link: "/collections/bloggers",

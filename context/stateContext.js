@@ -27,6 +27,11 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
+      title: "Sale",
+      link: "/collections/sale",
+      active: false,
+    },
+    {
       title: "Brands",
       link: "/collections/brands",
       active: false,
@@ -37,6 +42,8 @@ export const StateProvider = (props) => {
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, seCurrentUser] = useState(null);
   const [productsCollection, setProductsCollection] = useState([]);
+  const [newCollection, setNewCollection] = useState([]);
+  const [saleProductsCollection, setSaleProductsCollection] = useState([]);
 
   const stateContext = {
     menu,
@@ -67,6 +74,10 @@ export const StateProvider = (props) => {
     setProductsCollection,
     register,
     setRegister,
+    saleProductsCollection,
+    setSaleProductsCollection,
+    newCollection,
+    setNewCollection,
   };
 
   return (
