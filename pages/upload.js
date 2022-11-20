@@ -425,7 +425,7 @@ export default function Upload() {
             <input
               placeholder="b21c1c 5, 514242 45"
               className={classes.size}
-              type="tel"
+              type="text"
               id="FS"
               name="FS"
               onChange={(e) => setFS(e.target.value)}
@@ -453,7 +453,7 @@ export default function Upload() {
             <input
               placeholder="b21c1c 5, 514242 45"
               className={classes.size}
-              type="tel"
+              type="text"
               id="XS"
               name="XS"
               onChange={(e) => setXS(e.target.value)}
@@ -475,7 +475,7 @@ export default function Upload() {
             </div>
             <input
               className={classes.size}
-              type="tel"
+              type="text"
               id="S"
               name="S"
               onChange={(e) => setS(e.target.value)}
@@ -497,7 +497,7 @@ export default function Upload() {
             </div>
             <input
               className={classes.size}
-              type="tel"
+              type="text"
               id="M"
               name="M"
               onChange={(e) => setM(e.target.value)}
@@ -519,7 +519,7 @@ export default function Upload() {
             </div>
             <input
               className={classes.size}
-              type="tel"
+              type="text"
               id="L"
               name="L"
               onChange={(e) => setL(e.target.value)}
@@ -541,7 +541,7 @@ export default function Upload() {
             </div>
             <input
               className={classes.size}
-              type="tel"
+              type="text"
               id="XL"
               name="XL"
               onChange={(e) => setXL(e.target.value)}
@@ -563,7 +563,7 @@ export default function Upload() {
             </div>
             <input
               className={classes.size}
-              type="tel"
+              type="text"
               id="XXL"
               name="XXL"
               onChange={(e) => setXXL(e.target.value)}

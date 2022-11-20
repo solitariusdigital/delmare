@@ -55,16 +55,16 @@
       }
     }
   }
-}
 
-.sale {
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  right: 10px;
-  font-size: config.$small-font;
-  color: config.$red;
-  font-weight: bold;
+  .sale {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    font-size: config.$small-font;
+    color: config.$red;
+    font-weight: bold;
+  }
 }
 
 .image {
@@ -132,6 +132,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  .sale {
+    font-size: config.$small-font;
+    color: config.$red;
+    font-weight: bold;
+  }
 }
 
 .topBar,

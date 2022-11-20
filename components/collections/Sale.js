@@ -22,10 +22,12 @@ function Sale() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const [like, setLike] = useState(false);
   const { register, setRegister } = useContext(StateContext);
+  const { bar, setBar } = useContext(StateContext);
 
   useEffect(() => {
+    setBar(true);
     setDisplayProduct(false);
-  }, [setDisplayProduct]);
+  }, [setDisplayProduct, setBar]);
 
   const selectProduct = async (id) => {
     const product = await getProductApi(id);

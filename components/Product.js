@@ -234,7 +234,7 @@ function Product({ favourite }) {
             />
             {selectedProduct.sale && (
               <div className={classes.sale}>
-                <p>{selectedProduct.percentage}%</p>
+                <p>{selectedProduct.percentage}% OFF</p>
               </div>
             )}
             <Image
@@ -307,6 +307,11 @@ function Product({ favourite }) {
               }}
               sx={{ fontSize: 30 }}
             />
+            {selectedProduct.sale && (
+              <div className={classes.sale}>
+                <p>{selectedProduct.percentage}% OFF</p>
+              </div>
+            )}
             <div className={classes.sectionId}>
               <p>{selectedProduct.delmareId}</p>
               <p className={classes.title}>کد آیتم</p>
