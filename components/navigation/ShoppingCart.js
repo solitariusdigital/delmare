@@ -177,7 +177,7 @@ export default function ShoppingCart() {
           {checkout && (
             <ArrowBackIosNewIcon
               className={classes.back}
-              sx={{ color: "#1b1b1b", fontSize: 30 }}
+              sx={{ fontSize: 30 }}
               onClick={() => setCheckout(false)}
             />
           )}

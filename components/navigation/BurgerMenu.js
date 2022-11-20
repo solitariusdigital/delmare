@@ -64,6 +64,7 @@ export default function BurgerMenu() {
       icon: <CallIcon />,
       call: () => {
         setContact(!contact);
+        setAdmin(false);
         setAlert("");
       },
     },
@@ -117,7 +118,10 @@ export default function BurgerMenu() {
                 {userLogIn && currentUser.permission === "admin" && (
                   <div
                     className={classes.item}
-                    onClick={() => setAdmin(!admin)}
+                    onClick={() => {
+                      setAdmin(!admin);
+                      setContact(false);
+                    }}
                   >
                     <StarsIcon />
                     <p>ادمین</p>

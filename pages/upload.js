@@ -189,8 +189,9 @@ export default function Upload() {
     <div className="upload-form">
       <div className="bar">
         <ArrowBackIosNewIcon
-          sx={{ color: "#1b1b1b", fontSize: 30 }}
+          className="icon"
           onClick={() => Router.push("/")}
+          sx={{ fontSize: 30 }}
         />
         <h3>Product information</h3>
         <RefreshIcon

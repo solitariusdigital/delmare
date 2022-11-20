@@ -43,8 +43,9 @@ export default function Invoice({ invoices, postedInvoices }) {
     <div className={classes.invoiceContainer}>
       <div className={classes.navigation}>
         <ArrowBackIosNewIcon
-          sx={{ color: "#1b1b1b", fontSize: 30 }}
+          className="icon"
           onClick={() => Router.push("/")}
+          sx={{ fontSize: 30 }}
         />
         <p
           onClick={() => setposted(false)}

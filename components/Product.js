@@ -222,7 +222,7 @@ function Product({ favourite }) {
           <div className={classes.productContainer}>
             <ArrowBackIosNewIcon
               className={classes.back}
-              sx={{ color: "#1b1b1b", fontSize: 30 }}
+              sx={{ fontSize: 30 }}
               onClick={() => {
                 setDisplayProduct(false);
                 setBar(true);
@@ -281,10 +281,11 @@ function Product({ favourite }) {
         <div className={classes.itemContainer}>
           <div className={classes.topBar}>
             <ArrowBackIosNewIcon
-              sx={{ color: "#1b1b1b", fontSize: 30 }}
+              className="icon"
               onClick={() => {
                 back();
               }}
+              sx={{ fontSize: 30 }}
             />
             <div className={classes.item}>
               <p>{convertNumber(selectedProduct.price)} T</p>

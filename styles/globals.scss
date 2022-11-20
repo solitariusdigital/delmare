@@ -133,8 +133,9 @@ a {
       }
 
       .title {
-        min-width: 45%;
+        max-width: 45%;
         margin: 0px;
+        font-weight: bold;
       }
 
       .social {
