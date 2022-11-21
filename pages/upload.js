@@ -230,7 +230,7 @@ export default function Upload() {
           onClick={() => Router.push("/")}
           sx={{ fontSize: 30 }}
         />
-        <h3>Product information</h3>
+        <h3>اطلاعات آیتم</h3>
         <RefreshIcon
           className="icon"
           onClick={() => Router.push("/upload")}
@@ -239,12 +239,12 @@ export default function Upload() {
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Title</p>
           <CloseIcon
             className="icon"
             onClick={() => setTitle("")}
             sx={{ fontSize: 16 }}
           />
+          <p className={classes.label}>اسم آیتم</p>
         </div>
         <input
           type="text"
@@ -258,12 +258,12 @@ export default function Upload() {
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Designer Name</p>
           <CloseIcon
             className="icon"
             onClick={() => setDesigner("")}
             sx={{ fontSize: 16 }}
           />
+          <p className={classes.label}>اسم طراح</p>
         </div>
         <input
           type="text"
@@ -272,21 +272,22 @@ export default function Upload() {
           onChange={(e) => setDesigner(e.target.value)}
           value={designer}
           autoComplete="off"
+          dir="rtl"
         />
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Price Toman</p>
-          <AttachMoneyIcon
-            className="icon"
-            onClick={() => setSale(!sale)}
-            sx={{ fontSize: 22 }}
-          />
           <CloseIcon
             className="icon"
             onClick={() => setPrice("")}
             sx={{ fontSize: 16 }}
           />
+          <AttachMoneyIcon
+            className="icon"
+            onClick={() => setSale(!sale)}
+            sx={{ fontSize: 22 }}
+          />
+          <p className={classes.label}>قیمت تومان</p>
         </div>
         <input
           type="tel"
@@ -301,12 +302,12 @@ export default function Upload() {
         <Fragment>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>Discount Price Toman</p>
               <CloseIcon
                 className="icon"
                 onClick={() => setDiscount("")}
                 sx={{ fontSize: 16 }}
               />
+              <p className={classes.label}>قیمت تخفیف تومان</p>
             </div>
             <input
               type="tel"
@@ -319,12 +320,12 @@ export default function Upload() {
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>Discount Percentage</p>
               <CloseIcon
                 className="icon"
                 onClick={() => setPercentage("")}
                 sx={{ fontSize: 16 }}
               />
+              <p className={classes.label}>درصد تخفیف</p>
             </div>
             <input
               type="tel"
@@ -339,12 +340,12 @@ export default function Upload() {
       )}
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Delmare Id</p>
           <CloseIcon
             className="icon"
             onClick={() => setDelmareId("")}
             sx={{ fontSize: 16 }}
           />
+          <p className={classes.label}>شناسه دلماره</p>
         </div>
         <input
           type="text"
@@ -376,12 +377,12 @@ export default function Upload() {
 
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>Description</p>
           <CloseIcon
             className="icon"
             onClick={() => setDescription("")}
             sx={{ fontSize: 16 }}
           />
+          <p className={classes.label}>توضیحات</p>
         </div>
         <textarea
           type="text"
@@ -395,7 +396,7 @@ export default function Upload() {
         ></textarea>
       </div>
 
-      <h3>Size, color, count</h3>
+      <h3>رنگ، سایز، تعداد</h3>
       <div className={classes.sizeNav}>
         {freeSize ? (
           <button className="mainButton" onClick={() => setFreeSize(false)}>
@@ -574,7 +575,7 @@ export default function Upload() {
         </div>
       )}
 
-      <h3>Upload images</h3>
+      <h3>انتخاب عکس</h3>
       <div className="input">
         <div>
           <p className={classes.label}>Main</p>

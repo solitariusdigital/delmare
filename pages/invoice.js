@@ -51,13 +51,13 @@ export default function Invoice({ invoices, postedInvoices }) {
           onClick={() => setposted(false)}
           className={posted ? classes.nav : classes.navActive}
         >
-          To post
+          ارسالی جدید
         </p>
         <p
           onClick={() => setposted(true)}
           className={!posted ? classes.nav : classes.navActive}
         >
-          Posted
+          ارسال شده
         </p>
         <RefreshIcon
           className="icon"
@@ -68,7 +68,7 @@ export default function Invoice({ invoices, postedInvoices }) {
 
       {!posted && (
         <div>
-          <p className={classes.info}>Orders to post {invoices.length}</p>
+          <p className={classes.info}>سفارشات جدید {invoices.length}</p>
           {invoices.map((invoice, index) => (
             <div key={index} className={classes.invoice}>
               <div className={classes.row}>
@@ -122,7 +122,7 @@ export default function Invoice({ invoices, postedInvoices }) {
                 className={classes.button}
                 onClick={() => deliverInvoice(invoice)}
               >
-                Mark posted
+                انتقال به ارسال شده
               </button>
             </div>
           ))}
@@ -131,7 +131,9 @@ export default function Invoice({ invoices, postedInvoices }) {
 
       {posted && (
         <div>
-          <p className={classes.info}>Posted orders {postedInvoices.length}</p>
+          <p className={classes.info}>
+            سفارشات ارسال شده {postedInvoices.length}
+          </p>
           {postedInvoices.map((invoice, index) => (
             <div key={index} className={classes.invoice}>
               <div className={classes.row}>
