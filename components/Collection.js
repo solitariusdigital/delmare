@@ -12,6 +12,8 @@ import {
   updateUserApi,
 } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 function Collection({ collectionType }) {
   const { menue, setMenu } = useContext(StateContext);
@@ -27,9 +29,10 @@ function Collection({ collectionType }) {
     useContext(StateContext);
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
 
+  const [selector, setSelector] = useState(false);
   const [like, setLike] = useState(false);
   const [gallery, setGallery] = useState([]);
-  const [filter, setFilter] = useState("default");
+  const [filter, setFilter] = useState("دسته بندی");
 
   useEffect(() => {
     switch (collectionType) {
@@ -92,6 +95,7 @@ function Collection({ collectionType }) {
 
   const filterCollection = (type) => {
     setFilter(type);
+    setSelector(false);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -111,11 +115,11 @@ function Collection({ collectionType }) {
   };
 
   const resetFilter = () => {
-    setFilter(filter);
+    setFilter("دسته بندی");
+    setSelector(false);
     switch (collectionType) {
       case "gallery":
         setGallery(galleryCollection);
-
         break;
       case "sale":
         setGallery(saleCollection);
@@ -126,27 +130,34 @@ function Collection({ collectionType }) {
   return (
     <Fragment>
       {!displayProduct && (
-        <div className={classes.categorySelector}>
-          <select
-            defaultValue={filter}
-            onChange={(e) => filterCollection(e.target.value)}
-          >
-            <option value="default" disabled>
-              دسته بندی
-            </option>
-            {categories.map((category, index) => {
-              return (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              );
-            })}
-          </select>
-          <RefreshIcon
-            className="icon"
-            onClick={() => resetFilter()}
-            sx={{ fontSize: 24 }}
-          />
+        <div className={classes.category}>
+          <div className={classes.selectorContainer}>
+            <RefreshIcon
+              className={classes.reset}
+              onClick={() => resetFilter()}
+              sx={{ fontSize: 24 }}
+            />
+            <div
+              className={classes.selector}
+              onClick={() => setSelector(!selector)}
+            >
+              <div className={classes.icon}>
+                {selector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </div>
+              <p>{filter}</p>
+            </div>
+          </div>
+          {selector && (
+            <div className={classes.list}>
+              {categories.map((category, index) => {
+                return (
+                  <p onClick={() => filterCollection(category)} key={index}>
+                    {category}
+                  </p>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
       <div className="collection-grid">
