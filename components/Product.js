@@ -328,6 +328,23 @@ function Product({ favourite }) {
                 objectFit="cover"
                 priority={true}
               />
+              <div className={classes.banner}>
+                <div className={classes.social}>
+                  <div>
+                    {checFavourites(selectedProduct) ? (
+                      <FavoriteIcon
+                        className={classes.iconRed}
+                        onClick={() => favourProduct(selectedProduct)}
+                      />
+                    ) : (
+                      <FavoriteBorderIcon
+                        className={classes.icon}
+                        onClick={() => favourProduct(selectedProduct)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
             <div className={classes.subItemDetail}>
               <div
