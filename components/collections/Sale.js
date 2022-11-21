@@ -28,6 +28,7 @@ function Sale() {
 
   const [like, setLike] = useState(false);
   const [gallery, setGallery] = useState([]);
+  const [filter, setFilter] = useState("default");
 
   useEffect(() => {
     setGallery(saleCollection);
@@ -75,6 +76,7 @@ function Sale() {
   };
 
   const filterSale = (type) => {
+    setFilter(type);
     setGallery(
       productsCollection.filter((product) => {
         return product.category === type && product.sale;
@@ -87,7 +89,7 @@ function Sale() {
       {!displayProduct && (
         <div className={classes.categorySelector}>
           <select
-            defaultValue={"default"}
+            defaultValue={filter}
             onChange={(e) => filterSale(e.target.value)}
           >
             <option value="default" disabled>
@@ -103,7 +105,10 @@ function Sale() {
           </select>
           <RefreshIcon
             className="icon"
-            onClick={() => setGallery(saleCollection)}
+            onClick={() => {
+              setGallery(saleCollection);
+              setFilter(filter);
+            }}
             sx={{ fontSize: 24 }}
           />
         </div>
