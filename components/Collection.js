@@ -1,19 +1,19 @@
 import { useEffect, useContext, useState, Fragment } from "react";
-import { StateContext } from "../../context/stateContext";
-import Product from "../Product";
+import { StateContext } from "../context/stateContext";
+import Product from "./Product";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import classes from "./Collections.module.scss";
+import classes from "./Collection.module.scss";
 import Image from "next/image";
 import {
   getProductApi,
   updateProductApi,
   updateUserApi,
-} from "../../services/api";
+} from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
-function Sale() {
+function Collection({ collectionType }) {
   const { menue, setMenu } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
@@ -25,16 +25,30 @@ function Sale() {
   const { categories, setCategories } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
+  const { galleryCollection, setGalleryCollection } = useContext(StateContext);
 
   const [like, setLike] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [filter, setFilter] = useState("default");
 
   useEffect(() => {
-    setGallery(saleCollection);
+    switch (collectionType) {
+      case "gallery":
+        setGallery(galleryCollection);
+        break;
+      case "sale":
+        setGallery(saleCollection);
+        break;
+    }
     setBar(true);
     setDisplayProduct(false);
-  }, [setDisplayProduct, setBar, saleCollection]);
+  }, [
+    setDisplayProduct,
+    setBar,
+    saleCollection,
+    galleryCollection,
+    collectionType,
+  ]);
 
   const selectProduct = async (id) => {
     const product = await getProductApi(id);
@@ -69,19 +83,44 @@ function Sale() {
       await updateUserApi(currentUser);
     }
   };
+
   const checFavourites = (product) => {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);
     }
   };
 
-  const filterSale = (type) => {
+  const filterCollection = (type) => {
     setFilter(type);
-    setGallery(
-      productsCollection.filter((product) => {
-        return product.category === type && product.sale;
-      })
-    );
+    switch (collectionType) {
+      case "gallery":
+        setGallery(
+          productsCollection.filter((product) => {
+            return product.category === type && !product.sale;
+          })
+        );
+        break;
+      case "sale":
+        setGallery(
+          productsCollection.filter((product) => {
+            return product.category === type && product.sale;
+          })
+        );
+        break;
+    }
+  };
+
+  const resetFilter = () => {
+    setFilter(filter);
+    switch (collectionType) {
+      case "gallery":
+        setGallery(galleryCollection);
+
+        break;
+      case "sale":
+        setGallery(saleCollection);
+        break;
+    }
   };
 
   return (
@@ -90,7 +129,7 @@ function Sale() {
         <div className={classes.categorySelector}>
           <select
             defaultValue={filter}
-            onChange={(e) => filterSale(e.target.value)}
+            onChange={(e) => filterCollection(e.target.value)}
           >
             <option value="default" disabled>
               دسته بندی
@@ -105,10 +144,7 @@ function Sale() {
           </select>
           <RefreshIcon
             className="icon"
-            onClick={() => {
-              setGallery(saleCollection);
-              setFilter(filter);
-            }}
+            onClick={() => resetFilter()}
             sx={{ fontSize: 24 }}
           />
         </div>
@@ -149,9 +185,11 @@ function Sale() {
                   objectFit="cover"
                   priority={true}
                 />
-                <div className="sale">
-                  <p>{product.percentage}%</p>
-                </div>
+                {product.sale && (
+                  <div className="sale">
+                    <p>{product.percentage}%</p>
+                  </div>
+                )}
               </div>
             ))
             .reverse()}
@@ -164,4 +202,4 @@ function Sale() {
   );
 }
 
-export default Sale;
+export default Collection;

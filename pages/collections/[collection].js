@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import Gallery from "../../components/collections/Gallery";
-import Brands from "../../components/collections/Brands";
-import Sale from "../../components/collections/Sale";
+import Brands from "../../components/Brands";
+import Collection from "../../components/Collection";
 
 function CollectionPage() {
   const router = useRouter();
@@ -10,8 +9,8 @@ function CollectionPage() {
 
   return (
     <Fragment>
-      {collection == "gallery" && <Gallery />}
-      {collection == "sale" && <Sale />}
+      {collection == "gallery" && <Collection collectionType={"gallery"} />}
+      {collection == "sale" && <Collection collectionType={"sale"} />}
       {collection == "brands" && <Brands />}
     </Fragment>
   );
