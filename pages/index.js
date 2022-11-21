@@ -6,20 +6,19 @@ import dbConnect from "../services/dbConnect";
 import User from "../models/User";
 import Product from "../models/Product";
 
-function HomePage({ users, products, newProducts, saleProducts }) {
+function HomePage({ users, products, galleryProducts, saleProducts }) {
   const { bar, setBar } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
-  const { saleProductsCollection, setSaleProductsCollection } =
-    useContext(StateContext);
-  const { newCollection, setNewCollection } = useContext(StateContext);
+  const { saleCollection, setSaleCollection } = useContext(StateContext);
+  const { galleryCollection, setGalleryCollection } = useContext(StateContext);
 
   useEffect(() => {
     setAppUsers(users);
     setProductsCollection(products);
-    setNewCollection(newProducts);
-    setSaleProductsCollection(saleProducts);
+    setGalleryCollection(galleryProducts);
+    setSaleCollection(saleProducts);
     setBar(false);
   }, [
     setBar,
@@ -27,10 +26,10 @@ function HomePage({ users, products, newProducts, saleProducts }) {
     users,
     setProductsCollection,
     products,
-    setSaleProductsCollection,
+    setSaleCollection,
     saleProducts,
-    setNewCollection,
-    newProducts,
+    setGalleryCollection,
+    galleryProducts,
   ]);
 
   return <LandingPage></LandingPage>;
@@ -42,7 +41,7 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const users = await User.find();
     const products = await Product.find();
-    const newProducts = products.filter((product) => {
+    const galleryProducts = products.filter((product) => {
       return !product.sale;
     });
     const saleProducts = products.filter((product) => {
@@ -53,7 +52,7 @@ export async function getServerSideProps(context) {
       props: {
         users: JSON.parse(JSON.stringify(users)),
         products: JSON.parse(JSON.stringify(products)),
-        newProducts: JSON.parse(JSON.stringify(newProducts)),
+        galleryProducts: JSON.parse(JSON.stringify(galleryProducts)),
         saleProducts: JSON.parse(JSON.stringify(saleProducts)),
       },
     };

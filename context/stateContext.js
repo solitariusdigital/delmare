@@ -22,8 +22,8 @@ export const StateProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [navigation, setNavigation] = useState([
     {
-      title: "New",
-      link: "/collections/new",
+      title: "Gallery",
+      link: "/collections/gallery",
       active: false,
     },
     {
@@ -37,13 +37,33 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
+  const [categories, setCategories] = useState([
+    "اسکارف",
+    "اکسسوری",
+    "بارونی",
+    "بلوز",
+    "پالتو",
+    "تاپ",
+    "جین",
+    "ست",
+    "شلوار",
+    "شومیز",
+    "عینک",
+    "کاپشن",
+    "کت",
+    "کفش",
+    "کلاه",
+    "کیف",
+    "هودی",
+  ]);
+
   // application context
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, seCurrentUser] = useState(null);
   const [productsCollection, setProductsCollection] = useState([]);
-  const [newCollection, setNewCollection] = useState([]);
-  const [saleProductsCollection, setSaleProductsCollection] = useState([]);
+  const [galleryCollection, setGalleryCollection] = useState([]);
+  const [saleCollection, setSaleCollection] = useState([]);
 
   const stateContext = {
     menu,
@@ -74,10 +94,12 @@ export const StateProvider = (props) => {
     setProductsCollection,
     register,
     setRegister,
-    saleProductsCollection,
-    setSaleProductsCollection,
-    newCollection,
-    setNewCollection,
+    saleCollection,
+    setSaleCollection,
+    galleryCollection,
+    setGalleryCollection,
+    categories,
+    setCategories,
   };
 
   return (

@@ -13,11 +13,11 @@ import {
 } from "../../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
-function Sale() {
+function Gallery() {
   const { menue, setMenu } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
-  const { saleCollection, setSaleCollection } = useContext(StateContext);
+  const { galleryCollection, setGalleryCollection } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
@@ -30,10 +30,10 @@ function Sale() {
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    setGallery(saleCollection);
+    setGallery(galleryCollection);
     setBar(true);
     setDisplayProduct(false);
-  }, [setDisplayProduct, setBar, saleCollection]);
+  }, [setDisplayProduct, setBar, galleryCollection]);
 
   const selectProduct = async (id) => {
     const product = await getProductApi(id);
@@ -74,10 +74,10 @@ function Sale() {
     }
   };
 
-  const filterSale = (type) => {
+  const filterGallery = (type) => {
     setGallery(
       productsCollection.filter((product) => {
-        return product.category === type && product.sale;
+        return product.category === type && !product.sale;
       })
     );
   };
@@ -88,7 +88,7 @@ function Sale() {
         <div className={classes.categorySelector}>
           <select
             defaultValue={"default"}
-            onChange={(e) => filterSale(e.target.value)}
+            onChange={(e) => filterGallery(e.target.value)}
           >
             <option value="default" disabled>
               دسته بندی
@@ -103,7 +103,7 @@ function Sale() {
           </select>
           <RefreshIcon
             className="icon"
-            onClick={() => setGallery(saleCollection)}
+            onClick={() => setGallery(galleryCollection)}
             sx={{ fontSize: 24 }}
           />
         </div>
@@ -144,9 +144,6 @@ function Sale() {
                   objectFit="cover"
                   priority={true}
                 />
-                <div className="sale">
-                  <p>{product.percentage}%</p>
-                </div>
               </div>
             ))
             .reverse()}
@@ -159,4 +156,4 @@ function Sale() {
   );
 }
 
-export default Sale;
+export default Gallery;

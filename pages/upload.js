@@ -31,29 +31,10 @@ export default function Upload() {
 
   const { container, setContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { categories, setCategories } = useContext(StateContext);
 
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
-
-  const [categories, setCategories] = useState([
-    "اسکارف",
-    "اکسسوری",
-    "بارونی",
-    "بلوز",
-    "پالتو",
-    "تاپ",
-    "جین",
-    "ست",
-    "شلوار",
-    "شومیز",
-    "عینک",
-    "کاپشن",
-    "کت",
-    "کفش",
-    "کلاه",
-    "کیف",
-    "هودی",
-  ]);
 
   const [mainImage, setMainImage] = useState("");
   const [imageOne, setImageOne] = useState("");

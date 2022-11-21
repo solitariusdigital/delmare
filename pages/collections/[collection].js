@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import New from "../../components/collections/New";
+import Gallery from "../../components/collections/Gallery";
 import Brands from "../../components/collections/Brands";
 import Sale from "../../components/collections/Sale";
 
@@ -10,7 +10,7 @@ function CollectionPage() {
 
   return (
     <Fragment>
-      {collection == "new" && <New />}
+      {collection == "gallery" && <Gallery />}
       {collection == "sale" && <Sale />}
       {collection == "brands" && <Brands />}
     </Fragment>

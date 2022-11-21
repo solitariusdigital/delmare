@@ -14,8 +14,8 @@ function CollectionsPage() {
 
   const collections = [
     {
-      title: "New",
-      link: "/collections/new",
+      title: "Gallery",
+      link: "/collections/gallery",
       imageSrc: `${sourceLink}one.jpg`,
     },
     {

@@ -23,3 +23,29 @@
   object-position: 100% 0%;
   @include mixins.border-radius();
 }
+
+.categorySelector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  width: 50%;
+
+  select {
+    @include mixins.input();
+    width: 100%;
+    background: config.$cream;
+    height: 50px;
+    margin-right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.message {
+  text-align: center;
+}
