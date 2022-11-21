@@ -33,6 +33,7 @@ function Collection({ collectionType }) {
   const [like, setLike] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [filter, setFilter] = useState("دسته بندی");
+  const [message, setMessage] = useState(false);
 
   useEffect(() => {
     switch (collectionType) {
@@ -96,6 +97,7 @@ function Collection({ collectionType }) {
   const filterCollection = (type) => {
     setFilter(type);
     setSelector(false);
+    setMessage(false);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -112,6 +114,7 @@ function Collection({ collectionType }) {
         );
         break;
     }
+    setMessage(true);
   };
 
   const resetFilter = () => {
@@ -204,7 +207,7 @@ function Collection({ collectionType }) {
               </div>
             ))
             .reverse()}
-        {gallery.length === 0 && (
+        {gallery.length === 0 && message && (
           <p className={classes.message}>دسته بندی نا موجود</p>
         )}
         {displayProduct && <Product favourite={like} />}

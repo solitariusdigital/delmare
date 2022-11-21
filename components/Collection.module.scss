@@ -13,6 +13,7 @@
   flex-direction: row-reverse;
   margin-top: 10px;
   position: relative;
+  width: 100%;
 
   .selectorContainer {
     display: flex;
@@ -53,7 +54,7 @@
 
   .list {
     position: absolute;
-    top: 50px;
+    top: 30px;
     right: 10px;
     z-index: 2;
     width: 180px;
@@ -64,9 +65,14 @@
     background: config.$white;
     @include mixins.border-radius();
     box-shadow: config.$card-shadow;
+    @include mixins.slide-bottom();
 
     p {
       height: 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
