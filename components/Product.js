@@ -24,7 +24,7 @@ function Product({ favourite }) {
   const { register, setRegister } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
-  const [displayDetails, setDisplayDetails] = useState(false);
+  const [displayDetails, setDisplayDetails] = useState(true);
 
   // item image variables
   const [mainItem, setMainItem] = useState(selectedProduct.images.main);
@@ -108,7 +108,8 @@ function Product({ favourite }) {
   };
 
   const back = () => {
-    setDisplayDetails(false);
+    setDisplayProduct(false);
+    setBar(true);
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
@@ -452,6 +453,15 @@ function Product({ favourite }) {
           >
             افزودن به سبد خرید
           </button>
+
+          <div className={classes.designContainer}>
+            <div className={classes.row}>
+              <p className={classes.category}>{selectedProduct.category}</p>
+              <p className={classes.title}>{selectedProduct.designer}</p>
+              <p>طراح</p>
+            </div>
+            <p className={classes.description}>{selectedProduct.description}</p>
+          </div>
 
           <div className={classes.information}>
             <div className={classes.section}>

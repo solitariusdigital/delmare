@@ -311,7 +311,6 @@
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  margin-top: 10px;
 
   .section {
     background: config.$white;
@@ -360,5 +359,38 @@
         margin-right: 5px;
       }
     }
+  }
+}
+
+.designContainer {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+
+  .description {
+    margin-bottom: 20px;
+    font-size: config.$med-font;
+    text-align: right;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    .title {
+      font-size: config.$big-font;
+      font-weight: bold;
+    }
+  }
+
+  .category {
+    background: config.$white;
+    width: 100px;
+    text-align: center;
+    padding: 5px;
+    @include mixins.border-radius();
   }
 }

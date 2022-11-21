@@ -36,14 +36,14 @@ export default function Upload() {
   const [alert, setAlert] = useState("");
 
   const [categories, setCategories] = useState([
+    "اسکارف",
     "اکسسوری",
     "بارونی",
     "بلوز",
     "پالتو",
     "تاپ",
     "جین",
-    "روسری",
-    "شال",
+    "ست",
     "شلوار",
     "شومیز",
     "عینک",

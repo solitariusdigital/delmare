@@ -9,12 +9,13 @@
 }
 
 .graphic {
-  opacity: 0.5;
+  opacity: 0.3;
   position: relative;
   width: 100%;
   height: calc(100vh - 100px);
 
   a {
+    opacity: 0.5;
     position: absolute;
     bottom: 0px;
     left: 50%;
