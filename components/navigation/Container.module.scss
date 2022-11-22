@@ -7,7 +7,7 @@
 .header {
   width: 100%;
   text-align: center;
-  background: linear-gradient(to bottom, config.$brand, config.$cream);
+  background: linear-gradient(config.$brand, config.$cream);
 
   .bar {
     display: flex;

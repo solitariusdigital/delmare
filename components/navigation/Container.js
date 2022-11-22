@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect, useRef, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -100,19 +100,21 @@ function Container() {
             <MenuIcon className="icon" onClick={() => setMenu(true)} />
           </div>
         </div>
-        {bar && (
-          <div className={classes.navigation}>
-            {navigation.map((nav, index) => (
-              <div
-                key={index}
-                className={!nav.active ? classes.nav : classes.navActive}
-                onClick={() => activateNav(index)}
-              >
-                <Link href={nav.link}>{nav.title}</Link>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className={classes.navigation}>
+          {bar && (
+            <Fragment>
+              {navigation.map((nav, index) => (
+                <div
+                  key={index}
+                  className={!nav.active ? classes.nav : classes.navActive}
+                  onClick={() => activateNav(index)}
+                >
+                  <Link href={nav.link}>{nav.title}</Link>
+                </div>
+              ))}
+            </Fragment>
+          )}
+        </div>
       </div>
       {menu && <BurgerMenu />}
       {/* container layouts / pages navigation from menu */}
