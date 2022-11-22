@@ -30,6 +30,7 @@ function Collection({ collectionType }) {
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
@@ -59,6 +60,7 @@ function Collection({ collectionType }) {
   ]);
 
   const selectProduct = async (id) => {
+    setSearchControl(false);
     const product = await getProductApi(id);
     setSelectedProduct(product);
     setDisplayProduct(true);

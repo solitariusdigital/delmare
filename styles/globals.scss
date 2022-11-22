@@ -183,6 +183,7 @@ a {
 .shoppingcart-icon {
   display: flex;
   align-items: center;
+  position: relative;
 
   p {
     width: 20px;
@@ -192,7 +193,8 @@ a {
   }
 
   .search {
-    margin-right: 10px;
+    position: absolute;
+    right: 30px;
   }
 }
 

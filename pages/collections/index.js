@@ -6,6 +6,7 @@ import Image from "next/image";
 function CollectionsPage() {
   const { bar, setBar } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -39,6 +40,11 @@ function CollectionsPage() {
     Router.push(`${link}`);
     navigation.map((nav, i) => {
       if (i === index) {
+        if (nav.title === "Brands") {
+          setSearchControl(false);
+        } else {
+          setSearchControl(true);
+        }
         nav.active = !nav.active;
       } else {
         nav.active = false;

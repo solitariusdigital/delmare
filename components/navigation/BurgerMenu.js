@@ -23,6 +23,7 @@ export default function BurgerMenu() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
@@ -66,6 +67,7 @@ export default function BurgerMenu() {
       icon: <StoreIcon />,
       call: () => {
         setMenu(false);
+        setSearchControl(false);
         Router.push("/");
       },
     },

@@ -21,6 +21,7 @@ function Product({ favourite }) {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menue, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(true);
@@ -112,6 +113,8 @@ function Product({ favourite }) {
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
+    setSearchControl(true);
+
     colors.length = 0;
   };
 

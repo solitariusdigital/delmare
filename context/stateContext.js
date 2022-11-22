@@ -5,6 +5,7 @@ export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
   const [register, setRegister] = useState(false);
   const [search, setSearch] = useState(false);
+  const [searchControl, setSearchControl] = useState(false);
   const [bar, setBar] = useState(true);
   const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
@@ -105,6 +106,8 @@ export const StateProvider = (props) => {
     setSeasons,
     search,
     setSearch,
+    searchControl,
+    setSearchControl,
   };
 
   return (

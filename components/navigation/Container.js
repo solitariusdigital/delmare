@@ -26,6 +26,7 @@ function Container() {
   const { navigation, setNavigation } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("currentUser"))) {
@@ -50,6 +51,11 @@ function Container() {
   const activateNav = (index) => {
     navigation.map((nav, i) => {
       if (i === index) {
+        if (nav.title === "Brands") {
+          setSearchControl(false);
+        } else {
+          setSearchControl(true);
+        }
         nav.active = !nav.active;
       } else {
         nav.active = false;
@@ -59,6 +65,7 @@ function Container() {
   };
 
   const navigateLandingPage = () => {
+    setSearchControl(false);
     Router.push("/");
     navigation.map((nav, i) => {
       nav.active = false;
@@ -84,10 +91,12 @@ function Container() {
             />
           </div>
           <div className="shoppingcart-icon">
-            <SearchIcon
-              className="icon search"
-              onClick={() => setSearch(!search)}
-            />
+            {searchControl && (
+              <SearchIcon
+                className="icon search"
+                onClick={() => setSearch(!search)}
+              />
+            )}
             <MenuIcon className="icon" onClick={() => setMenu(true)} />
           </div>
         </div>
