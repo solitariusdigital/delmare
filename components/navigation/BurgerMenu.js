@@ -202,7 +202,7 @@ export default function BurgerMenu() {
             </div>
           )}
           <div className={classes.logo}>
-            <Image width={100} height={140} src={logo} alt="logo" />
+            <Image width={90} height={140} src={logo} alt="logo" />
           </div>
         </div>
       </div>
