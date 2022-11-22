@@ -15,6 +15,7 @@
     justify-content: space-between;
     height: 50px;
     padding: 0px 10px;
+    position: relative;
 
     .brand {
       display: flex;
@@ -27,9 +28,9 @@
     }
 
     p {
-      position: fixed;
-      left: 40px;
-      top: 5px;
+      position: absolute;
+      left: 30px;
+      bottom: 5px;
       min-height: 30px;
       font-size: config.$small-font;
     }
