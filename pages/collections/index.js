@@ -21,7 +21,7 @@ function CollectionsPage() {
     {
       title: "Sale",
       link: "/collections/sale",
-      imageSrc: `${sourceLink}seven.jpg`,
+      imageSrc: `${sourceLink}three.jpg`,
     },
     {
       title: "Brands",

@@ -14,6 +14,7 @@ import Register from "../Register";
 import Image from "next/image";
 import logo from "../../assets/logo.png";
 import Router from "next/router";
+import StoreIcon from "@mui/icons-material/Store";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -57,6 +58,14 @@ export default function BurgerMenu() {
       call: () => {
         navigateMenu("wish");
         setContact(false);
+      },
+    },
+    {
+      title: "صفحه اصلی",
+      icon: <StoreIcon />,
+      call: () => {
+        setMenu(false);
+        Router.push("/");
       },
     },
     {

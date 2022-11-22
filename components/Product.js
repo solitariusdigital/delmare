@@ -501,10 +501,6 @@ function Product({ favourite }) {
                       اندازه به سانتی متر است
                     </p>
                   </div>
-                  <div className={classes.row}>
-                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                    <p className={classes.description}>FS : Free Size</p>
-                  </div>
                   <div className={classes.table}>
                     <Image
                       src={selectedProduct.images.table}
@@ -513,6 +509,12 @@ function Product({ favourite }) {
                       objectFit="contain"
                       priority={true}
                     />
+                  </div>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <p className={classes.description}>
+                      شامل : اسکارف، عینک، کیف، اکسسوری، کلاه - FS : Free Size
+                    </p>
                   </div>
                 </div>
               )}
@@ -578,18 +580,18 @@ function Product({ favourite }) {
                     <p className={classes.description}>
                       رضایتمندی مشتریان همواره از اولویت‏‌های دلماره است. ما در
                       این راستا می‏‌کوشیم تا هر سفارش در شرایط مطلوب به دست
-                      مشتری برسد. با وجود این ممکن است مشتریان عزیز پس از خرید،
-                      با مسایلی روبرو شوند که درچنین مواردی خدماتی در چارچوب
+                      مشتری برسد. با وجود این ممکن است مشتریان عزیز پس از خرید
+                      با مسایلی روبرو شوند که در چنین مواردی خدماتی در چارچوب
                       خدمات پس از فروش در نظر گرفته شده است. مدت زمان لازم جهت
-                      استفاده از این امکان 24ساعت است
+                      استفاده از این خدمات 24 ساعت است
                     </p>
                   </div>
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      اگر کالای خریداری شده، ایراد، زدگی یا پارگی داشته باشد در
-                      صورت تایید کارشناسان ما هزینه ارسال کالا به مشتری قابل
-                      بازگشت خواهد بود
+                      اگر کالای خریداری شده ایراد، زدگی یا پارگی داشته باشد در
+                      صورت تایید کارشناسان ما، هزینه کالا به مشتری قابل بازگشت
+                      خواهد بود
                     </p>
                   </div>
                   <div className={classes.row}>
@@ -602,7 +604,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      اگر مغایرت، بدون استفاده از کالا قابل مشاهده است، مثل رنگ
+                      اگر مغایرت بدون استفاده از کالا قابل مشاهده است، مثل رنگ
                       یا مشخصات درج شده روی آن، باید کالا در شرایط اولیه خود
                       باشد و از آن استفاده نشده باشد
                     </p>
@@ -618,7 +620,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      استفاده از این سرویس تنها در صورتی امکان‌پذیر است که کالا
+                      استفاده از این سرویس تنها در صورتی امکانپذیر است که کالا
                       در کارتن یا جعبه اصلی خود به دلماره بازگردانده شود. برچسب
                       زدن یا نوشتن توضیحات، آدرس یا هر مورد دیگری روی کارتن یا
                       جعبه اصلی کالا و یا پاره و مخدوش کردن آن، امکان استفاده از
@@ -631,35 +633,27 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      اگر هنوز سفارش ارسال نشده باشد، باید هر چه سریع‏‌تر به
-                      واحد پیگیری سفارش دلماره اطلاع داده شود
+                      اگر هنوز سفارش ارسال نشده باشد، باید هر چه سریعتر به واحد
+                      پیگیری سفارش دلماره اطلاع داده شود
                     </p>
                   </div>
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
                       اگر پس از دریافت کالا مشتری از خرید خود منصرف شود، حداکثر
-                      تا 12ساعت ‏، باید انصراف خود را به واحد خدمات پس از فروش
+                      تا 12 ساعت باید انصراف خود را به واحد خدمات پس از فروش
                       اطلاع دهد
                     </p>
                   </div>
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      اگر پس از دریافت کالا مشتری از خرید خود منصرف شود، حداکثر
-                      تا 12ساعت ‏، باید انصراف خود را به واحد خدمات پس از فروش
-                      .اطلاع دهد
-                    </p>
-                  </div>
-                  <div className={classes.row}>
-                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                    <p className={classes.description}>
                       در این حالت، برگرداندن کالا پس از تایید کارشناس خدمات پس
-                      از فروش، تنها در صورتی امکان‌پذیر است که در شرایط اولیه
-                      خود (پلمپ) باشد، از آن استفاده نشده باشد. همچنین اگر کالا
-                      به‌ همراه هدیه فروخته شده باشد، بازگرداندن هدیه همراه آن
-                      نیز الزامی است. لازم به ذکر است کالاهایی که به دلیل ماهیت
-                      خاص یا استفاده شخصی و با توجه به لزوم رعایت مسایل بهداشتی
+                      از فروش، تنها در صورتی امکانپذیر است که در شرایط اولیه خود
+                      (پلمپ) باشد، از آن استفاده نشده باشد. همچنین اگر کالا به‌
+                      همراه هدیه فروخته شده باشد، بازگرداندن هدیه همراه آن نیز
+                      الزامی است. لازم به ذکر است کالاهایی که به دلیل ماهیت خاص
+                      یا استفاده شخصی و با توجه به لزوم رعایت مسایل بهداشتی
                       نمی‌توانند بازپس داده شوند، از شمول این بند خارج هستند
                     </p>
                   </div>
@@ -689,7 +683,7 @@ function Product({ favourite }) {
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
                       اطلاعات هر محصول آرایشی بهداشتی در دلماره ، صرفاً برای
-                      اطلاع‌رسانی است و جنبه مشاوره ندارد. خریدار باید قبل از
+                      اطلاع‌ رسانی است و جنبه مشاوره ندارد. خریدار باید قبل از
                       استفاده از مواد آرایشی بهداشتی نسبت به کسب اطلاعات حرفه‌ای
                       و اخذ مشاوره از متخصص مربوط اقدام کند. همچنین، نظراتی که
                       کاربران در خصوص کالا در اپلیکیشن درج کرده‌اند، تجربه یا
