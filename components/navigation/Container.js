@@ -6,7 +6,7 @@ import Account from "./Account";
 import ShoppingCart from "./ShoppingCart";
 import WishList from "./WishList";
 import Orders from "./Orders";
-import Transactions from "./Transactions";
+import About from "./About";
 import AddHomeScreen from "./AddHomeScreen";
 import { getMobileOperatingSystem } from "../../services/utility";
 
@@ -107,7 +107,7 @@ function Container() {
       {toggleContainer === "cart" && <ShoppingCart />}
       {toggleContainer === "wish" && <WishList />}
       {toggleContainer === "orders" && <Orders />}
-      {toggleContainer === "transactions" && <Transactions />}
+      {toggleContainer === "about" && <About />}
     </div>
   );
 }

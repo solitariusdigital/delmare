@@ -1,0 +1,77 @@
+import { useState, useContext, useEffect } from "react";
+import { StateContext } from "../../context/stateContext";
+import CloseIcon from "@mui/icons-material/Close";
+import ShoppingCart from "./ShoppingCart.module.scss";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import classes from "./About.module.scss";
+import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
+
+export default function About() {
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { shoppingCart, setShoppingCart } = useContext(StateContext);
+
+  return (
+    <div className={ShoppingCart.slider}>
+      <div className={ShoppingCart.menu}>
+        <div className={ShoppingCart.topBar}>
+          <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
+          <div className={ShoppingCart.title}>
+            <p>دلماره</p>
+          </div>
+          <div className="shoppingcart-icon">
+            <ShoppingCartIcon
+              className="icon"
+              onClick={() => setToggleContainer("cart")}
+            />
+            <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
+          </div>
+        </div>
+        <div className={classes.description}>
+          <div className={classes.row}>
+            <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+            <p>
+              مولتی برند دلماره مجموعه ای از کارآفرینان، طراحان لباس، برنامه
+              نویسان، عکاسان مد و استایلیست ها هستند، که با بهره گیری از تجربه
+              چندین ساله خود در زمینه مد و لباس، تلاش می کنند تجربه خرید خوشایند
+              و منطبق با استانداردهای روز دنیای فشن را برای شما فراهم کنند
+            </p>
+          </div>
+          <div className={classes.row}>
+            <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+            <p>
+              ما با کمک بهترین استایلیست های ایران استایل های زیبا و متفاوت را
+              برای شما آماده کرده ایم که شامل بهترین برندهای ایرانی و برندهای
+              معروف دنیا هستند
+            </p>
+          </div>
+          <div className={classes.row}>
+            <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+            <p>
+              برندهای ایرانی همکار ما همگی از برندهای معروف و شناخته شده ایران
+              هستند که دارای بالاترین کیفیت دوخت، پارچه و طراحی هستند
+            </p>
+          </div>
+          <div className={classes.row}>
+            <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+            <p>
+              لاین واردات دلماره شامل برندهای لاکچری دنیا از قبیل گوچی، لوییز
+              ویتون، الکساندر مککویین و همچنین برندهای پرطرفدار از جمله آدیداس،
+              نایکی، اچ اند ام و زارا می باشد. کلیه اجناس از نمایندگی های این
+              برندها از ایتالیا وارد می شوند
+            </p>
+          </div>
+          <div className={classes.row}>
+            <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+            <p>
+              دلماره همه تلاش خود را می کند تا زمانی که محصول به دست شما خواهد
+              رسید، کوتاهترین زمان ممکن باشد. تیم دلماره به صورت شبانه روز در
+              حال ارتقا خود است و امیدوار است در سال های آینده بسیاری از خریدهای
+              شما را در مجموعه خود پاسخگو باشد و در ذخیره زمان ارزشمند شما کمک
+              رسان باشد
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -63,10 +63,8 @@ function LandingPage() {
         loading="eager"
       />
       <div className={classes.message}>
-        <p>
-          یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی متنوع،
-          باکیفیت و دارای قیمت مناسب را به دست مشتریان خود برساند
-        </p>
+        <p>خرید امن و راحت از بهترین برندهای دنیا و ایران</p>
+        <p>با دلماره متفاوت دیده شوید</p>
       </div>
       <div className={classes.icon}>
         <ExpandCircleDownIcon

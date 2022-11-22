@@ -9,7 +9,6 @@ import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutl
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
 import { convertNumber } from "../services/utility";
 import { updateUserApi } from "../services/api";
 
@@ -476,7 +475,7 @@ function Product({ favourite }) {
             <div className={classes.row}>
               <p className={classes.category}>{selectedProduct.season}</p>
               <p className={classes.category}>{selectedProduct.category}</p>
-              <p>دسته بندی</p>
+              <p>اتیکت</p>
             </div>
             <p className={classes.description}>{selectedProduct.description}</p>
           </div>

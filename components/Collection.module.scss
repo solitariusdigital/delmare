@@ -13,13 +13,14 @@
   flex-direction: row-reverse;
   margin-top: 10px;
   position: relative;
-  width: 100%;
 
-  .selectorContainer {
+  .selectContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     margin: 0px 10px;
+    width: 100%;
   }
 
   .icon,
@@ -31,11 +32,7 @@
     }
   }
 
-  .reset {
-    margin-right: 10px;
-  }
-
-  .selector {
+  .select {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -44,15 +41,16 @@
     height: 40px;
     padding: 10px;
     background: config.$white;
-    @include mixins.border-radius();
     box-shadow: config.$card-shadow;
+    @include mixins.border-radius();
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  .list {
+  .listCategory,
+  .listSeason {
     position: absolute;
     top: 30px;
     right: 10px;
@@ -74,6 +72,11 @@
         cursor: pointer;
       }
     }
+  }
+
+  .listSeason {
+    left: 10px;
+    height: 170px;
   }
 }
 

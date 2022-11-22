@@ -15,6 +15,7 @@ import Image from "next/image";
 import logo from "../../assets/logo.png";
 import Router from "next/router";
 import StoreIcon from "@mui/icons-material/Store";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -69,6 +70,14 @@ export default function BurgerMenu() {
       },
     },
     {
+      title: "دلماره",
+      icon: <AutoAwesomeIcon />,
+      call: () => {
+        navigateMenu("about");
+        setContact(false);
+      },
+    },
+    {
       title: "تماس با دلماره",
       icon: <CallIcon />,
       call: () => {
@@ -80,7 +89,7 @@ export default function BurgerMenu() {
   ];
 
   const navigateMenu = (action) => {
-    if (userLogIn || action === "cart") {
+    if (userLogIn || action === "cart" || action === "about") {
       setToggleContainer(action);
       setMenu(false);
     } else {

@@ -8,13 +8,7 @@ export const StateProvider = (props) => {
   const [bar, setBar] = useState(true);
   const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
-    "empty" ||
-      "screen" ||
-      "wish" ||
-      "account" ||
-      "cart" ||
-      "orders" ||
-      "transactions"
+    "empty" || "screen" || "wish" || "account" || "cart" || "orders" || "about"
   );
   const [displayProduct, setDisplayProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});

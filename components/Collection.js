@@ -25,14 +25,17 @@ function Collection({ collectionType }) {
   const { register, setRegister } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { categories, setCategories } = useContext(StateContext);
+  const { seasons, setSeasons } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
 
-  const [selector, setSelector] = useState(false);
+  const [categorySelector, setCategorySelector] = useState(false);
+  const [seasonSelector, setSeasonSelector] = useState(false);
   const [like, setLike] = useState(false);
   const [gallery, setGallery] = useState([]);
-  const [filter, setFilter] = useState("دسته بندی");
+  const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
+  const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
 
   useEffect(() => {
@@ -94,9 +97,9 @@ function Collection({ collectionType }) {
     }
   };
 
-  const filterCollection = (type) => {
-    setFilter(type);
-    setSelector(false);
+  const filterCategoryCollection = (type) => {
+    setCategoryFilter(type);
+    setCategorySelector(false);
     setMessage(false);
     switch (collectionType) {
       case "gallery":
@@ -117,9 +120,33 @@ function Collection({ collectionType }) {
     setMessage(true);
   };
 
+  const filterSeasonCollection = (type) => {
+    setSeasonFilter(type);
+    setSeasonSelector(false);
+    setMessage(false);
+    switch (collectionType) {
+      case "gallery":
+        setGallery(
+          productsCollection.filter((product) => {
+            return product.season === type && !product.sale;
+          })
+        );
+        break;
+      case "sale":
+        setGallery(
+          productsCollection.filter((product) => {
+            return product.season === type && product.sale;
+          })
+        );
+        break;
+    }
+    setMessage(true);
+  };
+
   const resetFilter = () => {
-    setFilter("دسته بندی");
-    setSelector(false);
+    setCategoryFilter("دسته بندی");
+    setSeasonFilter("فصل");
+    setCategorySelector(false);
     switch (collectionType) {
       case "gallery":
         setGallery(galleryCollection);
@@ -134,28 +161,52 @@ function Collection({ collectionType }) {
     <Fragment>
       {!displayProduct && (
         <div className={classes.category}>
-          <div className={classes.selectorContainer}>
-            <RefreshIcon
-              className={classes.reset}
-              onClick={() => resetFilter()}
-              sx={{ fontSize: 24 }}
-            />
+          <div className={classes.selectContainer}>
             <div
-              className={classes.selector}
-              onClick={() => setSelector(!selector)}
+              className={classes.select}
+              onClick={() => {
+                setCategorySelector(false);
+                setSeasonSelector(!seasonSelector);
+              }}
             >
               <div className={classes.icon}>
-                {selector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                {seasonSelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-              <p>{filter}</p>
+              <p>{seasonFilter}</p>
+            </div>
+            <div
+              className={classes.select}
+              onClick={() => {
+                setCategorySelector(!categorySelector);
+                setSeasonSelector(false);
+              }}
+            >
+              <div className={classes.icon}>
+                {categorySelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </div>
+              <p>{categoryFilter}</p>
             </div>
           </div>
-          {selector && (
-            <div className={classes.list}>
+          {categorySelector && (
+            <div className={classes.listCategory}>
               {categories.map((category, index) => {
                 return (
-                  <p onClick={() => filterCollection(category)} key={index}>
+                  <p
+                    onClick={() => filterCategoryCollection(category)}
+                    key={index}
+                  >
                     {category}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+          {seasonSelector && (
+            <div className={classes.listSeason}>
+              {seasons.map((season, index) => {
+                return (
+                  <p onClick={() => filterSeasonCollection(season)} key={index}>
+                    {season}
                   </p>
                 );
               })}
@@ -208,7 +259,7 @@ function Collection({ collectionType }) {
             ))
             .reverse()}
         {gallery.length === 0 && message && (
-          <p className={classes.message}>دسته بندی نا موجود</p>
+          <p className={classes.message}>اتیکت نا موجود</p>
         )}
         {displayProduct && <Product favourite={like} />}
       </div>
