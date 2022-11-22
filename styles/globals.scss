@@ -186,9 +186,9 @@ a {
   position: relative;
 
   p {
-    width: 20px;
-    height: 25px;
-    text-align: right;
+    position: absolute;
+    left: 25px;
+    bottom: 5px;
     font-size: config.$small-font;
   }
 
