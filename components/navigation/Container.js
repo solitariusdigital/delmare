@@ -8,8 +8,7 @@ import WishList from "./WishList";
 import Orders from "./Orders";
 import About from "./About";
 import AddHomeScreen from "./AddHomeScreen";
-import { getMobileOperatingSystem } from "../../services/utility";
-
+import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./Container.module.scss";
@@ -26,6 +25,7 @@ function Container() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { search, setSearch } = useContext(StateContext);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("currentUser"))) {
@@ -83,7 +83,13 @@ function Container() {
               onClick={() => navigateLandingPage()}
             />
           </div>
-          <MenuIcon className="icon" onClick={() => setMenu(true)} />
+          <div className="shoppingcart-icon">
+            <SearchIcon
+              className="icon search"
+              onClick={() => setSearch(!search)}
+            />
+            <MenuIcon className="icon" onClick={() => setMenu(true)} />
+          </div>
         </div>
         {bar && (
           <div className={classes.navigation}>

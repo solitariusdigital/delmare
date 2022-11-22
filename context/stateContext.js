@@ -4,7 +4,7 @@ export const StateContext = createContext();
 export const StateProvider = (props) => {
   const [menu, setMenu] = useState(false);
   const [register, setRegister] = useState(false);
-
+  const [search, setSearch] = useState(false);
   const [bar, setBar] = useState(true);
   const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
@@ -103,6 +103,8 @@ export const StateProvider = (props) => {
     setCategories,
     seasons,
     setSeasons,
+    search,
+    setSearch,
   };
 
   return (

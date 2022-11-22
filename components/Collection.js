@@ -17,6 +17,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 function Collection({ collectionType }) {
   const { menue, setMenu } = useContext(StateContext);
+  const { search, setSearch } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
@@ -159,7 +160,7 @@ function Collection({ collectionType }) {
 
   return (
     <Fragment>
-      {!displayProduct && (
+      {!displayProduct && search && (
         <div className={classes.category}>
           <div className={classes.selectContainer}>
             <div
