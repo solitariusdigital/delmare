@@ -459,9 +459,7 @@ function Product({ favourite }) {
               )}
             </div>
           </div>
-
           <div className={classes.alert}>{alert}</div>
-
           <button
             className={classes.button}
             onClick={() => {
@@ -470,16 +468,18 @@ function Product({ favourite }) {
           >
             افزودن به سبد خرید
           </button>
-
           <div className={classes.designContainer}>
             <div className={classes.row}>
-              <p className={classes.category}>{selectedProduct.category}</p>
               <p className={classes.title}>{selectedProduct.designer}</p>
               <p>طراح</p>
             </div>
+            <div className={classes.row}>
+              <p className={classes.category}>{selectedProduct.season}</p>
+              <p className={classes.category}>{selectedProduct.category}</p>
+              <p>دسته بندی</p>
+            </div>
             <p className={classes.description}>{selectedProduct.description}</p>
           </div>
-
           <div className={classes.information}>
             <div className={classes.section}>
               <div

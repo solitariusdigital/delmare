@@ -34,6 +34,7 @@ const ProductSchema = new Schema(
       FS: {},
     },
     category: String,
+    season: String,
     designer: String,
     price: Number,
     discount: Number,

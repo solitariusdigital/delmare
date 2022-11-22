@@ -32,6 +32,7 @@ export default function Upload() {
   const { container, setContainer } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { categories, setCategories } = useContext(StateContext);
+  const { seasons, setSeasons } = useContext(StateContext);
 
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
@@ -61,6 +62,7 @@ export default function Upload() {
   const [delmareId, setDelmareId] = useState("");
   const [designer, setDesigner] = useState("");
   const [category, setCategory] = useState("");
+  const [season, setSeason] = useState("");
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
@@ -96,7 +98,8 @@ export default function Upload() {
       !price &&
       !delmareId &&
       !designer &&
-      !category
+      !category &&
+      !season
     ) {
       setAlert("Fill in all fields");
       setTimeout(() => {
@@ -152,6 +155,7 @@ export default function Upload() {
         images: images,
         size: size,
         category: category.trim(),
+        season: season.trim(),
         designer: designer.trim(),
         price: price.trim(),
         discount: discount.trim(),
@@ -337,7 +341,6 @@ export default function Upload() {
           autoComplete="off"
         />
       </div>
-
       <div className={classes.input}>
         <select
           defaultValue={"default"}
@@ -355,7 +358,23 @@ export default function Upload() {
           })}
         </select>
       </div>
-
+      <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setSeason(e.target.value)}
+        >
+          <option value="default" disabled>
+            Choose season
+          </option>
+          {seasons.map((season, index) => {
+            return (
+              <option key={index} value={season}>
+                {season}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <div className={classes.input}>
         <div className={classes.bar}>
           <CloseIcon

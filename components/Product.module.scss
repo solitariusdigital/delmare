@@ -363,7 +363,6 @@
 }
 
 .designContainer {
-  text-align: right;
   display: flex;
   flex-direction: column;
 
@@ -377,8 +376,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin: 10px 0px;
 
     .title {
       font-size: config.$med-font;

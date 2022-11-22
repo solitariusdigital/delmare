@@ -56,6 +56,13 @@ export const StateProvider = (props) => {
     "کیف",
     "هودی",
   ]);
+  const [seasons, setSeasons] = useState([
+    "بهار",
+    "تابستان",
+    "پاییز",
+    "زمستان",
+    "همه فصول",
+  ]);
 
   // application context
   const [userLogIn, setUserLogin] = useState(false);
@@ -100,6 +107,8 @@ export const StateProvider = (props) => {
     setGalleryCollection,
     categories,
     setCategories,
+    seasons,
+    setSeasons,
   };
 
   return (
