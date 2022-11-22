@@ -14,17 +14,24 @@
     align-items: center;
     justify-content: space-between;
     height: 50px;
-    margin: 0px;
     padding: 0px 10px;
 
     .brand {
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
 
       &:hover {
         cursor: pointer;
       }
+    }
+
+    p {
+      position: absolute;
+      left: 30px;
+      bottom: 5px;
+      font-size: config.$small-font;
     }
   }
 
