@@ -12,7 +12,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import StarsIcon from "@mui/icons-material/Stars";
 import Register from "../Register";
 import Image from "next/image";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.svg";
 import Router from "next/router";
 import StoreIcon from "@mui/icons-material/Store";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
