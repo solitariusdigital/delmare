@@ -15,7 +15,6 @@
     justify-content: space-between;
     height: 50px;
     padding: 0px 10px;
-    position: relative;
 
     .brand {
       display: flex;
@@ -25,14 +24,6 @@
       &:hover {
         cursor: pointer;
       }
-    }
-
-    p {
-      position: absolute;
-      left: 25px;
-      bottom: 5px;
-      min-height: 30px;
-      font-size: config.$small-font;
     }
   }
 
