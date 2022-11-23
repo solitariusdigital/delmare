@@ -72,3 +72,13 @@ export const updateInvoiceApi = async (data) => {
   });
   return await response.json();
 };
+
+export const getBrandApi = async () => {
+  const response = await fetch("/api/brand", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

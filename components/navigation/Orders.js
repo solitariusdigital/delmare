@@ -3,7 +3,7 @@ import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { getInvoiceApi, getProductApi } from "../../services/api";
+import { getInvoiceApi } from "../../services/api";
 import Image from "next/image";
 import graphic from "../../assets/wardrobe.png";
 import { convertNumber } from "../../services/utility";

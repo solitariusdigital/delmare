@@ -8,44 +8,32 @@
   padding: 10px;
 
   .brand {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
     width: 100%;
-    height: 170px;
     box-shadow: config.$card-shadow;
-    @include mixins.border-radius();
     background: config.$white;
+    @include mixins.border-radius();
+    padding: 10px;
   }
-}
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-position: 100% 0%;
-  @include mixins.border-radius();
-}
-
-.categorySelector {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  margin: 10px;
-  width: 50%;
-
-  select {
-    @include mixins.input();
-    width: 100%;
-    background: config.$cream;
-    height: 50px;
-    margin-right: 10px;
-
-    &:hover {
-      cursor: pointer;
-    }
+  .row {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+    margin-top: 10px;
   }
-}
 
-.message {
-  text-align: center;
+  .value,
+  .title {
+    font-size: config.$med-font;
+    font-weight: bold;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
 }
