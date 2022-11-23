@@ -1,6 +1,6 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
-
+import Head from "next/head";
 import LandingPage from "../components/LandingPage";
 import dbConnect from "../services/dbConnect";
 import User from "../models/User";
@@ -32,7 +32,18 @@ function HomePage({ users, products, galleryProducts, saleProducts }) {
     galleryProducts,
   ]);
 
-  return <LandingPage></LandingPage>;
+  return (
+    <Fragment>
+      <Head>
+        <title>Delmareh</title>
+        <meta
+          name="description"
+          content="خرید امن و راحت از بهترین برندهای دنیا و ایران"
+        />
+      </Head>
+      <LandingPage></LandingPage>
+    </Fragment>
+  );
 }
 
 // to fetch all available data from db

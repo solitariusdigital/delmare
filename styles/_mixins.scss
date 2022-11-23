@@ -52,7 +52,6 @@ $screen-xl-min: 1200px;
   padding-left: 8px;
   padding-right: 8px;
   box-shadow: config.$button-shadow;
-  font-family: config.$font;
   font-weight: 300;
 
   &:hover {
@@ -65,7 +64,6 @@ $screen-xl-min: 1200px;
   height: 40px;
   background: config.$white;
   color: config.$black;
-  font-family: config.$font;
   font-size: config.$small-font;
   border: none;
   outline: none;
