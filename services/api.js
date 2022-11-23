@@ -30,6 +30,16 @@ export const getProductApi = async (id) => {
   return await response.json();
 };
 
+export const getProducstApi = async () => {
+  const response = await fetch("/api/products", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 export const updateProductApi = async (data) => {
   const response = await fetch("/api/product", {
     method: "PUT",
