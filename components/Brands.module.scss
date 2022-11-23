@@ -30,10 +30,20 @@
   .value,
   .title {
     font-size: config.$med-font;
-    font-weight: bold;
+  }
+
+  .count {
+    font-size: config.$tiny-font;
   }
 
   .title {
     margin-bottom: 10px;
   }
+}
+
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 }

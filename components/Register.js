@@ -66,31 +66,29 @@ function Register() {
       let tokenId = tokenGenerator();
       setToken(tokenId);
 
-      setAlert("کد تایید ارسال شد");
-      startCounter();
       setAlert(tokenId);
+      console.log(process.env.NEXT_PUBLIC_KAVENEGAR);
+      const api = Kavenegar.KavenegarApi({
+        apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
+      });
+      api.VerifyLookup(
+        {
+          receptor: phone,
+          token: tokenId.toString(),
+          template: "registerverify",
+        },
+        function (response, status) {
+          console.log(response);
+          console.log(status);
 
-      // const api = Kavenegar.KavenegarApi({
-      //   apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
-      // });
-      // api.VerifyLookup(
-      //   {
-      //     receptor: phone,
-      //     token: tokenId.toString(),
-      //     template: "registerverify",
-      //   },
-      //   function (response, status) {
-      //     console.log(response);
-      //     console.log(status);
-
-      //     if (status === 200) {
-      //       setAlert("کد تایید ارسال شد");
-      //     } else {
-      //       setAlert("خطا در سامانه ارسال کد تایید");
-      //     }
-      //     startCounter();
-      //   }
-      // );
+          if (status === 200) {
+            setAlert("کد تایید ارسال شد");
+          } else {
+            setAlert("خطا در سامانه ارسال کد تایید");
+          }
+          startCounter();
+        }
+      );
     } else {
       setAlert("شماره موبایل اشتباه است");
     }
