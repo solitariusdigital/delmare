@@ -6,8 +6,7 @@ import { tokenGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
-import Router from "next/router";
-import { createUserApi } from "../services/api";
+import { createUserApi, getUsersApi } from "../services/api";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -24,7 +23,15 @@ function Register() {
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
-  const [counter, setCounter] = useState(10);
+  const [counter, setCounter] = useState(30);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUsersApi();
+      setAppUsers(data);
+    };
+    fetchData().catch(console.error);
+  }, [setAppUsers]);
 
   let intervalRef = useRef(null);
   const startCounter = () => {
@@ -34,7 +41,7 @@ function Register() {
       if (counter < 0) {
         resetCounter();
         setDisplayCounter(false);
-        setCounter(10);
+        setCounter(30);
         setToken("");
         setCheckToken("");
       }
@@ -73,6 +80,9 @@ function Register() {
       //     template: "registerverify",
       //   },
       //   function (response, status) {
+      //     console.log(response);
+      //     console.log(status);
+
       //     if (status === 200) {
       //       setAlert("کد تایید ارسال شد");
       //     } else {
@@ -137,7 +147,7 @@ function Register() {
     }
     setDisplayCounter(false);
     resetCounter();
-    setCounter(10);
+    setCounter(30);
   };
 
   return (

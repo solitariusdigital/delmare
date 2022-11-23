@@ -20,6 +20,16 @@ export const createUserApi = async (data) => {
   return await response.json();
 };
 
+export const getUsersApi = async () => {
+  const response = await fetch("/api/user", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 export const getProductApi = async (id) => {
   const response = await fetch(`/api/product?id=${id}`, {
     method: "GET",

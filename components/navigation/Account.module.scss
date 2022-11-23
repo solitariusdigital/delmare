@@ -63,5 +63,9 @@
     p {
       border-bottom: 1px solid config.$black;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
