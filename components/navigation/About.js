@@ -5,6 +5,8 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./About.module.scss";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
+import Image from "next/image";
+import logo from "../../assets/logo.svg";
 
 export default function About() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -69,6 +71,9 @@ export default function About() {
               شما را در مجموعه خود پاسخگو باشد و در ذخیره زمان ارزشمند شما کمک
               رسان باشد
             </p>
+          </div>
+          <div className={classes.logo}>
+            <Image width={90} height={140} src={logo} alt="logo" />
           </div>
         </div>
       </div>

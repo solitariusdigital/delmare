@@ -39,7 +39,8 @@
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
-      height: 50px;
+      height: 40px;
+      margin-bottom: 5px;
 
       p {
         font-size: config.$med-font;
@@ -104,8 +105,6 @@
   align-items: center;
   width: 100%;
   padding: 0px 10px;
-  position: relative;
-  bottom: 20px;
 
   .row {
     display: flex;

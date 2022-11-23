@@ -8,7 +8,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CallIcon from "@mui/icons-material/Call";
 import Person4Icon from "@mui/icons-material/Person4";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import StarsIcon from "@mui/icons-material/Stars";
 import Register from "../Register";
 import Image from "next/image";
@@ -169,7 +168,6 @@ export default function BurgerMenu() {
           )}
           {contact && (
             <div className={classes.box}>
-              {/* <InstagramIcon className="icon" sx={{ fontSize: 40 }} /> */}
               <div className={classes.row}>
                 <p>
                   خیابان ولیعصر، پایین‌تر از توانیر، بخشندگان، مجتمع بخشندگان،
