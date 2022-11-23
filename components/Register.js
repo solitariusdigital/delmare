@@ -15,7 +15,7 @@ function Register() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
-  const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,7 +23,7 @@ function Register() {
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
-  const [counter, setCounter] = useState(30);
+  const [counter, setCounter] = useState(59);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +41,7 @@ function Register() {
       if (counter < 0) {
         resetCounter();
         setDisplayCounter(false);
-        setCounter(30);
+        setCounter(59);
         setToken("");
         setCheckToken("");
       }
@@ -66,10 +66,8 @@ function Register() {
       let tokenId = tokenGenerator();
       setToken(tokenId);
 
-      setAlert(tokenId);
-      console.log(process.env.NEXT_PUBLIC_KAVENEGAR);
       const api = Kavenegar.KavenegarApi({
-        apikey: process.env.NEXT_PUBLIC_KAVENEGAR,
+        apikey: kavenegarKey,
       });
       api.VerifyLookup(
         {
@@ -78,9 +76,6 @@ function Register() {
           template: "registerverify",
         },
         function (response, status) {
-          console.log(response);
-          console.log(status);
-
           if (status === 200) {
             setAlert("کد تایید ارسال شد");
           } else {
@@ -145,7 +140,7 @@ function Register() {
     }
     setDisplayCounter(false);
     resetCounter();
-    setCounter(30);
+    setCounter(59);
   };
 
   return (

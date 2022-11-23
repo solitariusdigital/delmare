@@ -58,6 +58,9 @@ export const StateProvider = (props) => {
     "زمستان",
     "همه فصول",
   ]);
+  const [kavenegarKey, setKavenegarKey] = useState(
+    "684E475442526B426237454A7836434D42394F3368324463527569754F4453616B386B2F573756303439413D"
+  );
 
   // application context
   const [userLogIn, setUserLogin] = useState(false);
@@ -108,6 +111,8 @@ export const StateProvider = (props) => {
     setSearch,
     searchControl,
     setSearchControl,
+    kavenegarKey,
+    setKavenegarKey,
   };
 
   return (
