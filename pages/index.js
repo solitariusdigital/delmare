@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import { useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import Head from "next/head";
@@ -36,9 +37,11 @@ function HomePage({ users, products, galleryProducts, saleProducts }) {
     <Fragment>
       <Head>
         <title>Delmareh</title>
-        <meta
-          name="description"
-          content="خرید امن و راحت از بهترین برندهای دنیا و ایران"
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500&display=swap"
+          rel="stylesheet"
         />
       </Head>
       <LandingPage></LandingPage>
