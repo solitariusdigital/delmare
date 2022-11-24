@@ -111,7 +111,7 @@ export default function Invoice({ invoices, postedInvoices }) {
                 <p>{invoice.size}</p>
               </div>
               <div className={classes.row}>
-                <p className={classes.title}>کد طراح</p>
+                <p className={classes.title}>کد برند</p>
                 <p>{invoice.delmareId.slice(0, 3)}</p>
               </div>
               <div className={classes.row}>
@@ -184,7 +184,7 @@ export default function Invoice({ invoices, postedInvoices }) {
                 <p>{invoice.size}</p>
               </div>
               <div className={classes.row}>
-                <p className={classes.title}>کد طراح</p>
+                <p className={classes.title}>کد برند</p>
                 <p>{invoice.delmareId.slice(0, 3)}</p>
               </div>
               <div className={classes.row}>

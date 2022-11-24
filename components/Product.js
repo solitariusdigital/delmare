@@ -273,7 +273,7 @@ function Product({ favourite }) {
           <div className={classes.product}>
             <p className={classes.description}>{selectedProduct.description}</p>
             <div className={classes.row}>
-              <p className={classes.title}>{selectedProduct.designer}</p>
+              <p className={classes.title}>{selectedProduct.brand}</p>
               <p>طراح</p>
             </div>
             <div
@@ -472,8 +472,8 @@ function Product({ favourite }) {
           </button>
           <div className={classes.designContainer}>
             <div className={classes.row}>
-              <p className={classes.title}>{selectedProduct.designer}</p>
-              <p>طراح</p>
+              <p className={classes.title}>{selectedProduct.brand}</p>
+              <p>برند</p>
             </div>
             <div className={classes.row}>
               <p className={classes.category}>{selectedProduct.season}</p>

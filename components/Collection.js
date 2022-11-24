@@ -14,6 +14,7 @@ import {
 } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import loadingImage from "../assets/loader.png";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
@@ -233,6 +234,11 @@ function Collection({ collectionType, brandGallery, brand }) {
           <p>برند {brand.title}</p>
         </div>
       )}
+      <div className={classes.loader}>
+        {gallery.length === 0 && (
+          <Image width={50} height={50} src={loadingImage} alt="isLoading" />
+        )}
+      </div>
       <div className="collection-grid">
         {!displayProduct &&
           gallery

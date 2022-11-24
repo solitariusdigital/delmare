@@ -61,7 +61,7 @@ export default function Upload() {
   const [percentage, setPercentage] = useState("");
   const [sale, setSale] = useState(false);
   const [delmareId, setDelmareId] = useState("");
-  const [designer, setDesigner] = useState("");
+  const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [season, setSeason] = useState("");
 
@@ -108,7 +108,7 @@ export default function Upload() {
       !description &&
       !price &&
       !delmareId &&
-      !designer &&
+      !brand &&
       !category &&
       !season
     ) {
@@ -167,7 +167,7 @@ export default function Upload() {
         size: size,
         category: category.trim(),
         season: season.trim(),
-        designer: designer.trim(),
+        brand: brand.trim(),
         price: price.trim(),
         discount: discount.trim(),
         percentage: percentage.trim(),
@@ -222,8 +222,8 @@ export default function Upload() {
     }, 1000);
   };
 
-  const assignDesigner = (value) => {
-    setDesigner(value);
+  const assignBrand = (value) => {
+    setBrand(value);
     brands.forEach((brand) => {
       if (brand.title === value) {
         setDelmareId(brand.delmareId);
@@ -269,10 +269,10 @@ export default function Upload() {
       <div className={classes.input}>
         <select
           defaultValue={"default"}
-          onChange={(e) => assignDesigner(e.target.value)}
+          onChange={(e) => assignBrand(e.target.value)}
         >
           <option value="default" disabled>
-            طراح
+            برند
           </option>
           {brands.map((brand, index) => {
             return (
@@ -290,7 +290,7 @@ export default function Upload() {
             onClick={() => setDelmareId("")}
             sx={{ fontSize: 16 }}
           />
-          <p className={classes.label}>کد طراح</p>
+          <p className={classes.label}>کد برند</p>
         </div>
         <input
           type="text"
