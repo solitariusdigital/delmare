@@ -10,6 +10,7 @@ import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import { getBrandApi, updateBrandApi } from "../services/api";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -66,6 +67,8 @@ export default function Upload() {
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
+  const [brands, setBrands] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
 
   useEffect(() => {
     if (
@@ -79,6 +82,14 @@ export default function Upload() {
       setContainer(false);
     }
   }, [setContainer]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getBrandApi();
+      setBrands(data);
+    };
+    fetchData().catch(console.error);
+  }, [setBrands]);
 
   const transformDataSize = (value, type) => {
     let split = value.split(",");
@@ -169,6 +180,10 @@ export default function Upload() {
     });
 
     if (upload.ok) {
+      // save product ID to its brand collection
+      const product = await upload.json();
+      selectedBrand.products.push(product["_id"]);
+      await updateBrandApi(selectedBrand);
       setAlert("Product saved successfully");
     } else {
       setAlert("Data save failed, try again");
@@ -207,6 +222,16 @@ export default function Upload() {
     }, 1000);
   };
 
+  const assignDesigner = (value) => {
+    setDesigner(value);
+    brands.forEach((brand) => {
+      if (brand.title === value) {
+        setDelmareId(brand.delmareId);
+        setSelectedBrand(brand);
+      }
+    });
+  };
+
   return (
     <div className="upload-form">
       <div className="bar">
@@ -218,7 +243,7 @@ export default function Upload() {
         <h3>اطلاعات آیتم</h3>
         <RefreshIcon
           className="icon"
-          onClick={() => Router.push("/upload")}
+          onClick={() => Router.reload(window.location.pathname)}
           sx={{ fontSize: 30 }}
         />
       </div>
@@ -242,23 +267,93 @@ export default function Upload() {
         />
       </div>
       <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => assignDesigner(e.target.value)}
+        >
+          <option value="default" disabled>
+            طراح
+          </option>
+          {brands.map((brand, index) => {
+            return (
+              <option key={index} value={brand.title}>
+                {brand.title}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={classes.input}>
         <div className={classes.bar}>
           <CloseIcon
             className="icon"
-            onClick={() => setDesigner("")}
+            onClick={() => setDelmareId("")}
             sx={{ fontSize: 16 }}
           />
-          <p className={classes.label}>اسم طراح</p>
+          <p className={classes.label}>کد طراح</p>
         </div>
         <input
           type="text"
-          id="designer"
-          name="designer"
-          onChange={(e) => setDesigner(e.target.value)}
-          value={designer}
+          id="delmareId"
+          name="delmareId"
+          onChange={(e) => setDelmareId(e.target.value)}
+          value={delmareId}
+          autoComplete="off"
+        />
+      </div>
+      <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="default" disabled>
+            دسته بندی
+          </option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setSeason(e.target.value)}
+        >
+          <option value="default" disabled>
+            فصل
+          </option>
+          {seasons.map((season, index) => {
+            return (
+              <option key={index} value={season}>
+                {season}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <CloseIcon
+            className="icon"
+            onClick={() => setDescription("")}
+            sx={{ fontSize: 16 }}
+          />
+          <p className={classes.label}>توضیحات</p>
+        </div>
+        <textarea
+          type="text"
+          id="description"
+          name="description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
           autoComplete="off"
           dir="rtl"
-        />
+          maxLength="250"
+        ></textarea>
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
@@ -323,78 +418,6 @@ export default function Upload() {
           </div>
         </Fragment>
       )}
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => setDelmareId("")}
-            sx={{ fontSize: 16 }}
-          />
-          <p className={classes.label}>شناسه دلماره</p>
-        </div>
-        <input
-          type="text"
-          id="delmareId"
-          name="delmareId"
-          onChange={(e) => setDelmareId(e.target.value)}
-          value={delmareId}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="default" disabled>
-            Choose category
-          </option>
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => setSeason(e.target.value)}
-        >
-          <option value="default" disabled>
-            Choose season
-          </option>
-          {seasons.map((season, index) => {
-            return (
-              <option key={index} value={season}>
-                {season}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => setDescription("")}
-            sx={{ fontSize: 16 }}
-          />
-          <p className={classes.label}>توضیحات</p>
-        </div>
-        <textarea
-          type="text"
-          id="description"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          autoComplete="off"
-          dir="rtl"
-          maxLength="250"
-        ></textarea>
-      </div>
 
       <h3>رنگ، سایز، تعداد</h3>
       <div className={classes.sizeNav}>

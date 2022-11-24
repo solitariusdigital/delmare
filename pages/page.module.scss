@@ -40,6 +40,10 @@
 
   select {
     height: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .size {

@@ -102,3 +102,14 @@ export const getBrandApi = async () => {
   });
   return await response.json();
 };
+
+export const updateBrandApi = async (data) => {
+  const response = await fetch("/api/brand", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

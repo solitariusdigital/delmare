@@ -500,24 +500,28 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      اندازه به سانتی متر است
+                      شامل : اسکارف، اکسسوری، عینک، کلاه، کیف - FS : Free Size
                     </p>
                   </div>
-                  <div className={classes.table}>
-                    <Image
-                      src={selectedProduct.images.table}
-                      alt="image"
-                      layout="fill"
-                      objectFit="contain"
-                      priority={true}
-                    />
-                  </div>
-                  <div className={classes.row}>
-                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                    <p className={classes.description}>
-                      شامل : اسکارف، عینک، کیف، اکسسوری، کلاه - FS : Free Size
-                    </p>
-                  </div>
+                  {selectedProduct.images.table !== "" && (
+                    <Fragment>
+                      <div className={classes.row}>
+                        <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                        <p className={classes.description}>
+                          اندازه در جدول به سانتی متر است
+                        </p>
+                      </div>
+                      <div className={classes.table}>
+                        <Image
+                          src={selectedProduct.images.table}
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority={true}
+                        />
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
               )}
             </div>
@@ -692,7 +696,7 @@ function Product({ favourite }) {
                       اطلاعات شخصی افراد است و برای آنها و دلماره مسئولیتی ایجاد
                       نمی‌کند. همچنین دلماره مسئولیتی در قبال درستی اطلاعات
                       فراهم شده روی بسته‌بندی کالا ندارد و مسئولیت آن با شرکت
-                      تولیدکننده کالاست
+                      تولید کننده کالا است
                     </p>
                   </div>
                   <div className={classes.row}>
@@ -738,7 +742,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      لباس های نوزادی به دلیل مسایل بهداشتی قابل بازگشت ندارند
+                      لباس های نوزادی به دلیل مسایل بهداشتی امکان بازگشت ندارند
                     </p>
                   </div>
                   <div className={classes.row}>

@@ -30,7 +30,7 @@ export default function Invoice({ invoices, postedInvoices }) {
     return new Date(date).toLocaleDateString("fa-IR");
   };
 
-  const deliverInvoice = async (invoice) => {
+  const postInvoice = async (invoice) => {
     let data = {
       ...invoice,
       posted: true,
@@ -61,7 +61,7 @@ export default function Invoice({ invoices, postedInvoices }) {
         </p>
         <RefreshIcon
           className="icon"
-          onClick={() => Router.push("/invoice")}
+          onClick={() => Router.reload(window.location.pathname)}
           sx={{ fontSize: 30 }}
         />
       </div>
@@ -92,14 +92,6 @@ export default function Invoice({ invoices, postedInvoices }) {
                 <p>{invoice.post}</p>
               </div>
               <div className={classes.row}>
-                <p className={classes.title}>کد محصول</p>
-                <p>{invoice.productId}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد آیتم</p>
-                <p>{invoice.delmareId}</p>
-              </div>
-              <div className={classes.row}>
                 <p className={classes.title}>آیتم</p>
                 <p>{invoice.title}</p>
               </div>
@@ -118,9 +110,21 @@ export default function Invoice({ invoices, postedInvoices }) {
                 <p className={classes.title}>اندازه</p>
                 <p>{invoice.size}</p>
               </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد طراح</p>
+                <p>{invoice.delmareId.slice(0, 3)}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد آیتم</p>
+                <p>{invoice.delmareId}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد محصول</p>
+                <p>{invoice.productId}</p>
+              </div>
               <button
                 className={classes.button}
-                onClick={() => deliverInvoice(invoice)}
+                onClick={() => postInvoice(invoice)}
               >
                 انتقال به ارسال شده
               </button>
@@ -161,14 +165,6 @@ export default function Invoice({ invoices, postedInvoices }) {
                 <p>{invoice.post}</p>
               </div>
               <div className={classes.row}>
-                <p className={classes.title}>کد محصول</p>
-                <p>{invoice.productId}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد آیتم</p>
-                <p>{invoice.delmareId}</p>
-              </div>
-              <div className={classes.row}>
                 <p className={classes.title}>آیتم</p>
                 <p>{invoice.title}</p>
               </div>
@@ -186,6 +182,18 @@ export default function Invoice({ invoices, postedInvoices }) {
               <div className={classes.row}>
                 <p className={classes.title}>اندازه</p>
                 <p>{invoice.size}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد طراح</p>
+                <p>{invoice.delmareId.slice(0, 3)}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد آیتم</p>
+                <p>{invoice.delmareId}</p>
+              </div>
+              <div className={classes.row}>
+                <p className={classes.title}>کد محصول</p>
+                <p>{invoice.productId}</p>
               </div>
             </div>
           ))}

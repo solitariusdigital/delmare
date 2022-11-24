@@ -11,7 +11,6 @@ import {
   updateProductApi,
   updateUserApi,
 } from "../services/api";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
