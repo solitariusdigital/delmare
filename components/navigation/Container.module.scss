@@ -28,24 +28,23 @@
   }
 
   .navigation {
-    width: 100%;
-    height: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
     padding: 0px 10px;
 
     .nav {
       font-size: config.$small-font;
       color: config.$black;
-      margin: 0px 50px;
+      border-bottom: 2px solid config.$cream;
     }
 
     .navActive {
       font-size: config.$small-font;
       color: config.$black;
       border-bottom: 2px solid config.$brand;
-      margin: 0px 50px;
     }
   }
 }

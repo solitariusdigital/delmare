@@ -13,10 +13,14 @@
     text-align: center;
     justify-content: space-between;
     width: 100%;
+    padding: 10px;
     box-shadow: config.$card-shadow;
     background: config.$white;
     @include mixins.border-radius();
-    padding: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .row {
@@ -24,7 +28,6 @@
     flex-direction: row;
     text-align: center;
     justify-content: space-between;
-    margin-top: 10px;
   }
 
   .value,
@@ -39,6 +42,9 @@
   .title {
     margin-bottom: 10px;
   }
+}
+.logo {
+  margin: 10px 0px;
 }
 
 .loader {

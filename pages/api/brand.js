@@ -1,16 +1,16 @@
 import Brand from "../../models/Brand";
 import dbConnect from "../../services/dbConnect";
 
-export default async function brandHandler(req, res) {
-  const { method, body } = req;
+export default async function productHandler(req, res) {
+  const { method } = req;
 
   await dbConnect();
 
   switch (method) {
     case "GET":
       try {
-        const brands = await Brand.find();
-        return res.status(200).json(brands);
+        const brand = await Brand.findById(req.query.id);
+        return res.status(200).json(brand);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

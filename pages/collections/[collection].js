@@ -11,24 +11,36 @@ function CollectionPage() {
     useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
+  const { accessoriesCollection, setAccessoriesCollection } =
+    useContext(StateContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getProducstApi();
       setProductsCollection(data);
-      setSaleCollection(
-        data.filter((product) => {
-          return product.sale;
-        })
-      );
       setGalleryCollection(
         data.filter((product) => {
           return !product.sale;
         })
       );
+      setSaleCollection(
+        data.filter((product) => {
+          return product.sale;
+        })
+      );
+      setAccessoriesCollection(
+        data.filter((product) => {
+          return product.category === "اکسسوری";
+        })
+      );
     };
     fetchData().catch(console.error);
-  }, [setProductsCollection, setSaleCollection, setGalleryCollection]);
+  }, [
+    setProductsCollection,
+    setSaleCollection,
+    setGalleryCollection,
+    setAccessoriesCollection,
+  ]);
 
   const router = useRouter();
   let collection = router.query.collection;
@@ -37,6 +49,9 @@ function CollectionPage() {
     <Fragment>
       {collection == "gallery" && <Collection collectionType={"gallery"} />}
       {collection == "sale" && <Collection collectionType={"sale"} />}
+      {collection == "accessories" && (
+        <Collection collectionType={"accessories"} />
+      )}
       {collection == "brands" && <Brands />}
     </Fragment>
   );

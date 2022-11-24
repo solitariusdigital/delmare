@@ -1,3 +1,4 @@
+// users api
 export const updateUserApi = async (data) => {
   const response = await fetch("/api/user", {
     method: "PUT",
@@ -8,7 +9,6 @@ export const updateUserApi = async (data) => {
   });
   return await response.json();
 };
-
 export const createUserApi = async (data) => {
   const response = await fetch("/api/user", {
     method: "POST",
@@ -19,7 +19,6 @@ export const createUserApi = async (data) => {
   });
   return await response.json();
 };
-
 export const getUsersApi = async () => {
   const response = await fetch("/api/user", {
     method: "GET",
@@ -30,6 +29,7 @@ export const getUsersApi = async () => {
   return await response.json();
 };
 
+// products api
 export const getProductApi = async (id) => {
   const response = await fetch(`/api/product?id=${id}`, {
     method: "GET",
@@ -39,7 +39,6 @@ export const getProductApi = async (id) => {
   });
   return await response.json();
 };
-
 export const getProducstApi = async () => {
   const response = await fetch("/api/products", {
     method: "GET",
@@ -49,7 +48,6 @@ export const getProducstApi = async () => {
   });
   return await response.json();
 };
-
 export const updateProductApi = async (data) => {
   const response = await fetch("/api/product", {
     method: "PUT",
@@ -61,6 +59,7 @@ export const updateProductApi = async (data) => {
   return await response.json();
 };
 
+// invoices api
 export const createInvoiceApi = async (data) => {
   const response = await fetch("/api/invoice", {
     method: "POST",
@@ -71,7 +70,6 @@ export const createInvoiceApi = async (data) => {
   });
   return await response.json();
 };
-
 export const getInvoiceApi = async () => {
   const response = await fetch("/api/invoice", {
     method: "GET",
@@ -81,7 +79,6 @@ export const getInvoiceApi = async () => {
   });
   return await response.json();
 };
-
 export const updateInvoiceApi = async (data) => {
   const response = await fetch("/api/invoice", {
     method: "PUT",
@@ -93,8 +90,9 @@ export const updateInvoiceApi = async (data) => {
   return await response.json();
 };
 
-export const getBrandApi = async () => {
-  const response = await fetch("/api/brand", {
+// brands api
+export const getBrandApi = async (id) => {
+  const response = await fetch(`/api/brand?id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -102,9 +100,17 @@ export const getBrandApi = async () => {
   });
   return await response.json();
 };
-
+export const getBrandsApi = async () => {
+  const response = await fetch("/api/brands", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
 export const updateBrandApi = async (data) => {
-  const response = await fetch("/api/brand", {
+  const response = await fetch("/api/brands", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {

@@ -1,15 +1,16 @@
 import { useState, useEffect, Fragment } from "react";
 import classes from "./Brands.module.scss";
-import { getBrandApi } from "../services/api";
+import { getBrandsApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
+import Router from "next/router";
 
 function Brands() {
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getBrandApi();
+      const data = await getBrandsApi();
       setBrands(data);
     };
     fetchData().catch(console.error);
@@ -26,13 +27,18 @@ function Brands() {
         {brands.map((brand, index) => (
           <div key={index} className={classes.brand}>
             <p className={classes.title}>{brand.title}</p>
-            <Image
-              src={brand.logo}
-              objectFit="contain"
-              width={100}
-              height={100}
-              alt="logo"
-            />
+            <div
+              className={classes.logo}
+              onClick={() => Router.push(`/collections/brands/${brand["_id"]}`)}
+            >
+              <Image
+                src={brand.logo}
+                objectFit="contain"
+                width={100}
+                height={100}
+                alt="logo"
+              />
+            </div>
             <div className={classes.row}>
               <p className={classes.value}>{brand.products.length}</p>
               <p className={classes.count}>تعداد آیتم و طرح</p>

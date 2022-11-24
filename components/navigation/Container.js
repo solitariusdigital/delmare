@@ -51,7 +51,7 @@ function Container() {
   const activateNav = (index) => {
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "Brands") {
+        if (nav.title === "Brands" || nav.title === "Accessories") {
           setSearchControl(false);
         } else {
           setSearchControl(true);

@@ -7,7 +7,7 @@ export default async function productHandler(req, res) {
 
   switch (method) {
     case "POST":
-      // save data with images link to db after images upload
+      // save data with images link to db after images upload in s3
       try {
         const newProduct = await Product.create(body);
         return res.status(200).json(newProduct);

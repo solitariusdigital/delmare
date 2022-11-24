@@ -31,6 +31,11 @@ export const StateProvider = (props) => {
       link: "/collections/brands",
       active: false,
     },
+    {
+      title: "Accessories",
+      link: "/collections/accessories",
+      active: false,
+    },
   ]);
   const [categories, setCategories] = useState([
     "اسکارف",
@@ -69,6 +74,7 @@ export const StateProvider = (props) => {
   const [productsCollection, setProductsCollection] = useState([]);
   const [galleryCollection, setGalleryCollection] = useState([]);
   const [saleCollection, setSaleCollection] = useState([]);
+  const [accessoriesCollection, setAccessoriesCollection] = useState([]);
 
   const stateContext = {
     menu,
@@ -113,6 +119,8 @@ export const StateProvider = (props) => {
     setSearchControl,
     kavenegarKey,
     setKavenegarKey,
+    accessoriesCollection,
+    setAccessoriesCollection,
   };
 
   return (

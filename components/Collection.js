@@ -10,11 +10,12 @@ import {
   getProductApi,
   updateProductApi,
   updateUserApi,
+  getBrandApi,
 } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-function Collection({ collectionType }) {
+function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
@@ -29,6 +30,8 @@ function Collection({ collectionType }) {
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
+  const { accessoriesCollection, setAccessoriesCollection } =
+    useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
@@ -47,6 +50,12 @@ function Collection({ collectionType }) {
       case "sale":
         setGallery(saleCollection);
         break;
+      case "brand":
+        setGallery(brandGallery);
+        break;
+      case "accessories":
+        setGallery(accessoriesCollection);
+        break;
     }
     setBar(true);
     setDisplayProduct(false);
@@ -55,7 +64,10 @@ function Collection({ collectionType }) {
     setBar,
     saleCollection,
     galleryCollection,
+    productsCollection,
+    accessoriesCollection,
     collectionType,
+    brandGallery,
   ]);
 
   const selectProduct = async (id) => {
@@ -214,6 +226,11 @@ function Collection({ collectionType }) {
               })}
             </div>
           )}
+        </div>
+      )}
+      {collectionType === "brand" && (
+        <div className={classes.brand}>
+          <p>برند {brand.title}</p>
         </div>
       )}
       <div className="collection-grid">

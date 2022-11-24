@@ -29,18 +29,18 @@ function CollectionsPage() {
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
     },
-    // {
-    //   title: "Bloggers",
-    //   link: "/collections/bloggers",
-    //   imageSrc: `${sourceLink}seven.jpg`,
-    // },
+    {
+      title: "Accessories",
+      link: "/collections/accessories",
+      imageSrc: `${sourceLink}eight.jpg`,
+    },
   ];
 
   const activateNav = (link, index) => {
     Router.push(`${link}`);
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "Brands") {
+        if (nav.title === "Brands" || nav.title === "Accessories") {
           setSearchControl(false);
         } else {
           setSearchControl(true);

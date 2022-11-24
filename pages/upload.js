@@ -10,7 +10,7 @@ import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { getBrandApi, updateBrandApi } from "../services/api";
+import { getBrandsApi, updateBrandApi } from "../services/api";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -85,7 +85,7 @@ export default function Upload() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getBrandApi();
+      const data = await getBrandsApi();
       setBrands(data);
     };
     fetchData().catch(console.error);
