@@ -174,7 +174,7 @@ function Collection({ collectionType, brandGallery, brand }) {
 
   return (
     <Fragment>
-      {!displayProduct && search && (
+      {!displayProduct && search && collectionType !== "accessories" && (
         <div className={classes.category}>
           <div className={classes.selectContainer}>
             <div

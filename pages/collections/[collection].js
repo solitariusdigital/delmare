@@ -30,7 +30,12 @@ function CollectionPage() {
       );
       setAccessoriesCollection(
         data.filter((product) => {
-          return product.category === "اکسسوری";
+          return (
+            product.category === "اکسسوری" ||
+            product.category === "عینک" ||
+            product.category === "کیف" ||
+            product.category === "کلاه"
+          );
         })
       );
     };
