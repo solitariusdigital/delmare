@@ -51,12 +51,12 @@ function Container() {
   const activateNav = (index) => {
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "Brands" || nav.title === "Accessories") {
+        if (nav.title === "برند" || nav.title === "اکسسوری") {
           setSearchControl(false);
         } else {
           setSearchControl(true);
         }
-        nav.active = !nav.active;
+        nav.active = true;
       } else {
         nav.active = false;
       }
@@ -102,15 +102,17 @@ function Container() {
         </div>
         {bar && (
           <div className={classes.navigation}>
-            {navigation.map((nav, index) => (
-              <div
-                key={index}
-                className={!nav.active ? classes.nav : classes.navActive}
-                onClick={() => activateNav(index)}
-              >
-                <Link href={nav.link}>{nav.title}</Link>
-              </div>
-            ))}
+            {navigation
+              .map((nav, index) => (
+                <div
+                  key={index}
+                  className={!nav.active ? classes.nav : classes.navActive}
+                  onClick={() => activateNav(index)}
+                >
+                  <Link href={nav.link}>{nav.title}</Link>
+                </div>
+              ))
+              .reverse()}
           </div>
         )}
       </div>

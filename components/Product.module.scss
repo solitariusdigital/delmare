@@ -230,6 +230,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin: 5px 0px;
   }
 
   .sectionId {
@@ -284,7 +285,11 @@
     }
 
     .selectedSize {
-      border: 1px solid config.$black;
+      background: config.$brand;
+    }
+
+    .selectedColor {
+      border: 2px solid config.$brand;
     }
   }
 }
@@ -365,23 +370,22 @@
 .designContainer {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   .description {
-    margin-bottom: 20px;
-    margin-top: 10px;
     font-size: config.$small-font;
     text-align: right;
   }
 
   .row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px 0px;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
 
     .title {
       font-size: config.$med-font;
       font-weight: bold;
+      margin-right: 10px;
     }
   }
 

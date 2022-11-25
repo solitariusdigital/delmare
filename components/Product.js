@@ -22,6 +22,7 @@ function Product({ favourite }) {
   const { menue, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(true);
@@ -168,7 +169,6 @@ function Product({ favourite }) {
     if (selectedColor === "" || selectedSize === "") {
       setAlert("رنگ یا اندازه را انتخاب کنید");
     } else {
-      setAlert("آیتم به سبد خرید اضافه شد");
       setShoppingCart([
         ...shoppingCart,
         {
@@ -188,6 +188,8 @@ function Product({ favourite }) {
       clearDetails();
       setSelectedColor("");
       setSelectedSize("");
+      setToggleContainer("cart");
+      colors.length = 0;
     }
     setTimeout(() => {
       setAlert("");
@@ -416,7 +418,6 @@ function Product({ favourite }) {
               )}
               <p>{selectedProduct.title}</p>
             </div>
-
             <div className={classes.section}>
               <div className={classes.box}>
                 {Object.keys(productSizes).map((size, index) => (
@@ -435,7 +436,7 @@ function Product({ favourite }) {
                   </div>
                 ))}
               </div>
-              <p className={classes.title}>اندازه</p>
+              <p className={classes.title}>انتخاب اندازه</p>
             </div>
             <div className={classes.section}>
               <div className={classes.box}>
@@ -456,9 +457,7 @@ function Product({ favourite }) {
                   </div>
                 ))}
               </div>
-              {colors.length > 0 && (
-                <p className={classes.title}>رنگ و موجودی</p>
-              )}
+              {colors.length > 0 && <p className={classes.title}>انتخاب رنگ</p>}
             </div>
           </div>
           <div className={classes.alert}>{alert}</div>
@@ -472,13 +471,8 @@ function Product({ favourite }) {
           </button>
           <div className={classes.designContainer}>
             <div className={classes.row}>
-              <p className={classes.title}>{selectedProduct.brand}</p>
               <p>برند</p>
-            </div>
-            <div className={classes.row}>
-              <p className={classes.category}>{selectedProduct.season}</p>
-              <p className={classes.category}>{selectedProduct.category}</p>
-              <p>اتیکت</p>
+              <p className={classes.title}>{selectedProduct.brand}</p>
             </div>
             <p className={classes.description}>{selectedProduct.description}</p>
           </div>
@@ -499,9 +493,14 @@ function Product({ favourite }) {
                 <div className={classes.information}>
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                    <p className={classes.description}>
-                      شامل : اسکارف، اکسسوری، عینک، کلاه، کیف - FS : Free Size
-                    </p>
+                    <div>
+                      <p className={classes.description}>
+                        تک سایز - FS : Free Size
+                      </p>
+                      <p className={classes.description}>
+                        اسکارف، اکسسوری، عینک، کلاه و کیف تک سایز هستند
+                      </p>
+                    </div>
                   </div>
                   {selectedProduct.images.table !== "" && (
                     <Fragment>
@@ -542,7 +541,7 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      ارسال رایگان سفارش تهران وشهرستان در صورتی که جمع کل مبلغ
+                      ارسال رایگان سفارش تهران و شهرستان در صورتی که جمع کل مبلغ
                       پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
                       بیشتر باشد
                     </p>

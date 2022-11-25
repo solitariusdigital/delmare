@@ -15,22 +15,22 @@ function CollectionsPage() {
 
   const collections = [
     {
-      title: "Gallery",
+      title: "گالری",
       link: "/collections/gallery",
       imageSrc: `${sourceLink}one.jpg`,
     },
     {
-      title: "Sale",
+      title: "تخفیف",
       link: "/collections/sale",
       imageSrc: `${sourceLink}three.jpg`,
     },
     {
-      title: "Brands",
+      title: "برند",
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
     },
     {
-      title: "Accessories",
+      title: "اکسسوری",
       link: "/collections/accessories",
       imageSrc: `${sourceLink}eight.jpg`,
     },
@@ -40,12 +40,12 @@ function CollectionsPage() {
     Router.push(`${link}`);
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "Brands" || nav.title === "Accessories") {
+        if (nav.title === "برند" || nav.title === "اکسسوری") {
           setSearchControl(false);
         } else {
           setSearchControl(true);
         }
-        nav.active = !nav.active;
+        nav.active = true;
       } else {
         nav.active = false;
       }

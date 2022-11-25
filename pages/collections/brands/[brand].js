@@ -29,7 +29,7 @@ export default function Brand() {
   return (
     <Fragment>
       <Collection
-        collectionType={"brand"}
+        collectionType={"brands"}
         brandGallery={gallery}
         brand={brand}
       />

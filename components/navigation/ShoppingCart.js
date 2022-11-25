@@ -46,6 +46,8 @@ export default function ShoppingCart() {
         let getProduct = await getProductApi(product["_id"]);
         if (getProduct.size[product.size].colors[product.color] === 0) {
           product.message = "اتمام موجودی";
+        } else {
+          product.message = "";
         }
       });
     };
@@ -176,7 +178,7 @@ export default function ShoppingCart() {
           )}
           {checkout && (
             <ArrowBackIosNewIcon
-              className={classes.back}
+              className="icon"
               sx={{ fontSize: 30 }}
               onClick={() => setCheckout(false)}
             />

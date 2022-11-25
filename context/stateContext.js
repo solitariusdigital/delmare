@@ -17,22 +17,22 @@ export const StateProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [navigation, setNavigation] = useState([
     {
-      title: "Gallery",
+      title: "گالری",
       link: "/collections/gallery",
       active: false,
     },
     {
-      title: "Sale",
+      title: "تخفیف",
       link: "/collections/sale",
       active: false,
     },
     {
-      title: "Brands",
+      title: "برند",
       link: "/collections/brands",
       active: false,
     },
     {
-      title: "Accessories",
+      title: "اکسسوری",
       link: "/collections/accessories",
       active: false,
     },
