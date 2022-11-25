@@ -11,6 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { getBrandsApi, updateBrandApi } from "../services/api";
+import { responsiveFontSizes } from "@mui/material";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -232,6 +233,16 @@ export default function Upload() {
     });
   };
 
+  const resetSizes = () => {
+    setFreeSize(true);
+    setXS("");
+    setS("");
+    setM("");
+    setL("");
+    setXL("");
+    setXXL("");
+  };
+
   return (
     <div className="upload-form">
       <div className="bar">
@@ -418,20 +429,24 @@ export default function Upload() {
           </div>
         </Fragment>
       )}
-
       <h3>رنگ، سایز، تعداد</h3>
       <div className={classes.sizeNav}>
         {freeSize ? (
-          <button className="mainButton" onClick={() => setFreeSize(false)}>
+          <button
+            className="mainButton"
+            onClick={() => {
+              setFreeSize(false);
+              setFS("");
+            }}
+          >
             Add size
           </button>
         ) : (
-          <button className="mainButton" onClick={() => setFreeSize(true)}>
+          <button className="mainButton" onClick={() => resetSizes()}>
             Free size
           </button>
         )}
       </div>
-
       {freeSize && (
         <div className={classes.sizeContainer}>
           <div className={classes.input}>
@@ -459,7 +474,6 @@ export default function Upload() {
           </div>
         </div>
       )}
-
       {!freeSize && (
         <div className={classes.sizeContainer}>
           <div className={classes.input}>
@@ -597,7 +611,6 @@ export default function Upload() {
           </div>
         </div>
       )}
-
       <h3>انتخاب عکس</h3>
       <div className="input">
         <div>

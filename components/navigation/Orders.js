@@ -52,8 +52,9 @@ export default function Orders() {
               <div key={index} className={ShoppingCart.order}>
                 <div>
                   <Image
+                    className={ShoppingCart.image}
                     src={order.image}
-                    objectFit="contain"
+                    objectFit="cover"
                     width={100}
                     height={140}
                     alt="image"

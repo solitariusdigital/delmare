@@ -191,14 +191,16 @@ export default function ShoppingCart() {
               .map((cart, index) => (
                 <div key={index} className={classes.item}>
                   <div className={classes.cart}>
-                    <Image
-                      className={classes.image}
-                      width={110}
-                      height={140}
-                      objectFit="cover"
-                      src={cart.image}
-                      alt="image"
-                    />
+                    <div className={classes.imageContainer}>
+                      <Image
+                        className={classes.image}
+                        width={110}
+                        height={140}
+                        objectFit="cover"
+                        src={cart.image}
+                        alt="image"
+                      />
+                    </div>
                     <div className={classes.information}>
                       <div className={classes.title}>
                         <p>{convertNumber(cart.price)} T</p>

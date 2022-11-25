@@ -289,7 +289,7 @@ function Collection({ collectionType, brandGallery, brand }) {
             ))
             .reverse()}
         {gallery.length === 0 && message && (
-          <p className={classes.message}>اتیکت نا موجود</p>
+          <p className={classes.message}>درخواست نا موجود</p>
         )}
         {displayProduct && <Product favourite={like} />}
       </div>

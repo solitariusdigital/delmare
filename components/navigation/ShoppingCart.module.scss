@@ -74,7 +74,7 @@
         flex-direction: row-reverse;
         position: absolute;
         right: 10px;
-        bottom: 10px;
+        bottom: 5px;
       }
 
       .sale {
@@ -93,9 +93,13 @@
       .cart {
         position: relative;
 
-        .image {
-          @include mixins.border-radius();
-          object-position: 50% 0%;
+        .imageContainer {
+          display: flex;
+          align-items: center;
+
+          .image {
+            @include mixins.border-radius();
+          }
         }
 
         .information {
@@ -221,6 +225,10 @@
           margin-right: 10px;
         }
       }
+    }
+
+    .image {
+      @include mixins.border-radius();
     }
   }
 
