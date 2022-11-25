@@ -225,85 +225,9 @@ function Product({ favourite }) {
 
   return (
     <Fragment>
-      {/* product */}
-      {!displayDetails && (
-        <div>
-          <div className={classes.productContainer}>
-            <ArrowBackIosNewIcon
-              className={classes.back}
-              sx={{ fontSize: 30 }}
-              onClick={() => {
-                setDisplayProduct(false);
-                setBar(true);
-              }}
-            />
-            {selectedProduct.sale && (
-              <div className={classes.sale}>
-                <p>{selectedProduct.percentage}% OFF</p>
-              </div>
-            )}
-            <Image
-              className={classes.image}
-              src={selectedProduct.images.main}
-              alt="image"
-              layout="fill"
-              objectFit="cover"
-              priority={true}
-            />
-            <div className={classes.banner}>
-              <div className={classes.social}>
-                <div>
-                  {checFavourites(selectedProduct) ? (
-                    <FavoriteIcon
-                      className={classes.iconRed}
-                      onClick={() => favourProduct(selectedProduct)}
-                    />
-                  ) : (
-                    <FavoriteBorderIcon
-                      className={classes.icon}
-                      onClick={() => favourProduct(selectedProduct)}
-                    />
-                  )}
-                </div>
-              </div>
-              <div className={classes.social}>
-                <p>{Math.round(selectedProduct.views)}</p>
-                <VisibilityIcon className={classes.icon} />
-              </div>
-            </div>
-          </div>
-          <div className={classes.product}>
-            <p className={classes.description}>{selectedProduct.description}</p>
-            <div className={classes.row}>
-              <p className={classes.title}>{selectedProduct.brand}</p>
-              <p>طراح</p>
-            </div>
-            <div
-              className={classes.action}
-              onClick={() => {
-                setDisplayDetails(true);
-              }}
-            >
-              {selectedProduct.sale ? (
-                <Fragment>
-                  <p className={classes.price}>
-                    {convertNumber(selectedProduct.price)} T
-                  </p>
-                  <p className={classes.discount}>
-                    {convertNumber(selectedProduct.discount)} T
-                  </p>
-                </Fragment>
-              ) : (
-                <p>{convertNumber(selectedProduct.price)} T</p>
-              )}
-              <p>{selectedProduct.title}</p>
-            </div>
-          </div>
-        </div>
-      )}
       {/* item details */}
       {displayDetails && (
-        <div className={classes.itemContainer}>
+        <div className={classes.productContainer}>
           <div className={classes.topBar}>
             <ArrowBackIosNewIcon
               className="icon"
@@ -322,8 +246,8 @@ function Product({ favourite }) {
               <p className={classes.title}>کد آیتم</p>
             </div>
           </div>
-          <div className={classes.itemDetails}>
-            <div className={classes.item}>
+          <div className={classes.productImages}>
+            <div className={classes.product}>
               <Image
                 className={classes.image}
                 src={mainItem}
@@ -350,15 +274,15 @@ function Product({ favourite }) {
                 </div>
               </div>
             </div>
-            <div className={classes.subItemDetail}>
+            <div className={classes.subItemProduct}>
               <div
-                className={classes.subItem}
+                className={classes.subProduct}
                 onClick={() => {
                   toggleImages("one");
                 }}
               >
                 <Image
-                  className={classes.detailImage}
+                  className={classes.productImage}
                   src={itemOne}
                   alt="image"
                   width={100}
@@ -368,13 +292,13 @@ function Product({ favourite }) {
                 />
               </div>
               <div
-                className={classes.subItem}
+                className={classes.subProduct}
                 onClick={() => {
                   toggleImages("two");
                 }}
               >
                 <Image
-                  className={classes.detailImage}
+                  className={classes.productImage}
                   src={itemTwo}
                   alt="image"
                   width={100}
@@ -384,13 +308,13 @@ function Product({ favourite }) {
                 />
               </div>
               <div
-                className={classes.subItem}
+                className={classes.subProduct}
                 onClick={() => {
                   toggleImages("three");
                 }}
               >
                 <Image
-                  className={classes.detailImage}
+                  className={classes.productImage}
                   src={itemThree}
                   alt="image"
                   width={100}
@@ -401,8 +325,7 @@ function Product({ favourite }) {
               </div>
             </div>
           </div>
-
-          <div className={classes.details}>
+          <div className={classes.productDetails}>
             <div className={classes.priceContainer}>
               {selectedProduct.sale ? (
                 <Fragment>
@@ -498,7 +421,7 @@ function Product({ favourite }) {
                         تک سایز - FS : Free Size
                       </p>
                       <p className={classes.description}>
-                        اسکارف، اکسسوری، عینک، کلاه و کیف تک سایز هستند
+                        اسکارف، اکسسوری، عینک، کلاه و کیف، تک سایز هستند
                       </p>
                     </div>
                   </div>
