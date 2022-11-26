@@ -48,11 +48,6 @@
   }
 }
 
-.image {
-  @include mixins.border-radius();
-  object-position: 50% 0%;
-}
-
 .back {
   position: absolute;
   cursor: pointer;
@@ -106,6 +101,11 @@
     height: 100%;
     max-width: 300px;
     @include mixins.border-radius();
+    box-shadow: config.$image-shadow;
+
+    .image {
+      @include mixins.border-radius();
+    }
   }
 
   .subItemProduct {
@@ -122,7 +122,6 @@
 
       .productImage {
         @include mixins.border-radius();
-        object-position: 50% 0%;
 
         &:hover {
           cursor: pointer;
@@ -138,10 +137,17 @@
   justify-content: space-between;
   margin-bottom: 10px;
 
-  .price {
-    text-decoration: line-through;
-    color: config.$grey;
-    font-weight: 300;
+  .discount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .price {
+      text-decoration: line-through;
+      color: config.$grey;
+      font-weight: 300;
+      margin-right: 20px;
+    }
   }
 
   p {

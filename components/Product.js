@@ -8,7 +8,6 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { convertNumber } from "../services/utility";
 import { updateUserApi } from "../services/api";
 
@@ -115,7 +114,6 @@ function Product({ favourite }) {
     setSelectedSize("");
     clearDetails();
     setSearchControl(true);
-
     colors.length = 0;
   };
 
@@ -130,7 +128,6 @@ function Product({ favourite }) {
 
   const selectDetails = (detail, type, i) => {
     setAlert("");
-
     switch (detail) {
       case "color":
         setSelectedColor(type);
@@ -157,6 +154,10 @@ function Product({ favourite }) {
                 count: count,
                 selected: false,
               });
+            }
+            if (colors.length === 1) {
+              colors[0].selected = true;
+              setSelectedColor(colors[0].type);
             }
           } else {
             productSizes[size].selected = false;
@@ -225,7 +226,6 @@ function Product({ favourite }) {
 
   return (
     <Fragment>
-      {/* item details */}
       {displayDetails && (
         <div className={classes.productContainer}>
           <div className={classes.topBar}>
@@ -328,14 +328,12 @@ function Product({ favourite }) {
           <div className={classes.productDetails}>
             <div className={classes.priceContainer}>
               {selectedProduct.sale ? (
-                <Fragment>
+                <div className={classes.discount}>
                   <p className={classes.price}>
                     {convertNumber(selectedProduct.price)} T
                   </p>
-                  <p className={classes.discount}>
-                    {convertNumber(selectedProduct.discount)} T
-                  </p>
-                </Fragment>
+                  <p>{convertNumber(selectedProduct.discount)} T</p>
+                </div>
               ) : (
                 <p>{convertNumber(selectedProduct.price)} T</p>
               )}
@@ -380,7 +378,9 @@ function Product({ favourite }) {
                   </div>
                 ))}
               </div>
-              {colors.length > 0 && <p className={classes.title}>انتخاب رنگ</p>}
+              {colors.length > 0 && (
+                <p className={classes.title}>انتخاب رنگ و موجودی</p>
+              )}
             </div>
           </div>
           <div className={classes.alert}>{alert}</div>

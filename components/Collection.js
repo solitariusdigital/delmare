@@ -282,7 +282,7 @@ function Collection({ collectionType, brandGallery, brand }) {
                 />
                 {product.sale && (
                   <div className="sale">
-                    <p>{product.percentage}%</p>
+                    <p>{product.percentage}% OFF</p>
                   </div>
                 )}
               </div>
