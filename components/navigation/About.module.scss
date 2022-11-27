@@ -27,3 +27,18 @@
     justify-content: center;
   }
 }
+
+.videoContainer {
+  width: 100%;
+  height: 60%;
+  margin-bottom: 20px;
+  @include mixins.border-radius();
+  box-shadow: config.$image-shadow;
+
+  .video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    @include mixins.border-radius();
+  }
+}
