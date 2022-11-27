@@ -13,7 +13,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./Container.module.scss";
 import Router from "next/router";
-
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 
@@ -83,12 +82,8 @@ function Container() {
             />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
-          <div className={classes.brand}>
-            <Image
-              src={brand}
-              alt="brand"
-              onClick={() => navigateLandingPage()}
-            />
+          <div className={classes.brand} onClick={() => navigateLandingPage()}>
+            <Image src={brand} alt="brand" />
           </div>
           <div className="shoppingcart-icon">
             {searchControl && (

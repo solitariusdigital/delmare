@@ -41,6 +41,7 @@ function Collection({ collectionType, brandGallery, brand }) {
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
+  const [reqNumber, setReqNumber] = useState(10);
 
   useEffect(() => {
     switch (collectionType) {
@@ -115,6 +116,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setCategoryFilter(type);
     setCategorySelector(false);
     setMessage(false);
+    setReqNumber(10);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -138,6 +140,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSeasonFilter(type);
     setSeasonSelector(false);
     setMessage(false);
+    setReqNumber(10);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -287,12 +290,18 @@ function Collection({ collectionType, brandGallery, brand }) {
                 )}
               </div>
             ))
-            .reverse()}
+            .reverse()
+            .slice(0, reqNumber)}
         {gallery.length === 0 && message && (
           <p className={classes.message}>درخواست نا موجود</p>
         )}
         {displayProduct && <Product favourite={like} />}
       </div>
+      {gallery.length >= 10 && !displayProduct && (
+        <div className={classes.more}>
+          <p onClick={() => setReqNumber(reqNumber + 10)}>آیتم بیشتر</p>
+        </div>
+      )}
     </Fragment>
   );
 }

@@ -103,3 +103,19 @@
   justify-content: center;
   width: 100%;
 }
+
+.more {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  p {
+    border-bottom: 1px solid config.$black;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
