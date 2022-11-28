@@ -88,18 +88,31 @@
   }
 }
 
+.similarContainer {
+  text-align: right;
+
+  .grid {
+    padding: 0px;
+
+    .image {
+      @include mixins.border-radius();
+    }
+  }
+
+  .title {
+    margin: 10px 0px;
+  }
+}
+
 .productImages {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 10px 0px;
-  height: 400px;
+  height: 600px;
 
   .product {
     position: relative;
-    width: 100%;
     height: 100%;
-    max-width: 300px;
     @include mixins.border-radius();
     box-shadow: config.$image-shadow;
 
@@ -110,15 +123,14 @@
 
   .subItemProduct {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
 
     .subProduct {
       display: flex;
       align-items: center;
       justify-content: right;
-      width: 120px;
 
       .productImage {
         @include mixins.border-radius();
@@ -180,7 +192,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 260px;
+    max-width: 200px;
 
     .color,
     .size,
@@ -229,6 +241,20 @@
 
     .selectedColor {
       border: 2px solid config.$brand;
+    }
+  }
+}
+
+.countContainer {
+  text-align: center;
+
+  .count {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    p {
+      margin-left: 10px;
     }
   }
 }

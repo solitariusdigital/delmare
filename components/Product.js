@@ -9,10 +9,15 @@ import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutl
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { convertNumber } from "../services/utility";
-import { updateUserApi } from "../services/api";
+import {
+  updateUserApi,
+  updateProductApi,
+  getProductApi,
+} from "../services/api";
 import payment from "../assets/payment.png";
 import quality from "../assets/quality.png";
 import post from "../assets/post.png";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Product({ favourite }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -25,11 +30,13 @@ function Product({ favourite }) {
   const { register, setRegister } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { productsCollection, setProductsCollection } =
+    useContext(StateContext);
 
   const [alert, setAlert] = useState("");
   const [displayDetails, setDisplayDetails] = useState(true);
 
-  // item image variables
+  // product image variables
   const [mainItem, setMainItem] = useState(selectedProduct.images.main);
   const [itemOne, setItemOne] = useState(selectedProduct.images.one);
   const [itemTwo, setItemTwo] = useState(selectedProduct.images.two);
@@ -42,12 +49,15 @@ function Product({ favourite }) {
   const [sizeGuide, setSizeGuide] = useState(false);
   const [shipmentMethod, setShipmentMethod] = useState(false);
   const [returnPolicy, setReturnPolicy] = useState(false);
+  const [similarProducts, setSimilarProducts] = useState([]);
   // product options
   const [colors, setColors] = useState([]);
   const [productSizes, setProductSizes] = useState(selectedProduct.size);
   // customer selections
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedCount, setSelectedCount] = useState("");
+
   const [like, setLike] = useState(favourite);
 
   useEffect(() => {
@@ -58,7 +68,16 @@ function Product({ favourite }) {
       productSizes[size]["type"] = size;
       productSizes[size]["selected"] = false;
     });
-  }, [setBar, shoppingCart, productSizes]);
+
+    setSimilarProducts(
+      productsCollection
+        .filter((product) => {
+          return product.category === selectedProduct.category;
+        })
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 2)
+    );
+  }, [setBar, shoppingCart, productSizes, productsCollection, selectedProduct]);
 
   const toggleImages = (type) => {
     switch (type) {
@@ -129,10 +148,11 @@ function Product({ favourite }) {
     });
   };
 
-  const selectDetails = (detail, type, i) => {
+  const selectDetails = (detail, type, i, count) => {
     setAlert("");
     switch (detail) {
       case "color":
+        setSelectedCount(count);
         setSelectedColor(type);
         colors.map((color, index) => {
           if (i === index) {
@@ -143,6 +163,7 @@ function Product({ favourite }) {
         });
         break;
       case "size":
+        setSelectedCount("");
         colors.length = 0;
         setSelectedColor("");
         setSelectedSize(type);
@@ -161,6 +182,7 @@ function Product({ favourite }) {
             if (colors.length === 1) {
               colors[0].selected = true;
               setSelectedColor(colors[0].type);
+              setSelectedCount(colors[0].count);
             }
           } else {
             productSizes[size].selected = false;
@@ -225,6 +247,22 @@ function Product({ favourite }) {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);
     }
+  };
+
+  const selectProduct = async (id) => {
+    const product = await getProductApi(id);
+    setSelectedProduct(product);
+    setProductSizes(product.size);
+    setMainItem(product.images.main);
+    setItemOne(product.images.one);
+    setItemTwo(product.images.two);
+    setItemThree(product.images.three);
+    setDisplayDetails(false);
+    colors.length = 0;
+
+    setTimeout(() => {
+      setDisplayDetails(true);
+    }, 5);
   };
 
   return (
@@ -353,7 +391,7 @@ function Product({ favourite }) {
                         : classes.size
                     }
                     onClick={() => {
-                      selectDetails("size", productSizes[size].type, index);
+                      selectDetails("size", productSizes[size].type, index, 0);
                     }}
                   >
                     <p>{size}</p>
@@ -372,23 +410,32 @@ function Product({ favourite }) {
                     }
                     style={{ backgroundColor: `#${color.type}` }}
                     onClick={() =>
-                      color.count > 0
-                        ? selectDetails("color", color.type, index)
-                        : setAlert("اتمام موجودی")
+                      selectDetails("color", color.type, index, color.count)
                     }
-                  >
-                    <p>{color.count}</p>
-                  </div>
+                  ></div>
                 ))}
               </div>
-              {colors.length > 0 && (
-                <p className={classes.title}>انتخاب رنگ و موجودی</p>
-              )}
+              {colors.length > 0 && <p className={classes.title}>انتخاب رنگ</p>}
             </div>
+            {colors.length > 0 && (
+              <div className={classes.countContainer}>
+                <div className={classes.count}>
+                  {selectedCount === 0 ? (
+                    <p>اتمام موجودی</p>
+                  ) : (
+                    <div className={classes.count}>
+                      {selectedCount}
+                      {selectedCount !== "" && <p>موجودی</p>}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           <div className={classes.alert}>{alert}</div>
           <button
             className={classes.button}
+            disabled={selectedCount === 0}
             onClick={() => {
               addToCart();
             }}
@@ -413,7 +460,7 @@ function Product({ favourite }) {
                 width={100}
                 height={100}
               />
-              <p>پرداخت آنلاین و ایمن</p>
+              <p>پرداخت ایمن</p>
             </div>
             <div>
               <Image
@@ -504,8 +551,8 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      ارسال رایگان سفارش به تهران و شهرستان در صورتی که جمع کل
-                      مبلغ پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
+                      ارسال رایگان سفارش به تمام کشور در صورتی که جمع کل مبلغ
+                      پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
                       بیشتر باشد
                     </p>
                   </div>
@@ -716,6 +763,52 @@ function Product({ favourite }) {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          <div className={classes.similarContainer}>
+            <p className={classes.title}>آیتم مشابه</p>
+            <div className={`collection-grid ${classes.grid}`}>
+              {similarProducts.map((product, index) => (
+                <div key={index} className="product">
+                  <div className="banner">
+                    <p className="title">{product.title}</p>
+                    <div className="social">
+                      <div>
+                        {checFavourites(product) ? (
+                          <FavoriteIcon
+                            className="iconRed"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
+                      </div>
+                      <div className="social">
+                        <VisibilityIcon className="icon" />
+                        <p>{Math.round(product.views)}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <Image
+                    onClick={() => selectProduct(product["_id"])}
+                    className={classes.image}
+                    src={product.images.main}
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority={true}
+                  />
+                  {product.sale && (
+                    <div className="sale">
+                      <p>{product.percentage}% OFF</p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
