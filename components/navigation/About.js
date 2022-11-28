@@ -11,7 +11,7 @@ import logo from "../../assets/logo.svg";
 export default function About() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const videoLink = `https://delmare.storage.iran.liara.space/landingpage/video.MOV`;
+  const videoLink = `https://delmare.storage.iran.liara.space/landingpage/video.MOV#t=0.1`;
 
   return (
     <div className={ShoppingCart.slider}>
@@ -31,7 +31,13 @@ export default function About() {
         </div>
         <div className={classes.description}>
           <div className={classes.videoContainer}>
-            <video className={classes.video} controls src={videoLink} loop />
+            <video
+              className={classes.video}
+              preload="metadata"
+              controls
+              src={videoLink}
+              loop
+            />
           </div>
           <div className={classes.row}>
             <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
