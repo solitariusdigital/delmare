@@ -10,9 +10,10 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Head from "next/head";
 
-export default function Invoice({ invoices, postedInvoices }) {
+export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
   const [posted, setposted] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
     if (
@@ -38,6 +39,14 @@ export default function Invoice({ invoices, postedInvoices }) {
     };
     await updateInvoiceApi(data);
     Router.push("/invoice");
+  };
+
+  const calculateTotalSale = () => {
+    let price = [];
+    invoices.forEach((invoice) => {
+      price.push(invoice.price);
+    });
+    return price.reduce((partialSum, a) => partialSum + a, 0);
   };
 
   return (
@@ -74,8 +83,11 @@ export default function Invoice({ invoices, postedInvoices }) {
 
         {!posted && (
           <div>
-            <p className={classes.info}>سفارشات جدید {invoices.length}</p>
-            {invoices.map((invoice, index) => (
+            <div className={classes.info}>
+              <p>سفارشات جدید {newInvoices.length}</p>
+              <p>{convertNumber(calculateTotalSale())}</p>
+            </div>
+            {newInvoices.map((invoice, index) => (
               <div key={index} className={classes.invoice}>
                 <div className={classes.row}>
                   <p className={classes.title}>تاریخ خرید</p>
@@ -143,9 +155,9 @@ export default function Invoice({ invoices, postedInvoices }) {
 
         {posted && (
           <div>
-            <p className={classes.info}>
-              سفارشات ارسال شده {postedInvoices.length}
-            </p>
+            <div className={classes.info}>
+              <p>سفارشات ارسال شده {postedInvoices.length}</p>
+            </div>
             {postedInvoices.map((invoice, index) => (
               <div key={index} className={classes.invoice}>
                 <div className={classes.row}>
@@ -220,17 +232,18 @@ export default function Invoice({ invoices, postedInvoices }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    const data = await invoiceModel.find();
-    const invoices = data.reverse().filter((invoice) => {
+    const invoices = await invoiceModel.find();
+    const newInvoices = invoices.reverse().filter((invoice) => {
       return !invoice.posted;
     });
-    const postedInvoices = data.filter((invoice) => {
+    const postedInvoices = invoices.filter((invoice) => {
       return invoice.posted;
     });
 
     return {
       props: {
         invoices: JSON.parse(JSON.stringify(invoices)),
+        newInvoices: JSON.parse(JSON.stringify(newInvoices)),
         postedInvoices: JSON.parse(JSON.stringify(postedInvoices)),
       },
     };
