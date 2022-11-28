@@ -8,6 +8,7 @@ import { convertNumber } from "../services/utility";
 import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import Head from "next/head";
 
 export default function Invoice({ invoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
@@ -40,166 +41,178 @@ export default function Invoice({ invoices, postedInvoices }) {
   };
 
   return (
-    <div className={classes.invoiceContainer}>
-      <div className={classes.navigation}>
-        <ArrowBackIosNewIcon
-          className="icon"
-          onClick={() => Router.push("/")}
-          sx={{ fontSize: 30 }}
-        />
-        <p
-          onClick={() => setposted(false)}
-          className={posted ? classes.nav : classes.navActive}
-        >
-          ارسالی جدید
-        </p>
-        <p
-          onClick={() => setposted(true)}
-          className={!posted ? classes.nav : classes.navActive}
-        >
-          ارسال شده
-        </p>
-        <RefreshIcon
-          className="icon"
-          onClick={() => Router.reload(window.location.pathname)}
-          sx={{ fontSize: 30 }}
-        />
-      </div>
-
-      {!posted && (
-        <div>
-          <p className={classes.info}>سفارشات جدید {invoices.length}</p>
-          {invoices.map((invoice, index) => (
-            <div key={index} className={classes.invoice}>
-              <div className={classes.row}>
-                <p className={classes.title}>تاریخ خرید</p>
-                <p suppressHydrationWarning>{convertDate(invoice.createdAt)}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>نام مشتری</p>
-                <p>{invoice.name}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>موبایل</p>
-                <p>{invoice.phone}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>آدرس</p>
-                <p>{invoice.address}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد پستی</p>
-                <p>{invoice.post}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>آیتم</p>
-                <p>{invoice.title}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>قیمت</p>
-                <p>{convertNumber(invoice.price)} T</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>رنگ</p>
-                <div
-                  className={classes.color}
-                  style={{ backgroundColor: `#${invoice.color}` }}
-                ></div>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>اندازه</p>
-                <p>{invoice.size}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد برند</p>
-                <p>{invoice.delmareId.slice(0, 3)}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد آیتم</p>
-                <p>{invoice.delmareId}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد محصول</p>
-                <p>{invoice.productId}</p>
-              </div>
-              <button
-                className={classes.button}
-                onClick={() => postInvoice(invoice)}
-              >
-                انتقال به ارسال شده
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {posted && (
-        <div>
-          <p className={classes.info}>
-            سفارشات ارسال شده {postedInvoices.length}
+    <Fragment>
+      <Head>
+        <title>Invoices</title>
+        <meta name="description" content="Manage new orders and invoices" />
+      </Head>
+      <div className={classes.invoiceContainer}>
+        <div className={classes.navigation}>
+          <ArrowBackIosNewIcon
+            className="icon"
+            onClick={() => Router.push("/")}
+            sx={{ fontSize: 30 }}
+          />
+          <p
+            onClick={() => setposted(false)}
+            className={posted ? classes.nav : classes.navActive}
+          >
+            ارسالی جدید
           </p>
-          {postedInvoices.map((invoice, index) => (
-            <div key={index} className={classes.invoice}>
-              <div className={classes.row}>
-                <p className={classes.title}>تاریخ خرید</p>
-                <p suppressHydrationWarning>{convertDate(invoice.createdAt)}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>تاریخ ارسال</p>
-                <p suppressHydrationWarning>{convertDate(invoice.updatedAt)}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>نام مشتری</p>
-                <p>{invoice.name}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>موبایل</p>
-                <p>{invoice.phone}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>آدرس</p>
-                <p>{invoice.address}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد پستی</p>
-                <p>{invoice.post}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>آیتم</p>
-                <p>{invoice.title}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>قیمت</p>
-                <p>{convertNumber(invoice.price)} T</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>رنگ</p>
-                <div
-                  className={classes.color}
-                  style={{ backgroundColor: `#${invoice.color}` }}
-                ></div>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>اندازه</p>
-                <p>{invoice.size}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد برند</p>
-                <p>{invoice.delmareId.slice(0, 3)}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد آیتم</p>
-                <p>{invoice.delmareId}</p>
-              </div>
-              <div className={classes.row}>
-                <p className={classes.title}>کد محصول</p>
-                <p>{invoice.productId}</p>
-              </div>
-            </div>
-          ))}
+          <p
+            onClick={() => setposted(true)}
+            className={!posted ? classes.nav : classes.navActive}
+          >
+            ارسال شده
+          </p>
+          <RefreshIcon
+            className="icon"
+            onClick={() => Router.reload(window.location.pathname)}
+            sx={{ fontSize: 30 }}
+          />
         </div>
-      )}
-    </div>
+
+        {!posted && (
+          <div>
+            <p className={classes.info}>سفارشات جدید {invoices.length}</p>
+            {invoices.map((invoice, index) => (
+              <div key={index} className={classes.invoice}>
+                <div className={classes.row}>
+                  <p className={classes.title}>تاریخ خرید</p>
+                  <p suppressHydrationWarning>
+                    {convertDate(invoice.createdAt)}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>نام مشتری</p>
+                  <p>{invoice.name}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>موبایل</p>
+                  <p>{invoice.phone}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>آدرس</p>
+                  <p>{invoice.address}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد پستی</p>
+                  <p>{invoice.post}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>آیتم</p>
+                  <p>{invoice.title}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>قیمت</p>
+                  <p>{convertNumber(invoice.price)} T</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>رنگ</p>
+                  <div
+                    className={classes.color}
+                    style={{ backgroundColor: `#${invoice.color}` }}
+                  ></div>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>اندازه</p>
+                  <p>{invoice.size}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد برند</p>
+                  <p>{invoice.delmareId.slice(0, 3)}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد آیتم</p>
+                  <p>{invoice.delmareId}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد محصول</p>
+                  <p>{invoice.productId}</p>
+                </div>
+                <button
+                  className={classes.button}
+                  onClick={() => postInvoice(invoice)}
+                >
+                  انتقال به ارسال شده
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {posted && (
+          <div>
+            <p className={classes.info}>
+              سفارشات ارسال شده {postedInvoices.length}
+            </p>
+            {postedInvoices.map((invoice, index) => (
+              <div key={index} className={classes.invoice}>
+                <div className={classes.row}>
+                  <p className={classes.title}>تاریخ خرید</p>
+                  <p suppressHydrationWarning>
+                    {convertDate(invoice.createdAt)}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>تاریخ ارسال</p>
+                  <p suppressHydrationWarning>
+                    {convertDate(invoice.updatedAt)}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>نام مشتری</p>
+                  <p>{invoice.name}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>موبایل</p>
+                  <p>{invoice.phone}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>آدرس</p>
+                  <p>{invoice.address}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد پستی</p>
+                  <p>{invoice.post}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>آیتم</p>
+                  <p>{invoice.title}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>قیمت</p>
+                  <p>{convertNumber(invoice.price)} T</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>رنگ</p>
+                  <div
+                    className={classes.color}
+                    style={{ backgroundColor: `#${invoice.color}` }}
+                  ></div>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>اندازه</p>
+                  <p>{invoice.size}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد برند</p>
+                  <p>{invoice.delmareId.slice(0, 3)}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد آیتم</p>
+                  <p>{invoice.delmareId}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد محصول</p>
+                  <p>{invoice.productId}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Fragment>
   );
 }
 

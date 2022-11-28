@@ -11,7 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { getBrandsApi, updateBrandApi } from "../services/api";
-import { responsiveFontSizes } from "@mui/material";
+import Head from "next/head";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -244,495 +244,501 @@ export default function Upload() {
   };
 
   return (
-    <div className="upload-form">
-      <div className="bar">
-        <ArrowBackIosNewIcon
-          className="icon"
-          onClick={() => Router.push("/")}
-          sx={{ fontSize: 30 }}
-        />
-        <h3>اطلاعات آیتم</h3>
-        <RefreshIcon
-          className="icon"
-          onClick={() => Router.reload(window.location.pathname)}
-          sx={{ fontSize: 30 }}
-        />
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
+    <Fragment>
+      <Head>
+        <title>Upload</title>
+        <meta name="description" content="Upload a new product" />
+      </Head>
+      <div className="upload-form">
+        <div className="bar">
+          <ArrowBackIosNewIcon
             className="icon"
-            onClick={() => setTitle("")}
-            sx={{ fontSize: 16 }}
+            onClick={() => Router.push("/")}
+            sx={{ fontSize: 30 }}
           />
-          <p className={classes.label}>اسم آیتم</p>
+          <h3>اطلاعات آیتم</h3>
+          <RefreshIcon
+            className="icon"
+            onClick={() => Router.reload(window.location.pathname)}
+            sx={{ fontSize: 30 }}
+          />
         </div>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          autoComplete="off"
-          dir="rtl"
-        />
-      </div>
-      <div className={classes.input}>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => assignBrand(e.target.value)}
-        >
-          <option value="default" disabled>
-            برند
-          </option>
-          {brands.map((brand, index) => {
-            return (
-              <option key={index} value={brand.title}>
-                {brand.title}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => setDelmareId("")}
-            sx={{ fontSize: 16 }}
-          />
-          <p className={classes.label}>کد برند</p>
-        </div>
-        <input
-          type="text"
-          id="delmareId"
-          name="delmareId"
-          onChange={(e) => setDelmareId(e.target.value)}
-          value={delmareId}
-          autoComplete="off"
-        />
-      </div>
-      <div className={classes.input}>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="default" disabled>
-            دسته بندی
-          </option>
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => setSeason(e.target.value)}
-        >
-          <option value="default" disabled>
-            فصل
-          </option>
-          {seasons.map((season, index) => {
-            return (
-              <option key={index} value={season}>
-                {season}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => setDescription("")}
-            sx={{ fontSize: 16 }}
-          />
-          <p className={classes.label}>توضیحات</p>
-        </div>
-        <textarea
-          type="text"
-          id="description"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          autoComplete="off"
-          dir="rtl"
-          maxLength="250"
-        ></textarea>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <CloseIcon
-            className="icon"
-            onClick={() => setPrice("")}
-            sx={{ fontSize: 16 }}
-          />
-          <AttachMoneyIcon
-            className="icon"
-            onClick={() => setSale(!sale)}
-            sx={{ fontSize: 22 }}
-          />
-          <p className={classes.label}>قیمت تومان</p>
-        </div>
-        <input
-          type="tel"
-          id="price"
-          name="price"
-          onChange={(e) => setPrice(e.target.value)}
-          value={price}
-          autoComplete="off"
-        />
-      </div>
-      {sale && (
-        <Fragment>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <CloseIcon
-                className="icon"
-                onClick={() => setDiscount("")}
-                sx={{ fontSize: 16 }}
-              />
-              <p className={classes.label}>قیمت تخفیف تومان</p>
-            </div>
-            <input
-              type="tel"
-              id="discount"
-              name="discount"
-              onChange={(e) => setDiscount(e.target.value)}
-              value={discount}
-              autoComplete="off"
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <CloseIcon
+              className="icon"
+              onClick={() => setTitle("")}
+              sx={{ fontSize: 16 }}
             />
+            <p className={classes.label}>اسم آیتم</p>
           </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <CloseIcon
-                className="icon"
-                onClick={() => setPercentage("")}
-                sx={{ fontSize: 16 }}
-              />
-              <p className={classes.label}>درصد تخفیف</p>
-            </div>
-            <input
-              type="tel"
-              id="percentage"
-              name="percentage"
-              onChange={(e) => setPercentage(e.target.value)}
-              value={percentage}
-              autoComplete="off"
-            />
-          </div>
-        </Fragment>
-      )}
-      <h3>رنگ، سایز، تعداد</h3>
-      <div className={classes.sizeNav}>
-        {freeSize ? (
-          <button
-            className="mainButton"
-            onClick={() => {
-              setFreeSize(false);
-              setFS("");
-            }}
+          <input
+            type="text"
+            id="title"
+            name="title"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            autoComplete="off"
+            dir="rtl"
+          />
+        </div>
+        <div className={classes.input}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => assignBrand(e.target.value)}
           >
-            Add size
-          </button>
-        ) : (
-          <button className="mainButton" onClick={() => resetSizes()}>
-            Free size
-          </button>
-        )}
-      </div>
-      {freeSize && (
-        <div className={classes.sizeContainer}>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>Free Size - FS</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setFS("");
-                  size["FS"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              placeholder="b21c1c 5, 514242 45"
-              className={classes.size}
-              type="text"
-              id="FS"
-              name="FS"
-              onChange={(e) => setFS(e.target.value)}
-              value={FS}
-              autoComplete="off"
-            />
-          </div>
+            <option value="default" disabled>
+              برند
+            </option>
+            {brands.map((brand, index) => {
+              return (
+                <option key={index} value={brand.title}>
+                  {brand.title}
+                </option>
+              );
+            })}
+          </select>
         </div>
-      )}
-      {!freeSize && (
-        <div className={classes.sizeContainer}>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>XS</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setXS("");
-                  size["XS"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              placeholder="b21c1c 5, 514242 45"
-              className={classes.size}
-              type="text"
-              id="XS"
-              name="XS"
-              onChange={(e) => setXS(e.target.value)}
-              value={XS}
-              autoComplete="off"
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <CloseIcon
+              className="icon"
+              onClick={() => setDelmareId("")}
+              sx={{ fontSize: 16 }}
             />
+            <p className={classes.label}>کد برند</p>
           </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>S</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setS("");
-                  size["S"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              className={classes.size}
-              type="text"
-              id="S"
-              name="S"
-              onChange={(e) => setS(e.target.value)}
-              value={S}
-              autoComplete="off"
-            />
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>M</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setM("");
-                  size["M"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              className={classes.size}
-              type="text"
-              id="M"
-              name="M"
-              onChange={(e) => setM(e.target.value)}
-              value={M}
-              autoComplete="off"
-            />
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>L</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setL("");
-                  size["L"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              className={classes.size}
-              type="text"
-              id="L"
-              name="L"
-              onChange={(e) => setL(e.target.value)}
-              value={L}
-              autoComplete="off"
-            />
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>XL</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setXL("");
-                  size["XL"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              className={classes.size}
-              type="text"
-              id="XL"
-              name="XL"
-              onChange={(e) => setXL(e.target.value)}
-              value={XL}
-              autoComplete="off"
-            />
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>XXL</p>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setXXL("");
-                  size["XXL"] = {};
-                }}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              className={classes.size}
-              type="text"
-              id="XXL"
-              name="XXL"
-              onChange={(e) => setXXL(e.target.value)}
-              value={XXL}
-              autoComplete="off"
-            />
-          </div>
-        </div>
-      )}
-      <h3>انتخاب عکس</h3>
-      <div className="input">
-        <div>
-          <p className={classes.label}>Main</p>
           <input
-            onChange={(e) => {
-              setMainImage(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/png, image/jpeg"
+            type="text"
+            id="delmareId"
+            name="delmareId"
+            onChange={(e) => setDelmareId(e.target.value)}
+            value={delmareId}
+            autoComplete="off"
           />
         </div>
-        {mainImage !== "" && (
-          <Image
-            className={classes.image}
-            width={50}
-            height={70}
-            objectFit="cover"
-            src={URL.createObjectURL(mainImage)}
-            alt="mainImage"
-          />
-        )}
-      </div>
-      <div className="input">
-        <div>
-          <p className={classes.label}>Image 1</p>
+        <div className={classes.input}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="default" disabled>
+              دسته بندی
+            </option>
+            {categories.map((category, index) => {
+              return (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={classes.input}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => setSeason(e.target.value)}
+          >
+            <option value="default" disabled>
+              فصل
+            </option>
+            {seasons.map((season, index) => {
+              return (
+                <option key={index} value={season}>
+                  {season}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <CloseIcon
+              className="icon"
+              onClick={() => setDescription("")}
+              sx={{ fontSize: 16 }}
+            />
+            <p className={classes.label}>توضیحات</p>
+          </div>
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            autoComplete="off"
+            dir="rtl"
+            maxLength="250"
+          ></textarea>
+        </div>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <CloseIcon
+              className="icon"
+              onClick={() => setPrice("")}
+              sx={{ fontSize: 16 }}
+            />
+            <AttachMoneyIcon
+              className="icon"
+              onClick={() => setSale(!sale)}
+              sx={{ fontSize: 22 }}
+            />
+            <p className={classes.label}>قیمت تومان</p>
+          </div>
           <input
-            onChange={(e) => {
-              setImageOne(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/png, image/jpeg"
+            type="tel"
+            id="price"
+            name="price"
+            onChange={(e) => setPrice(e.target.value)}
+            value={price}
+            autoComplete="off"
           />
         </div>
-        {imageOne !== "" && (
-          <Image
-            className={classes.image}
-            width={50}
-            height={70}
-            objectFit="cover"
-            src={URL.createObjectURL(imageOne)}
-            alt="image"
-          />
+        {sale && (
+          <Fragment>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setDiscount("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <p className={classes.label}>قیمت تخفیف تومان</p>
+              </div>
+              <input
+                type="tel"
+                id="discount"
+                name="discount"
+                onChange={(e) => setDiscount(e.target.value)}
+                value={discount}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPercentage("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <p className={classes.label}>درصد تخفیف</p>
+              </div>
+              <input
+                type="tel"
+                id="percentage"
+                name="percentage"
+                onChange={(e) => setPercentage(e.target.value)}
+                value={percentage}
+                autoComplete="off"
+              />
+            </div>
+          </Fragment>
         )}
-      </div>
-      <div className="input">
-        <div>
-          <p className={classes.label}>Image 2</p>
-          <input
-            onChange={(e) => {
-              setImageTwo(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/png, image/jpeg"
-          />
+        <h3>رنگ، سایز، تعداد</h3>
+        <div className={classes.sizeNav}>
+          {freeSize ? (
+            <button
+              className="mainButton"
+              onClick={() => {
+                setFreeSize(false);
+                setFS("");
+              }}
+            >
+              Add size
+            </button>
+          ) : (
+            <button className="mainButton" onClick={() => resetSizes()}>
+              Free size
+            </button>
+          )}
         </div>
-        {imageTwo !== "" && (
-          <Image
-            className={classes.image}
-            width={50}
-            height={70}
-            objectFit="cover"
-            src={URL.createObjectURL(imageTwo)}
-            alt="image"
-          />
+        {freeSize && (
+          <div className={classes.sizeContainer}>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Free Size - FS</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setFS("");
+                    size["FS"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                placeholder="b21c1c 5, 514242 45"
+                className={classes.size}
+                type="text"
+                id="FS"
+                name="FS"
+                onChange={(e) => setFS(e.target.value)}
+                value={FS}
+                autoComplete="off"
+              />
+            </div>
+          </div>
         )}
-      </div>
-      <div className="input">
-        <div>
-          <p className={classes.label}>Image 3</p>
-          <input
-            onChange={(e) => {
-              setImageThree(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/png, image/jpeg"
-          />
+        {!freeSize && (
+          <div className={classes.sizeContainer}>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>XS</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setXS("");
+                    size["XS"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                placeholder="b21c1c 5, 514242 45"
+                className={classes.size}
+                type="text"
+                id="XS"
+                name="XS"
+                onChange={(e) => setXS(e.target.value)}
+                value={XS}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>S</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setS("");
+                    size["S"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                className={classes.size}
+                type="text"
+                id="S"
+                name="S"
+                onChange={(e) => setS(e.target.value)}
+                value={S}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>M</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setM("");
+                    size["M"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                className={classes.size}
+                type="text"
+                id="M"
+                name="M"
+                onChange={(e) => setM(e.target.value)}
+                value={M}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>L</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setL("");
+                    size["L"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                className={classes.size}
+                type="text"
+                id="L"
+                name="L"
+                onChange={(e) => setL(e.target.value)}
+                value={L}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>XL</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setXL("");
+                    size["XL"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                className={classes.size}
+                type="text"
+                id="XL"
+                name="XL"
+                onChange={(e) => setXL(e.target.value)}
+                value={XL}
+                autoComplete="off"
+              />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>XXL</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => {
+                    setXXL("");
+                    size["XXL"] = {};
+                  }}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                className={classes.size}
+                type="text"
+                id="XXL"
+                name="XXL"
+                onChange={(e) => setXXL(e.target.value)}
+                value={XXL}
+                autoComplete="off"
+              />
+            </div>
+          </div>
+        )}
+        <h3>انتخاب عکس</h3>
+        <div className="input">
+          <div>
+            <p className={classes.label}>Main</p>
+            <input
+              onChange={(e) => {
+                setMainImage(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          {mainImage !== "" && (
+            <Image
+              className={classes.image}
+              width={50}
+              height={70}
+              objectFit="cover"
+              src={URL.createObjectURL(mainImage)}
+              alt="mainImage"
+            />
+          )}
         </div>
-        {imageThree !== "" && (
-          <Image
-            className={classes.image}
-            width={50}
-            height={70}
-            objectFit="cover"
-            src={URL.createObjectURL(imageThree)}
-            alt="image"
-          />
-        )}
-      </div>
-      <div className="input">
-        <div>
-          <p className={classes.label}>Size table</p>
-          <input
-            onChange={(e) => {
-              setTable(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/png, image/jpeg"
-          />
+        <div className="input">
+          <div>
+            <p className={classes.label}>Image 1</p>
+            <input
+              onChange={(e) => {
+                setImageOne(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          {imageOne !== "" && (
+            <Image
+              className={classes.image}
+              width={50}
+              height={70}
+              objectFit="cover"
+              src={URL.createObjectURL(imageOne)}
+              alt="image"
+            />
+          )}
         </div>
-        {table !== "" && (
-          <Image
-            width={150}
-            height={70}
-            objectFit="cover"
-            src={URL.createObjectURL(table)}
-            alt="image"
-          />
+        <div className="input">
+          <div>
+            <p className={classes.label}>Image 2</p>
+            <input
+              onChange={(e) => {
+                setImageTwo(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          {imageTwo !== "" && (
+            <Image
+              className={classes.image}
+              width={50}
+              height={70}
+              objectFit="cover"
+              src={URL.createObjectURL(imageTwo)}
+              alt="image"
+            />
+          )}
+        </div>
+        <div className="input">
+          <div>
+            <p className={classes.label}>Image 3</p>
+            <input
+              onChange={(e) => {
+                setImageThree(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          {imageThree !== "" && (
+            <Image
+              className={classes.image}
+              width={50}
+              height={70}
+              objectFit="cover"
+              src={URL.createObjectURL(imageThree)}
+              alt="image"
+            />
+          )}
+        </div>
+        <div className="input">
+          <div>
+            <p className={classes.label}>Size table</p>
+            <input
+              onChange={(e) => {
+                setTable(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+          {table !== "" && (
+            <Image
+              width={150}
+              height={70}
+              objectFit="cover"
+              src={URL.createObjectURL(table)}
+              alt="image"
+            />
+          )}
+        </div>
+        <p className={classes.alert}>{alert}</p>
+        {uploadClicked && (
+          <Image width={50} height={50} src={loadingImage} alt="isLoading" />
         )}
+        <button
+          className="mainButton"
+          onClick={() => handleUpload()}
+          disabled={uploadClicked}
+        >
+          Upload
+        </button>
       </div>
-      <p className={classes.alert}>{alert}</p>
-      {uploadClicked && (
-        <Image width={50} height={50} src={loadingImage} alt="isLoading" />
-      )}
-      <button
-        className="mainButton"
-        onClick={() => handleUpload()}
-        disabled={uploadClicked}
-      >
-        Upload
-      </button>
-    </div>
+    </Fragment>
   );
 }
 

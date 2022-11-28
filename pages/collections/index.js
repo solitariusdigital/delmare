@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
+import Head from "next/head";
 
 function CollectionsPage() {
   const { bar, setBar } = useContext(StateContext);
@@ -54,28 +55,34 @@ function CollectionsPage() {
   };
 
   return (
-    <div className="collections-type">
-      {collections.map((collection, index) => (
-        <div
-          key={index}
-          className="card"
-          onClick={() => activateNav(collection.link, index)}
-        >
-          <div className="banner">
-            <p>{collection.title}</p>
+    <Fragment>
+      <Head>
+        <title>Collections</title>
+        <meta name="description" content="Select from Delmareh's collections" />
+      </Head>
+      <div className="collections-type">
+        {collections.map((collection, index) => (
+          <div
+            key={index}
+            className="card"
+            onClick={() => activateNav(collection.link, index)}
+          >
+            <div className="banner">
+              <p>{collection.title}</p>
+            </div>
+            <Image
+              className={"image"}
+              src={collection.imageSrc}
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              loading="eager"
+            />
           </div>
-          <Image
-            className={"image"}
-            src={collection.imageSrc}
-            alt="image"
-            layout="fill"
-            objectFit="cover"
-            priority={true}
-            loading="eager"
-          />
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Fragment>
   );
 }
 
