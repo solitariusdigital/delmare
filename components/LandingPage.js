@@ -8,6 +8,7 @@ import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
+  const { navigation, setNavigation } = useContext(StateContext);
   const [count, setCount] = useState(0);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -40,15 +41,18 @@ function LandingPage() {
     return image;
   };
 
-  const handleScroll = () => {
+  const collections = () => {
+    navigation.map((nav) => {
+      nav.active = false;
+    });
     Router.push("/collections");
   };
 
   return (
     <div
       className={classes.container}
-      onClick={() => Router.push("/collections")}
-      onTouchMove={handleScroll}
+      onClick={() => collections()}
+      onTouchMove={collections}
     >
       <div className={classes.banner}>
         <p>متفاوت بپوشیم</p>
@@ -70,7 +74,7 @@ function LandingPage() {
         <ExpandCircleDownIcon
           className="icon"
           sx={{ color: "#b2ffef", fontSize: 50 }}
-          onClick={() => Router.push("/collections")}
+          onClick={() => collections()}
         />
       </div>
     </div>

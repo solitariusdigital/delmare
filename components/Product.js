@@ -259,6 +259,7 @@ function Product({ favourite }) {
     setItemThree(product.images.three);
     setDisplayDetails(false);
     colors.length = 0;
+    setSelectedSize("");
 
     setTimeout(() => {
       setDisplayDetails(true);

@@ -31,13 +31,7 @@ export default function About() {
         </div>
         <div className={classes.description}>
           <div className={classes.videoContainer}>
-            <video
-              className={classes.video}
-              controls
-              src={videoLink}
-              autoPlay
-              loop
-            />
+            <video className={classes.video} controls src={videoLink} loop />
           </div>
           <div className={classes.row}>
             <FiberManualRecordOutlined sx={{ fontSize: 8 }} />

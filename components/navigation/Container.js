@@ -36,7 +36,7 @@ function Container() {
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       setToggleContainer("screen");
     }
-  }, [setToggleContainer, setUserLogin, seCurrentUser]);
+  }, [setToggleContainer, setUserLogin, seCurrentUser, navigation]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
