@@ -11,7 +11,7 @@ import logo from "../../assets/logo.svg";
 export default function About() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const videoLink = `https://delmare.storage.iran.liara.space/landingpage/video.MOV#t=0.1`;
+  const videoLink = `https://delmare.storage.iran.liara.space/landingpage/video.MOV#t=0.5`;
 
   return (
     <div className={ShoppingCart.slider}>

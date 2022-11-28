@@ -146,6 +146,10 @@
             border-radius: 50%;
             font-size: config.$med-font;
           }
+
+          .color {
+            box-shadow: config.$image-shadow;
+          }
         }
       }
     }
@@ -200,6 +204,10 @@
           width: 25px;
           height: 25px;
           border-radius: 50%;
+        }
+
+        .color {
+          box-shadow: config.$image-shadow;
         }
 
         .size {
