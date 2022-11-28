@@ -10,6 +10,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { convertNumber } from "../services/utility";
 import { updateUserApi } from "../services/api";
+import payment from "../assets/payment.png";
+import quality from "../assets/quality.png";
+import post from "../assets/post.png";
 
 function Product({ favourite }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -399,6 +402,43 @@ function Product({ favourite }) {
             </div>
             <p className={classes.description}>{selectedProduct.description}</p>
           </div>
+
+          <div className={classes.graphic}>
+            <div>
+              <Image
+                className={classes.image}
+                src={payment}
+                alt="image"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>پرداخت آنلاین و ایمن</p>
+            </div>
+            <div>
+              <Image
+                className={classes.image}
+                src={post}
+                alt="image"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>ارسال به تمام کشور</p>
+            </div>
+            <div>
+              <Image
+                className={classes.image}
+                src={quality}
+                alt="image"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>ضمانت کیفیت</p>
+            </div>
+          </div>
+
           <div className={classes.information}>
             <div className={classes.section}>
               <div
@@ -464,8 +504,8 @@ function Product({ favourite }) {
                   <div className={classes.row}>
                     <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                     <p className={classes.description}>
-                      ارسال رایگان سفارش تهران و شهرستان در صورتی که جمع کل مبلغ
-                      پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
+                      ارسال رایگان سفارش به تهران و شهرستان در صورتی که جمع کل
+                      مبلغ پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا
                       بیشتر باشد
                     </p>
                   </div>
