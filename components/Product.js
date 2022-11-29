@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Product.module.scss";
@@ -17,6 +18,7 @@ import {
 import payment from "../assets/payment.png";
 import quality from "../assets/quality.png";
 import post from "../assets/post.png";
+import enamad from "../assets/enamad.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Product({ favourite }) {
@@ -449,38 +451,63 @@ function Product({ favourite }) {
           </div>
 
           <div className={classes.graphic}>
-            <div>
-              <Image
-                className={classes.image}
-                src={payment}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>پرداخت ایمن</p>
+            <div className={classes.row}>
+              <div>
+                <Image
+                  className={classes.image}
+                  src={payment}
+                  alt="image"
+                  objectFit="contain"
+                  width={100}
+                  height={100}
+                />
+                <p>پرداخت ایمن</p>
+              </div>
+              <div>
+                <Image
+                  className={classes.image}
+                  src={post}
+                  alt="image"
+                  objectFit="contain"
+                  width={100}
+                  height={100}
+                />
+                <p>ارسال به تمام کشور</p>
+              </div>
             </div>
-            <div>
-              <Image
-                className={classes.image}
-                src={post}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>ارسال به تمام کشور</p>
-            </div>
-            <div>
-              <Image
-                className={classes.image}
-                src={quality}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>ضمانت کیفیت</p>
+            <div className={classes.row}>
+              <div>
+                <Image
+                  className={classes.image}
+                  src={quality}
+                  alt="image"
+                  objectFit="contain"
+                  width={100}
+                  height={100}
+                />
+                <p>ضمانت کیفیت</p>
+              </div>
+              <div>
+                <a
+                  referrerPolicy="origin"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+                  id="GPyVAMJIOJVa0l6MNns2"
+                >
+                  <Image
+                    className={classes.image}
+                    src={enamad}
+                    alt="نماد اعتماد الکترونیک"
+                    objectFit="contain"
+                    width={100}
+                    height={100}
+                    id="GPyVAMJIOJVa0l6MNns2"
+                    referrerPolicy="origin"
+                  />
+                  <p>نماد اعتماد الکترونیک</p>
+                </a>
+              </div>
             </div>
           </div>
 

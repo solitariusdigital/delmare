@@ -365,13 +365,20 @@
 
 .graphic {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  margin-bottom: 20px;
 
   p {
     font-size: config.$tiny-font;
     color: config.$grey;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 10px;
   }
 }
