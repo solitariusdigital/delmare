@@ -30,15 +30,6 @@ export default function About() {
           </div>
         </div>
         <div className={classes.description}>
-          <div className={classes.videoContainer}>
-            <video
-              className={classes.video}
-              preload="metadata"
-              controls
-              src={videoLink}
-              loop
-            />
-          </div>
           <div className={classes.row}>
             <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
             <p>
@@ -62,6 +53,15 @@ export default function About() {
               برندهای ایرانی همکار ما همگی از برندهای معروف و شناخته شده ایران
               هستند که دارای بالاترین کیفیت دوخت، پارچه و طراحی هستند
             </p>
+          </div>
+          <div className={classes.videoContainer}>
+            <video
+              className={classes.video}
+              preload="metadata"
+              controls
+              src={videoLink}
+              loop
+            />
           </div>
           <div className={classes.row}>
             <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
