@@ -10,15 +10,10 @@ import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutl
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { convertNumber } from "../services/utility";
-import {
-  updateUserApi,
-  updateProductApi,
-  getProductApi,
-} from "../services/api";
+import { updateUserApi, getProductApi } from "../services/api";
 import payment from "../assets/payment.png";
 import quality from "../assets/quality.png";
 import post from "../assets/post.png";
-import enamad from "../assets/enamad.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Product({ favourite }) {
@@ -493,11 +488,10 @@ function Product({ favourite }) {
                   target="_blank"
                   rel="noreferrer"
                   href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                  id="GPyVAMJIOJVa0l6MNns2"
                 >
                   <Image
                     className={classes.image}
-                    src={enamad}
+                    src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
                     alt="نماد اعتماد الکترونیک"
                     objectFit="contain"
                     width={100}
