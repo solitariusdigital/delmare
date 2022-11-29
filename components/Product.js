@@ -257,13 +257,9 @@ function Product({ favourite }) {
     setItemOne(product.images.one);
     setItemTwo(product.images.two);
     setItemThree(product.images.three);
-    setDisplayDetails(false);
     colors.length = 0;
     setSelectedSize("");
-
-    setTimeout(() => {
-      setDisplayDetails(true);
-    }, 5);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -443,6 +439,7 @@ function Product({ favourite }) {
           >
             افزودن به سبد خرید
           </button>
+
           <div className={classes.designContainer}>
             <div className={classes.row}>
               <p>برند</p>

@@ -82,6 +82,7 @@ function Collection({ collectionType, brandGallery, brand }) {
       views: product.views + 1.5,
     };
     await updateProductApi(updateData);
+    window.scrollTo(0, 0);
   };
 
   const favourProduct = async (product) => {
