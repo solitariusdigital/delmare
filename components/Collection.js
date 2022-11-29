@@ -238,7 +238,7 @@ function Collection({ collectionType, brandGallery, brand }) {
             )}
           </div>
         )}
-      {collectionType === "brands" && (
+      {collectionType === "brands" && !displayProduct && (
         <div className={classes.brand}>
           <p>برند {brand.title}</p>
         </div>
