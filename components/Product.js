@@ -493,7 +493,7 @@ function Product({ favourite }) {
                     className={classes.image}
                     referrerPolicy="origin"
                     src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                    alt=""
+                    alt="نماد اعتماد الکترونیک"
                     style="cursor:pointer"
                     id="GPyVAMJIOJVa0l6MNns2"
                     objectFit="contain"
