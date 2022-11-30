@@ -1,4 +1,6 @@
-import { useState, useContext, useEffect } from "react";
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable @next/next/no-img-element */
+import { useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
@@ -83,7 +85,25 @@ export default function About() {
             </p>
           </div>
           <div className={classes.logo}>
-            <Image width={90} height={140} src={logo} alt="logo" />
+            <div>
+              <Image width={90} height={140} src={logo} alt="logo" />
+            </div>
+            <div>
+              <a
+                referrerPolicy="origin"
+                rel="noopener"
+                target="_blank"
+                href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+              >
+                <img
+                  referrerPolicy="origin"
+                  src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+                  id="GPyVAMJIOJVa0l6MNns2"
+                  decoding="async"
+                  alt="enamad logo"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
