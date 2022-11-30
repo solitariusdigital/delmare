@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
@@ -485,7 +486,7 @@ function Product({ favourite }) {
               <div>
                 <a
                   referrerPolicy="origin"
-                  rel="noreferrer"
+                  rel="noopener"
                   target="_blank"
                   href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
                 >
