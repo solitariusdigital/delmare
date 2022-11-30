@@ -485,21 +485,16 @@ function Product({ favourite }) {
               <div>
                 <a
                   referrerPolicy="origin"
-                  target="_blank"
                   rel="noreferrer"
+                  target="_blank"
                   href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
                 >
-                  <Image
-                    className={classes.image}
+                  <img
                     referrerPolicy="origin"
                     src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
                     alt=""
                     id="GPyVAMJIOJVa0l6MNns2"
-                    objectFit="contain"
-                    width={100}
-                    height={100}
                   />
-                  <p>نماد اعتماد الکترونیک</p>
                 </a>
               </div>
             </div>
