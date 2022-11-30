@@ -470,8 +470,6 @@ function Product({ favourite }) {
                 />
                 <p>ارسال به تمام کشور</p>
               </div>
-            </div>
-            <div className={classes.row}>
               <div>
                 <Image
                   className={classes.image}
@@ -483,6 +481,8 @@ function Product({ favourite }) {
                 />
                 <p>ضمانت کیفیت</p>
               </div>
+            </div>
+            <div className={classes.row}>
               <div>
                 <a
                   referrerPolicy="origin"
@@ -493,8 +493,9 @@ function Product({ favourite }) {
                   <img
                     referrerPolicy="origin"
                     src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                    alt=""
                     id="GPyVAMJIOJVa0l6MNns2"
+                    decoding="async"
+                    alt="enamad logo"
                   />
                 </a>
               </div>
