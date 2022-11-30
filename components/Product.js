@@ -491,13 +491,14 @@ function Product({ favourite }) {
                 >
                   <Image
                     className={classes.image}
+                    referrerPolicy="origin"
                     src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                    alt="نماد اعتماد الکترونیک"
+                    alt=""
+                    style="cursor:pointer"
+                    id="GPyVAMJIOJVa0l6MNns2"
                     objectFit="contain"
                     width={100}
                     height={100}
-                    id="GPyVAMJIOJVa0l6MNns2"
-                    referrerPolicy="origin"
                   />
                   <p>نماد اعتماد الکترونیک</p>
                 </a>
