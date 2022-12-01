@@ -98,6 +98,14 @@ a {
   }
 }
 
+.enamad {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));

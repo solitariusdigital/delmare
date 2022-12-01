@@ -371,11 +371,6 @@ function Product({ favourite }) {
                   <p className={classes.discountPrice}>
                     {convertNumber(selectedProduct.discount)} T
                   </p>
-                  {selectedProduct.sale && (
-                    <div className={classes.sale}>
-                      <p>{selectedProduct.percentage}% OFF</p>
-                    </div>
-                  )}
                 </div>
               ) : (
                 <p>{convertNumber(selectedProduct.price)} T</p>
