@@ -88,6 +88,13 @@ a {
       border-bottom-left-radius: 50px;
       @include mixins.transparentBackground(0.8, config.$brand);
     }
+
+    .sale {
+      position: absolute;
+      top: -15px;
+      left: 0px;
+      z-index: 1;
+    }
   }
 }
 

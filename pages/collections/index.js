@@ -3,6 +3,7 @@ import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
 import Head from "next/head";
+import sale from "../../assets/sale.png";
 
 function CollectionsPage() {
   const { bar, setBar } = useContext(StateContext);
@@ -70,6 +71,17 @@ function CollectionsPage() {
             <div className="banner">
               <p>{collection.title}</p>
             </div>
+            {collection.title === "تخفیف" && (
+              <div className="sale">
+                <Image
+                  src={sale}
+                  alt="sale"
+                  objectFit="contain"
+                  width={80}
+                  height={80}
+                />
+              </div>
+            )}
             <Image
               className={"image"}
               src={collection.imageSrc}

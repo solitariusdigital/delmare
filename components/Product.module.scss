@@ -100,7 +100,7 @@
   }
 
   .title {
-    margin: 10px 0px;
+    margin: 20px 0px;
   }
 }
 
@@ -148,6 +148,8 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
+  font-weight: bold;
+  font-size: config.$med-font;
 
   .discount {
     display: flex;
@@ -158,13 +160,11 @@
       text-decoration: line-through;
       color: config.$grey;
       font-weight: 300;
-      margin-right: 20px;
     }
-  }
 
-  p {
-    font-size: config.$med-font;
-    font-weight: bold;
+    .discountPrice {
+      margin: 0px 20px;
+    }
   }
 }
 
@@ -379,6 +379,6 @@
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 }

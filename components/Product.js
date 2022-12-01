@@ -368,7 +368,14 @@ function Product({ favourite }) {
                   <p className={classes.price}>
                     {convertNumber(selectedProduct.price)} T
                   </p>
-                  <p>{convertNumber(selectedProduct.discount)} T</p>
+                  <p className={classes.discountPrice}>
+                    {convertNumber(selectedProduct.discount)} T
+                  </p>
+                  {selectedProduct.sale && (
+                    <div className={classes.sale}>
+                      <p>{selectedProduct.percentage}% OFF</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <p>{convertNumber(selectedProduct.price)} T</p>
@@ -811,22 +818,20 @@ function Product({ favourite }) {
           </div>
 
           <div className={classes.graphic}>
-            <div>
-              <a
+            <a
+              referrerPolicy="origin"
+              rel="noopener"
+              target="_blank"
+              href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+            >
+              <img
                 referrerPolicy="origin"
-                rel="noopener"
-                target="_blank"
-                href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-              >
-                <img
-                  referrerPolicy="origin"
-                  src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                  id="GPyVAMJIOJVa0l6MNns2"
-                  decoding="async"
-                  alt="enamad logo"
-                />
-              </a>
-            </div>
+                src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+                id="GPyVAMJIOJVa0l6MNns2"
+                decoding="async"
+                alt="enamad logo"
+              />
+            </a>
           </div>
         </div>
       )}
