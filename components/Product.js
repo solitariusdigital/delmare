@@ -482,24 +482,6 @@ function Product({ favourite }) {
                 <p>ضمانت کیفیت</p>
               </div>
             </div>
-            <div className={classes.row}>
-              <div>
-                <a
-                  referrerPolicy="origin"
-                  rel="noopener"
-                  target="_blank"
-                  href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                >
-                  <img
-                    referrerPolicy="origin"
-                    src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-                    id="GPyVAMJIOJVa0l6MNns2"
-                    decoding="async"
-                    alt="enamad logo"
-                  />
-                </a>
-              </div>
-            </div>
           </div>
 
           <div className={classes.information}>
@@ -825,6 +807,25 @@ function Product({ favourite }) {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className={classes.graphic}>
+            <div>
+              <a
+                referrerPolicy="origin"
+                rel="noopener"
+                target="_blank"
+                href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+              >
+                <img
+                  referrerPolicy="origin"
+                  src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
+                  id="GPyVAMJIOJVa0l6MNns2"
+                  decoding="async"
+                  alt="enamad logo"
+                />
+              </a>
             </div>
           </div>
         </div>
