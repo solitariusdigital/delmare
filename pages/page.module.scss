@@ -145,3 +145,31 @@
 .sizeNav {
   margin: 20px 0px;
 }
+
+.sizeGraphContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0px;
+
+  .graph {
+    height: 50px;
+    border-bottom: 1px solid config.$cream;
+
+    &:hover {
+      cursor: pointer;
+      border-bottom: 1px solid config.$black;
+    }
+  }
+
+  .sizeGraph {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid config.$black;
+    padding: 10px;
+  }
+}

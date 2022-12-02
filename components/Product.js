@@ -368,12 +368,17 @@ function Product({ favourite }) {
             <div className={classes.priceContainer}>
               {selectedProduct.sale ? (
                 <div className={classes.discount}>
-                  <p className={classes.price}>
-                    {convertNumber(selectedProduct.price)} T
-                  </p>
                   <p className={classes.discountPrice}>
                     {convertNumber(selectedProduct.discount)} T
                   </p>
+                  <p className={classes.price}>
+                    {convertNumber(selectedProduct.price)}
+                  </p>
+                  {selectedProduct.sale && (
+                    <div className={classes.sale}>
+                      <p>{selectedProduct.percentage}% OFF</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <p>{convertNumber(selectedProduct.price)} T</p>
@@ -526,6 +531,19 @@ function Product({ favourite }) {
                       <div className={classes.table}>
                         <Image
                           src={selectedProduct.images.table}
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority={true}
+                        />
+                      </div>
+                    </Fragment>
+                  )}
+                  {selectedProduct.images.graph !== "" && (
+                    <Fragment>
+                      <div className={classes.table}>
+                        <Image
+                          src={selectedProduct.images.graph}
                           alt="image"
                           layout="fill"
                           objectFit="contain"
@@ -769,51 +787,53 @@ function Product({ favourite }) {
             </div>
           </div>
 
-          <div className={classes.similarContainer}>
-            <p className={classes.title}>آیتم مشابه</p>
-            <div className={`collection-grid ${classes.grid}`}>
-              {similarProducts.map((product, index) => (
-                <div key={index} className="product">
-                  <div className="banner">
-                    <p className="title">{product.title}</p>
-                    <div className="social">
-                      <div>
-                        {checFavourites(product) ? (
-                          <FavoriteIcon
-                            className="iconRed"
-                            onClick={() => favourProduct(product)}
-                          />
-                        ) : (
-                          <FavoriteBorderIcon
-                            className="icon"
-                            onClick={() => favourProduct(product)}
-                          />
-                        )}
-                      </div>
+          {similarProducts.length !== 0 && (
+            <div className={classes.similarContainer}>
+              <p className={classes.title}>آیتم مشابه</p>
+              <div className={`collection-grid ${classes.grid}`}>
+                {similarProducts.map((product, index) => (
+                  <div key={index} className="product">
+                    <div className="banner">
+                      <p className="title">{product.title}</p>
                       <div className="social">
-                        <VisibilityIcon className="icon" />
-                        <p>{Math.round(product.views)}</p>
+                        <div>
+                          {checFavourites(product) ? (
+                            <FavoriteIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                        <div className="social">
+                          <VisibilityIcon className="icon" />
+                          <p>{Math.round(product.views)}</p>
+                        </div>
                       </div>
                     </div>
+                    <Image
+                      onClick={() => selectProduct(product["_id"])}
+                      className={classes.image}
+                      src={product.images.main}
+                      alt="image"
+                      layout="fill"
+                      objectFit="cover"
+                      priority={true}
+                    />
+                    {product.sale && (
+                      <div className="sale">
+                        <p>{product.percentage}% OFF</p>
+                      </div>
+                    )}
                   </div>
-                  <Image
-                    onClick={() => selectProduct(product["_id"])}
-                    className={classes.image}
-                    src={product.images.main}
-                    alt="image"
-                    layout="fill"
-                    objectFit="cover"
-                    priority={true}
-                  />
-                  {product.sale && (
-                    <div className="sale">
-                      <p>{product.percentage}% OFF</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className={classes.graphic}>
             <a

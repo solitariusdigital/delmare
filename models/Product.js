@@ -23,6 +23,7 @@ const ProductSchema = new Schema(
       two: String,
       three: String,
       table: String,
+      graph: String,
     },
     size: {
       XS: {},

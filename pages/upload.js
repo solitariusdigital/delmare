@@ -29,10 +29,10 @@ export default function Upload() {
     two: "",
     three: "",
     table: "",
+    graph: "",
   };
 
   const { container, setContainer } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
   const { categories, setCategories } = useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
 
@@ -70,6 +70,7 @@ export default function Upload() {
   const [images, setImages] = useState(imageInitialState);
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [sizeGraph, setSizeGraph] = useState("");
 
   useEffect(() => {
     if (
@@ -102,6 +103,25 @@ export default function Upload() {
         size[type]["colors"][item.split(" ")[0]] = Number(item.split(" ")[1]);
     });
   };
+
+  const graphInfo = [
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+      active: false,
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
+      active: false,
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
+      active: false,
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+      active: false,
+    },
+  ];
 
   const handleUpload = async () => {
     if (
@@ -154,6 +174,7 @@ export default function Upload() {
     if (table !== "") {
       let imageId = `img${tokenGenerator()}`;
       images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.graph = sizeGraph;
       await uploadImages(table, imageId, delmareIdFolder);
     }
 
@@ -192,7 +213,7 @@ export default function Upload() {
 
     setTimeout(() => {
       Router.reload(window.location.pathname);
-    }, 5000);
+    }, 3000);
   };
 
   // upload images into s3 bucket
@@ -726,6 +747,43 @@ export default function Upload() {
             />
           )}
         </div>
+        {table !== "" && (
+          <Fragment>
+            <div className={classes.sizeGraphContainer}>
+              {graphInfo.map((info, index) => (
+                <div
+                  className={classes.graph}
+                  key={index}
+                  onClick={() => setSizeGraph(info.src)}
+                >
+                  <Image
+                    src={info.src}
+                    alt="graph"
+                    objectFit="contain"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+              ))}
+              {sizeGraph !== "" && (
+                <div className={classes.sizeGraph}>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => setSizeGraph("")}
+                    sx={{ fontSize: 16 }}
+                  />
+                  <Image
+                    src={sizeGraph}
+                    alt="graph"
+                    objectFit="contain"
+                    width={80}
+                    height={80}
+                  />
+                </div>
+              )}
+            </div>
+          </Fragment>
+        )}
         <p className={classes.alert}>{alert}</p>
         {uploadClicked && (
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
