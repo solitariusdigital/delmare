@@ -70,7 +70,10 @@ function Product({ favourite }) {
     setSimilarProducts(
       productsCollection
         .filter((product) => {
-          return product.category === selectedProduct.category;
+          return (
+            product.category === selectedProduct.category &&
+            product["_id"] !== selectedProduct["_id"]
+          );
         })
         .sort(() => 0.5 - Math.random())
         .slice(0, 2)
@@ -414,21 +417,21 @@ function Product({ favourite }) {
               </div>
               {colors.length > 0 && <p className={classes.title}>انتخاب رنگ</p>}
             </div>
-            {colors.length > 0 && (
-              <div className={classes.countContainer}>
-                <div className={classes.count}>
-                  {selectedCount === 0 ? (
-                    <p>اتمام موجودی</p>
-                  ) : (
-                    <div className={classes.count}>
-                      {selectedCount}
-                      {selectedCount !== "" && <p>موجودی</p>}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
+          {colors.length > 0 && (
+            <div className={classes.countContainer}>
+              <div className={classes.count}>
+                {selectedCount === 0 ? (
+                  <p>اتمام موجودی</p>
+                ) : (
+                  <div className={classes.count}>
+                    {selectedCount}
+                    {selectedCount !== "" && <p>موجودی</p>}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           <div className={classes.alert}>{alert}</div>
           <button
             className={classes.button}

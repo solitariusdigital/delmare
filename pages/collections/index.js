@@ -79,8 +79,8 @@ function CollectionsPage() {
                   src={sale}
                   alt="sale"
                   objectFit="contain"
-                  width={80}
-                  height={80}
+                  width={70}
+                  height={70}
                 />
               </div>
             )}

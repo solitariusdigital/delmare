@@ -246,15 +246,21 @@
 }
 
 .countContainer {
-  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  height: 0px;
 
   .count {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    font-weight: bold;
 
     p {
       margin-left: 10px;
+      font-weight: 300;
     }
   }
 }
