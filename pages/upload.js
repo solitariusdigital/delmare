@@ -106,20 +106,28 @@ export default function Upload() {
 
   const graphInfo = [
     {
+      title: "شلوار",
       src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
-      active: false,
     },
     {
+      title: "کاپشن",
       src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
-      active: false,
     },
     {
+      title: "پیراهن",
       src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
-      active: false,
     },
     {
+      title: "بلوز",
       src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
-      active: false,
+    },
+    {
+      title: "بلوز شلوار",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+    },
+    {
+      title: "کت شلوار",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
     },
   ];
 
@@ -763,25 +771,26 @@ export default function Upload() {
                     width={50}
                     height={50}
                   />
+                  <p>{info.title}</p>
                 </div>
               ))}
-              {sizeGraph !== "" && (
-                <div className={classes.sizeGraph}>
-                  <CloseIcon
-                    className="icon"
-                    onClick={() => setSizeGraph("")}
-                    sx={{ fontSize: 16 }}
-                  />
-                  <Image
-                    src={sizeGraph}
-                    alt="graph"
-                    objectFit="contain"
-                    width={80}
-                    height={80}
-                  />
-                </div>
-              )}
             </div>
+            {sizeGraph !== "" && (
+              <div className={classes.sizeGraph}>
+                <Image
+                  src={sizeGraph}
+                  alt="graph"
+                  objectFit="contain"
+                  width={80}
+                  height={80}
+                />
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setSizeGraph("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+            )}
           </Fragment>
         )}
         <p className={classes.alert}>{alert}</p>

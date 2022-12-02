@@ -149,27 +149,28 @@
 .sizeGraphContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin: 10px 0px;
 
   .graph {
-    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-bottom: 1px solid config.$cream;
 
     &:hover {
       cursor: pointer;
       border-bottom: 1px solid config.$black;
     }
-  }
 
-  .sizeGraph {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    border-bottom: 1px solid config.$black;
-    padding: 10px;
+    p {
+      font-size: config.$tiny-font;
+    }
   }
+}
+
+.sizeGraph {
+  border-bottom: 1px solid config.$black;
+  padding: 10px;
 }
