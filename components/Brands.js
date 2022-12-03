@@ -25,12 +25,13 @@ function Brands() {
       </div>
       <div className={classes.brands}>
         {brands.map((brand, index) => (
-          <div key={index} className={classes.brand}>
+          <div
+            key={index}
+            className={classes.brand}
+            onClick={() => Router.push(`/collections/brands/${brand["_id"]}`)}
+          >
             <p className={classes.title}>{brand.title}</p>
-            <div
-              className={classes.logo}
-              onClick={() => Router.push(`/collections/brands/${brand["_id"]}`)}
-            >
+            <div className={classes.logo}>
               <Image
                 src={brand.logo}
                 objectFit="contain"

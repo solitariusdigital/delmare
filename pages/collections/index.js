@@ -44,7 +44,7 @@ function CollectionsPage() {
     Router.push(`${link}`);
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "برند" || nav.title === "اکسسوری") {
+        if (nav.title === "برند") {
           setSearchControl(false);
         } else {
           setSearchControl(true);

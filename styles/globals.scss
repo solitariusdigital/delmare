@@ -141,22 +141,16 @@ a {
       width: 100%;
       @include mixins.transparentBackground(0.8, config.$cream);
 
-      p {
-        font-size: config.$tiny-font;
-        margin-left: 10px;
-      }
-
       .title {
-        max-width: 45%;
         margin: 0px;
         font-weight: bold;
+        font-size: config.$tiny-font;
       }
 
       .social {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 10px;
 
         div {
           display: flex;
@@ -167,11 +161,16 @@ a {
           font-size: config.$med-font;
           width: 20px;
           height: 20px;
+          margin: 0px 5px;
         }
 
         .iconRed {
           color: config.$red;
           @include mixins.favour();
+        }
+
+        .count {
+          font-size: config.$tiny-font;
         }
       }
     }

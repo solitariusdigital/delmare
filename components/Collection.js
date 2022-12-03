@@ -25,7 +25,9 @@ function Collection({ collectionType, brandGallery, brand }) {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-  const { categories, setCategories } = useContext(StateContext);
+  const { generalCategories, setGeneralCategories } = useContext(StateContext);
+  const { accessoriesGeneralCategories, setAccessoriesGeneralCategories } =
+    useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
@@ -42,20 +44,24 @@ function Collection({ collectionType, brandGallery, brand }) {
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
   const [reqNumber, setReqNumber] = useState(10);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     switch (collectionType) {
       case "gallery":
         setGallery(galleryCollection);
+        setCategories(generalCategories);
         break;
       case "sale":
         setGallery(saleCollection);
+        setCategories(generalCategories);
         break;
       case "brands":
         setGallery(brandGallery);
         break;
       case "accessories":
         setGallery(accessoriesCollection);
+        setCategories(accessoriesGeneralCategories);
         break;
     }
     setBar(true);
@@ -69,6 +75,8 @@ function Collection({ collectionType, brandGallery, brand }) {
     accessoriesCollection,
     collectionType,
     brandGallery,
+    generalCategories,
+    accessoriesGeneralCategories,
   ]);
 
   const selectProduct = async (id) => {
@@ -135,6 +143,13 @@ function Collection({ collectionType, brandGallery, brand }) {
           })
         );
         break;
+      case "accessories":
+        setGallery(
+          accessoriesCollection.filter((product) => {
+            return product.category === type;
+          })
+        );
+        break;
     }
     setMessage(true);
   };
@@ -159,87 +174,74 @@ function Collection({ collectionType, brandGallery, brand }) {
           })
         );
         break;
+      case "accessories":
+        setGallery(
+          accessoriesCollection.filter((product) => {
+            return product.season === type;
+          })
+        );
+        break;
     }
     setMessage(true);
   };
 
-  const resetFilter = () => {
-    setCategoryFilter("دسته بندی");
-    setSeasonFilter("فصل");
-    setCategorySelector(false);
-    switch (collectionType) {
-      case "gallery":
-        setGallery(galleryCollection);
-        break;
-      case "sale":
-        setGallery(saleCollection);
-        break;
-    }
-  };
-
   return (
     <Fragment>
-      {!displayProduct &&
-        search &&
-        collectionType !== "accessories" &&
-        collectionType !== "brands" && (
-          <div className={classes.category}>
-            <div className={classes.selectContainer}>
-              <div
-                className={classes.select}
-                onClick={() => {
-                  setCategorySelector(false);
-                  setSeasonSelector(!seasonSelector);
-                }}
-              >
-                <div className={classes.icon}>
-                  {seasonSelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </div>
-                <p>{seasonFilter}</p>
+      {!displayProduct && search && collectionType !== "brands" && (
+        <div className={classes.category}>
+          <div className={classes.selectContainer}>
+            <div
+              className={classes.select}
+              onClick={() => {
+                setCategorySelector(false);
+                setSeasonSelector(!seasonSelector);
+              }}
+            >
+              <div className={classes.icon}>
+                {seasonSelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-              <div
-                className={classes.select}
-                onClick={() => {
-                  setCategorySelector(!categorySelector);
-                  setSeasonSelector(false);
-                }}
-              >
-                <div className={classes.icon}>
-                  {categorySelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </div>
-                <p>{categoryFilter}</p>
-              </div>
+              <p>{seasonFilter}</p>
             </div>
-            {categorySelector && (
-              <div className={classes.listCategory}>
-                {categories.map((category, index) => {
-                  return (
-                    <p
-                      onClick={() => filterCategoryCollection(category)}
-                      key={index}
-                    >
-                      {category}
-                    </p>
-                  );
-                })}
+            <div
+              className={classes.select}
+              onClick={() => {
+                setCategorySelector(!categorySelector);
+                setSeasonSelector(false);
+              }}
+            >
+              <div className={classes.icon}>
+                {categorySelector ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-            )}
-            {seasonSelector && (
-              <div className={classes.listSeason}>
-                {seasons.map((season, index) => {
-                  return (
-                    <p
-                      onClick={() => filterSeasonCollection(season)}
-                      key={index}
-                    >
-                      {season}
-                    </p>
-                  );
-                })}
-              </div>
-            )}
+              <p>{categoryFilter}</p>
+            </div>
           </div>
-        )}
+          {categorySelector && (
+            <div className={classes.listCategory}>
+              {categories.map((category, index) => {
+                return (
+                  <p
+                    onClick={() => filterCategoryCollection(category)}
+                    key={index}
+                  >
+                    {category}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+          {seasonSelector && (
+            <div className={classes.listSeason}>
+              {seasons.map((season, index) => {
+                return (
+                  <p onClick={() => filterSeasonCollection(season)} key={index}>
+                    {season}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
       {collectionType === "brands" && !displayProduct && (
         <div className={classes.brand}>
           <p>برند {brand.title}</p>
@@ -273,7 +275,7 @@ function Collection({ collectionType, brandGallery, brand }) {
                     </div>
                     <div className="social">
                       <VisibilityIcon className="icon" />
-                      <p>{Math.round(product.views)}</p>
+                      <p className="count">{Math.round(product.views)}</p>
                     </div>
                   </div>
                 </div>

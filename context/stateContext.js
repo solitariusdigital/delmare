@@ -37,7 +37,7 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
-  const [categories, setCategories] = useState([
+  const [generalCategories, setGeneralCategories] = useState([
     "اسکارف",
     "اکسسوری",
     "بارونی",
@@ -51,11 +51,14 @@ export const StateProvider = (props) => {
     "عینک",
     "کاپشن",
     "کت",
+    "کت شلوار",
     "کفش",
     "کلاه",
     "کیف",
     "هودی",
   ]);
+  const [accessoriesGeneralCategories, setAccessoriesGeneralCategories] =
+    useState(["اکسسوری", "عینک", "کلاه", "کیف"]);
   const [seasons, setSeasons] = useState([
     "بهار",
     "تابستان",
@@ -109,8 +112,10 @@ export const StateProvider = (props) => {
     setSaleCollection,
     galleryCollection,
     setGalleryCollection,
-    categories,
-    setCategories,
+    generalCategories,
+    setGeneralCategories,
+    accessoriesGeneralCategories,
+    setAccessoriesGeneralCategories,
     seasons,
     setSeasons,
     search,

@@ -33,7 +33,7 @@ export default function Upload() {
   };
 
   const { container, setContainer } = useContext(StateContext);
-  const { categories, setCategories } = useContext(StateContext);
+  const { generalCategories, setGeneralCategories } = useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
 
   const [uploadClicked, setUploadClicked] = useState(false);
@@ -354,7 +354,7 @@ export default function Upload() {
             <option value="default" disabled>
               دسته بندی
             </option>
-            {categories.map((category, index) => {
+            {generalCategories.map((category, index) => {
               return (
                 <option key={index} value={category}>
                   {category}
