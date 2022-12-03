@@ -77,11 +77,13 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSelectedProduct(product);
     setDisplayProduct(true);
     // on each click update views count
-    let updateData = {
-      ...product,
-      views: product.views + 1.5,
-    };
-    await updateProductApi(updateData);
+    if (currentUser.permission === "customer") {
+      let updateData = {
+        ...product,
+        views: product.views + 1.5,
+      };
+      await updateProductApi(updateData);
+    }
     window.scrollTo(0, 0);
   };
 
