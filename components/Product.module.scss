@@ -176,6 +176,11 @@
   width: 100%;
   margin: 10px 0px;
 
+  .description {
+    font-size: config.$small-font;
+    text-align: right;
+  }
+
   .section {
     display: flex;
     flex-direction: row;
@@ -312,6 +317,7 @@
   .table {
     position: relative;
     height: 120px;
+    margin: 5px 0px;
   }
 
   .description {
@@ -342,11 +348,6 @@
 .designContainer {
   display: flex;
   flex-direction: column;
-
-  .description {
-    font-size: config.$small-font;
-    text-align: right;
-  }
 
   .row {
     display: flex;
