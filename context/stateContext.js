@@ -57,8 +57,12 @@ export const StateProvider = (props) => {
     "کیف",
     "هودی",
   ]);
-  const [accessoriesGeneralCategories, setAccessoriesGeneralCategories] =
-    useState(["اکسسوری", "عینک", "کلاه", "کیف"]);
+  const [accessoriesCategories, setAccessoriesCategories] = useState([
+    "اکسسوری",
+    "عینک",
+    "کلاه",
+    "کیف",
+  ]);
   const [seasons, setSeasons] = useState([
     "بهار",
     "تابستان",
@@ -114,8 +118,8 @@ export const StateProvider = (props) => {
     setGalleryCollection,
     generalCategories,
     setGeneralCategories,
-    accessoriesGeneralCategories,
-    setAccessoriesGeneralCategories,
+    accessoriesCategories,
+    setAccessoriesCategories,
     seasons,
     setSeasons,
     search,

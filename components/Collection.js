@@ -26,7 +26,7 @@ function Collection({ collectionType, brandGallery, brand }) {
   const { register, setRegister } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { generalCategories, setGeneralCategories } = useContext(StateContext);
-  const { accessoriesGeneralCategories, setAccessoriesGeneralCategories } =
+  const { accessoriesCategories, setAccessoriesCategories } =
     useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
   const { productsCollection, setProductsCollection } =
@@ -61,7 +61,7 @@ function Collection({ collectionType, brandGallery, brand }) {
         break;
       case "accessories":
         setGallery(accessoriesCollection);
-        setCategories(accessoriesGeneralCategories);
+        setCategories(accessoriesCategories);
         break;
     }
     setBar(true);
@@ -76,7 +76,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     collectionType,
     brandGallery,
     generalCategories,
-    accessoriesGeneralCategories,
+    accessoriesCategories,
   ]);
 
   const selectProduct = async (id) => {
