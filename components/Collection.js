@@ -192,6 +192,10 @@ function Collection({ collectionType, brandGallery, brand }) {
     }).format(num);
   };
 
+  const checkDate = (date) => {
+    return Date.parse(date) > Date.now() - 1000 * 60 * 60 * 24 * 7;
+  };
+
   return (
     <Fragment>
       {!displayProduct && search && collectionType !== "brands" && (
@@ -300,6 +304,11 @@ function Collection({ collectionType, brandGallery, brand }) {
                 {product.sale && (
                   <div className="sale">
                     <p>{product.percentage}% OFF</p>
+                  </div>
+                )}
+                {checkDate(product.createdAt) && (
+                  <div className="new">
+                    <p>جدید</p>
                   </div>
                 )}
               </div>

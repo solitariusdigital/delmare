@@ -118,8 +118,8 @@
     box-shadow: config.$image-shadow;
 
     .image {
-      @include mixins.border-radius();
       object-position: 100% 10%;
+      @include mixins.border-radius();
     }
   }
 
