@@ -185,6 +185,13 @@ function Collection({ collectionType, brandGallery, brand }) {
     setMessage(true);
   };
 
+  const abbreviateViews = (num) => {
+    return new Intl.NumberFormat("en-GB", {
+      notation: "compact",
+      compactDisplay: "short",
+    }).format(num);
+  };
+
   return (
     <Fragment>
       {!displayProduct && search && collectionType !== "brands" && (
@@ -275,7 +282,9 @@ function Collection({ collectionType, brandGallery, brand }) {
                     </div>
                     <div className="social">
                       <VisibilityIcon className="icon" />
-                      <p className="count">{Math.round(product.views)}</p>
+                      <p className="count">
+                        {abbreviateViews(Math.round(product.views))}
+                      </p>
                     </div>
                   </div>
                 </div>
