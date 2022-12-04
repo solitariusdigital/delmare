@@ -142,6 +142,10 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                   <p className={classes.title}>کد محصول</p>
                   <p>{invoice.productId}</p>
                 </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد رهگیری</p>
+                  <p>{invoice["_id"].slice(0, 10)}</p>
+                </div>
                 <button
                   className={classes.button}
                   onClick={() => postInvoice(invoice)}
@@ -218,6 +222,10 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 <div className={classes.row}>
                   <p className={classes.title}>کد محصول</p>
                   <p>{invoice.productId}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد رهگیری</p>
+                  <p>{invoice["_id"].slice(0, 10)}</p>
                 </div>
               </div>
             ))}

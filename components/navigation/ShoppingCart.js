@@ -132,10 +132,6 @@ export default function ShoppingCart() {
     };
 
     await createInvoiceApi(invoice);
-
-    setTimeout(() => {
-      setCheckoutClicked(false);
-    }, 3000);
   };
 
   // update and change product count based on size and color in size object

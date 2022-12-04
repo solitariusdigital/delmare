@@ -27,13 +27,13 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
-      title: "برند",
-      link: "/collections/brands",
+      title: "اکسسوری",
+      link: "/collections/accessories",
       active: false,
     },
     {
-      title: "اکسسوری",
-      link: "/collections/accessories",
+      title: "برند",
+      link: "/collections/brands",
       active: false,
     },
   ]);

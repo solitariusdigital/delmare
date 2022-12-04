@@ -29,14 +29,14 @@ function CollectionsPage() {
       imageSrc: `${sourceLink}three.jpg`,
     },
     {
-      title: "برند",
-      link: "/collections/brands",
-      imageSrc: `${sourceLink}ten.jpg`,
-    },
-    {
       title: "اکسسوری",
       link: "/collections/accessories",
       imageSrc: `${sourceLink}eight.jpg`,
+    },
+    {
+      title: "برند",
+      link: "/collections/brands",
+      imageSrc: `${sourceLink}ten.jpg`,
     },
   ];
 
@@ -79,8 +79,8 @@ function CollectionsPage() {
                   src={sale}
                   alt="sale"
                   objectFit="contain"
-                  width={70}
-                  height={70}
+                  width={60}
+                  height={60}
                 />
               </div>
             )}

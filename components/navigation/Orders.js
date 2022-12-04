@@ -77,6 +77,10 @@ export default function Orders() {
                     <p>{order.delmareId}</p>
                   </div>
                   <div className={ShoppingCart.row}>
+                    <p className={ShoppingCart.title}>کد رهگیری</p>
+                    <p>{order["_id"].slice(0, 10)}</p>
+                  </div>
+                  <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>قیمت</p>
                     <p>{convertNumber(order.price)} T</p>
                   </div>

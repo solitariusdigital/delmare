@@ -9,7 +9,7 @@ import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
 
@@ -407,7 +407,7 @@ export default function Upload() {
               onClick={() => setPrice("")}
               sx={{ fontSize: 16 }}
             />
-            <AttachMoneyIcon
+            <MonetizationOnIcon
               className="icon"
               onClick={() => setSale(!sale)}
               sx={{ fontSize: 22 }}
