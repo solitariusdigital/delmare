@@ -85,7 +85,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSelectedProduct(product);
     setDisplayProduct(true);
     // on each click update views count
-    if (currentUser.permission === "customer") {
+    if (currentUser && currentUser.permission === "customer") {
       let updateData = {
         ...product,
         views: product.views + 1.5,
