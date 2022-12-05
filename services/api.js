@@ -119,3 +119,14 @@ export const updateBrandApi = async (data) => {
   });
   return await response.json();
 };
+
+// mellat api
+export const mellatApi = async (credit) => {
+  const response = await fetch(`/api/mellat?credit=${credit}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

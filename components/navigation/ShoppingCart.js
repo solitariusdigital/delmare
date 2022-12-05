@@ -11,6 +11,7 @@ import {
   updateUserApi,
   updateProductApi,
   getProductApi,
+  mellatApi,
 } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 
@@ -130,7 +131,6 @@ export default function ShoppingCart() {
       image: product.image,
       posted: false,
     };
-
     await createInvoiceApi(invoice);
   };
 
@@ -139,19 +139,26 @@ export default function ShoppingCart() {
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] > 0) {
-        getProduct.size[product.size].colors[product.color]--;
-        await updateProductApi(getProduct);
+        let res = await mellatApi("10000");
+        console.log(res);
+        if (res.hasOwnProperty("error")) {
+          setAlert(res.error);
+        } else {
+          console.log(res);
+        }
+        // getProduct.size[product.size].colors[product.color]--;
+        // await updateProductApi(getProduct);
         // await updateUser();
-        await createInvoice(product);
-        setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
+        // await createInvoice(product);
+        // setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
       } else {
         setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
       }
 
       setTimeout(() => {
-        setCheckout(false);
+        // setCheckout(false);
         setCheckoutClicked(false);
-        setAlert("");
+        // setAlert("");
       }, 5000);
     });
   };
