@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getInvoiceApi } from "../../services/api";
 import Image from "next/image";
 import graphic from "../../assets/wardrobe.png";
-import { convertNumber } from "../../services/utility";
+import { convertNumber, convertDate } from "../../services/utility";
 
 export default function Orders() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -25,10 +25,6 @@ export default function Orders() {
     };
     fetchData().catch(console.error);
   }, [setOrders, currentUser]);
-
-  const convertDate = (date) => {
-    return new Date(date).toLocaleDateString("fa-IR");
-  };
 
   return (
     <div className={ShoppingCart.slider}>
@@ -78,7 +74,7 @@ export default function Orders() {
                   </div>
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>کد رهگیری</p>
-                    <p>{order["_id"].slice(0, 10)}</p>
+                    <p>{order.refId}</p>
                   </div>
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>قیمت</p>

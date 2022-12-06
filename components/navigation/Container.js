@@ -26,6 +26,7 @@ function Container() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { tempInvoice, setTempInvoice } = useContext(StateContext);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("currentUser"))) {

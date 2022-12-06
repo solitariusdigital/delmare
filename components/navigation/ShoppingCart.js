@@ -13,6 +13,7 @@ import {
   getProductApi,
 } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
+import { tokenGenerator } from "../../services/utility";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -113,47 +114,28 @@ export default function ShoppingCart() {
     setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
   };
 
-  // create invoice with customer and product info
-  const createInvoice = async (product) => {
-    const invoice = {
-      name: name.trim(),
-      phone: phone.trim(),
-      address: address.trim(),
-      post: post.trim(),
-      userId: currentUser["_id"],
-      productId: product["_id"],
-      delmareId: product.delmareId,
-      title: product.title,
-      price: product.price,
-      color: product.color,
-      size: product.size,
-      image: product.image,
-      posted: false,
-    };
-
-    await createInvoiceApi(invoice);
-  };
-
   // update and change product count based on size and color in size object
   const updateProduct = async () => {
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] > 0) {
-        getProduct.size[product.size].colors[product.color]--;
-        await updateProductApi(getProduct);
-        // await updateUser();
-        await createInvoice(product);
-        setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
-      } else {
-        setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
-      }
+      if (getProduct.size[product.size].colors[product.color] === 0) {
+        setAlert(`موجود نمیباشد ${product.delmareId} آیتم`);
+        product.message = "اتمام موجودی";
 
-      setTimeout(() => {
-        setCheckout(false);
-        setCheckoutClicked(false);
-        setAlert("");
-      }, 5000);
+        setTimeout(() => {
+          setCheckout(false);
+          setToggleContainer("cart");
+        }, 5000);
+        return;
+      }
     });
+    // call mellat api
+    setCheckoutClicked(false);
+    await updateUser();
+    localStorage.setItem(
+      "refId",
+      JSON.stringify(currentUser["_id"].slice(0, 5) + tokenGenerator())
+    );
   };
 
   return (
