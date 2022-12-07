@@ -30,6 +30,7 @@ export default function ShoppingCart() {
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [checkoutClicked, setCheckoutClicked] = useState(false);
+  const [availability, setAvailability] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -47,13 +48,15 @@ export default function ShoppingCart() {
         let getProduct = await getProductApi(product["_id"]);
         if (getProduct.size[product.size].colors[product.color] === 0) {
           product.message = "اتمام موجودی";
+          setAvailability(!availability);
         } else {
           product.message = "";
+          setAvailability(!availability);
         }
       });
     };
     fetchData().catch(console.error);
-  }, [shoppingCart]);
+  }, [shoppingCart, setAvailability, availability]);
 
   const deletecart = (index) => {
     setShoppingCart(
@@ -111,7 +114,7 @@ export default function ShoppingCart() {
     let data = await updateUserApi(user);
     seCurrentUser(data);
     localStorage.setItem("currentUser", JSON.stringify(data));
-    setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
+    // setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
   };
 
   // update and change product count based on size and color in size object
@@ -120,7 +123,7 @@ export default function ShoppingCart() {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] === 0) {
         setAlert(`موجود نمیباشد ${product.delmareId} آیتم`);
-        product.message = "اتمام موجودی";
+        setAvailability(!availability);
 
         setTimeout(() => {
           setCheckout(false);
