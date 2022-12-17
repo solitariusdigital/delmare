@@ -4,6 +4,7 @@ import { getBrandsApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
+import ShareIcon from "@mui/icons-material/Share";
 
 function Brands() {
   const [brands, setBrands] = useState([]);
@@ -25,12 +26,19 @@ function Brands() {
       </div>
       <div className={classes.brands}>
         {brands.map((brand, index) => (
-          <div
-            key={index}
-            className={classes.brand}
-            onClick={() => Router.push(`/collections/brands/${brand["_id"]}`)}
-          >
+          <div key={index} className={classes.brand}>
             <p className={classes.title}>{brand.title}</p>
+            <div className={classes.share}>
+              <ShareIcon
+                className="icon"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `delmareh.com/collections/brands/${brand.delmareId}`
+                  )
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
             <div className={classes.logo}>
               <Image
                 src={brand.logo}
@@ -38,6 +46,9 @@ function Brands() {
                 width={100}
                 height={100}
                 alt="logo"
+                onClick={() =>
+                  Router.push(`/collections/brands/${brand.delmareId}`)
+                }
               />
             </div>
             <div className={classes.row}>
