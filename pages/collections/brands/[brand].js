@@ -16,20 +16,21 @@ export default function Brand() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const products = await getProducstApi();
-
-      const brands = await getBrandsApi();
-      brands.forEach(async (brand) => {
-        if (brand.delmareId === brandDelmareId) {
-          const brandData = await getBrandApi(brand["_id"]);
-          setBrand(brandData);
-          setGallery(
-            products.filter((product) => {
-              return brandData.products.includes(product["_id"]);
-            })
-          );
-        }
-      });
+      if (brandDelmareId) {
+        const products = await getProducstApi();
+        const brands = await getBrandsApi();
+        brands.forEach(async (brand) => {
+          if (brand.delmareId === brandDelmareId.toUpperCase()) {
+            const brandData = await getBrandApi(brand["_id"]);
+            setBrand(brandData);
+            setGallery(
+              products.filter((product) => {
+                return brandData.products.includes(product["_id"]);
+              })
+            );
+          }
+        });
+      }
     };
     fetchData().catch(console.error);
   }, [brandDelmareId]);
