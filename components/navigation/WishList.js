@@ -65,9 +65,9 @@ export default function WishList() {
   };
 
   const selectProduct = async (id) => {
+    Router.push(`/collections/product/${id}`);
     setToggleContainer("");
     setBar(false);
-    Router.push(`/collections/product/${id}`);
   };
 
   return (
