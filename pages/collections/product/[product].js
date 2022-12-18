@@ -143,6 +143,21 @@ export default function Product({ favourite, product }) {
     }
   };
 
+  // navigation back/forward actions
+  useEffect(() => {
+    router.beforePopState(({ as }) => {
+      if (as !== router.asPath) {
+        Router.reload(window.location.pathname);
+        window.scrollTo(0, 0);
+      }
+      return true;
+    });
+
+    return () => {
+      router.beforePopState(() => true);
+    };
+  }, [router]);
+
   const back = async () => {
     setSelectedColor("");
     setSelectedSize("");
