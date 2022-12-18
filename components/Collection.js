@@ -1,25 +1,20 @@
 import { useEffect, useContext, useState, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
-import Product from "./Product";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collection.module.scss";
 import Image from "next/image";
-import {
-  getProductApi,
-  updateProductApi,
-  updateUserApi,
-} from "../services/api";
+import { updateProductApi, updateUserApi } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import loadingImage from "../assets/loader.png";
+import Router from "next/router";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
-  const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -81,9 +76,8 @@ function Collection({ collectionType, brandGallery, brand }) {
 
   const selectProduct = async (id) => {
     setSearchControl(false);
-    const product = await getProductApi(id);
-    setSelectedProduct(product);
-    setDisplayProduct(true);
+    Router.push(`/collections/product/${id}`);
+
     // on each click update views count
     if (!currentUser || currentUser.permission === "customer") {
       let updateData = {
@@ -318,7 +312,6 @@ function Collection({ collectionType, brandGallery, brand }) {
         {gallery.length === 0 && message && (
           <p className={classes.message}>درخواست نا موجود</p>
         )}
-        {displayProduct && <Product favourite={like} />}
       </div>
       {gallery.length >= 10 && !displayProduct && (
         <div className={classes.more}>
