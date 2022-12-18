@@ -179,6 +179,9 @@
   .description {
     font-size: config.$small-font;
     text-align: right;
+    border-bottom: 1px solid config.$brand;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .section {
