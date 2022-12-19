@@ -16,7 +16,7 @@
 .menu {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: config.$max-width;
   background: config.$cream;
   box-shadow: config.$card-shadow;
   overflow-y: scroll;
@@ -184,7 +184,7 @@
 
     .button {
       width: 100%;
-      max-width: 500px;
+      max-width: config.$max-width;
       height: 40px;
       font-size: config.$med-font;
     }
