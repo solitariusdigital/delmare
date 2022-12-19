@@ -49,6 +49,10 @@
   }
 }
 
+.shareIcon {
+  @include mixins.favour();
+}
+
 .back {
   position: absolute;
   cursor: pointer;

@@ -291,6 +291,16 @@ export default function Product({ favourite, product }) {
     Router.push(`/collections/product/${id}`);
   };
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(
+      `delmareh.com/collections/product/${product["_id"]}`
+    );
+    document.querySelector(".shareIcon").classList.add(classes.shareIcon);
+    setTimeout(() => {
+      document.querySelector(".shareIcon").classList.remove(classes.shareIcon);
+    }, 1000);
+  };
+
   return (
     <Fragment>
       <div className={classes.productContainer}>
@@ -339,13 +349,9 @@ export default function Product({ favourite, product }) {
                 </div>
               </div>
               <ShareIcon
-                className="icon"
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    `delmareh.com/collections/product/${product["_id"]}`
-                  )
-                }
-                sx={{ fontSize: 20 }}
+                className="icon shareIcon"
+                onClick={() => copyLink()}
+                sx={{ fontSize: 18 }}
               />
             </div>
           </div>
