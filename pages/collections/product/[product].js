@@ -38,9 +38,9 @@ export default function Product({ favourite, product }) {
 
   // product image variables
   const [mainItem, setMainItem] = useState(product.images.main);
-  const [itemOne, setItemOne] = useState(product.images.main);
-  const [itemTwo, setItemTwo] = useState(product.images.main);
-  const [itemThree, setItemThree] = useState(product.images.main);
+  const [itemOne, setItemOne] = useState(product.images.one);
+  const [itemTwo, setItemTwo] = useState(product.images.two);
+  const [itemThree, setItemThree] = useState(product.images.three);
   // to control image display
   const [itemOneDisplay, setitemOneDisplay] = useState(false);
   const [itemTwoDisplay, setitemTwoDisplay] = useState(false);
