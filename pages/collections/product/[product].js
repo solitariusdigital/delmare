@@ -147,23 +147,21 @@ export default function Product({ favourite, product }) {
   useEffect(() => {
     router.beforePopState(({ as }) => {
       if (as !== router.asPath) {
-        Router.reload(window.location.pathname);
         window.scrollTo(0, 0);
+        Router.reload(window.location.pathname);
       }
       return true;
     });
-
     return () => {
       router.beforePopState(() => true);
     };
   }, [router]);
 
-  const back = async () => {
+  const back = () => {
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
     colors.length = 0;
-
     window.scrollTo(0, 0);
     router.back();
   };
