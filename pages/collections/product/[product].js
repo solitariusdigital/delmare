@@ -164,10 +164,8 @@ export default function Product({ favourite, product }) {
     clearDetails();
     colors.length = 0;
 
+    window.scrollTo(0, 0);
     router.back();
-    setTimeout(() => {
-      Router.reload(window.location.pathname);
-    }, 5);
   };
 
   const clearDetails = () => {
