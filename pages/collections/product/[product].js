@@ -72,14 +72,13 @@ export default function Product({ favourite, product }) {
       if (as !== router.asPath) {
         window.scrollTo(0, 0);
         Router.reload(window.location.pathname);
-        setBar(false);
       }
       return true;
     });
     return () => {
       router.beforePopState(() => true);
     };
-  }, [router, setBar]);
+  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -324,7 +323,7 @@ export default function Product({ favourite, product }) {
             <Image
               className={classes.image}
               src={mainItem}
-              alt="image"
+              alt="Loading image"
               layout="fill"
               objectFit="cover"
               priority={true}

@@ -8,14 +8,9 @@ import Head from "next/head";
 import sale from "../../assets/sale.png";
 
 function CollectionsPage() {
-  const { bar, setBar } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
-
-  useEffect(() => {
-    setBar(true);
-  }, [setBar]);
 
   const collections = [
     {
