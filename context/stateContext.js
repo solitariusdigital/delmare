@@ -55,6 +55,7 @@ export const StateProvider = (props) => {
     "کفش",
     "کلاه",
     "کیف",
+    "وست",
     "هودی",
   ]);
   const [accessoriesCategories, setAccessoriesCategories] = useState([

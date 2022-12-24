@@ -66,6 +66,21 @@ export default function Product({ favourite, product }) {
 
   const router = useRouter();
 
+  // navigation back/forward actions
+  useEffect(() => {
+    router.beforePopState(({ as }) => {
+      if (as !== router.asPath) {
+        window.scrollTo(0, 0);
+        Router.reload(window.location.pathname);
+        setBar(false);
+      }
+      return true;
+    });
+    return () => {
+      router.beforePopState(() => true);
+    };
+  }, [router, setBar]);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getProducstApi();
@@ -142,20 +157,6 @@ export default function Product({ favourite, product }) {
         break;
     }
   };
-
-  // navigation back/forward actions
-  useEffect(() => {
-    router.beforePopState(({ as }) => {
-      if (as !== router.asPath) {
-        window.scrollTo(0, 0);
-        Router.reload(window.location.pathname);
-      }
-      return true;
-    });
-    return () => {
-      router.beforePopState(() => true);
-    };
-  }, [router]);
 
   const back = () => {
     setSelectedColor("");

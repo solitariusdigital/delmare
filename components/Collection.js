@@ -38,7 +38,7 @@ function Collection({ collectionType, brandGallery, brand }) {
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
-  const [reqNumber, setReqNumber] = useState(10);
+  const [reqNumber, setReqNumber] = useState(20);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setCategoryFilter(type);
     setCategorySelector(false);
     setMessage(false);
-    setReqNumber(10);
+    setReqNumber(20);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -152,7 +152,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSeasonFilter(type);
     setSeasonSelector(false);
     setMessage(false);
-    setReqNumber(10);
+    setReqNumber(20);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -313,9 +313,9 @@ function Collection({ collectionType, brandGallery, brand }) {
           <p className={classes.message}>درخواست نا موجود</p>
         )}
       </div>
-      {gallery.length >= 10 && !displayProduct && (
+      {gallery.length >= 20 && !displayProduct && (
         <div className={classes.more}>
-          <p onClick={() => setReqNumber(reqNumber + 10)}>آیتم بیشتر</p>
+          <p onClick={() => setReqNumber(reqNumber + 20)}>آیتم بیشتر</p>
         </div>
       )}
     </Fragment>

@@ -199,7 +199,7 @@ a {
 
     .new {
       position: absolute;
-      top: 170px;
+      top: 200px;
       color: config.$black;
       @include mixins.transparentBackground(0.9, config.$cream);
     }
