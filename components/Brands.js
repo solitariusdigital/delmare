@@ -1,21 +1,24 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Brands.module.scss";
 import { getBrandsApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
+import { StateContext } from "../context/stateContext";
 
 function Brands() {
   const [brands, setBrands] = useState([]);
+  const { bar, setBar } = useContext(StateContext);
 
   useEffect(() => {
+    setBar(true);
     const fetchData = async () => {
       const data = await getBrandsApi();
       setBrands(data);
     };
     fetchData().catch(console.error);
-  }, [setBrands]);
+  }, [setBrands, setBar]);
 
   return (
     <Fragment>

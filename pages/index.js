@@ -5,12 +5,6 @@ import Head from "next/head";
 import LandingPage from "../components/LandingPage";
 
 function HomePage() {
-  const { bar, setBar } = useContext(StateContext);
-
-  useEffect(() => {
-    setBar(false);
-  }, [setBar]);
-
   return (
     <Fragment>
       <Head>
