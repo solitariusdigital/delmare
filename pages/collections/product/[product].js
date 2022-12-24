@@ -491,6 +491,10 @@ export default function Product({ favourite, product }) {
             <p className={classes.title}>{product.brand}</p>
           </div>
           <div className={classes.row}>
+            <p>نوع</p>
+            <p className={classes.title}>{product.brandType}</p>
+          </div>
+          <div className={classes.row}>
             <p>دسته بندی</p>
             <p className={classes.title}>{product.category}</p>
           </div>

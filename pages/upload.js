@@ -65,12 +65,15 @@ export default function Upload() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [season, setSeason] = useState("");
+  const [brandType, setBrandType] = useState("");
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [sizeGraph, setSizeGraph] = useState("");
+
+  const brandTypes = ["برند ایرانی", "برند اورجینال", "های کپی"];
 
   useEffect(() => {
     if (
@@ -139,7 +142,8 @@ export default function Upload() {
       !delmareId &&
       !brand &&
       !category &&
-      !season
+      !season &&
+      !brandType
     ) {
       setAlert("Fill in all fields");
       setTimeout(() => {
@@ -195,9 +199,10 @@ export default function Upload() {
         description: description.trim(),
         images: images,
         size: size,
-        category: category.trim(),
-        season: season.trim(),
-        brand: brand.trim(),
+        category: category,
+        season: season,
+        brand: brand,
+        brandType: brandType,
         price: price.trim(),
         discount: discount.trim(),
         percentage: percentage.trim(),
@@ -323,6 +328,23 @@ export default function Upload() {
               return (
                 <option key={index} value={brand.title}>
                   {brand.title}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={classes.input}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => setBrandType(e.target.value)}
+          >
+            <option value="default" disabled>
+              نوع برند
+            </option>
+            {brandTypes.map((brand, index) => {
+              return (
+                <option key={index} value={brand}>
+                  {brand}
                 </option>
               );
             })}
