@@ -495,46 +495,12 @@ export default function Product({ favourite, product }) {
             <p className={classes.title}>{product.brandType}</p>
           </div>
           <div className={classes.row}>
-            <p>دسته بندی</p>
+            <p>دسته</p>
             <p className={classes.title}>{product.category}</p>
           </div>
-        </div>
-
-        <div className={classes.graphic}>
           <div className={classes.row}>
-            <div>
-              <Image
-                className={classes.image}
-                src={payment}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>پرداخت ایمن</p>
-            </div>
-            <div>
-              <Image
-                className={classes.image}
-                src={post}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>ارسال به تمام کشور</p>
-            </div>
-            <div>
-              <Image
-                className={classes.image}
-                src={quality}
-                alt="image"
-                objectFit="contain"
-                width={100}
-                height={100}
-              />
-              <p>ضمانت کیفیت</p>
-            </div>
+            <p>فصل</p>
+            <p className={classes.title}>{product.season}</p>
           </div>
         </div>
 
@@ -822,6 +788,44 @@ export default function Product({ favourite, product }) {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+
+        <div className={classes.graphic}>
+          <div className={classes.row}>
+            <div>
+              <Image
+                className={classes.image}
+                src={payment}
+                alt="ایمن"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>پرداخت ایمن</p>
+            </div>
+            <div>
+              <Image
+                className={classes.image}
+                src={post}
+                alt="ارسال"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>ارسال به تمام کشور</p>
+            </div>
+            <div>
+              <Image
+                className={classes.image}
+                src={quality}
+                alt="کیفیت"
+                objectFit="contain"
+                width={100}
+                height={100}
+              />
+              <p>ضمانت کیفیت</p>
+            </div>
           </div>
         </div>
 
