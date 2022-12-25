@@ -73,7 +73,7 @@ export default function Upload() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [sizeGraph, setSizeGraph] = useState("");
 
-  const brandTypes = ["برند ایرانی", "برند اورجینال", "های کپی"];
+  const brandTypes = ["ایرانی", "اورجینال", "های کپی"];
 
   useEffect(() => {
     if (
