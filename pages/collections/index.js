@@ -91,22 +91,6 @@ function CollectionsPage() {
           </div>
         ))}
       </div>
-      <div className={"enamad"}>
-        <a
-          referrerPolicy="origin"
-          rel="noopener"
-          target="_blank"
-          href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-        >
-          <img
-            referrerPolicy="origin"
-            src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-            id="GPyVAMJIOJVa0l6MNns2"
-            decoding="async"
-            alt="enamad logo"
-          />
-        </a>
-      </div>
     </Fragment>
   );
 }

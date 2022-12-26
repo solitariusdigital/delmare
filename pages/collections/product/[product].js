@@ -914,6 +914,7 @@ export default function Product({ favourite, product }) {
               alt="enamad logo"
             />
           </a>
+          <p>نماد اعتماد الکترونیکی</p>
         </div>
       </div>
     </Fragment>
