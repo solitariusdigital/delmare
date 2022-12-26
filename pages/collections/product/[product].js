@@ -328,7 +328,10 @@ export default function Product({ favourite, product }) {
               layout="fill"
               objectFit="cover"
               priority={true}
-              onClick={() => setDisplayPopuo(true)}
+              onClick={() => {
+                setDisplayPopuo(true);
+                window.scrollTo(0, 0);
+              }}
             />
             <div className={classes.banner}>
               <div className={classes.social}>
