@@ -71,6 +71,19 @@
     color: config.$red;
     font-weight: bold;
   }
+
+  .imagePopup {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: 600px;
+    z-index: 2;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
+
+    .image {
+      @include mixins.border-radius();
+    }
+  }
 }
 
 .topBar,

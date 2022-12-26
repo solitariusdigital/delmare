@@ -63,6 +63,7 @@ export default function Product({ favourite, product }) {
   const [percentage, setPercentage] = useState(product.percentage);
 
   const [like, setLike] = useState(favourite);
+  const [displayPopup, setDisplayPopuo] = useState(false);
 
   const router = useRouter();
 
@@ -327,6 +328,7 @@ export default function Product({ favourite, product }) {
               layout="fill"
               objectFit="cover"
               priority={true}
+              onClick={() => setDisplayPopuo(true)}
             />
             <div className={classes.banner}>
               <div className={classes.social}>
@@ -401,6 +403,23 @@ export default function Product({ favourite, product }) {
               />
             </div>
           </div>
+          {displayPopup && (
+            <div className={classes.imagePopup}>
+              <Image
+                className={classes.image}
+                src={mainItem}
+                alt="Loading image"
+                layout="fill"
+                objectFit="cover"
+                ver
+                priority={true}
+                onClick={() => {
+                  setDisplayPopuo(false);
+                  window.scrollTo(0, 0);
+                }}
+              />
+            </div>
+          )}
         </div>
         <div className={classes.productDetails}>
           <div className={classes.priceContainer}>
@@ -432,9 +451,9 @@ export default function Product({ favourite, product }) {
                       ? classes.selectedSize
                       : classes.size
                   }
-                  onClick={() => {
-                    selectDetails("size", productSizes[size].type, index, 0);
-                  }}
+                  onClick={() =>
+                    selectDetails("size", productSizes[size].type, index, 0)
+                  }
                 >
                   <p>{size}</p>
                 </div>
