@@ -14,6 +14,7 @@ import {
   mellatApi,
 } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
+import { tokenGenerator } from "../../services/utility";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -30,6 +31,7 @@ export default function ShoppingCart() {
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [checkoutClicked, setCheckoutClicked] = useState(false);
+  const [availability, setAvailability] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -47,13 +49,15 @@ export default function ShoppingCart() {
         let getProduct = await getProductApi(product["_id"]);
         if (getProduct.size[product.size].colors[product.color] === 0) {
           product.message = "اتمام موجودی";
+          setAvailability(!availability);
         } else {
           product.message = "";
+          setAvailability(!availability);
         }
       });
     };
     fetchData().catch(console.error);
-  }, [shoppingCart]);
+  }, [shoppingCart, setAvailability, availability]);
 
   const deletecart = (index) => {
     setShoppingCart(
@@ -161,6 +165,13 @@ export default function ShoppingCart() {
         // setAlert("");
       }, 5000);
     });
+    // call mellat api
+    setCheckoutClicked(false);
+    await updateUser();
+    localStorage.setItem(
+      "refId",
+      JSON.stringify(currentUser["_id"].slice(0, 5) + tokenGenerator())
+    );
   };
 
   return (

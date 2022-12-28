@@ -7,10 +7,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
-import Product from "../Product";
 import classes from "./WishList.module.scss";
-import { updateUserApi } from "../../services/api";
+import { updateUserApi, getProducstApi } from "../../services/api";
 import graphic from "../../assets/wishlist.png";
+import Router from "next/router";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -20,8 +20,6 @@ export default function WishList() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
-  const { productsCollection, setProductsCollection } =
-    useContext(StateContext);
 
   const [wishList, setWishList] = useState([]);
   const [like, setLike] = useState(false);
@@ -33,12 +31,17 @@ export default function WishList() {
   }, [setSelectedProduct, setDisplayProduct, setBar]);
 
   useEffect(() => {
-    setWishList(
-      productsCollection.filter((product) =>
-        currentUser.favourites.includes(product["_id"])
-      )
-    );
-  }, [productsCollection, currentUser]);
+    Router.push(`/collections/gallery`);
+    const fetchData = async () => {
+      const data = await getProducstApi();
+      setWishList(
+        data.filter((product) =>
+          currentUser.favourites.includes(product["_id"])
+        )
+      );
+    };
+    fetchData().catch(console.error);
+  }, [currentUser]);
 
   const favourProduct = async (product) => {
     if (currentUser) {
@@ -61,6 +64,14 @@ export default function WishList() {
     }
   };
 
+  const selectProduct = async (id) => {
+    Router.push(`/collections/product/${id}`);
+    setBar(false);
+    setTimeout(() => {
+      setToggleContainer("");
+    }, 200);
+  };
+
   return (
     <div className={ShoppingCart.slider}>
       <div className={ShoppingCart.menu}>
@@ -78,51 +89,49 @@ export default function WishList() {
           </div>
         </div>
         <div className="collection-grid wish-list">
-          {!displayProduct &&
-            wishList.map((product, index) => (
-              <div key={index} className="product">
-                <div className="banner">
-                  <p className="title">{product.title}</p>
+          {wishList.map((product, index) => (
+            <div key={index} className="product">
+              <div className="banner">
+                <p className="title">{product.title}</p>
+                <div className="social">
+                  <div>
+                    {checFavourites(product) ? (
+                      <FavoriteIcon
+                        className="iconRed"
+                        onClick={() => favourProduct(product)}
+                      />
+                    ) : (
+                      <FavoriteBorderIcon
+                        className="icon"
+                        onClick={() => favourProduct(product)}
+                      />
+                    )}
+                  </div>
                   <div className="social">
-                    <div>
-                      {checFavourites(product) ? (
-                        <FavoriteIcon
-                          className="iconRed"
-                          onClick={() => favourProduct(product)}
-                        />
-                      ) : (
-                        <FavoriteBorderIcon
-                          className="icon"
-                          onClick={() => favourProduct(product)}
-                        />
-                      )}
-                    </div>
-                    <div className="social">
-                      <VisibilityIcon className="icon" />
-                      <p>{Math.round(product.views)}</p>
-                    </div>
+                    <VisibilityIcon className="icon" />
+                    <p>{Math.round(product.views)}</p>
                   </div>
                 </div>
-                <Image
-                  onClick={() => {
-                    setDisplayProduct(true);
-                    setSelectedProduct(product);
-                  }}
-                  className={classes.image}
-                  src={product.images.main}
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority={true}
-                  loading="eager"
-                />
-                {product.sale && (
-                  <div className="sale">
-                    <p>{product.percentage}%</p>
-                  </div>
-                )}
               </div>
-            ))}
+              <Image
+                onClick={() => {
+                  selectProduct(product["_id"]);
+                }}
+                className={classes.image}
+                src={product.images.main}
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority={true}
+                loading="eager"
+              />
+              {product.sale && (
+                <div className="sale">
+                  <p>{product.percentage}%</p>
+                </div>
+              )}
+            </div>
+          ))}
           {wishList.length === 0 && (
             <div className={classes.graphic}>
               <Image
@@ -140,7 +149,6 @@ export default function WishList() {
               </a>
             </div>
           )}
-          {displayProduct && <Product favourite={like} />}
         </div>
       </div>
     </div>

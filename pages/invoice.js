@@ -4,11 +4,12 @@ import classes from "./page.module.scss";
 import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import invoiceModel from "../models/Invoice";
-import { convertNumber } from "../services/utility";
+import { convertNumber, convertDate } from "../services/utility";
 import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
@@ -27,10 +28,6 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
       setContainer(false);
     }
   }, [setContainer]);
-
-  const convertDate = (date) => {
-    return new Date(date).toLocaleDateString("fa-IR");
-  };
 
   const postInvoice = async (invoice) => {
     let data = {
@@ -90,6 +87,33 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
             {newInvoices.map((invoice, index) => (
               <div key={index} className={classes.invoice}>
                 <div className={classes.row}>
+                  <div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>آیتم</p>
+                      <p>{invoice.title}</p>
+                    </div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>رنگ</p>
+                      <div
+                        className={classes.color}
+                        style={{ backgroundColor: `#${invoice.color}` }}
+                      ></div>
+                    </div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>اندازه</p>
+                      <p>{invoice.size}</p>
+                    </div>
+                  </div>
+                  <Image
+                    className={classes.image}
+                    src={invoice.image}
+                    objectFit="cover"
+                    width={100}
+                    height={140}
+                    alt="image"
+                  />
+                </div>
+                <div className={classes.row}>
                   <p className={classes.title}>تاریخ خرید</p>
                   <p suppressHydrationWarning>
                     {convertDate(invoice.createdAt)}
@@ -112,27 +136,8 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                   <p>{invoice.post}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>آیتم</p>
-                  <p>{invoice.title}</p>
-                </div>
-                <div className={classes.row}>
                   <p className={classes.title}>قیمت</p>
                   <p>{convertNumber(invoice.price)} T</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>رنگ</p>
-                  <div
-                    className={classes.color}
-                    style={{ backgroundColor: `#${invoice.color}` }}
-                  ></div>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>اندازه</p>
-                  <p>{invoice.size}</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>کد برند</p>
-                  <p>{invoice.delmareId.slice(0, 3)}</p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>کد آیتم</p>
@@ -144,7 +149,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>کد رهگیری</p>
-                  <p>{invoice["_id"].slice(0, 10)}</p>
+                  <p>{invoice.refId}</p>
                 </div>
                 <button
                   className={classes.button}
@@ -165,15 +170,42 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
             {postedInvoices.map((invoice, index) => (
               <div key={index} className={classes.invoice}>
                 <div className={classes.row}>
-                  <p className={classes.title}>تاریخ خرید</p>
-                  <p suppressHydrationWarning>
-                    {convertDate(invoice.createdAt)}
-                  </p>
+                  <div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>آیتم</p>
+                      <p>{invoice.title}</p>
+                    </div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>رنگ</p>
+                      <div
+                        className={classes.color}
+                        style={{ backgroundColor: `#${invoice.color}` }}
+                      ></div>
+                    </div>
+                    <div className={classes.subRow}>
+                      <p className={classes.title}>اندازه</p>
+                      <p>{invoice.size}</p>
+                    </div>
+                  </div>
+                  <Image
+                    className={classes.image}
+                    src={invoice.image}
+                    objectFit="cover"
+                    width={100}
+                    height={140}
+                    alt="image"
+                  />
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>تاریخ ارسال</p>
                   <p suppressHydrationWarning>
                     {convertDate(invoice.updatedAt)}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>تاریخ خرید</p>
+                  <p suppressHydrationWarning>
+                    {convertDate(invoice.createdAt)}
                   </p>
                 </div>
                 <div className={classes.row}>
@@ -193,27 +225,8 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                   <p>{invoice.post}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>آیتم</p>
-                  <p>{invoice.title}</p>
-                </div>
-                <div className={classes.row}>
                   <p className={classes.title}>قیمت</p>
                   <p>{convertNumber(invoice.price)} T</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>رنگ</p>
-                  <div
-                    className={classes.color}
-                    style={{ backgroundColor: `#${invoice.color}` }}
-                  ></div>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>اندازه</p>
-                  <p>{invoice.size}</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>کد برند</p>
-                  <p>{invoice.delmareId.slice(0, 3)}</p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>کد آیتم</p>
@@ -225,7 +238,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>کد رهگیری</p>
-                  <p>{invoice["_id"].slice(0, 10)}</p>
+                  <p>{invoice.refId}</p>
                 </div>
               </div>
             ))}

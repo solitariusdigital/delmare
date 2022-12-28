@@ -24,3 +24,7 @@ export function getMobileOperatingSystem() {
     return "ios";
   }
 }
+
+export function convertDate(date) {
+  return new Date(date).toLocaleDateString("fa-IR");
+}

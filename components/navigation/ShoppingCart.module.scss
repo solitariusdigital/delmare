@@ -16,7 +16,7 @@
 .menu {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: config.$max-width;
   background: config.$cream;
   box-shadow: config.$card-shadow;
   overflow-y: scroll;
@@ -155,91 +155,6 @@
     }
   }
 
-  .orders {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    padding-top: 0px;
-    height: calc(100% - 50px);
-    margin-top: 50px;
-    overflow-y: scroll;
-
-    .order {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      position: relative;
-      background: config.$white;
-      box-shadow: config.$card-shadow;
-      margin-top: 10px;
-      padding: 10px;
-      @include mixins.border-radius();
-
-      .rows {
-        width: 100%;
-        margin-left: 20px;
-      }
-
-      .row,
-      .features {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-content: space-between;
-        padding: 5px 0px;
-        border-bottom: 1px solid config.$cream;
-
-        p {
-          font-size: config.$small-font;
-        }
-
-        .title {
-          color: config.$grey;
-          font-size: config.$tiny-font;
-          margin-left: 10px;
-        }
-
-        .color,
-        .size {
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-        }
-
-        .color {
-          box-shadow: config.$image-shadow;
-        }
-
-        .size {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      }
-
-      .features {
-        justify-content: space-around;
-        border: none;
-        margin-top: 15px;
-      }
-
-      .status {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-content: space-between;
-
-        span {
-          margin-right: 10px;
-        }
-      }
-    }
-
-    .image {
-      @include mixins.border-radius();
-    }
-  }
-
   .graphic {
     opacity: 0.3;
     position: relative;
@@ -269,7 +184,7 @@
 
     .button {
       width: 100%;
-      max-width: 500px;
+      max-width: config.$max-width;
       height: 40px;
       font-size: config.$med-font;
     }
@@ -369,5 +284,90 @@
   .alert {
     color: config.$orange;
     margin-top: 10px;
+  }
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-top: 0px;
+  height: calc(100% - 50px);
+  margin-top: 50px;
+  overflow-y: scroll;
+
+  .order {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    margin-top: 10px;
+    padding: 10px;
+    @include mixins.border-radius();
+
+    .rows {
+      width: 100%;
+      margin-left: 20px;
+    }
+
+    .row,
+    .features {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 0px;
+      border-bottom: 1px solid config.$cream;
+
+      p {
+        font-size: config.$small-font;
+      }
+
+      .title {
+        color: config.$grey;
+        font-size: config.$tiny-font;
+        margin-left: 10px;
+      }
+
+      .color,
+      .size {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+
+      .color {
+        box-shadow: config.$image-shadow;
+      }
+
+      .size {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .features {
+      justify-content: space-around;
+      border: none;
+      margin-top: 15px;
+    }
+
+    .status {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .image {
+    @include mixins.border-radius();
   }
 }

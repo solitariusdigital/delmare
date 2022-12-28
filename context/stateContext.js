@@ -6,7 +6,7 @@ export const StateProvider = (props) => {
   const [register, setRegister] = useState(false);
   const [search, setSearch] = useState(false);
   const [searchControl, setSearchControl] = useState(false);
-  const [bar, setBar] = useState(true);
+  const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
     "empty" || "screen" || "wish" || "account" || "cart" || "orders" || "about"
@@ -55,6 +55,7 @@ export const StateProvider = (props) => {
     "کفش",
     "کلاه",
     "کیف",
+    "وست",
     "هودی",
   ]);
   const [accessoriesCategories, setAccessoriesCategories] = useState([

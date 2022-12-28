@@ -17,9 +17,13 @@
     box-shadow: config.$card-shadow;
     background: config.$white;
     @include mixins.border-radius();
+    position: relative;
 
-    &:hover {
-      cursor: pointer;
+    .share {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: 16px;
     }
   }
 
@@ -47,6 +51,10 @@
 .logo {
   margin: 10px 0px;
   opacity: 0.5;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .loader {

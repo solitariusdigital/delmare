@@ -8,14 +8,9 @@ import Head from "next/head";
 import sale from "../../assets/sale.png";
 
 function CollectionsPage() {
-  const { bar, setBar } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
-
-  useEffect(() => {
-    setBar(true);
-  }, [setBar]);
 
   const collections = [
     {
@@ -95,22 +90,6 @@ function CollectionsPage() {
             />
           </div>
         ))}
-      </div>
-      <div className={"enamad"}>
-        <a
-          referrerPolicy="origin"
-          rel="noopener"
-          target="_blank"
-          href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-        >
-          <img
-            referrerPolicy="origin"
-            src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-            id="GPyVAMJIOJVa0l6MNns2"
-            decoding="async"
-            alt="enamad logo"
-          />
-        </a>
       </div>
     </Fragment>
   );

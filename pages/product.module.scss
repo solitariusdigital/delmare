@@ -49,6 +49,10 @@
   }
 }
 
+.shareIcon {
+  @include mixins.favour();
+}
+
 .back {
   position: absolute;
   cursor: pointer;
@@ -60,11 +64,25 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 0px 10px;
 
   .sale {
     font-size: config.$small-font;
     color: config.$red;
     font-weight: bold;
+  }
+
+  .imagePopup {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: 600px;
+    z-index: 2;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
+
+    .image {
+      @include mixins.border-radius();
+    }
   }
 }
 
@@ -179,13 +197,16 @@
   .description {
     font-size: config.$small-font;
     text-align: right;
+    border-bottom: 1px solid config.$brand;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: right;
     width: 100%;
     margin: 5px 0px;
   }
@@ -194,11 +215,16 @@
     margin-bottom: 10px;
   }
 
+  .title {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
   .box {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: wrap;
-    max-width: 200px;
+    margin-top: 5px;
 
     .color,
     .size,
@@ -273,7 +299,7 @@
 
 .button {
   @include mixins.button(config.$brand, config.$black, 100%);
-  max-width: 500px;
+  max-width: config.$max-width;
   height: 40px;
   font-size: config.$med-font;
   margin: 20px 0px;
@@ -292,7 +318,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: config.$max-width;
 
   .section {
     background: config.$white;
@@ -316,7 +342,7 @@
 
   .table {
     position: relative;
-    height: 120px;
+    height: 150px;
     margin: 5px 0px;
   }
 
@@ -376,6 +402,7 @@
   justify-content: space-around;
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 
   p {
     font-size: config.$tiny-font;

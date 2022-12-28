@@ -1,25 +1,20 @@
 import { useEffect, useContext, useState, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
-import Product from "./Product";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collection.module.scss";
 import Image from "next/image";
-import {
-  getProductApi,
-  updateProductApi,
-  updateUserApi,
-} from "../services/api";
+import { updateProductApi, updateUserApi } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import loadingImage from "../assets/loader.png";
+import Router from "next/router";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { displayProduct, setDisplayProduct } = useContext(StateContext);
-  const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -43,7 +38,7 @@ function Collection({ collectionType, brandGallery, brand }) {
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
-  const [reqNumber, setReqNumber] = useState(10);
+  const [reqNumber, setReqNumber] = useState(16);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -81,11 +76,10 @@ function Collection({ collectionType, brandGallery, brand }) {
 
   const selectProduct = async (id) => {
     setSearchControl(false);
-    const product = await getProductApi(id);
-    setSelectedProduct(product);
-    setDisplayProduct(true);
+    Router.push(`/collections/product/${id}`);
+
     // on each click update views count
-    if (currentUser.permission === "customer") {
+    if (!currentUser || currentUser.permission === "customer") {
       let updateData = {
         ...product,
         views: product.views + 1.5,
@@ -127,7 +121,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setCategoryFilter(type);
     setCategorySelector(false);
     setMessage(false);
-    setReqNumber(10);
+    setReqNumber(16);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -158,7 +152,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSeasonFilter(type);
     setSeasonSelector(false);
     setMessage(false);
-    setReqNumber(10);
+    setReqNumber(16);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -311,6 +305,9 @@ function Collection({ collectionType, brandGallery, brand }) {
                     <p>جدید</p>
                   </div>
                 )}
+                <div className="brandType">
+                  <p>{product.brandType}</p>
+                </div>
               </div>
             ))
             .reverse()
@@ -318,11 +315,10 @@ function Collection({ collectionType, brandGallery, brand }) {
         {gallery.length === 0 && message && (
           <p className={classes.message}>درخواست نا موجود</p>
         )}
-        {displayProduct && <Product favourite={like} />}
       </div>
-      {gallery.length >= 10 && !displayProduct && (
+      {gallery.length >= 16 && !displayProduct && (
         <div className={classes.more}>
-          <p onClick={() => setReqNumber(reqNumber + 10)}>آیتم بیشتر</p>
+          <p onClick={() => setReqNumber(reqNumber + 16)}>آیتم بیشتر</p>
         </div>
       )}
     </Fragment>

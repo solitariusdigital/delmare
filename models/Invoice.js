@@ -48,6 +48,7 @@ const InvoiceSchema = new Schema(
     color: String,
     size: String,
     posted: Boolean,
+    refId: String,
   },
   { timestamps: true }
 );

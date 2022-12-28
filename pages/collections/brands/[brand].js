@@ -1,30 +1,39 @@
 import { useEffect, useContext, useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import Collection from "../../../components/Collection";
-import { getBrandApi } from "../../../services/api";
-import { StateContext } from "../../../context/stateContext";
+import {
+  getBrandApi,
+  getProducstApi,
+  getBrandsApi,
+} from "../../../services/api";
 
 export default function Brand() {
-  const { productsCollection, setProductsCollection } =
-    useContext(StateContext);
   const [gallery, setGallery] = useState([]);
   const [brand, setBrand] = useState([]);
 
   const router = useRouter();
-  let brandId = router.query.brand;
+  let brandDelmareId = router.query.brand;
 
   useEffect(() => {
     const fetchData = async () => {
-      const brand = await getBrandApi(brandId);
-      setBrand(brand);
-      setGallery(
-        productsCollection.filter((product) => {
-          return brand.products.includes(product["_id"]);
-        })
-      );
+      if (brandDelmareId) {
+        const products = await getProducstApi();
+        const brands = await getBrandsApi();
+        brands.forEach(async (brand) => {
+          if (brand.delmareId === brandDelmareId.toUpperCase()) {
+            const brandData = await getBrandApi(brand["_id"]);
+            setBrand(brandData);
+            setGallery(
+              products.filter((product) => {
+                return brandData.products.includes(product["_id"]);
+              })
+            );
+          }
+        });
+      }
     };
     fetchData().catch(console.error);
-  }, [brandId, productsCollection]);
+  }, [brandDelmareId]);
 
   return (
     <Fragment>
