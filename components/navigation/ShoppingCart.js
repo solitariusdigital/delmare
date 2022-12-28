@@ -154,6 +154,10 @@ export default function ShoppingCart() {
             mode: "cors",
             headers: {
               "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods":
+                "HEAD, GET, POST, PUT, PATCH, DELETE",
+              "Access-Control-Allow-Headers":
+                "Origin, Content-Type, X-Auth-Token",
             },
           }
         );
