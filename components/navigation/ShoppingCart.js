@@ -153,7 +153,8 @@ export default function ShoppingCart() {
             body: JSON.stringify(res.RefId),
             mode: "cors",
             headers: {
-              "Access-Control-Allow-Origin": "https://bpm.shaparak.ir",
+              "Access-Control-Allow-Origin":
+                "https://bpm.shaparak.ir/pgwchannel/startpay.mellat",
             },
           }
         );
