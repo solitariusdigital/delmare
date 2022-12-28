@@ -4,11 +4,10 @@ moment.locale("en");
 
 const mellatWsdl = "https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl";
 const PgwSite = "https://bpm.shaparak.ir/pgwchannel/startpay.mellat";
-const callbackUrl =
-  "http://www.example.com:" + global.mainPort + "/pay/mellatBankCallback";
-const terminalId = 1111111; //this send to you by mellat bank
-const userName = "test"; //this send to you by mellat bank
-const password = "test"; //this send to you by mellat bank
+const callbackUrl = "http://delmareh.com/confirmation";
+const terminalId = process.env.MELLAT_TERMINAL_ID;
+const userName = process.env.MELLAT_USERNAME;
+const password = process.env.MELLAT_PASSWORD;
 const mellatBankReturnCode = {
   0: "ﺗﺮاﻛﻨﺶ_ﺑﺎ_ﻣﻮﻓﻘﻴﺖ_اﻧﺠﺎم_ﺷﺪ",
   11: "ﺷﻤﺎره_ﻛﺎرت_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",

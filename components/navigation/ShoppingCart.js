@@ -143,7 +143,7 @@ export default function ShoppingCart() {
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] > 0) {
-        let res = await mellatApi("10000");
+        let res = await mellatApi(calculateTotal() + "0");
         console.log(res);
         if (res.hasOwnProperty("error")) {
           setAlert(res.error);
