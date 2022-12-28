@@ -153,11 +153,7 @@ export default function ShoppingCart() {
             body: JSON.stringify(res.RefId),
             mode: "cors",
             headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods":
-                "HEAD, GET, POST, PUT, PATCH, DELETE",
-              "Access-Control-Allow-Headers":
-                "Origin, Content-Type, X-Auth-Token",
+              "Access-Control-Allow-Origin": "https://bpm.shaparak.ir",
             },
           }
         );
