@@ -151,9 +151,9 @@ export default function ShoppingCart() {
           {
             method: "POST",
             body: JSON.stringify(res.RefId),
-            mode: "no-cors",
+            mode: "cors",
             headers: {
-              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
             },
           }
         );
