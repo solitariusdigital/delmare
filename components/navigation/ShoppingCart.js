@@ -145,11 +145,26 @@ export default function ShoppingCart() {
       if (getProduct.size[product.size].colors[product.color] > 0) {
         let res = await mellatApi(calculateTotal() + "0");
         console.log(res);
+
+        const mellat = await fetch(
+          "https://bpm.shaparak.ir/pgwchannel/startpay.mellat",
+          {
+            method: "POST",
+            body: JSON.stringify(res.RefId),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log(mellat);
+
         if (res.hasOwnProperty("error")) {
           setAlert(res.error);
         } else {
           console.log(res);
         }
+
         // getProduct.size[product.size].colors[product.color]--;
         // await updateProductApi(getProduct);
         // await updateUser();
