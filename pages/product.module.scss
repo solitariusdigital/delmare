@@ -204,9 +204,9 @@
 
   .section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: right;
     width: 100%;
     margin: 5px 0px;
   }
@@ -215,11 +215,16 @@
     margin-bottom: 10px;
   }
 
+  .title {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
   .box {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: wrap;
-    max-width: 200px;
+    margin-top: 5px;
 
     .color,
     .size,

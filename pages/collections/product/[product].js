@@ -445,6 +445,7 @@ export default function Product({ favourite, product }) {
           </div>
           <p className={classes.description}>{product.description}</p>
           <div className={classes.section}>
+            <p className={classes.title}>اندازه</p>
             <div className={classes.box}>
               {Object.keys(productSizes).map((size, index) => (
                 <div
@@ -462,9 +463,9 @@ export default function Product({ favourite, product }) {
                 </div>
               ))}
             </div>
-            <p className={classes.title}>انتخاب اندازه</p>
           </div>
           <div className={classes.section}>
+            {colors.length > 0 && <p className={classes.title}>رنگ</p>}
             <div className={classes.box}>
               {colors.map((color, index) => (
                 <div
@@ -479,7 +480,6 @@ export default function Product({ favourite, product }) {
                 ></div>
               ))}
             </div>
-            {colors.length > 0 && <p className={classes.title}>انتخاب رنگ</p>}
           </div>
         </div>
         {colors.length > 0 && (
