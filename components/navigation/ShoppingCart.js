@@ -121,8 +121,7 @@ export default function ShoppingCart() {
       if (getProduct.size[product.size].colors[product.color] > 0) {
         setPayment(true);
 
-        // let pay = await getMellatApi(calculateTotal() + "0");
-        let pay = await getMellatApi(5000 + "0");
+        let pay = await getMellatApi(calculateTotal() + "0");
         refId = pay.RefId;
 
         if (pay.hasOwnProperty("error")) {
