@@ -199,10 +199,24 @@
   .title {
     text-align: center;
     font-weight: bold;
+    font-size: config.$med-font;
+  }
+}
+
+.rejectContainer {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .rejectMsg {
+    font-size: config.$med-font;
+    color: config.$red;
+    margin-bottom: 10px;
   }
 
-  .orders {
-    margin: 0px;
-    padding: 0px;
+  button {
+    margin-top: 20px;
   }
 }

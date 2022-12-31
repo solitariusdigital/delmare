@@ -320,7 +320,17 @@ async function reversePay(orderId, saleOrderId, saleReferenceId) {
   console.log(resultReversePay);
 }
 
-export default async function pay(req, res) {
+export default async function mellatHandler(req, res) {
+  const { method } = req;
+  switch (method) {
+    case "GET":
+      return pay(req, res);
+    case "POST":
+      return callBackCheck(req, res);
+  }
+}
+
+async function pay(req, res) {
   const credit = parseInt(req.query.credit);
   const orderId = moment().valueOf();
 
@@ -354,35 +364,22 @@ export default async function pay(req, res) {
   }
 }
 
-export async function callBack(req, res) {
-  let Run_bpReversalRequest = false;
+async function callBackCheck(req, res) {
   let saleReferenceId = -999;
   let saleOrderId = -999;
   let resultCode_bpPayRequest;
 
-  if (
-    req.body.ResCode === null ||
-    req.body.SaleOrderId === null ||
-    req.body.SaleReferenceId === null ||
-    req.body.CardHolderPan === null
-  ) {
-    return res
-      .status(422)
-      .json({ error: "پارامترهای لازم از طرف بانک ارسال نشد" });
-  }
   saleReferenceId = parseInt(req.body.SaleReferenceId, 10);
   saleOrderId = parseInt(req.body.SaleOrderId, 10);
   resultCode_bpPayRequest = parseInt(req.body.ResCode);
-  const cardHolderPan = req.body.CardHolderPan;
-  console.log(req.body);
 
-  //Result Code
+  // Result Code
   let resultCode_bpinquiryRequest = "-9999";
   let resultCode_bpSettleRequest = "-9999";
   let resultCode_bpVerifyRequest = "-9999";
 
   if (resultCode_bpPayRequest === 0) {
-    //verify request
+    // verify request
     resultCode_bpVerifyRequest = await bpVerifyRequest(
       saleOrderId,
       saleOrderId,
@@ -395,7 +392,7 @@ export async function callBack(req, res) {
       resultCode_bpVerifyRequest === null ||
       resultCode_bpVerifyRequest.length === 0
     ) {
-      //Inquiry Request
+      // Inquiry Request
       resultCode_bpinquiryRequest = await bpInquiryRequest(
         saleOrderId,
         saleOrderId,
@@ -406,11 +403,10 @@ export async function callBack(req, res) {
       );
       console.log("bpinquiryRequest" + resultCode_bpinquiryRequest);
 
-      if (resultInquiryRequest !== 0) {
+      if (resultCode_bpinquiryRequest !== 0) {
         reversePay(saleOrderId, saleOrderId, saleReferenceId);
         const error = desribtionStatusCode(resultCode_bpinquiryRequest);
-
-        return res.render("mellat_payment_result.ejs", { error });
+        return res.json({ msg: error.message });
       }
     }
 
@@ -418,7 +414,7 @@ export async function callBack(req, res) {
       parseInt(resultCode_bpVerifyRequest) === 0 ||
       resultCode_bpinquiryRequest === 0
     ) {
-      //SettleRequest
+      // SettleRequest
       resultCode_bpSettleRequest = await bpSettleRequest(
         saleOrderId,
         saleOrderId,
@@ -427,36 +423,31 @@ export async function callBack(req, res) {
       resultCode_bpSettleRequest = parseInt(resultCode_bpSettleRequest.return);
       console.log("bpSettleRequest" + resultCode_bpSettleRequest);
 
-      //ﺗﺮاﻛﻨﺶ_ﺑﺎ_ﻣﻮﻓﻘﻴﺖ_اﻧﺠﺎم_ﺷﺪ
+      // Success
       if (
         resultCode_bpSettleRequest === 0 ||
         resultCode_bpSettleRequest === 45
       ) {
-        //success payment
-        let msg = "تراکنش شما با موفقیت انجام شد";
-        msg += "لطفا شماره پیگیری را یادداشت نمایید" + saleReferenceId;
-
-        //save success payment into db
-
-        return res.render("mellat_payment_result.ejs", { msg });
+        let refId = saleReferenceId;
+        return res.json({
+          code: 200,
+          refId: refId,
+        });
       }
     } else {
       if (saleOrderId != -999 && saleReferenceId != -999) {
         if (resultCode_bpPayRequest !== 17)
           reversePay(saleOrderId, saleOrderId, saleReferenceId);
       }
-
       const error = desribtionStatusCode(resultCode_bpVerifyRequest);
-
-      return res.render("mellat_payment_result.ejs", { error });
+      return res.json({ msg: error.message });
     }
   } else {
     if (saleOrderId != -999 && saleReferenceId != -999) {
       if (resultCode_bpPayRequest !== 17)
         reversePay(saleOrderId, saleOrderId, saleReferenceId);
       const error = desribtionStatusCode(resultCode_bpPayRequest);
-
-      return res.render("mellat_payment_result.ejs", { error });
+      return res.json({ msg: error.message });
     }
   }
 }

@@ -13,6 +13,15 @@
   @include mixins.slide-top();
 }
 
+.payment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: config.$cream;
+}
+
 .menu {
   position: relative;
   width: 100%;

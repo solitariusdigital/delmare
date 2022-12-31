@@ -6,15 +6,10 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import {
-  createInvoiceApi,
-  updateUserApi,
-  updateProductApi,
-  getProductApi,
-  mellatApi,
-} from "../../services/api";
+import { updateUserApi, getProductApi, getMellatApi } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
-import { tokenGenerator } from "../../services/utility";
+import Router from "next/router";
+import loadingImage from "../../assets/loader.png";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -30,6 +25,7 @@ export default function ShoppingCart() {
   const [post, setPost] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
+  const [payment, setPayment] = useState(false);
   const [checkoutClicked, setCheckoutClicked] = useState(false);
   const [availability, setAvailability] = useState(false);
 
@@ -115,322 +111,292 @@ export default function ShoppingCart() {
     let data = await updateUserApi(user);
     seCurrentUser(data);
     localStorage.setItem("currentUser", JSON.stringify(data));
-    setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
   };
 
-  // create invoice with customer and product info
-  const createInvoice = async (product) => {
-    const invoice = {
-      name: name.trim(),
-      phone: phone.trim(),
-      address: address.trim(),
-      post: post.trim(),
-      userId: currentUser["_id"],
-      productId: product["_id"],
-      delmareId: product.delmareId,
-      title: product.title,
-      price: product.price,
-      color: product.color,
-      size: product.size,
-      image: product.image,
-      posted: false,
-    };
-    await createInvoiceApi(invoice);
-  };
-
-  // update and change product count based on size and color in size object
+  // check if product exist and make a request to bank to get refId then redirect user to payment page
   const updateProduct = async () => {
+    let refId = null;
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] > 0) {
-        let res = await mellatApi(calculateTotal() + "0");
-        console.log(res, "xxx");
+        setPayment(true);
 
-        const mellat = await fetch(
-          "https://bpm.shaparak.ir/pgwchannel/startpay.mellat",
-          {
-            method: "POST",
-            body: JSON.stringify(res.RefId),
-            mode: "cors",
-            headers: {
-              "Access-Control-Allow-Origin":
-                "https://bpm.shaparak.ir/pgwchannel/startpay.mellat",
-            },
-          }
-        );
+        // let pay = await getMellatApi(calculateTotal() + "0");
+        let pay = await getMellatApi(5000 + "0");
+        refId = pay.RefId;
 
-        console.log(mellat, "zzz");
-
-        if (res.hasOwnProperty("error")) {
-          setAlert(res.error);
+        if (pay.hasOwnProperty("error")) {
+          setAlert(pay.error);
         } else {
-          console.log(res, "xxx");
-        }
+          await updateUser();
+          Router.push(
+            `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
+          );
 
-        // getProduct.size[product.size].colors[product.color]--;
-        // await updateProductApi(getProduct);
-        // await updateUser();
-        // await createInvoice(product);
-        // setAlert("تا لحظاتی دیگر وارد درگاه پرداخت میشوید");
+          setTimeout(() => {
+            setPayment(false);
+            setCheckoutClicked(false);
+          }, 3000);
+        }
+        setAlert("");
       } else {
         setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
       }
-
-      setTimeout(() => {
-        // setCheckout(false);
-        setCheckoutClicked(false);
-        // setAlert("");
-      }, 5000);
     });
-    // call mellat api
-    setCheckoutClicked(false);
-    await updateUser();
-    localStorage.setItem(
-      "refId",
-      JSON.stringify(currentUser["_id"].slice(0, 5) + tokenGenerator())
-    );
   };
 
   return (
     <div className={classes.slider}>
-      <div className={classes.menu}>
-        <div className={classes.topBar}>
-          <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
-          {!checkout && (
-            <div className={classes.title}>
-              <p className={classes.count}>{shoppingCart.length}</p>
-              <p>سبد خرید</p>
-            </div>
-          )}
-          {checkout && (
-            <div className={classes.brand}>
-              <Image src={brand} alt="brand" />
-            </div>
-          )}
-          {checkout && (
-            <ArrowBackIosNewIcon
+      {!payment ? (
+        <div className={classes.menu}>
+          <div className={classes.topBar}>
+            <CloseIcon
               className="icon"
-              sx={{ fontSize: 30 }}
-              onClick={() => setCheckout(false)}
+              onClick={() => setToggleContainer("")}
             />
-          )}
-        </div>
-        {!checkout && (
-          // cart list
-          <div className={classes.items}>
-            {shoppingCart
-              .map((cart, index) => (
-                <div key={index} className={classes.item}>
-                  <div className={classes.cart}>
-                    <div className={classes.imageContainer}>
-                      <Image
-                        className={classes.image}
-                        width={110}
-                        height={140}
-                        objectFit="cover"
-                        src={cart.image}
-                        alt="image"
+            {!checkout && (
+              <div className={classes.title}>
+                <p className={classes.count}>{shoppingCart.length}</p>
+                <p>سبد خرید</p>
+              </div>
+            )}
+            {checkout && (
+              <div className={classes.brand}>
+                <Image src={brand} alt="brand" />
+              </div>
+            )}
+            {checkout && (
+              <ArrowBackIosNewIcon
+                className="icon"
+                sx={{ fontSize: 30 }}
+                onClick={() => setCheckout(false)}
+              />
+            )}
+          </div>
+          {!checkout && (
+            // cart list
+            <div className={classes.items}>
+              {shoppingCart
+                .map((cart, index) => (
+                  <div key={index} className={classes.item}>
+                    <div className={classes.cart}>
+                      <div className={classes.imageContainer}>
+                        <Image
+                          className={classes.image}
+                          width={110}
+                          height={140}
+                          objectFit="cover"
+                          src={cart.image}
+                          alt="image"
+                        />
+                      </div>
+                      <div className={classes.information}>
+                        <div className={classes.title}>
+                          <p>{convertNumber(cart.price)} T</p>
+                          <p>{cart.title}</p>
+                        </div>
+                        <div className={classes.options}>
+                          <div className={classes.size}>{cart.size}</div>
+                          <div
+                            className={classes.color}
+                            style={{ backgroundColor: `#${cart.color}` }}
+                          ></div>
+                        </div>
+                        <div className={classes.id}>
+                          <p className={classes.code}>کد آیتم</p>
+                          <p>{cart.delmareId}</p>
+                        </div>
+                        {cart.sale && (
+                          <div className={classes.sale}>
+                            <p>Save {cart.percentage}%</p>
+                          </div>
+                        )}
+                        <div className={classes.message}>
+                          <p>{cart.message}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={classes.close}>
+                      <CloseIcon
+                        className="icon icon-grey"
+                        onClick={() => deletecart(index)}
                       />
                     </div>
-                    <div className={classes.information}>
-                      <div className={classes.title}>
-                        <p>{convertNumber(cart.price)} T</p>
-                        <p>{cart.title}</p>
-                      </div>
-                      <div className={classes.options}>
-                        <div className={classes.size}>{cart.size}</div>
-                        <div
-                          className={classes.color}
-                          style={{ backgroundColor: `#${cart.color}` }}
-                        ></div>
-                      </div>
-                      <div className={classes.id}>
-                        <p className={classes.code}>کد آیتم</p>
-                        <p>{cart.delmareId}</p>
-                      </div>
-                      {cart.sale && (
-                        <div className={classes.sale}>
-                          <p>Save {cart.percentage}%</p>
-                        </div>
-                      )}
-                      <div className={classes.message}>
-                        <p>{cart.message}</p>
-                      </div>
-                    </div>
                   </div>
-                  <div className={classes.close}>
-                    <CloseIcon
-                      className="icon icon-grey"
-                      onClick={() => deletecart(index)}
-                    />
-                  </div>
-                </div>
-              ))
-              .reverse()}
-            {shoppingCart.length === 0 && (
-              <div className={classes.graphic}>
-                <Image
-                  src={graphic}
-                  alt="image"
-                  objectFit="contain"
-                  layout="fill"
-                />
-                <a
-                  href="https://www.vecteezy.com/free-png/shopping-cart"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Graphic by Vecteezy
-                </a>
-              </div>
-            )}
-          </div>
-        )}
-        {checkout && (
-          // checkout from
-          <div>
-            {userLogIn ? (
-              <div className={classes.form}>
-                <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>
-                      نام و نام خانوادگی
-                      <span>*</span>
-                    </p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setName("")}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    autoComplete="off"
-                    dir="rtl"
+                ))
+                .reverse()}
+              {shoppingCart.length === 0 && (
+                <div className={classes.graphic}>
+                  <Image
+                    src={graphic}
+                    alt="image"
+                    objectFit="contain"
+                    layout="fill"
                   />
+                  <a
+                    href="https://www.vecteezy.com/free-png/shopping-cart"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Graphic by Vecteezy
+                  </a>
                 </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>
-                      موبایل
-                      <span>*</span>
-                    </p>
-                  </div>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    onChange={(e) => setPhone(e.target.value)}
-                    value={phone}
-                    autoComplete="off"
-                    dir="rtl"
-                    disabled={true}
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>
-                      آدرس تحویل
-                      <span>*</span>
-                    </p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setAddress("")}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <textarea
-                    type="text"
-                    id="address"
-                    name="address"
-                    onChange={(e) => setAddress(e.target.value)}
-                    value={address}
-                    autoComplete="off"
-                    dir="rtl"
-                  ></textarea>
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>
-                      کد پستی
-                      <span>*</span>
-                    </p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setPost("")}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    type="tel"
-                    id="post"
-                    name="post"
-                    onChange={(e) => setPost(e.target.value)}
-                    value={post}
-                    autoComplete="off"
-                    dir="rtl"
-                  />
-                </div>
-                <div className={classes.alert}>{alert}</div>
-              </div>
-            ) : (
-              <div className={classes.register}>
-                <p>جهت تکمیل کردن خرید</p>
-                <p>وارد حساب کاربری شوید یا ثبت نام کنید</p>
-                <button
-                  className={`mainButton ${classes.button}`}
-                  disabled={shoppingCart.length === 0}
-                  onClick={() => handlecheckout()}
-                >
-                  ورود ​/ ثبت نام
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-        <div className={classes.details}>
-          <div className={classes.row}>
-            <p className={classes.value}>{shoppingCart.length}</p>
-            <p className={classes.title}>تعداد آیتم</p>
-          </div>
-          <div className={classes.row}>
-            <p className={classes.value}>{convertNumber(calculateTotal())} T</p>
-            <p className={classes.title}>جمع سبد خرید</p>
-          </div>
-          <div className={classes.row}>
-            {calculateTotal() >= 1000000 ? (
-              <p className={classes.value}>رایگان</p>
-            ) : (
-              <p className={classes.value}>
-                {shoppingCart.length > 0 ? "پرداخت موقع تحویل" : ""}
-              </p>
-            )}
-            <p className={classes.title}>هزینه ارسال</p>
-          </div>
-          {!checkout ? (
-            <button
-              className={`mainButton ${classes.button}`}
-              disabled={shoppingCart.length === 0}
-              onClick={() => setCheckout(true)}
-            >
-              {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
-            </button>
-          ) : (
-            <button
-              className={`mainButton ${classes.button}`}
-              disabled={checkoutClicked}
-              onClick={() => handlecheckout()}
-            >
-              {userLogIn ? "پرداخت" : "ورود ​/ ثبت نام"}
-            </button>
+              )}
+            </div>
           )}
+          {checkout && (
+            // checkout from
+            <div>
+              {userLogIn ? (
+                <div className={classes.form}>
+                  <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>
+                        نام و نام خانوادگی
+                        <span>*</span>
+                      </p>
+                      <CloseIcon
+                        className="icon"
+                        onClick={() => setName("")}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                      autoComplete="off"
+                      dir="rtl"
+                    />
+                  </div>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>
+                        موبایل
+                        <span>*</span>
+                      </p>
+                    </div>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      onChange={(e) => setPhone(e.target.value)}
+                      value={phone}
+                      autoComplete="off"
+                      dir="rtl"
+                      disabled={true}
+                    />
+                  </div>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>
+                        آدرس تحویل
+                        <span>*</span>
+                      </p>
+                      <CloseIcon
+                        className="icon"
+                        onClick={() => setAddress("")}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <textarea
+                      type="text"
+                      id="address"
+                      name="address"
+                      onChange={(e) => setAddress(e.target.value)}
+                      value={address}
+                      autoComplete="off"
+                      dir="rtl"
+                    ></textarea>
+                  </div>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>
+                        کد پستی
+                        <span>*</span>
+                      </p>
+                      <CloseIcon
+                        className="icon"
+                        onClick={() => setPost("")}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <input
+                      type="tel"
+                      id="post"
+                      name="post"
+                      onChange={(e) => setPost(e.target.value)}
+                      value={post}
+                      autoComplete="off"
+                      dir="rtl"
+                    />
+                  </div>
+                  <div className={classes.alert}>{alert}</div>
+                </div>
+              ) : (
+                <div className={classes.register}>
+                  <p>جهت تکمیل کردن خرید</p>
+                  <p>وارد حساب کاربری شوید یا ثبت نام کنید</p>
+                  <button
+                    className={`mainButton ${classes.button}`}
+                    disabled={shoppingCart.length === 0}
+                    onClick={() => handlecheckout()}
+                  >
+                    ورود ​/ ثبت نام
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          <div className={classes.details}>
+            <div className={classes.row}>
+              <p className={classes.value}>{shoppingCart.length}</p>
+              <p className={classes.title}>تعداد آیتم</p>
+            </div>
+            <div className={classes.row}>
+              <p className={classes.value}>
+                {convertNumber(calculateTotal())} T
+              </p>
+              <p className={classes.title}>جمع سبد خرید</p>
+            </div>
+            <div className={classes.row}>
+              {calculateTotal() >= 1000000 ? (
+                <p className={classes.value}>رایگان</p>
+              ) : (
+                <p className={classes.value}>
+                  {shoppingCart.length > 0 ? "پرداخت موقع تحویل" : ""}
+                </p>
+              )}
+              <p className={classes.title}>هزینه ارسال</p>
+            </div>
+            {!checkout ? (
+              <button
+                className={`mainButton ${classes.button}`}
+                disabled={shoppingCart.length === 0}
+                onClick={() => setCheckout(true)}
+              >
+                {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
+              </button>
+            ) : (
+              <button
+                className={`mainButton ${classes.button}`}
+                disabled={checkoutClicked}
+                onClick={() => handlecheckout()}
+              >
+                {userLogIn ? "پرداخت" : "ورود ​/ ثبت نام"}
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={classes.payment}>
+          <p>تا لحظاتی دیگر وارد درگاه پرداخت میشوید</p>
+          <Image width={50} height={50} src={loadingImage} alt="isLoading" />
+        </div>
+      )}
     </div>
   );
 }

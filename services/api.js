@@ -121,9 +121,19 @@ export const updateBrandApi = async (data) => {
 };
 
 // mellat api
-export const mellatApi = async (credit) => {
+export const getMellatApi = async (credit) => {
   const response = await fetch(`/api/mellat?credit=${credit}`, {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const postMellatApi = async (data) => {
+  const response = await fetch("/api/mellat", {
+    method: "POST",
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
