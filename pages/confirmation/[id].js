@@ -56,6 +56,8 @@ export default function ConfirmationId() {
 
         setTimeout(() => {
           localStorage.removeItem("refId");
+          localStorage.removeItem("shoppingCart");
+          shoppingCart.length = 0;
         }, 1000);
       });
     }
