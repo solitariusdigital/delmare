@@ -389,7 +389,7 @@ export default function ShoppingCart() {
         </div>
       ) : (
         <div className={classes.payment}>
-          <p>تا لحظاتی دیگر وارد درگاه پرداخت میشوید</p>
+          <p>در حال اتصال به درگاه پرداخت بانکی</p>
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
         </div>
       )}
