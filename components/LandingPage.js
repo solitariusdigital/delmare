@@ -67,7 +67,7 @@ function LandingPage() {
         loading="eager"
       />
       <div className={classes.message}>
-        <p>خرید امن و راحت از بهترین برندهای دنیا و ایران</p>
+        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
         <p>با دلماره متفاوت دیده شوید</p>
       </div>
       <div className={classes.icon}>

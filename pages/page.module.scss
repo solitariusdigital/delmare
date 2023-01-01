@@ -185,6 +185,8 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   .row {
     display: flex;
@@ -209,6 +211,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 
   .rejectMsg {
     font-size: config.$med-font;

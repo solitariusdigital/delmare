@@ -128,14 +128,11 @@ export default function ShoppingCart() {
           setAlert(pay.error);
         } else {
           await updateUser();
+          setCheckoutClicked(false);
+          setPayment(false);
           Router.push(
             `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
           );
-
-          setTimeout(() => {
-            setPayment(false);
-            setCheckoutClicked(false);
-          }, 3000);
         }
         setAlert("");
       } else {
@@ -145,7 +142,7 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div className={classes.slider}>
+    <div className={classes.slider} style={{ height: window.innerHeight }}>
       {!payment ? (
         <div className={classes.menu}>
           <div className={classes.topBar}>

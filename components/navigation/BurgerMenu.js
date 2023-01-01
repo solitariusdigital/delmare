@@ -102,7 +102,7 @@ export default function BurgerMenu() {
   };
 
   return (
-    <div className={classes.slider}>
+    <div className={classes.slider} style={{ height: window.innerHeight }}>
       <div className={classes.menu}>
         <div className={classes.cross}>
           <CloseIcon

@@ -185,7 +185,6 @@ function bpPayRequest(orderId, priceAmount, additionalText, callbackUrl) {
     soap.createClient(mellatWsdl, options, (err, client) => {
       client.bpPayRequest(args, (err, result, body) => {
         if (err) {
-          //console.log(err);
           reject(err);
         }
         return resolve(result);
@@ -214,7 +213,6 @@ function bpVerifyRequest(orderId, saleOrderId, saleReferenceId) {
     soap.createClient(mellatWsdl, options, (err, client) => {
       client.bpVerifyRequest(args, (err, result, body) => {
         if (err) {
-          //console.log(err);
           reject(err);
         }
         return resolve(result);
@@ -243,7 +241,6 @@ function bpInquiryRequest(orderId, saleOrderId, saleReferenceId) {
     soap.createClient(mellatWsdl, options, (err, client) => {
       client.bpInquiryRequest(args, (err, result, body) => {
         if (err) {
-          //console.log(err);
           reject(err);
         }
         return resolve(result);
@@ -272,7 +269,6 @@ function bpSettleRequest(orderId, saleOrderId, saleReferenceId) {
     soap.createClient(mellatWsdl, options, (err, client) => {
       client.bpSettleRequest(args, (err, result, body) => {
         if (err) {
-          //console.log(err);
           reject(err);
         }
         return resolve(result);
@@ -301,7 +297,6 @@ function bpReversalRequest(orderId, saleOrderId, saleReferenceId) {
     soap.createClient(mellatWsdl, options, (err, client) => {
       client.bpReversalRequest(args, (err, result, body) => {
         if (err) {
-          //console.log(err);
           reject(err);
         }
         return resolve(result);

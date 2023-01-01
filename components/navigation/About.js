@@ -16,7 +16,7 @@ export default function About() {
   const videoLink = `https://delmare.storage.iran.liara.space/landingpage/video.MOV#t=0.5`;
 
   return (
-    <div className={ShoppingCart.slider}>
+    <div className={ShoppingCart.slider} style={{ height: window.innerHeight }}>
       <div className={ShoppingCart.menu}>
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />

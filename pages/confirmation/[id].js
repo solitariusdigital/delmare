@@ -17,11 +17,15 @@ export default function ConfirmationId() {
 
   const [refId, setRefId] = useState("");
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [divHeight, setDivHeight] = useState(null);
 
   const router = useRouter();
   let id = router.query.id;
 
   useEffect(() => {
+    document.body.style.background = "#ffffff";
+    setDivHeight(window.innerHeight);
+
     setContainer(false);
     setRefId(JSON.parse(localStorage.getItem("refId")));
 
@@ -64,7 +68,10 @@ export default function ConfirmationId() {
   }, [setContainer, shoppingCart, currentUser, id]);
 
   return (
-    <div className={classes.confirmationContainer}>
+    <div
+      className={classes.confirmationContainer}
+      style={{ height: divHeight }}
+    >
       {displayConfirmation ? (
         <div>
           <p className={classes.title}>دلماره از خرید شما تشکر میکند</p>
@@ -87,7 +94,17 @@ export default function ConfirmationId() {
           </div>
         </div>
       ) : (
-        <p className={classes.title}>خطا در کد رهگیری ارسالی</p>
+        <div className={classes.rejectContainer}>
+          <p className={classes.title}>خطا در کد رهگیری ارسالی</p>
+          <button
+            className="mainButton"
+            onClick={() => {
+              Router.push("/");
+            }}
+          >
+            صفحه اصلی
+          </button>
+        </div>
       )}
     </div>
   );
