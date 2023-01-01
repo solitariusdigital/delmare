@@ -66,6 +66,7 @@ export default function Upload() {
   const [category, setCategory] = useState("");
   const [season, setSeason] = useState("");
   const [brandType, setBrandType] = useState("");
+  const [deliveryType, setDeliveryType] = useState("");
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
@@ -74,6 +75,11 @@ export default function Upload() {
   const [sizeGraph, setSizeGraph] = useState("");
 
   const brandTypes = ["ایرانی", "اورجینال", "های کپی"];
+  const deliveryTypes = [
+    "موجود در انبار",
+    "یک الی هفت روز کاری",
+    "هفت الی چهارده روز کاری",
+  ];
 
   useEffect(() => {
     if (
@@ -143,7 +149,8 @@ export default function Upload() {
       !brand ||
       !category ||
       !season ||
-      !brandType
+      !brandType ||
+      !deliveryType
     ) {
       setAlert("Fill in all fields");
       setTimeout(() => {
@@ -203,6 +210,7 @@ export default function Upload() {
         season: season,
         brand: brand,
         brandType: brandType,
+        deliveryType: deliveryType,
         price: price.trim(),
         discount: discount.trim(),
         percentage: percentage.trim(),
@@ -367,6 +375,23 @@ export default function Upload() {
             value={delmareId}
             autoComplete="off"
           />
+        </div>
+        <div className={classes.input}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => setDeliveryType(e.target.value)}
+          >
+            <option value="default" disabled>
+              تحویل
+            </option>
+            {deliveryTypes.map((delivery, index) => {
+              return (
+                <option key={index} value={delivery}>
+                  {delivery}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div className={classes.input}>
           <select

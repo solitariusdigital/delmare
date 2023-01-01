@@ -497,6 +497,10 @@ export default function Product({ favourite, product }) {
           </div>
         )}
         <div className={classes.alert}>{alert}</div>
+        <div className={classes.rowDetails}>
+          <p>تحویل</p>
+          <p className={classes.title}>{product.deliveryType}</p>
+        </div>
         <button
           className={classes.button}
           disabled={selectedCount === 0}
@@ -508,19 +512,19 @@ export default function Product({ favourite, product }) {
         </button>
 
         <div className={classes.designContainer}>
-          <div className={classes.row}>
+          <div className={classes.rowDetails}>
             <p>برند</p>
             <p className={classes.title}>{product.brand}</p>
           </div>
-          <div className={classes.row}>
+          <div className={classes.rowDetails}>
             <p>نوع</p>
             <p className={classes.title}>{product.brandType}</p>
           </div>
-          <div className={classes.row}>
+          <div className={classes.rowDetails}>
             <p>دسته</p>
             <p className={classes.title}>{product.category}</p>
           </div>
-          <div className={classes.row}>
+          <div className={classes.rowDetails}>
             <p>فصل</p>
             <p className={classes.title}>{product.season}</p>
           </div>

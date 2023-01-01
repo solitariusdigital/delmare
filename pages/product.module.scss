@@ -371,21 +371,21 @@
   }
 }
 
+.rowDetails {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+
+  .title {
+    font-size: config.$med-font;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+}
+
 .designContainer {
   display: flex;
   flex-direction: column;
-
-  .row {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 10px;
-
-    .title {
-      font-size: config.$med-font;
-      font-weight: bold;
-      margin-right: 10px;
-    }
-  }
 
   .category {
     background: config.$white;

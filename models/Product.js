@@ -38,6 +38,7 @@ const ProductSchema = new Schema(
     season: String,
     brand: String,
     brandType: String,
+    deliveryType: String,
     price: Number,
     discount: Number,
     percentage: Number,
