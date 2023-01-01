@@ -81,6 +81,33 @@ export default function Upload() {
     "هفت الی چهارده روز کاری",
   ];
 
+  const graphInfo = [
+    {
+      title: "شلوار",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+    },
+    {
+      title: "کاپشن",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
+    },
+    {
+      title: "پیراهن",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
+    },
+    {
+      title: "بلوز",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+    },
+    {
+      title: "بلوز شلوار",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+    },
+    {
+      title: "کت شلوار",
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
+    },
+  ];
+
   useEffect(() => {
     if (
       !JSON.parse(localStorage.getItem("currentUser")) ||
@@ -113,33 +140,6 @@ export default function Upload() {
     });
   };
 
-  const graphInfo = [
-    {
-      title: "شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
-    },
-    {
-      title: "کاپشن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
-    },
-    {
-      title: "پیراهن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
-    },
-    {
-      title: "بلوز",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
-    },
-    {
-      title: "بلوز شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
-    },
-    {
-      title: "کت شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
-    },
-  ];
-
   const handleUpload = async () => {
     if (
       !title ||
@@ -158,7 +158,7 @@ export default function Upload() {
       }, 3000);
       return;
     }
-    console.log("pass");
+
     setUploadClicked(true);
 
     transformDataSize(XS, "XS");
