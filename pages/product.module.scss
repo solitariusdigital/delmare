@@ -319,6 +319,7 @@
   flex-direction: column;
   width: 100%;
   max-width: config.$max-width;
+  margin-top: 10px;
 
   .section {
     background: config.$white;
@@ -374,7 +375,7 @@
 .rowDetails {
   display: flex;
   flex-direction: row-reverse;
-  margin-bottom: 10px;
+  margin: 5px 0px;
 
   .title {
     font-size: config.$med-font;

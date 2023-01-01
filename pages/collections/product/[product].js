@@ -481,6 +481,10 @@ export default function Product({ favourite, product }) {
               ))}
             </div>
           </div>
+          <div className={classes.rowDetails}>
+            <p>تحویل</p>
+            <p className={classes.title}>{product.deliveryType}</p>
+          </div>
         </div>
         {colors.length > 0 && (
           <div className={classes.countContainer}>
@@ -497,10 +501,6 @@ export default function Product({ favourite, product }) {
           </div>
         )}
         <div className={classes.alert}>{alert}</div>
-        <div className={classes.rowDetails}>
-          <p>تحویل</p>
-          <p className={classes.title}>{product.deliveryType}</p>
-        </div>
         <button
           className={classes.button}
           disabled={selectedCount === 0}
