@@ -136,13 +136,13 @@ export default function Upload() {
 
   const handleUpload = async () => {
     if (
-      !title &&
-      !description &&
-      !price &&
-      !delmareId &&
-      !brand &&
-      !category &&
-      !season &&
+      !title ||
+      !description ||
+      !price ||
+      !delmareId ||
+      !brand ||
+      !category ||
+      !season ||
       !brandType
     ) {
       setAlert("Fill in all fields");
@@ -151,7 +151,7 @@ export default function Upload() {
       }, 3000);
       return;
     }
-
+    console.log("pass");
     setUploadClicked(true);
 
     transformDataSize(XS, "XS");
