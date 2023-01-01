@@ -13,6 +13,8 @@ function LandingPage() {
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
+    document.body.style.background = "#f9f7f2";
+
     setBar(false);
     setContainer(true);
     const timerId = setInterval(() => {
