@@ -188,8 +188,7 @@ a {
       justify-content: center;
     }
 
-    .sale,
-    .activate {
+    .sale {
       @include mixins.transparentBackground(0.9, config.$red);
 
       p {
@@ -205,6 +204,7 @@ a {
       border-bottom-left-radius: 0px;
       border-top-right-radius: 50px;
       border-bottom-right-radius: 50px;
+      width: 50px;
     }
 
     .new {
