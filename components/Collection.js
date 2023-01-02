@@ -300,6 +300,11 @@ function Collection({ collectionType, brandGallery, brand }) {
                     <p>{product.percentage}% OFF</p>
                   </div>
                 )}
+                {!product.activate && (
+                  <div className="activate">
+                    <p>تمام</p>
+                  </div>
+                )}
                 {checkDate(product.createdAt) && (
                   <div className="new">
                     <p>جدید</p>

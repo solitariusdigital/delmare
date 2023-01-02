@@ -302,22 +302,15 @@ export default function Product({ favourite, product }) {
   };
 
   const productActivation = async (type) => {
-    let updateData = null;
-    const res = await getProductApi(product["_id"]);
+    const updateData = await getProductApi(product["_id"]);
     switch (type) {
       case "activate":
         setActive(false);
-        updateData = {
-          ...res,
-          activate: false,
-        };
+        updateData.activate = false;
         break;
       case "deactivate":
         setActive(true);
-        updateData = {
-          ...res,
-          activate: true,
-        };
+        updateData.activate = true;
         break;
     }
     await updateProductApi(updateData);
@@ -534,7 +527,6 @@ export default function Product({ favourite, product }) {
           </div>
         )}
         <div className={classes.alert}>{alert}</div>
-
         {active && (
           <button
             className={classes.button}
@@ -546,7 +538,6 @@ export default function Product({ favourite, product }) {
             افزودن به سبد خرید
           </button>
         )}
-
         {!currentUser ||
           (currentUser.permission === "admin" && (
             <Fragment>

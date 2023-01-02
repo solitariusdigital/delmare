@@ -169,7 +169,8 @@ a {
 
     .sale,
     .new,
-    .brandType {
+    .brandType,
+    .activate {
       position: absolute;
       top: 10px;
       right: 0px;
@@ -187,13 +188,23 @@ a {
       justify-content: center;
     }
 
-    .sale {
+    .sale,
+    .activate {
       @include mixins.transparentBackground(0.9, config.$red);
 
       p {
         position: relative;
         top: 1px;
       }
+    }
+
+    .activate {
+      @include mixins.transparentBackground(0.9, config.$orange);
+      left: 0px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
     }
 
     .new {
