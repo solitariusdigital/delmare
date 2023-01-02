@@ -168,7 +168,6 @@ a {
     }
 
     .new,
-    .brandType,
     .activate {
       position: absolute;
       top: 10px;
@@ -215,18 +214,6 @@ a {
       color: config.$black;
       width: 50px;
       @include mixins.transparentBackground(0.9, config.$brand);
-    }
-
-    .brandType {
-      position: absolute;
-      top: 200px;
-      left: 0px;
-      color: config.$black;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-top-right-radius: 50px;
-      border-bottom-right-radius: 50px;
-      @include mixins.transparentBackground(0.9, config.$cream);
     }
   }
 }

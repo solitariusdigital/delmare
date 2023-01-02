@@ -310,9 +310,6 @@ function Collection({ collectionType, brandGallery, brand }) {
                     <p>جدید</p>
                   </div>
                 )}
-                <div className="brandType">
-                  <p>{product.brandType}</p>
-                </div>
               </div>
             ))
             .reverse()
