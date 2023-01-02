@@ -215,6 +215,7 @@ export default function Upload() {
         discount: discount.trim(),
         percentage: percentage.trim(),
         sale: sale,
+        activate: true,
         views: Math.floor(Math.random() * 10) + 1,
       }),
       headers: {
@@ -457,7 +458,7 @@ export default function Upload() {
             <MonetizationOnIcon
               className="icon"
               onClick={() => setSale(!sale)}
-              sx={{ fontSize: 22 }}
+              sx={{ color: "#d40d12", fontSize: 25 }}
             />
             <p className={classes.label}>قیمت تومان</p>
           </div>

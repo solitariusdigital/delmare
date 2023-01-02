@@ -297,12 +297,24 @@
   }
 }
 
-.button {
+.button,
+.deactivate,
+.activate {
   @include mixins.button(config.$brand, config.$black, 100%);
   max-width: config.$max-width;
   height: 40px;
   font-size: config.$med-font;
   margin: 20px 0px;
+}
+
+.deactivate {
+  @include mixins.button(config.$red, config.$white, 100%);
+  width: 120px;
+}
+
+.activate {
+  @include mixins.button(config.$green, config.$white, 100%);
+  width: 120px;
 }
 
 .alert {

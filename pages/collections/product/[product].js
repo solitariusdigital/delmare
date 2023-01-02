@@ -15,6 +15,7 @@ import {
   updateUserApi,
   getProductApi,
   getProducstApi,
+  updateProductApi,
 } from "../../../services/api";
 import payment from "../../../assets/payment.png";
 import quality from "../../../assets/quality.png";
@@ -64,6 +65,7 @@ export default function Product({ favourite, product }) {
 
   const [like, setLike] = useState(favourite);
   const [displayPopup, setDisplayPopuo] = useState(false);
+  const [active, setActive] = useState(null);
 
   const router = useRouter();
 
@@ -82,6 +84,7 @@ export default function Product({ favourite, product }) {
   }, [router]);
 
   useEffect(() => {
+    setActive(product.activate);
     const fetchData = async () => {
       const data = await getProducstApi();
       setSimilarProducts(
@@ -298,6 +301,28 @@ export default function Product({ favourite, product }) {
     }, 1000);
   };
 
+  const productActivation = async (type) => {
+    let updateData = null;
+    const res = await getProductApi(product["_id"]);
+    switch (type) {
+      case "activate":
+        setActive(false);
+        updateData = {
+          ...res,
+          activate: false,
+        };
+        break;
+      case "deactivate":
+        setActive(true);
+        updateData = {
+          ...res,
+          activate: true,
+        };
+        break;
+    }
+    await updateProductApi(updateData);
+  };
+
   return (
     <Fragment>
       <div className={classes.productContainer}>
@@ -444,46 +469,54 @@ export default function Product({ favourite, product }) {
             <p>{product.title}</p>
           </div>
           <p className={classes.description}>{product.description}</p>
-          <div className={classes.section}>
-            <p className={classes.title}>اندازه</p>
-            <div className={classes.box}>
-              {Object.keys(productSizes).map((size, index) => (
-                <div
-                  key={index}
-                  className={
-                    productSizes[size].selected
-                      ? classes.selectedSize
-                      : classes.size
-                  }
-                  onClick={() =>
-                    selectDetails("size", productSizes[size].type, index, 0)
-                  }
-                >
-                  <p>{size}</p>
+          {active && (
+            <Fragment>
+              <div className={classes.section}>
+                <p className={classes.title}>اندازه</p>
+                <div className={classes.box}>
+                  {Object.keys(productSizes).map((size, index) => (
+                    <div
+                      key={index}
+                      className={
+                        productSizes[size].selected
+                          ? classes.selectedSize
+                          : classes.size
+                      }
+                      onClick={() =>
+                        selectDetails("size", productSizes[size].type, index, 0)
+                      }
+                    >
+                      <p>{size}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className={classes.section}>
-            {colors.length > 0 && <p className={classes.title}>رنگ</p>}
-            <div className={classes.box}>
-              {colors.map((color, index) => (
-                <div
-                  key={index}
-                  className={
-                    color.selected ? classes.selectedColor : classes.color
-                  }
-                  style={{ backgroundColor: `#${color.type}` }}
-                  onClick={() =>
-                    selectDetails("color", color.type, index, color.count)
-                  }
-                ></div>
-              ))}
-            </div>
-          </div>
+              </div>
+              <div className={classes.section}>
+                {colors.length > 0 && <p className={classes.title}>رنگ</p>}
+                <div className={classes.box}>
+                  {colors.map((color, index) => (
+                    <div
+                      key={index}
+                      className={
+                        color.selected ? classes.selectedColor : classes.color
+                      }
+                      style={{ backgroundColor: `#${color.type}` }}
+                      onClick={() =>
+                        selectDetails("color", color.type, index, color.count)
+                      }
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </Fragment>
+          )}
           <div className={classes.rowDetails}>
             <p>تحویل</p>
-            <p className={classes.title}>{product.deliveryType}</p>
+            {active ? (
+              <p className={classes.title}>{product.deliveryType}</p>
+            ) : (
+              <p className={classes.title}>اتمام موجودی</p>
+            )}
           </div>
         </div>
         {colors.length > 0 && (
@@ -501,15 +534,45 @@ export default function Product({ favourite, product }) {
           </div>
         )}
         <div className={classes.alert}>{alert}</div>
-        <button
-          className={classes.button}
-          disabled={selectedCount === 0}
-          onClick={() => {
-            addToCart();
-          }}
-        >
-          افزودن به سبد خرید
-        </button>
+
+        {active && (
+          <button
+            className={classes.button}
+            disabled={selectedCount === 0}
+            onClick={() => {
+              addToCart();
+            }}
+          >
+            افزودن به سبد خرید
+          </button>
+        )}
+
+        {!currentUser ||
+          (currentUser.permission === "admin" && (
+            <Fragment>
+              {!active ? (
+                <button
+                  className={classes.activate}
+                  disabled={selectedCount === 0}
+                  onClick={() => {
+                    productActivation("deactivate");
+                  }}
+                >
+                  فعال کن
+                </button>
+              ) : (
+                <button
+                  className={classes.deactivate}
+                  disabled={selectedCount === 0}
+                  onClick={() => {
+                    productActivation("activate");
+                  }}
+                >
+                  غیر فعال کن
+                </button>
+              )}
+            </Fragment>
+          ))}
 
         <div className={classes.designContainer}>
           <div className={classes.rowDetails}>

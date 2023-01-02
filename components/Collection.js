@@ -74,9 +74,9 @@ function Collection({ collectionType, brandGallery, brand }) {
     accessoriesCategories,
   ]);
 
-  const selectProduct = async (id) => {
+  const selectProduct = async (product) => {
     setSearchControl(false);
-    Router.push(`/collections/product/${id}`);
+    Router.push(`/collections/product/${product["_id"]}`);
 
     // on each click update views count
     if (!currentUser || currentUser.permission === "customer") {
@@ -287,7 +287,7 @@ function Collection({ collectionType, brandGallery, brand }) {
                   </div>
                 </div>
                 <Image
-                  onClick={() => selectProduct(product["_id"])}
+                  onClick={() => selectProduct(product)}
                   className={classes.image}
                   src={product.images.main}
                   alt="image"

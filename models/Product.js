@@ -43,6 +43,7 @@ const ProductSchema = new Schema(
     discount: Number,
     percentage: Number,
     sale: Boolean,
+    activate: Boolean,
     views: Number,
   },
   { timestamps: true }
