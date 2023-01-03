@@ -951,7 +951,7 @@ export default function Product({ favourite, product }) {
                   />
                   {product.sale && (
                     <div className="sale">
-                      <p>{product.percentage}% OFF</p>
+                      <p>{product.percentage}%</p>
                     </div>
                   )}
                 </div>
