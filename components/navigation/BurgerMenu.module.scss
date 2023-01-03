@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
     text-align: right;
-    margin: 20px 10px;
+    margin: 10px 10px;
 
     .item {
       display: flex;
@@ -105,16 +105,17 @@
   width: 100%;
   padding: 0px 10px;
 
-  .row {
+  .row,
+  .social {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: space-between;
+    align-items: center;
     width: 80%;
-    margin-top: 10px;
+    margin: 5px 0px;
+  }
 
-    .title {
-      color: config.$grey;
-    }
+  .social {
+    width: 70px;
   }
 }

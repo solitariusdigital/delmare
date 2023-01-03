@@ -15,6 +15,8 @@ import logo from "../../assets/logo.svg";
 import Router from "next/router";
 import StoreIcon from "@mui/icons-material/Store";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
 
 export default function BurgerMenu() {
@@ -177,11 +179,26 @@ export default function BurgerMenu() {
                   خیابان ولیعصر، پایین‌تر از توانیر، بخشندگان، مجتمع بخشندگان،
                   واحد ۵
                 </p>
-                <p className={classes.title}>گالری</p>
               </div>
               <div className={classes.row}>
                 <p>0912 022 1526</p>
-                <p className={classes.title}>تلفن</p>
+                <div className={classes.social}>
+                  <InstagramIcon
+                    className="icon"
+                    onClick={() =>
+                      window.open(
+                        "https://www.instagram.com/odin.hall/",
+                        "_ blank"
+                      )
+                    }
+                  />
+                  <TelegramIcon
+                    className="icon"
+                    onClick={() =>
+                      window.open("https://t.me/odinhallofficial", "_ blank")
+                    }
+                  />
+                </div>
               </div>
             </div>
           )}
