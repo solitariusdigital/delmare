@@ -1,6 +1,5 @@
-import soap from "soap";
-import moment from "moment";
-
+var soap = require("soap");
+var moment = require("moment");
 moment.locale("en");
 
 const mellatWsdl = "https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl";
