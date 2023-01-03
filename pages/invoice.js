@@ -10,6 +10,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Head from "next/head";
 import Image from "next/image";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
@@ -18,8 +19,8 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
 
   useEffect(() => {
     if (
-      !JSON.parse(localStorage.getItem("currentUser")) ||
-      JSON.parse(localStorage.getItem("currentUser"))["permission"] ===
+      !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
+      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
         "customer"
     ) {
       Router.push("/");

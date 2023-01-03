@@ -26,6 +26,7 @@ import ProductModel from "../../../models/Product";
 import Router from "next/router";
 import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Product({ favourite, product }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -268,7 +269,7 @@ export default function Product({ favourite, product }) {
       } else {
         currentUser.favourites.unshift(product["_id"]);
       }
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      secureLocalStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
     }
   };

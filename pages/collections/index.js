@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable @next/next/no-img-element */
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";

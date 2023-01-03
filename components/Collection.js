@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
+import secureLocalStorage from "react-secure-storage";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
@@ -79,7 +80,11 @@ function Collection({ collectionType, brandGallery, brand }) {
     Router.push(`/collections/product/${product["_id"]}`);
 
     // on each click update views count
-    if (!currentUser || currentUser.permission === "customer") {
+    if (
+      !currentUser ||
+      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
+        "customer"
+    ) {
       let updateData = {
         ...product,
         views: product.views + 1.5,
@@ -106,7 +111,7 @@ function Collection({ collectionType, brandGallery, brand }) {
       } else {
         currentUser.favourites.unshift(product["_id"]);
       }
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      secureLocalStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
     }
   };

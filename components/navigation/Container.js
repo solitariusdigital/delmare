@@ -15,6 +15,7 @@ import classes from "./Container.module.scss";
 import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
+import secureLocalStorage from "react-secure-storage";
 
 function Container() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -29,9 +30,9 @@ function Container() {
   const { tempInvoice, setTempInvoice } = useContext(StateContext);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("currentUser"))) {
+    if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
       setUserLogin(true);
-      seCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      seCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
     }
     // check if user is using pwa
     if (!window.matchMedia("(display-mode: standalone)").matches) {

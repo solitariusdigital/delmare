@@ -12,6 +12,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -110,8 +111,8 @@ export default function Upload() {
 
   useEffect(() => {
     if (
-      !JSON.parse(localStorage.getItem("currentUser")) ||
-      JSON.parse(localStorage.getItem("currentUser"))["permission"] ===
+      !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
+      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
         "customer"
     ) {
       Router.push("/");

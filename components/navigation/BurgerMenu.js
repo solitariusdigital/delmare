@@ -15,6 +15,7 @@ import logo from "../../assets/logo.svg";
 import Router from "next/router";
 import StoreIcon from "@mui/icons-material/Store";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import secureLocalStorage from "react-secure-storage";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -134,18 +135,21 @@ export default function BurgerMenu() {
                     <p>{nav.title}</p>
                   </div>
                 ))}
-                {userLogIn && currentUser.permission === "admin" && (
-                  <div
-                    className={classes.item}
-                    onClick={() => {
-                      setAdmin(!admin);
-                      setContact(false);
-                    }}
-                  >
-                    <StarsIcon />
-                    <p>ادمین</p>
-                  </div>
-                )}
+                {userLogIn &&
+                  JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                    "permission"
+                  ] === "admin" && (
+                    <div
+                      className={classes.item}
+                      onClick={() => {
+                        setAdmin(!admin);
+                        setContact(false);
+                      }}
+                    >
+                      <StarsIcon />
+                      <p>ادمین</p>
+                    </div>
+                  )}
               </div>
               {!userLogIn && (
                 <div className={classes.buttonContainer}>

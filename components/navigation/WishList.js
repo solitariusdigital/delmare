@@ -11,6 +11,7 @@ import classes from "./WishList.module.scss";
 import { updateUserApi, getProducstApi } from "../../services/api";
 import graphic from "../../assets/wishlist.png";
 import Router from "next/router";
+import secureLocalStorage from "react-secure-storage";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -54,7 +55,7 @@ export default function WishList() {
       } else {
         currentUser.favourites.unshift(product["_id"]);
       }
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      secureLocalStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
     }
   };

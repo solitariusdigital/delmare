@@ -5,6 +5,7 @@ import { postMellatApi } from "../../services/api";
 import classes from "../page.module.scss";
 import CancelIcon from "@mui/icons-material/Cancel";
 import qs from "querystring";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Confimation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -24,7 +25,7 @@ export default function Confimation({ props }) {
       if (props.ResCode === "0") {
         let check = await postMellatApi(props);
         if (check.code === 200) {
-          localStorage.setItem("refId", JSON.stringify(check.refId));
+          secureLocalStorage.setItem("refId", JSON.stringify(check.refId));
           Router.push(`/confirmation/${check.refId}`);
         } else {
           setDisplayReject(true);

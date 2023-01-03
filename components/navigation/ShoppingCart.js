@@ -10,6 +10,7 @@ import { updateUserApi, getProductApi, getMellatApi } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
+import secureLocalStorage from "react-secure-storage";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -110,7 +111,7 @@ export default function ShoppingCart() {
 
     let data = await updateUserApi(user);
     seCurrentUser(data);
-    localStorage.setItem("currentUser", JSON.stringify(data));
+    secureLocalStorage.setItem("currentUser", JSON.stringify(data));
   };
 
   // check if product exist and make a request to bank to get refId then redirect user to payment page

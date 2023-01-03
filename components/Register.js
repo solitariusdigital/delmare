@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import { createUserApi, getUsersApi } from "../services/api";
+import secureLocalStorage from "react-secure-storage";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -102,7 +103,7 @@ function Register() {
           userExist = true;
           setUserLogin(true);
           seCurrentUser(user);
-          localStorage.setItem("currentUser", JSON.stringify(user));
+          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
           setRegister(false);
         }
       });
@@ -136,7 +137,7 @@ function Register() {
       setRegister(false);
       setUserLogin(true);
       seCurrentUser(data);
-      localStorage.setItem("currentUser", JSON.stringify(data));
+      secureLocalStorage.setItem("currentUser", JSON.stringify(data));
     }
     setDisplayCounter(false);
     resetCounter();

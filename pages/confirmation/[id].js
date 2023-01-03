@@ -8,6 +8,7 @@ import {
   getProductApi,
   updateProductApi,
 } from "../../services/api";
+import secureLocalStorage from "react-secure-storage";
 
 export default function ConfirmationId() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -27,9 +28,9 @@ export default function ConfirmationId() {
     setDivHeight(window.innerHeight);
 
     setContainer(false);
-    setRefId(JSON.parse(localStorage.getItem("refId")));
+    setRefId(JSON.parse(secureLocalStorage.getItem("refId")));
 
-    if (parseInt(id) === JSON.parse(localStorage.getItem("refId"))) {
+    if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
       setDisplayConfirmation(true);
       // create invoice with customer and product info
       shoppingCart.forEach(async (product) => {
@@ -51,7 +52,7 @@ export default function ConfirmationId() {
           userId: currentUser["_id"],
           productId: product["_id"],
           delmareId: product.delmareId,
-          refId: JSON.parse(localStorage.getItem("refId")),
+          refId: JSON.parse(secureLocalStorage.getItem("refId")),
           title: product.title,
           price: product.price,
           color: product.color,
@@ -62,7 +63,7 @@ export default function ConfirmationId() {
         await createInvoiceApi(invoice);
 
         setTimeout(() => {
-          localStorage.removeItem("refId");
+          secureLocalStorage.removeItem("refId");
           localStorage.removeItem("shoppingCart");
           shoppingCart.length = 0;
         }, 1000);

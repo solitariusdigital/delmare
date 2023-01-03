@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
@@ -6,6 +6,7 @@ import classes from "./Account.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Router from "next/router";
 import { updateUserApi } from "../../services/api";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Account() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -23,7 +24,7 @@ export default function Account() {
   const logOut = () => {
     setUserLogin(false);
     setToggleContainer("");
-    localStorage.removeItem("currentUser");
+    secureLocalStorage.removeItem("currentUser");
     seCurrentUser(null);
     Router.push("/");
   };
@@ -54,7 +55,7 @@ export default function Account() {
     };
     let data = await updateUserApi(user);
     seCurrentUser(data);
-    localStorage.setItem("currentUser", JSON.stringify(data));
+    secureLocalStorage.setItem("currentUser", JSON.stringify(data));
     setAlert("اطلاعات با موفقیت ذخیره شد");
     setTimeout(() => {
       setToggleContainer("");

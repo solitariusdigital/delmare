@@ -25,6 +25,7 @@
     "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-secure-storage": "^1.0.21",
     "sass": "^1.54.9",
     "soap": "^0.45.0",
     "styled-components": "^5.3.5"
