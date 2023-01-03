@@ -302,7 +302,7 @@ function Collection({ collectionType, brandGallery, brand }) {
                 />
                 {product.sale && (
                   <div className="sale">
-                    <p>{product.percentage}% OFF</p>
+                    <p>{product.percentage}%</p>
                   </div>
                 )}
                 {!product.activate && (
