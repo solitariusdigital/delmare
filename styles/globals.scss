@@ -188,13 +188,24 @@ a {
     .sale {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 0px;
       z-index: 1;
       font-size: config.$tiny-font;
       color: config.$red;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       font-weight: bold;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      width: 70px;
+      padding: 3px;
+      @include mixins.transparentBackground(0.8, config.$cream);
+
+      p {
+        position: relative;
+        top: 1px;
+        left: 7px;
+      }
     }
 
     .activate {
@@ -205,7 +216,7 @@ a {
       border-bottom-right-radius: 50px;
       width: 50px;
       color: config.$white;
-      @include mixins.transparentBackground(0.9, config.$orange);
+      @include mixins.transparentBackground(0.8, config.$orange);
     }
 
     .new {
@@ -213,7 +224,7 @@ a {
       top: 200px;
       color: config.$black;
       width: 50px;
-      @include mixins.transparentBackground(0.9, config.$brand);
+      @include mixins.transparentBackground(0.8, config.$brand);
     }
   }
 }
