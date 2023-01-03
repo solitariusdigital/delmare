@@ -540,7 +540,9 @@ export default function Product({ favourite, product }) {
           </button>
         )}
         {!currentUser ||
-          (currentUser.permission === "admin" && (
+          (JSON.parse(secureLocalStorage.getItem("currentUser"))[
+            "permission"
+          ] === "admin" && (
             <Fragment>
               {!active ? (
                 <button
