@@ -88,17 +88,6 @@ function CollectionsPage() {
             />
           </div>
         ))}
-        <div className="copyright">
-          <p>
-            استفاده از مطالب وب اپلیکیشن دلماره فقط برای مقاصد غیر تجاری و با
-            ذکر منبع بلامانع است
-          </p>
-          <p>کليه حقوق اين وب اپلیکیشن به دلماره تعلق دارد</p>
-          <p>
-            <span onClick={() => Router.push("/")}>delmareh.com</span> - 2023
-            @Copyright
-          </p>
-        </div>
       </div>
     </Fragment>
   );

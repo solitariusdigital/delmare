@@ -287,23 +287,3 @@ a {
     margin-bottom: 10px;
   }
 }
-
-.copyright {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  @include mixins.transparentBackground(0.5, config.$brand);
-  @include mixins.border-radius();
-
-  p {
-    margin: 5px;
-    text-align: center;
-    font-size: config.$tiny-font;
-  }
-
-  span {
-    font-weight: bold;
-  }
-}
