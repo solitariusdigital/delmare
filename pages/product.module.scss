@@ -308,13 +308,13 @@
 }
 
 .deactivate {
-  @include mixins.button(config.$red, config.$white, 100%);
-  width: 120px;
+  @include mixins.button(config.$orange, config.$white, 100%);
+  width: 100px;
 }
 
 .activate {
   @include mixins.button(config.$green, config.$white, 100%);
-  width: 120px;
+  width: 100px;
 }
 
 .alert {

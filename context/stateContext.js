@@ -45,6 +45,7 @@ export const StateProvider = (props) => {
     "پالتو",
     "تاپ",
     "جین",
+    "ساعت",
     "ست",
     "شلوار",
     "شومیز",
@@ -60,6 +61,7 @@ export const StateProvider = (props) => {
   ]);
   const [accessoriesCategories, setAccessoriesCategories] = useState([
     "اکسسوری",
+    "ساعت",
     "عینک",
     "کلاه",
     "کیف",

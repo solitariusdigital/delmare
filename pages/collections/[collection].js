@@ -35,6 +35,7 @@ function CollectionPage() {
         data.filter((product) => {
           return (
             product.category === "اکسسوری" ||
+            product.category === "ساعت" ||
             product.category === "عینک" ||
             product.category === "کلاه" ||
             product.category === "کیف"

@@ -44,6 +44,7 @@ const ProductSchema = new Schema(
     percentage: Number,
     sale: Boolean,
     activate: Boolean,
+    display: Boolean,
     views: Number,
   },
   { timestamps: true }

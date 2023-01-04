@@ -217,6 +217,7 @@ export default function Upload() {
         percentage: percentage.trim(),
         sale: sale,
         activate: true,
+        display: true,
         views: Math.floor(Math.random() * 10) + 1,
       }),
       headers: {
