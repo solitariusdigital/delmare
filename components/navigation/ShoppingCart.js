@@ -95,7 +95,7 @@ export default function ShoppingCart() {
       setAlert("کد پستی صحیح ده رقمی وارد کنید");
     } else {
       setCheckoutClicked(true);
-      await updateProduct();
+      await initializePayment();
     }
   };
 
@@ -115,7 +115,7 @@ export default function ShoppingCart() {
   };
 
   // check if product exist and make a request to bank to get refId then redirect user to payment page
-  const updateProduct = async () => {
+  const initializePayment = async () => {
     let refId = null;
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
@@ -130,7 +130,9 @@ export default function ShoppingCart() {
         } else {
           await updateUser();
           setCheckoutClicked(false);
-          setPayment(false);
+          setTimeout(() => {
+            setPayment(false);
+          }, 3000);
           Router.push(
             `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
           );
@@ -383,14 +385,14 @@ export default function ShoppingCart() {
                 disabled={checkoutClicked}
                 onClick={() => handlecheckout()}
               >
-                {userLogIn ? "پرداخت" : "ورود ​/ ثبت نام"}
+                {userLogIn ? "درگاه پرداخت بانکی" : "ورود ​/ ثبت نام"}
               </button>
             )}
           </div>
         </div>
       ) : (
         <div className={classes.payment}>
-          <p>در حال اتصال به درگاه پرداخت بانکی</p>
+          <p>در حال انتقال و بارگذاری</p>
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
         </div>
       )}
