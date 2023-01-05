@@ -306,7 +306,9 @@ export default function Product({ favourite, product }) {
   };
 
   const productActivation = async (type) => {
-    let confirm = window.confirm("اتمام موجودی، مطمئنی؟");
+    let confirm = window.confirm(
+      `${type === "activate" ? "اتمام موجودی" : "موجود در انبار"} مطمئنی؟`
+    );
     if (confirm) {
       const updateData = await getProductApi(product["_id"]);
       switch (type) {
