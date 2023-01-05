@@ -29,7 +29,11 @@ export default function Users() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUsersApi();
-      setAppUsers(data);
+      setAppUsers(
+        data.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        })
+      );
     };
     fetchData().catch(console.error);
   }, [setAppUsers]);
@@ -74,6 +78,10 @@ export default function Users() {
             <div className={classes.row}>
               <p className={classes.title}>آیتم آرزو</p>
               <p>{user.favourites.length}</p>
+            </div>
+            <div className={classes.row}>
+              <p className={classes.title}>تولد</p>
+              <p>{user.birthday}</p>
             </div>
             <div className={classes.row}>
               <p className={classes.title}>تاریخ عضویت</p>

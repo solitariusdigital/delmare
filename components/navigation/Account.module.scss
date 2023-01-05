@@ -28,19 +28,15 @@
       justify-content: space-between;
     }
 
-    .label {
-      color: config.$grey;
-
-      span {
-        color: config.$orange;
-        font-size: config.$tiny-font;
-      }
-    }
-
+    select,
     input,
     textarea {
       @include mixins.input();
       width: 100%;
+    }
+
+    select {
+      height: 50px;
     }
 
     textarea {
@@ -52,6 +48,16 @@
       display: flex;
       flex-direction: row-reverse;
       margin-bottom: 10px;
+    }
+  }
+
+  .label {
+    color: config.$grey;
+    text-align: right;
+
+    span {
+      color: config.$orange;
+      font-size: config.$tiny-font;
     }
   }
 
@@ -68,4 +74,11 @@
       cursor: pointer;
     }
   }
+}
+
+.row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 10px 0px;
 }

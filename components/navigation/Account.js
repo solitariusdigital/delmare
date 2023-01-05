@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
@@ -20,6 +20,25 @@ export default function Account() {
   const [address, setAddress] = useState(currentUser.address);
   const [post, setPost] = useState(currentUser.post);
   const [alert, setAlert] = useState("");
+
+  const [birthDay, setBirthDay] = useState("");
+  const [monthDay, setMonthDay] = useState("");
+
+  const days = [...Array(31).keys()].map((i) => i + 1);
+  const months = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
 
   const logOut = () => {
     setUserLogin(false);
@@ -47,11 +66,12 @@ export default function Account() {
   // update user info into db/state/localstorage
   const updateUser = async () => {
     const user = {
+      _id: currentUser["_id"],
       name: name.trim(),
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      _id: currentUser["_id"],
+      birthday: `${monthDay} ${birthDay}`,
     };
     let data = await updateUserApi(user);
     seCurrentUser(data);
@@ -166,6 +186,50 @@ export default function Account() {
                 dir="rtl"
               />
             </div>
+            <div className={classes.row}>
+              <p className={classes.label}>
+                ثبت روز تولد برای دریافت کادو تولد
+              </p>
+              {currentUser.birthday && <p>{currentUser.birthday}</p>}
+            </div>
+            {currentUser.birthday === "" && (
+              <Fragment>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setMonthDay(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      ماه تولد
+                    </option>
+                    {months.map((month, index) => {
+                      return (
+                        <option key={index} value={month}>
+                          {month}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBirthDay(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      روز تولد
+                    </option>
+                    {days.map((day, index) => {
+                      return (
+                        <option key={index} value={day}>
+                          {day}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </Fragment>
+            )}
             <div className={classes.alert}>{alert}</div>
             <button className="mainButton" onClick={() => handleUpdate()}>
               ذخیره

@@ -128,6 +128,7 @@ function Register() {
       phone: phone.trim(),
       address: "",
       post: "",
+      birthday: "",
       permission: "customer",
     };
     let data = await createUserApi(user);
