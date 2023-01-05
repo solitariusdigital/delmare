@@ -492,7 +492,7 @@ export default function Product({ favourite, product }) {
           {active && (
             <Fragment>
               <div className={classes.section}>
-                <p className={classes.title}>اندازه</p>
+                <p className={classes.title}>انتخاب اندازه</p>
                 <div className={classes.box}>
                   {Object.keys(productSizes).map((size, index) => (
                     <div
@@ -512,7 +512,9 @@ export default function Product({ favourite, product }) {
                 </div>
               </div>
               <div className={classes.section}>
-                {colors.length > 0 && <p className={classes.title}>رنگ</p>}
+                {colors.length > 0 && (
+                  <p className={classes.title}>انتخاب رنگ</p>
+                )}
                 <div className={classes.box}>
                   {colors.map((color, index) => (
                     <div
@@ -656,7 +658,7 @@ export default function Product({ favourite, product }) {
                       تک سایز - FS : Free Size
                     </p>
                     <p className={classes.description}>
-                      اسکارف، اکسسوری، عینک، کلاه و کیف، تک سایز هستند
+                      اسکارف، اکسسوری، ساعت، عینک، کلاه و کیف، تک سایز هستند
                     </p>
                   </div>
                 </div>

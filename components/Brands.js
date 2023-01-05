@@ -44,8 +44,9 @@ function Brands() {
             </div>
             <div className={classes.logo}>
               <Image
+                className={classes.image}
                 src={brand.logo}
-                objectFit="contain"
+                objectFit="cover"
                 width={100}
                 height={100}
                 alt="logo"

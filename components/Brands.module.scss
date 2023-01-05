@@ -50,7 +50,12 @@
 }
 .logo {
   margin: 10px 0px;
-  opacity: 0.5;
+  width: 100%;
+  @include mixins.border-radius();
+
+  .image {
+    @include mixins.border-radius();
+  }
 
   &:hover {
     cursor: pointer;
