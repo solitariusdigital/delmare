@@ -176,29 +176,30 @@ export default function BurgerMenu() {
             <div className={classes.box}>
               <div className={classes.row}>
                 <p>
-                  خیابان ولیعصر، پایین‌تر از توانیر، بخشندگان، مجتمع بخشندگان،
-                  واحد ۵
+                  خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
+                  مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
                 </p>
               </div>
               <div className={classes.row}>
                 <p>0912 022 1526</p>
-                <div className={classes.social}>
-                  <InstagramIcon
-                    className="icon"
-                    onClick={() =>
-                      window.open(
-                        "https://www.instagram.com/odin.hall/",
-                        "_ blank"
-                      )
-                    }
-                  />
-                  <TelegramIcon
-                    className="icon"
-                    onClick={() =>
-                      window.open("https://t.me/odinhallofficial", "_ blank")
-                    }
-                  />
-                </div>
+                <p>02188793585</p>
+              </div>
+              <div className={classes.social}>
+                <InstagramIcon
+                  className="icon"
+                  onClick={() =>
+                    window.open(
+                      "https://www.instagram.com/odin.hall/",
+                      "_ blank"
+                    )
+                  }
+                />
+                <TelegramIcon
+                  className="icon"
+                  onClick={() =>
+                    window.open("https://t.me/odinhallofficial", "_ blank")
+                  }
+                />
               </div>
             </div>
           )}

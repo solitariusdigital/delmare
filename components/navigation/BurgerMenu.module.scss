@@ -109,13 +109,14 @@
   .social {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 80%;
+    width: 90%;
     margin: 5px 0px;
+    text-align: center;
   }
 
   .social {
-    width: 70px;
+    width: 100px;
   }
 }
