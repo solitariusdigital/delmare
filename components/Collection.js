@@ -15,7 +15,6 @@ import secureLocalStorage from "react-secure-storage";
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
-  const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -61,9 +60,7 @@ function Collection({ collectionType, brandGallery, brand }) {
         break;
     }
     setBar(true);
-    setDisplayProduct(false);
   }, [
-    setDisplayProduct,
     setBar,
     saleCollection,
     galleryCollection,
@@ -197,7 +194,7 @@ function Collection({ collectionType, brandGallery, brand }) {
 
   return (
     <Fragment>
-      {!displayProduct && search && collectionType !== "brands" && (
+      {search && collectionType !== "brands" && (
         <div className={classes.category}>
           <div className={classes.selectContainer}>
             <div
@@ -252,7 +249,7 @@ function Collection({ collectionType, brandGallery, brand }) {
           )}
         </div>
       )}
-      {collectionType === "brands" && !displayProduct && (
+      {collectionType === "brands" && (
         <div className={classes.brand}>
           <p>برند {brand.title}</p>
         </div>
@@ -263,67 +260,70 @@ function Collection({ collectionType, brandGallery, brand }) {
         )}
       </div>
       <div className="collection-grid">
-        {!displayProduct &&
-          gallery
-            .map((product, index) => (
-              <div key={index} className="product">
-                <div className="banner">
-                  <p className="title">{product.title}</p>
-                  <div className="social">
-                    <div>
-                      {checFavourites(product) ? (
-                        <FavoriteIcon
-                          className="iconRed"
-                          onClick={() => favourProduct(product)}
-                        />
-                      ) : (
-                        <FavoriteBorderIcon
-                          className="icon"
-                          onClick={() => favourProduct(product)}
-                        />
-                      )}
-                    </div>
+        {gallery
+          .map((product, index) => (
+            <Fragment key={index}>
+              {product.display && (
+                <div className="product">
+                  <div className="banner">
+                    <p className="title">{product.title}</p>
                     <div className="social">
-                      <VisibilityIcon className="icon" />
-                      <p className="count">
-                        {abbreviateViews(Math.round(product.views))}
-                      </p>
+                      <div>
+                        {checFavourites(product) ? (
+                          <FavoriteIcon
+                            className="iconRed"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
+                      </div>
+                      <div className="social">
+                        <VisibilityIcon className="icon" />
+                        <p className="count">
+                          {abbreviateViews(Math.round(product.views))}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <Image
+                    onClick={() => selectProduct(product)}
+                    className={classes.image}
+                    src={product.images.main}
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority={true}
+                  />
+                  {product.sale && (
+                    <div className="sale">
+                      <p>{product.percentage}%</p>
+                    </div>
+                  )}
+                  {!product.activate && (
+                    <div className="activate">
+                      <p>تمام</p>
+                    </div>
+                  )}
+                  {checkDate(product.createdAt) && (
+                    <div className="new">
+                      <p>جدید</p>
+                    </div>
+                  )}
                 </div>
-                <Image
-                  onClick={() => selectProduct(product)}
-                  className={classes.image}
-                  src={product.images.main}
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority={true}
-                />
-                {product.sale && (
-                  <div className="sale">
-                    <p>{product.percentage}%</p>
-                  </div>
-                )}
-                {!product.activate && (
-                  <div className="activate">
-                    <p>تمام</p>
-                  </div>
-                )}
-                {checkDate(product.createdAt) && (
-                  <div className="new">
-                    <p>جدید</p>
-                  </div>
-                )}
-              </div>
-            ))
-            .reverse()
-            .slice(0, reqNumber)}
+              )}
+            </Fragment>
+          ))
+          .reverse()
+          .slice(0, reqNumber)}
         {gallery.length === 0 && message && (
           <p className={classes.message}>درخواست نا موجود</p>
         )}
       </div>
-      {gallery.length >= 16 && !displayProduct && (
+      {gallery.length >= 16 && (
         <div className={classes.more}>
           <p onClick={() => setReqNumber(reqNumber + 16)}>آیتم بیشتر</p>
         </div>

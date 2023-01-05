@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
@@ -15,7 +15,6 @@ import secureLocalStorage from "react-secure-storage";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
-  const { displayProduct, setDisplayProduct } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -27,9 +26,8 @@ export default function WishList() {
 
   useEffect(() => {
     setSelectedProduct({});
-    setDisplayProduct(false);
     setBar(true);
-  }, [setSelectedProduct, setDisplayProduct, setBar]);
+  }, [setSelectedProduct, , setBar]);
 
   useEffect(() => {
     Router.push(`/collections/gallery`);
@@ -91,47 +89,51 @@ export default function WishList() {
         </div>
         <div className="collection-grid wish-list">
           {wishList.map((product, index) => (
-            <div key={index} className="product">
-              <div className="banner">
-                <p className="title">{product.title}</p>
-                <div className="social">
-                  <div>
-                    {checFavourites(product) ? (
-                      <FavoriteIcon
-                        className="iconRed"
-                        onClick={() => favourProduct(product)}
-                      />
-                    ) : (
-                      <FavoriteBorderIcon
-                        className="icon"
-                        onClick={() => favourProduct(product)}
-                      />
-                    )}
+            <Fragment key={index}>
+              {product.display && (
+                <div className="product">
+                  <div className="banner">
+                    <p className="title">{product.title}</p>
+                    <div className="social">
+                      <div>
+                        {checFavourites(product) ? (
+                          <FavoriteIcon
+                            className="iconRed"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
+                      </div>
+                      <div className="social">
+                        <VisibilityIcon className="icon" />
+                        <p>{Math.round(product.views)}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="social">
-                    <VisibilityIcon className="icon" />
-                    <p>{Math.round(product.views)}</p>
-                  </div>
-                </div>
-              </div>
-              <Image
-                onClick={() => {
-                  selectProduct(product["_id"]);
-                }}
-                className={classes.image}
-                src={product.images.main}
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority={true}
-                loading="eager"
-              />
-              {product.sale && (
-                <div className="sale">
-                  <p>{product.percentage}%</p>
+                  <Image
+                    onClick={() => {
+                      selectProduct(product["_id"]);
+                    }}
+                    className={classes.image}
+                    src={product.images.main}
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority={true}
+                    loading="eager"
+                  />
+                  {product.sale && (
+                    <div className="sale">
+                      <p>{product.percentage}%</p>
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
+            </Fragment>
           ))}
           {wishList.length === 0 && (
             <div className={classes.graphic}>

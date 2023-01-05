@@ -67,6 +67,7 @@ export default function Product({ favourite, product }) {
   const [like, setLike] = useState(favourite);
   const [displayPopup, setDisplayPopuo] = useState(false);
   const [active, setActive] = useState(null);
+  const [display, setDisplay] = useState(null);
 
   const router = useRouter();
 
@@ -86,6 +87,8 @@ export default function Product({ favourite, product }) {
 
   useEffect(() => {
     setActive(product.activate);
+    setDisplay(product.display);
+
     const fetchData = async () => {
       const data = await getProducstApi();
       setSimilarProducts(
@@ -303,18 +306,39 @@ export default function Product({ favourite, product }) {
   };
 
   const productActivation = async (type) => {
-    const updateData = await getProductApi(product["_id"]);
-    switch (type) {
-      case "activate":
-        setActive(false);
-        updateData.activate = false;
-        break;
-      case "deactivate":
-        setActive(true);
-        updateData.activate = true;
-        break;
+    let confirm = window.confirm("اتمام موجودی، مطمئنی؟");
+    if (confirm) {
+      const updateData = await getProductApi(product["_id"]);
+      switch (type) {
+        case "activate":
+          setActive(false);
+          updateData.activate = false;
+          break;
+        case "deactivate":
+          setActive(true);
+          updateData.activate = true;
+          break;
+      }
+      await updateProductApi(updateData);
     }
-    await updateProductApi(updateData);
+  };
+
+  const productArchive = async (type) => {
+    let confirm = window.confirm("وارد آرکایو میشه و پنهان، مطمئنی؟");
+    if (confirm) {
+      const updateData = await getProductApi(product["_id"]);
+      switch (type) {
+        case "display":
+          setDisplay(true);
+          updateData.display = true;
+          break;
+        case "hide":
+          setDisplay(false);
+          updateData.display = false;
+          break;
+      }
+      await updateProductApi(updateData);
+    }
   };
 
   return (
@@ -543,29 +567,50 @@ export default function Product({ favourite, product }) {
           (JSON.parse(secureLocalStorage.getItem("currentUser"))[
             "permission"
           ] === "admin" && (
-            <Fragment>
-              {!active ? (
-                <button
-                  className={classes.activate}
-                  disabled={selectedCount === 0}
-                  onClick={() => {
-                    productActivation("deactivate");
-                  }}
-                >
-                  فعال کن
-                </button>
-              ) : (
-                <button
-                  className={classes.deactivate}
-                  disabled={selectedCount === 0}
-                  onClick={() => {
-                    productActivation("activate");
-                  }}
-                >
-                  غیر فعال کن
-                </button>
-              )}
-            </Fragment>
+            <div className={classes.adminAction}>
+              <Fragment>
+                {!active ? (
+                  <button
+                    className={classes.activate}
+                    onClick={() => {
+                      productActivation("deactivate");
+                    }}
+                  >
+                    فعال
+                  </button>
+                ) : (
+                  <button
+                    className={classes.deactivate}
+                    onClick={() => {
+                      productActivation("activate");
+                    }}
+                  >
+                    غیر فعال
+                  </button>
+                )}
+              </Fragment>
+              <Fragment>
+                {!display ? (
+                  <button
+                    className={classes.activate}
+                    onClick={() => {
+                      productArchive("display");
+                    }}
+                  >
+                    نمایش
+                  </button>
+                ) : (
+                  <button
+                    className={classes.hidden}
+                    onClick={() => {
+                      productArchive("hide");
+                    }}
+                  >
+                    پنهان
+                  </button>
+                )}
+              </Fragment>
+            </div>
           ))}
 
         <div className={classes.designContainer}>

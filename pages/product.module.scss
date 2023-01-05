@@ -299,7 +299,8 @@
 
 .button,
 .deactivate,
-.activate {
+.activate,
+.hidden {
   @include mixins.button(config.$brand, config.$black, 100%);
   max-width: config.$max-width;
   height: 40px;
@@ -307,20 +308,33 @@
   margin: 20px 0px;
 }
 
-.deactivate {
-  @include mixins.button(config.$orange, config.$white, 100%);
-  width: 100px;
-}
+.adminAction {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 
-.activate {
-  @include mixins.button(config.$green, config.$white, 100%);
-  width: 100px;
+  .deactivate {
+    @include mixins.button(config.$orange, config.$white, 100%);
+    width: 100px;
+  }
+
+  .activate {
+    @include mixins.button(config.$green, config.$white, 100%);
+    width: 100px;
+  }
+
+  .hidden {
+    @include mixins.button(config.$red, config.$white, 100%);
+    width: 100px;
+  }
 }
 
 .alert {
   display: flex;
-  align-items: center;
   flex-direction: row-reverse;
+  align-items: center;
   justify-content: center;
   color: config.$orange;
   height: 0px;
