@@ -165,7 +165,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
 
         {posted && (
           <div>
-            <div className={classes.info}>
+            <div className={classes.infoBar}>
               <p>سفارشات ارسال شده {postedInvoices.length}</p>
             </div>
             {postedInvoices.map((invoice, index) => (
