@@ -81,12 +81,12 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
 
         {!posted && (
           <div>
-            <div className={classes.info}>
+            <div className={classes.infoBar}>
               <p>سفارشات جدید {newInvoices.length}</p>
               <p>{convertNumber(calculateTotalSale())}</p>
             </div>
             {newInvoices.map((invoice, index) => (
-              <div key={index} className={classes.invoice}>
+              <div key={index} className={classes.infoCard}>
                 <div className={classes.row}>
                   <div>
                     <div className={classes.subRow}>

@@ -218,6 +218,12 @@ export default function BurgerMenu() {
                 >
                   Invoice
                 </button>
+                <button
+                  className="mainButton"
+                  onClick={() => Router.push("/users")}
+                >
+                  Users
+                </button>
               </div>
             </div>
           )}

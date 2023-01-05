@@ -294,20 +294,20 @@ export default function Upload() {
         <title>Upload</title>
         <meta name="description" content="Upload a new product" />
       </Head>
+      <div className="navigationBar">
+        <ArrowBackIosNewIcon
+          className="icon"
+          onClick={() => Router.push("/")}
+          sx={{ fontSize: 30 }}
+        />
+        <h3>اطلاعات آیتم</h3>
+        <RefreshIcon
+          className="icon"
+          onClick={() => Router.reload(window.location.pathname)}
+          sx={{ fontSize: 30 }}
+        />
+      </div>
       <div className="upload-form">
-        <div className="bar">
-          <ArrowBackIosNewIcon
-            className="icon"
-            onClick={() => Router.push("/")}
-            sx={{ fontSize: 30 }}
-          />
-          <h3>اطلاعات آیتم</h3>
-          <RefreshIcon
-            className="icon"
-            onClick={() => Router.reload(window.location.pathname)}
-            sx={{ fontSize: 30 }}
-          />
-        </div>
         <div className={classes.input}>
           <div className={classes.bar}>
             <CloseIcon

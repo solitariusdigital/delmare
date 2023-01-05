@@ -92,54 +92,55 @@
     }
   }
 
-  .info {
-    margin: 20px 0px;
-    font-size: config.$med-font;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .invoice {
-    background: config.$white;
-    box-shadow: config.$card-shadow;
-    margin-top: 10px;
-    padding: 10px;
-    @include mixins.border-radius();
-    user-select: text;
-
-    .row,
-    .subRow {
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin: 5px 0px;
-      padding: 5px 0px;
-      border-bottom: 1px solid config.$cream;
-
-      .title {
-        color: config.$grey;
-        font-size: config.$tiny-font;
-        margin-left: 10px;
-      }
-
-      .color {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        box-shadow: config.$image-shadow;
-      }
-    }
-
-    .button {
-      @include mixins.button(config.$brand, config.$black, 100%);
-      margin-top: 20px;
-    }
-  }
-
   .subRow {
     min-width: 200px;
+  }
+}
+
+.infoBar {
+  margin: 10px 0px;
+  font-size: config.$med-font;
+  text-align: center;
+  font-weight: bold;
+}
+
+.infoCard {
+  background: config.$white;
+  box-shadow: config.$card-shadow;
+  margin-top: 10px;
+  padding: 10px;
+  @include mixins.border-radius();
+  user-select: text;
+
+  .row,
+  .subRow {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0px;
+    padding: 5px 0px;
+    border-bottom: 1px solid config.$cream;
+
+    .title {
+      color: config.$grey;
+      font-size: config.$tiny-font;
+      margin-left: 10px;
+      text-align: right;
+    }
+
+    .color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: config.$image-shadow;
+    }
+  }
+
+  .button {
+    @include mixins.button(config.$brand, config.$black, 100%);
+    margin-top: 20px;
   }
 }
 
