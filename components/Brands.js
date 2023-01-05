@@ -46,7 +46,6 @@ function Brands() {
               <Image
                 className={classes.image}
                 src={brand.logo}
-                objectFit="cover"
                 width={100}
                 height={100}
                 alt="logo"
