@@ -4,7 +4,7 @@ moment.locale("en");
 
 const mellatWsdl = "https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl";
 const PgwSite = "https://bpm.shaparak.ir/pgwchannel/startpay.mellat";
-const callbackUrl = "http://delmareh.com/confirmation";
+const callbackUrl = "https://delmareh.com/confirmation";
 const terminalId = process.env.MELLAT_TERMINAL_ID;
 const userName = process.env.MELLAT_USERNAME;
 const password = process.env.MELLAT_PASSWORD;
