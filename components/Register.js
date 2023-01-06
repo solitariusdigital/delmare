@@ -18,7 +18,6 @@ function Register() {
   const { register, setRegister } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
-  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [token, setToken] = useState("");
   const [checkToken, setCheckToken] = useState("");
@@ -124,7 +123,7 @@ function Register() {
   // create new user into db/state/localstorage
   const createUser = async () => {
     const user = {
-      name: name.trim(),
+      name: "",
       phone: phone.trim(),
       address: "",
       post: "",
@@ -149,25 +148,6 @@ function Register() {
     <Fragment>
       <div className={classes.form}>
         <p className={classes.title}>به دلماره خوش آمدید</p>
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>نام و نام خانوادگی</p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setName("")}
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            autoComplete="off"
-            dir="rtl"
-          />
-        </div>
         <div className={classes.input}>
           <div className={classes.bar}>
             <p className={classes.label}>

@@ -132,7 +132,7 @@ export default function ShoppingCart() {
           setCheckoutClicked(false);
           setTimeout(() => {
             setPayment(false);
-          }, 3000);
+          }, 5000);
           Router.push(
             `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
           );
