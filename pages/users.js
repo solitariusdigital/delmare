@@ -81,7 +81,7 @@ export default function Users() {
             </div>
             <div className={classes.row}>
               <p className={classes.title}>تولد</p>
-              <p>{user.birthday}</p>
+              <p>{user.birthday === "" ? "-" : user.birthday}</p>
             </div>
             <div className={classes.row}>
               <p className={classes.title}>تاریخ عضویت</p>
