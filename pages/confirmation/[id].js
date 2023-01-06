@@ -38,7 +38,10 @@ export default function ConfirmationId() {
         let getProduct = await getProductApi(product["_id"]);
         if (getProduct.size[product.size].colors[product.color] > 0) {
           getProduct.size[product.size].colors[product.color]--;
-          if (getProduct.size[product.size].colors[product.color] === 0) {
+          if (
+            Object.keys(getProduct.size[product.size].colors).length === 1 &&
+            getProduct.size[product.size].colors[product.color] === 0
+          ) {
             getProduct.activate = false;
           }
           await updateProductApi(getProduct);
