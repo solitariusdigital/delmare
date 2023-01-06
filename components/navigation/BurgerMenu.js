@@ -182,7 +182,7 @@ export default function BurgerMenu() {
               </div>
               <div className={classes.row}>
                 <p>0912 022 1526</p>
-                <p>02188793585</p>
+                <p>021 8879 3585</p>
               </div>
               <div className={classes.social}>
                 <InstagramIcon
