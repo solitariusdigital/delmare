@@ -4,7 +4,7 @@ import { StateProvider } from "../context/stateContext";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
-  const [countryCode, setCountryCode] = useState("");
+  const [countryCode, setCountryCode] = useState("IR");
 
   useEffect(() => {
     const fetchIP = async () => {
