@@ -88,7 +88,6 @@ function Collection({ collectionType, brandGallery, brand }) {
       };
       await updateProductApi(updateData);
     }
-    window.scrollTo(0, 0);
   };
 
   const favourProduct = async (product) => {
