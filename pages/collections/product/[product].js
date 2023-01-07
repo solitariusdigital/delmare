@@ -297,7 +297,7 @@ export default function Product({ favourite, product }) {
 
   const copyLink = () => {
     navigator.clipboard.writeText(
-      `delmareh.com/collections/product/${product["_id"]}`
+      `https://delmareh.com/collections/product/${product["_id"]}`
     );
     document.querySelector(".shareIcon").classList.add(classes.shareIcon);
     setTimeout(() => {
