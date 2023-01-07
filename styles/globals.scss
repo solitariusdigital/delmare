@@ -294,3 +294,32 @@ a {
   width: 100%;
   padding: 10px;
 }
+
+.landing-message {
+  transform: translateY(50%);
+
+  .content {
+    position: relative;
+    transform: translateY(50%);
+    padding: 10px;
+    background: config.$white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    @include mixins.border-radius();
+  }
+
+  .vpm {
+    color: config.$red;
+    font-size: config.$big-font;
+  }
+
+  p {
+    margin: 10px 0px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef, Fragment } from "react";
+import { useContext, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import classes from "./AddHomeScreen.module.scss";
 import IosShareIcon from "@mui/icons-material/IosShare";
