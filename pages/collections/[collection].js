@@ -13,11 +13,14 @@ function CollectionPage() {
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
   const { accessoriesCollection, setAccessoriesCollection } =
     useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   const router = useRouter();
   let collection = router.query.collection;
 
   useEffect(() => {
+    setSearchControl(true);
+
     const fetchData = async () => {
       const data = await getProducstApi();
       setProductsCollection(data);
@@ -49,6 +52,7 @@ function CollectionPage() {
     setSaleCollection,
     setGalleryCollection,
     setAccessoriesCollection,
+    setSearchControl,
   ]);
 
   return (
