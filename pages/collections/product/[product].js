@@ -620,7 +620,9 @@ export default function Product({ favourite, product }) {
         <div className={classes.designContainer}>
           <div className={classes.rowDetails}>
             <p>برند</p>
-            <p className={classes.title}>{product.brand}</p>
+            <p className={classes.title}>
+              {product.brandType === "اورجینال" ? "خارجی" : product.brand}
+            </p>
           </div>
           <div className={classes.rowDetails}>
             <p>نوع</p>
