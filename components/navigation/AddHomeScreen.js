@@ -30,6 +30,7 @@ export default function AddHomeScreen() {
               <p>کلیک کنید Add روی</p>
               <p>Add</p>
             </div>
+            <p className={classes.vpn}>را خاموش کنید VPN لطفا</p>
             <button
               className="mainButton"
               onClick={() => setToggleContainer("")}
@@ -58,6 +59,7 @@ export default function AddHomeScreen() {
               <p>کلیک کنید Add روی</p>
               <p>Add</p>
             </div>
+            <p className={classes.vpn}>را خاموش کنید VPN لطفا</p>
             <button
               className="mainButton"
               onClick={() => setToggleContainer("")}

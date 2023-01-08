@@ -16,7 +16,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 280px;
     margin: 10px;
     @include mixins.border-radius();
   }
@@ -41,9 +40,12 @@
   }
 
   button {
-    position: absolute;
-    bottom: 10px;
-    width: 90%;
+    width: 100%;
     font-size: config.$med-font;
+  }
+
+  .vpn {
+    margin: 10px 0px;
+    color: config.$red;
   }
 }
