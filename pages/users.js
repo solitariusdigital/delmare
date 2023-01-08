@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import secureLocalStorage from "react-secure-storage";
 import { getUsersApi } from "../services/api";
@@ -68,7 +68,7 @@ export default function Users() {
             style={{ marginTop: "0px" }}
           >
             <div className={classes.row}>
-              <p className={classes.title}>نام مشتری</p>
+              <p className={classes.title}>نام</p>
               <p>{user.name}</p>
             </div>
             <div className={classes.row}>
@@ -84,11 +84,11 @@ export default function Users() {
               <p>{user.birthday === "" ? "-" : user.birthday}</p>
             </div>
             <div className={classes.row}>
-              <p className={classes.title}>تاریخ عضویت</p>
+              <p className={classes.title}>عضویت</p>
               <p suppressHydrationWarning>{convertDate(user.createdAt)}</p>
             </div>
             <div className={classes.row}>
-              <p className={classes.title}>تاریخ فعالیت</p>
+              <p className={classes.title}>فعالیت</p>
               <p suppressHydrationWarning>{convertDate(user.updatedAt)}</p>
             </div>
           </div>
