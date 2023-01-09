@@ -27,6 +27,7 @@ import Router from "next/router";
 import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
+import Head from "next/head";
 
 export default function Product({ favourite, product }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -345,6 +346,10 @@ export default function Product({ favourite, product }) {
 
   return (
     <Fragment>
+      <Head>
+        <title>Fashion Product</title>
+        <meta name="description" content="Fashion product" />
+      </Head>
       <div className={classes.productContainer}>
         <div className={classes.topBar}>
           <ArrowBackIosNewIcon

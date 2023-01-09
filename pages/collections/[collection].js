@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import Brands from "../../components/Brands";
 import Collection from "../../components/Collection";
 import { getProducstApi } from "../../services/api";
+import Head from "next/head";
 
 function CollectionPage() {
   const { productsCollection, setProductsCollection } =
@@ -57,6 +58,10 @@ function CollectionPage() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Fashion Clothing</title>
+        <meta name="description" content="Fashion clothing" />
+      </Head>
       {collection == "gallery" && <Collection collectionType={"gallery"} />}
       {collection == "sale" && <Collection collectionType={"sale"} />}
       {collection == "accessories" && (

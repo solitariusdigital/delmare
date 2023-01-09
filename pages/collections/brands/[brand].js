@@ -6,6 +6,7 @@ import {
   getProducstApi,
   getBrandsApi,
 } from "../../../services/api";
+import Head from "next/head";
 
 export default function Brand() {
   const [gallery, setGallery] = useState([]);
@@ -37,6 +38,10 @@ export default function Brand() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Fashion Brands</title>
+        <meta name="description" content="Fashion brands" />
+      </Head>
       <Collection
         collectionType={"brands"}
         brandGallery={gallery}
