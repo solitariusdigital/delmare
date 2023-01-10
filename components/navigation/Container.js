@@ -34,11 +34,7 @@ function Container() {
       setUserLogin(true);
       seCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
     }
-    // check if user is using pwa
-    if (!window.matchMedia("(display-mode: standalone)").matches) {
-      setToggleContainer("screen");
-    }
-  }, [setToggleContainer, setUserLogin, seCurrentUser, navigation]);
+  }, [setUserLogin, seCurrentUser, navigation]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {

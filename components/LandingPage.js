@@ -9,6 +9,7 @@ function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const [count, setCount] = useState(0);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -22,6 +23,13 @@ function LandingPage() {
     }, 5000);
     return () => clearInterval(timerId);
   });
+
+  useEffect(() => {
+    // check if user is using pwa
+    if (!window.matchMedia("(display-mode: standalone)").matches) {
+      setToggleContainer("screen");
+    }
+  }, [setToggleContainer]);
 
   const assignImage = () => {
     const imagesArray = [

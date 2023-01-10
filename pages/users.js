@@ -69,7 +69,7 @@ export default function Users() {
           >
             <div className={classes.row}>
               <p className={classes.title}>نام</p>
-              <p>{user.name}</p>
+              <p>{user.name === "" ? "-" : user.name}</p>
             </div>
             <div className={classes.row}>
               <p className={classes.title}>موبایل</p>
