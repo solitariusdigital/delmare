@@ -45,7 +45,7 @@ function Register() {
         setToken("");
         setCheckToken("");
       }
-    }, 1000);
+    }, 1200);
   };
 
   const resetCounter = () => {

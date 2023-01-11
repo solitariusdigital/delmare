@@ -20,7 +20,6 @@ export default function Account() {
   const [address, setAddress] = useState(currentUser.address);
   const [post, setPost] = useState(currentUser.post);
   const [alert, setAlert] = useState("");
-
   const [birthDay, setBirthDay] = useState("");
   const [monthDay, setMonthDay] = useState("");
 
@@ -71,7 +70,10 @@ export default function Account() {
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      birthday: `${monthDay} ${birthDay}`,
+      birthday:
+        currentUser.birthday === ""
+          ? `${monthDay} ${birthDay}`
+          : currentUser.birthday,
     };
     let data = await updateUserApi(user);
     seCurrentUser(data);
