@@ -44,6 +44,7 @@ function LandingPage() {
       `${sourceLink}nine.jpg`,
       `${sourceLink}ten.jpg`,
       `${sourceLink}eleven.jpg`,
+      `${sourceLink}motion.gif`,
     ];
     const image = imagesArray.sort(() => Math.random() - 0.5)[
       count % imagesArray.length
