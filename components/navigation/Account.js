@@ -188,12 +188,10 @@ export default function Account() {
                 dir="rtl"
               />
             </div>
-            {currentUser.birthday && (
-              <div className={classes.row}>
-                <p className={classes.label}>ثبت روز تولد برای دریافت هدیه</p>
-                <p>{currentUser.birthday}</p>
-              </div>
-            )}
+            <div className={classes.row}>
+              <p className={classes.label}>ثبت روز تولد برای دریافت هدیه</p>
+              <p>{currentUser.birthday}</p>
+            </div>
             {currentUser.birthday === "" && (
               <Fragment>
                 <div className={classes.input}>

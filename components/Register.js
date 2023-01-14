@@ -78,6 +78,7 @@ function Register() {
         function (response, status) {
           if (status === 200) {
             setAlert("کد تایید ارسال شد");
+            setDisplayCounter(false);
           } else {
             setAlert("خطا در سامانه ارسال کد تایید");
           }
