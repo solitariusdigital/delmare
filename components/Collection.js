@@ -75,19 +75,6 @@ function Collection({ collectionType, brandGallery, brand }) {
   const selectProduct = async (product) => {
     setSearchControl(false);
     Router.push(`/collections/product/${product["_id"]}`);
-
-    // on each click update views count
-    if (
-      !currentUser ||
-      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
-        "customer"
-    ) {
-      let updateData = {
-        ...product,
-        views: product.views + 1.5,
-      };
-      await updateProductApi(updateData);
-    }
   };
 
   const favourProduct = async (product) => {

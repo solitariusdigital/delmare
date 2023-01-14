@@ -116,6 +116,24 @@ export default function Product({ favourite, product }) {
     });
   }, [setBar, shoppingCart, productSizes]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      // on each click update views count
+      if (
+        !currentUser ||
+        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
+          "customer"
+      ) {
+        let updateData = {
+          ...product,
+          views: product.views + 1.5,
+        };
+        await updateProductApi(updateData);
+      }
+    };
+    fetchData().catch(console.error);
+  }, [currentUser, product]);
+
   const toggleImages = (type) => {
     switch (type) {
       case "one":
