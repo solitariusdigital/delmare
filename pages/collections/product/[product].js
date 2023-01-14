@@ -67,8 +67,8 @@ export default function Product({ favourite, product }) {
 
   const [like, setLike] = useState(favourite);
   const [displayPopup, setDisplayPopuo] = useState(false);
-  const [active, setActive] = useState(null);
-  const [display, setDisplay] = useState(null);
+  const [active, setActive] = useState(true);
+  const [display, setDisplay] = useState(true);
 
   const router = useRouter();
 
