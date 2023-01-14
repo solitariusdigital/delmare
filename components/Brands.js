@@ -15,7 +15,11 @@ function Brands() {
     setBar(true);
     const fetchData = async () => {
       const data = await getBrandsApi();
-      setBrands(data);
+      setBrands(
+        data.sort(function (a, b) {
+          return b.products.length - a.products.length;
+        })
+      );
     };
     fetchData().catch(console.error);
   }, [setBrands, setBar]);
