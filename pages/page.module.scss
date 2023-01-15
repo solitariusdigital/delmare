@@ -246,7 +246,23 @@
   }
 
   .name {
-    margin: 10px 0px;
+    margin: 20px 0px;
     font-size: config.$big-font;
+    font-weight: bold;
+  }
+
+  .productContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .product {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
   }
 }

@@ -27,10 +27,10 @@ export default function Blogger() {
             const bloggerData = await getBloggerApi(blogger["_id"]);
             setBlogger(bloggerData);
 
-            // bloggerData.products.forEach(async (product) => {
-            //   let getProduct = await getProductApi(product);
-            //   setProducts((oldArray) => [...oldArray, getProduct.images.main]);
-            // });
+            bloggerData.products.forEach(async (product) => {
+              let getProduct = await getProductApi(product);
+              setProducts((oldArray) => [...oldArray, getProduct.images.main]);
+            });
           }
         });
       }
@@ -59,6 +59,24 @@ export default function Blogger() {
         </div>
         <p className={classes.name}> {blogger.name}</p>
         <p>{blogger.bio}</p>
+        <div className={classes.productContainer}>
+          {products.map((product, index) => (
+            <div key={index} className={classes.product}>
+              <Image
+                className={classes.image}
+                src={product}
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority={true}
+                loading="eager"
+                onClick={() =>
+                  Router.push(`/collections/product/${product["_id"]}`)
+                }
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </Fragment>
   );
