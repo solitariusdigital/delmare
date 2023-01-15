@@ -87,73 +87,75 @@ export default function WishList() {
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
         </div>
-        <div className="collection-grid wish-list">
-          {wishList.map((product, index) => (
-            <Fragment key={index}>
-              {product.display && (
-                <div className="product">
-                  <div className="banner">
-                    <p className="title">{product.title}</p>
-                    <div className="social">
-                      <div>
-                        {checFavourites(product) ? (
-                          <FavoriteIcon
-                            className="iconRed"
-                            onClick={() => favourProduct(product)}
-                          />
-                        ) : (
-                          <FavoriteBorderIcon
-                            className="icon"
-                            onClick={() => favourProduct(product)}
-                          />
-                        )}
-                      </div>
+        {wishList.length === 0 && (
+          <div className={ShoppingCart.graphic} style={{ marginTop: "50px" }}>
+            <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+            <Image
+              src={graphic}
+              alt="image"
+              objectFit="contain"
+              layout="fill"
+            />
+            <a
+              href="https://www.vecteezy.com/free-png/shopping-cart"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Graphic by Vecteezy
+            </a>
+          </div>
+        )}
+        {wishList.length > 0 && (
+          <div className="collection-grid wish-list">
+            {wishList.map((product, index) => (
+              <Fragment key={index}>
+                {product.display && (
+                  <div className="product">
+                    <div className="banner">
+                      <p className="title">{product.title}</p>
                       <div className="social">
-                        <VisibilityIcon className="icon" />
-                        <p>{Math.round(product.views)}</p>
+                        <div>
+                          {checFavourites(product) ? (
+                            <FavoriteIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                        <div className="social">
+                          <VisibilityIcon className="icon" />
+                          <p>{Math.round(product.views)}</p>
+                        </div>
                       </div>
                     </div>
+                    <Image
+                      onClick={() => {
+                        selectProduct(product["_id"]);
+                      }}
+                      className={classes.image}
+                      src={product.images.main}
+                      alt="image"
+                      layout="fill"
+                      objectFit="cover"
+                      priority={true}
+                      loading="eager"
+                    />
+                    {product.sale && (
+                      <div className="sale">
+                        <p>{product.percentage}%</p>
+                      </div>
+                    )}
                   </div>
-                  <Image
-                    onClick={() => {
-                      selectProduct(product["_id"]);
-                    }}
-                    className={classes.image}
-                    src={product.images.main}
-                    alt="image"
-                    layout="fill"
-                    objectFit="cover"
-                    priority={true}
-                    loading="eager"
-                  />
-                  {product.sale && (
-                    <div className="sale">
-                      <p>{product.percentage}%</p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Fragment>
-          ))}
-          {wishList.length === 0 && (
-            <div className={ShoppingCart.graphic}>
-              <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
-              <Image
-                src={graphic}
-                alt="image"
-                objectFit="contain"
-                layout="fill"
-              />
-              <a
-                href="https://www.vecteezy.com/free-png/shopping-cart"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Graphic by Vecteezy
-              </a>
-            </div>
-          )}
-        </div>
+                )}
+              </Fragment>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
