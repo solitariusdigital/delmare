@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import { Fragment } from "react";
 import Brands from "../../components/Brands";
+import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
 import { getProducstApi } from "../../services/api";
 import Head from "next/head";
@@ -14,14 +15,11 @@ function CollectionPage() {
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
   const { accessoriesCollection, setAccessoriesCollection } =
     useContext(StateContext);
-  const { searchControl, setSearchControl } = useContext(StateContext);
 
   const router = useRouter();
   let collection = router.query.collection;
 
   useEffect(() => {
-    setSearchControl(true);
-
     const fetchData = async () => {
       const data = await getProducstApi();
       setProductsCollection(data);
@@ -53,7 +51,6 @@ function CollectionPage() {
     setSaleCollection,
     setGalleryCollection,
     setAccessoriesCollection,
-    setSearchControl,
   ]);
 
   return (
@@ -62,12 +59,13 @@ function CollectionPage() {
         <title>Fashion Clothing</title>
         <meta name="description" content="Fashion clothing" />
       </Head>
-      {collection == "gallery" && <Collection collectionType={"gallery"} />}
-      {collection == "sale" && <Collection collectionType={"sale"} />}
-      {collection == "accessories" && (
+      {collection === "gallery" && <Collection collectionType={"gallery"} />}
+      {collection === "sale" && <Collection collectionType={"sale"} />}
+      {collection === "accessories" && (
         <Collection collectionType={"accessories"} />
       )}
-      {collection == "brands" && <Brands />}
+      {collection === "brands" && <Brands />}
+      {collection === "bloggers" && <Bloggers />}
     </Fragment>
   );
 }

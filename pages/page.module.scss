@@ -225,3 +225,23 @@
     margin-top: 20px;
   }
 }
+
+.blogger {
+  padding: 10px;
+  text-align: center;
+
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-position: 100% 30%;
+      @include mixins.border-radius();
+    }
+  }
+}

@@ -60,6 +60,7 @@ function Collection({ collectionType, brandGallery, brand }) {
         break;
     }
     setBar(true);
+    setSearchControl(true);
   }, [
     setBar,
     saleCollection,
@@ -70,6 +71,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     brandGallery,
     generalCategories,
     accessoriesCategories,
+    setSearchControl,
   ]);
 
   const selectProduct = async (product) => {

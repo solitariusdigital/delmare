@@ -392,7 +392,7 @@ export default function Product({ favourite, product }) {
             <Image
               className={classes.image}
               src={mainItem}
-              alt="Loading image"
+              alt="image"
               layout="fill"
               objectFit="cover"
               priority={true}
@@ -479,7 +479,7 @@ export default function Product({ favourite, product }) {
               <Image
                 className={classes.image}
                 src={mainItem}
-                alt="Loading image"
+                alt="image"
                 layout="fill"
                 objectFit="cover"
                 ver

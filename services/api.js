@@ -120,6 +120,36 @@ export const updateBrandApi = async (data) => {
   return await response.json();
 };
 
+// bloggers api
+export const getBloggerApi = async (id) => {
+  const response = await fetch(`/api/blogger?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getBloggersApi = async () => {
+  const response = await fetch("/api/bloggers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const updateBloggerApi = async (data) => {
+  const response = await fetch("/api/bloggers", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // mellat api
 export const getMellatApi = async (credit) => {
   const response = await fetch(`/api/mellat?credit=${credit}`, {

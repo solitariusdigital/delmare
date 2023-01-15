@@ -27,7 +27,12 @@ function CollectionsPage() {
       imageSrc: `${sourceLink}accessories.jpg`,
     },
     {
-      title: "برند",
+      title: "بلاگرز",
+      link: "/collections/bloggers",
+      imageSrc: `${sourceLink}four.jpg`,
+    },
+    {
+      title: "برندز",
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
     },
@@ -37,11 +42,6 @@ function CollectionsPage() {
     Router.push(`${link}`);
     navigation.map((nav, i) => {
       if (i === index) {
-        if (nav.title === "برند") {
-          setSearchControl(false);
-        } else {
-          setSearchControl(true);
-        }
         nav.active = true;
       } else {
         nav.active = false;

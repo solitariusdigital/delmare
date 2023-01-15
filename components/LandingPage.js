@@ -70,7 +70,7 @@ function LandingPage() {
       <Image
         className={classes.image}
         src={assignImage()}
-        alt="Loading image"
+        alt="image"
         layout="fill"
         objectFit="cover"
         priority={true}
