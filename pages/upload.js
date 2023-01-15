@@ -325,7 +325,7 @@ export default function Upload() {
             value={title}
             autoComplete="off"
             dir="rtl"
-            maxLength="12"
+            maxLength="20"
           />
         </div>
         <div className={classes.input}>
