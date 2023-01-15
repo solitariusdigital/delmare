@@ -24,7 +24,7 @@ function CollectionsPage() {
     {
       title: "اکسسوری",
       link: "/collections/accessories",
-      imageSrc: `${sourceLink}eight.jpg`,
+      imageSrc: `${sourceLink}accessories.jpg`,
     },
     {
       title: "برند",
