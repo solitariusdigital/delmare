@@ -37,7 +37,6 @@ function Register() {
   const startCounter = () => {
     intervalRef.current = setInterval(() => {
       setCounter(counter--);
-      setDisplayCounter(true);
       if (counter < 0) {
         resetCounter();
         setDisplayCounter(false);
@@ -63,6 +62,7 @@ function Register() {
     }
 
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
+      setDisplayCounter(true);
       let tokenId = tokenGenerator();
       setToken(tokenId);
 
@@ -78,7 +78,6 @@ function Register() {
         function (response, status) {
           if (status === 200) {
             setAlert("کد تایید ارسال شد");
-            setDisplayCounter(false);
           } else {
             setAlert("خطا در سامانه ارسال کد تایید");
           }

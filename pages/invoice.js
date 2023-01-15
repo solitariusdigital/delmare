@@ -145,12 +145,12 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                   <p>{invoice.delmareId}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>کد محصول</p>
-                  <p>{invoice.productId}</p>
-                </div>
-                <div className={classes.row}>
                   <p className={classes.title}>کد رهگیری</p>
                   <p>{invoice.refId}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد محصول</p>
+                  <p>{invoice.productId}</p>
                 </div>
                 <button
                   className={classes.button}
@@ -169,7 +169,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
               <p>سفارشات ارسال شده {postedInvoices.length}</p>
             </div>
             {postedInvoices.map((invoice, index) => (
-              <div key={index} className={classes.invoice}>
+              <div key={index} className={classes.infoCard}>
                 <div className={classes.row}>
                   <div>
                     <div className={classes.subRow}>
@@ -234,12 +234,12 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                   <p>{invoice.delmareId}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>کد محصول</p>
-                  <p>{invoice.productId}</p>
-                </div>
-                <div className={classes.row}>
                   <p className={classes.title}>کد رهگیری</p>
                   <p>{invoice.refId}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.title}>کد محصول</p>
+                  <p>{invoice.productId}</p>
                 </div>
               </div>
             ))}

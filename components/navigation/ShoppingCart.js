@@ -391,7 +391,7 @@ export default function ShoppingCart() {
           </div>
         </div>
       ) : (
-        <div className={classes.payment}>
+        <div className={classes.payment} style={{ height: window.innerHeight }}>
           <p>در حال انتقال و بارگذاری</p>
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
         </div>
