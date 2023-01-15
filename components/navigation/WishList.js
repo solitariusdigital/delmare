@@ -136,7 +136,8 @@ export default function WishList() {
             </Fragment>
           ))}
           {wishList.length === 0 && (
-            <div className={classes.graphic}>
+            <div className={ShoppingCart.graphic}>
+              <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
               <Image
                 src={graphic}
                 alt="image"

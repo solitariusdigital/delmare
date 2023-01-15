@@ -104,6 +104,7 @@ export default function Orders() {
             .reverse()}
           {orders.length === 0 && (
             <div className={ShoppingCart.graphic}>
+              <p>آیتم خریداری شده شما در اینجا نمایش داده میشود</p>
               <Image
                 src={graphic}
                 alt="image"
