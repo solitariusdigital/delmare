@@ -57,6 +57,7 @@ export default function WishList() {
       await updateUserApi(currentUser);
     }
   };
+
   const checFavourites = (product) => {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);

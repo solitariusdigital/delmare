@@ -65,8 +65,11 @@ export default function Bloggers() {
             <div className={classes.info}>
               <div className={classes.row}>
                 <p className={classes.value}>{blogger.products.length}</p>
+                <p className={classes.count}>آیتم</p>
+              </div>
+              <div className={classes.row}>
                 <p className={classes.value}>{blogger.followers.length}</p>
-                <p className={classes.count}>تعداد آیتم و طرح</p>
+                <p className={classes.count}>فالو</p>
               </div>
               <p className={classes.name}>{blogger.name}</p>
             </div>

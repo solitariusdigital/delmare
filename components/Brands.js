@@ -63,7 +63,7 @@ export default function Brands() {
             </div>
             <div className={classes.row}>
               <p className={classes.value}>{brand.products.length}</p>
-              <p className={classes.count}>تعداد آیتم و طرح</p>
+              <p className={classes.count}>آیتم و طرح</p>
             </div>
           </div>
         ))}
