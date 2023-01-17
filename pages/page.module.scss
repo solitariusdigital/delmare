@@ -255,6 +255,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     margin-top: 20px;
+    font-size: config.$tiny-font;
   }
 
   .product {
@@ -263,5 +264,36 @@
     width: 100%;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
+
+    .image {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+
+    .rate {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      p {
+        margin-left: 10px;
+      }
+    }
   }
 }

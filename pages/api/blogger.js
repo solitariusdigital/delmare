@@ -1,7 +1,7 @@
 import Blogger from "../../models/Blogger";
 import dbConnect from "../../services/dbConnect";
 
-export default async function brandHandler(req, res) {
+export default async function bloggerHandler(req, res) {
   const { method } = req;
 
   await dbConnect();

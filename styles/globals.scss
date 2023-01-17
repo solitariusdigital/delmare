@@ -209,7 +209,8 @@ a {
       }
     }
 
-    .activate {
+    .activate,
+    .blogger {
       left: 0px;
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
@@ -226,6 +227,17 @@ a {
       color: config.$black;
       width: 50px;
       @include mixins.transparentBackground(0.8, config.$brand);
+    }
+
+    .blogger {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 180px;
+      left: 0px;
+      color: config.$black;
+      width: 50px;
+      @include mixins.transparentBackground(0.8, config.$gold);
     }
   }
 }

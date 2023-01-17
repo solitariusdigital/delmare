@@ -5,12 +5,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collection.module.scss";
 import Image from "next/image";
-import { updateProductApi, updateUserApi } from "../services/api";
+import { updateUserApi, getBloggerApi } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
@@ -40,6 +42,8 @@ function Collection({ collectionType, brandGallery, brand }) {
   const [message, setMessage] = useState(false);
   const [reqNumber, setReqNumber] = useState(20);
   const [categories, setCategories] = useState([]);
+
+  const [blogger, setBlogger] = useState([]);
 
   useEffect(() => {
     switch (collectionType) {
@@ -74,6 +78,16 @@ function Collection({ collectionType, brandGallery, brand }) {
     setSearchControl,
   ]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (currentUser.bloggerId) {
+        const blogger = await getBloggerApi(currentUser.bloggerId);
+        setBlogger(blogger);
+      }
+    };
+    fetchData().catch(console.error);
+  }, [currentUser]);
+
   const selectProduct = async (product) => {
     setSearchControl(false);
     Router.push(`/collections/product/${product["_id"]}`);
@@ -104,6 +118,20 @@ function Collection({ collectionType, brandGallery, brand }) {
   const checFavourites = (product) => {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);
+    }
+  };
+
+  const checkBloggerFavourites = (product) => {
+    return blogger.products.includes(product["_id"]);
+  };
+
+  const favourBloggerProduct = (product) => {
+    setLike(!like);
+
+    if (blogger.products.includes(product["_id"])) {
+      blogger.products.splice(blogger.products.indexOf(product["_id"]), 1);
+    } else {
+      blogger.products.unshift(product["_id"]);
     }
   };
 
@@ -299,6 +327,21 @@ function Collection({ collectionType, brandGallery, brand }) {
                   {checkDate(product.createdAt) && (
                     <div className="new">
                       <p>جدید</p>
+                    </div>
+                  )}
+                  {currentUser && currentUser.bloggerId && (
+                    <div className="blogger">
+                      {checkBloggerFavourites(product) ? (
+                        <StarIcon
+                          className="icon"
+                          onClick={() => favourBloggerProduct(product)}
+                        />
+                      ) : (
+                        <StarBorderIcon
+                          className="icon"
+                          onClick={() => favourBloggerProduct(product)}
+                        />
+                      )}
                     </div>
                   )}
                 </div>
