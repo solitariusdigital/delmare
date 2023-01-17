@@ -217,7 +217,7 @@ function Register() {
         </div>
         <div className={classes.formAction}>
           <p className={classes.alert}>{alert}</p>
-          {checkToken.length === 6 && (
+          {checkToken.length === 4 && (
             <button className="mainButton" onClick={() => handleRegister()}>
               ورود / ​ثبت نام
             </button>
