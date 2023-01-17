@@ -49,6 +49,7 @@ const InvoiceSchema = new Schema(
     size: String,
     posted: Boolean,
     refId: String,
+    deliveryType: String,
   },
   { timestamps: true }
 );

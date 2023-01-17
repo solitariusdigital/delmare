@@ -87,6 +87,10 @@ export default function Orders() {
                     </p>
                   </div>
                   <div className={ShoppingCart.row}>
+                    <p className={ShoppingCart.title}>تحویل</p>
+                    <p>{order.deliveryType}</p>
+                  </div>
+                  <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>وضعیت</p>
                     {order.posted ? (
                       <div className={ShoppingCart.status}>

@@ -63,6 +63,7 @@ export default function ConfirmationId() {
           color: product.color,
           size: product.size,
           image: product.image,
+          deliveryType: product.deliveryType,
           posted: false,
         };
         await createInvoiceApi(invoice);
