@@ -9,6 +9,7 @@ import Head from "next/head";
 import { StateContext } from "../../../context/stateContext";
 import Image from "next/image";
 import classes from "../../page.module.scss";
+import Router from "next/router";
 
 export default function Blogger() {
   const [blogger, setBlogger] = useState([]);
@@ -29,6 +30,7 @@ export default function Blogger() {
 
             bloggerData.products.forEach(async (product) => {
               let getProduct = await getProductApi(product);
+              console.log(getProduct);
               setProducts((oldArray) => [...oldArray, getProduct.images.main]);
             });
           }
