@@ -6,7 +6,7 @@ import { tokenGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
-import { createUserApi, getUsersApi } from "../services/api";
+import { createUserApi, getUsersApi, getMessageApi } from "../services/api";
 import secureLocalStorage from "react-secure-storage";
 
 function Register() {
@@ -24,11 +24,20 @@ function Register() {
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
   const [counter, setCounter] = useState(59);
+  const [message, setMessage] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUsersApi();
       setAppUsers(data);
+    };
+    fetchData().catch(console.error);
+  }, [setAppUsers]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getMessageApi();
+      setMessage(data[0].message);
     };
     fetchData().catch(console.error);
   }, [setAppUsers]);
@@ -217,6 +226,7 @@ function Register() {
             <Image width={50} height={50} src={loadingImage} alt="isLoading" />
           )}
         </div>
+        {message.active && <p className={classes.message}>{message.text}</p>}
       </div>
     </Fragment>
   );

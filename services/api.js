@@ -120,6 +120,17 @@ export const updateBrandApi = async (data) => {
   return await response.json();
 };
 
+// message api
+export const getMessageApi = async () => {
+  const response = await fetch("/api/message", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // mellat api
 export const getMellatApi = async (credit) => {
   const response = await fetch(`/api/mellat?credit=${credit}`, {
