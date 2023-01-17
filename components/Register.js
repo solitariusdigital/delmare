@@ -2,7 +2,7 @@ import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
-import { tokenGenerator } from "../services/utility";
+import { fourGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
@@ -72,7 +72,7 @@ function Register() {
 
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
       setDisplayCounter(true);
-      let tokenId = tokenGenerator();
+      let tokenId = fourGenerator();
       setToken(tokenId);
 
       const api = Kavenegar.KavenegarApi({

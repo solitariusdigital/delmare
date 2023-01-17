@@ -3,7 +3,7 @@ import { StateContext } from "../context/stateContext";
 import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./page.module.scss";
-import { tokenGenerator } from "../services/utility";
+import { sixGenerator } from "../services/utility";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import dbConnect from "../services/dbConnect";
@@ -169,30 +169,30 @@ export default function Upload() {
     transformDataSize(XL, "XL");
     transformDataSize(FS, "FS");
 
-    let delmareIdFolder = `${delmareId}${tokenGenerator()}`;
+    let delmareIdFolder = `${delmareId}${sixGenerator()}`;
 
     if (mainImage !== "") {
-      let imageId = `img${tokenGenerator()}`;
+      let imageId = `img${sixGenerator()}`;
       images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(mainImage, imageId, delmareIdFolder);
     }
     if (imageOne !== "") {
-      let imageId = `img${tokenGenerator()}`;
+      let imageId = `img${sixGenerator()}`;
       images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageOne, imageId, delmareIdFolder);
     }
     if (imageTwo !== "") {
-      let imageId = `img${tokenGenerator()}`;
+      let imageId = `img${sixGenerator()}`;
       images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageTwo, imageId, delmareIdFolder);
     }
     if (imageThree !== "") {
-      let imageId = `img${tokenGenerator()}`;
+      let imageId = `img${sixGenerator()}`;
       images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageThree, imageId, delmareIdFolder);
     }
     if (table !== "") {
-      let imageId = `img${tokenGenerator()}`;
+      let imageId = `img${sixGenerator()}`;
       images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       images.graph = sizeGraph;
       await uploadImages(table, imageId, delmareIdFolder);
