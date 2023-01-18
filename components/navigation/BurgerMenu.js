@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./BurgerMenu.module.scss";
@@ -138,9 +138,12 @@ export default function BurgerMenu() {
                   </div>
                 ))}
                 {userLogIn &&
-                  JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                  (JSON.parse(secureLocalStorage.getItem("currentUser"))[
                     "permission"
-                  ] === "admin" && (
+                  ] === "admin" ||
+                    JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                      "permission"
+                    ] === "subadmin") && (
                     <div
                       className={classes.item}
                       onClick={() => {
@@ -206,23 +209,29 @@ export default function BurgerMenu() {
           {admin && (
             <div className={classes.box}>
               <div className={classes.row}>
-                <button
-                  className="mainButton"
-                  onClick={() => Router.push("/upload")}
-                >
-                  Upload
-                </button>
+                {JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                  "permission"
+                ] === "admin" && (
+                  <Fragment>
+                    <button
+                      className="mainButton"
+                      onClick={() => Router.push("/upload")}
+                    >
+                      Upload
+                    </button>
+                    <button
+                      className="mainButton"
+                      onClick={() => Router.push("/users")}
+                    >
+                      Users
+                    </button>
+                  </Fragment>
+                )}
                 <button
                   className="mainButton"
                   onClick={() => Router.push("/invoice")}
                 >
                   Invoice
-                </button>
-                <button
-                  className="mainButton"
-                  onClick={() => Router.push("/users")}
-                >
-                  Users
                 </button>
               </div>
             </div>
