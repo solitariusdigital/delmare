@@ -409,7 +409,7 @@ export default function Product({ favourite, product }) {
                   <div>
                     {checFavourites(product) ? (
                       <StarIcon
-                        className={classes.iconGold}
+                        className={classes.iconPink}
                         onClick={() => favourProduct(product)}
                       />
                     ) : (
@@ -1017,7 +1017,7 @@ export default function Product({ favourite, product }) {
                         <div>
                           {checFavourites(product) ? (
                             <StarIcon
-                              className="iconGold"
+                              className="iconPink"
                               onClick={() => favourProduct(product)}
                             />
                           ) : (
