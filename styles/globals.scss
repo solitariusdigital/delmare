@@ -148,7 +148,8 @@ a {
         }
 
         .icon,
-        .iconRed {
+        .iconRed,
+        .iconGold {
           font-size: config.$med-font;
           width: 20px;
           height: 20px;
@@ -157,6 +158,11 @@ a {
 
         .iconRed {
           color: config.$red;
+          @include mixins.favour();
+        }
+
+        .iconGold {
+          color: config.$gold;
           @include mixins.favour();
         }
 

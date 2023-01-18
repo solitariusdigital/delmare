@@ -71,7 +71,7 @@ export default function Bloggers() {
               <div className={classes.row}>
                 <p className={classes.value}>{blogger.favourites.length}</p>
                 <p>برگزیده</p>
-                <StarIcon />
+                <StarIcon className={classes.iconGold} />
               </div>
               <div className={classes.row}>
                 <p className={classes.value}>{blogger.followers.length}</p>

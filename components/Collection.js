@@ -262,7 +262,7 @@ function Collection({ collectionType, brandGallery, brand }) {
                         <div>
                           {checFavourites(product) ? (
                             <StarIcon
-                              className="iconRed"
+                              className="iconGold"
                               onClick={() => favourProduct(product)}
                             />
                           ) : (

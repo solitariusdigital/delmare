@@ -107,7 +107,7 @@ export default function WishList() {
                         <div>
                           {checFavourites(product) ? (
                             <StarIcon
-                              className="iconRed"
+                              className="iconGold"
                               onClick={() => favourProduct(product)}
                             />
                           ) : (

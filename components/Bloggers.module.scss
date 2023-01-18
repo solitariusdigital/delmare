@@ -51,6 +51,10 @@
     }
   }
 
+  .iconGold {
+    color: config.$gold;
+  }
+
   .row {
     display: flex;
     flex-direction: row;

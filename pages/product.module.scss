@@ -35,7 +35,8 @@
     }
 
     .icon,
-    .iconRed {
+    .iconRed,
+    .iconGold {
       font-size: config.$big-font;
       cursor: pointer;
       width: 25px;
@@ -44,6 +45,11 @@
 
     .iconRed {
       color: config.$red;
+      @include mixins.favour();
+    }
+
+    .iconGold {
+      color: config.$gold;
       @include mixins.favour();
     }
   }
