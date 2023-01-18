@@ -6,7 +6,11 @@ import { fourGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
-import { createUserApi, getUsersApi, getMessageApi } from "../services/api";
+import {
+  createUserApi,
+  getUsersApi,
+  getNotificationsApi,
+} from "../services/api";
 import secureLocalStorage from "react-secure-storage";
 
 function Register() {
@@ -24,7 +28,7 @@ function Register() {
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
   const [counter, setCounter] = useState(59);
-  const [message, setMessage] = useState({});
+  const [notification, setNotification] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +40,8 @@ function Register() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getMessageApi();
-      setMessage(data[0].message);
+      const data = await getNotificationsApi();
+      setNotification(data[0].sms);
     };
     fetchData().catch(console.error);
   }, [setAppUsers]);
@@ -226,7 +230,9 @@ function Register() {
             <Image width={50} height={50} src={loadingImage} alt="isLoading" />
           )}
         </div>
-        {message.active && <p className={classes.message}>{message.text}</p>}
+        {notification.active && (
+          <p className={classes.notification}>{notification.text}</p>
+        )}
       </div>
     </Fragment>
   );

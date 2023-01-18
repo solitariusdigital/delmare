@@ -120,9 +120,9 @@ export const updateBrandApi = async (data) => {
   return await response.json();
 };
 
-// message api
-export const getMessageApi = async () => {
-  const response = await fetch("/api/message", {
+// notification api
+export const getNotificationsApi = async () => {
+  const response = await fetch("/api/notifications", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

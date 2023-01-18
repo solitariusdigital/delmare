@@ -1,7 +1,7 @@
 import Brand from "../../models/Brand";
 import dbConnect from "../../services/dbConnect";
 
-export default async function productHandler(req, res) {
+export default async function brandHandler(req, res) {
   const { method } = req;
 
   await dbConnect();

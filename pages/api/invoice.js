@@ -1,7 +1,7 @@
 import Invoice from "../../models/Invoice";
 import dbConnect from "../../services/dbConnect";
 
-export default async function invoiceHandler(req, res) {
+export default async function invoicesHandler(req, res) {
   const { method, body } = req;
 
   await dbConnect();
