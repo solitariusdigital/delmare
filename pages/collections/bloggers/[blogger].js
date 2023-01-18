@@ -1,30 +1,22 @@
 import { useEffect, useState, Fragment, useContext } from "react";
 import { useRouter } from "next/router";
 import {
-  getBloggerApi,
   getBloggersApi,
   getProductApi,
   updateBloggerApi,
+  getUserApi,
 } from "../../../services/api";
 import Head from "next/head";
 import { StateContext } from "../../../context/stateContext";
 import Image from "next/image";
 import classes from "../../page.module.scss";
 import Router from "next/router";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import StarRateIcon from "@mui/icons-material/StarRate";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 export default function Blogger() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-
   const [blogger, setBlogger] = useState([]);
   const [products, setProducts] = useState([]);
-  const [bloggerAccess, setBloggerAccess] = useState(false);
-  const [update, setUpdate] = useState(false);
-  const [rate, setRate] = useState(0);
 
   const router = useRouter();
   let bloggerDelmareId = router.query.blogger;
@@ -35,24 +27,18 @@ export default function Blogger() {
         const bloggers = await getBloggersApi();
         bloggers.forEach(async (blogger) => {
           if (blogger.delmareId === bloggerDelmareId.toUpperCase()) {
-            const bloggerData = await getBloggerApi(blogger["_id"]);
-            setBlogger(bloggerData);
+            const user = await getUserApi(blogger.userId);
 
-            bloggerData.products.forEach(async (productId) => {
+            // blogger.favourites = user.favourites;
+            setBlogger({ ...blogger, favourites: user.favourites });
+
+            user.favourites.forEach(async (productId) => {
               let getProduct = await getProductApi(productId);
               setProducts((oldArray) => [
                 ...oldArray,
                 { link: getProduct.images.main, id: productId },
               ]);
             });
-
-            if (
-              currentUser &&
-              currentUser.bloggerId &&
-              blogger["_id"] === currentUser.bloggerId
-            ) {
-              setBloggerAccess(true);
-            }
           }
         });
       }
@@ -92,16 +78,6 @@ export default function Blogger() {
         <div className={classes.productContainer}>
           {products.map((product, index) => (
             <div key={index}>
-              {bloggerAccess && (
-                <div className={classes.control}>
-                  <RemoveCircleIcon
-                    className="icon"
-                    sx={{ color: "#d40d12", fontSize: 20 }}
-                    onClick={() => removeProduct(product.id)}
-                  />{" "}
-                  <p>حذف آیتم</p>
-                </div>
-              )}
               <div className={classes.product}>
                 <Image
                   className={classes.image}
@@ -116,24 +92,6 @@ export default function Blogger() {
                   }
                 />
               </div>
-              {/* {bloggerAccess && (
-                <div className={classes.rating}>
-                  <RemoveIcon
-                    className="icon"
-                    sx={{ fontSize: 16 }}
-                    onClick={() => setRate(rate - 1)}
-                  />{" "}
-                  <div className={classes.rate}>
-                    <StarRateIcon className="icon" sx={{ fontSize: 16 }} />{" "}
-                    <p>{rate}</p>
-                  </div>
-                  <AddIcon
-                    className="icon"
-                    sx={{ fontSize: 16 }}
-                    onClick={() => setRate(rate + 1)}
-                  />
-                </div>
-              )} */}
             </div>
           ))}
         </div>

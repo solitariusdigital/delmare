@@ -18,6 +18,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
+import StarIcon from "@mui/icons-material/Star";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -33,7 +34,10 @@ export default function BurgerMenu() {
 
   const navigation = [
     {
-      title: "حساب من",
+      title:
+        currentUser && currentUser.permission === "blogger"
+          ? "حساب بلاگر"
+          : "حساب من",
       icon: <AccountBoxIcon />,
       call: () => {
         navigateMenu("account");
@@ -41,10 +45,18 @@ export default function BurgerMenu() {
       },
     },
     {
-      title: "کمد من",
-      icon: <CheckroomIcon />,
+      title:
+        currentUser && currentUser.permission === "blogger"
+          ? "برگزیده"
+          : "سبد آرزو",
+      icon:
+        currentUser && currentUser.permission === "blogger" ? (
+          <StarIcon />
+        ) : (
+          <FavoriteIcon />
+        ),
       call: () => {
-        navigateMenu("orders");
+        navigateMenu("wish");
         setContact(false);
       },
     },
@@ -57,10 +69,13 @@ export default function BurgerMenu() {
       },
     },
     {
-      title: "سبد آرزو",
-      icon: <FavoriteIcon />,
+      title:
+        currentUser && currentUser.permission === "blogger"
+          ? "کمد بلاگر"
+          : "کمد من",
+      icon: <CheckroomIcon />,
       call: () => {
-        navigateMenu("wish");
+        navigateMenu("orders");
         setContact(false);
       },
     },
@@ -120,7 +135,11 @@ export default function BurgerMenu() {
               className={classes.user}
               onClick={() => navigateMenu("account")}
             >
-              <Person4Icon className="icon" />
+              {currentUser.permission === "blogger" ? (
+                <StarIcon className="icon" />
+              ) : (
+                <Person4Icon className="icon" />
+              )}
               <p>
                 {currentUser.name === "" ? currentUser.phone : currentUser.name}
               </p>

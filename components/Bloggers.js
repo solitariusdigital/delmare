@@ -1,11 +1,13 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Bloggers.module.scss";
-import { getBloggersApi } from "../services/api";
+import { getBloggersApi, getUserApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import { StateContext } from "../context/stateContext";
+import StarIcon from "@mui/icons-material/Star";
+import Person4Icon from "@mui/icons-material/Person4";
 
 export default function Bloggers() {
   const [bloggers, setBloggers] = useState([]);
@@ -13,17 +15,20 @@ export default function Bloggers() {
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const bloggersData = await getBloggersApi();
+      bloggersData.forEach(async (blogger) => {
+        const user = await getUserApi(blogger.userId);
+        blogger.favourites = user.favourites;
+        setBloggers((oldArray) =>
+          [...oldArray, blogger].sort(function (a, b) {
+            return b.favourites.length - a.favourites.length;
+          })
+        );
+      });
+    };
     setBar(true);
     setSearchControl(false);
-
-    const fetchData = async () => {
-      const data = await getBloggersApi();
-      setBloggers(
-        data.sort(function (a, b) {
-          return b.products.length - a.products.length;
-        })
-      );
-    };
     fetchData().catch(console.error);
   }, [setBloggers, setBar, setSearchControl]);
 
@@ -64,12 +69,14 @@ export default function Bloggers() {
             </div>
             <div className={classes.info}>
               <div className={classes.row}>
-                <p className={classes.value}>{blogger.products.length}</p>
-                <p className={classes.count}>آیتم</p>
+                <p className={classes.value}>{blogger.favourites.length}</p>
+                <p>برگزیده</p>
+                <StarIcon />
               </div>
               <div className={classes.row}>
                 <p className={classes.value}>{blogger.followers.length}</p>
-                <p className={classes.count}>فالو</p>
+                <p>فالوورز</p>
+                <Person4Icon />
               </div>
               <p className={classes.name}>{blogger.name}</p>
             </div>

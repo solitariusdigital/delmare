@@ -32,7 +32,11 @@ export default function Orders() {
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
-            <p>کمد من</p>
+            {currentUser.permission === "blogger" ? (
+              <p>کمد بلاگر</p>
+            ) : (
+              <p>کمد من</p>
+            )}
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon
@@ -104,7 +108,7 @@ export default function Orders() {
             .reverse()}
           {orders.length === 0 && (
             <div className={ShoppingCart.graphic}>
-              <p>آیتم خریداری شده شما در اینجا نمایش داده میشود</p>
+              <p>آیتم خریداری شده شما اینجا نمایش داده میشود</p>
               <Image
                 src={graphic}
                 alt="image"

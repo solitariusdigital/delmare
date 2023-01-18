@@ -19,7 +19,7 @@ const BloggerSchema = new Schema(
       maxlength: 300,
     },
     image: String,
-    products: [String],
+    userId: String,
     followers: [String],
   },
   { timestamps: true }

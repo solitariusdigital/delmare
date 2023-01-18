@@ -28,6 +28,8 @@ import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
 import Head from "next/head";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 export default function Product({ favourite, product }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -403,19 +405,35 @@ export default function Product({ favourite, product }) {
             />
             <div className={classes.banner}>
               <div className={classes.social}>
-                <div>
-                  {checFavourites(product) ? (
-                    <FavoriteIcon
-                      className={classes.iconRed}
-                      onClick={() => favourProduct(product)}
-                    />
-                  ) : (
-                    <FavoriteBorderIcon
-                      className={classes.icon}
-                      onClick={() => favourProduct(product)}
-                    />
-                  )}
-                </div>
+                {currentUser && currentUser.permission === "blogger" ? (
+                  <div>
+                    {checFavourites(product) ? (
+                      <StarIcon
+                        className={classes.iconRed}
+                        onClick={() => favourProduct(product)}
+                      />
+                    ) : (
+                      <StarBorderIcon
+                        className={classes.icon}
+                        onClick={() => favourProduct(product)}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {checFavourites(product) ? (
+                      <FavoriteIcon
+                        className={classes.iconRed}
+                        onClick={() => favourProduct(product)}
+                      />
+                    ) : (
+                      <FavoriteBorderIcon
+                        className={classes.icon}
+                        onClick={() => favourProduct(product)}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
               <ShareIcon
                 className="icon shareIcon"
@@ -995,19 +1013,35 @@ export default function Product({ favourite, product }) {
                   <div className="banner">
                     <p className="title">{product.title}</p>
                     <div className="social">
-                      <div>
-                        {checFavourites(product) ? (
-                          <FavoriteIcon
-                            className="iconRed"
-                            onClick={() => favourProduct(product)}
-                          />
-                        ) : (
-                          <FavoriteBorderIcon
-                            className="icon"
-                            onClick={() => favourProduct(product)}
-                          />
-                        )}
-                      </div>
+                      {currentUser && currentUser.permission === "blogger" ? (
+                        <div>
+                          {checFavourites(product) ? (
+                            <StarIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <StarBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <div>
+                          {checFavourites(product) ? (
+                            <FavoriteIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      )}
                       <div className="social">
                         <VisibilityIcon className="icon" />
                         <p>{Math.round(product.views)}</p>

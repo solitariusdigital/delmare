@@ -9,9 +9,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
 import classes from "./WishList.module.scss";
 import { updateUserApi, getProducstApi } from "../../services/api";
-import graphic from "../../assets/wishlist.png";
+import likeGraphic from "../../assets/wishlist.png";
+import starGraphic from "../../assets/star.png";
 import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -78,7 +81,11 @@ export default function WishList() {
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
-            <p>سبد آرزو</p>
+            {currentUser.permission === "blogger" ? (
+              <p>برگزیده</p>
+            ) : (
+              <p>سبد آرزو</p>
+            )}
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon
@@ -96,19 +103,35 @@ export default function WishList() {
                   <div className="banner">
                     <p className="title">{product.title}</p>
                     <div className="social">
-                      <div>
-                        {checFavourites(product) ? (
-                          <FavoriteIcon
-                            className="iconRed"
-                            onClick={() => favourProduct(product)}
-                          />
-                        ) : (
-                          <FavoriteBorderIcon
-                            className="icon"
-                            onClick={() => favourProduct(product)}
-                          />
-                        )}
-                      </div>
+                      {currentUser && currentUser.permission === "blogger" ? (
+                        <div>
+                          {checFavourites(product) ? (
+                            <StarIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <StarBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <div>
+                          {checFavourites(product) ? (
+                            <FavoriteIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      )}
                       <div className="social">
                         <VisibilityIcon className="icon" />
                         <p>{Math.round(product.views)}</p>
@@ -138,9 +161,17 @@ export default function WishList() {
           ))}
           {wishList.length === 0 && (
             <div className={ShoppingCart.graphic}>
-              <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+              {currentUser && currentUser.permission === "blogger" ? (
+                <p>لیست برگزیده شما اینجا نمایش داده میشود</p>
+              ) : (
+                <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+              )}
               <Image
-                src={graphic}
+                src={
+                  currentUser && currentUser.permission === "blogger"
+                    ? starGraphic
+                    : likeGraphic
+                }
                 alt="image"
                 objectFit="contain"
                 layout="fill"

@@ -54,19 +54,16 @@
   .row {
     display: flex;
     flex-direction: row;
-    text-align: center;
-    justify-content: space-between;
-    width: 70px;
+    align-items: center;
+
+    p {
+      margin: 0px 5px;
+    }
   }
 
   .value,
   .name {
-    font-size: config.$med-font;
     font-weight: bold;
-  }
-
-  .count {
-    font-size: config.$tiny-font;
   }
 }
 
