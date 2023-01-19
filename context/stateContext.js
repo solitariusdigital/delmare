@@ -9,7 +9,14 @@ export const StateProvider = (props) => {
   const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
-    "empty" || "screen" || "wish" || "account" || "cart" || "orders" || "about"
+    "empty" ||
+      "screen" ||
+      "wish" ||
+      "account" ||
+      "cart" ||
+      "orders" ||
+      "about" ||
+      "download"
   );
   const [selectedProduct, setSelectedProduct] = useState({});
   const [shoppingCart, setShoppingCart] = useState([]);

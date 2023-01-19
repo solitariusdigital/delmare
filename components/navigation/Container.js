@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
@@ -7,6 +7,7 @@ import ShoppingCart from "./ShoppingCart";
 import WishList from "./WishList";
 import Orders from "./Orders";
 import About from "./About";
+import Download from "./Download";
 import AddHomeScreen from "./AddHomeScreen";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -113,6 +114,7 @@ function Container() {
       {toggleContainer === "wish" && <WishList />}
       {toggleContainer === "orders" && <Orders />}
       {toggleContainer === "about" && <About />}
+      {toggleContainer === "download" && <Download />}
     </div>
   );
 }

@@ -19,7 +19,7 @@ export default function AddHomeScreen() {
               اضافه کنید
             </p>
             <div className={classes.items}>
-              <p>را در نوار پایین کلیک کنید Share دکمه</p>
+              <p>را در نوار پایین کلیک کنید Share دکمه - Safari</p>
               <IosShareIcon className="icon" sx={{ fontSize: 18 }} />
             </div>
             <div className={classes.items}>
@@ -47,7 +47,7 @@ export default function AddHomeScreen() {
               اضافه کنید
             </p>
             <div className={classes.items}>
-              <p>را کلیک کنید Menu دکمه</p>
+              <p>را کلیک کنید Menu دکمه - Chrome</p>
               <MoreVertIcon className="icon" sx={{ fontSize: 18 }} />
             </div>
             <div className={classes.items}>

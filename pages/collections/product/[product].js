@@ -262,6 +262,7 @@ export default function Product({ favourite, product }) {
           price: product.sale ? product.discount : product.price,
           image: product.images.main,
           percentage: product.percentage,
+          deliveryType: product.deliveryType,
           sale: product.sale,
         },
       ]);

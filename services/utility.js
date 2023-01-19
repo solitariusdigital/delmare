@@ -5,7 +5,11 @@ export function convertNumber(number) {
   });
 }
 
-export function tokenGenerator() {
+export function fourGenerator() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
+
+export function sixGenerator() {
   return Math.floor(100000 + Math.random() * 900000);
 }
 

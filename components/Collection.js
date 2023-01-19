@@ -248,6 +248,9 @@ function Collection({ collectionType, brandGallery, brand }) {
         {gallery.length === 0 && (
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
         )}
+        {gallery.length === 0 && message && (
+          <p className={classes.message}>درخواست نا موجود</p>
+        )}
       </div>
       <div className="collection-grid">
         {gallery
@@ -325,9 +328,6 @@ function Collection({ collectionType, brandGallery, brand }) {
           ))
           .reverse()
           .slice(0, reqNumber)}
-        {gallery.length === 0 && message && (
-          <p className={classes.message}>درخواست نا موجود</p>
-        )}
       </div>
       {gallery.length >= 20 && (
         <div className={classes.more}>

@@ -129,9 +129,9 @@ export const updateBrandApi = async (data) => {
   return await response.json();
 };
 
-// bloggers api
-export const getBloggerApi = async (id) => {
-  const response = await fetch(`/api/blogger?id=${id}`, {
+// notification api
+export const getNotificationsApi = async () => {
+  const response = await fetch("/api/notifications", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -139,6 +139,8 @@ export const getBloggerApi = async (id) => {
   });
   return await response.json();
 };
+
+// bloggers api
 export const getBloggersApi = async () => {
   const response = await fetch("/api/bloggers", {
     method: "GET",

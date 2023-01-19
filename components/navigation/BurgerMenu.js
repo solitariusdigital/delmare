@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./BurgerMenu.module.scss";
@@ -19,6 +19,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
 import StarIcon from "@mui/icons-material/Star";
+import DownloadIcon from "@mui/icons-material/Download";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -31,6 +32,8 @@ export default function BurgerMenu() {
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
   const [admin, setAdmin] = useState(false);
+
+  const [desktop, setDesktop] = useState(false);
 
   const navigation = [
     {
@@ -107,8 +110,22 @@ export default function BurgerMenu() {
     },
   ];
 
+  useEffect(() => {
+    if (
+      !window.matchMedia("(display-mode: standalone)").matches &&
+      navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
+    ) {
+      setDesktop(true);
+    }
+  }, [setDesktop]);
+
   const navigateMenu = (action) => {
-    if (userLogIn || action === "cart" || action === "about") {
+    if (
+      userLogIn ||
+      action === "cart" ||
+      action === "about" ||
+      action === "download"
+    ) {
       setToggleContainer(action);
       setMenu(false);
     } else {
@@ -156,10 +173,25 @@ export default function BurgerMenu() {
                     <p>{nav.title}</p>
                   </div>
                 ))}
+                {desktop && (
+                  <div
+                    className={classes.item}
+                    onClick={() => {
+                      navigateMenu("download");
+                      setContact(false);
+                    }}
+                  >
+                    <DownloadIcon />
+                    <p>راهنمای نصب</p>
+                  </div>
+                )}
                 {userLogIn &&
-                  JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                  (JSON.parse(secureLocalStorage.getItem("currentUser"))[
                     "permission"
-                  ] === "admin" && (
+                  ] === "admin" ||
+                    JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                      "permission"
+                    ] === "subadmin") && (
                     <div
                       className={classes.item}
                       onClick={() => {
@@ -193,16 +225,6 @@ export default function BurgerMenu() {
           )}
           {contact && (
             <div className={classes.box}>
-              <div className={classes.row}>
-                <p>
-                  خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
-                  مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
-                </p>
-              </div>
-              <div className={classes.row}>
-                <p>0912 022 1526</p>
-                <p>021 8879 3585</p>
-              </div>
               <div className={classes.social}>
                 <InstagramIcon
                   className="icon"
@@ -220,28 +242,44 @@ export default function BurgerMenu() {
                   }
                 />
               </div>
+              <div className={classes.row}>
+                <p>
+                  خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
+                  مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
+                </p>
+              </div>
+              <div className={classes.row}>
+                <p>0912 022 1526</p>
+                <p>021 8879 3585</p>
+              </div>
             </div>
           )}
           {admin && (
             <div className={classes.box}>
               <div className={classes.row}>
-                <button
-                  className="mainButton"
-                  onClick={() => Router.push("/upload")}
-                >
-                  Upload
-                </button>
+                {JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                  "permission"
+                ] === "admin" && (
+                  <Fragment>
+                    <button
+                      className="mainButton"
+                      onClick={() => Router.push("/upload")}
+                    >
+                      Upload
+                    </button>
+                    <button
+                      className="mainButton"
+                      onClick={() => Router.push("/users")}
+                    >
+                      Users
+                    </button>
+                  </Fragment>
+                )}
                 <button
                   className="mainButton"
                   onClick={() => Router.push("/invoice")}
                 >
                   Invoice
-                </button>
-                <button
-                  className="mainButton"
-                  onClick={() => Router.push("/users")}
-                >
-                  Users
                 </button>
               </div>
             </div>

@@ -9,12 +9,14 @@ import {
   updateProductApi,
 } from "../../services/api";
 import secureLocalStorage from "react-secure-storage";
+import Kavenegar from "kavenegar";
 
 export default function ConfirmationId() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
   const [refId, setRefId] = useState("");
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -61,6 +63,7 @@ export default function ConfirmationId() {
           color: product.color,
           size: product.size,
           image: product.image,
+          deliveryType: product.deliveryType,
           posted: false,
         };
         await createInvoiceApi(invoice);
@@ -73,6 +76,25 @@ export default function ConfirmationId() {
       });
     }
   }, [setContainer, shoppingCart, currentUser, id]);
+
+  const confirmation = () => {
+    Router.push("/");
+    setTimeout(() => {
+      setToggleContainer("orders");
+
+      const api = Kavenegar.KavenegarApi({
+        apikey: kavenegarKey,
+      });
+      api.VerifyLookup(
+        {
+          receptor: currentUser.phone,
+          token: refId,
+          template: "confirmation",
+        },
+        function (response, status) {}
+      );
+    }, 200);
+  };
 
   return (
     <div
@@ -87,15 +109,7 @@ export default function ConfirmationId() {
             <p className={classes.title}>{refId}</p>
           </div>
           <div className={classes.row}>
-            <button
-              className="mainButton"
-              onClick={() => {
-                Router.push("/");
-                setTimeout(() => {
-                  setToggleContainer("orders");
-                }, 200);
-              }}
-            >
+            <button className="mainButton" onClick={() => confirmation()}>
               کمد من
             </button>
           </div>

@@ -2,11 +2,15 @@ import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
-import { tokenGenerator } from "../services/utility";
+import { fourGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
-import { createUserApi, getUsersApi } from "../services/api";
+import {
+  createUserApi,
+  getUsersApi,
+  getNotificationsApi,
+} from "../services/api";
 import secureLocalStorage from "react-secure-storage";
 
 function Register() {
@@ -24,11 +28,20 @@ function Register() {
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
   const [counter, setCounter] = useState(59);
+  const [notification, setNotification] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUsersApi();
       setAppUsers(data);
+    };
+    fetchData().catch(console.error);
+  }, [setAppUsers]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getNotificationsApi();
+      setNotification(data[0].sms);
     };
     fetchData().catch(console.error);
   }, [setAppUsers]);
@@ -63,7 +76,7 @@ function Register() {
 
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
       setDisplayCounter(true);
-      let tokenId = tokenGenerator();
+      let tokenId = fourGenerator();
       setToken(tokenId);
 
       const api = Kavenegar.KavenegarApi({
@@ -208,7 +221,7 @@ function Register() {
         </div>
         <div className={classes.formAction}>
           <p className={classes.alert}>{alert}</p>
-          {checkToken.length === 6 && (
+          {checkToken.length === 4 && (
             <button className="mainButton" onClick={() => handleRegister()}>
               ورود / ​ثبت نام
             </button>
@@ -217,6 +230,9 @@ function Register() {
             <Image width={50} height={50} src={loadingImage} alt="isLoading" />
           )}
         </div>
+        {notification.active && (
+          <p className={classes.notification}>{notification.text}</p>
+        )}
       </div>
     </Fragment>
   );

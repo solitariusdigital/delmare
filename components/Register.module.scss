@@ -15,6 +15,12 @@
   }
 }
 
+.notification {
+  font-size: config.$tiny-font;
+  color: config.$red;
+  text-align: center;
+}
+
 .formAction {
   display: flex;
   flex-direction: column;
