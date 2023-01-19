@@ -95,6 +95,32 @@ export default function WishList() {
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
         </div>
+        {wishList.length === 0 && (
+          <div className={ShoppingCart.graphic}>
+            {currentUser && currentUser.permission === "blogger" ? (
+              <p>لیست برگزیده شما اینجا نمایش داده میشود</p>
+            ) : (
+              <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+            )}
+            <Image
+              src={
+                currentUser && currentUser.permission === "blogger"
+                  ? starGraphic
+                  : likeGraphic
+              }
+              alt="image"
+              objectFit="contain"
+              layout="fill"
+            />
+            <a
+              href="https://www.vecteezy.com/free-png/shopping-cart"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Graphic by Vecteezy
+            </a>
+          </div>
+        )}
         <div className="collection-grid wish-list">
           {wishList.map((product, index) => (
             <Fragment key={index}>
@@ -159,32 +185,6 @@ export default function WishList() {
               )}
             </Fragment>
           ))}
-          {wishList.length === 0 && (
-            <div className={ShoppingCart.graphic}>
-              {currentUser && currentUser.permission === "blogger" ? (
-                <p>لیست برگزیده شما اینجا نمایش داده میشود</p>
-              ) : (
-                <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
-              )}
-              <Image
-                src={
-                  currentUser && currentUser.permission === "blogger"
-                    ? starGraphic
-                    : likeGraphic
-                }
-                alt="image"
-                objectFit="contain"
-                layout="fill"
-              />
-              <a
-                href="https://www.vecteezy.com/free-png/shopping-cart"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Graphic by Vecteezy
-              </a>
-            </div>
-          )}
         </div>
       </div>
     </div>
