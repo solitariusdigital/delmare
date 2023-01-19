@@ -96,9 +96,12 @@ export default function BurgerMenu() {
   ];
 
   useEffect(() => {
-    setDesktop(
+    if (
+      !window.matchMedia("(display-mode: standalone)").matches &&
       navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
-    );
+    ) {
+      setDesktop(true);
+    }
   }, [setDesktop]);
 
   const navigateMenu = (action) => {
