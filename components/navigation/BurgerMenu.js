@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./BurgerMenu.module.scss";
@@ -18,6 +18,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
+import DownloadIcon from "@mui/icons-material/Download";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -30,6 +31,8 @@ export default function BurgerMenu() {
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
   const [admin, setAdmin] = useState(false);
+
+  const [desktop, setDesktop] = useState(false);
 
   const navigation = [
     {
@@ -92,8 +95,19 @@ export default function BurgerMenu() {
     },
   ];
 
+  useEffect(() => {
+    setDesktop(
+      navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
+    );
+  }, [setDesktop]);
+
   const navigateMenu = (action) => {
-    if (userLogIn || action === "cart" || action === "about") {
+    if (
+      userLogIn ||
+      action === "cart" ||
+      action === "about" ||
+      action === "download"
+    ) {
       setToggleContainer(action);
       setMenu(false);
     } else {
@@ -155,6 +169,18 @@ export default function BurgerMenu() {
                       <p>ادمین</p>
                     </div>
                   )}
+                {desktop && (
+                  <div
+                    className={classes.item}
+                    onClick={() => {
+                      navigateMenu("download");
+                      setContact(false);
+                    }}
+                  >
+                    <DownloadIcon />
+                    <p>راهنمای نصب</p>
+                  </div>
+                )}
               </div>
               {!userLogIn && (
                 <div className={classes.buttonContainer}>
@@ -177,16 +203,6 @@ export default function BurgerMenu() {
           )}
           {contact && (
             <div className={classes.box}>
-              <div className={classes.row}>
-                <p>
-                  خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
-                  مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
-                </p>
-              </div>
-              <div className={classes.row}>
-                <p>0912 022 1526</p>
-                <p>021 8879 3585</p>
-              </div>
               <div className={classes.social}>
                 <InstagramIcon
                   className="icon"
@@ -203,6 +219,16 @@ export default function BurgerMenu() {
                     window.open("https://t.me/odinhallofficial", "_ blank")
                   }
                 />
+              </div>
+              <div className={classes.row}>
+                <p>
+                  خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
+                  مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
+                </p>
+              </div>
+              <div className={classes.row}>
+                <p>0912 022 1526</p>
+                <p>021 8879 3585</p>
               </div>
             </div>
           )}

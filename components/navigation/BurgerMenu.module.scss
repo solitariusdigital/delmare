@@ -89,7 +89,7 @@
   justify-content: center;
 
   .button {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     @include mixins.heartbeat();
   }
 

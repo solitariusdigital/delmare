@@ -5,8 +5,7 @@
   position: absolute;
   width: 100%;
   height: calc(100vh - 50px);
-  background: config.$white;
-  @include mixins.transparentBackground(0.4, config.$brand);
+  @include mixins.transparentBackground(0.4, config.$cream);
 
   .content {
     position: relative;
