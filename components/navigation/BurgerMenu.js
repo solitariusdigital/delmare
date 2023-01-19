@@ -151,6 +151,18 @@ export default function BurgerMenu() {
                     <p>{nav.title}</p>
                   </div>
                 ))}
+                {desktop && (
+                  <div
+                    className={classes.item}
+                    onClick={() => {
+                      navigateMenu("download");
+                      setContact(false);
+                    }}
+                  >
+                    <DownloadIcon />
+                    <p>راهنمای نصب</p>
+                  </div>
+                )}
                 {userLogIn &&
                   (JSON.parse(secureLocalStorage.getItem("currentUser"))[
                     "permission"
@@ -169,18 +181,6 @@ export default function BurgerMenu() {
                       <p>ادمین</p>
                     </div>
                   )}
-                {desktop && (
-                  <div
-                    className={classes.item}
-                    onClick={() => {
-                      navigateMenu("download");
-                      setContact(false);
-                    }}
-                  >
-                    <DownloadIcon />
-                    <p>راهنمای نصب</p>
-                  </div>
-                )}
               </div>
               {!userLogIn && (
                 <div className={classes.buttonContainer}>
