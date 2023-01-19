@@ -9,9 +9,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
 import classes from "./WishList.module.scss";
 import { updateUserApi, getProducstApi } from "../../services/api";
-import graphic from "../../assets/wishlist.png";
+import likeGraphic from "../../assets/wishlist.png";
+import starGraphic from "../../assets/star.png";
 import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -57,6 +60,7 @@ export default function WishList() {
       await updateUserApi(currentUser);
     }
   };
+
   const checFavourites = (product) => {
     if (currentUser) {
       return currentUser.favourites.includes(product["_id"]);
@@ -77,7 +81,11 @@ export default function WishList() {
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
-            <p>سبد آرزو</p>
+            {currentUser.permission === "blogger" ? (
+              <p>برگزیده</p>
+            ) : (
+              <p>سبد آرزو</p>
+            )}
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon
@@ -88,10 +96,18 @@ export default function WishList() {
           </div>
         </div>
         {wishList.length === 0 && (
-          <div className={ShoppingCart.graphic} style={{ marginTop: "50px" }}>
-            <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+          <div className={ShoppingCart.graphic}>
+            {currentUser && currentUser.permission === "blogger" ? (
+              <p>لیست برگزیده شما اینجا نمایش داده میشود</p>
+            ) : (
+              <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
+            )}
             <Image
-              src={graphic}
+              src={
+                currentUser && currentUser.permission === "blogger"
+                  ? starGraphic
+                  : likeGraphic
+              }
               alt="image"
               objectFit="contain"
               layout="fill"
@@ -105,15 +121,29 @@ export default function WishList() {
             </a>
           </div>
         )}
-        {wishList.length > 0 && (
-          <div className="collection-grid wish-list">
-            {wishList.map((product, index) => (
-              <Fragment key={index}>
-                {product.display && (
-                  <div className="product">
-                    <div className="banner">
-                      <p className="title">{product.title}</p>
-                      <div className="social">
+        <div className="collection-grid wish-list">
+          {wishList.map((product, index) => (
+            <Fragment key={index}>
+              {product.display && (
+                <div className="product">
+                  <div className="banner">
+                    <p className="title">{product.title}</p>
+                    <div className="social">
+                      {currentUser && currentUser.permission === "blogger" ? (
+                        <div>
+                          {checFavourites(product) ? (
+                            <StarIcon
+                              className="iconPink"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <StarBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      ) : (
                         <div>
                           {checFavourites(product) ? (
                             <FavoriteIcon
@@ -127,35 +157,35 @@ export default function WishList() {
                             />
                           )}
                         </div>
-                        <div className="social">
-                          <VisibilityIcon className="icon" />
-                          <p>{Math.round(product.views)}</p>
-                        </div>
+                      )}
+                      <div className="social">
+                        <VisibilityIcon className="icon" />
+                        <p>{Math.round(product.views)}</p>
                       </div>
                     </div>
-                    <Image
-                      onClick={() => {
-                        selectProduct(product["_id"]);
-                      }}
-                      className={classes.image}
-                      src={product.images.main}
-                      alt="image"
-                      layout="fill"
-                      objectFit="cover"
-                      priority={true}
-                      loading="eager"
-                    />
-                    {product.sale && (
-                      <div className="sale">
-                        <p>{product.percentage}%</p>
-                      </div>
-                    )}
                   </div>
-                )}
-              </Fragment>
-            ))}
-          </div>
-        )}
+                  <Image
+                    onClick={() => {
+                      selectProduct(product["_id"]);
+                    }}
+                    className={classes.image}
+                    src={product.images.main}
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority={true}
+                    loading="eager"
+                  />
+                  {product.sale && (
+                    <div className="sale">
+                      <p>{product.percentage}%</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );
