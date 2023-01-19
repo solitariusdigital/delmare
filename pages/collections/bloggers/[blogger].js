@@ -11,6 +11,8 @@ import { StateContext } from "../../../context/stateContext";
 import Image from "next/image";
 import classes from "../../page.module.scss";
 import Router from "next/router";
+import StarIcon from "@mui/icons-material/Star";
+import Person4Icon from "@mui/icons-material/Person4";
 
 export default function Blogger() {
   const { currentUser, seCurrentUser } = useContext(StateContext);
@@ -28,8 +30,6 @@ export default function Blogger() {
         bloggers.forEach(async (blogger) => {
           if (blogger.delmareId === bloggerDelmareId.toUpperCase()) {
             const user = await getUserApi(blogger.userId);
-
-            // blogger.favourites = user.favourites;
             setBlogger({ ...blogger, favourites: user.favourites });
 
             user.favourites.forEach(async (productId) => {
@@ -46,12 +46,6 @@ export default function Blogger() {
     setBar(true);
     fetchData().catch(console.error);
   }, [bloggerDelmareId, setBar, currentUser]);
-
-  const removeProduct = async (id) => {
-    blogger.products.splice(blogger.products.indexOf(id), 1);
-    await updateBloggerApi(blogger);
-    Router.reload(window.location.pathname);
-  };
 
   return (
     <Fragment>
@@ -72,6 +66,16 @@ export default function Blogger() {
               loading="eager"
             />
           )}
+        </div>
+        {blogger.followers && (
+          <div className={classes.social}>
+            <p className={classes.value}>{blogger.followers.length}</p>
+            <Person4Icon sx={{ fontSize: 22 }} />
+          </div>
+        )}
+        <div className={classes.social}>
+          <p className={classes.value}>{products.length}</p>
+          <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
         </div>
         <p className={classes.name}> {blogger.name}</p>
         <p>{blogger.bio}</p>

@@ -7,7 +7,6 @@ import sale from "../../assets/sale.png";
 
 function CollectionsPage() {
   const { navigation, setNavigation } = useContext(StateContext);
-  const { searchControl, setSearchControl } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   const collections = [
