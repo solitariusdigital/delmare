@@ -1,6 +1,6 @@
 // users api
 export const updateUserApi = async (data) => {
-  const response = await fetch("/api/user", {
+  const response = await fetch("/api/users", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -10,7 +10,7 @@ export const updateUserApi = async (data) => {
   return await response.json();
 };
 export const createUserApi = async (data) => {
-  const response = await fetch("/api/user", {
+  const response = await fetch("/api/users", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -20,7 +20,16 @@ export const createUserApi = async (data) => {
   return await response.json();
 };
 export const getUsersApi = async () => {
-  const response = await fetch("/api/user", {
+  const response = await fetch("/api/users", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getUserApi = async (id) => {
+  const response = await fetch(`/api/user?id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -124,6 +133,36 @@ export const updateBrandApi = async (data) => {
 export const getNotificationsApi = async () => {
   const response = await fetch("/api/notifications", {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+// bloggers api
+export const getBloggerApi = async (id) => {
+  const response = await fetch(`/api/blogger?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getBloggersApi = async () => {
+  const response = await fetch("/api/bloggers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const updateBloggerApi = async (data) => {
+  const response = await fetch("/api/bloggers", {
+    method: "PUT",
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
