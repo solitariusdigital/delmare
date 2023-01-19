@@ -5,12 +5,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import classes from "./Collection.module.scss";
 import Image from "next/image";
-import { updateProductApi, updateUserApi } from "../services/api";
+import { updateUserApi } from "../services/api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
@@ -60,6 +62,7 @@ function Collection({ collectionType, brandGallery, brand }) {
         break;
     }
     setBar(true);
+    setSearchControl(true);
   }, [
     setBar,
     saleCollection,
@@ -70,6 +73,7 @@ function Collection({ collectionType, brandGallery, brand }) {
     brandGallery,
     generalCategories,
     accessoriesCategories,
+    setSearchControl,
   ]);
 
   const selectProduct = async (product) => {
@@ -257,19 +261,35 @@ function Collection({ collectionType, brandGallery, brand }) {
                   <div className="banner">
                     <p className="title">{product.title}</p>
                     <div className="social">
-                      <div>
-                        {checFavourites(product) ? (
-                          <FavoriteIcon
-                            className="iconRed"
-                            onClick={() => favourProduct(product)}
-                          />
-                        ) : (
-                          <FavoriteBorderIcon
-                            className="icon"
-                            onClick={() => favourProduct(product)}
-                          />
-                        )}
-                      </div>
+                      {currentUser && currentUser.permission === "blogger" ? (
+                        <div>
+                          {checFavourites(product) ? (
+                            <StarIcon
+                              className="iconPink"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <StarBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <div>
+                          {checFavourites(product) ? (
+                            <FavoriteIcon
+                              className="iconRed"
+                              onClick={() => favourProduct(product)}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className="icon"
+                              onClick={() => favourProduct(product)}
+                            />
+                          )}
+                        </div>
+                      )}
                       <div className="social">
                         <VisibilityIcon className="icon" />
                         <p className="count">

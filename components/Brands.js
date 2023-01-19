@@ -7,12 +7,15 @@ import Router from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import { StateContext } from "../context/stateContext";
 
-function Brands() {
+export default function Brands() {
   const [brands, setBrands] = useState([]);
   const { bar, setBar } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
     setBar(true);
+    setSearchControl(false);
+
     const fetchData = async () => {
       const data = await getBrandsApi();
       setBrands(
@@ -22,7 +25,7 @@ function Brands() {
       );
     };
     fetchData().catch(console.error);
-  }, [setBrands, setBar]);
+  }, [setBrands, setBar, setSearchControl]);
 
   return (
     <Fragment>
@@ -60,7 +63,7 @@ function Brands() {
             </div>
             <div className={classes.row}>
               <p className={classes.value}>{brand.products.length}</p>
-              <p className={classes.count}>تعداد آیتم و طرح</p>
+              <p className={classes.count}>آیتم و طرح</p>
             </div>
           </div>
         ))}
@@ -68,5 +71,3 @@ function Brands() {
     </Fragment>
   );
 }
-
-export default Brands;

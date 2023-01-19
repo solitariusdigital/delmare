@@ -1,0 +1,79 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.bloggers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  gap: 10px;
+  padding: 10px;
+
+  .blogger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 250px;
+    box-shadow: config.$card-shadow;
+    background: config.$white;
+    @include mixins.border-radius();
+
+    .imageContainer {
+      margin: 10px 0px;
+      @include mixins.border-radius();
+
+      .image {
+        @include mixins.border-radius();
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .share {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: 16px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      justify-content: space-between;
+      position: absolute;
+      width: 100%;
+      bottom: 10px;
+      padding: 5px;
+      @include mixins.transparentBackground(0.8, config.$cream);
+    }
+  }
+
+  .iconPink {
+    color: config.$pink;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    p {
+      margin: 0px 5px;
+    }
+  }
+
+  .value,
+  .name {
+    font-weight: bold;
+  }
+}
+
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}

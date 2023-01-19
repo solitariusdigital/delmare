@@ -148,7 +148,8 @@ a {
         }
 
         .icon,
-        .iconRed {
+        .iconRed,
+        .iconPink {
           font-size: config.$med-font;
           width: 20px;
           height: 20px;
@@ -157,6 +158,11 @@ a {
 
         .iconRed {
           color: config.$red;
+          @include mixins.favour();
+        }
+
+        .iconPink {
+          color: config.$pink;
           @include mixins.favour();
         }
 
@@ -209,7 +215,8 @@ a {
       }
     }
 
-    .activate {
+    .activate,
+    .blogger {
       left: 0px;
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;

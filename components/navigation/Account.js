@@ -91,7 +91,11 @@ export default function Account() {
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
           <div className={ShoppingCart.title}>
-            <p>حساب من</p>
+            {currentUser.permission === "blogger" ? (
+              <p>حساب بلاگر</p>
+            ) : (
+              <p>حساب من</p>
+            )}
           </div>
           <div className="shoppingcart-icon">
             <ShoppingCartIcon

@@ -225,3 +225,57 @@
     margin-top: 20px;
   }
 }
+
+.blogger {
+  padding: 10px;
+  text-align: right;
+
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
+
+    .image {
+      width: 100%;
+      height: 100%;
+      @include mixins.border-radius();
+    }
+  }
+
+  .name {
+    margin: 20px 0px;
+    font-size: config.$big-font;
+    font-weight: bold;
+  }
+
+  .productContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: config.$tiny-font;
+  }
+
+  .product {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    box-shadow: config.$image-shadow;
+    @include mixins.border-radius();
+
+    .image {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+}
