@@ -13,6 +13,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
 import secureLocalStorage from "react-secure-storage";
+import { convertNumber } from "../services/utility";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -466,6 +467,7 @@ export default function Upload() {
                   onClick={() => setSale(!sale)}
                   sx={{ color: "#d40d12", fontSize: 25 }}
                 />
+                <p>{convertNumber(Number(price))} T</p>
                 <p className={classes.label}>قیمت تومان</p>
               </div>
               <input
@@ -486,6 +488,7 @@ export default function Upload() {
                       onClick={() => setDiscount("")}
                       sx={{ fontSize: 16 }}
                     />
+                    <p>{convertNumber(Number(discount))} T</p>
                     <p className={classes.label}>قیمت تخفیف تومان</p>
                   </div>
                   <input
