@@ -1063,6 +1063,11 @@ export default function Product({ favourite, product }) {
                       <p>{product.percentage}%</p>
                     </div>
                   )}
+                  {!product.activate && (
+                    <div className="activate">
+                      <p>تمام</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

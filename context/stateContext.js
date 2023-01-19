@@ -37,11 +37,11 @@ export const StateProvider = (props) => {
       link: "/collections/accessories",
       active: false,
     },
-    {
-      title: "بلاگرز",
-      link: "/collections/bloggers",
-      active: false,
-    },
+    // {
+    //   title: "بلاگرز",
+    //   link: "/collections/bloggers",
+    //   active: false,
+    // },
     {
       title: "برندز",
       link: "/collections/brands",

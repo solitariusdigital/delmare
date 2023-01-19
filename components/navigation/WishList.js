@@ -121,71 +121,78 @@ export default function WishList() {
             </a>
           </div>
         )}
-        <div className="collection-grid wish-list">
-          {wishList.map((product, index) => (
-            <Fragment key={index}>
-              {product.display && (
-                <div className="product">
-                  <div className="banner">
-                    <p className="title">{product.title}</p>
-                    <div className="social">
-                      {currentUser && currentUser.permission === "blogger" ? (
-                        <div>
-                          {checFavourites(product) ? (
-                            <StarIcon
-                              className="iconPink"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <StarBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      ) : (
-                        <div>
-                          {checFavourites(product) ? (
-                            <FavoriteIcon
-                              className="iconRed"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <FavoriteBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      )}
+        {wishList.length > 0 && (
+          <div className="collection-grid wish-list">
+            {wishList.map((product, index) => (
+              <Fragment key={index}>
+                {product.display && (
+                  <div className="product">
+                    <div className="banner">
+                      <p className="title">{product.title}</p>
                       <div className="social">
-                        <VisibilityIcon className="icon" />
-                        <p>{Math.round(product.views)}</p>
+                        {currentUser && currentUser.permission === "blogger" ? (
+                          <div>
+                            {checFavourites(product) ? (
+                              <StarIcon
+                                className="iconPink"
+                                onClick={() => favourProduct(product)}
+                              />
+                            ) : (
+                              <StarBorderIcon
+                                className="icon"
+                                onClick={() => favourProduct(product)}
+                              />
+                            )}
+                          </div>
+                        ) : (
+                          <div>
+                            {checFavourites(product) ? (
+                              <FavoriteIcon
+                                className="iconRed"
+                                onClick={() => favourProduct(product)}
+                              />
+                            ) : (
+                              <FavoriteBorderIcon
+                                className="icon"
+                                onClick={() => favourProduct(product)}
+                              />
+                            )}
+                          </div>
+                        )}
+                        <div className="social">
+                          <VisibilityIcon className="icon" />
+                          <p>{Math.round(product.views)}</p>
+                        </div>
                       </div>
                     </div>
+                    <Image
+                      onClick={() => {
+                        selectProduct(product["_id"]);
+                      }}
+                      className={classes.image}
+                      src={product.images.main}
+                      alt="image"
+                      layout="fill"
+                      objectFit="cover"
+                      priority={true}
+                      loading="eager"
+                    />
+                    {product.sale && (
+                      <div className="sale">
+                        <p>{product.percentage}%</p>
+                      </div>
+                    )}
+                    {!product.activate && (
+                      <div className="activate">
+                        <p>تمام</p>
+                      </div>
+                    )}
                   </div>
-                  <Image
-                    onClick={() => {
-                      selectProduct(product["_id"]);
-                    }}
-                    className={classes.image}
-                    src={product.images.main}
-                    alt="image"
-                    layout="fill"
-                    objectFit="cover"
-                    priority={true}
-                    loading="eager"
-                  />
-                  {product.sale && (
-                    <div className="sale">
-                      <p>{product.percentage}%</p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Fragment>
-          ))}
-        </div>
+                )}
+              </Fragment>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

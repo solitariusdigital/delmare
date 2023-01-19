@@ -56,25 +56,28 @@ export default function Bloggers() {
                 }
               />
             </div>
-            <div className={classes.share}>
-              <ShareIcon
-                className="icon"
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    `delmareh.com/collections/bloggers/${blogger.delmareId}`
-                  )
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
             <div className={classes.info}>
               <div className={classes.row}>
-                <p className={classes.value}>{blogger.favourites.length}</p>
-                <StarIcon className={classes.iconPink} />
-              </div>
-              <div className={classes.row}>
-                <p className={classes.value}>{blogger.followers.length}</p>
-                <Person4Icon />
+                <ShareIcon
+                  className="icon"
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      `delmareh.com/collections/bloggers/${blogger.delmareId}`
+                    )
+                  }
+                  sx={{ fontSize: 20 }}
+                />
+                <div className={classes.social}>
+                  <p className={classes.value}>{blogger.followers.length}</p>
+                  <Person4Icon sx={{ fontSize: 22 }} />
+                </div>
+                <div className={classes.social}>
+                  <p className={classes.value}>{blogger.favourites.length}</p>
+                  <StarIcon
+                    className={classes.iconPink}
+                    sx={{ fontSize: 22 }}
+                  />
+                </div>
               </div>
               <p className={classes.name}>{blogger.name}</p>
             </div>
