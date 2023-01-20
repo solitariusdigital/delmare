@@ -22,7 +22,7 @@ export default function WishList() {
   const { bar, setBar } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
 
   const [wishList, setWishList] = useState([]);
   const [like, setLike] = useState(false);

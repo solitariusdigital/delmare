@@ -230,6 +230,34 @@
   padding: 10px;
   text-align: right;
 
+  .socialContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    .social {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0px 10px;
+
+      .value {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .shareIcon {
+        @include mixins.favour();
+      }
+    }
+
+    button {
+      margin: 0px;
+    }
+  }
+
   .imageContainer {
     position: relative;
     width: 100%;
@@ -244,7 +272,7 @@
     }
   }
 
-  .name {
+  .title {
     margin: 20px 0px;
     font-size: config.$big-font;
     font-weight: bold;

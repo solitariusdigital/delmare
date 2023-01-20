@@ -28,6 +28,7 @@ const UserSchema = new Schema(
       maxlength: 20,
     },
     favourites: [String],
+    follows: [String],
     birthday: String,
   },
   { timestamps: true }

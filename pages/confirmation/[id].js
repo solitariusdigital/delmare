@@ -13,7 +13,7 @@ import Kavenegar from "kavenegar";
 
 export default function ConfirmationId() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);

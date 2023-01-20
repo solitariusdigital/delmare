@@ -4,7 +4,6 @@ import { getBrandsApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
-import ShareIcon from "@mui/icons-material/Share";
 import { StateContext } from "../context/stateContext";
 
 export default function Brands() {
@@ -38,17 +37,6 @@ export default function Brands() {
         {brands.map((brand, index) => (
           <div key={index} className={classes.brand}>
             <p className={classes.title}>{brand.title}</p>
-            <div className={classes.share}>
-              <ShareIcon
-                className="icon"
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    `delmareh.com/collections/brands/${brand.delmareId}`
-                  )
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
             <div className={classes.logo}>
               <Image
                 className={classes.image}

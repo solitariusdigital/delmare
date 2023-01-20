@@ -4,7 +4,6 @@ import { getBloggersApi, getUserApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
-import ShareIcon from "@mui/icons-material/Share";
 import { StateContext } from "../context/stateContext";
 import StarIcon from "@mui/icons-material/Star";
 import Person4Icon from "@mui/icons-material/Person4";
@@ -58,15 +57,6 @@ export default function Bloggers() {
             </div>
             <div className={classes.info}>
               <div className={classes.row}>
-                <ShareIcon
-                  className="icon"
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      `delmareh.com/collections/bloggers/${blogger.delmareId}`
-                    )
-                  }
-                  sx={{ fontSize: 20 }}
-                />
                 <div className={classes.social}>
                   <p className={classes.value}>{blogger.followers.length}</p>
                   <Person4Icon sx={{ fontSize: 22 }} />

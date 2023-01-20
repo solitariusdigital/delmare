@@ -94,7 +94,12 @@
   p {
     font-size: config.$med-font;
     font-weight: bold;
+    margin-right: 10px;
   }
+}
+
+.shareIcon {
+  @include mixins.favour();
 }
 
 .loader {

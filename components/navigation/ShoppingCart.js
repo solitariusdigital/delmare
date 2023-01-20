@@ -15,7 +15,7 @@ import secureLocalStorage from "react-secure-storage";
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
@@ -110,7 +110,7 @@ export default function ShoppingCart() {
     };
 
     let data = await updateUserApi(user);
-    seCurrentUser(data);
+    setCurrentUser(data);
     secureLocalStorage.setItem("currentUser", JSON.stringify(data));
   };
 
@@ -337,7 +337,7 @@ export default function ShoppingCart() {
                 </div>
               ) : (
                 <div className={classes.register}>
-                  <p>جهت تکمیل کردن خرید</p>
+                  <p>جهت تکمیل خرید</p>
                   <p>وارد حساب کاربری شوید یا ثبت نام کنید</p>
                   <button
                     className={`mainButton ${classes.button}`}

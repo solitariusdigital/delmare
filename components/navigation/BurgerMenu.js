@@ -25,7 +25,7 @@ export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
 

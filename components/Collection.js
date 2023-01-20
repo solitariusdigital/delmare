@@ -13,12 +13,13 @@ import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
+import ShareIcon from "@mui/icons-material/Share";
 
 function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
@@ -182,6 +183,16 @@ function Collection({ collectionType, brandGallery, brand }) {
     return Date.parse(date) > Date.now() - 1000 * 60 * 60 * 24 * 7;
   };
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(
+      `https://delmareh.com/collections/brands/${brand.delmareId}`
+    );
+    document.querySelector(".shareIcon").classList.add(classes.shareIcon);
+    setTimeout(() => {
+      document.querySelector(".shareIcon").classList.remove(classes.shareIcon);
+    }, 1000);
+  };
+
   return (
     <Fragment>
       {search && collectionType !== "brands" && (
@@ -242,6 +253,11 @@ function Collection({ collectionType, brandGallery, brand }) {
       {collectionType === "brands" && (
         <div className={classes.brand}>
           <p>برند {brand.title}</p>
+          <ShareIcon
+            className="icon shareIcon"
+            onClick={() => copyLink()}
+            sx={{ fontSize: 16 }}
+          />
         </div>
       )}
       <div className={classes.loader}>

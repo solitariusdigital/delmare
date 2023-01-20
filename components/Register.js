@@ -17,7 +17,7 @@ function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { isLoading, setIsLoading } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
@@ -114,7 +114,7 @@ function Register() {
         if (user.phone === phone) {
           userExist = true;
           setUserLogin(true);
-          seCurrentUser(user);
+          setCurrentUser(user);
           secureLocalStorage.setItem("currentUser", JSON.stringify(user));
           setRegister(false);
         }
@@ -149,7 +149,7 @@ function Register() {
     } else {
       setRegister(false);
       setUserLogin(true);
-      seCurrentUser(data);
+      setCurrentUser(data);
       secureLocalStorage.setItem("currentUser", JSON.stringify(data));
     }
     setDisplayCounter(false);

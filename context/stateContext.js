@@ -37,11 +37,11 @@ export const StateProvider = (props) => {
       link: "/collections/accessories",
       active: false,
     },
-    // {
-    //   title: "بلاگرز",
-    //   link: "/collections/bloggers",
-    //   active: false,
-    // },
+    {
+      title: "بلاگرز",
+      link: "/collections/bloggers",
+      active: false,
+    },
     {
       title: "برندز",
       link: "/collections/brands",
@@ -91,7 +91,7 @@ export const StateProvider = (props) => {
   // application context
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
-  const [currentUser, seCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [productsCollection, setProductsCollection] = useState([]);
   const [galleryCollection, setGalleryCollection] = useState([]);
   const [saleCollection, setSaleCollection] = useState([]);
@@ -115,7 +115,7 @@ export const StateProvider = (props) => {
     isLoading,
     setIsLoading,
     currentUser,
-    seCurrentUser,
+    setCurrentUser,
     appUsers,
     setAppUsers,
     container,
