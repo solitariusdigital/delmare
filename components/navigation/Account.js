@@ -13,7 +13,7 @@ export default function Account() {
   const { menu, setMenu } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
 
   const [name, setName] = useState(currentUser.name);
   const [phone, setPhone] = useState(currentUser.phone);
@@ -43,7 +43,7 @@ export default function Account() {
     setUserLogin(false);
     setToggleContainer("");
     secureLocalStorage.removeItem("currentUser");
-    seCurrentUser(null);
+    setCurrentUser(null);
     Router.push("/");
   };
 
@@ -76,7 +76,7 @@ export default function Account() {
           : currentUser.birthday,
     };
     let data = await updateUserApi(user);
-    seCurrentUser(data);
+    setCurrentUser(data);
     secureLocalStorage.setItem("currentUser", JSON.stringify(data));
     setAlert("اطلاعات با موفقیت ذخیره شد");
     setTimeout(() => {

@@ -34,7 +34,7 @@ import StarIcon from "@mui/icons-material/Star";
 export default function Product({ favourite, product }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menue, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);

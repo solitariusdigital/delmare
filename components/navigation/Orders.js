@@ -10,7 +10,7 @@ import { convertNumber, convertDate } from "../../services/utility";
 
 export default function Orders() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const [orders, setOrders] = useState([]);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
 

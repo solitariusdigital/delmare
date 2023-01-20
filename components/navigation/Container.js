@@ -25,16 +25,16 @@ function Container() {
   const { bar, setBar } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
-  const { currentUser, seCurrentUser } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
     if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
       setUserLogin(true);
-      seCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
+      setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
     }
-  }, [setUserLogin, seCurrentUser, navigation]);
+  }, [setUserLogin, setCurrentUser, navigation]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {

@@ -42,11 +42,11 @@ a {
 }
 
 .mainButton {
-  @include mixins.button(config.$brand, config.$black, 120px);
+  @include mixins.button(config.$brand, config.$black, 100px);
 }
 
 .subButton {
-  @include mixins.button(config.$black, config.$brand, 120px);
+  @include mixins.button(config.$cream, config.$black, 100px);
 }
 
 .collections-type {
