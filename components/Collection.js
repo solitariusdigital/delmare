@@ -256,7 +256,7 @@ function Collection({ collectionType, brandGallery, brand }) {
           <ShareIcon
             className="icon shareIcon"
             onClick={() => copyLink()}
-            sx={{ fontSize: 16 }}
+            sx={{ fontSize: 18 }}
           />
         </div>
       )}

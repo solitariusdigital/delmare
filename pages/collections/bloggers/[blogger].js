@@ -161,7 +161,7 @@ export default function Blogger() {
             <ShareIcon
               className="icon shareIcon"
               onClick={() => copyLink()}
-              sx={{ fontSize: 20 }}
+              sx={{ fontSize: 18 }}
             />
           </div>
         </div>
