@@ -15,6 +15,7 @@ function CollectionPage() {
   const { galleryCollection, setGalleryCollection } = useContext(StateContext);
   const { accessoriesCollection, setAccessoriesCollection } =
     useContext(StateContext);
+  const { navigation, setNavigation } = useContext(StateContext);
 
   const router = useRouter();
   let collection = router.query.collection;
@@ -52,6 +53,18 @@ function CollectionPage() {
     setGalleryCollection,
     setAccessoriesCollection,
   ]);
+
+  useEffect(() => {
+    navigation.map((nav) => {
+      if (nav.collection === collection) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collection, setNavigation]);
 
   return (
     <Fragment>

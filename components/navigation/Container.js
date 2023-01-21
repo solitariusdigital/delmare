@@ -35,7 +35,7 @@ function Container() {
       setUserLogin(true);
       setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
     }
-  }, [setUserLogin, setCurrentUser, navigation]);
+  }, [setUserLogin, setCurrentUser]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
@@ -45,25 +45,6 @@ function Container() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const activateNav = (index) => {
-    navigation.map((nav, i) => {
-      if (i === index) {
-        nav.active = true;
-      } else {
-        nav.active = false;
-      }
-    });
-    setNavigation([...navigation]);
-  };
-
-  const navigateLandingPage = () => {
-    setSearchControl(false);
-    Router.push("/");
-    navigation.map((nav, i) => {
-      nav.active = false;
-    });
-  };
 
   return (
     <div className={classes.container}>
@@ -76,7 +57,13 @@ function Container() {
             />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
-          <div className={classes.brand} onClick={() => navigateLandingPage()}>
+          <div
+            className={classes.brand}
+            onClick={() => {
+              setSearchControl(false);
+              Router.push("/");
+            }}
+          >
             <Image src={brand} alt="brand" />
           </div>
           <div className="shoppingcart-icon">
@@ -96,7 +83,7 @@ function Container() {
                 <div
                   key={index}
                   className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(index)}
+                  onClick={() => Router.push(nav.link)}
                 >
                   <Link href={nav.link}>{nav.title}</Link>
                 </div>

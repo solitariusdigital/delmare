@@ -25,26 +25,31 @@ export const StateProvider = (props) => {
   const [navigation, setNavigation] = useState([
     {
       title: "گالری",
+      collection: "gallery",
       link: "/collections/gallery",
       active: false,
     },
     {
       title: "تخفیف",
+      collection: "sale",
       link: "/collections/sale",
       active: false,
     },
     {
       title: "اکسسوری",
+      collection: "accessories",
       link: "/collections/accessories",
       active: false,
     },
     {
       title: "بلاگرز",
+      collection: "bloggers",
       link: "/collections/bloggers",
       active: false,
     },
     {
       title: "برندز",
+      collection: "brands",
       link: "/collections/brands",
       active: false,
     },

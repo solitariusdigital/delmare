@@ -1,5 +1,6 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useContext } from "react";
 import { useRouter } from "next/router";
+import { StateContext } from "../../../context/stateContext";
 import Collection from "../../../components/Collection";
 import {
   getBrandApi,
@@ -11,6 +12,7 @@ import Head from "next/head";
 export default function Brand() {
   const [gallery, setGallery] = useState([]);
   const [brand, setBrand] = useState([]);
+  const { navigation, setNavigation } = useContext(StateContext);
 
   const router = useRouter();
   let brandDelmareId = router.query.brand;
@@ -35,6 +37,16 @@ export default function Brand() {
     };
     fetchData().catch(console.error);
   }, [brandDelmareId]);
+
+  useEffect(() => {
+    navigation.map((nav) => {
+      if (nav.collection === "brands") {
+        nav.active = true;
+      }
+    });
+    setNavigation([...navigation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setNavigation]);
 
   return (
     <Fragment>

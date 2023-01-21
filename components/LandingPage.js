@@ -8,7 +8,6 @@ import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
-  const { navigation, setNavigation } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const [count, setCount] = useState(0);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
@@ -52,9 +51,6 @@ function LandingPage() {
   };
 
   const collections = () => {
-    navigation.map((nav) => {
-      nav.active = false;
-    });
     Router.push("/collections");
   };
 
