@@ -6,6 +6,7 @@ import Head from "next/head";
 import sale from "../../assets/sale.png";
 
 function CollectionsPage() {
+  const { navigation, setNavigation } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   const collections = [
@@ -24,17 +25,29 @@ function CollectionsPage() {
       link: "/collections/accessories",
       imageSrc: `${sourceLink}accessories.jpg`,
     },
-    {
-      title: "بلاگرز",
-      link: "/collections/bloggers",
-      imageSrc: `${sourceLink}four.jpg`,
-    },
+    // {
+    //   title: "بلاگرز",
+    //   link: "/collections/bloggers",
+    //   imageSrc: `${sourceLink}four.jpg`,
+    // },
     {
       title: "برندز",
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
     },
   ];
+
+  const activateNav = (link, index) => {
+    Router.push(`${link}`);
+    navigation.map((nav, i) => {
+      if (i === index) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
+  };
 
   return (
     <Fragment>
@@ -47,7 +60,7 @@ function CollectionsPage() {
           <div
             key={index}
             className="card"
-            onClick={() => Router.push(collection.link)}
+            onClick={() => activateNav(collection.link, index)}
           >
             <div className="banner">
               <p>{collection.title}</p>

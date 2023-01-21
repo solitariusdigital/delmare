@@ -46,6 +46,22 @@ function Container() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const activateNav = (index) => {
+    navigation.map((nav, i) => {
+      if (i === index) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
+  };
+
+  const navigateLandingPage = () => {
+    setSearchControl(false);
+    Router.push("/");
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -57,13 +73,7 @@ function Container() {
             />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
-          <div
-            className={classes.brand}
-            onClick={() => {
-              setSearchControl(false);
-              Router.push("/");
-            }}
-          >
+          <div className={classes.brand} onClick={() => navigateLandingPage()}>
             <Image src={brand} alt="brand" />
           </div>
           <div className="shoppingcart-icon">
@@ -83,7 +93,7 @@ function Container() {
                 <div
                   key={index}
                   className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => Router.push(nav.link)}
+                  onClick={() => activateNav(index)}
                 >
                   <Link href={nav.link}>{nav.title}</Link>
                 </div>

@@ -64,14 +64,14 @@ export default function BurgerMenu() {
         setContact(false);
       },
     },
-    {
-      title: "بلاگرز من",
-      icon: <StarsIcon />,
-      call: () => {
-        navigateMenu("follow");
-        setContact(false);
-      },
-    },
+    // {
+    //   title: "بلاگرز من",
+    //   icon: <StarsIcon />,
+    //   call: () => {
+    //     navigateMenu("follow");
+    //     setContact(false);
+    //   },
+    // },
     {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,

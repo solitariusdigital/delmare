@@ -23,7 +23,6 @@ export default function Blogger() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
-  const { navigation, setNavigation } = useContext(StateContext);
 
   const [blogger, setBlogger] = useState([]);
   const [products, setProducts] = useState([]);
@@ -56,16 +55,6 @@ export default function Blogger() {
     setBar(true);
     fetchData().catch(console.error);
   }, [bloggerDelmareId, setBar, currentUser]);
-
-  useEffect(() => {
-    navigation.map((nav) => {
-      if (nav.collection === "bloggers") {
-        nav.active = true;
-      }
-    });
-    setNavigation([...navigation]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setNavigation]);
 
   // check if user follows blogger
   useEffect(() => {
