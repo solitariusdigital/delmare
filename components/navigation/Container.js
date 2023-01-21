@@ -8,6 +8,7 @@ import WishList from "./WishList";
 import Orders from "./Orders";
 import About from "./About";
 import Download from "./Download";
+import Follow from "./Follow";
 import AddHomeScreen from "./AddHomeScreen";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -114,6 +115,7 @@ function Container() {
       {toggleContainer === "orders" && <Orders />}
       {toggleContainer === "about" && <About />}
       {toggleContainer === "download" && <Download />}
+      {toggleContainer === "follow" && <Follow />}
     </div>
   );
 }

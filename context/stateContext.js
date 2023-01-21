@@ -16,7 +16,8 @@ export const StateProvider = (props) => {
       "cart" ||
       "orders" ||
       "about" ||
-      "download"
+      "download" ||
+      "follow"
   );
   const [selectedProduct, setSelectedProduct] = useState({});
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -37,11 +38,11 @@ export const StateProvider = (props) => {
       link: "/collections/accessories",
       active: false,
     },
-    // {
-    //   title: "بلاگرز",
-    //   link: "/collections/bloggers",
-    //   active: false,
-    // },
+    {
+      title: "بلاگرز",
+      link: "/collections/bloggers",
+      active: false,
+    },
     {
       title: "برندز",
       link: "/collections/brands",
