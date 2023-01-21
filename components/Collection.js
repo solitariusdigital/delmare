@@ -63,7 +63,11 @@ function Collection({ collectionType, brandGallery, brand }) {
         break;
     }
     setBar(true);
-    setSearchControl(true);
+    if (collectionType === "brands") {
+      setSearchControl(false);
+    } else {
+      setSearchControl(true);
+    }
   }, [
     setBar,
     saleCollection,
