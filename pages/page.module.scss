@@ -233,8 +233,8 @@
   .socialContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 10px;
+    justify-content: space-around;
+    margin-top: 20px;
 
     .social {
       display: flex;
@@ -261,7 +261,7 @@
   .imageContainer {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 250px;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
 

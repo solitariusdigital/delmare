@@ -8,6 +8,7 @@ import WishList from "./WishList";
 import Orders from "./Orders";
 import About from "./About";
 import Download from "./Download";
+import Follow from "./Follow";
 import AddHomeScreen from "./AddHomeScreen";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -34,7 +35,7 @@ function Container() {
       setUserLogin(true);
       setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
     }
-  }, [setUserLogin, setCurrentUser, navigation]);
+  }, [setUserLogin, setCurrentUser]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("shoppingCart"))) {
@@ -59,9 +60,6 @@ function Container() {
   const navigateLandingPage = () => {
     setSearchControl(false);
     Router.push("/");
-    navigation.map((nav, i) => {
-      nav.active = false;
-    });
   };
 
   return (
@@ -114,6 +112,7 @@ function Container() {
       {toggleContainer === "orders" && <Orders />}
       {toggleContainer === "about" && <About />}
       {toggleContainer === "download" && <Download />}
+      {toggleContainer === "follow" && <Follow />}
     </div>
   );
 }

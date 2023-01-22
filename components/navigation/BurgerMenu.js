@@ -20,6 +20,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
 import StarIcon from "@mui/icons-material/Star";
 import DownloadIcon from "@mui/icons-material/Download";
+import ShieldIcon from "@mui/icons-material/Shield";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -63,6 +64,14 @@ export default function BurgerMenu() {
         setContact(false);
       },
     },
+    // {
+    //   title: "بلاگرز من",
+    //   icon: <StarsIcon />,
+    //   call: () => {
+    //     navigateMenu("follow");
+    //     setContact(false);
+    //   },
+    // },
     {
       title: "سبد خرید",
       icon: <ShoppingCartIcon />,
@@ -199,7 +208,7 @@ export default function BurgerMenu() {
                         setContact(false);
                       }}
                     >
-                      <StarsIcon />
+                      <ShieldIcon />
                       <p>ادمین</p>
                     </div>
                   )}

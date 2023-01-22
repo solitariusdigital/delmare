@@ -23,6 +23,7 @@ export default function Blogger() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+
   const [blogger, setBlogger] = useState([]);
   const [products, setProducts] = useState([]);
   const [followAction, setFollowAction] = useState(true);
@@ -31,6 +32,7 @@ export default function Blogger() {
   let bloggerDelmareId = router.query.blogger;
 
   useEffect(() => {
+    setProducts([]);
     const fetchData = async () => {
       if (bloggerDelmareId) {
         const bloggers = await getBloggersApi();
@@ -60,6 +62,8 @@ export default function Blogger() {
       const user = await getUserApi(currentUser["_id"]);
       if (user.follows.includes(blogger["_id"])) {
         setFollowAction(false);
+      } else {
+        setFollowAction(true);
       }
     };
     fetchData().catch(console.error);
@@ -76,13 +80,10 @@ export default function Blogger() {
     const blogger = await getBloggerApi(id);
 
     // update blogger
-    if (blogger.followers.includes(currentUser["_id"])) {
-      blogger.followers.splice(
-        blogger.followers.indexOf(currentUser["_id"]),
-        1
-      );
+    if (blogger.followers.includes(user["_id"])) {
+      blogger.followers.splice(blogger.followers.indexOf(user["_id"]), 1);
     } else {
-      blogger.followers.push(currentUser["_id"]);
+      blogger.followers.push(user["_id"]);
     }
 
     // update user
@@ -99,6 +100,7 @@ export default function Blogger() {
     }
     await updateUserApi(user);
     await updateBloggerApi(blogger);
+    setBlogger(blogger);
   };
 
   const copyLink = () => {
