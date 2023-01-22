@@ -47,5 +47,11 @@
       border-bottom: 2px solid config.$brand;
       font-weight: bold;
     }
+
+    p {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

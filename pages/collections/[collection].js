@@ -21,21 +21,18 @@ export default function CollectionPage({ products, data }) {
   let collection = router.query.collection;
 
   useEffect(() => {
-    const fetchData = async () => {
-      setProductsCollection(products);
-      switch (collection) {
-        case "gallery":
-          setGalleryCollection(data);
-          break;
-        case "sale":
-          setSaleCollection(data);
-          break;
-        case "accessories":
-          setAccessoriesCollection(data);
-          break;
-      }
-    };
-    fetchData().catch(console.error);
+    setProductsCollection(products);
+    switch (collection) {
+      case "gallery":
+        setGalleryCollection(data);
+        break;
+      case "sale":
+        setSaleCollection(data);
+        break;
+      case "accessories":
+        setAccessoriesCollection(data);
+        break;
+    }
   }, [
     setProductsCollection,
     setSaleCollection,

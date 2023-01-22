@@ -46,7 +46,8 @@ function Container() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const activateNav = (index) => {
+  const activateNav = (link, index) => {
+    Router.push(link);
     navigation.map((nav, i) => {
       if (i === index) {
         nav.active = true;
@@ -93,9 +94,9 @@ function Container() {
                 <div
                   key={index}
                   className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(index)}
+                  onClick={() => activateNav(nav.link, index)}
                 >
-                  <Link href={nav.link}>{nav.title}</Link>
+                  <p>{nav.title}</p>
                 </div>
               ))
               .reverse()}
