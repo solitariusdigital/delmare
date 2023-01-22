@@ -23,27 +23,35 @@ function CollectionPage() {
     const fetchData = async () => {
       const data = await getProducstApi();
       setProductsCollection(data);
-      setGalleryCollection(
-        data.filter((product) => {
-          return !product.sale;
-        })
-      );
-      setSaleCollection(
-        data.filter((product) => {
-          return product.sale;
-        })
-      );
-      setAccessoriesCollection(
-        data.filter((product) => {
-          return (
-            product.category === "اکسسوری" ||
-            product.category === "ساعت" ||
-            product.category === "عینک" ||
-            product.category === "کلاه" ||
-            product.category === "کیف"
+      switch (collection) {
+        case "gallery":
+          setGalleryCollection(
+            data.filter((product) => {
+              return !product.sale;
+            })
           );
-        })
-      );
+          break;
+        case "sale":
+          setSaleCollection(
+            data.filter((product) => {
+              return product.sale;
+            })
+          );
+          break;
+        case "accessories":
+          setAccessoriesCollection(
+            data.filter((product) => {
+              return (
+                product.category === "اکسسوری" ||
+                product.category === "ساعت" ||
+                product.category === "عینک" ||
+                product.category === "کلاه" ||
+                product.category === "کیف"
+              );
+            })
+          );
+          break;
+      }
     };
     fetchData().catch(console.error);
   }, [
@@ -51,6 +59,7 @@ function CollectionPage() {
     setSaleCollection,
     setGalleryCollection,
     setAccessoriesCollection,
+    collection,
   ]);
 
   return (
@@ -59,10 +68,10 @@ function CollectionPage() {
         <title>Fashion Clothing</title>
         <meta name="description" content="Fashion clothing" />
       </Head>
-      {collection === "gallery" && <Collection collectionType={"gallery"} />}
-      {collection === "sale" && <Collection collectionType={"sale"} />}
+      {collection === "gallery" && <Collection collectionType={collection} />}
+      {collection === "sale" && <Collection collectionType={collection} />}
       {collection === "accessories" && (
-        <Collection collectionType={"accessories"} />
+        <Collection collectionType={collection} />
       )}
       {collection === "brands" && <Brands />}
       {collection === "bloggers" && <Bloggers />}

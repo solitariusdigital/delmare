@@ -79,7 +79,6 @@ export default function Product({ favourite, product }) {
     router.beforePopState(({ as }) => {
       if (as !== router.asPath) {
         window.scrollTo(0, 0);
-        Router.reload(window.location.pathname);
       }
       return true;
     });
@@ -87,6 +86,23 @@ export default function Product({ favourite, product }) {
       router.beforePopState(() => true);
     };
   }, [router]);
+
+  // manage product states on arrow back
+  useEffect(() => {
+    setMainItem(product.images.main);
+    setItemOne(product.images.one);
+    setItemTwo(product.images.two);
+    setItemThree(product.images.three);
+    setProductSizes(product.size);
+    colors.length = 0;
+  }, [
+    colors,
+    product.images.main,
+    product.images.one,
+    product.images.three,
+    product.images.two,
+    product.size,
+  ]);
 
   useEffect(() => {
     setActive(product.activate);
@@ -111,7 +127,6 @@ export default function Product({ favourite, product }) {
   useEffect(() => {
     setBar(false);
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-
     Object.keys(productSizes).forEach((size) => {
       productSizes[size]["type"] = size;
       productSizes[size]["selected"] = false;
@@ -196,10 +211,10 @@ export default function Product({ favourite, product }) {
   };
 
   const clearDetails = () => {
-    colors.map((color, index) => {
+    colors.map((color) => {
       color.selected = false;
     });
-    Object.keys(productSizes).forEach((size, index) => {
+    Object.keys(productSizes).forEach((size) => {
       productSizes[size].selected = false;
     });
   };
@@ -271,6 +286,7 @@ export default function Product({ favourite, product }) {
       setSelectedSize("");
       setToggleContainer("cart");
       colors.length = 0;
+      window.scrollTo(0, 0);
     }
     setTimeout(() => {
       setAlert("");

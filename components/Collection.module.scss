@@ -105,8 +105,9 @@
 .loader {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  height: 200px;
   width: 100%;
 }
 

@@ -54,32 +54,32 @@ function Collection({ collectionType, brandGallery, brand }) {
         setGallery(saleCollection);
         setCategories(generalCategories);
         break;
-      case "brands":
-        setGallery(brandGallery);
-        break;
       case "accessories":
         setGallery(accessoriesCollection);
         setCategories(accessoriesCategories);
+        break;
+      case "brands":
+        setGallery(brandGallery);
         break;
     }
     setBar(true);
     setSearchControl(true);
   }, [
+    collectionType,
+    brandGallery,
     setBar,
     saleCollection,
     galleryCollection,
     productsCollection,
     accessoriesCollection,
-    collectionType,
-    brandGallery,
     generalCategories,
     accessoriesCategories,
     setSearchControl,
   ]);
 
   const selectProduct = async (product) => {
-    setSearchControl(false);
     Router.push(`/collections/product/${product["_id"]}`);
+    setSearchControl(false);
   };
 
   const favourProduct = async (product) => {
@@ -260,14 +260,12 @@ function Collection({ collectionType, brandGallery, brand }) {
           />
         </div>
       )}
-      <div className={classes.loader}>
-        {gallery.length === 0 && (
+      {gallery.length === 0 && (
+        <div className={classes.loader}>
           <Image width={50} height={50} src={loadingImage} alt="isLoading" />
-        )}
-        {gallery.length === 0 && message && (
-          <p className={classes.message}>درخواست نا موجود</p>
-        )}
-      </div>
+          {message && <p className={classes.message}>درخواست نا موجود</p>}
+        </div>
+      )}
       <div className="collection-grid">
         {gallery
           .map((product, index) => (
