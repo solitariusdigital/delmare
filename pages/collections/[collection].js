@@ -5,10 +5,11 @@ import { Fragment } from "react";
 import Brands from "../../components/Brands";
 import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
-import { getProducstApi } from "../../services/api";
 import Head from "next/head";
+import Product from "../../models/Product";
+import dbConnect from "../../services/dbConnect";
 
-function CollectionPage() {
+export default function CollectionPage({ products, data }) {
   const { productsCollection, setProductsCollection } =
     useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
@@ -21,35 +22,16 @@ function CollectionPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getProducstApi();
-      setProductsCollection(data);
+      setProductsCollection(products);
       switch (collection) {
         case "gallery":
-          setGalleryCollection(
-            data.filter((product) => {
-              return !product.sale;
-            })
-          );
+          setGalleryCollection(data);
           break;
         case "sale":
-          setSaleCollection(
-            data.filter((product) => {
-              return product.sale;
-            })
-          );
+          setSaleCollection(data);
           break;
         case "accessories":
-          setAccessoriesCollection(
-            data.filter((product) => {
-              return (
-                product.category === "اکسسوری" ||
-                product.category === "ساعت" ||
-                product.category === "عینک" ||
-                product.category === "کلاه" ||
-                product.category === "کیف"
-              );
-            })
-          );
+          setAccessoriesCollection(data);
           break;
       }
     };
@@ -60,6 +42,8 @@ function CollectionPage() {
     setGalleryCollection,
     setAccessoriesCollection,
     collection,
+    products,
+    data,
   ]);
 
   return (
@@ -79,4 +63,44 @@ function CollectionPage() {
   );
 }
 
-export default CollectionPage;
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const products = await Product.find();
+    let data = null;
+    switch (context.params.collection) {
+      case "gallery":
+        data = products.filter((product) => {
+          return !product.sale;
+        });
+        break;
+      case "sale":
+        data = products.filter((product) => {
+          return product.sale;
+        });
+        break;
+      case "accessories":
+        data = products.filter((product) => {
+          return (
+            product.category === "اکسسوری" ||
+            product.category === "ساعت" ||
+            product.category === "عینک" ||
+            product.category === "کلاه" ||
+            product.category === "کیف"
+          );
+        });
+        break;
+    }
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(products)),
+        data: JSON.parse(JSON.stringify(data)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}

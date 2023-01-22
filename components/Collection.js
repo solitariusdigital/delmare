@@ -15,7 +15,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ShareIcon from "@mui/icons-material/Share";
 
-function Collection({ collectionType, brandGallery, brand }) {
+export default function Collection({ collectionType, brandGallery, brand }) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { saleCollection, setSaleCollection } = useContext(StateContext);
@@ -351,5 +351,3 @@ function Collection({ collectionType, brandGallery, brand }) {
     </Fragment>
   );
 }
-
-export default Collection;
