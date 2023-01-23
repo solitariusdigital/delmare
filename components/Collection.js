@@ -15,10 +15,14 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ShareIcon from "@mui/icons-material/Share";
 
-export default function Collection({ collectionType, brandGallery, brand }) {
+export default function Collection({
+  galleryData,
+  collectionType,
+  brandGallery,
+  brand,
+}) {
   const { menue, setMenu } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
-  const { saleCollection, setSaleCollection } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
@@ -27,11 +31,6 @@ export default function Collection({ collectionType, brandGallery, brand }) {
   const { accessoriesCategories, setAccessoriesCategories } =
     useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
-  const { productsCollection, setProductsCollection } =
-    useContext(StateContext);
-  const { galleryCollection, setGalleryCollection } = useContext(StateContext);
-  const { accessoriesCollection, setAccessoriesCollection } =
-    useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
@@ -45,37 +44,30 @@ export default function Collection({ collectionType, brandGallery, brand }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    if (collectionType === "brands") {
+      setGallery(brandGallery);
+      setSearchControl(false);
+    } else {
+      setGallery(galleryData);
+      setSearchControl(true);
+    }
     switch (collectionType) {
       case "gallery":
-        setGallery(galleryCollection);
         setCategories(generalCategories);
         break;
       case "sale":
-        setGallery(saleCollection);
         setCategories(generalCategories);
         break;
       case "accessories":
-        setGallery(accessoriesCollection);
         setCategories(accessoriesCategories);
-        break;
-      case "brands":
-        setGallery(brandGallery);
         break;
     }
     setBar(true);
-    if (collectionType === "brands") {
-      setSearchControl(false);
-    } else {
-      setSearchControl(true);
-    }
   }, [
     collectionType,
     brandGallery,
+    galleryData,
     setBar,
-    saleCollection,
-    galleryCollection,
-    productsCollection,
-    accessoriesCollection,
     generalCategories,
     accessoriesCategories,
     setSearchControl,
@@ -84,6 +76,7 @@ export default function Collection({ collectionType, brandGallery, brand }) {
   const selectProduct = async (product) => {
     Router.push(`/collections/product/${product["_id"]}`);
     setSearchControl(false);
+    setGallery([]);
   };
 
   const favourProduct = async (product) => {
@@ -122,21 +115,21 @@ export default function Collection({ collectionType, brandGallery, brand }) {
     switch (collectionType) {
       case "gallery":
         setGallery(
-          productsCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.category === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          productsCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.category === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          accessoriesCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.category === type;
           })
         );
@@ -153,21 +146,21 @@ export default function Collection({ collectionType, brandGallery, brand }) {
     switch (collectionType) {
       case "gallery":
         setGallery(
-          productsCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.season === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          productsCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.season === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          accessoriesCollection.filter((product) => {
+          galleryData.filter((product) => {
             return product.season === type;
           })
         );

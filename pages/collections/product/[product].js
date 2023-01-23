@@ -31,7 +31,7 @@ import Head from "next/head";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 
-export default function Product({ favourite, product }) {
+export default function Product({ product, favourite }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -206,7 +206,6 @@ export default function Product({ favourite, product }) {
     setSelectedSize("");
     clearDetails();
     colors.length = 0;
-    window.scrollTo(0, 0);
     router.back();
   };
 
@@ -331,6 +330,7 @@ export default function Product({ favourite, product }) {
     colors.length = 0;
     setSelectedSize("");
     Router.push(`/collections/product/${id}`);
+    window.scrollTo(0, 0);
   };
 
   const copyLink = () => {

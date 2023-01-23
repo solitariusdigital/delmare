@@ -1,47 +1,16 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
-import { StateContext } from "../../context/stateContext";
 import { Fragment } from "react";
 import Brands from "../../components/Brands";
 import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
 import Head from "next/head";
-import Product from "../../models/Product";
 import dbConnect from "../../services/dbConnect";
+import Product from "../../models/Product";
+import Brand from "../../models/Brand";
 
-export default function CollectionPage({ products, data }) {
-  const { productsCollection, setProductsCollection } =
-    useContext(StateContext);
-  const { saleCollection, setSaleCollection } = useContext(StateContext);
-  const { galleryCollection, setGalleryCollection } = useContext(StateContext);
-  const { accessoriesCollection, setAccessoriesCollection } =
-    useContext(StateContext);
-
+export default function CollectionPage({ products, brands }) {
   const router = useRouter();
   let collection = router.query.collection;
-
-  useEffect(() => {
-    setProductsCollection(products);
-    switch (collection) {
-      case "gallery":
-        setGalleryCollection(data);
-        break;
-      case "sale":
-        setSaleCollection(data);
-        break;
-      case "accessories":
-        setAccessoriesCollection(data);
-        break;
-    }
-  }, [
-    setProductsCollection,
-    setSaleCollection,
-    setGalleryCollection,
-    setAccessoriesCollection,
-    collection,
-    products,
-    data,
-  ]);
 
   return (
     <Fragment>
@@ -49,12 +18,16 @@ export default function CollectionPage({ products, data }) {
         <title>Fashion Clothing</title>
         <meta name="description" content="Fashion clothing" />
       </Head>
-      {collection === "gallery" && <Collection collectionType={collection} />}
-      {collection === "sale" && <Collection collectionType={collection} />}
-      {collection === "accessories" && (
-        <Collection collectionType={collection} />
+      {collection === "gallery" && (
+        <Collection collectionType={collection} galleryData={products} />
       )}
-      {collection === "brands" && <Brands />}
+      {collection === "sale" && (
+        <Collection collectionType={collection} galleryData={products} />
+      )}
+      {collection === "accessories" && (
+        <Collection collectionType={collection} galleryData={products} />
+      )}
+      {collection === "brands" && <Brands brandsData={brands} />}
       {collection === "bloggers" && <Bloggers />}
     </Fragment>
   );
@@ -64,21 +37,19 @@ export default function CollectionPage({ products, data }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    const products = await Product.find();
-    let data = null;
+    let products = null;
+    let brands = null;
+
     switch (context.params.collection) {
       case "gallery":
-        data = products.filter((product) => {
-          return !product.sale;
-        });
+        products = await Product.find({ sale: false });
         break;
       case "sale":
-        data = products.filter((product) => {
-          return product.sale;
-        });
+        products = await Product.find({ sale: true });
         break;
       case "accessories":
-        data = products.filter((product) => {
+        products = await Product.find();
+        products = products.filter((product) => {
           return (
             product.category === "اکسسوری" ||
             product.category === "ساعت" ||
@@ -88,11 +59,14 @@ export async function getServerSideProps(context) {
           );
         });
         break;
+      case "brands":
+        brands = await Brand.find();
+        break;
     }
     return {
       props: {
         products: JSON.parse(JSON.stringify(products)),
-        data: JSON.parse(JSON.stringify(data)),
+        brands: JSON.parse(JSON.stringify(brands)),
       },
     };
   } catch (error) {

@@ -98,10 +98,6 @@ export const StateProvider = (props) => {
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [productsCollection, setProductsCollection] = useState([]);
-  const [galleryCollection, setGalleryCollection] = useState([]);
-  const [saleCollection, setSaleCollection] = useState([]);
-  const [accessoriesCollection, setAccessoriesCollection] = useState([]);
 
   const stateContext = {
     menu,
@@ -126,14 +122,8 @@ export const StateProvider = (props) => {
     setAppUsers,
     container,
     setContainer,
-    productsCollection,
-    setProductsCollection,
     register,
     setRegister,
-    saleCollection,
-    setSaleCollection,
-    galleryCollection,
-    setGalleryCollection,
     generalCategories,
     setGeneralCategories,
     accessoriesCategories,
@@ -146,8 +136,6 @@ export const StateProvider = (props) => {
     setSearchControl,
     kavenegarKey,
     setKavenegarKey,
-    accessoriesCollection,
-    setAccessoriesCollection,
   };
 
   return (
