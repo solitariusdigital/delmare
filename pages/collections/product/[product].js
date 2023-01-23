@@ -126,7 +126,7 @@ export default function Product({ product, favourite }) {
 
   useEffect(() => {
     setBar(false);
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     Object.keys(productSizes).forEach((size) => {
       productSizes[size]["type"] = size;
       productSizes[size]["selected"] = false;
