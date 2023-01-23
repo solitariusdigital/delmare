@@ -79,6 +79,8 @@ function CollectionsPage() {
             <Image
               className={"image"}
               src={collection.imageSrc}
+              blurDataURL={collection.imageSrc}
+              placeholder="blur"
               alt="image"
               layout="fill"
               objectFit="cover"

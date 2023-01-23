@@ -66,6 +66,8 @@ function LandingPage() {
       <Image
         className={classes.image}
         src={assignImage()}
+        blurDataURL={assignImage()}
+        placeholder="blur"
         alt="image"
         layout="fill"
         objectFit="cover"
