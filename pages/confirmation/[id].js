@@ -30,14 +30,14 @@ export default function ConfirmationId() {
   useEffect(() => {
     document.body.style.background = "#ffffff";
     setDivHeight(window.innerHeight);
-
     setContainer(false);
-    setRefId(JSON.parse(secureLocalStorage.getItem("refId")));
 
+    setRefId(JSON.parse(secureLocalStorage.getItem("refId")));
     if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
       setDisplayConfirmation(true);
+
       // create invoice with customer and product info
-      shoppingCart.forEach(async (product) => {
+      const updateProductsData = async (product) => {
         // get latest product and update count and save on db
         let getProduct = await getProductApi(product["_id"]);
         if (getProduct.size[product.size].colors[product.color] > 0) {
@@ -69,18 +69,20 @@ export default function ConfirmationId() {
           posted: false,
         };
         await createInvoiceApi(invoice);
+      };
+
+      shoppingCart.forEach((product) => {
+        updateProductsData(product);
       });
 
       setTimeout(() => {
         secureLocalStorage.removeItem("refId");
         secureLocalStorage.removeItem("shoppingCart");
         shoppingCart.length = 0;
-      }, 1000);
-      setTimeout(() => {
         setDisplayButton(true);
-      }, 3000);
+      }, 4000);
     }
-  }, [setContainer, shoppingCart, currentUser, id]);
+  }, [shoppingCart, id, currentUser, setContainer]);
 
   const confirmation = () => {
     Router.push("/");
