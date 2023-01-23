@@ -38,9 +38,9 @@ function CollectionsPage() {
   ];
 
   const activateNav = (link, index) => {
-    Router.push(`${link}`);
-    navigation.map((nav, i) => {
+    navigation.forEach((nav, i) => {
       if (i === index) {
+        Router.push(`${link}`);
         nav.active = true;
       } else {
         nav.active = false;
