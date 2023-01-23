@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Bloggers.module.scss";
-import { getBloggersApi, getUserApi } from "../services/api";
+import { getUserApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
@@ -8,14 +8,13 @@ import { StateContext } from "../context/stateContext";
 import StarIcon from "@mui/icons-material/Star";
 import Person4Icon from "@mui/icons-material/Person4";
 
-export default function Bloggers() {
+export default function Bloggers({ bloggersData }) {
   const [bloggers, setBloggers] = useState([]);
   const { bar, setBar } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const bloggersData = await getBloggersApi();
       bloggersData.forEach(async (blogger) => {
         const user = await getUserApi(blogger.userId);
         blogger.favourites = user.favourites;
@@ -29,7 +28,7 @@ export default function Bloggers() {
     setBar(true);
     setSearchControl(false);
     fetchData().catch(console.error);
-  }, [setBloggers, setBar, setSearchControl]);
+  }, [setBloggers, setBar, setSearchControl, bloggersData]);
 
   return (
     <Fragment>

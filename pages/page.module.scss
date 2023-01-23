@@ -272,9 +272,15 @@
     }
   }
 
-  .title {
+  .name {
     margin: 20px 0px;
     font-size: config.$big-font;
+    font-weight: bold;
+  }
+
+  .title {
+    margin: 20px 0px;
+    font-size: config.$small-font;
     font-weight: bold;
   }
 

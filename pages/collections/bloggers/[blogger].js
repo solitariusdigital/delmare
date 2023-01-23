@@ -59,11 +59,13 @@ export default function Blogger() {
   // check if user follows blogger
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getUserApi(currentUser["_id"]);
-      if (user.follows.includes(blogger["_id"])) {
-        setFollowAction(false);
-      } else {
-        setFollowAction(true);
+      if (currentUser) {
+        const user = await getUserApi(currentUser["_id"]);
+        if (user.follows.includes(blogger["_id"])) {
+          setFollowAction(false);
+        } else {
+          setFollowAction(true);
+        }
       }
     };
     fetchData().catch(console.error);
@@ -168,7 +170,7 @@ export default function Blogger() {
           </div>
         </div>
         <div>
-          <p className={classes.title}> {blogger.name}</p>
+          <p className={classes.name}> {blogger.name}</p>
           <p>{blogger.bio}</p>
         </div>
         {products.length > 0 && (
