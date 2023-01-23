@@ -37,7 +37,7 @@ export default function ShoppingCart() {
       setAddress(currentUser.address);
       setPost(currentUser.post);
     }
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart, currentUser]);
 
   useEffect(() => {

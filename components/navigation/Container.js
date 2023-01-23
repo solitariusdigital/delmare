@@ -38,10 +38,10 @@ function Container() {
   }, [setUserLogin, setCurrentUser]);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("shoppingCart"))) {
-      setShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
+    if (JSON.parse(secureLocalStorage.getItem("shoppingCart"))) {
+      setShoppingCart(JSON.parse(secureLocalStorage.getItem("shoppingCart")));
     } else {
-      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+      secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

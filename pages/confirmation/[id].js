@@ -20,6 +20,8 @@ export default function ConfirmationId() {
 
   const [refId, setRefId] = useState("");
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [displayButton, setDisplayButton] = useState(false);
+
   const [divHeight, setDivHeight] = useState(null);
 
   const router = useRouter();
@@ -67,13 +69,16 @@ export default function ConfirmationId() {
           posted: false,
         };
         await createInvoiceApi(invoice);
-
-        setTimeout(() => {
-          secureLocalStorage.removeItem("refId");
-          localStorage.removeItem("shoppingCart");
-          shoppingCart.length = 0;
-        }, 1000);
       });
+
+      setTimeout(() => {
+        secureLocalStorage.removeItem("refId");
+        secureLocalStorage.removeItem("shoppingCart");
+        shoppingCart.length = 0;
+      }, 1000);
+      setTimeout(() => {
+        setDisplayButton(true);
+      }, 3000);
     }
   }, [setContainer, shoppingCart, currentUser, id]);
 
@@ -108,11 +113,13 @@ export default function ConfirmationId() {
             <p>کد رهگیری</p>
             <p className={classes.title}>{refId}</p>
           </div>
-          <div className={classes.row}>
-            <button className="mainButton" onClick={() => confirmation()}>
-              کمد من
-            </button>
-          </div>
+          {displayButton && (
+            <div className={classes.row}>
+              <button className="mainButton" onClick={() => confirmation()}>
+                کمد من
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className={classes.rejectContainer}>
