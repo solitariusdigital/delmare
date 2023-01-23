@@ -98,6 +98,7 @@ export const StateProvider = (props) => {
   const [userLogIn, setUserLogin] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [gallery, setGallery] = useState([]);
 
   const stateContext = {
     menu,
@@ -136,6 +137,8 @@ export const StateProvider = (props) => {
     setSearchControl,
     kavenegarKey,
     setKavenegarKey,
+    gallery,
+    setGallery,
   };
 
   return (

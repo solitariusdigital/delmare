@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
-import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
 import Account from "./Account";
 import ShoppingCart from "./ShoppingCart";
@@ -29,6 +28,7 @@ function Container() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { gallery, setGallery } = useContext(StateContext);
 
   useEffect(() => {
     if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
@@ -47,6 +47,7 @@ function Container() {
   }, []);
 
   const activateNav = (link, index) => {
+    setGallery([]);
     Router.push(link);
     navigation.map((nav, i) => {
       if (i === index) {

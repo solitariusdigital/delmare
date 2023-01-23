@@ -32,11 +32,11 @@ export default function Collection({
     useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { gallery, setGallery } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
   const [like, setLike] = useState(false);
-  const [gallery, setGallery] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
@@ -71,6 +71,7 @@ export default function Collection({
     generalCategories,
     accessoriesCategories,
     setSearchControl,
+    setGallery,
   ]);
 
   const selectProduct = async (product) => {
