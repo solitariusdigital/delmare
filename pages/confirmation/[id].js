@@ -115,13 +115,15 @@ export default function ConfirmationId() {
             <p>کد رهگیری</p>
             <p className={classes.title}>{refId}</p>
           </div>
-          {displayButton && (
-            <div className={classes.row}>
+          <div className={classes.row}>
+            {displayButton ? (
               <button className="mainButton" onClick={() => confirmation()}>
                 کمد من
               </button>
-            </div>
-          )}
+            ) : (
+              <p>لطفا صبر کنید و صفحه را نبندید </p>
+            )}
+          </div>
         </div>
       ) : (
         <div className={classes.rejectContainer}>
