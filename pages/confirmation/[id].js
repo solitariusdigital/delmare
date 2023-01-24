@@ -121,7 +121,7 @@ export default function ConfirmationId() {
                 کمد من
               </button>
             ) : (
-              <p>لطفا صبر کنید و صفحه را نبندید </p>
+              <p>لطفا صبر کنید و صفحه را نبندید</p>
             )}
           </div>
         </div>

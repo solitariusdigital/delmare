@@ -300,3 +300,17 @@ a {
   width: 100%;
   padding: 10px;
 }
+
+.loadAppUpdate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+
+  p {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+}
