@@ -10,6 +10,8 @@ import {
 } from "../../services/api";
 import secureLocalStorage from "react-secure-storage";
 import Kavenegar from "kavenegar";
+import Image from "next/image";
+import loadingImage from "../../assets/loader.png";
 
 export default function ConfirmationId() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -121,7 +123,15 @@ export default function ConfirmationId() {
                 کمد من
               </button>
             ) : (
-              <p>لطفا صبر کنید و صفحه را نبندید </p>
+              <div className={classes.loading}>
+                <p>لطفا صبر کنید و صفحه را نبندید </p>
+                <Image
+                  width={50}
+                  height={50}
+                  src={loadingImage}
+                  alt="isLoading"
+                />
+              </div>
             )}
           </div>
         </div>
