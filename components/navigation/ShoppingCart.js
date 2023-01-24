@@ -73,6 +73,27 @@ export default function ShoppingCart() {
     return total;
   };
 
+  // clear shopping cart from duplicate selections
+  const continueShopping = () => {
+    const uniqueShoppingCart = shoppingCart.filter((value, index) => {
+      const _value = JSON.stringify(value);
+      return (
+        index ===
+        shoppingCart.findIndex((obj) => {
+          return JSON.stringify(obj) === _value;
+        })
+      );
+    });
+    if (uniqueShoppingCart.length !== shoppingCart.length) {
+      setShoppingCart(uniqueShoppingCart);
+      setAlert("آیتم تکراری از سبد شما پاک شد");
+    }
+    setCheckout(true);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+  };
+
   const handlecheckout = async () => {
     if (userLogIn) {
       checkoutConfirmation();
@@ -117,6 +138,7 @@ export default function ShoppingCart() {
   // check if product exist and make a request to bank to get refId then redirect user to payment page
   const initializePayment = async () => {
     let refId = null;
+
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] > 0) {
@@ -346,6 +368,7 @@ export default function ShoppingCart() {
                   >
                     ورود ​/ ثبت نام
                   </button>
+                  <div className={classes.alert}>{alert}</div>
                 </div>
               )}
             </div>
@@ -375,7 +398,7 @@ export default function ShoppingCart() {
               <button
                 className={`mainButton ${classes.button}`}
                 disabled={shoppingCart.length === 0}
-                onClick={() => setCheckout(true)}
+                onClick={() => continueShopping()}
               >
                 {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
               </button>
