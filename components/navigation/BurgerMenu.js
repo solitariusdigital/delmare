@@ -293,9 +293,11 @@ export default function BurgerMenu() {
               </div>
             </div>
           )}
-          <div className={classes.logo}>
-            <Image width={90} height={140} src={logo} alt="logo" />
-          </div>
+          {!admin && !contact && (
+            <div className={classes.logo}>
+              <Image width={90} height={140} src={logo} alt="logo" />
+            </div>
+          )}
         </div>
       </div>
     </div>

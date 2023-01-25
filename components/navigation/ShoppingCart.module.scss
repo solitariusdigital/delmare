@@ -28,7 +28,6 @@
   background: config.$cream;
   box-shadow: config.$card-shadow;
   overflow-y: scroll;
-  min-height: 700px;
 
   .topBar {
     position: absolute;
@@ -122,10 +121,10 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+            text-align: right;
 
             p {
               font-weight: bold;
-              font-size: config.$med-font;
             }
           }
 
