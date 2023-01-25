@@ -138,8 +138,8 @@ export default function Product({ product, favourite }) {
       // on each click update views count
       if (
         !currentUser ||
-        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
-          "customer"
+        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==
+          "admin"
       ) {
         let updateData = {
           ...product,
@@ -202,6 +202,7 @@ export default function Product({ product, favourite }) {
   };
 
   const back = () => {
+    // secureLocalStorage.removeItem("bloggerId");
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
@@ -261,16 +262,34 @@ export default function Product({ product, favourite }) {
     }
   };
 
+  // assign bloggerId to be added into shopping cart
+  const assignBloggerId = () => {
+    let bloggerDelmareId = "";
+    let bloggerIdContainer = JSON.parse(
+      secureLocalStorage.getItem("bloggerDelmareId")
+    );
+    if (bloggerIdContainer) {
+      bloggerIdContainer.forEach((item) => {
+        if (product["_id"] === Object.keys(item)[0]) {
+          bloggerDelmareId = Object.values(item)[0];
+        }
+      });
+    }
+    return bloggerDelmareId;
+  };
+
   const addToCart = () => {
     if (selectedColor === "" || selectedSize === "") {
       setAlert("رنگ یا اندازه را انتخاب کنید");
     } else {
+      // add item to shopping cart
       setShoppingCart([
         ...shoppingCart,
         {
           _id: product["_id"],
           delmareId: product.delmareId,
           title: product.title,
+          bloggerDelmareId: assignBloggerId(),
           size: selectedSize,
           color: selectedColor,
           price: product.sale ? product.discount : product.price,
@@ -280,6 +299,7 @@ export default function Product({ product, favourite }) {
           sale: product.sale,
         },
       ]);
+
       clearDetails();
       setSelectedColor("");
       setSelectedSize("");

@@ -68,6 +68,7 @@ export default function ConfirmationId() {
           size: product.size,
           image: product.image,
           deliveryType: product.deliveryType,
+          bloggerDelmareId: product.bloggerDelmareId,
           posted: false,
         };
         await createInvoiceApi(invoice);

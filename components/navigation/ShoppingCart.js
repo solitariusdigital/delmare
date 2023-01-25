@@ -56,7 +56,24 @@ export default function ShoppingCart() {
     fetchData().catch(console.error);
   }, [shoppingCart, setAvailability, availability]);
 
-  const deletecart = (index) => {
+  // remove bloggerId from shopping cart on deleteCart
+  const deleteBloggerId = (productId) => {
+    let bloggerIdContainer = JSON.parse(
+      secureLocalStorage.getItem("bloggerDelmareId")
+    );
+    if (bloggerIdContainer) {
+      bloggerIdContainer = bloggerIdContainer.filter((item) => {
+        return productId !== Object.keys(item)[0];
+      });
+    }
+    secureLocalStorage.setItem(
+      "bloggerDelmareId",
+      JSON.stringify(bloggerIdContainer)
+    );
+  };
+
+  const deleteCart = (index, productId) => {
+    deleteBloggerId(productId);
     setShoppingCart(
       shoppingCart.filter((cart, i) => {
         return i !== index;
@@ -86,7 +103,7 @@ export default function ShoppingCart() {
     });
     if (uniqueShoppingCart.length !== shoppingCart.length) {
       setShoppingCart(uniqueShoppingCart);
-      setAlert("آیتم تکراری از سبد شما پاک شد");
+      setAlert("آیتم مشابه از سبد حذف شد");
     }
     setCheckout(true);
     setTimeout(() => {
@@ -216,6 +233,9 @@ export default function ShoppingCart() {
                           <p>{convertNumber(cart.price)} T</p>
                           <p>{cart.title}</p>
                         </div>
+                        <div className={classes.title}>
+                          <p>{cart.bloggerDelmareId}</p>
+                        </div>
                         <div className={classes.options}>
                           <div className={classes.size}>{cart.size}</div>
                           <div
@@ -240,7 +260,7 @@ export default function ShoppingCart() {
                     <div className={classes.close}>
                       <CloseIcon
                         className="icon icon-grey"
-                        onClick={() => deletecart(index)}
+                        onClick={() => deleteCart(index, cart["_id"])}
                       />
                     </div>
                   </div>

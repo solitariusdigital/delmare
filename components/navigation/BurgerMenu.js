@@ -20,7 +20,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
 import StarIcon from "@mui/icons-material/Star";
 import DownloadIcon from "@mui/icons-material/Download";
-import ShieldIcon from "@mui/icons-material/Shield";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -208,7 +208,7 @@ export default function BurgerMenu() {
                         setContact(false);
                       }}
                     >
-                      <ShieldIcon />
+                      <MilitaryTechIcon />
                       <p>ادمین</p>
                     </div>
                   )}
@@ -288,7 +288,7 @@ export default function BurgerMenu() {
                   className="mainButton"
                   onClick={() => Router.push("/invoice")}
                 >
-                  Invoice
+                  Invoices
                 </button>
               </div>
             </div>

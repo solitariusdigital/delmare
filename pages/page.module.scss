@@ -237,6 +237,10 @@
   padding: 10px;
   text-align: right;
 
+  .iconPink {
+    color: config.$pink;
+  }
+
   .socialContainer {
     display: flex;
     flex-direction: row;
@@ -265,6 +269,18 @@
     }
   }
 
+  .row {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 20px 0px;
+
+    .title {
+      font-size: config.$small-font;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
+
   .imageContainer {
     position: relative;
     width: 100%;
@@ -282,12 +298,6 @@
   .name {
     margin: 20px 0px;
     font-size: config.$big-font;
-    font-weight: bold;
-  }
-
-  .title {
-    margin: 20px 0px;
-    font-size: config.$small-font;
     font-weight: bold;
   }
 
@@ -319,8 +329,4 @@
     justify-content: space-around;
     margin-bottom: 10px;
   }
-}
-
-.iconPink {
-  color: config.$pink;
 }

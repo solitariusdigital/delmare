@@ -8,6 +8,7 @@ import { getNotificationsApi } from "../services/api";
 import loadingImage from "../assets/loaderUpdate.png";
 import Image from "next/image";
 import logo from "../assets/logo.svg";
+import secureLocalStorage from "react-secure-storage";
 
 export default function App({ Component, pageProps }) {
   const [loadAppUpdate, setLoadUpdate] = useState({});
@@ -26,7 +27,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <StateProvider>
-      {!loadAppUpdate.active ? (
+      {(JSON.parse(secureLocalStorage.getItem("currentUser")) &&
+        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
+          "admin") ||
+      !loadAppUpdate.active ? (
         <Layout>
           <PullToRefresh
             onRefresh={handleRefresh}

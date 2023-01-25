@@ -50,6 +50,7 @@ const InvoiceSchema = new Schema(
     posted: Boolean,
     refId: String,
     deliveryType: String,
+    bloggerDelmareId: String,
   },
   { timestamps: true }
 );

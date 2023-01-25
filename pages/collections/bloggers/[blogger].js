@@ -16,6 +16,7 @@ import Router from "next/router";
 import StarIcon from "@mui/icons-material/Star";
 import Person4Icon from "@mui/icons-material/Person4";
 import ShareIcon from "@mui/icons-material/Share";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Blogger() {
   const { register, setRegister } = useContext(StateContext);
@@ -115,6 +116,21 @@ export default function Blogger() {
     }, 1000);
   };
 
+  const selectProduct = (productId, bloggerDelmareId) => {
+    let bloggerIdContainer = [];
+    if (JSON.parse(secureLocalStorage.getItem("bloggerDelmareId"))) {
+      bloggerIdContainer = JSON.parse(
+        secureLocalStorage.getItem("bloggerDelmareId")
+      );
+    }
+    bloggerIdContainer.push({ [productId]: bloggerDelmareId });
+    secureLocalStorage.setItem(
+      "bloggerDelmareId",
+      JSON.stringify(bloggerIdContainer)
+    );
+    Router.push(`/collections/product/${productId}`);
+  };
+
   return (
     <Fragment>
       <Head>
@@ -175,7 +191,10 @@ export default function Blogger() {
         </div>
         {products.length > 0 && (
           <Fragment>
-            <p className={classes.title}>آیتم های برگزیده برای شما</p>
+            <div className={classes.row}>
+              <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
+              <p className={classes.title}>آیتم های برگزیده برای شما</p>
+            </div>
             <div className={classes.productContainer}>
               {products.map((product, index) => (
                 <div key={index}>
@@ -189,7 +208,7 @@ export default function Blogger() {
                       priority={true}
                       loading="eager"
                       onClick={() =>
-                        Router.push(`/collections/product/${product.id}`)
+                        selectProduct(product.id, blogger.delmareId)
                       }
                     />
                   </div>
