@@ -303,13 +303,16 @@ a {
 .loadAppUpdate {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
+  margin: auto;
+  height: 100vh;
 
   p {
     margin-top: 10px;
     margin-bottom: 30px;
+    font-weight: bold;
   }
 }
