@@ -161,9 +161,11 @@ export default function BurgerMenu() {
               className={classes.user}
               onClick={() => navigateMenu("account")}
             >
-              {currentUser.permission === "admin" && <MilitaryTechIcon />}
-              {currentUser.permission === "blogger" && <StarIcon />}
-              {currentUser.permission === "customer" && <Person4Icon />}
+              {currentUser.permission === "blogger" ? (
+                <StarIcon />
+              ) : (
+                <Person4Icon />
+              )}
               <p>
                 {currentUser.name === "" ? currentUser.phone : currentUser.name}
               </p>
