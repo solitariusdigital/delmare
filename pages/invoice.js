@@ -50,6 +50,10 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
     return price.reduce((partialSum, a) => partialSum + a, 0);
   };
 
+  const calculatePercentage = (percentage, value) => {
+    return convertNumber(value * (percentage / 100));
+  };
+
   return (
     <Fragment>
       {displayPage && (
@@ -146,16 +150,36 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{convertNumber(invoice.price)} T</p>
                     </div>
                     <div className={classes.row}>
+                      <p className={classes.title}>درصد بلاگر</p>
+                      {invoice.bloggerDelmareId === "DELMAREH" ? (
+                        <div className={classes.bloggerRow}>
+                          <p>{calculatePercentage(28, invoice.price)} T</p>
+                          <p>{invoice.bloggerDelmareId}</p>
+                        </div>
+                      ) : (
+                        <div className={classes.bloggerPercentage}>
+                          <div className={classes.bloggerRow}>
+                            <p>{calculatePercentage(13, invoice.price)} T</p>
+                            <p>DELMAREH</p>
+                          </div>
+                          <div className={classes.bloggerRow}>
+                            <p>{calculatePercentage(15, invoice.price)} T</p>
+                            <p>{invoice.bloggerDelmareId}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className={classes.row}>
+                      <p className={classes.title}>تحویل</p>
+                      <p>{invoice.deliveryType}</p>
+                    </div>
+                    <div className={classes.row}>
                       <p className={classes.title}>کد آیتم</p>
                       <p>{invoice.delmareId}</p>
                     </div>
                     <div className={classes.row}>
                       <p className={classes.title}>کد رهگیری</p>
                       <p>{invoice.refId}</p>
-                    </div>
-                    <div className={classes.row}>
-                      <p className={classes.title}>کد محصول</p>
-                      <p>{invoice.productId}</p>
                     </div>
                     <button
                       className={classes.button}
@@ -235,16 +259,36 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{convertNumber(invoice.price)} T</p>
                     </div>
                     <div className={classes.row}>
+                      <p className={classes.title}>درصد بلاگر</p>
+                      {invoice.bloggerDelmareId === "DELMAREH" ? (
+                        <div className={classes.bloggerRow}>
+                          <p>{calculatePercentage(28, invoice.price)} T</p>
+                          <p>{invoice.bloggerDelmareId}</p>
+                        </div>
+                      ) : (
+                        <div className={classes.bloggerPercentage}>
+                          <div className={classes.bloggerRow}>
+                            <p>{calculatePercentage(13, invoice.price)} T</p>
+                            <p>DELMAREH</p>
+                          </div>
+                          <div className={classes.bloggerRow}>
+                            <p>{calculatePercentage(15, invoice.price)} T</p>
+                            <p>{invoice.bloggerDelmareId}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className={classes.row}>
+                      <p className={classes.title}>تحویل</p>
+                      <p>{invoice.deliveryType}</p>
+                    </div>
+                    <div className={classes.row}>
                       <p className={classes.title}>کد آیتم</p>
                       <p>{invoice.delmareId}</p>
                     </div>
                     <div className={classes.row}>
                       <p className={classes.title}>کد رهگیری</p>
                       <p>{invoice.refId}</p>
-                    </div>
-                    <div className={classes.row}>
-                      <p className={classes.title}>کد محصول</p>
-                      <p>{invoice.productId}</p>
                     </div>
                   </div>
                 ))}
