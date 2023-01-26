@@ -90,15 +90,17 @@ export default function ShoppingCart() {
     return total;
   };
 
-  // clear shopping cart from duplicate selections
+  // clear shopping cart from duplicate selections based on id and color and size
   const continueShopping = () => {
-    const uniqueShoppingCart = shoppingCart.filter((value, index) => {
-      const _value = JSON.stringify(value);
+    const uniqueShoppingCart = shoppingCart.filter((obj, index) => {
       return (
         index ===
-        shoppingCart.findIndex((obj) => {
-          return JSON.stringify(obj) === _value;
-        })
+        shoppingCart.findIndex(
+          (o) =>
+            obj["_id"] === o["_id"] &&
+            obj.color === o.color &&
+            obj.size === o.size
+        )
       );
     });
     if (uniqueShoppingCart.length !== shoppingCart.length) {
