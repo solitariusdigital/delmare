@@ -41,22 +41,20 @@ export default function ShoppingCart() {
   }, [shoppingCart, currentUser]);
 
   useEffect(() => {
-    const checkProductsData = async (product) => {
-      let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] === 0) {
-        product.message = "اتمام موجودی";
-        setAvailability(!availability);
-      } else {
-        product.message = "";
-        setAvailability(!availability);
-      }
+    const fetchData = async () => {
+      shoppingCart.forEach(async (product) => {
+        let getProduct = await getProductApi(product["_id"]);
+        if (getProduct.size[product.size].colors[product.color] === 0) {
+          product.message = "اتمام موجودی";
+          setAvailability(!availability);
+        } else {
+          product.message = "";
+          setAvailability(!availability);
+        }
+      });
     };
-
-    shoppingCart.forEach((product) => {
-      checkProductsData(product);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shoppingCart]);
+    fetchData().catch(console.error);
+  }, [shoppingCart, setAvailability, availability]);
 
   // remove bloggerId from shopping cart on deleteCart
   const deleteBloggerId = (productId) => {
@@ -156,54 +154,37 @@ export default function ShoppingCart() {
     secureLocalStorage.setItem("currentUser", JSON.stringify(data));
   };
 
-  const allAreTrue = (arr) => {
-    return arr.every((element) => element === true);
-  };
-
-  // check if product exist
+  // check if product exist and make a request to bank to get refId then redirect user to payment page
   const initializePayment = async () => {
-    let itemCheck = [];
+    let refId = null;
+
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
       if (getProduct.size[product.size].colors[product.color] > 0) {
-        itemCheck.push(true);
+        setPayment(true);
+
+        let pay = await getMellatApi(calculateTotal() + "0");
+        refId = pay.RefId;
+
+        if (pay.hasOwnProperty("error")) {
+          setAlert(pay.error);
+        } else {
+          await updateUser();
+          setCheckoutClicked(false);
+          setTimeout(() => {
+            setPayment(false);
+          }, 5000);
+          Router.push(
+            `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
+          );
+        }
+        setAlert("");
       } else {
-        itemCheck.push(false);
+        setAlert(`${product.delmareId} آیتم انتخاب شده موجود نمیباشد`);
       }
     });
-    setTimeout(() => {
-      if (allAreTrue(itemCheck)) {
-        openPaymentPortal();
-      } else {
-        setAlert(`آیتم انتخاب شده موجود نمیباشد`);
-        setTimeout(() => {
-          setCheckoutClicked(false);
-          setCheckout(false);
-        }, 2000);
-      }
-    }, 1000);
   };
 
-  // make a request to bank to get refId then redirect user to payment page
-  const openPaymentPortal = async () => {
-    let refId = null;
-    setPayment(true);
-    let pay = await getMellatApi(calculateTotal() + "0");
-    refId = pay.RefId;
-
-    if (pay.hasOwnProperty("error")) {
-      setAlert(pay.error);
-    } else {
-      await updateUser();
-      setCheckoutClicked(false);
-      setTimeout(() => {
-        setPayment(false);
-      }, 5000);
-      Router.push(
-        `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
-      );
-    }
-  };
   return (
     <div className={classes.slider} style={{ height: window.innerHeight }}>
       {!payment ? (
@@ -253,6 +234,9 @@ export default function ShoppingCart() {
                         <div className={classes.title}>
                           <p>{convertNumber(cart.price)} T</p>
                           <p>{cart.title}</p>
+                        </div>
+                        <div className={classes.title}>
+                          <p>{cart.bloggerDelmareId}</p>
                         </div>
                         <div className={classes.options}>
                           <div className={classes.size}>{cart.size}</div>

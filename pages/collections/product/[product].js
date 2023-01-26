@@ -264,7 +264,7 @@ export default function Product({ product, favourite }) {
 
   // assign bloggerId to be added into shopping cart
   const assignBloggerId = () => {
-    let bloggerDelmareId = "DELMAREH";
+    let bloggerDelmareId = "";
     let bloggerIdContainer = JSON.parse(
       secureLocalStorage.getItem("bloggerDelmareId")
     );

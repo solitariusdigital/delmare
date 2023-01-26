@@ -91,6 +91,10 @@
       background: config.$brand;
     }
   }
+
+  .subRow {
+    min-width: 200px;
+  }
 }
 
 .infoBar {
@@ -109,8 +113,7 @@
   user-select: text;
 
   .row,
-  .subRow,
-  .bloggerRow {
+  .subRow {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -133,19 +136,6 @@
       border-radius: 50%;
       box-shadow: config.$image-shadow;
     }
-  }
-
-  .subRow {
-    min-width: 200px;
-  }
-
-  .bloggerPercentage {
-    width: 50%;
-  }
-
-  .bloggerRow {
-    max-width: 200px;
-    border-bottom: none;
   }
 
   .button {
