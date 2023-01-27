@@ -15,22 +15,22 @@ export default function Brand({ products, brands }) {
   let brandDelmareId = router.query.brand;
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (brandDelmareId) {
-        brands.forEach(async (brand) => {
-          if (brand.delmareId === brandDelmareId.toUpperCase()) {
-            const brandData = await getBrandApi(brand["_id"]);
-            setBrand(brandData);
-            setGallery(
-              products.filter((product) => {
-                return brandData.products.includes(product["_id"]);
-              })
-            );
-          }
-        });
+    const setBrandData = async (brand) => {
+      if (brand.delmareId === brandDelmareId.toUpperCase()) {
+        const brandData = await getBrandApi(brand["_id"]);
+        setBrand(brandData);
+        setGallery(
+          products.filter((product) => {
+            return brandData.products.includes(product["_id"]);
+          })
+        );
       }
     };
-    fetchData().catch(console.error);
+    if (brandDelmareId) {
+      brands.forEach((brand) => {
+        setBrandData(brand);
+      });
+    }
   }, [brandDelmareId, brands, products]);
 
   return (
