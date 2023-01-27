@@ -14,6 +14,7 @@ import secureLocalStorage from "react-secure-storage";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ShareIcon from "@mui/icons-material/Share";
+import { abbreviateNumber } from "../services/utility";
 
 export default function Collection({
   galleryData,
@@ -170,13 +171,6 @@ export default function Collection({
     setMessage(true);
   };
 
-  const abbreviateViews = (num) => {
-    return new Intl.NumberFormat("en-GB", {
-      notation: "compact",
-      compactDisplay: "short",
-    }).format(num);
-  };
-
   const checkDate = (date) => {
     return Date.parse(date) > Date.now() - 1000 * 60 * 60 * 24 * 7;
   };
@@ -305,7 +299,7 @@ export default function Collection({
                       <div className="social">
                         <VisibilityIcon className="icon" />
                         <p className="count">
-                          {abbreviateViews(Math.round(product.views))}
+                          {abbreviateNumber(Math.round(product.views))}
                         </p>
                       </div>
                     </div>

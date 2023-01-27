@@ -10,7 +10,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { convertNumber } from "../../../services/utility";
+import { convertNumber, abbreviateNumber } from "../../../services/utility";
 import {
   updateUserApi,
   getProductApi,
@@ -471,6 +471,10 @@ export default function Product({ product, favourite }) {
                     )}
                   </div>
                 )}
+              </div>
+              <div className={classes.social}>
+                <p>{abbreviateNumber(Math.round(product.views))}</p>
+                <VisibilityIcon className="icon" />
               </div>
               <ShareIcon
                 className="icon shareIcon"
@@ -1081,7 +1085,7 @@ export default function Product({ product, favourite }) {
                       )}
                       <div className="social">
                         <VisibilityIcon className="icon" />
-                        <p>{Math.round(product.views)}</p>
+                        <p>{abbreviateNumber(Math.round(product.views))}</p>
                       </div>
                     </div>
                   </div>

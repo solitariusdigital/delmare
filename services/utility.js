@@ -32,3 +32,10 @@ export function getMobileOperatingSystem() {
 export function convertDate(date) {
   return new Date(date).toLocaleDateString("fa-IR");
 }
+
+export function abbreviateNumber(num) {
+  return new Intl.NumberFormat("en-GB", {
+    notation: "compact",
+    compactDisplay: "short",
+  }).format(num);
+}
