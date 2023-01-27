@@ -56,7 +56,7 @@ export default function ShoppingCart() {
       checkProductsData(product);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shoppingCart]);
+  }, [shoppingCart, checkout]);
 
   // remove bloggerId from shopping cart on deleteCart
   const deleteBloggerId = (productId) => {
@@ -108,11 +108,11 @@ export default function ShoppingCart() {
     if (uniqueShoppingCart.length !== shoppingCart.length) {
       setShoppingCart(uniqueShoppingCart);
       setAlert("آیتم مشابه از سبد حذف شد");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
     }
     setCheckout(true);
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
   };
 
   const handlecheckout = async () => {
