@@ -247,6 +247,14 @@
   padding: 10px;
   text-align: right;
 
+  .text {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+    color: config.$grey;
+    font-size: config.$tiny-font;
+  }
+
   .iconPink {
     color: config.$pink;
   }

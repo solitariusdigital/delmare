@@ -175,7 +175,9 @@ export default function Blogger() {
               </div>
             )}
             <div className={classes.social}>
-              <p className={classes.value}>{products.length}</p>
+              <p className={classes.value}>
+                {products.length > 21 ? 21 : products.length}
+              </p>
               <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
             </div>
             <ShareIcon
@@ -196,25 +198,32 @@ export default function Blogger() {
               <p className={classes.title}>آیتم های برگزیده برای شما</p>
             </div>
             <div className={classes.productContainer}>
-              {products.map((product, index) => (
-                <div key={index}>
-                  <div className={classes.product}>
-                    <Image
-                      className={classes.image}
-                      src={product.link}
-                      alt="image"
-                      layout="fill"
-                      objectFit="cover"
-                      priority={true}
-                      loading="eager"
-                      onClick={() =>
-                        selectProduct(product.id, blogger.delmareId)
-                      }
-                    />
+              {products
+                .map((product, index) => (
+                  <div key={index}>
+                    <div className={classes.product}>
+                      <Image
+                        className={classes.image}
+                        src={product.link}
+                        alt="image"
+                        layout="fill"
+                        objectFit="cover"
+                        priority={true}
+                        loading="eager"
+                        onClick={() =>
+                          selectProduct(product.id, blogger.delmareId)
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+                .slice(0, 21)}
             </div>
+            {products.length > 21 && (
+              <p className={classes.text}>
+                تنها 21 آیتم توسط بلاگر برگزیده میشود
+              </p>
+            )}
           </Fragment>
         )}
       </div>

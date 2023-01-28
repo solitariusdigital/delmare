@@ -1,12 +1,11 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.card {
+.infoCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 10px;
-  margin: 10px;
+  padding: 20px;
 
   button {
     margin-top: 20px;
@@ -64,7 +63,7 @@
   .logout {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
 
     p {
       border-bottom: 1px solid config.$black;
@@ -81,4 +80,64 @@
   flex-direction: row-reverse;
   justify-content: space-between;
   margin: 10px 0px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  width: 60%;
+  margin-bottom: 20px;
+
+  .nav,
+  .navActive {
+    padding: 10px;
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    background: config.$white;
+    @include mixins.border-radius();
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .navActive {
+    background: config.$brand;
+  }
+}
+
+.invoiceContainer {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.invoiceData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    p {
+      margin-right: 10px;
+      font-weight: 300;
+    }
+  }
+
+  p {
+    font-weight: bold;
+  }
 }

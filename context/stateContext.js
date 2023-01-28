@@ -41,12 +41,12 @@ export const StateProvider = (props) => {
       link: "/collections/accessories",
       active: false,
     },
-    // {
-    //   title: "بلاگرز",
-    //   collection: "bloggers",
-    //   link: "/collections/bloggers",
-    //   active: false,
-    // },
+    {
+      title: "بلاگرز",
+      collection: "bloggers",
+      link: "/collections/bloggers",
+      active: false,
+    },
     {
       title: "برندز",
       collection: "brands",
