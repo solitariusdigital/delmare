@@ -282,6 +282,7 @@ export default function Product({ product, favourite }) {
     if (selectedColor === "" || selectedSize === "") {
       setAlert("رنگ یا اندازه را انتخاب کنید");
     } else {
+      let bloggerDelmareId = assignBloggerId();
       // add item to shopping cart
       setShoppingCart([
         ...shoppingCart,
@@ -289,7 +290,7 @@ export default function Product({ product, favourite }) {
           _id: product["_id"],
           delmareId: product.delmareId,
           title: product.title,
-          bloggerDelmareId: assignBloggerId(),
+          bloggerDelmareId: bloggerDelmareId,
           size: selectedSize,
           color: selectedColor,
           price: product.sale ? product.discount : product.price,
