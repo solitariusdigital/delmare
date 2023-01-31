@@ -195,7 +195,7 @@ export default function Blogger() {
           <Fragment>
             <div className={classes.row}>
               <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
-              <p className={classes.title}>آیتم های برگزیده برای شما</p>
+              <p className={classes.title}>آیتم های برگزیده</p>
             </div>
             <div className={classes.productContainer}>
               {products
@@ -219,7 +219,7 @@ export default function Blogger() {
                 ))
                 .slice(0, 21)}
             </div>
-            {products.length > 21 && (
+            {products.length >= 21 && (
               <p className={classes.text}>
                 تنها 21 آیتم توسط بلاگر برگزیده میشود
               </p>
