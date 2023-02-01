@@ -148,12 +148,12 @@ export default function Blogger() {
   };
 
   return (
-    <Fragment>
+    <Fragment style={{ height: divHeight }}>
       <Head>
         <title>Fashion Bloggers</title>
         <meta name="description" content="Fashion bloggers" />
       </Head>
-      <div className={classes.blogger} style={{ height: divHeight }}>
+      <div className={classes.blogger}>
         <div className={classes.imageContainer}>
           {blogger.image && (
             <Image
@@ -206,7 +206,7 @@ export default function Blogger() {
           </div>
         </div>
         <div>
-          <p className={classes.name}> {blogger.name}</p>
+          <p className={classes.name}>{blogger.name}</p>
           <p>{blogger.bio}</p>
         </div>
         {products.length > 0 && (
