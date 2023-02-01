@@ -135,7 +135,7 @@ export default function Product({ product, favourite }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      // on each click update views count
+      // update views count
       if (
         !currentUser ||
         JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==

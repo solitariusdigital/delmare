@@ -112,6 +112,14 @@
 .invoiceContainer {
   padding: 10px;
   padding-top: 0px;
+
+  .text {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+    color: config.$grey;
+    font-size: config.$tiny-font;
+  }
 }
 
 .invoiceData {

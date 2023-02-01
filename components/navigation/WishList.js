@@ -99,10 +99,7 @@ export default function WishList() {
         {wishList.length === 0 && (
           <div className={ShoppingCart.graphic} style={{ marginTop: "50px" }}>
             {currentUser && currentUser.permission === "blogger" ? (
-              <div>
-                <p>لیست برگزیده شما</p>
-                <p>تنها 21 آیتم برگزیده توسط بلاگر نمایش داده میشود</p>
-              </div>
+              <p>لیست برگزیده شما</p>
             ) : (
               <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
             )}

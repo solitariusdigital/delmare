@@ -21,6 +21,7 @@ const BloggerSchema = new Schema(
     image: String,
     userId: String,
     followers: [String],
+    views: Number,
   },
   { timestamps: true }
 );

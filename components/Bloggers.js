@@ -5,8 +5,9 @@ import Image from "next/image";
 import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import { StateContext } from "../context/stateContext";
-import StarIcon from "@mui/icons-material/Star";
 import Person4Icon from "@mui/icons-material/Person4";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { abbreviateNumber } from "../services/utility";
 
 export default function Bloggers({ bloggersData }) {
   const [bloggers, setBloggers] = useState([]);
@@ -20,7 +21,7 @@ export default function Bloggers({ bloggersData }) {
       blogger.favourites = user.favourites;
       setBloggers((oldArray) =>
         [...oldArray, blogger].sort(function (a, b) {
-          return b.favourites.length - a.favourites.length;
+          return b.followers.length - a.followers.length;
         })
       );
     };
@@ -46,6 +47,8 @@ export default function Bloggers({ bloggersData }) {
               <Image
                 className={classes.image}
                 src={blogger.image}
+                blurDataURL={blogger.image}
+                placeholder="blur"
                 alt="image"
                 layout="fill"
                 objectFit="cover"
@@ -64,14 +67,9 @@ export default function Bloggers({ bloggersData }) {
                 </div>
                 <div className={classes.social}>
                   <p className={classes.value}>
-                    {blogger.favourites.length > 21
-                      ? 21
-                      : blogger.favourites.length}
+                    {abbreviateNumber(Math.round(blogger.views))}
                   </p>
-                  <StarIcon
-                    className={classes.iconPink}
-                    sx={{ fontSize: 22 }}
-                  />
+                  <VisibilityIcon sx={{ fontSize: 22 }} />
                 </div>
               </div>
               <p className={classes.name}>{blogger.name}</p>

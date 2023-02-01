@@ -338,6 +338,9 @@ export default function Account() {
                   </div>
                 </div>
               </div>
+              <p className={classes.text}>
+                تنها ۲۱ آیتم برگزیده توسط بلاگر به مشتری نمایش داده میشود
+              </p>
             </div>
           )}
           {controlNavigation && (
