@@ -53,15 +53,12 @@ export default function Users() {
               onClick={() => Router.push("/")}
               sx={{ fontSize: 30 }}
             />
-            <h3>اطلاعات مشتری</h3>
+            <h3>تعداد مشتری {appUsers.length}</h3>
             <RefreshIcon
               className="icon"
               onClick={() => Router.reload(window.location.pathname)}
               sx={{ fontSize: 30 }}
             />
-          </div>
-          <div className={classes.infoBar}>
-            <p>تعداد مشتری {appUsers.length}</p>
           </div>
           <div className="user-page">
             {appUsers.map((user, index) => (
