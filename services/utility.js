@@ -39,3 +39,7 @@ export function abbreviateNumber(num) {
     compactDisplay: "short",
   }).format(num);
 }
+
+export function calculatePercentage(percentage, value) {
+  return value * (percentage / 100);
+}

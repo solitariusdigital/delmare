@@ -15,6 +15,7 @@ import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
+import { abbreviateNumber } from "../../services/utility";
 
 export default function WishList() {
   const { menue, setMenu } = useContext(StateContext);
@@ -98,7 +99,10 @@ export default function WishList() {
         {wishList.length === 0 && (
           <div className={ShoppingCart.graphic} style={{ marginTop: "50px" }}>
             {currentUser && currentUser.permission === "blogger" ? (
-              <p>لیست برگزیده شما اینجا نمایش داده میشود</p>
+              <div>
+                <p>لیست برگزیده شما</p>
+                <p>تنها 21 آیتم برگزیده توسط بلاگر نمایش داده میشود</p>
+              </div>
             ) : (
               <p>لیست آیتم مورد علاقه شما اینجا نمایش داده میشود</p>
             )}
@@ -122,7 +126,7 @@ export default function WishList() {
           </div>
         )}
         {wishList.length > 0 && (
-          <div className="collection-grid wish-list">
+          <div className="collection-grid container-list">
             {wishList.map((product, index) => (
               <Fragment key={index}>
                 {product.display && (
@@ -161,7 +165,7 @@ export default function WishList() {
                         )}
                         <div className="social">
                           <VisibilityIcon className="icon" />
-                          <p>{Math.round(product.views)}</p>
+                          <p>{abbreviateNumber(Math.round(product.views))}</p>
                         </div>
                       </div>
                     </div>

@@ -62,7 +62,7 @@ export default function Follow() {
           </div>
         )}
         {bloggers.length > 0 && (
-          <div className="collection-grid wish-list">
+          <div className="collection-grid container-list">
             {bloggers.map((blogger, index) => (
               <Fragment key={index}>
                 <div className="product">

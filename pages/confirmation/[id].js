@@ -40,19 +40,6 @@ export default function ConfirmationId() {
 
       // create invoice with customer and product info
       const updateProductsData = async (product) => {
-        // get latest product and update count and save on db
-        let getProduct = await getProductApi(product["_id"]);
-        if (getProduct.size[product.size].colors[product.color] > 0) {
-          getProduct.size[product.size].colors[product.color]--;
-          if (
-            Object.keys(getProduct.size[product.size].colors).length === 1 &&
-            getProduct.size[product.size].colors[product.color] === 0
-          ) {
-            getProduct.activate = false;
-          }
-          await updateProductApi(getProduct);
-        }
-
         const invoice = {
           name: currentUser.name,
           phone: currentUser.phone,
@@ -71,6 +58,24 @@ export default function ConfirmationId() {
           bloggerDelmareId: product.bloggerDelmareId,
           posted: false,
         };
+
+        // get latest product and update count and save on db
+        let getProduct = await getProductApi(product["_id"]);
+        if (getProduct.size[product.size].colors[product.color] > 0) {
+          getProduct.size[product.size].colors[product.color]--;
+          if (
+            Object.keys(getProduct.size[product.size].colors).length === 1 &&
+            getProduct.size[product.size].colors[product.color] === 0
+          ) {
+            getProduct.activate = false;
+          }
+          await updateProductApi(getProduct);
+        } else {
+          invoice = {
+            ...invoice,
+            deliveryType: "بازگشت وجه مشتری",
+          };
+        }
         await createInvoiceApi(invoice);
       };
 

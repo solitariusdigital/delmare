@@ -4,7 +4,11 @@ import classes from "./page.module.scss";
 import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import invoiceModel from "../models/Invoice";
-import { convertNumber, convertDate } from "../services/utility";
+import {
+  convertNumber,
+  convertDate,
+  calculatePercentage,
+} from "../services/utility";
 import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -48,10 +52,6 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
       price.push(invoice.price);
     });
     return price.reduce((partialSum, a) => partialSum + a, 0);
-  };
-
-  const calculatePercentage = (percentage, value) => {
-    return convertNumber(value * (percentage / 100));
   };
 
   return (
@@ -153,17 +153,32 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p className={classes.title}>درصد بلاگر</p>
                       {invoice.bloggerDelmareId === "DELMAREH" ? (
                         <div className={classes.bloggerRow}>
-                          <p>{calculatePercentage(28, invoice.price)} T</p>
+                          <p>
+                            {convertNumber(
+                              calculatePercentage(28, invoice.price)
+                            )}{" "}
+                            T
+                          </p>
                           <p>{invoice.bloggerDelmareId}</p>
                         </div>
                       ) : (
                         <div className={classes.bloggerPercentage}>
                           <div className={classes.bloggerRow}>
-                            <p>{calculatePercentage(13, invoice.price)} T</p>
+                            <p>
+                              {convertNumber(
+                                calculatePercentage(13, invoice.price)
+                              )}{" "}
+                              T
+                            </p>
                             <p>DELMAREH</p>
                           </div>
                           <div className={classes.bloggerRow}>
-                            <p>{calculatePercentage(15, invoice.price)} T</p>
+                            <p>
+                              {convertNumber(
+                                calculatePercentage(15, invoice.price)
+                              )}{" "}
+                              T
+                            </p>
                             <p>{invoice.bloggerDelmareId}</p>
                           </div>
                         </div>
@@ -191,7 +206,6 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 ))}
               </div>
             )}
-
             {posted && (
               <div>
                 <div className={classes.infoBar}>
@@ -262,17 +276,32 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p className={classes.title}>درصد بلاگر</p>
                       {invoice.bloggerDelmareId === "DELMAREH" ? (
                         <div className={classes.bloggerRow}>
-                          <p>{calculatePercentage(28, invoice.price)} T</p>
+                          <p>
+                            {convertNumber(
+                              calculatePercentage(28, invoice.price)
+                            )}{" "}
+                            T
+                          </p>
                           <p>{invoice.bloggerDelmareId}</p>
                         </div>
                       ) : (
                         <div className={classes.bloggerPercentage}>
                           <div className={classes.bloggerRow}>
-                            <p>{calculatePercentage(13, invoice.price)} T</p>
+                            <p>
+                              {convertNumber(
+                                calculatePercentage(13, invoice.price)
+                              )}{" "}
+                              T
+                            </p>
                             <p>DELMAREH</p>
                           </div>
                           <div className={classes.bloggerRow}>
-                            <p>{calculatePercentage(15, invoice.price)} T</p>
+                            <p>
+                              {convertNumber(
+                                calculatePercentage(15, invoice.price)
+                              )}{" "}
+                              T
+                            </p>
                             <p>{invoice.bloggerDelmareId}</p>
                           </div>
                         </div>

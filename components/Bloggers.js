@@ -14,6 +14,7 @@ export default function Bloggers({ bloggersData }) {
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
+    setBloggers([]);
     const setBloggerData = async (blogger) => {
       const user = await getUserApi(blogger.userId);
       blogger.favourites = user.favourites;
@@ -62,7 +63,11 @@ export default function Bloggers({ bloggersData }) {
                   <Person4Icon sx={{ fontSize: 22 }} />
                 </div>
                 <div className={classes.social}>
-                  <p className={classes.value}>{blogger.favourites.length}</p>
+                  <p className={classes.value}>
+                    {blogger.favourites.length > 21
+                      ? 21
+                      : blogger.favourites.length}
+                  </p>
                   <StarIcon
                     className={classes.iconPink}
                     sx={{ fontSize: 22 }}
