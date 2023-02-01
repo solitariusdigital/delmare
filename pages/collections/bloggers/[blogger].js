@@ -17,6 +17,8 @@ import StarIcon from "@mui/icons-material/Star";
 import Person4Icon from "@mui/icons-material/Person4";
 import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { abbreviateNumber } from "../../../services/utility";
 
 export default function Blogger() {
   const { register, setRegister } = useContext(StateContext);
@@ -28,6 +30,7 @@ export default function Blogger() {
   const [blogger, setBlogger] = useState([]);
   const [products, setProducts] = useState([]);
   const [followAction, setFollowAction] = useState(true);
+  const [divHeight, setDivHeight] = useState(null);
 
   const router = useRouter();
   let bloggerDelmareId = router.query.blogger;
@@ -54,6 +57,7 @@ export default function Blogger() {
       }
     };
     setBar(true);
+    setDivHeight(window.innerHeight);
     fetchData().catch(console.error);
   }, [bloggerDelmareId, setBar, currentUser]);
 
@@ -71,6 +75,18 @@ export default function Blogger() {
     };
     fetchData().catch(console.error);
   }, [currentUser, blogger]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // update views count
+      let updateData = {
+        ...blogger,
+        views: blogger.views + 1.5,
+      };
+      await updateBloggerApi(updateData);
+    };
+    fetchData().catch(console.error);
+  }, [blogger]);
 
   const follow = async (id) => {
     if (!userLogIn) {
@@ -137,12 +153,14 @@ export default function Blogger() {
         <title>Fashion Bloggers</title>
         <meta name="description" content="Fashion bloggers" />
       </Head>
-      <div className={classes.blogger}>
+      <div className={classes.blogger} style={{ height: divHeight }}>
         <div className={classes.imageContainer}>
           {blogger.image && (
             <Image
               className={classes.image}
               src={blogger.image}
+              blurDataURL={blogger.image}
+              placeholder="blur"
               alt="image"
               layout="fill"
               objectFit="cover"
@@ -176,9 +194,9 @@ export default function Blogger() {
             )}
             <div className={classes.social}>
               <p className={classes.value}>
-                {products.length > 21 ? 21 : products.length}
+                {abbreviateNumber(Math.round(blogger.views))}
               </p>
-              <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
+              <VisibilityIcon sx={{ fontSize: 22 }} />
             </div>
             <ShareIcon
               className="icon shareIcon"
@@ -219,11 +237,6 @@ export default function Blogger() {
                 ))
                 .slice(0, 21)}
             </div>
-            {products.length >= 21 && (
-              <p className={classes.text}>
-                تنها 21 آیتم توسط بلاگر برگزیده میشود
-              </p>
-            )}
           </Fragment>
         )}
       </div>

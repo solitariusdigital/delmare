@@ -23,7 +23,6 @@ export default function ConfirmationId() {
   const [refId, setRefId] = useState("");
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [displayButton, setDisplayButton] = useState(false);
-
   const [divHeight, setDivHeight] = useState(null);
 
   const router = useRouter();
