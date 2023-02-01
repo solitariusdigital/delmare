@@ -357,10 +357,6 @@ export default function Account() {
                           )}{" "}
                           T
                         </p>
-                        <p>
-                          {convertNumber(calculateTotalSale(15, invoice.price))}{" "}
-                          T
-                        </p>
                       </div>
                       <div className={classesPage.subRow}>
                         <p className={classesPage.title}>قیمت فروش</p>

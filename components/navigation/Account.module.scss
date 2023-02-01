@@ -116,7 +116,7 @@
   .text {
     display: flex;
     justify-content: center;
-    margin: 10px 0px;
+    margin-top: 10px;
     color: config.$grey;
     font-size: config.$tiny-font;
   }
@@ -132,7 +132,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 40%;
+    width: 45%;
   }
 
   .row {
