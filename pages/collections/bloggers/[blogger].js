@@ -137,7 +137,7 @@ export default function Blogger() {
         <title>Fashion Bloggers</title>
         <meta name="description" content="Fashion bloggers" />
       </Head>
-      <div className={classes.blogger} style={{ height: window.innerHeight }}>
+      <div className={classes.blogger}>
         <div className={classes.imageContainer}>
           {blogger.image && (
             <Image
