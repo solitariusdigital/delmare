@@ -339,7 +339,7 @@ export default function Account() {
                 </div>
               </div>
               <p className={classes.text}>
-                تنها ۲۱ آیتم برگزیده توسط بلاگر به مشتری نمایش داده میشود
+                تنها 21 آیتم برگزیده توسط بلاگر به مشتری نمایش داده میشود
               </p>
             </div>
           )}
