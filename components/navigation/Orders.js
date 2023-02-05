@@ -118,6 +118,7 @@ export default function Orders() {
                 alt="image"
                 objectFit="contain"
                 layout="fill"
+                priority
               />
               <a
                 href="https://www.vecteezy.com/free-png/shopping-cart"

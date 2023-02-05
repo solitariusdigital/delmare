@@ -112,6 +112,7 @@ export default function WishList() {
               alt="image"
               objectFit="contain"
               layout="fill"
+              priority
             />
             <a
               href="https://www.vecteezy.com/free-png/shopping-cart"
@@ -172,11 +173,13 @@ export default function WishList() {
                       }}
                       className={classes.image}
                       src={product.images.main}
+                      blurDataURL={product.images.main}
+                      placeholder="blur"
                       alt="image"
                       layout="fill"
                       objectFit="cover"
-                      priority
                       loading="eager"
+                      priority
                     />
                     {product.sale && (
                       <div className="sale">

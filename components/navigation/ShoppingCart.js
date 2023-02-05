@@ -243,11 +243,14 @@ export default function ShoppingCart() {
                       <div className={classes.imageContainer}>
                         <Image
                           className={classes.image}
+                          src={cart.image}
+                          blurDataURL={cart.image}
+                          placeholder="blur"
                           width={110}
                           height={140}
                           objectFit="cover"
-                          src={cart.image}
                           alt="image"
+                          priority
                         />
                       </div>
                       <div className={classes.information}>
@@ -292,6 +295,7 @@ export default function ShoppingCart() {
                     alt="image"
                     objectFit="contain"
                     layout="fill"
+                    priority
                   />
                   <a
                     href="https://www.vecteezy.com/free-png/shopping-cart"

@@ -51,6 +51,7 @@ export default function Follow() {
               alt="image"
               objectFit="contain"
               layout="fill"
+              priority
             />
             <a
               href="https://www.vecteezy.com/free-png/shopping-cart"
@@ -82,11 +83,13 @@ export default function Follow() {
                       Router.push(`/collections/bloggers/${blogger.delmareId}`);
                     }}
                     src={blogger.image}
+                    blurDataURL={blogger.image}
+                    placeholder="blur"
                     alt="image"
                     layout="fill"
                     objectFit="cover"
-                    priority
                     loading="eager"
+                    priority
                   />
                 </div>
               </Fragment>
