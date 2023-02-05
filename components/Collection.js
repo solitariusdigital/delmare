@@ -308,6 +308,8 @@ export default function Collection({
                     onClick={() => selectProduct(product)}
                     className={classes.image}
                     src={product.images.main}
+                    blurDataURL={product.images.main}
+                    placeholder="blur"
                     alt="image"
                     layout="fill"
                     objectFit="cover"
