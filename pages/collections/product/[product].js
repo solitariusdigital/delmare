@@ -432,10 +432,13 @@ export default function Product({ product, favourite }) {
             <Image
               className={classes.image}
               src={mainItem}
+              blurDataURL={mainItem}
+              placeholder="blur"
               alt="image"
               layout="fill"
               objectFit="cover"
-              priority={true}
+              priority
+              loading="eager"
               onClick={() => {
                 setDisplayPopuo(true);
                 window.scrollTo(0, 0);
@@ -494,11 +497,14 @@ export default function Product({ product, favourite }) {
               <Image
                 className={classes.productImage}
                 src={itemOne}
+                blurDataURL={itemOne}
+                placeholder="blur"
                 alt="image"
                 width={100}
                 height={115}
                 objectFit="cover"
-                priority={true}
+                priority
+                loading="eager"
               />
             </div>
             <div
@@ -510,11 +516,14 @@ export default function Product({ product, favourite }) {
               <Image
                 className={classes.productImage}
                 src={itemTwo}
+                blurDataURL={itemTwo}
+                placeholder="blur"
                 alt="image"
                 width={100}
                 height={115}
                 objectFit="cover"
-                priority={true}
+                priority
+                loading="eager"
               />
             </div>
             <div
@@ -526,11 +535,14 @@ export default function Product({ product, favourite }) {
               <Image
                 className={classes.productImage}
                 src={itemThree}
+                blurDataURL={itemThree}
+                placeholder="blur"
                 alt="image"
                 width={100}
                 height={115}
                 objectFit="cover"
-                priority={true}
+                priority
+                loading="eager"
               />
             </div>
           </div>
@@ -539,11 +551,14 @@ export default function Product({ product, favourite }) {
               <Image
                 className={classes.image}
                 src={mainItem}
+                blurDataURL={mainItem}
+                placeholder="blur"
                 alt="image"
                 layout="fill"
                 objectFit="cover"
                 ver
-                priority={true}
+                priority
+                loading="eager"
                 onClick={() => {
                   setDisplayPopuo(false);
                   window.scrollTo(0, 0);
@@ -761,7 +776,8 @@ export default function Product({ product, favourite }) {
                         alt="image"
                         layout="fill"
                         objectFit="contain"
-                        priority={true}
+                        priority
+                        loading="eager"
                       />
                     </div>
                   </Fragment>
@@ -774,7 +790,8 @@ export default function Product({ product, favourite }) {
                         alt="image"
                         layout="fill"
                         objectFit="contain"
-                        priority={true}
+                        priority
+                        loading="eager"
                       />
                     </div>
                   </Fragment>
@@ -1094,10 +1111,13 @@ export default function Product({ product, favourite }) {
                     onClick={() => selectProduct(product["_id"])}
                     className={classes.image}
                     src={product.images.main}
+                    blurDataURL={product.images.main}
+                    placeholder="blur"
                     alt="image"
                     layout="fill"
                     objectFit="cover"
-                    priority={true}
+                    priority
+                    loading="eager"
                   />
                   {product.sale && (
                     <div className="sale">

@@ -175,7 +175,7 @@ export default function WishList() {
                       alt="image"
                       layout="fill"
                       objectFit="cover"
-                      priority={true}
+                      priority
                       loading="eager"
                     />
                     {product.sale && (

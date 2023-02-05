@@ -52,7 +52,7 @@ export default function Bloggers({ bloggersData }) {
                 alt="image"
                 layout="fill"
                 objectFit="cover"
-                priority={true}
+                priority
                 loading="eager"
                 onClick={() =>
                   Router.push(`/collections/bloggers/${blogger.delmareId}`)

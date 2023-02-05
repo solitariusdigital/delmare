@@ -311,7 +311,7 @@ export default function Collection({
                     alt="image"
                     layout="fill"
                     objectFit="cover"
-                    priority={true}
+                    priority
                   />
                   {product.sale && (
                     <div className="sale">

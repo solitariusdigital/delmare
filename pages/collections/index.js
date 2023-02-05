@@ -25,11 +25,11 @@ function CollectionsPage() {
       link: "/collections/accessories",
       imageSrc: `${sourceLink}accessories.jpg`,
     },
-    // {
-    //   title: "بلاگرز",
-    //   link: "/collections/bloggers",
-    //   imageSrc: `${sourceLink}four.jpg`,
-    // },
+    {
+      title: "بلاگرز",
+      link: "/collections/bloggers",
+      imageSrc: `${sourceLink}four.jpg`,
+    },
     {
       title: "برندز",
       link: "/collections/brands",
@@ -84,7 +84,7 @@ function CollectionsPage() {
               alt="image"
               layout="fill"
               objectFit="cover"
-              priority={true}
+              priority
               loading="eager"
             />
           </div>

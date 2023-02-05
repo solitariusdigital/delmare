@@ -17,6 +17,7 @@ import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import secureLocalStorage from "react-secure-storage";
+import { updateUserApi } from "../../services/api";
 
 function Container() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -31,10 +32,16 @@ function Container() {
   const { gallery, setGallery } = useContext(StateContext);
 
   useEffect(() => {
-    if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
-      setUserLogin(true);
-      setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
-    }
+    const fetchData = async () => {
+      if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
+        setUserLogin(true);
+        setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
+        await updateUserApi(
+          JSON.parse(secureLocalStorage.getItem("currentUser"))
+        );
+      }
+    };
+    fetchData().catch(console.error);
   }, [setUserLogin, setCurrentUser]);
 
   useEffect(() => {

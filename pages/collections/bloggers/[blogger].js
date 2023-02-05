@@ -164,7 +164,7 @@ export default function Blogger() {
               alt="image"
               layout="fill"
               objectFit="cover"
-              priority={true}
+              priority
               loading="eager"
             />
           )}
@@ -226,7 +226,7 @@ export default function Blogger() {
                         alt="image"
                         layout="fill"
                         objectFit="cover"
-                        priority={true}
+                        priority
                         loading="eager"
                         onClick={() =>
                           selectProduct(product.id, blogger.delmareId)
