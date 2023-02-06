@@ -1,0 +1,17 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 5px;
+
+  div {
+    height: 55px;
+  }
+
+  .image {
+    border-radius: 50%;
+  }
+}
