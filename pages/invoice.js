@@ -335,12 +335,21 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const invoices = await invoiceModel.find();
-    const newInvoices = invoices.reverse().filter((invoice) => {
-      return !invoice.posted;
-    });
-    const postedInvoices = invoices.filter((invoice) => {
-      return invoice.posted;
-    });
+    const newInvoices = invoices
+      .reverse()
+      .filter((invoice) => {
+        return !invoice.posted;
+      })
+      .sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+    const postedInvoices = invoices
+      .filter((invoice) => {
+        return invoice.posted;
+      })
+      .sort((a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      });
 
     return {
       props: {
