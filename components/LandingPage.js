@@ -11,6 +11,7 @@ function LandingPage() {
   const { container, setContainer } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const [count, setCount] = useState(0);
+  const [divHeight, setDivHeight] = useState(null);
 
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -19,6 +20,7 @@ function LandingPage() {
 
     setBar(false);
     setContainer(true);
+    setDivHeight(window.innerHeight - 110);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
@@ -60,6 +62,7 @@ function LandingPage() {
     <Fragment>
       <Highlight />
       <div
+        style={{ height: divHeight }}
         className={classes.container}
         onClick={() => collections()}
         onTouchMove={collections}
