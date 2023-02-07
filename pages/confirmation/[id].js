@@ -39,19 +39,6 @@ export default function ConfirmationId() {
 
       // create invoice with customer and product info
       const updateProductsData = async (product) => {
-        // get latest product and update count and save on db
-        let getProduct = await getProductApi(product["_id"]);
-        if (getProduct.size[product.size].colors[product.color] > 0) {
-          getProduct.size[product.size].colors[product.color]--;
-          if (
-            Object.keys(getProduct.size[product.size].colors).length === 1 &&
-            getProduct.size[product.size].colors[product.color] === 0
-          ) {
-            getProduct.activate = false;
-          }
-          await updateProductApi(getProduct);
-        }
-
         const invoice = {
           name: currentUser.name,
           phone: currentUser.phone,
@@ -71,6 +58,19 @@ export default function ConfirmationId() {
           posted: false,
         };
         await createInvoiceApi(invoice);
+
+        // get latest product and update count and save on db
+        let getProduct = await getProductApi(product["_id"]);
+        if (getProduct.size[product.size].colors[product.color] > 0) {
+          getProduct.size[product.size].colors[product.color]--;
+          if (
+            Object.keys(getProduct.size[product.size].colors).length === 1 &&
+            getProduct.size[product.size].colors[product.color] === 0
+          ) {
+            getProduct.activate = false;
+          }
+          await updateProductApi(getProduct);
+        }
       };
 
       shoppingCart.forEach((product) => {
@@ -82,7 +82,7 @@ export default function ConfirmationId() {
         secureLocalStorage.removeItem("shoppingCart");
         shoppingCart.length = 0;
         setDisplayButton(true);
-      }, 4000);
+      }, 3000);
     }
   }, [shoppingCart, id, currentUser, setContainer]);
 
