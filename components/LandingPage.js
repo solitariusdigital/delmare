@@ -6,7 +6,7 @@ import Image from "next/image";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import Highlight from "./Highlight";
 
-function LandingPage() {
+export default function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -25,7 +25,7 @@ function LandingPage() {
       setCount((count) => count + 1);
     }, 5000);
     return () => clearInterval(timerId);
-  });
+  }, [setBar, setContainer]);
 
   useEffect(() => {
     // check if user is using pwa
@@ -96,5 +96,3 @@ function LandingPage() {
     </Fragment>
   );
 }
-
-export default LandingPage;

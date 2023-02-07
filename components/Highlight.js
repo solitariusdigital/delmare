@@ -18,7 +18,7 @@ export default function Highlight() {
           .sort((a, b) => {
             return b.views - a.views;
           })
-          .slice(0, 5)
+          .slice(0, 6)
       );
     };
     fetchData().catch(console.error);
