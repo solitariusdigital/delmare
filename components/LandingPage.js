@@ -20,7 +20,7 @@ export default function LandingPage() {
 
     setBar(false);
     setContainer(true);
-    setDivHeight(window.innerHeight - 110);
+    setDivHeight(window.innerHeight - 115);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);

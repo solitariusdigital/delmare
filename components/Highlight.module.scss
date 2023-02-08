@@ -6,7 +6,13 @@
   flex-direction: row;
   justify-content: space-around;
   height: 60px;
+  margin-bottom: 5px;
 
+  div {
+    display: flex;
+    border-radius: 50%;
+    border: 2px solid config.$brand;
+  }
   .image {
     border-radius: 50%;
   }

@@ -79,14 +79,20 @@ export default function Blogger() {
   useEffect(() => {
     const fetchData = async () => {
       // update views count
-      let updateData = {
-        ...blogger,
-        views: blogger.views + 1.5,
-      };
-      await updateBloggerApi(updateData);
+      if (
+        !currentUser ||
+        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==
+          "admin"
+      ) {
+        let updateData = {
+          ...blogger,
+          views: blogger.views + 1.5,
+        };
+        await updateBloggerApi(updateData);
+      }
     };
     fetchData().catch(console.error);
-  }, [blogger]);
+  }, [blogger, currentUser]);
 
   const follow = async (id) => {
     if (!userLogIn) {
