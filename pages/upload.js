@@ -22,8 +22,19 @@ export default function Upload() {
     M: { colors: {} },
     L: { colors: {} },
     XL: { colors: {} },
-    XXL: { colors: {} },
     FS: { colors: {} },
+    34: { colors: {} },
+    35: { colors: {} },
+    36: { colors: {} },
+    37: { colors: {} },
+    38: { colors: {} },
+    39: { colors: {} },
+    40: { colors: {} },
+    41: { colors: {} },
+    42: { colors: {} },
+    43: { colors: {} },
+    44: { colors: {} },
+    45: { colors: {} },
   };
   const imageInitialState = {
     main: "",
@@ -48,14 +59,30 @@ export default function Upload() {
   const [imageThree, setImageThree] = useState("");
   const [table, setTable] = useState("");
 
+  // clothing size
   const [XS, setXS] = useState("");
   const [S, setS] = useState("");
   const [M, setM] = useState("");
   const [L, setL] = useState("");
   const [XL, setXL] = useState("");
-  const [XXL, setXXL] = useState("");
   const [FS, setFS] = useState("");
-  const [freeSize, setFreeSize] = useState(false);
+  // shoes size
+  const [size34, setSize34] = useState("");
+  const [size35, setSize35] = useState("");
+  const [size36, setSize36] = useState("");
+  const [size37, setSize37] = useState("");
+  const [size38, setSize38] = useState("");
+  const [size39, setSize39] = useState("");
+  const [size40, setSize40] = useState("");
+  const [size41, setSize41] = useState("");
+  const [size42, setSize42] = useState("");
+  const [size43, setSize43] = useState("");
+  const [size44, setSize44] = useState("");
+  const [size45, setSize45] = useState("");
+
+  const [categorySize, setCategorySize] = useState(
+    "clothesSize" || "clothesSize" || "shoesSize"
+  );
 
   // data to save into db
   const [title, setTitle] = useState("");
@@ -111,6 +138,198 @@ export default function Upload() {
     },
   ];
 
+  const clothesSize = [
+    {
+      type: "XS",
+      value: XS,
+      clear: () => {
+        setXS("");
+        size["XS"] = {};
+      },
+      change: (value) => {
+        setXS(value);
+      },
+    },
+    {
+      type: "S",
+      value: S,
+      clear: () => {
+        setS("");
+        size["S"] = {};
+      },
+      change: (value) => {
+        setS(value);
+      },
+    },
+    {
+      type: "M",
+      value: M,
+      clear: () => {
+        setM("");
+        size["M"] = {};
+      },
+      change: (value) => {
+        setM(value);
+      },
+    },
+    {
+      type: "L",
+      value: L,
+      clear: () => {
+        setL("");
+        size["L"] = {};
+      },
+      change: (value) => {
+        setL(value);
+      },
+    },
+    {
+      type: "XL",
+      value: XL,
+      clear: () => {
+        setXL("");
+        size["XL"] = {};
+      },
+      change: (value) => {
+        setXL(value);
+      },
+    },
+  ];
+
+  const shoesSize = [
+    {
+      type: "34",
+      value: size34,
+      clear: () => {
+        setSize34("");
+        size["34"] = {};
+      },
+      change: (value) => {
+        setSize34(value);
+      },
+    },
+    {
+      type: "35",
+      value: size35,
+      clear: () => {
+        setSize35("");
+        size["35"] = {};
+      },
+      change: (value) => {
+        setSize35(value);
+      },
+    },
+    {
+      type: "36",
+      value: size36,
+      clear: () => {
+        setSize36("");
+        size["36"] = {};
+      },
+      change: (value) => {
+        setSize36(value);
+      },
+    },
+    {
+      type: "37",
+      value: size37,
+      clear: () => {
+        setSize37("");
+        size["37"] = {};
+      },
+      change: (value) => {
+        setSize37(value);
+      },
+    },
+    {
+      type: "38",
+      value: size38,
+      clear: () => {
+        setSize38("");
+        size["38"] = {};
+      },
+      change: (value) => {
+        setSize38(value);
+      },
+    },
+    {
+      type: "39",
+      value: size39,
+      clear: () => {
+        setSize39("");
+        size["39"] = {};
+      },
+      change: (value) => {
+        setSize39(value);
+      },
+    },
+    {
+      type: "40",
+      value: size40,
+      clear: () => {
+        setSize40("");
+        size["40"] = {};
+      },
+      change: (value) => {
+        setSize40(value);
+      },
+    },
+    {
+      type: "41",
+      value: size41,
+      clear: () => {
+        setSize41("");
+        size["41"] = {};
+      },
+      change: (value) => {
+        setSize41(value);
+      },
+    },
+    {
+      type: "42",
+      value: size42,
+      clear: () => {
+        setSize42("");
+        size["42"] = {};
+      },
+      change: (value) => {
+        setSize42(value);
+      },
+    },
+    {
+      type: "43",
+      value: size43,
+      clear: () => {
+        setSize43("");
+        size["43"] = {};
+      },
+      change: (value) => {
+        setSize43(value);
+      },
+    },
+    {
+      type: "44",
+      value: size44,
+      clear: () => {
+        setSize44("");
+        size["44"] = {};
+      },
+      change: (value) => {
+        setSize44(value);
+      },
+    },
+    {
+      type: "45",
+      value: size45,
+      clear: () => {
+        setSize45("");
+        size["45"] = {};
+      },
+      change: (value) => {
+        setSize45(value);
+      },
+    },
+  ];
   useEffect(() => {
     if (
       !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
@@ -164,12 +383,32 @@ export default function Upload() {
 
     setUploadClicked(true);
 
-    transformDataSize(XS, "XS");
-    transformDataSize(S, "S");
-    transformDataSize(M, "M");
-    transformDataSize(L, "L");
-    transformDataSize(XL, "XL");
-    transformDataSize(FS, "FS");
+    switch (categorySize) {
+      case "clothesSize":
+        transformDataSize(XS, "XS");
+        transformDataSize(S, "S");
+        transformDataSize(M, "M");
+        transformDataSize(L, "L");
+        transformDataSize(XL, "XL");
+        break;
+      case "shoesSize":
+        transformDataSize(size34, "34");
+        transformDataSize(size35, "35");
+        transformDataSize(size36, "36");
+        transformDataSize(size37, "37");
+        transformDataSize(size38, "38");
+        transformDataSize(size39, "39");
+        transformDataSize(size40, "40");
+        transformDataSize(size41, "41");
+        transformDataSize(size42, "42");
+        transformDataSize(size43, "43");
+        transformDataSize(size44, "44");
+        transformDataSize(size45, "45");
+        break;
+      case "freeSize":
+        transformDataSize(FS, "FS");
+        break;
+    }
 
     let delmareIdFolder = `${delmareId}${sixGenerator()}`;
 
@@ -281,13 +520,23 @@ export default function Upload() {
   };
 
   const resetSizes = () => {
-    setFreeSize(true);
     setXS("");
     setS("");
     setM("");
     setL("");
     setXL("");
-    setXXL("");
+    setSize34("");
+    setSize35("");
+    setSize36("");
+    setSize37("");
+    setSize38("");
+    setSize39("");
+    setSize40("");
+    setSize41("");
+    setSize42("");
+    setSize43("");
+    setSize44("");
+    setSize45("");
   };
 
   return (
@@ -522,23 +771,35 @@ export default function Upload() {
             )}
             <h3>رنگ، سایز، تعداد</h3>
             <div className={classes.sizeNav}>
-              {freeSize ? (
-                <button
-                  className="mainButton"
-                  onClick={() => {
-                    setFreeSize(false);
-                    setFS("");
-                  }}
-                >
-                  Add size
-                </button>
-              ) : (
-                <button className="mainButton" onClick={() => resetSizes()}>
-                  Free size
-                </button>
-              )}
+              <button
+                className="mainButton"
+                onClick={() => {
+                  setCategorySize("clothesSize");
+                  setFS("");
+                }}
+              >
+                Clothes size
+              </button>
+              <button
+                className="mainButton"
+                onClick={() => {
+                  setCategorySize("freeSize");
+                  resetSizes();
+                }}
+              >
+                Free size
+              </button>
+              <button
+                className="mainButton"
+                onClick={() => {
+                  setCategorySize("shoesSize");
+                  resetSizes();
+                }}
+              >
+                Shoes size
+              </button>
             </div>
-            {freeSize && (
+            {categorySize === "freeSize" && (
               <div className={classes.sizeContainer}>
                 <div className={classes.input}>
                   <div className={classes.bar}>
@@ -553,7 +814,7 @@ export default function Upload() {
                     />
                   </div>
                   <input
-                    placeholder="b21c1c 5, 514242 45"
+                    placeholder="b21c1c 5, 514242 9"
                     className={classes.size}
                     type="text"
                     id="FS"
@@ -565,141 +826,56 @@ export default function Upload() {
                 </div>
               </div>
             )}
-            {!freeSize && (
+            {categorySize === "clothesSize" && (
               <div className={classes.sizeContainer}>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>XS</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setXS("");
-                        size["XS"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
+                {clothesSize.map((size, index) => (
+                  <div className={classes.input} key={index}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>{size.type}</p>
+                      <CloseIcon
+                        className="icon"
+                        onClick={size.clear}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <input
+                      placeholder="b21c1c 5, 514242 9"
+                      className={classes.size}
+                      type="text"
+                      id={size.type}
+                      name={size.type}
+                      onChange={(e) => size.change(e.target.value)}
+                      value={size.value}
+                      autoComplete="off"
                     />
                   </div>
-                  <input
-                    placeholder="b21c1c 5, 514242 45"
-                    className={classes.size}
-                    type="text"
-                    id="XS"
-                    name="XS"
-                    onChange={(e) => setXS(e.target.value)}
-                    value={XS}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>S</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setS("");
-                        size["S"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
+                ))}
+              </div>
+            )}
+            {categorySize === "shoesSize" && (
+              <div className={classes.sizeContainer}>
+                {shoesSize.map((size, index) => (
+                  <div className={classes.input} key={index}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>{size.type}</p>
+                      <CloseIcon
+                        className="icon"
+                        onClick={size.clear}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <input
+                      placeholder="b21c1c 5, 514242 9"
+                      className={classes.size}
+                      type="text"
+                      id={size.type}
+                      name={size.type}
+                      onChange={(e) => size.change(e.target.value)}
+                      value={size.value}
+                      autoComplete="off"
                     />
                   </div>
-                  <input
-                    className={classes.size}
-                    type="text"
-                    id="S"
-                    name="S"
-                    onChange={(e) => setS(e.target.value)}
-                    value={S}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>M</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setM("");
-                        size["M"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    className={classes.size}
-                    type="text"
-                    id="M"
-                    name="M"
-                    onChange={(e) => setM(e.target.value)}
-                    value={M}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>L</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setL("");
-                        size["L"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    className={classes.size}
-                    type="text"
-                    id="L"
-                    name="L"
-                    onChange={(e) => setL(e.target.value)}
-                    value={L}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>XL</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setXL("");
-                        size["XL"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    className={classes.size}
-                    type="text"
-                    id="XL"
-                    name="XL"
-                    onChange={(e) => setXL(e.target.value)}
-                    value={XL}
-                    autoComplete="off"
-                  />
-                </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>XXL</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setXXL("");
-                        size["XXL"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    className={classes.size}
-                    type="text"
-                    id="XXL"
-                    name="XXL"
-                    onChange={(e) => setXXL(e.target.value)}
-                    value={XXL}
-                    autoComplete="off"
-                  />
-                </div>
+                ))}
               </div>
             )}
             <h3>انتخاب عکس</h3>
