@@ -320,6 +320,15 @@
     font-size: config.$tiny-font;
   }
 
+  .text {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: config.$grey;
+    font-size: config.$tiny-font;
+    margin-bottom: 10px;
+  }
+
   .product {
     position: relative;
     height: 200px;
