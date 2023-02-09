@@ -160,8 +160,8 @@ export default function Blogger() {
         <meta name="description" content="Fashion bloggers" />
       </Head>
       <div className={classes.blogger}>
-        <div className={classes.imageContainer}>
-          {blogger.image && (
+        {blogger.image && (
+          <div className={classes.imageContainer}>
             <Image
               className={classes.image}
               src={blogger.image}
@@ -173,8 +173,8 @@ export default function Blogger() {
               priority
               loading="eager"
             />
-          )}
-        </div>
+          </div>
+        )}
         {blogger.followers && (
           <div className={classes.socialContainer}>
             {followAction ? (
