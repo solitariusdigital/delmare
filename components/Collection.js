@@ -51,6 +51,9 @@ export default function Collection({
     } else {
       setGallery(galleryData);
       setSearchControl(true);
+      if (collectionType === "shoes") {
+        setSearchControl(false);
+      }
     }
     switch (collectionType) {
       case "gallery":

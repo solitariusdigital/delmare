@@ -1,10 +1,9 @@
-import { useEffect, useState, useContext, Fragment } from "react";
+import { useEffect, useState, useContext } from "react";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import Highlight from "./Highlight";
 
 export default function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
@@ -20,7 +19,7 @@ export default function LandingPage() {
 
     setBar(false);
     setContainer(true);
-    setDivHeight(window.innerHeight - 115);
+    setDivHeight(window.innerHeight - 50);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
@@ -59,40 +58,37 @@ export default function LandingPage() {
   };
 
   return (
-    <Fragment>
-      <Highlight />
-      <div
-        style={{ height: divHeight }}
-        className={classes.container}
-        onClick={() => collections()}
-        onTouchMove={collections}
-      >
-        <div className={classes.banner}>
-          <p>متفاوت بپوشیم</p>
-        </div>
-        <Image
-          className={classes.image}
-          src={assignImage()}
-          blurDataURL={assignImage()}
-          placeholder="blur"
-          alt="image"
-          layout="fill"
-          objectFit="cover"
-          priority
-          loading="eager"
-        />
-        <div className={classes.message}>
-          <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-          <p>با دلماره متفاوت دیده شوید</p>
-        </div>
-        <div className={classes.icon}>
-          <ExpandCircleDownIcon
-            className="icon"
-            sx={{ color: "#b2ffef", fontSize: 50 }}
-            onClick={() => collections()}
-          />
-        </div>
+    <div
+      style={{ height: divHeight }}
+      className={classes.container}
+      onClick={() => collections()}
+      onTouchMove={collections}
+    >
+      <div className={classes.banner}>
+        <p>متفاوت بپوشیم</p>
       </div>
-    </Fragment>
+      <Image
+        className={classes.image}
+        src={assignImage()}
+        blurDataURL={assignImage()}
+        placeholder="blur"
+        alt="image"
+        layout="fill"
+        objectFit="cover"
+        priority
+        loading="eager"
+      />
+      <div className={classes.message}>
+        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+        <p>با دلماره متفاوت دیده شوید</p>
+      </div>
+      <div className={classes.icon}>
+        <ExpandCircleDownIcon
+          className="icon"
+          sx={{ color: "#b2ffef", fontSize: 50 }}
+          onClick={() => collections()}
+        />
+      </div>
+    </div>
   );
 }

@@ -330,6 +330,7 @@ export default function Upload() {
       },
     },
   ];
+
   useEffect(() => {
     if (
       !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
@@ -599,23 +600,6 @@ export default function Upload() {
               </select>
             </div>
             <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => setBrandType(e.target.value)}
-              >
-                <option value="default" disabled>
-                  نوع برند
-                </option>
-                {brandTypes.map((brand, index) => {
-                  return (
-                    <option key={index} value={brand}>
-                      {brand}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className={classes.input}>
               <div className={classes.bar}>
                 <CloseIcon
                   className="icon"
@@ -632,6 +616,23 @@ export default function Upload() {
                 value={delmareId}
                 autoComplete="off"
               />
+            </div>
+            <div className={classes.input}>
+              <select
+                defaultValue={"default"}
+                onChange={(e) => setBrandType(e.target.value)}
+              >
+                <option value="default" disabled>
+                  نوع برند
+                </option>
+                {brandTypes.map((brand, index) => {
+                  return (
+                    <option key={index} value={brand}>
+                      {brand}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className={classes.input}>
               <select

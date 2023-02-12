@@ -28,6 +28,9 @@ export default function CollectionPage({ products, brands, bloggers }) {
       {collection === "accessories" && (
         <Collection collectionType={collection} galleryData={products} />
       )}
+      {collection === "shoes" && (
+        <Collection collectionType={collection} galleryData={products} />
+      )}
       {collection === "brands" && <Brands brandsData={brands} />}
       {collection === "bloggers" && <Bloggers bloggersData={bloggers} />}
     </Fragment>
@@ -59,6 +62,12 @@ export async function getServerSideProps(context) {
             product.category === "کلاه" ||
             product.category === "کیف"
           );
+        });
+        break;
+      case "shoes":
+        products = await Product.find();
+        products = products.filter((product) => {
+          return product.category === "کفش";
         });
         break;
       case "brands":

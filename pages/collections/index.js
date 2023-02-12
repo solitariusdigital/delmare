@@ -4,6 +4,7 @@ import Router from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import sale from "../../assets/sale.png";
+import Highlight from "../../components/Highlight";
 
 function CollectionsPage() {
   const { navigation, setNavigation } = useContext(StateContext);
@@ -24,6 +25,11 @@ function CollectionsPage() {
       title: "اکسسوری",
       link: "/collections/accessories",
       imageSrc: `${sourceLink}accessories.jpg`,
+    },
+    {
+      title: "کفش",
+      link: "/collections/shoes",
+      imageSrc: `${sourceLink}shoes.jpg`,
     },
     {
       title: "بلاگرز",
@@ -55,6 +61,7 @@ function CollectionsPage() {
         <title>Collections</title>
         <meta name="description" content="Select from Delmareh's collections" />
       </Head>
+      <Highlight />
       <div className="collections-type">
         {collections.map((collection, index) => (
           <div
