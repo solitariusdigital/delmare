@@ -160,8 +160,8 @@ export default function Blogger() {
         <meta name="description" content="Fashion bloggers" />
       </Head>
       <div className={classes.blogger}>
-        <div className={classes.imageContainer}>
-          {blogger.image && (
+        {blogger.image && (
+          <div className={classes.imageContainer}>
             <Image
               className={classes.image}
               src={blogger.image}
@@ -173,44 +173,44 @@ export default function Blogger() {
               priority
               loading="eager"
             />
-          )}
-        </div>
-        <div className={classes.socialContainer}>
-          {followAction ? (
-            <button
-              className="mainButton"
-              onClick={() => follow(blogger["_id"])}
-            >
-              Follow
-            </button>
-          ) : (
-            <button
-              className="subButton"
-              onClick={() => follow(blogger["_id"])}
-            >
-              Unfollow
-            </button>
-          )}
-          <div className={classes.social}>
-            {blogger.followers && (
+          </div>
+        )}
+        {blogger.followers && (
+          <div className={classes.socialContainer}>
+            {followAction ? (
+              <button
+                className="mainButton"
+                onClick={() => follow(blogger["_id"])}
+              >
+                Follow
+              </button>
+            ) : (
+              <button
+                className="subButton"
+                onClick={() => follow(blogger["_id"])}
+              >
+                Unfollow
+              </button>
+            )}
+            <div className={classes.social}>
               <div className={classes.social}>
                 <p className={classes.value}>{blogger.followers.length}</p>
                 <Person4Icon sx={{ fontSize: 22 }} />
               </div>
-            )}
-            <div className={classes.social}>
-              <p className={classes.value}>
-                {abbreviateNumber(Math.round(blogger.views))}
-              </p>
-              <VisibilityIcon sx={{ fontSize: 22 }} />
+              <div className={classes.social}>
+                <p className={classes.value}>
+                  {abbreviateNumber(Math.round(blogger.views))}
+                </p>
+                <VisibilityIcon sx={{ fontSize: 22 }} />
+              </div>
+              <ShareIcon
+                className="icon shareIcon"
+                onClick={() => copyLink()}
+                sx={{ fontSize: 18 }}
+              />
             </div>
-            <ShareIcon
-              className="icon shareIcon"
-              onClick={() => copyLink()}
-              sx={{ fontSize: 18 }}
-            />
           </div>
-        </div>
+        )}
         <div>
           <p className={classes.name}>{blogger.name}</p>
           <p>{blogger.bio}</p>
@@ -221,6 +221,11 @@ export default function Blogger() {
               <StarIcon className={classes.iconPink} sx={{ fontSize: 22 }} />
               <p className={classes.title}>آیتم های برگزیده</p>
             </div>
+            {currentUser && currentUser.permission === "blogger" && (
+              <p className={classes.text}>
+                تنها 21 آیتم برگزیده توسط بلاگر به مشتری نمایش داده میشود
+              </p>
+            )}
             <div className={classes.productContainer}>
               {products
                 .map((product, index) => (
