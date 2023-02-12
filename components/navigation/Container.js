@@ -18,6 +18,7 @@ import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import secureLocalStorage from "react-secure-storage";
 import { updateUserApi } from "../../services/api";
+import heart from "../../assets/heart.png";
 
 function Container() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -82,8 +83,29 @@ function Container() {
             />
             <p>{shoppingCart.length === 0 ? "" : shoppingCart.length}</p>
           </div>
-          <div className={classes.brand} onClick={() => navigateLandingPage()}>
-            <Image src={brand} alt="brand" />
+          <div
+            className={classes.brandContainer}
+            onClick={() => navigateLandingPage()}
+          >
+            <Image
+              className={classes.heart}
+              width={20}
+              height={20}
+              src={heart}
+              alt="heart"
+              onClick={() => collections()}
+            />
+            <div className={classes.brand}>
+              <Image src={brand} alt="brand" />
+            </div>
+            <Image
+              className={classes.heart}
+              width={20}
+              height={20}
+              src={heart}
+              alt="heart"
+              onClick={() => collections()}
+            />
           </div>
           <div className="shoppingcart-icon">
             {searchControl && (

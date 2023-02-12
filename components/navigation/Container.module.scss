@@ -1,4 +1,5 @@
 @use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
 
 .container {
   position: relative;
@@ -16,7 +17,7 @@
     height: 50px;
     padding: 0px 10px;
 
-    .brand {
+    .brandContainer {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,6 +25,15 @@
       &:hover {
         cursor: pointer;
       }
+    }
+
+    .brand {
+      display: flex;
+      margin: 0px 10px;
+    }
+
+    .heart {
+      @include mixins.heartbeat();
     }
   }
 

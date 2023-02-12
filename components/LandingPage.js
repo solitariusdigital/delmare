@@ -4,6 +4,7 @@ import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
+import heart from "../assets/heart.png";
 
 export default function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
@@ -83,9 +84,16 @@ export default function LandingPage() {
         <p>با دلماره متفاوت دیده شوید</p>
       </div>
       <div className={classes.icon}>
-        <ExpandCircleDownIcon
+        {/* <ExpandCircleDownIcon
           className="icon"
           sx={{ color: "#b2ffef", fontSize: 50 }}
+          onClick={() => collections()}
+        /> */}
+        <Image
+          width={50}
+          height={50}
+          src={heart}
+          alt="heart"
           onClick={() => collections()}
         />
       </div>
