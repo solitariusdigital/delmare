@@ -396,7 +396,7 @@ async function callBackCheck(req, res) {
       resultCode_bpinquiryRequest = parseInt(
         resultCode_bpinquiryRequest.return
       );
-      console.log("bpinquiryRequest" + resultCode_bpinquiryRequest);
+      console.log("bpinquiryRequest:" + resultCode_bpinquiryRequest);
 
       if (resultCode_bpinquiryRequest !== 0) {
         reversePay(saleOrderId, saleOrderId, saleReferenceId);
@@ -416,7 +416,7 @@ async function callBackCheck(req, res) {
         saleReferenceId
       );
       resultCode_bpSettleRequest = parseInt(resultCode_bpSettleRequest.return);
-      console.log("bpSettleRequest" + resultCode_bpSettleRequest);
+      console.log("bpSettleRequest:" + saleReferenceId);
 
       // Success
       if (
