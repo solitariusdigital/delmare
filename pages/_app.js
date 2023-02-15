@@ -9,6 +9,7 @@ import loadingImage from "../assets/loaderUpdate.png";
 import Image from "next/image";
 import logo from "../assets/logo.svg";
 import secureLocalStorage from "react-secure-storage";
+import { DefaultSeo } from "next-seo";
 
 export default function App({ Component, pageProps }) {
   const [loadAppUpdate, setLoadUpdate] = useState({});
@@ -37,6 +38,16 @@ export default function App({ Component, pageProps }) {
             pullingContent={false}
             refreshingContent={false}
           >
+            <DefaultSeo
+              title="با دلماره متفاوت دیده شوید"
+              description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
+              openGraph={{
+                type: "website",
+                locale: "fa_IR",
+                url: "https://delmareh.com/",
+                siteName: "Delmareh",
+              }}
+            />
             <Component {...pageProps} />
           </PullToRefresh>
         </Layout>
