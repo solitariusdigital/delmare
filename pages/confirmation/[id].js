@@ -33,12 +33,14 @@ export default function ConfirmationId() {
     setDivHeight(window.innerHeight);
     setContainer(false);
     setRefId(JSON.parse(secureLocalStorage.getItem("refId")));
+  }, [setContainer]);
 
+  useEffect(() => {
     const fetchData = async () => {
       if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
         setDisplayConfirmation(true);
         // create invoice with customer and product info
-        const updateProductsData = async (product) => {
+        const updateProductData = async (product) => {
           const invoice = {
             name: currentUser.name,
             phone: currentUser.phone,
@@ -72,7 +74,7 @@ export default function ConfirmationId() {
           }
         };
         shoppingCart.forEach((product) => {
-          updateProductsData(product);
+          updateProductData(product);
         });
         setTimeout(() => {
           secureLocalStorage.removeItem("refId");
@@ -83,7 +85,7 @@ export default function ConfirmationId() {
       }
     };
     fetchData().catch(console.error);
-  }, [shoppingCart, id, currentUser, setContainer]);
+  }, [currentUser, id, shoppingCart]);
 
   const confirmation = () => {
     Router.push("/");
@@ -101,7 +103,7 @@ export default function ConfirmationId() {
         },
         function (response, status) {}
       );
-    }, 200);
+    }, 1000);
   };
 
   return (
