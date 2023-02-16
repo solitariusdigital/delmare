@@ -32,58 +32,57 @@ export default function ConfirmationId() {
     document.body.style.background = "#ffffff";
     setDivHeight(window.innerHeight);
     setContainer(false);
-
     setRefId(JSON.parse(secureLocalStorage.getItem("refId")));
-    if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
-      setDisplayConfirmation(true);
 
-      // create invoice with customer and product info
-      const updateProductsData = async (product) => {
-        const invoice = {
-          name: currentUser.name,
-          phone: currentUser.phone,
-          address: currentUser.address,
-          post: currentUser.post,
-          userId: currentUser["_id"],
-          productId: product["_id"],
-          delmareId: product.delmareId,
-          refId: JSON.parse(secureLocalStorage.getItem("refId")),
-          title: product.title,
-          price: product.price,
-          color: product.color,
-          size: product.size,
-          image: product.image,
-          deliveryType: product.deliveryType,
-          bloggerDelmareId: product.bloggerDelmareId,
-          posted: false,
-        };
-        await createInvoiceApi(invoice);
-
-        // get latest product and update count and save on db
-        let getProduct = await getProductApi(product["_id"]);
-        if (getProduct.size[product.size].colors[product.color] > 0) {
-          getProduct.size[product.size].colors[product.color]--;
-          if (
-            Object.keys(getProduct.size[product.size].colors).length === 1 &&
-            getProduct.size[product.size].colors[product.color] === 0
-          ) {
-            getProduct.activate = false;
+    const fetchData = async () => {
+      if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
+        setDisplayConfirmation(true);
+        // create invoice with customer and product info
+        const updateProductsData = async (product) => {
+          const invoice = {
+            name: currentUser.name,
+            phone: currentUser.phone,
+            address: currentUser.address,
+            post: currentUser.post,
+            userId: currentUser["_id"],
+            productId: product["_id"],
+            delmareId: product.delmareId,
+            refId: JSON.parse(secureLocalStorage.getItem("refId")),
+            title: product.title,
+            price: product.price,
+            color: product.color,
+            size: product.size,
+            image: product.image,
+            deliveryType: product.deliveryType,
+            bloggerDelmareId: product.bloggerDelmareId,
+            posted: false,
+          };
+          await createInvoiceApi(invoice);
+          // get latest product and update count and save on db
+          let getProduct = await getProductApi(product["_id"]);
+          if (getProduct.size[product.size].colors[product.color] > 0) {
+            getProduct.size[product.size].colors[product.color]--;
+            if (
+              Object.keys(getProduct.size[product.size].colors).length === 1 &&
+              getProduct.size[product.size].colors[product.color] === 0
+            ) {
+              getProduct.activate = false;
+            }
+            await updateProductApi(getProduct);
           }
-          await updateProductApi(getProduct);
-        }
-      };
-
-      shoppingCart.forEach((product) => {
-        updateProductsData(product);
-      });
-
-      setTimeout(() => {
-        secureLocalStorage.removeItem("refId");
-        secureLocalStorage.removeItem("shoppingCart");
-        shoppingCart.length = 0;
-        setDisplayButton(true);
-      }, 3000);
-    }
+        };
+        shoppingCart.forEach((product) => {
+          updateProductsData(product);
+        });
+        setTimeout(() => {
+          secureLocalStorage.removeItem("refId");
+          secureLocalStorage.removeItem("shoppingCart");
+          shoppingCart.length = 0;
+          setDisplayButton(true);
+        }, 3000);
+      }
+    };
+    fetchData().catch(console.error);
   }, [shoppingCart, id, currentUser, setContainer]);
 
   const confirmation = () => {
