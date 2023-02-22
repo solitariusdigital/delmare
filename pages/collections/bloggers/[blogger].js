@@ -49,7 +49,11 @@ export default function Blogger() {
               let getProduct = await getProductApi(productId);
               setProducts((oldArray) => [
                 ...oldArray,
-                { link: getProduct.images.main, id: productId },
+                {
+                  link: getProduct.images.main,
+                  id: productId,
+                  display: getProduct.display,
+                },
               ]);
             });
           }
@@ -229,22 +233,24 @@ export default function Blogger() {
             <div className={classes.productContainer}>
               {products
                 .map((product, index) => (
-                  <div key={index}>
-                    <div className={classes.product}>
-                      <Image
-                        className={classes.image}
-                        src={product.link}
-                        alt="image"
-                        layout="fill"
-                        objectFit="cover"
-                        priority
-                        loading="eager"
-                        onClick={() =>
-                          selectProduct(product.id, blogger.delmareId)
-                        }
-                      />
-                    </div>
-                  </div>
+                  <Fragment key={index}>
+                    {product.display && (
+                      <div className={classes.product}>
+                        <Image
+                          className={classes.image}
+                          src={product.link}
+                          alt="image"
+                          layout="fill"
+                          objectFit="cover"
+                          priority
+                          loading="eager"
+                          onClick={() =>
+                            selectProduct(product.id, blogger.delmareId)
+                          }
+                        />
+                      </div>
+                    )}
+                  </Fragment>
                 ))
                 .slice(0, 21)}
             </div>
