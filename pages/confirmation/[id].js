@@ -65,6 +65,7 @@ export default function ConfirmationId() {
           if (getProduct.size[product.size].colors[product.color] > 0) {
             getProduct.size[product.size].colors[product.color]--;
             if (
+              Object.keys(getProduct.size).length === 1 &&
               Object.keys(getProduct.size[product.size].colors).length === 1 &&
               getProduct.size[product.size].colors[product.color] === 0
             ) {
