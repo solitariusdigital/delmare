@@ -556,7 +556,6 @@ export default function Product({ product, favourite }) {
                 alt="image"
                 layout="fill"
                 objectFit="cover"
-                ver
                 priority
                 loading="eager"
                 onClick={() => {
@@ -773,6 +772,8 @@ export default function Product({ product, favourite }) {
                     <div className={classes.table}>
                       <Image
                         src={product.images.table}
+                        blurDataURL={product.images.table}
+                        placeholder="blur"
                         alt="image"
                         layout="fill"
                         objectFit="contain"
@@ -787,6 +788,8 @@ export default function Product({ product, favourite }) {
                     <div className={classes.table}>
                       <Image
                         src={product.images.graph}
+                        blurDataURL={product.images.graph}
+                        placeholder="blur"
                         alt="image"
                         layout="fill"
                         objectFit="contain"

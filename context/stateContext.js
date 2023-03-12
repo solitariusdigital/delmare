@@ -67,6 +67,7 @@ export const StateProvider = (props) => {
     "بلوز",
     "پالتو",
     "تاپ",
+    "تیشرت",
     "جین",
     "ساعت",
     "ست",
@@ -79,6 +80,7 @@ export const StateProvider = (props) => {
     "کفش",
     "کلاه",
     "کیف",
+    "مانتو",
     "وست",
     "هودی",
   ]);

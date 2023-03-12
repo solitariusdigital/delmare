@@ -317,6 +317,7 @@ export default function Collection({
                     layout="fill"
                     objectFit="cover"
                     priority
+                    loading="eager"
                   />
                   {product.sale && (
                     <div className="sale">
