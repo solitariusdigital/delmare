@@ -43,7 +43,10 @@ export default function ShoppingCart() {
   useEffect(() => {
     const checkProductsData = async (product) => {
       let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] === 0) {
+      if (
+        !getProduct.activate ||
+        getProduct.size[product.size].colors[product.color] === 0
+      ) {
         product.message = "اتمام موجودی";
         setAvailability(!availability);
       } else {

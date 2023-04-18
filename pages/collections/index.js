@@ -5,8 +5,10 @@ import Image from "next/image";
 import Head from "next/head";
 import sale from "../../assets/sale.png";
 import Highlight from "../../components/Highlight";
+import dbConnect from "../../services/dbConnect";
+import productModel from "../../models/Product";
 
-function CollectionsPage() {
+export default function CollectionsPage({ products }) {
   const { navigation, setNavigation } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -61,7 +63,7 @@ function CollectionsPage() {
         <title>Collections</title>
         <meta name="description" content="Select from Delmareh's collections" />
       </Head>
-      <Highlight />
+      <Highlight products={products} />
       <div className="collections-type">
         {collections.map((collection, index) => (
           <div
@@ -101,4 +103,28 @@ function CollectionsPage() {
   );
 }
 
-export default CollectionsPage;
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const products = await productModel.find();
+    const filterProducts = products
+      .filter((product) => {
+        return product.activate && product.season === "بهار";
+      })
+      .sort((a, b) => {
+        return b.views - a.views;
+      })
+      .slice(0, 6);
+
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(filterProducts)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}
