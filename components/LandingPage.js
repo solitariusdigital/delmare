@@ -3,15 +3,18 @@ import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import classes from "./LandingPage.module.scss";
 import Image from "next/image";
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 export default function LandingPage() {
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
+  const { navigation, setNavigation } = useContext(StateContext);
+
   const [count, setCount] = useState(0);
   const [divHeight, setDivHeight] = useState(null);
-
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -53,22 +56,56 @@ export default function LandingPage() {
     return image;
   };
 
-  const collections = () => {
-    Router.push("/collections");
+  const loginAction = () => {
+    setToggleContainer("");
+    setMenu(true);
+    setRegister(true);
+  };
+
+  const activateNav = (link, title) => {
+    navigation.forEach((nav, i) => {
+      if (title === nav.title) {
+        Router.push(`${link}`);
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigation([...navigation]);
   };
 
   return (
-    <div
-      style={{ height: divHeight }}
-      className={classes.container}
-      onClick={() => collections()}
-      onTouchMove={collections}
-    >
-      <div className={classes.banner}>
-        <p>متفاوت بپوشیم</p>
+    <div>
+      <div className={classes.actions}>
+        <div
+          className={classes.call}
+          onClick={() => activateNav("/collections/bloggers", "بلاگرز")}
+        >
+          <p>بلاگرز</p>
+        </div>
+        <div
+          className={classes.call}
+          onClick={() => Router.push("/collections")}
+        >
+          <p>کالکشن</p>
+        </div>
+        {!userLogIn ? (
+          <div className={classes.call} onClick={() => loginAction()}>
+            <p>ورود / ​ثبت نام</p>
+          </div>
+        ) : (
+          <div
+            className={classes.call}
+            onClick={() => activateNav("/collections/sale", "تخفیف")}
+          >
+            <p>تخفیف</p>
+          </div>
+        )}
       </div>
+
       <Image
         className={classes.image}
+        onClick={() => Router.push("/collections")}
         src={assignImage()}
         blurDataURL={assignImage()}
         placeholder="blur"
@@ -78,16 +115,12 @@ export default function LandingPage() {
         priority
         loading="eager"
       />
-      <div className={classes.message}>
+      <div
+        className={classes.message}
+        onClick={() => Router.push("/collections")}
+      >
         <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
         <p>با دلماره متفاوت دیده شوید</p>
-      </div>
-      <div className={classes.icon}>
-        <ExpandCircleDownIcon
-          className="icon"
-          sx={{ color: "#b2ffef", fontSize: 50 }}
-          onClick={() => collections()}
-        />
       </div>
     </div>
   );

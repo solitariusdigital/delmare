@@ -33,7 +33,6 @@ export default function BurgerMenu() {
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
   const [admin, setAdmin] = useState(false);
-
   const [desktop, setDesktop] = useState(false);
 
   const navigation = [
@@ -257,7 +256,7 @@ export default function BurgerMenu() {
                 </p>
               </div>
               <div className={classes.row}>
-                <p>0912 022 1526</p>
+                <p>0933 336 3411</p>
                 <p>021 8879 3585</p>
               </div>
             </div>

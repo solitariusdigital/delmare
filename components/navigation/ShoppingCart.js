@@ -118,7 +118,7 @@ export default function ShoppingCart() {
     setCheckout(true);
   };
 
-  const handlecheckout = async () => {
+  const handleCheckout = async () => {
     if (userLogIn) {
       checkoutConfirmation();
     } else {
@@ -410,7 +410,7 @@ export default function ShoppingCart() {
                   <button
                     className={`mainButton ${classes.button}`}
                     disabled={shoppingCart.length === 0}
-                    onClick={() => handlecheckout()}
+                    onClick={() => handleCheckout()}
                   >
                     ورود ​/ ثبت نام
                   </button>
@@ -452,7 +452,7 @@ export default function ShoppingCart() {
               <button
                 className={`mainButton ${classes.button}`}
                 disabled={checkoutClicked}
-                onClick={() => handlecheckout()}
+                onClick={() => handleCheckout()}
               >
                 {userLogIn ? "درگاه پرداخت بانکی" : "ورود ​/ ثبت نام"}
               </button>
