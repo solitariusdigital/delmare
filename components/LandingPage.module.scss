@@ -9,16 +9,19 @@
 
 .actions {
   position: fixed;
-  top: 60px;
+  top: 50px;
+
   z-index: 2;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   width: 100%;
   max-width: config.$max-width;
   height: 50px;
-  text-align: center;
   align-items: center;
   justify-content: space-around;
+  box-shadow: config.$card-shadow;
+  @include mixins.transparentBackground(0.8, config.$cream);
 
   .call {
     display: flex;
@@ -33,6 +36,11 @@
     p {
       width: 100%;
       font-weight: bold;
+      font-size: config.$tiny-font;
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
