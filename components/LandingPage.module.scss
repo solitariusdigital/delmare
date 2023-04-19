@@ -1,6 +1,12 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
+.container {
+  position: relative;
+  width: 100%;
+  top: 0px;
+}
+
 .actions {
   position: fixed;
   top: 60px;
@@ -8,6 +14,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  max-width: config.$max-width;
   height: 50px;
   text-align: center;
   align-items: center;
@@ -30,8 +37,13 @@
   }
 }
 
-.image {
-  @include mixins.background-anime();
+.imageContainer {
+  max-width: config.$max-width;
+  height: calc(100vh - 50px);
+
+  .image {
+    @include mixins.background-anime();
+  }
 }
 
 .message {
@@ -39,11 +51,12 @@
   flex-direction: column;
   text-align: center;
   position: absolute;
-  bottom: 100px;
+  bottom: 80px;
   width: 100%;
   padding: 10px;
   box-shadow: config.$card-shadow;
   @include mixins.transparentBackground(0.8, config.$cream);
+  max-width: config.$max-width;
 
   p {
     font-size: config.$med-font;

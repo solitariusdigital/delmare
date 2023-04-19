@@ -75,7 +75,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.actions}>
         <div
           className={classes.call}
@@ -102,19 +102,20 @@ export default function LandingPage() {
           </div>
         )}
       </div>
-
-      <Image
-        className={classes.image}
-        onClick={() => Router.push("/collections")}
-        src={assignImage()}
-        blurDataURL={assignImage()}
-        placeholder="blur"
-        alt="image"
-        layout="fill"
-        objectFit="cover"
-        priority
-        loading="eager"
-      />
+      <div className={classes.imageContainer}>
+        <Image
+          className={classes.image}
+          onClick={() => Router.push("/collections")}
+          src={assignImage()}
+          blurDataURL={assignImage()}
+          placeholder="blur"
+          alt="image"
+          layout="fill"
+          objectFit="cover"
+          priority
+          loading="eager"
+        />
+      </div>
       <div
         className={classes.message}
         onClick={() => Router.push("/collections")}
