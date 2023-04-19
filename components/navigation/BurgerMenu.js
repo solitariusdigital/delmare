@@ -237,7 +237,7 @@ export default function BurgerMenu() {
                   className="icon"
                   onClick={() =>
                     window.open(
-                      "https://www.instagram.com/odin.hall/",
+                      "https://www.instagram.com/delmarehofficial/",
                       "_ blank"
                     )
                   }
