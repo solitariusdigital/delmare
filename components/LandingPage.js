@@ -96,9 +96,9 @@ export default function LandingPage() {
         ) : (
           <div
             className={classes.call}
-            onClick={() => activateNav("/collections/sale", "تخفیف")}
+            onClick={() => activateNav("/collections/gallery", "گالری")}
           >
-            <p>تخفیف</p>
+            <p>گالری</p>
           </div>
         )}
       </div>

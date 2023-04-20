@@ -8,18 +8,17 @@
 }
 
 .actions {
-  position: fixed;
-  top: 50px;
-
+  position: absolute;
+  top: 0px;
   z-index: 2;
   padding: 10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   width: 100%;
   max-width: config.$max-width;
   height: 50px;
-  align-items: center;
-  justify-content: space-around;
   box-shadow: config.$card-shadow;
   @include mixins.transparentBackground(0.8, config.$cream);
 
@@ -62,7 +61,7 @@
   bottom: 80px;
   width: 100%;
   padding: 10px;
-  box-shadow: config.$card-shadow;
+  box-shadow: config.$image-shadow;
   @include mixins.transparentBackground(0.8, config.$cream);
   max-width: config.$max-width;
 
