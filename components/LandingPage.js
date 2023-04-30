@@ -22,7 +22,7 @@ export default function LandingPage() {
 
     setBar(false);
     setContainer(true);
-    setDivHeight(window.innerHeight);
+    setDivHeight(window.innerHeight - 50);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
@@ -41,7 +41,6 @@ export default function LandingPage() {
       `${sourceLink}one.jpg`,
       `${sourceLink}two.jpg`,
       `${sourceLink}three.jpg`,
-      `${sourceLink}four.jpg`,
       `${sourceLink}five.jpg`,
       `${sourceLink}six.jpg`,
       `${sourceLink}seven.jpg`,
@@ -75,7 +74,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={{ height: divHeight }}>
       <div className={classes.actions}>
         <div
           className={classes.call}

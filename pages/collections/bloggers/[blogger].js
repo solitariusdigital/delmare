@@ -19,6 +19,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { abbreviateNumber } from "../../../services/utility";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function Blogger() {
   const { register, setRegister } = useContext(StateContext);
@@ -163,6 +164,16 @@ export default function Blogger() {
         <title>Fashion Bloggers</title>
         <meta name="description" content="Fashion bloggers" />
       </Head>
+      <div className={classes.topBar}>
+        <ArrowBackIosNewIcon
+          className="icon"
+          onClick={() => {
+            router.back();
+          }}
+          sx={{ fontSize: 30 }}
+        />
+        <p className={classes.name}>{blogger.name}</p>
+      </div>
       <div className={classes.blogger}>
         {blogger.image && (
           <div className={classes.imageContainer}>
@@ -215,8 +226,7 @@ export default function Blogger() {
             </div>
           </div>
         )}
-        <div>
-          <p className={classes.name}>{blogger.name}</p>
+        <div className={classes.bio}>
           <p>{blogger.bio}</p>
         </div>
         {products.length > 0 && (
