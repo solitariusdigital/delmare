@@ -168,7 +168,7 @@ export default function Blogger() {
         <ArrowBackIosNewIcon
           className="icon"
           onClick={() => {
-            router.back();
+            Router.push("/collections/bloggers");
           }}
           sx={{ fontSize: 30 }}
         />
