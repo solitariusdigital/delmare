@@ -26,7 +26,9 @@ export default function Confimation({ props }) {
         let check = await postMellatApi(props);
         if (check.code === 200) {
           secureLocalStorage.setItem("refId", JSON.stringify(check.refId));
-          Router.push(`/confirmation/${check.refId}`);
+          setTimeout(() => {
+            Router.push(`/confirmation/${check.refId}`);
+          }, 500);
         } else {
           setDisplayReject(true);
         }

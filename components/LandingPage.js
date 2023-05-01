@@ -22,7 +22,7 @@ export default function LandingPage() {
 
     setBar(false);
     setContainer(true);
-    setDivHeight(window.innerHeight - 50);
+    setDivHeight(window.innerHeight);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
@@ -74,7 +74,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className={classes.container} style={{ height: divHeight }}>
+    <div className={classes.container}>
       <div className={classes.actions}>
         <div
           className={classes.call}
@@ -101,7 +101,7 @@ export default function LandingPage() {
           </div>
         )}
       </div>
-      <div className={classes.imageContainer}>
+      <div className={classes.imageContainer} style={{ height: divHeight }}>
         <Image
           className={classes.image}
           onClick={() => Router.push("/collections")}

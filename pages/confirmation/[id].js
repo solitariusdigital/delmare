@@ -38,7 +38,6 @@ export default function ConfirmationId() {
   useEffect(() => {
     const fetchData = async () => {
       if (parseInt(id) === JSON.parse(secureLocalStorage.getItem("refId"))) {
-        setDisplayConfirmation(true);
         // create invoice with customer and product info
         const updateProductData = async (product) => {
           const invoice = {
@@ -77,6 +76,7 @@ export default function ConfirmationId() {
         shoppingCart.forEach((product) => {
           updateProductData(product);
         });
+        setDisplayConfirmation(true);
         setTimeout(() => {
           secureLocalStorage.removeItem("refId");
           secureLocalStorage.removeItem("shoppingCart");
@@ -89,10 +89,8 @@ export default function ConfirmationId() {
   }, [currentUser, id, shoppingCart]);
 
   const confirmation = () => {
-    Router.push("/");
     setTimeout(() => {
       setToggleContainer("orders");
-
       const api = Kavenegar.KavenegarApi({
         apikey: kavenegarKey,
       });
@@ -105,6 +103,7 @@ export default function ConfirmationId() {
         function (response, status) {}
       );
     }, 1000);
+    Router.push("/");
   };
 
   return (
