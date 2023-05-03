@@ -159,7 +159,7 @@ export default function Blogger() {
   };
 
   return (
-    <Fragment style={{ height: divHeight }}>
+    <div style={{ height: divHeight }}>
       <Head>
         <title>Fashion Bloggers</title>
         <meta name="description" content="Fashion bloggers" />
@@ -267,6 +267,6 @@ export default function Blogger() {
           </Fragment>
         )}
       </div>
-    </Fragment>
+    </div>
   );
 }

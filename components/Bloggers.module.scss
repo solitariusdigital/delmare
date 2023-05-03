@@ -18,13 +18,8 @@
     background: config.$white;
     @include mixins.border-radius();
 
-    .imageContainer {
-      margin: 10px 0px;
+    .image {
       @include mixins.border-radius();
-
-      .image {
-        @include mixins.border-radius();
-      }
 
       &:hover {
         cursor: pointer;
