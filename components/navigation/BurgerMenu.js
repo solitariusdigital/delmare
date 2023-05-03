@@ -255,10 +255,10 @@ export default function BurgerMenu() {
                   مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
                 </p>
               </div>
-              <div className={classes.row}>
+              {/* <div className={classes.row}>
                 <p>0933 336 3411</p>
                 <p>021 8879 3585</p>
-              </div>
+              </div> */}
             </div>
           )}
           {admin && (
