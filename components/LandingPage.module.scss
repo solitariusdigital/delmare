@@ -14,7 +14,7 @@
   max-width: config.$max-width;
 
   .image {
-    // @include mixins.background-anime();
+    @include mixins.background-anime();
   }
 
   .categories {
