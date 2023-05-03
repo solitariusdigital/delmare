@@ -22,7 +22,7 @@ export default function LandingPage() {
 
     setBar(false);
     setContainer(true);
-    setDivHeight(window.innerHeight);
+    setDivHeight(window.innerHeight - 50);
     const timerId = setInterval(() => {
       setCount((count) => count + 1);
     }, 5000);
@@ -38,16 +38,17 @@ export default function LandingPage() {
 
   const assignImage = () => {
     const imagesArray = [
-      `${sourceLink}one.jpg`,
-      `${sourceLink}two.jpg`,
-      `${sourceLink}three.jpg`,
-      `${sourceLink}five.jpg`,
-      `${sourceLink}six.jpg`,
-      `${sourceLink}seven.jpg`,
-      `${sourceLink}eight.jpg`,
-      `${sourceLink}nine.jpg`,
-      `${sourceLink}ten.jpg`,
-      `${sourceLink}eleven.jpg`,
+      // `${sourceLink}one.jpg`,
+      // `${sourceLink}two.jpg`,
+      // `${sourceLink}three.jpg`,
+      // `${sourceLink}five.jpg`,
+      // `${sourceLink}six.jpg`,
+      // `${sourceLink}seven.jpg`,
+      // `${sourceLink}eight.jpg`,
+      // `${sourceLink}nine.jpg`,
+      // `${sourceLink}ten.jpg`,
+      // `${sourceLink}eleven.jpg`,
+      `${sourceLink}graphic.jpg`,
     ];
     const image = imagesArray.sort(() => Math.random() - 0.5)[
       count % imagesArray.length
@@ -75,32 +76,6 @@ export default function LandingPage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.actions}>
-        <div
-          className={classes.call}
-          onClick={() => activateNav("/collections/bloggers", "بلاگرز")}
-        >
-          <p>بلاگرز</p>
-        </div>
-        <div
-          className={classes.call}
-          onClick={() => Router.push("/collections")}
-        >
-          <p>کالکشن</p>
-        </div>
-        {!userLogIn ? (
-          <div className={classes.call} onClick={() => loginAction()}>
-            <p>ورود / ​ثبت نام</p>
-          </div>
-        ) : (
-          <div
-            className={classes.call}
-            onClick={() => activateNav("/collections/gallery", "گالری")}
-          >
-            <p>گالری</p>
-          </div>
-        )}
-      </div>
       <div className={classes.imageContainer} style={{ height: divHeight }}>
         <Image
           className={classes.image}
@@ -114,6 +89,26 @@ export default function LandingPage() {
           priority
           loading="eager"
         />
+        <div className={classes.categories}>
+          {!userLogIn ? (
+            <div onClick={() => loginAction()}>
+              <p>ورود / ​ثبت نام</p>
+            </div>
+          ) : (
+            <div onClick={() => activateNav("/collections/gallery", "گالری")}>
+              <p>گالری</p>
+            </div>
+          )}
+          <div onClick={() => Router.push("/collections")}>
+            <p>کالکشن</p>
+          </div>
+          <div onClick={() => activateNav("/collections/bloggers", "بلاگرز")}>
+            <p>بلاگرز</p>
+          </div>
+          <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
+            <p>تخفیف</p>
+          </div>
+        </div>
       </div>
       <div
         className={classes.message}
@@ -122,6 +117,14 @@ export default function LandingPage() {
         <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
         <p>با دلماره متفاوت دیده شوید</p>
       </div>
+      {!userLogIn && (
+        <div className={classes.discount}>
+          <div onClick={() => loginAction()}>
+            <p>هدیه %15 تخفیف خرید اول برای مشتریان جدید</p>
+            <p>اعتبار تا پایان خرداد 1402</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
