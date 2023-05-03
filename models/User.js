@@ -30,6 +30,7 @@ const UserSchema = new Schema(
     favourites: [String],
     follows: [String],
     birthday: String,
+    discount: String,
   },
   { timestamps: true }
 );

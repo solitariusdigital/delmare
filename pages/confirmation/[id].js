@@ -7,6 +7,8 @@ import {
   createInvoiceApi,
   getProductApi,
   updateProductApi,
+  getUserApi,
+  updateUserApi,
 } from "../../services/api";
 import secureLocalStorage from "react-secure-storage";
 import Kavenegar from "kavenegar";
@@ -76,11 +78,20 @@ export default function ConfirmationId() {
         shoppingCart.forEach((product) => {
           updateProductData(product);
         });
+
+        // get user/change discount value/update localstorage
+        const user = await getUserApi(currentUser["_id"]);
+        if (user.discount) {
+          user.discount = "";
+          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+          await updateUserApi(user);
+        }
+
         setDisplayConfirmation(true);
+        secureLocalStorage.removeItem("refId");
+        secureLocalStorage.removeItem("shoppingCart");
+        shoppingCart.length = 0;
         setTimeout(() => {
-          secureLocalStorage.removeItem("refId");
-          secureLocalStorage.removeItem("shoppingCart");
-          shoppingCart.length = 0;
           setDisplayButton(true);
         }, 3000);
       }

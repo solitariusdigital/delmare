@@ -29,6 +29,7 @@ function Register() {
   const [displayCounter, setDisplayCounter] = useState(false);
   const [counter, setCounter] = useState(59);
   const [notification, setNotification] = useState({});
+  const [discount, setDiscount] = useState("15");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,6 +123,19 @@ function Register() {
       // if user does not exist create a new one
       if (!userExist) {
         await createUser();
+        // send dsicount offer for new users
+        const api = Kavenegar.KavenegarApi({
+          apikey: kavenegarKey,
+        });
+        api.VerifyLookup(
+          {
+            receptor: phone,
+            token: discount,
+            token2: phone,
+            template: "discount",
+          },
+          function (response, status) {}
+        );
       }
     } else {
       setAlert("کد تایید اشتباه است");
@@ -142,6 +156,7 @@ function Register() {
       post: "",
       birthday: "",
       permission: "customer",
+      discount: discount,
     };
     let data = await createUserApi(user);
     if (data.hasOwnProperty("error")) {

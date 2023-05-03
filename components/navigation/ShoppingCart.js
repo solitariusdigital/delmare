@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { convertNumber } from "../../services/utility";
+import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import { updateUserApi, getProductApi, getMellatApi } from "../../services/api";
@@ -24,6 +24,7 @@ export default function ShoppingCart() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
+  const [discount, setDiscount] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -36,6 +37,7 @@ export default function ShoppingCart() {
       setPhone(currentUser.phone);
       setAddress(currentUser.address);
       setPost(currentUser.post);
+      setDiscount(currentUser.discount);
     }
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart, currentUser]);
@@ -163,12 +165,15 @@ export default function ShoppingCart() {
     return arr.every((element) => element === true);
   };
 
-  // check if product exist
+  // check if product count exist and is available
   const initializePayment = async () => {
     let itemCheck = [];
     shoppingCart.forEach(async (product) => {
       let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] > 0) {
+      if (
+        getProduct.size[product.size].colors[product.color] > 0 &&
+        getProduct.activate
+      ) {
         itemCheck.push(true);
       } else {
         itemCheck.push(false);
@@ -191,7 +196,9 @@ export default function ShoppingCart() {
   const openPaymentPortal = async () => {
     let refId = null;
     setPayment(true);
-    let pay = await getMellatApi(calculateTotal() + "0");
+    let pay = await getMellatApi(
+      calculateTotal() - calculatePercentage(discount, calculateTotal()) + "0"
+    );
     refId = pay.RefId;
 
     if (pay.hasOwnProperty("error")) {
@@ -425,10 +432,33 @@ export default function ShoppingCart() {
               <p className={classes.title}>تعداد آیتم</p>
             </div>
             <div className={classes.row}>
-              <p className={classes.value}>
-                {convertNumber(calculateTotal())} T
-              </p>
-              <p className={classes.title}>جمع سبد خرید</p>
+              {discount && discount !== "" ? (
+                <div className={classes.discountRow}>
+                  <p className={classes.price}>
+                    {convertNumber(calculateTotal())} T
+                  </p>
+                  <p className={classes.value}>
+                    {convertNumber(
+                      calculateTotal() -
+                        calculatePercentage(discount, calculateTotal())
+                    )}{" "}
+                    T
+                  </p>
+                </div>
+              ) : (
+                <p className={classes.value}>
+                  {convertNumber(calculateTotal())} T
+                </p>
+              )}
+              <div className={classes.discountRow}>
+                {discount && discount !== "" && (
+                  <Fragment>
+                    <p className={classes.title}>هدیه خرید اول</p>
+                    <span className={classes.percentage}>{discount}%</span>
+                  </Fragment>
+                )}
+                <p className={classes.title}>مبلغ پرداخت</p>
+              </div>
             </div>
             <div className={classes.row}>
               {calculateTotal() >= 1000000 ? (
