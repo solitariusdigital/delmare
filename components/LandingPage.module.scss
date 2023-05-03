@@ -31,17 +31,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: 80%;
       height: 100px;
       font-weight: bold;
       box-shadow: config.$image-shadow;
       font-size: config.$med-font;
       @include mixins.border-radius();
-      @include mixins.transparentBackground(0.3, config.$cream);
+      @include mixins.transparentBackground(0.4, config.$cream);
       border: 2px solid config.$lemon;
+      margin: auto;
+
       &:hover {
         cursor: pointer;
       }
+    }
+
+    .beat {
+      @include mixins.heartbeat();
     }
   }
 }
@@ -68,14 +74,14 @@
   flex-direction: column;
   text-align: center;
   position: absolute;
+  z-index: 2;
   top: 0px;
   width: 100%;
   padding: 10px;
   box-shadow: config.$image-shadow;
   @include mixins.transparentBackground(0.8, config.$cream);
   max-width: config.$max-width;
-  color: config.$red;
-  z-index: 2;
+  color: config.$orange;
 
   &:hover {
     cursor: pointer;
