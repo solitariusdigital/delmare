@@ -60,8 +60,8 @@
   width: 100%;
   padding: 10px;
   box-shadow: config.$image-shadow;
-  @include mixins.transparentBackground(0.8, config.$cream);
   max-width: config.$max-width;
+  @include mixins.transparentBackground(0.8, config.$cream);
 
   p {
     font-size: config.$small-font;
@@ -78,9 +78,9 @@
   width: 100%;
   padding: 10px;
   box-shadow: config.$image-shadow;
-  @include mixins.transparentBackground(0.8, config.$cream);
   max-width: config.$max-width;
   color: config.$orange;
+  @include mixins.transparentBackground(0.8, config.$cream);
 
   &:hover {
     cursor: pointer;

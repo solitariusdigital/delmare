@@ -95,6 +95,7 @@ function Container() {
               <SearchIcon
                 className="icon search"
                 onClick={() => setSearch(!search)}
+                sx={{ fontSize: 28 }}
               />
             )}
             <MenuIcon className="icon" onClick={() => setMenu(true)} />
