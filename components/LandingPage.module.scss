@@ -26,6 +26,7 @@
     z-index: 2;
     width: 100%;
     padding: 10px;
+    @include mixins.slide-top();
 
     div {
       display: flex;

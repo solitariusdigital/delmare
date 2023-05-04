@@ -13,20 +13,18 @@ export default function LandingPage() {
   const { register, setRegister } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
 
-  const [count, setCount] = useState(0);
   const [divHeight, setDivHeight] = useState(null);
+  const [categories, setCategories] = useState(false);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     document.body.style.background = "#f9f7f2";
-
     setBar(false);
     setContainer(true);
     setDivHeight(window.innerHeight - 50);
-    const timerId = setInterval(() => {
-      setCount((count) => count + 1);
-    }, 5000);
-    return () => clearInterval(timerId);
+    setTimeout(() => {
+      setCategories(true);
+    }, 200);
   }, [setBar, setContainer]);
 
   useEffect(() => {
@@ -35,26 +33,6 @@ export default function LandingPage() {
       setToggleContainer("screen");
     }
   }, [setToggleContainer]);
-
-  const assignImage = () => {
-    const imagesArray = [
-      // `${sourceLink}one.jpg`,
-      // `${sourceLink}two.jpg`,
-      // `${sourceLink}three.jpg`,
-      // `${sourceLink}five.jpg`,
-      // `${sourceLink}six.jpg`,
-      // `${sourceLink}seven.jpg`,
-      // `${sourceLink}eight.jpg`,
-      // `${sourceLink}nine.jpg`,
-      // `${sourceLink}ten.jpg`,
-      // `${sourceLink}eleven.jpg`,
-      `${sourceLink}graphic.jpg`,
-    ];
-    const image = imagesArray.sort(() => Math.random() - 0.5)[
-      count % imagesArray.length
-    ];
-    return image;
-  };
 
   const loginAction = () => {
     setToggleContainer("");
@@ -77,11 +55,33 @@ export default function LandingPage() {
   return (
     <div className={classes.container}>
       <div className={classes.imageContainer} style={{ height: divHeight }}>
+        {categories && (
+          <div className={classes.categories}>
+            <div onClick={() => activateNav("/collections/gallery", "گالری")}>
+              <p>گالری</p>
+            </div>
+            <div onClick={() => Router.push("/collections")}>
+              <p>کالکشن</p>
+            </div>
+            <div onClick={() => activateNav("/collections/bloggers", "بلاگرز")}>
+              <p>بلاگرز</p>
+            </div>
+            {!userLogIn ? (
+              <div className={classes.beat} onClick={() => loginAction()}>
+                <p>ورود / ​ثبت نام</p>
+              </div>
+            ) : (
+              <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
+                <p>تخفیف</p>
+              </div>
+            )}
+          </div>
+        )}
         <Image
           className={classes.image}
           onClick={() => Router.push("/collections")}
-          src={assignImage()}
-          blurDataURL={assignImage()}
+          src={`${sourceLink}graphic.jpg`}
+          blurDataURL={`${sourceLink}graphic.jpg`}
           placeholder="blur"
           alt="image"
           layout="fill"
@@ -89,42 +89,22 @@ export default function LandingPage() {
           priority
           loading="eager"
         />
-        <div className={classes.categories}>
-          <div onClick={() => activateNav("/collections/gallery", "گالری")}>
-            <p>گالری</p>
-          </div>
-          <div onClick={() => Router.push("/collections")}>
-            <p>کالکشن</p>
-          </div>
-          <div onClick={() => activateNav("/collections/bloggers", "بلاگرز")}>
-            <p>بلاگرز</p>
-          </div>
-          {!userLogIn ? (
-            <div className={classes.beat} onClick={() => loginAction()}>
-              <p>ورود / ​ثبت نام</p>
-            </div>
-          ) : (
-            <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
-              <p>تخفیف</p>
-            </div>
-          )}
+        <div
+          className={classes.message}
+          onClick={() => Router.push("/collections")}
+        >
+          <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+          <p>با دلماره متفاوت دیده شوید</p>
         </div>
-      </div>
-      <div
-        className={classes.message}
-        onClick={() => Router.push("/collections")}
-      >
-        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-        <p>با دلماره متفاوت دیده شوید</p>
-      </div>
-      {!userLogIn && (
-        <div className={classes.discount}>
-          <div onClick={() => loginAction()}>
-            <p>هدیه %15 تخفیف خرید اول برای مشتریان جدید</p>
-            <p>اعتبار تا پایان خرداد 1402</p>
+        {!userLogIn && (
+          <div className={classes.discount}>
+            <div onClick={() => loginAction()}>
+              <p>هدیه %15 تخفیف خرید اول برای مشتریان جدید</p>
+              <p>اعتبار تا پایان خرداد 1402</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
