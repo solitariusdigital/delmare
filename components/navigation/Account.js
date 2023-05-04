@@ -116,10 +116,10 @@ export default function Account() {
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      birthday:
-        currentUser.birthday === ""
-          ? `${monthDay} ${birthDay}`
-          : currentUser.birthday,
+      birthday: "",
+      // currentUser.birthday === ""
+      //   ? `${monthDay} ${birthDay}`
+      //   : currentUser.birthday,
     };
     let data = await updateUserApi(user);
     setCurrentUser(data);
@@ -254,7 +254,7 @@ export default function Account() {
                   dir="rtl"
                 />
               </div>
-              <div className={classes.row}>
+              {/* <div className={classes.row}>
                 <p className={classes.label}>ثبت روز تولد برای دریافت هدیه</p>
                 <p>{currentUser.birthday}</p>
               </div>
@@ -295,7 +295,7 @@ export default function Account() {
                     </select>
                   </div>
                 </Fragment>
-              )}
+              )} */}
               <div className={classes.alert}>{alert}</div>
               <button className="mainButton" onClick={() => handleUpdate()}>
                 ذخیره
