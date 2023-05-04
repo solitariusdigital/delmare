@@ -35,27 +35,9 @@ export default function Account() {
   const [address, setAddress] = useState(currentUser.address);
   const [post, setPost] = useState(currentUser.post);
   const [alert, setAlert] = useState("");
-  const [birthDay, setBirthDay] = useState("");
-  const [monthDay, setMonthDay] = useState("");
   const [controlNavigation, setControlNavigation] = useState(false);
   const [blogger, setBlogger] = useState({});
   const [invoices, setInvoices] = useState([]);
-
-  const days = [...Array(31).keys()].map((i) => i + 1);
-  const months = [
-    "فروردین",
-    "اردیبهشت",
-    "خرداد",
-    "تیر",
-    "مرداد",
-    "شهریور",
-    "مهر",
-    "آبان",
-    "آذر",
-    "دی",
-    "بهمن",
-    "اسفند",
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,10 +98,7 @@ export default function Account() {
       phone: phone.trim(),
       address: address.trim(),
       post: post.trim(),
-      birthday:
-        currentUser.birthday === ""
-          ? `${monthDay} ${birthDay}`
-          : currentUser.birthday,
+      birthday: "",
     };
     let data = await updateUserApi(user);
     setCurrentUser(data);
@@ -254,48 +233,6 @@ export default function Account() {
                   dir="rtl"
                 />
               </div>
-              <div className={classes.row}>
-                <p className={classes.label}>ثبت روز تولد برای دریافت هدیه</p>
-                <p>{currentUser.birthday}</p>
-              </div>
-              {currentUser.birthday === "" && (
-                <Fragment>
-                  <div className={classes.input}>
-                    <select
-                      defaultValue={"default"}
-                      onChange={(e) => setMonthDay(e.target.value)}
-                    >
-                      <option value="default" disabled>
-                        ماه تولد
-                      </option>
-                      {months.map((month, index) => {
-                        return (
-                          <option key={index} value={month}>
-                            {month}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div className={classes.input}>
-                    <select
-                      defaultValue={"default"}
-                      onChange={(e) => setBirthDay(e.target.value)}
-                    >
-                      <option value="default" disabled>
-                        روز تولد
-                      </option>
-                      {days.map((day, index) => {
-                        return (
-                          <option key={index} value={day}>
-                            {day}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                </Fragment>
-              )}
               <div className={classes.alert}>{alert}</div>
               <button className="mainButton" onClick={() => handleUpdate()}>
                 ذخیره
