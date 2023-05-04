@@ -90,24 +90,24 @@ export default function LandingPage() {
           loading="eager"
         />
         <div className={classes.categories}>
-          {!userLogIn ? (
-            <div onClick={() => loginAction()}>
-              <p>ورود / ​ثبت نام</p>
-            </div>
-          ) : (
-            <div onClick={() => activateNav("/collections/gallery", "گالری")}>
-              <p>گالری</p>
-            </div>
-          )}
+          <div onClick={() => activateNav("/collections/gallery", "گالری")}>
+            <p>گالری</p>
+          </div>
           <div onClick={() => Router.push("/collections")}>
             <p>کالکشن</p>
           </div>
           <div onClick={() => activateNav("/collections/bloggers", "بلاگرز")}>
             <p>بلاگرز</p>
           </div>
-          <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
-            <p>تخفیف</p>
-          </div>
+          {!userLogIn ? (
+            <div className={classes.beat} onClick={() => loginAction()}>
+              <p>ورود / ​ثبت نام</p>
+            </div>
+          ) : (
+            <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
+              <p>تخفیف</p>
+            </div>
+          )}
         </div>
       </div>
       <div
