@@ -35,11 +35,10 @@
       height: 100px;
       font-weight: bold;
       box-shadow: config.$image-shadow;
-      font-size: config.$med-font;
-      @include mixins.border-radius();
-      @include mixins.transparentBackground(0.4, config.$cream);
       border: 2px solid config.$lemon;
       margin: auto;
+      @include mixins.border-radius();
+      @include mixins.transparentBackground(0.4, config.$cream);
 
       &:hover {
         cursor: pointer;
