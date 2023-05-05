@@ -209,7 +209,7 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div className={classes.slider}>
+    <div className={classes.slider} style={{ height: window.innerHeight }}>
       {!payment ? (
         <div className={classes.menu}>
           <div className={classes.topBar}>
