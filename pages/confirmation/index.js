@@ -31,74 +31,86 @@ export default function Confirmation({ props }) {
   useEffect(() => {
     const fetchData = async () => {
       if (props.ResCode === "0") {
-        let check = await postMellatApi(props);
-        if (check.code === 200) {
-          // create invoice with customer and product info
-          const updateProductData = async (product) => {
-            const invoice = {
-              name: currentUser.name,
-              phone: currentUser.phone,
-              address: currentUser.address,
-              post: currentUser.post,
-              userId: currentUser["_id"],
-              productId: product["_id"],
-              delmareId: product.delmareId,
-              refId: check.refId,
-              title: product.title,
-              price: product.price,
-              color: product.color,
-              size: product.size,
-              image: product.image,
-              deliveryType: product.deliveryType,
-              bloggerDelmareId: product.bloggerDelmareId,
-              posted: false,
-            };
-            await createInvoiceApi(invoice);
-            // get latest product and update count and save on db
-            let getProduct = await getProductApi(product["_id"]);
-            if (getProduct.size[product.size].colors[product.color] > 0) {
-              getProduct.size[product.size].colors[product.color]--;
-              if (
-                Object.keys(getProduct.size).length === 1 &&
-                Object.keys(getProduct.size[product.size].colors).length ===
-                  1 &&
-                getProduct.size[product.size].colors[product.color] === 0
-              ) {
-                getProduct.activate = false;
-              }
-              await updateProductApi(getProduct);
-            }
-          };
-
-          shoppingCart.map(async (product) => {
-            await updateProductData(product);
-          });
-
-          // get user/change discount value/update localstorage
-          const user = await getUserApi(currentUser["_id"]);
-          if (user.discount) {
-            user.discount = "";
-            secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-            await updateUserApi(user);
-          }
-
-          setRefId(check.refId);
-          setDisplayConfirmation(true);
-          secureLocalStorage.removeItem("shoppingCart");
-          shoppingCart.length = 0;
-
-          setTimeout(() => {
+        try {
+          const check = await postMellatApi(props);
+          if (check.code === 200) {
+            setRefId(check.refId);
+            await Promise.all(shoppingCart.map(updateProductData));
+            setDisplayConfirmation(true);
+            // await updateUserDiscount();
+            await clearShoppingCart();
             setDisplayButton(true);
-          }, 3000);
-        } else {
+          } else {
+            setDisplayReject(true);
+          }
+        } catch (error) {
+          console.error(error);
           setDisplayReject(true);
         }
       } else {
         setDisplayReject(true);
       }
     };
+
+    const updateProductData = async (product) => {
+      const invoice = createInvoiceObject(product);
+      await createInvoiceApi(invoice);
+      await updateProductCount(product);
+    };
+
+    const createInvoiceObject = (product) => {
+      return {
+        name: currentUser.name,
+        phone: currentUser.phone,
+        address: currentUser.address,
+        post: currentUser.post,
+        userId: currentUser["_id"],
+        productId: product["_id"],
+        delmareId: product.delmareId,
+        refId: refId,
+        title: product.title,
+        price: product.price,
+        color: product.color,
+        size: product.size,
+        image: product.image,
+        deliveryType: product.deliveryType,
+        bloggerDelmareId: product.bloggerDelmareId,
+        posted: false,
+      };
+    };
+
+    const updateProductCount = async (product) => {
+      // get latest product and update count and save on db
+      let getProduct = await getProductApi(product["_id"]);
+      if (getProduct.size[product.size].colors[product.color] > 0) {
+        getProduct.size[product.size].colors[product.color]--;
+        if (
+          Object.keys(getProduct.size).length === 1 &&
+          Object.keys(getProduct.size[product.size].colors).length === 1 &&
+          getProduct.size[product.size].colors[product.color] === 0
+        ) {
+          getProduct.activate = false;
+        }
+        await updateProductApi(getProduct);
+      }
+    };
+
+    const updateUserDiscount = async () => {
+      const user = await getUserApi(currentUser["_id"]);
+      if (user.discount) {
+        user.discount = "";
+        secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+        await updateUserApi(user);
+      }
+    };
+
+    const clearShoppingCart = async () => {
+      secureLocalStorage.removeItem("shoppingCart");
+      shoppingCart.length = 0;
+    };
+
     fetchData().catch(console.error);
-  }, [props.ResCode, props, currentUser, shoppingCart]);
+  }, [props.ResCode, props, shoppingCart, refId, currentUser]);
 
   const confirmation = () => {
     setTimeout(() => {
