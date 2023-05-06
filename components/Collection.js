@@ -53,6 +53,7 @@ export default function Collection({
       setSearchControl(true);
       if (collectionType === "shoes") {
         setSearchControl(false);
+        setSearch(false);
       }
     }
     switch (collectionType) {
@@ -76,6 +77,7 @@ export default function Collection({
     accessoriesCategories,
     setSearchControl,
     setGallery,
+    setSearch,
   ]);
 
   const selectProduct = async (product) => {
