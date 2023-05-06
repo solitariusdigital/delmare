@@ -7,24 +7,12 @@
   top: 0px;
 }
 
-.actions {
-  position: absolute;
-  top: 0px;
-  z-index: 2;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  max-width: config.$max-width;
-  height: 50px;
-  box-shadow: config.$card-shadow;
-  @include mixins.transparentBackground(0.8, config.$cream);
+.image {
+  @include mixins.background-anime();
+}
 
-  .image {
-    @include mixins.background-anime();
-  }
+.imageContainer {
+  display: flex;
 
   .categories {
     display: grid;
@@ -59,40 +47,31 @@
       @include mixins.heartbeat();
     }
   }
-}
 
-.message {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  padding: 10px;
-  box-shadow: config.$image-shadow;
-  max-width: config.$max-width;
-  @include mixins.transparentBackground(0.8, config.$cream);
-
-  .image {
-    @include mixins.background-anime();
+  .message {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    padding: 10px;
+    box-shadow: config.$image-shadow;
+    max-width: config.$max-width;
+    @include mixins.transparentBackground(0.8, config.$cream);
   }
-}
 
-.message {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  position: absolute;
-  z-index: 2;
-  top: 0px;
-  width: 100%;
-  padding: 10px;
-  box-shadow: config.$image-shadow;
-  max-width: config.$max-width;
-  color: config.$orange;
-  @include mixins.transparentBackground(0.8, config.$cream);
-
-  p {
-    font-size: config.$med-font;
+  .discount {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 10px;
+    box-shadow: config.$image-shadow;
+    max-width: config.$max-width;
+    color: config.$orange;
+    @include mixins.transparentBackground(0.8, config.$cream);
   }
 }
