@@ -24,7 +24,6 @@ export default function LandingPage() {
   }, [setBar, setContainer]);
 
   useEffect(() => {
-    // check if user is using pwa
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       setToggleContainer("screen");
     }
@@ -32,19 +31,19 @@ export default function LandingPage() {
 
   const assignImage = () => {
     const imagesArray = [
-      `${sourceLink}one.jpg`,
-      `${sourceLink}two.jpg`,
-      `${sourceLink}three.jpg`,
-      `${sourceLink}five.jpg`,
-      `${sourceLink}six.jpg`,
-      `${sourceLink}seven.jpg`,
-      `${sourceLink}eight.jpg`,
-      `${sourceLink}nine.jpg`,
-      `${sourceLink}ten.jpg`,
-      `${sourceLink}eleven.jpg`,
+      "one.jpg",
+      "two.jpg",
+      "three.jpg",
+      "five.jpg",
+      "six.jpg",
+      "seven.jpg",
+      "eight.jpg",
+      "nine.jpg",
+      "ten.jpg",
+      "eleven.jpg",
     ];
     const image = Math.floor(Math.random() * imagesArray.length);
-    return imagesArray[image];
+    return `${sourceLink}${imagesArray[image]}`;
   };
 
   const loginAction = () => {
@@ -54,15 +53,14 @@ export default function LandingPage() {
   };
 
   const activateNav = (link, title) => {
-    navigation.forEach((nav, i) => {
+    const updatedNavigation = navigation.map((nav) => {
       if (title === nav.title) {
-        Router.push(`${link}`);
-        nav.active = true;
-      } else {
-        nav.active = false;
+        Router.push(link);
+        return { ...nav, active: true };
       }
+      return { ...nav, active: false };
     });
-    setNavigation([...navigation]);
+    setNavigation(updatedNavigation);
   };
 
   return (

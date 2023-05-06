@@ -37,30 +37,33 @@ export default function Blogger() {
   let bloggerDelmareId = router.query.blogger;
 
   useEffect(() => {
-    setProducts([]);
     const fetchData = async () => {
       if (bloggerDelmareId) {
         const bloggers = await getBloggersApi();
-        bloggers.forEach(async (blogger) => {
-          if (blogger.delmareId === bloggerDelmareId.toUpperCase()) {
-            const user = await getUserApi(blogger.userId);
-            setBlogger({ ...blogger, favourites: user.favourites });
+        const blogger = bloggers.find(
+          (blogger) => blogger.delmareId === bloggerDelmareId.toUpperCase()
+        );
 
-            user.favourites.forEach(async (productId) => {
-              let getProduct = await getProductApi(productId);
-              setProducts((oldArray) => [
-                ...oldArray,
-                {
-                  link: getProduct.images.main,
-                  id: productId,
-                  display: getProduct.display,
-                },
-              ]);
-            });
-          }
-        });
+        if (blogger) {
+          const user = await getUserApi(blogger.userId);
+          setBlogger({ ...blogger, favourites: user.favourites });
+
+          const productPromises = user.favourites.map(async (productId) => {
+            const getProduct = await getProductApi(productId);
+            return {
+              link: getProduct.images.main,
+              id: productId,
+              display: getProduct.display,
+            };
+          });
+
+          const products = await Promise.all(productPromises);
+          setProducts(products);
+        }
       }
     };
+
+    setProducts([]);
     setBar(true);
     setDivHeight(window.innerHeight);
     fetchData().catch(console.error);
