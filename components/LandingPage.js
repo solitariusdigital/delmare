@@ -13,20 +13,14 @@ export default function LandingPage() {
   const { register, setRegister } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
 
-  const [count, setCount] = useState(0);
   const [divHeight, setDivHeight] = useState(null);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     document.body.style.background = "#f9f7f2";
-
     setBar(false);
     setContainer(true);
     setDivHeight(window.innerHeight - 50);
-    const timerId = setInterval(() => {
-      setCount((count) => count + 1);
-    }, 5000);
-    return () => clearInterval(timerId);
   }, [setBar, setContainer]);
 
   useEffect(() => {
@@ -49,10 +43,8 @@ export default function LandingPage() {
       `${sourceLink}ten.jpg`,
       `${sourceLink}eleven.jpg`,
     ];
-    const image = imagesArray.sort(() => Math.random() - 0.5)[
-      count % imagesArray.length
-    ];
-    return image;
+    const image = Math.floor(Math.random() * imagesArray.length);
+    return imagesArray[image];
   };
 
   const loginAction = () => {

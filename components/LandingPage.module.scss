@@ -47,6 +47,7 @@
 .imageContainer {
   max-width: config.$max-width;
   height: calc(100vh - 50px);
+  position: relative;
 
   .image {
     @include mixins.background-anime();
