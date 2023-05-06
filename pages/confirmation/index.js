@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, Fragment } from "react";
+import { useEffect, useContext, useState } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import {
@@ -6,6 +6,8 @@ import {
   createInvoiceApi,
   getProductApi,
   updateProductApi,
+  getUserApi,
+  updateUserApi,
 } from "../../services/api";
 import classes from "../page.module.scss";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -17,29 +19,20 @@ import loadingImage from "../../assets/loader.png";
 
 export default function Confirmation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
-  const { container, setContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const [divHeight, setDivHeight] = useState(null);
   const [refId, setRefId] = useState("");
   const [displayButton, setDisplayButton] = useState(false);
-
-  useEffect(() => {
-    document.body.style.background = "#ffffff";
-    setContainer(false);
-    setDivHeight(window.innerHeight);
-  }, [setContainer]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (props.ResCode === "0") {
         let check = await postMellatApi(props);
         if (check.code === 200) {
-          setRefId(check.refId);
           // create invoice with customer and product info
           const updateProductData = async (product) => {
             const invoice = {
@@ -76,14 +69,25 @@ export default function Confirmation({ props }) {
               await updateProductApi(getProduct);
             }
           };
-          shoppingCart.forEach((product) => {
-            updateProductData(product);
+
+          shoppingCart.map(async (product) => {
+            await updateProductData(product);
           });
+
+          // get user/change discount value/update localstorage
+          const user = await getUserApi(currentUser["_id"]);
+          if (user.discount) {
+            user.discount = "";
+            secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+            await updateUserApi(user);
+          }
+
+          setRefId(check.refId);
           setDisplayConfirmation(true);
+          secureLocalStorage.removeItem("shoppingCart");
+          shoppingCart.length = 0;
 
           setTimeout(() => {
-            secureLocalStorage.removeItem("shoppingCart");
-            shoppingCart.length = 0;
             setDisplayButton(true);
           }, 3000);
         } else {
@@ -94,7 +98,7 @@ export default function Confirmation({ props }) {
       }
     };
     fetchData().catch(console.error);
-  }, [props.ResCode, props, shoppingCart, currentUser]);
+  }, [props.ResCode, props, currentUser, shoppingCart]);
 
   const confirmation = () => {
     setTimeout(() => {
@@ -115,7 +119,7 @@ export default function Confirmation({ props }) {
   };
 
   return (
-    <div style={{ height: divHeight }}>
+    <div>
       {displayConfirmation && (
         <div className={classes.confirmationContainer}>
           <div>
@@ -125,7 +129,7 @@ export default function Confirmation({ props }) {
               <p className={classes.title}>{refId}</p>
             </div>
             <div className={classes.row}>
-              {true ? (
+              {displayButton ? (
                 <button className="mainButton" onClick={() => confirmation()}>
                   کمد من
                 </button>
