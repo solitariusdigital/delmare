@@ -43,22 +43,20 @@ export default function Bloggers({ bloggersData }) {
       <div className={classes.bloggers}>
         {bloggers.map((blogger, index) => (
           <div key={index} className={classes.blogger}>
-            <div className={classes.imageContainer}>
-              <Image
-                className={classes.image}
-                src={blogger.image}
-                blurDataURL={blogger.image}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-                loading="eager"
-                onClick={() =>
-                  Router.push(`/collections/bloggers/${blogger.delmareId}`)
-                }
-              />
-            </div>
+            <Image
+              className={classes.image}
+              src={blogger.image}
+              blurDataURL={blogger.image}
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              priority
+              loading="eager"
+              onClick={() =>
+                Router.push(`/collections/bloggers/${blogger.delmareId}`)
+              }
+            />
             <div className={classes.info}>
               <div className={classes.row}>
                 <div className={classes.social}>

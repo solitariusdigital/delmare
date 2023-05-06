@@ -54,6 +54,32 @@ export default function LandingPage() {
 
   return (
     <div className={classes.container}>
+      <div className={classes.actions}>
+        <div
+          className={classes.call}
+          onClick={() => activateNav("/collections/bloggers", "بلاگرز")}
+        >
+          <p>بلاگرز</p>
+        </div>
+        <div
+          className={classes.call}
+          onClick={() => Router.push("/collections")}
+        >
+          <p>کالکشن</p>
+        </div>
+        {!userLogIn ? (
+          <div className={classes.call} onClick={() => loginAction()}>
+            <p>ورود / ​ثبت نام</p>
+          </div>
+        ) : (
+          <div
+            className={classes.call}
+            onClick={() => activateNav("/collections/gallery", "گالری")}
+          >
+            <p>گالری</p>
+          </div>
+        )}
+      </div>
       <div className={classes.imageContainer} style={{ height: divHeight }}>
         {categories && (
           <div className={classes.categories}>

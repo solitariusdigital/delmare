@@ -7,11 +7,20 @@
   top: 0px;
 }
 
-.imageContainer {
+.actions {
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  padding: 10px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  width: 100%;
   max-width: config.$max-width;
+  height: 50px;
+  box-shadow: config.$card-shadow;
+  @include mixins.transparentBackground(0.8, config.$cream);
 
   .image {
     @include mixins.background-anime();
@@ -64,12 +73,12 @@
   max-width: config.$max-width;
   @include mixins.transparentBackground(0.8, config.$cream);
 
-  p {
-    font-size: config.$small-font;
+  .image {
+    @include mixins.background-anime();
   }
 }
 
-.discount {
+.message {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -83,7 +92,7 @@
   color: config.$orange;
   @include mixins.transparentBackground(0.8, config.$cream);
 
-  &:hover {
-    cursor: pointer;
+  p {
+    font-size: config.$med-font;
   }
 }
