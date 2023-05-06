@@ -6,6 +6,7 @@ import {
   createInvoiceApi,
   getProductApi,
   updateProductApi,
+  getUserApi,
 } from "../../services/api";
 import classes from "../page.module.scss";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -79,6 +80,15 @@ export default function Confirmation({ props }) {
           shoppingCart.forEach((product) => {
             updateProductData(product);
           });
+
+          // get user/change discount value/update localstorage
+          const user = await getUserApi(currentUser["_id"]);
+          if (user.discount) {
+            user.discount = "";
+            secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+            await updateUserApi(user);
+          }
+
           setDisplayConfirmation(true);
 
           setTimeout(() => {
