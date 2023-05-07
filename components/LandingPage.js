@@ -55,18 +55,6 @@ export default function LandingPage() {
   return (
     <div className={classes.container}>
       <div className={classes.imageContainer} style={{ height: divHeight }}>
-        <Image
-          className={classes.image}
-          onClick={() => Router.push("/collections")}
-          src={`${sourceLink}graphic.jpg`}
-          blurDataURL={`${sourceLink}graphic.jpg`}
-          placeholder="blur"
-          alt="image"
-          layout="fill"
-          objectFit="cover"
-          priority
-          loading="eager"
-        />
         {categories && (
           <div className={classes.categories}>
             <div onClick={() => activateNav("/collections/gallery", "گالری")}>
@@ -89,6 +77,18 @@ export default function LandingPage() {
             )}
           </div>
         )}
+        <Image
+          onClick={() => Router.push("/collections")}
+          className={classes.image}
+          src={`${sourceLink}graphic.jpg`}
+          blurDataURL={`${sourceLink}graphic.jpg`}
+          placeholder="blur"
+          alt="image"
+          layout="fill"
+          objectFit="cover"
+          priority
+          loading="eager"
+        />
         <div
           className={classes.message}
           onClick={() => Router.push("/collections")}

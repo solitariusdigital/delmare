@@ -37,7 +37,7 @@ export default function Confirmation({ props }) {
             setRefId(check.refId);
             await Promise.all(shoppingCart.map(updateProductData));
             setDisplayConfirmation(true);
-            // await updateUserDiscount();
+            await updateUserDiscount();
             await clearShoppingCart();
             setDisplayButton(true);
           } else {
