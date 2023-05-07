@@ -29,22 +29,18 @@ export default function LandingPage() {
     }
   }, [setToggleContainer]);
 
-  const assignImage = () => {
-    const imagesArray = [
-      "one.jpg",
-      "two.jpg",
-      "three.jpg",
-      "five.jpg",
-      "six.jpg",
-      "seven.jpg",
-      "eight.jpg",
-      "nine.jpg",
-      "ten.jpg",
-      "eleven.jpg",
-    ];
-    const image = Math.floor(Math.random() * imagesArray.length);
-    return `${sourceLink}${imagesArray[image]}`;
-  };
+  const imagesArray = [
+    "one.jpg",
+    "two.jpg",
+    "three.jpg",
+    "five.jpg",
+    "six.jpg",
+    "seven.jpg",
+    "eight.jpg",
+    "nine.jpg",
+    "ten.jpg",
+    "eleven.jpg",
+  ];
 
   const loginAction = () => {
     setToggleContainer("");
@@ -91,12 +87,19 @@ export default function LandingPage() {
           </div>
         )}
       </div>
-      <div className={classes.imageContainer} style={{ height: divHeight }}>
+      <div
+        className={classes.imageContainer}
+        style={{ height: divHeight }}
+        onClick={() => Router.push("/collections")}
+      >
         <Image
           className={classes.image}
-          onClick={() => Router.push("/collections")}
-          src={assignImage()}
-          blurDataURL={assignImage()}
+          src={`${sourceLink}${
+            imagesArray[Math.floor(Math.random() * imagesArray.length)]
+          }`}
+          blurDataURL={`${sourceLink}${
+            imagesArray[Math.floor(Math.random() * imagesArray.length)]
+          }`}
           placeholder="blur"
           alt="image"
           layout="fill"
