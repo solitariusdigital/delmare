@@ -28,6 +28,7 @@ export default function Confirmation({ props }) {
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [refId, setRefId] = useState("");
   const [displayButton, setDisplayButton] = useState(false);
+  const [clickConfirm, setClickConfirm] = useState(false);
 
   useEffect(() => {
     setContainer(false);
@@ -118,6 +119,7 @@ export default function Confirmation({ props }) {
   };
 
   const confirmation = async () => {
+    setClickConfirm(true);
     await createInvoice();
     setTimeout(() => {
       setToggleContainer("orders");
@@ -148,7 +150,11 @@ export default function Confirmation({ props }) {
             </div>
             <div className={classes.row}>
               {displayButton ? (
-                <button className="mainButton" onClick={() => confirmation()}>
+                <button
+                  className="mainButton"
+                  disabled={clickConfirm}
+                  onClick={() => confirmation()}
+                >
                   کمد من
                 </button>
               ) : (
