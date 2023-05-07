@@ -41,15 +41,14 @@ export default function LandingPage() {
   };
 
   const activateNav = (link, title) => {
-    navigation.forEach((nav, i) => {
+    const updatedNavigation = navigation.map((nav) => {
       if (title === nav.title) {
-        Router.push(`${link}`);
-        nav.active = true;
-      } else {
-        nav.active = false;
+        Router.push(link);
+        return { ...nav, active: true };
       }
+      return { ...nav, active: false };
     });
-    setNavigation([...navigation]);
+    setNavigation(updatedNavigation);
   };
 
   return (
