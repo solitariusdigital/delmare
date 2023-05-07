@@ -178,10 +178,16 @@
   font-weight: bold;
   font-size: config.$med-font;
 
+  .title {
+    text-align: right;
+    width: 30%;
+  }
+
   .discount {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 65%;
 
     .price {
       text-decoration: line-through;

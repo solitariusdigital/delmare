@@ -583,7 +583,7 @@ export default function Product({ product, favourite }) {
             ) : (
               <p>{convertNumber(price)} T</p>
             )}
-            <p>{product.title}</p>
+            <p className={classes.title}>{product.title}</p>
           </div>
           <p className={classes.description}>{product.description}</p>
           {active && (
