@@ -22,11 +22,16 @@ export default function Confirmation({ props }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
+  const { container, setContainer } = useContext(StateContext);
 
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [refId, setRefId] = useState("");
   const [displayButton, setDisplayButton] = useState(false);
+
+  useEffect(() => {
+    setContainer(false);
+  }, [setContainer]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +40,7 @@ export default function Confirmation({ props }) {
           const check = await postMellatApi(props);
           if (check.code === 200) {
             setRefId(check.refId);
-            await Promise.all(shoppingCart.map(updateProductData));
             setDisplayConfirmation(true);
-            await updateUserDiscount();
-            await clearShoppingCart();
             setDisplayButton(true);
           } else {
             setDisplayReject(true);
@@ -51,66 +53,72 @@ export default function Confirmation({ props }) {
         setDisplayReject(true);
       }
     };
-
-    const updateProductData = async (product) => {
-      const invoice = createInvoiceObject(product);
-      await createInvoiceApi(invoice);
-      await updateProductCount(product);
-    };
-
-    const createInvoiceObject = (product) => {
-      return {
-        name: currentUser.name,
-        phone: currentUser.phone,
-        address: currentUser.address,
-        post: currentUser.post,
-        userId: currentUser["_id"],
-        productId: product["_id"],
-        delmareId: product.delmareId,
-        refId: refId,
-        title: product.title,
-        price: product.price,
-        color: product.color,
-        size: product.size,
-        image: product.image,
-        deliveryType: product.deliveryType,
-        bloggerDelmareId: product.bloggerDelmareId,
-        posted: false,
-      };
-    };
-
-    const updateProductCount = async (product) => {
-      // get latest product and update count and save on db
-      let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] > 0) {
-        getProduct.size[product.size].colors[product.color]--;
-        if (
-          Object.keys(getProduct.size).length === 1 &&
-          Object.keys(getProduct.size[product.size].colors).length === 1 &&
-          getProduct.size[product.size].colors[product.color] === 0
-        ) {
-          getProduct.activate = false;
-        }
-        await updateProductApi(getProduct);
-      }
-    };
-
-    const updateUserDiscount = async () => {
-      const user = await getUserApi(currentUser["_id"]);
-      user.discount = "";
-      secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-      await updateUserApi(user);
-    };
-
-    const clearShoppingCart = async () => {
-      secureLocalStorage.removeItem("shoppingCart");
-      shoppingCart.length = 0;
-    };
-
     fetchData().catch(console.error);
-  }, [props.ResCode, props, shoppingCart, refId, currentUser]);
+  }, [props]);
 
-  const confirmation = () => {
+  const createInvoice = async () => {
+    await Promise.all(shoppingCart.map(updateProductData));
+    await updateUserDiscount();
+    await clearShoppingCart();
+  };
+
+  const updateProductData = async (product) => {
+    const invoice = createInvoiceObject(product);
+    await createInvoiceApi(invoice);
+    await updateProductCount(product);
+  };
+
+  const createInvoiceObject = (product) => {
+    return {
+      name: currentUser.name,
+      phone: currentUser.phone,
+      address: currentUser.address,
+      post: currentUser.post,
+      userId: currentUser["_id"],
+      productId: product["_id"],
+      delmareId: product.delmareId,
+      refId: refId,
+      title: product.title,
+      price: product.price,
+      color: product.color,
+      size: product.size,
+      image: product.image,
+      deliveryType: product.deliveryType,
+      bloggerDelmareId: product.bloggerDelmareId,
+      posted: false,
+    };
+  };
+
+  const updateProductCount = async (product) => {
+    // get latest product and update count and save on db
+    let getProduct = await getProductApi(product["_id"]);
+    if (getProduct.size[product.size].colors[product.color] > 0) {
+      getProduct.size[product.size].colors[product.color]--;
+      if (
+        Object.keys(getProduct.size).length === 1 &&
+        Object.keys(getProduct.size[product.size].colors).length === 1 &&
+        getProduct.size[product.size].colors[product.color] === 0
+      ) {
+        getProduct.activate = false;
+      }
+      await updateProductApi(getProduct);
+    }
+  };
+
+  const updateUserDiscount = async () => {
+    const user = await getUserApi(currentUser["_id"]);
+    user.discount = "";
+    secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+    await updateUserApi(user);
+  };
+
+  const clearShoppingCart = async () => {
+    secureLocalStorage.removeItem("shoppingCart");
+    shoppingCart.length = 0;
+  };
+
+  const confirmation = async () => {
+    await createInvoice();
     setTimeout(() => {
       setToggleContainer("orders");
       const api = Kavenegar.KavenegarApi({
