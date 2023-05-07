@@ -1,17 +1,17 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/stateContext";
 import secureLocalStorage from "react-secure-storage";
-import { getUsersApi } from "../services/api";
 import Head from "next/head";
 import { convertDate } from "../services/utility";
 import classes from "./page.module.scss";
 import Router from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import dbConnect from "../services/dbConnect";
+import userModel from "../models/User";
 
-export default function Users() {
+export default function Users({ sortedUsers }) {
   const { container, setContainer } = useContext(StateContext);
-  const { appUsers, setAppUsers } = useContext(StateContext);
   const [displayPage, setDisplayPage] = useState(false);
 
   useEffect(() => {
@@ -27,18 +27,6 @@ export default function Users() {
     }
   }, [setContainer]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUsersApi();
-      setAppUsers(
-        data.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        })
-      );
-    };
-    fetchData().catch(console.error);
-  }, [setAppUsers]);
-
   return (
     <Fragment>
       {displayPage && (
@@ -53,7 +41,7 @@ export default function Users() {
               onClick={() => Router.push("/")}
               sx={{ fontSize: 30 }}
             />
-            <h3>تعداد مشتری {appUsers.length}</h3>
+            <h3>تعداد مشتری {sortedUsers.length}</h3>
             <RefreshIcon
               className="icon"
               onClick={() => Router.reload(window.location.pathname)}
@@ -61,7 +49,7 @@ export default function Users() {
             />
           </div>
           <div className="user-page">
-            {appUsers.map((user, index) => (
+            {sortedUsers.map((user, index) => (
               <div
                 key={index}
                 className={classes.infoCard}
@@ -80,10 +68,6 @@ export default function Users() {
                   <p>{user.favourites.length}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>تولد</p>
-                  <p>{user.birthday === "" ? "-" : user.birthday}</p>
-                </div>
-                <div className={classes.row}>
                   <p className={classes.title}>عضویت</p>
                   <p suppressHydrationWarning>{convertDate(user.createdAt)}</p>
                 </div>
@@ -98,4 +82,25 @@ export default function Users() {
       )}
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const users = await userModel.find();
+    const sortedUsers = users.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    return {
+      props: {
+        sortedUsers: JSON.parse(JSON.stringify(sortedUsers)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
