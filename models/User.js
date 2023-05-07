@@ -15,7 +15,7 @@ const UserSchema = new Schema(
     address: {
       type: String,
       required: false,
-      maxlength: 150,
+      maxlength: 300,
     },
     post: {
       type: String,

@@ -53,9 +53,11 @@ export default function Confirmation({ props }) {
     };
 
     const updateProductData = async (product) => {
-      const invoice = createInvoiceObject(product);
-      await createInvoiceApi(invoice);
-      await updateProductCount(product);
+      if (currentUser) {
+        const invoice = createInvoiceObject(product);
+        await createInvoiceApi(invoice);
+        await updateProductCount(product);
+      }
     };
 
     const createInvoiceObject = (product) => {
@@ -96,8 +98,8 @@ export default function Confirmation({ props }) {
     };
 
     const updateUserDiscount = async () => {
-      const user = await getUserApi(currentUser["_id"]);
-      if (user.discount) {
+      if (currentUser) {
+        const user = await getUserApi(currentUser["_id"]);
         user.discount = "";
         secureLocalStorage.setItem("currentUser", JSON.stringify(user));
         await updateUserApi(user);
