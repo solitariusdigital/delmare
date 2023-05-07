@@ -7,13 +7,13 @@
   top: 0px;
 }
 
-.image {
-  @include mixins.background-anime();
-}
-
 .imageContainer {
   display: flex;
   position: relative;
+
+  .image {
+    @include mixins.background-anime();
+  }
 
   .categories {
     display: grid;
