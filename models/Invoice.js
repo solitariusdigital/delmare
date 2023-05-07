@@ -6,7 +6,6 @@ const InvoiceSchema = new Schema(
     name: {
       type: String,
       required: true,
-      maxlength: 20,
     },
     phone: {
       type: String,
@@ -15,33 +14,27 @@ const InvoiceSchema = new Schema(
     address: {
       type: String,
       required: true,
-      maxlength: 150,
     },
     post: {
       type: String,
       required: true,
-      maxlength: 20,
     },
     userId: {
       type: String,
       required: true,
-      maxlength: 30,
     },
     // product info
     productId: {
       type: String,
       required: true,
-      maxlength: 30,
     },
     delmareId: {
       type: String,
       required: true,
-      maxlength: 30,
     },
     title: {
       type: String,
       required: true,
-      maxlength: 20,
     },
     image: String,
     price: Number,
