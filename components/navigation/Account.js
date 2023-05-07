@@ -111,7 +111,7 @@ export default function Account() {
   };
 
   return (
-    <div className={ShoppingCart.slider}>
+    <div className={ShoppingCart.slider} style={{ height: window.innerHeight }}>
       <div className={ShoppingCart.menu}>
         <div className={ShoppingCart.topBar}>
           <CloseIcon className="icon" onClick={() => setToggleContainer("")} />
