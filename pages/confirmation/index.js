@@ -32,7 +32,7 @@ export default function Confirmation({ props }) {
   }, [setContainer]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const processOrder = async () => {
       if (props.ResCode === "0") {
         try {
           const check = await postMellatApi(props);
@@ -50,13 +50,17 @@ export default function Confirmation({ props }) {
         setDisplayReject(true);
       }
     };
-    fetchData().catch(console.error);
+    processOrder().catch(console.error);
   }, [props]);
 
-  const createInvoice = async () => {
-    await Promise.all(shoppingCart.map(updateProductData));
-    await updateUserDiscount();
-    await clearShoppingCart();
+  const generateInvoice = async () => {
+    try {
+      await Promise.all(shoppingCart.map(updateProductData));
+      await updateUserDiscount();
+      clearShoppingCart();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const updateProductData = async (product) => {
@@ -87,36 +91,45 @@ export default function Confirmation({ props }) {
   };
 
   const updateProductCount = async (product) => {
-    // get latest product and update count and save on db
-    let getProduct = await getProductApi(product["_id"]);
-    if (getProduct.size[product.size].colors[product.color] > 0) {
-      getProduct.size[product.size].colors[product.color]--;
-      if (
-        Object.keys(getProduct.size).length === 1 &&
-        Object.keys(getProduct.size[product.size].colors).length === 1 &&
-        getProduct.size[product.size].colors[product.color] === 0
-      ) {
-        getProduct.activate = false;
+    try {
+      let getProduct = await getProductApi(product["_id"]);
+      const size = getProduct.size[product.size];
+      const colorCount = size.colors[product.color];
+      if (colorCount > 0) {
+        size.colors[product.color]--;
+        if (
+          Object.keys(getProduct.size).length === 1 &&
+          Object.keys(size.colors).length === 1 &&
+          colorCount === 0
+        ) {
+          getProduct.activate = false;
+        }
+        await updateProductApi(getProduct);
       }
-      await updateProductApi(getProduct);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const updateUserDiscount = async () => {
-    const user = await getUserApi(currentUser["_id"]);
-    user.discount = "";
-    secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-    await updateUserApi(user);
+    try {
+      const user = await getUserApi(currentUser["_id"]);
+      user.discount = "";
+      secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+      await updateUserApi(user);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const clearShoppingCart = async () => {
+  const clearShoppingCart = () => {
     secureLocalStorage.removeItem("shoppingCart");
-    shoppingCart.length = 0;
+    setShoppingCart([]);
   };
 
-  const confirmation = async () => {
+  const confirmMessage = async () => {
     setClickConfirm(true);
-    await createInvoice();
+    await generateInvoice();
     setTimeout(() => {
       setToggleContainer("orders");
       const api = Kavenegar.KavenegarApi({
@@ -148,7 +161,7 @@ export default function Confirmation({ props }) {
               <button
                 className="mainButton"
                 disabled={clickConfirm}
-                onClick={() => confirmation()}
+                onClick={() => confirmMessage()}
               >
                 کمد من
               </button>
