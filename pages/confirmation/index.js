@@ -13,9 +13,7 @@ import classes from "../page.module.scss";
 import CancelIcon from "@mui/icons-material/Cancel";
 import qs from "querystring";
 import secureLocalStorage from "react-secure-storage";
-import Image from "next/image";
 import Kavenegar from "kavenegar";
-import loadingImage from "../../assets/loader.png";
 
 export default function Confirmation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -27,7 +25,6 @@ export default function Confirmation({ props }) {
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [refId, setRefId] = useState("");
-  const [displayButton, setDisplayButton] = useState(false);
   const [clickConfirm, setClickConfirm] = useState(false);
 
   useEffect(() => {
@@ -42,7 +39,6 @@ export default function Confirmation({ props }) {
           if (check.code === 200) {
             setRefId(check.refId);
             setDisplayConfirmation(true);
-            setDisplayButton(true);
           } else {
             setDisplayReject(true);
           }
@@ -148,17 +144,15 @@ export default function Confirmation({ props }) {
               <p>کد رهگیری</p>
               <p className={classes.title}>{refId}</p>
             </div>
-            {displayButton && (
-              <div className={classes.row}>
-                <button
-                  className="mainButton"
-                  disabled={clickConfirm}
-                  onClick={() => confirmation()}
-                >
-                  کمد من
-                </button>
-              </div>
-            )}
+            <div className={classes.row}>
+              <button
+                className="mainButton"
+                disabled={clickConfirm}
+                onClick={() => confirmation()}
+              >
+                کمد من
+              </button>
+            </div>
           </div>
         </div>
       )}
