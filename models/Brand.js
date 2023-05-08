@@ -6,12 +6,10 @@ const BrandSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      maxlength: 30,
     },
     title: {
       type: String,
       required: false,
-      maxlength: 20,
     },
     logo: String,
     products: [String],

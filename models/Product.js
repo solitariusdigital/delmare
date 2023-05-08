@@ -5,17 +5,14 @@ const ProductSchema = new Schema(
     delmareId: {
       type: String,
       required: true,
-      maxlength: 30,
     },
     title: {
       type: String,
       required: true,
-      maxlength: 20,
     },
     description: {
       type: String,
       required: true,
-      maxlength: 250,
     },
     images: {
       main: String,

@@ -28,7 +28,6 @@ export default function LandingPage() {
   }, [setBar, setContainer]);
 
   useEffect(() => {
-    // check if user is using pwa
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       setToggleContainer("screen");
     }

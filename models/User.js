@@ -5,7 +5,6 @@ const UserSchema = new Schema(
     name: {
       type: String,
       required: false,
-      maxlength: 20,
     },
     phone: {
       type: String,
@@ -15,17 +14,14 @@ const UserSchema = new Schema(
     address: {
       type: String,
       required: false,
-      maxlength: 150,
     },
     post: {
       type: String,
       required: false,
-      maxlength: 20,
     },
     permission: {
       type: String,
       required: false,
-      maxlength: 20,
     },
     favourites: [String],
     follows: [String],

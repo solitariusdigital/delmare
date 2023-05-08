@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { updateUserApi, getProductApi, getMellatApi } from "../../services/api";
+import { getProductApi, getMellatApi } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
@@ -146,21 +146,6 @@ export default function ShoppingCart() {
     }
   };
 
-  // update user info into db/state/localstorage
-  const updateUser = async () => {
-    const user = {
-      _id: currentUser["_id"],
-      name: name.trim(),
-      phone: phone.trim(),
-      address: address.trim(),
-      post: post.trim(),
-    };
-
-    let data = await updateUserApi(user);
-    setCurrentUser(data);
-    secureLocalStorage.setItem("currentUser", JSON.stringify(data));
-  };
-
   const allAreTrue = (arr) => {
     return arr.every((element) => element === true);
   };
@@ -204,7 +189,6 @@ export default function ShoppingCart() {
     if (pay.hasOwnProperty("error")) {
       setAlert(pay.error);
     } else {
-      await updateUser();
       setCheckoutClicked(false);
       setTimeout(() => {
         setPayment(false);
@@ -319,95 +303,40 @@ export default function ShoppingCart() {
             </div>
           )}
           {checkout && (
-            // checkout from
+            // checkout info
             <div>
               {userLogIn ? (
-                <div className={classes.form}>
-                  <p className={classes.title}>با دلماره متفاوت دیده شوید</p>
-                  <div className={classes.input}>
+                <div className={classes.register}>
+                  <div className={classes.info}>
                     <div className={classes.bar}>
-                      <p className={classes.label}>
-                        نام و نام خانوادگی
-                        <span>*</span>
-                      </p>
-                      <CloseIcon
-                        className="icon"
-                        onClick={() => setName("")}
-                        sx={{ fontSize: 16 }}
-                      />
+                      <p className={classes.label}>نام و نام خانوادگی</p>
+                      <p>{name}</p>
                     </div>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      onChange={(e) => setName(e.target.value)}
-                      value={name}
-                      autoComplete="off"
-                      dir="rtl"
-                    />
                   </div>
-                  <div className={classes.input}>
+                  <div className={classes.info}>
                     <div className={classes.bar}>
-                      <p className={classes.label}>
-                        موبایل
-                        <span>*</span>
-                      </p>
+                      <p className={classes.label}>موبایل</p>
+                      <p>{phone}</p>
                     </div>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
-                      autoComplete="off"
-                      dir="rtl"
-                      disabled={true}
-                    />
                   </div>
-                  <div className={classes.input}>
+                  <div className={classes.info}>
                     <div className={classes.bar}>
-                      <p className={classes.label}>
-                        آدرس تحویل
-                        <span>*</span>
-                      </p>
-                      <CloseIcon
-                        className="icon"
-                        onClick={() => setAddress("")}
-                        sx={{ fontSize: 16 }}
-                      />
+                      <p className={classes.label}>آدرس تحویل</p>
+                      <p>{address}</p>
                     </div>
-                    <textarea
-                      type="text"
-                      id="address"
-                      name="address"
-                      onChange={(e) => setAddress(e.target.value)}
-                      value={address}
-                      autoComplete="off"
-                      dir="rtl"
-                    ></textarea>
                   </div>
-                  <div className={classes.input}>
+                  <div className={classes.info}>
                     <div className={classes.bar}>
-                      <p className={classes.label}>
-                        کد پستی
-                        <span>*</span>
-                      </p>
-                      <CloseIcon
-                        className="icon"
-                        onClick={() => setPost("")}
-                        sx={{ fontSize: 16 }}
-                      />
+                      <p className={classes.label}>کد پستی</p>
+                      <p>{post}</p>
                     </div>
-                    <input
-                      type="tel"
-                      id="post"
-                      name="post"
-                      onChange={(e) => setPost(e.target.value)}
-                      value={post}
-                      autoComplete="off"
-                      dir="rtl"
-                    />
                   </div>
+                  <button
+                    className={`mainButton ${classes.button}`}
+                    onClick={() => setToggleContainer("account")}
+                  >
+                    ویرایش
+                  </button>
                   <div className={classes.alert}>{alert}</div>
                 </div>
               ) : (

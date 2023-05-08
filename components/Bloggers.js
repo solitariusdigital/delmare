@@ -15,22 +15,26 @@ export default function Bloggers({ bloggersData }) {
   const { searchControl, setSearchControl } = useContext(StateContext);
 
   useEffect(() => {
-    setBloggers([]);
-    const setBloggerData = async (blogger) => {
-      const user = await getUserApi(blogger.userId);
-      blogger.favourites = user.favourites;
-      setBloggers((oldArray) =>
-        [...oldArray, blogger].sort(function (a, b) {
-          return b.followers.length - a.followers.length;
+    const fetchBloggersData = async () => {
+      const bloggersWithFavourites = await Promise.all(
+        bloggersData.map(async (blogger) => {
+          const user = await getUserApi(blogger.userId);
+          blogger.favourites = user.favourites;
+          return blogger;
         })
       );
-    };
-    bloggersData.forEach((blogger) => {
-      setBloggerData(blogger);
-    });
 
-    setBar(true);
-    setSearchControl(false);
+      const sortedBloggers = bloggersWithFavourites.sort(
+        (a, b) => b.followers.length - a.followers.length
+      );
+
+      setBloggers(sortedBloggers);
+      setBar(true);
+      setSearchControl(false);
+    };
+
+    setBloggers([]);
+    fetchBloggersData();
   }, [setBloggers, setBar, setSearchControl, bloggersData]);
 
   return (
