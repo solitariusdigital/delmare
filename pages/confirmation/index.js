@@ -127,7 +127,7 @@ export default function Confirmation({ props }) {
     setShoppingCart([]);
   };
 
-  const confirmation = async () => {
+  const confirmMessage = async () => {
     setClickConfirm(true);
     await generateInvoice();
     setTimeout(() => {
@@ -161,7 +161,7 @@ export default function Confirmation({ props }) {
               <button
                 className="mainButton"
                 disabled={clickConfirm}
-                onClick={() => confirmation()}
+                onClick={() => confirmMessage()}
               >
                 کمد من
               </button>
