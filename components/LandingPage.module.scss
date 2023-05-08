@@ -34,10 +34,10 @@
       height: 100px;
       font-weight: bold;
       box-shadow: config.$image-shadow;
-      border: 2px solid config.$lemon;
       margin: auto;
       @include mixins.border-radius();
-      @include mixins.transparentBackground(0.4, config.$cream);
+      opacity: 0.8;
+      background: linear-gradient(config.$brand, config.$lemon);
 
       &:hover {
         cursor: pointer;

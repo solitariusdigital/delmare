@@ -41,7 +41,7 @@ export default function Users({ sortedUsers }) {
               onClick={() => Router.push("/")}
               sx={{ fontSize: 30 }}
             />
-            <h3>تعداد مشتری {sortedUsers.length}</h3>
+            <h3>{sortedUsers.length}</h3>
             <RefreshIcon
               className="icon"
               onClick={() => Router.reload(window.location.pathname)}

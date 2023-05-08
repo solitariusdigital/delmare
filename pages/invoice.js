@@ -73,7 +73,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 onClick={() => setposted(false)}
                 className={posted ? classes.nav : classes.navActive}
               >
-                ارسالی جدید
+                سفارشات جدید
               </p>
               <p
                 onClick={() => setposted(true)}
@@ -200,7 +200,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       className={classes.button}
                       onClick={() => postInvoice(invoice)}
                     >
-                      انتقال به ارسال شده
+                      ارسال شده
                     </button>
                   </div>
                 ))}
@@ -209,7 +209,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
             {posted && (
               <div>
                 <div className={classes.infoBar}>
-                  <p>سفارشات ارسال شده {postedInvoices.length}</p>
+                  <p>ارسال شده {postedInvoices.length}</p>
                 </div>
                 {postedInvoices.map((invoice, index) => (
                   <div key={index} className={classes.infoCard}>
