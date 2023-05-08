@@ -3,7 +3,6 @@ import Layout from "../components/Layout";
 import { StateProvider } from "../context/stateContext";
 import Router from "next/router";
 import { getNotificationsApi } from "../services/api";
-import PullToRefresh from "react-simple-pull-to-refresh";
 import loadingImage from "../assets/loaderUpdate.png";
 import Image from "next/image";
 import logo from "../assets/logo.svg";
@@ -33,23 +32,17 @@ export default function App({ Component, pageProps }) {
           "admin") ||
       !loadAppUpdate.active ? (
         <Layout>
-          <PullToRefresh
-            onRefresh={handleRefresh}
-            pullingContent={false}
-            refreshingContent={false}
-          >
-            <DefaultSeo
-              title="با دلماره متفاوت دیده شوید"
-              description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
-              openGraph={{
-                type: "website",
-                locale: "fa_IR",
-                url: "https://delmareh.com/",
-                siteName: "Delmareh",
-              }}
-            />
-            <Component {...pageProps} />
-          </PullToRefresh>
+          <DefaultSeo
+            title="با دلماره متفاوت دیده شوید"
+            description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
+            openGraph={{
+              type: "website",
+              locale: "fa_IR",
+              url: "https://delmareh.com/",
+              siteName: "Delmareh",
+            }}
+          />
+          <Component {...pageProps} />
         </Layout>
       ) : (
         <div className="loadAppUpdate">
