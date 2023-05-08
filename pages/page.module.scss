@@ -207,57 +207,63 @@
   }
 }
 
-.confirmationContainer {
-  width: 100%;
-  height: 100vh;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.confirmPage {
+  button {
+    margin-top: 20px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    height: 40px;
+    font-weight: bold;
+  }
 
-  .row {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
+  .confirmationContainer {
     width: 100%;
-    margin: 5px 0px;
-    padding: 5px 0px;
+    height: 100vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    .loading {
+    .row {
       display: flex;
-      flex-direction: column;
+      flex-direction: row-reverse;
       align-items: center;
+      justify-content: space-between;
       width: 100%;
+      margin: 5px 0px;
+      padding: 5px 0px;
+
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+    }
+
+    .title {
+      text-align: center;
+      font-weight: bold;
+      font-size: config.$med-font;
     }
   }
 
-  .title {
+  .rejectContainer {
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-weight: bold;
-    font-size: config.$med-font;
-  }
-}
 
-.rejectContainer {
-  width: 100%;
-  height: 100vh;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  .rejectMsg {
-    font-size: config.$med-font;
-    color: config.$red;
-    margin-bottom: 10px;
-  }
-
-  button {
-    margin-top: 20px;
+    .rejectMsg {
+      font-size: config.$med-font;
+      color: config.$red;
+      margin-bottom: 10px;
+    }
   }
 }
 

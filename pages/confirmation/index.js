@@ -139,7 +139,7 @@ export default function Confirmation({ props }) {
   };
 
   return (
-    <div>
+    <div className={classes.confirmPage}>
       {displayConfirmation && (
         <div className={classes.confirmationContainer}>
           <div>
@@ -148,8 +148,8 @@ export default function Confirmation({ props }) {
               <p>کد رهگیری</p>
               <p className={classes.title}>{refId}</p>
             </div>
-            <div className={classes.row}>
-              {displayButton ? (
+            {displayButton && (
+              <div className={classes.row}>
                 <button
                   className="mainButton"
                   disabled={clickConfirm}
@@ -157,18 +157,8 @@ export default function Confirmation({ props }) {
                 >
                   کمد من
                 </button>
-              ) : (
-                <div className={classes.loading}>
-                  <p>لطفا صبر کنید و صفحه را نبندید </p>
-                  <Image
-                    width={50}
-                    height={50}
-                    src={loadingImage}
-                    alt="isLoading"
-                  />
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}
