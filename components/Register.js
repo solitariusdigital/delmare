@@ -110,16 +110,15 @@ function Register() {
     if (token === Number(checkToken)) {
       setIsLoading(true);
       let userExist = false;
-      // check if user already exist in db
-      appUsers.forEach((user) => {
-        if (user.phone === phone) {
-          userExist = true;
-          setUserLogin(true);
-          setCurrentUser(user);
-          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-          setRegister(false);
-        }
-      });
+      // Check if user already exists in the database
+      const existingUser = appUsers.find((user) => user.phone === phone);
+      if (existingUser) {
+        userExist = true;
+        setUserLogin(true);
+        setCurrentUser(existingUser);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
+        setRegister(false);
+      }
       // if user does not exist create a new one
       if (!userExist) {
         await createUser();
@@ -147,6 +146,7 @@ function Register() {
       setAlert("");
     }, 3000);
   };
+
   // create new user into db/state/localstorage
   const createUser = async () => {
     const user = {
@@ -158,14 +158,18 @@ function Register() {
       permission: "customer",
       discount: discount,
     };
-    let data = await createUserApi(user);
-    if (data.hasOwnProperty("error")) {
+    try {
+      const data = await createUserApi(user);
+      if (data.hasOwnProperty("error")) {
+        setAlert("خطا در برقراری ارتباط");
+      } else {
+        setRegister(false);
+        setUserLogin(true);
+        setCurrentUser(data);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(data));
+      }
+    } catch (error) {
       setAlert("خطا در برقراری ارتباط");
-    } else {
-      setRegister(false);
-      setUserLogin(true);
-      setCurrentUser(data);
-      secureLocalStorage.setItem("currentUser", JSON.stringify(data));
     }
     setDisplayCounter(false);
     resetCounter();

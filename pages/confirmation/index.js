@@ -28,6 +28,7 @@ export default function Confirmation({ props }) {
   const [clickConfirm, setClickConfirm] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = "#ffffff";
     setContainer(false);
   }, [setContainer]);
 
@@ -129,22 +130,20 @@ export default function Confirmation({ props }) {
 
   const confirmMessage = async () => {
     setClickConfirm(true);
-    await generateInvoice();
-    setTimeout(() => {
-      setToggleContainer("orders");
-      const api = Kavenegar.KavenegarApi({
-        apikey: kavenegarKey,
-      });
-      api.VerifyLookup(
-        {
-          receptor: currentUser.phone,
-          token: refId,
-          template: "confirmation",
-        },
-        function (response, status) {}
-      );
-    }, 1000);
     Router.push("/");
+    await generateInvoice();
+    const api = Kavenegar.KavenegarApi({
+      apikey: kavenegarKey,
+    });
+    api.VerifyLookup(
+      {
+        receptor: currentUser.phone,
+        token: refId,
+        template: "confirmation",
+      },
+      function (response, status) {}
+    );
+    setToggleContainer("orders");
   };
 
   return (

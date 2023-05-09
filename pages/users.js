@@ -92,13 +92,13 @@ export async function getServerSideProps(context) {
     const sortedUsers = users.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
-
     return {
       props: {
         sortedUsers: JSON.parse(JSON.stringify(sortedUsers)),
       },
     };
   } catch (error) {
+    console.error(error);
     return {
       notFound: true,
     };

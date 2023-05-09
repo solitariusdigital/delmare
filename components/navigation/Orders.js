@@ -16,14 +16,17 @@ export default function Orders() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getInvoiceApi();
-      setOrders(
-        data.filter((item, i) => {
-          return item.userId === currentUser["_id"];
-        })
-      );
+      try {
+        const data = await getInvoiceApi();
+        const filteredOrders = data.filter(
+          (item) => item.userId === currentUser["_id"]
+        );
+        setOrders(filteredOrders);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    fetchData().catch(console.error);
+    fetchData();
   }, [setOrders, currentUser]);
 
   return (

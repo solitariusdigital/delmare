@@ -73,7 +73,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 onClick={() => setposted(false)}
                 className={posted ? classes.nav : classes.navActive}
               >
-                سفارشات جدید
+                سفارشات
               </p>
               <p
                 onClick={() => setposted(true)}
@@ -91,7 +91,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
             {!posted && (
               <div>
                 <div className={classes.infoBar}>
-                  <p>سفارشات جدید {newInvoices.length}</p>
+                  <p>سفارشات {newInvoices.length}</p>
                   <p>{convertNumber(calculateTotalSale())}</p>
                 </div>
                 {newInvoices.map((invoice, index) => (
@@ -336,21 +336,11 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const invoices = await invoiceModel.find();
     const newInvoices = invoices
-      .reverse()
-      .filter((invoice) => {
-        return !invoice.posted;
-      })
-      .sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
+      .filter((invoice) => !invoice.posted)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const postedInvoices = invoices
-      .filter((invoice) => {
-        return invoice.posted;
-      })
-      .sort((a, b) => {
-        return new Date(b.updatedAt) - new Date(a.updatedAt);
-      });
-
+      .filter((invoice) => invoice.posted)
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
     return {
       props: {
         invoices: JSON.parse(JSON.stringify(invoices)),
@@ -359,6 +349,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
+    console.error(error);
     return {
       notFound: true,
     };

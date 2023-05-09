@@ -364,17 +364,19 @@ export default function Upload() {
   };
 
   const handleUpload = async () => {
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !delmareId ||
-      !brand ||
-      !category ||
-      !season ||
-      !brandType ||
-      !deliveryType
-    ) {
+    const validateFields = [
+      title,
+      description,
+      price,
+      delmareId,
+      brand,
+      category,
+      season,
+      brandType,
+      deliveryType,
+    ];
+
+    if (validateFields.some((field) => !field)) {
       setAlert("Fill in all fields");
       setTimeout(() => {
         setAlert("");
@@ -384,60 +386,56 @@ export default function Upload() {
 
     setUploadClicked(true);
 
-    switch (categorySize) {
-      case "clothesSize":
-        transformDataSize(XS, "XS");
-        transformDataSize(S, "S");
-        transformDataSize(M, "M");
-        transformDataSize(L, "L");
-        transformDataSize(XL, "XL");
-        break;
-      case "shoesSize":
-        transformDataSize(size34, "34");
-        transformDataSize(size35, "35");
-        transformDataSize(size36, "36");
-        transformDataSize(size37, "37");
-        transformDataSize(size38, "38");
-        transformDataSize(size39, "39");
-        transformDataSize(size40, "40");
-        transformDataSize(size41, "41");
-        transformDataSize(size42, "42");
-        transformDataSize(size43, "43");
-        transformDataSize(size44, "44");
-        transformDataSize(size45, "45");
-        break;
-      case "freeSize":
-        transformDataSize(FS, "FS");
-        break;
-    }
+    const sizeTransforms = {
+      clothesSize: [
+        { sizeData: XS, label: "XS" },
+        { sizeData: S, label: "S" },
+        { sizeData: M, label: "M" },
+        { sizeData: L, label: "L" },
+        { sizeData: XL, label: "XL" },
+      ],
+      shoesSize: [
+        { sizeData: size34, label: "34" },
+        { sizeData: size35, label: "35" },
+        { sizeData: size36, label: "36" },
+        { sizeData: size37, label: "37" },
+        { sizeData: size38, label: "38" },
+        { sizeData: size39, label: "39" },
+        { sizeData: size40, label: "40" },
+        { sizeData: size41, label: "41" },
+        { sizeData: size42, label: "42" },
+        { sizeData: size43, label: "43" },
+        { sizeData: size44, label: "44" },
+        { sizeData: size45, label: "45" },
+      ],
+      freeSize: [{ sizeData: FS, label: "FS" }],
+    };
+    const selectedSizeTransform = sizeTransforms[categorySize];
+    selectedSizeTransform.forEach(({ sizeData, label }) => {
+      transformDataSize(sizeData, label);
+    });
 
     let delmareIdFolder = `${delmareId}${sixGenerator()}`;
 
-    if (mainImage !== "") {
-      let imageId = `img${sixGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
-      await uploadImages(mainImage, imageId, delmareIdFolder);
-    }
-    if (imageOne !== "") {
-      let imageId = `img${sixGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
-      await uploadImages(imageOne, imageId, delmareIdFolder);
-    }
-    if (imageTwo !== "") {
-      let imageId = `img${sixGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
-      await uploadImages(imageTwo, imageId, delmareIdFolder);
-    }
-    if (imageThree !== "") {
-      let imageId = `img${sixGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
-      await uploadImages(imageThree, imageId, delmareIdFolder);
-    }
+    const images = {};
+    const uploadAndSetImage = async (image, key) => {
+      if (image !== "") {
+        const imageId = `img${sixGenerator()}`;
+        images[
+          key
+        ] = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+        await uploadImages(image, imageId, delmareIdFolder);
+      }
+    };
+    await Promise.all([
+      uploadAndSetImage(mainImage, "main"),
+      uploadAndSetImage(imageOne, "one"),
+      uploadAndSetImage(imageTwo, "two"),
+      uploadAndSetImage(imageThree, "three"),
+      uploadAndSetImage(table, "table"),
+    ]);
     if (table !== "") {
-      let imageId = `img${sixGenerator()}`;
-      images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
       images.graph = sizeGraph;
-      await uploadImages(table, imageId, delmareIdFolder);
     }
 
     // upload product data into db
@@ -500,24 +498,22 @@ export default function Upload() {
       body: formData,
     });
 
-    if (upload.ok) {
-      setAlert("Images uploaded successfully");
-    } else {
-      setAlert("Images upload failed");
-    }
+    const alertMessage = upload.ok
+      ? "Images uploaded successfully"
+      : "Images upload failed";
+    setAlert(alertMessage);
     setTimeout(() => {
       setAlert("");
     }, 1000);
   };
 
   const assignBrand = (value) => {
-    setBrand(value);
-    brands.forEach((brand) => {
-      if (brand.title === value) {
-        setDelmareId(brand.delmareId);
-        setSelectedBrand(brand);
-      }
-    });
+    const selectedBrand = brands.find((brand) => brand.title === value);
+    if (selectedBrand) {
+      setBrand(value);
+      setDelmareId(selectedBrand.delmareId);
+      setSelectedBrand(selectedBrand);
+    }
   };
 
   const resetSizes = () => {

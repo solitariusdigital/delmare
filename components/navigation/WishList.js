@@ -36,12 +36,16 @@ export default function WishList() {
   useEffect(() => {
     Router.push(`/collections/gallery`);
     const fetchData = async () => {
-      const data = await getProducstApi();
-      setWishList(
-        data.filter((product) =>
-          currentUser.favourites.includes(product["_id"])
-        )
-      );
+      try {
+        const data = await getProducstApi();
+        setWishList(
+          data.filter((product) =>
+            currentUser.favourites.includes(product["_id"])
+          )
+        );
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchData().catch(console.error);
   }, [currentUser]);
@@ -49,13 +53,12 @@ export default function WishList() {
   const favourProduct = async (product) => {
     if (currentUser) {
       setLike(!like);
-      if (currentUser.favourites.includes(product["_id"])) {
-        currentUser.favourites.splice(
-          currentUser.favourites.indexOf(product["_id"]),
-          1
-        );
+      const { favourites } = currentUser;
+      const productIndex = favourites.indexOf(product["_id"]);
+      if (productIndex !== -1) {
+        favourites.splice(productIndex, 1);
       } else {
-        currentUser.favourites.unshift(product["_id"]);
+        favourites.unshift(product["_id"]);
       }
       secureLocalStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);

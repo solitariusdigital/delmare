@@ -58,8 +58,6 @@ export default function Collection({
     }
     switch (collectionType) {
       case "gallery":
-        setCategories(generalCategories);
-        break;
       case "sale":
         setCategories(generalCategories);
         break;
@@ -67,6 +65,7 @@ export default function Collection({
         setCategories(accessoriesCategories);
         break;
     }
+
     setBar(true);
   }, [
     collectionType,

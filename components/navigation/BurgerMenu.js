@@ -119,12 +119,15 @@ export default function BurgerMenu() {
   ];
 
   useEffect(() => {
-    if (
-      !window.matchMedia("(display-mode: standalone)").matches &&
-      navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
-    ) {
-      setDesktop(true);
-    }
+    const checkDeviceType = () => {
+      if (
+        !window.matchMedia("(display-mode: standalone)").matches &&
+        navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
+      ) {
+        setDesktop(true);
+      }
+    };
+    checkDeviceType();
   }, [setDesktop]);
 
   const navigateMenu = (action) => {

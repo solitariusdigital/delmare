@@ -1,7 +1,6 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Brands.module.scss";
 import Image from "next/image";
-import loadingImage from "../assets/loader.png";
 import Router from "next/router";
 import { StateContext } from "../context/stateContext";
 
@@ -13,20 +12,14 @@ export default function Brands({ brandsData }) {
   useEffect(() => {
     setBar(true);
     setSearchControl(false);
-    setBrands(
-      brandsData.sort(function (a, b) {
-        return b.products.length - a.products.length;
-      })
+    const sortedBrands = brandsData.sort(
+      (a, b) => b.products.length - a.products.length
     );
+    setBrands(sortedBrands);
   }, [setBrands, setBar, setSearchControl, brandsData]);
 
   return (
     <Fragment>
-      <div className={classes.loader}>
-        {brandsData.length === 0 && (
-          <Image width={50} height={50} src={loadingImage} alt="isLoading" />
-        )}
-      </div>
       <div className={classes.brands}>
         {brandsData.map((brand, index) => (
           <div key={index} className={classes.brand}>
