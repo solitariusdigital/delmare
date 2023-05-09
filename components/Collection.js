@@ -80,6 +80,7 @@ export default function Collection({
   ]);
 
   const selectProduct = async (product) => {
+    setMessage(false);
     Router.push(`/collections/product/${product["_id"]}`);
     setSearchControl(false);
     setGallery([]);
