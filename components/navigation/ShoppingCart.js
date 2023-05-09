@@ -395,7 +395,9 @@ export default function ShoppingCart() {
               </div>
             </div>
             <div className={classes.row}>
-              {calculateTotal() >= 1000000 ? (
+              {calculateTotal() -
+                calculatePercentage(discount, calculateTotal()) >=
+              1000000 ? (
                 <p className={classes.value}>رایگان</p>
               ) : (
                 <p className={classes.value}>
