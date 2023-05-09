@@ -211,6 +211,27 @@
 
       .title {
         color: config.$grey;
+        margin-left: 10px;
+      }
+
+      .discountRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .price {
+          text-decoration: line-through;
+          color: config.$grey;
+          font-weight: 300;
+          font-size: config.$small-font;
+          margin-right: 10px;
+        }
+
+        .percentage {
+          color: config.$red;
+          font-weight: bold;
+          margin-left: 5px;
+        }
       }
     }
   }

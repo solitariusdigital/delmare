@@ -41,30 +41,36 @@ export default function Account() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (currentUser.permission === "blogger") {
-        const bloggersData = await getBloggersApi();
-        const invoicesData = await getInvoiceApi();
-        setBlogger(
-          bloggersData.filter(
+      try {
+        if (currentUser.permission === "blogger") {
+          const bloggersData = await getBloggersApi();
+          const invoicesData = await getInvoiceApi();
+
+          const filteredBloggers = bloggersData.filter(
             (blogger) => blogger.userId === currentUser["_id"]
-          )[0]
-        );
-        setInvoices(
-          invoicesData.filter(
-            (invoice) => invoice.bloggerDelmareId === blogger.delmareId
-          )
-        );
+          );
+          const bloggerData =
+            filteredBloggers.length > 0 ? filteredBloggers[0] : null;
+          setBlogger(bloggerData);
+
+          const filteredInvoices = invoicesData.filter(
+            (invoice) => invoice.bloggerDelmareId === bloggerData?.delmareId
+          );
+          setInvoices(filteredInvoices);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
-    fetchData().catch(console.error);
-  }, [blogger.delmareId, currentUser, currentUser.permission]);
+    fetchData();
+  }, [blogger?.delmareId, currentUser, currentUser.permission]);
 
   const calculateTotalSale = () => {
-    let price = [];
-    invoices.forEach((invoice) => {
-      price.push(calculatePercentage(15, invoice.price));
-    });
-    return price.reduce((partialSum, a) => partialSum + a, 0);
+    const totalSale = invoices.reduce((partialSum, invoice) => {
+      const discountedPrice = calculatePercentage(15, invoice.price);
+      return partialSum + discountedPrice;
+    }, 0);
+    return totalSale;
   };
 
   const logOut = () => {
@@ -92,7 +98,7 @@ export default function Account() {
 
   // update user info into db/state/localstorage
   const updateUser = async () => {
-    const user = {
+    const updatedUser = {
       _id: currentUser["_id"],
       name: name.trim(),
       phone: phone.trim(),
@@ -100,14 +106,19 @@ export default function Account() {
       post: post.trim(),
       birthday: "",
     };
-    let data = await updateUserApi(user);
-    setCurrentUser(data);
-    secureLocalStorage.setItem("currentUser", JSON.stringify(data));
-    setAlert("اطلاعات با موفقیت ذخیره شد");
-    setTimeout(() => {
-      setToggleContainer("");
-      setMenu(true);
-    }, 1000);
+    try {
+      const data = await updateUserApi(updatedUser);
+      setCurrentUser(data);
+      secureLocalStorage.setItem("currentUser", JSON.stringify(data));
+      setAlert("اطلاعات با موفقیت ذخیره شد");
+      setTimeout(() => {
+        setToggleContainer("");
+        setMenu(true);
+      }, 1000);
+    } catch (error) {
+      setAlert("خطا در برقراری ارتباط");
+      console.error(error);
+    }
   };
 
   return (

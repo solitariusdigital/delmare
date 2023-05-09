@@ -72,34 +72,43 @@ export default function Blogger() {
   // check if user follows blogger
   useEffect(() => {
     const fetchData = async () => {
-      if (currentUser) {
-        const user = await getUserApi(currentUser["_id"]);
-        if (user.follows.includes(blogger["_id"])) {
-          setFollowAction(false);
-        } else {
-          setFollowAction(true);
+      try {
+        if (currentUser) {
+          const user = await getUserApi(currentUser["_id"]);
+          const isFollowing = user.follows.includes(blogger["_id"]);
+          setFollowAction(!isFollowing);
         }
+      } catch (error) {
+        console.error(error);
       }
     };
-    fetchData().catch(console.error);
+    fetchData();
   }, [currentUser, blogger]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // update views count
+      // Update views count
       if (
-        !currentUser ||
-        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==
+        currentUser &&
+        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
           "admin"
       ) {
-        let updateData = {
-          ...blogger,
-          views: blogger.views + 1.5,
-        };
+        return;
+      }
+
+      const updateData = {
+        ...blogger,
+        views: blogger.views + 1.5,
+      };
+
+      try {
         await updateBloggerApi(updateData);
+      } catch (error) {
+        console.error(error);
       }
     };
-    fetchData().catch(console.error);
+
+    fetchData();
   }, [blogger, currentUser]);
 
   const follow = async (id) => {
@@ -108,31 +117,25 @@ export default function Blogger() {
       setRegister(true);
       return;
     }
-
     const user = await getUserApi(currentUser["_id"]);
     const blogger = await getBloggerApi(id);
-
     // update blogger
-    if (blogger.followers.includes(user["_id"])) {
-      blogger.followers.splice(blogger.followers.indexOf(user["_id"]), 1);
+    const bloggerFollowersIndex = blogger.followers.indexOf(user["_id"]);
+    if (bloggerFollowersIndex !== -1) {
+      blogger.followers.splice(bloggerFollowersIndex, 1);
     } else {
       blogger.followers.push(user["_id"]);
     }
-
     // update user
-    if (user.follows) {
-      if (user.follows.includes(id)) {
-        user.follows.splice(user.follows.indexOf(id), 1);
-        setFollowAction(true);
-      } else {
-        user.follows.push(id);
-        setFollowAction(false);
-      }
+    const userFollowsIndex = user.follows ? user.follows.indexOf(id) : -1;
+    if (userFollowsIndex !== -1) {
+      user.follows.splice(userFollowsIndex, 1);
+      setFollowAction(true);
     } else {
-      user.follows = [id];
+      user.follows.push(id);
+      setFollowAction(false);
     }
-    await updateUserApi(user);
-    await updateBloggerApi(blogger);
+    await Promise.all([updateUserApi(user), updateBloggerApi(blogger)]);
     setBlogger(blogger);
   };
 
@@ -147,12 +150,8 @@ export default function Blogger() {
   };
 
   const selectProduct = (productId, bloggerDelmareId) => {
-    let bloggerIdContainer = [];
-    if (JSON.parse(secureLocalStorage.getItem("bloggerDelmareId"))) {
-      bloggerIdContainer = JSON.parse(
-        secureLocalStorage.getItem("bloggerDelmareId")
-      );
-    }
+    const bloggerIdContainer =
+      JSON.parse(secureLocalStorage.getItem("bloggerDelmareId")) || [];
     bloggerIdContainer.push({ [productId]: bloggerDelmareId });
     secureLocalStorage.setItem(
       "bloggerDelmareId",

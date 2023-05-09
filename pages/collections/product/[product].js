@@ -76,12 +76,13 @@ export default function Product({ product, favourite }) {
 
   // navigation back/forward actions
   useEffect(() => {
-    router.beforePopState(({ as }) => {
+    const handleBeforePopState = ({ as }) => {
       if (as !== router.asPath) {
         window.scrollTo(0, 0);
       }
       return true;
-    });
+    };
+    router.beforePopState(handleBeforePopState);
     return () => {
       router.beforePopState(() => true);
     };
@@ -107,19 +108,21 @@ export default function Product({ product, favourite }) {
   useEffect(() => {
     setActive(product.activate);
     setDisplay(product.display);
-
     const fetchData = async () => {
-      const data = await getProducstApi();
-      setSimilarProducts(
-        data
-          .filter((pro) => {
-            return (
+      try {
+        const data = await getProducstApi();
+        const similarProducts = data
+          .filter(
+            (pro) =>
               pro.category === product.category && pro["_id"] !== product["_id"]
-            );
-          })
+          )
           .sort(() => 0.5 - Math.random())
-          .slice(0, 2)
-      );
+          .slice(0, 2);
+
+        setSimilarProducts(similarProducts);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchData().catch(console.error);
   }, [setSimilarProducts, product]);
@@ -135,74 +138,68 @@ export default function Product({ product, favourite }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      // update views count
       if (
         !currentUser ||
-        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==
-          "admin"
+        secureLocalStorage.getItem("currentUser").permission !== "admin"
       ) {
-        let updateData = {
-          ...product,
-          views: product.views + 1.5,
-        };
-        await updateProductApi(updateData);
+        const updatedProduct = { ...product, views: product.views + 1.5 };
+        await updateProductApi(updatedProduct);
       }
     };
     fetchData().catch(console.error);
   }, [currentUser, product]);
 
   const toggleImages = (type) => {
+    const images = product.images;
     switch (type) {
       case "one":
-        setItemTwo(product.images.two);
-        setItemThree(product.images.three);
+        setItemTwo(images.two);
+        setItemThree(images.three);
         setitemTwoDisplay(false);
         setitemThreeDisplay(false);
         if (itemOneDisplay) {
-          setItemOne(product.images.one);
-          setMainItem(product.images.main);
-          setitemOneDisplay(false);
+          setItemOne(images.one);
+          setMainItem(images.main);
         } else {
-          setItemOne(product.images.main);
-          setMainItem(product.images.one);
-          setitemOneDisplay(true);
+          setItemOne(images.main);
+          setMainItem(images.one);
         }
+        setitemOneDisplay(!itemOneDisplay);
         break;
       case "two":
-        setItemOne(product.images.one);
-        setItemThree(product.images.three);
+        setItemOne(images.one);
+        setItemThree(images.three);
         setitemOneDisplay(false);
         setitemThreeDisplay(false);
         if (itemTwoDisplay) {
-          setItemTwo(product.images.two);
-          setMainItem(product.images.main);
-          setitemTwoDisplay(false);
+          setItemTwo(images.two);
+          setMainItem(images.main);
         } else {
-          setItemTwo(product.images.main);
-          setMainItem(product.images.two);
-          setitemTwoDisplay(true);
+          setItemTwo(images.main);
+          setMainItem(images.two);
         }
+        setitemTwoDisplay(!itemTwoDisplay);
         break;
       case "three":
-        setItemOne(product.images.one);
-        setItemTwo(product.images.two);
+        setItemOne(images.one);
+        setItemTwo(images.two);
         setitemOneDisplay(false);
         setitemTwoDisplay(false);
         if (itemThreeDisplay) {
-          setItemThree(product.images.three);
-          setMainItem(product.images.main);
-          setitemThreeDisplay(false);
+          setItemThree(images.three);
+          setMainItem(images.main);
         } else {
-          setItemThree(product.images.main);
-          setMainItem(product.images.three);
-          setitemThreeDisplay(true);
+          setItemThree(images.main);
+          setMainItem(images.three);
         }
+        setitemThreeDisplay(!itemThreeDisplay);
+        break;
+      default:
         break;
     }
   };
 
   const back = () => {
-    // secureLocalStorage.removeItem("bloggerId");
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
@@ -284,23 +281,20 @@ export default function Product({ product, favourite }) {
     } else {
       let bloggerDelmareId = assignBloggerId();
       // add item to shopping cart
-      setShoppingCart([
-        ...shoppingCart,
-        {
-          _id: product["_id"],
-          delmareId: product.delmareId,
-          title: product.title,
-          bloggerDelmareId: bloggerDelmareId,
-          size: selectedSize,
-          color: selectedColor,
-          price: product.sale ? product.discount : product.price,
-          image: product.images.main,
-          percentage: product.percentage,
-          deliveryType: product.deliveryType,
-          sale: product.sale,
-        },
-      ]);
-
+      const newItem = {
+        _id: product["_id"],
+        delmareId: product.delmareId,
+        title: product.title,
+        bloggerDelmareId: bloggerDelmareId,
+        size: selectedSize,
+        color: selectedColor,
+        price: product.sale ? product.discount : product.price,
+        image: product.images.main,
+        percentage: product.percentage,
+        deliveryType: product.deliveryType,
+        sale: product.sale,
+      };
+      setShoppingCart([...shoppingCart, newItem]);
       clearDetails();
       setSelectedColor("");
       setSelectedSize("");
@@ -319,16 +313,14 @@ export default function Product({ product, favourite }) {
       setRegister(true);
       return;
     }
-
     if (currentUser) {
       setLike(!like);
-      if (currentUser.favourites.includes(product["_id"])) {
-        currentUser.favourites.splice(
-          currentUser.favourites.indexOf(product["_id"]),
-          1
-        );
+      const { favourites } = currentUser;
+      const productIndex = favourites.indexOf(product["_id"]);
+      if (productIndex !== -1) {
+        favourites.splice(productIndex, 1);
       } else {
-        currentUser.favourites.unshift(product["_id"]);
+        favourites.unshift(product["_id"]);
       }
       secureLocalStorage.setItem("currentUser", JSON.stringify(currentUser));
       await updateUserApi(currentUser);
@@ -343,12 +335,16 @@ export default function Product({ product, favourite }) {
 
   const selectProduct = async (id) => {
     const product = await getProductApi(id);
-    setProductSizes(product.size);
-    setMainItem(product.images.main);
-    setItemOne(product.images.one);
-    setItemTwo(product.images.two);
-    setItemThree(product.images.three);
-    colors.length = 0;
+    const {
+      size,
+      images: { main, one, two, three },
+    } = product;
+    setProductSizes(size);
+    setMainItem(main);
+    setItemOne(one);
+    setItemTwo(two);
+    setItemThree(three);
+    setColors([]);
     setSelectedSize("");
     Router.push(`/collections/product/${id}`);
     window.scrollTo(0, 0);
@@ -365,40 +361,42 @@ export default function Product({ product, favourite }) {
   };
 
   const productActivation = async (type) => {
-    let confirm = window.confirm(
-      `${type === "activate" ? "اتمام موجودی" : "موجود در انبار"} مطمئنی؟`
-    );
+    const confirmationMessage = `${
+      type === "activate" ? "اتمام موجودی" : "موجود در انبار"
+    } مطمئنی؟`;
+    const confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      const updateData = await getProductApi(product["_id"]);
+      const updatedProduct = await getProductApi(product["_id"]);
       switch (type) {
         case "activate":
           setActive(false);
-          updateData.activate = false;
+          updatedProduct.activate = false;
           break;
         case "deactivate":
           setActive(true);
-          updateData.activate = true;
+          updatedProduct.activate = true;
           break;
       }
-      await updateProductApi(updateData);
+      await updateProductApi(updatedProduct);
     }
   };
 
   const productArchive = async (type) => {
-    let confirm = window.confirm("وارد آرکایو میشه و پنهان، مطمئنی؟");
+    const confirmationMessage = "وارد آرکایو میشه و پنهان، مطمئنی؟";
+    const confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      const updateData = await getProductApi(product["_id"]);
+      const updatedProduct = await getProductApi(product["_id"]);
       switch (type) {
         case "display":
           setDisplay(true);
-          updateData.display = true;
+          updatedProduct.display = true;
           break;
         case "hide":
           setDisplay(false);
-          updateData.display = false;
+          updatedProduct.display = false;
           break;
       }
-      await updateProductApi(updateData);
+      await updateProductApi(updatedProduct);
     }
   };
 

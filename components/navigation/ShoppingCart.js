@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { convertNumber } from "../../services/utility";
+import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import { getProductApi, getMellatApi } from "../../services/api";
@@ -24,6 +24,7 @@ export default function ShoppingCart() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
+  const [discount, setDiscount] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -36,28 +37,34 @@ export default function ShoppingCart() {
       setPhone(currentUser.phone);
       setAddress(currentUser.address);
       setPost(currentUser.post);
+      setDiscount(currentUser.discount);
     }
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart, currentUser]);
 
   useEffect(() => {
     const checkProductsData = async (product) => {
-      let getProduct = await getProductApi(product["_id"]);
-      if (
-        !getProduct.activate ||
-        getProduct.size[product.size].colors[product.color] === 0
-      ) {
-        product.message = "اتمام موجودی";
+      try {
+        const getProduct = await getProductApi(product["_id"]);
+        const isActivated = getProduct.activate;
+        const colorCount = getProduct.size[product.size].colors[product.color];
+        const message = isActivated && colorCount > 0 ? "" : "اتمام موجودی";
+        product.message = message;
         setAvailability(!availability);
-      } else {
-        product.message = "";
-        setAvailability(!availability);
+      } catch (error) {
+        console.error(error);
       }
     };
-
-    shoppingCart.forEach((product) => {
-      checkProductsData(product);
-    });
+    const checkAllProductsData = async () => {
+      try {
+        await Promise.all(
+          shoppingCart.map((product) => checkProductsData(product))
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    checkAllProductsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shoppingCart, checkout]);
 
@@ -67,14 +74,14 @@ export default function ShoppingCart() {
       secureLocalStorage.getItem("bloggerDelmareId")
     );
     if (bloggerIdContainer) {
-      bloggerIdContainer = bloggerIdContainer.filter((item) => {
-        return productId !== Object.keys(item)[0];
-      });
+      bloggerIdContainer = bloggerIdContainer.filter(
+        (item) => productId !== Object.keys(item)[0]
+      );
+      secureLocalStorage.setItem(
+        "bloggerDelmareId",
+        JSON.stringify(bloggerIdContainer)
+      );
     }
-    secureLocalStorage.setItem(
-      "bloggerDelmareId",
-      JSON.stringify(bloggerIdContainer)
-    );
   };
 
   const deleteCart = (index, productId) => {
@@ -87,18 +94,17 @@ export default function ShoppingCart() {
   };
 
   const calculateTotal = () => {
-    let prices = [];
-    shoppingCart.map((cart) => {
-      prices.push(cart.price);
-    });
-    const total = prices.reduce((partialSum, a) => partialSum + a, 0);
+    const total = shoppingCart.reduce(
+      (partialSum, cart) => partialSum + cart.price,
+      0
+    );
     return total;
   };
 
   // clear shopping cart from duplicate selections based on id and color and size
   const continueShopping = () => {
-    const uniqueShoppingCart = shoppingCart.filter((obj, index) => {
-      return (
+    const uniqueShoppingCart = shoppingCart.filter(
+      (obj, index) =>
         index ===
         shoppingCart.findIndex(
           (o) =>
@@ -106,8 +112,8 @@ export default function ShoppingCart() {
             obj.color === o.color &&
             obj.size === o.size
         )
-      );
-    });
+    );
+
     if (uniqueShoppingCart.length !== shoppingCart.length) {
       setShoppingCart(uniqueShoppingCart);
       setAlert("آیتم مشابه از سبد حذف شد");
@@ -115,6 +121,7 @@ export default function ShoppingCart() {
         setAlert("");
       }, 3000);
     }
+
     setCheckout(true);
   };
 
@@ -144,25 +151,20 @@ export default function ShoppingCart() {
     }
   };
 
-  const allAreTrue = (arr) => {
-    return arr.every((element) => element === true);
-  };
+  const allAreTrue = (array) => array.every((item) => item);
 
-  // check if product exist
+  // check if product count exist and is available
   const initializePayment = async () => {
-    let itemCheck = [];
-    shoppingCart.forEach(async (product) => {
-      let getProduct = await getProductApi(product["_id"]);
-      if (
-        getProduct.size[product.size].colors[product.color] > 0 &&
-        getProduct.activate
-      ) {
-        itemCheck.push(true);
-      } else {
-        itemCheck.push(false);
-      }
-    });
-    setTimeout(() => {
+    try {
+      const itemCheck = await Promise.all(
+        shoppingCart.map(async (product) => {
+          const getProduct = await getProductApi(product["_id"]);
+          return (
+            getProduct.size[product.size].colors[product.color] > 0 &&
+            getProduct.activate
+          );
+        })
+      );
       if (allAreTrue(itemCheck)) {
         openPaymentPortal();
       } else {
@@ -172,26 +174,33 @@ export default function ShoppingCart() {
           setCheckout(false);
         }, 2000);
       }
-    }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  // make a request to bank to get refId then redirect user to payment page
+  // make a request to bank to get refId then direct user to payment page
   const openPaymentPortal = async () => {
-    let refId = null;
-    setPayment(true);
-    let pay = await getMellatApi(calculateTotal() + "0");
-    refId = pay.RefId;
-
-    if (pay.hasOwnProperty("error")) {
-      setAlert(pay.error);
-    } else {
-      setCheckoutClicked(false);
-      setTimeout(() => {
-        setPayment(false);
-      }, 5000);
-      Router.push(
-        `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`
-      );
+    try {
+      setPayment(true);
+      const totalAmount =
+        calculateTotal() -
+        calculatePercentage(discount, calculateTotal()) +
+        "0";
+      const pay = await getMellatApi(totalAmount);
+      const refId = pay.RefId;
+      if (pay.hasOwnProperty("error")) {
+        setAlert(pay.error);
+      } else {
+        setCheckoutClicked(false);
+        setTimeout(() => {
+          setPayment(false);
+        }, 5000);
+        const paymentUrl = `https://bpm.shaparak.ir/pgwchannel/startpay.mellat?RefId=${refId}`;
+        Router.push(paymentUrl);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -357,10 +366,33 @@ export default function ShoppingCart() {
               <p className={classes.title}>تعداد آیتم</p>
             </div>
             <div className={classes.row}>
-              <p className={classes.value}>
-                {convertNumber(calculateTotal())} T
-              </p>
-              <p className={classes.title}>جمع سبد خرید</p>
+              {discount && discount !== "" ? (
+                <div className={classes.discountRow}>
+                  <p className={classes.price}>
+                    {convertNumber(calculateTotal())} T
+                  </p>
+                  <p className={classes.value}>
+                    {convertNumber(
+                      calculateTotal() -
+                        calculatePercentage(discount, calculateTotal())
+                    )}{" "}
+                    T
+                  </p>
+                </div>
+              ) : (
+                <p className={classes.value}>
+                  {convertNumber(calculateTotal())} T
+                </p>
+              )}
+              <div className={classes.discountRow}>
+                {discount && discount !== "" && (
+                  <Fragment>
+                    <p className={classes.title}>هدیه خرید اول</p>
+                    <span className={classes.percentage}>{discount}%</span>
+                  </Fragment>
+                )}
+                <p className={classes.title}>مبلغ پرداخت</p>
+              </div>
             </div>
             <div className={classes.row}>
               {calculateTotal() >= 1000000 ? (

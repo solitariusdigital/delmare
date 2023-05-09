@@ -28,6 +28,7 @@ export default function Confirmation({ props }) {
   const [clickConfirm, setClickConfirm] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = "#ffffff";
     setContainer(false);
   }, [setContainer]);
 

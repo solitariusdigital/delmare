@@ -33,15 +33,20 @@ function Container() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (JSON.parse(secureLocalStorage.getItem("currentUser"))) {
-        setUserLogin(true);
-        setCurrentUser(JSON.parse(secureLocalStorage.getItem("currentUser")));
-        await updateUserApi(
-          JSON.parse(secureLocalStorage.getItem("currentUser"))
+      try {
+        const currentUserData = JSON.parse(
+          secureLocalStorage.getItem("currentUser")
         );
+        if (currentUserData) {
+          setUserLogin(true);
+          setCurrentUser(currentUserData);
+          await updateUserApi(currentUserData);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
-    fetchData().catch(console.error);
+    fetchData();
   }, [setUserLogin, setCurrentUser]);
 
   useEffect(() => {
@@ -95,6 +100,7 @@ function Container() {
               <SearchIcon
                 className="icon search"
                 onClick={() => setSearch(!search)}
+                sx={{ fontSize: 28 }}
               />
             )}
             <MenuIcon className="icon" onClick={() => setMenu(true)} />

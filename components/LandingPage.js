@@ -14,6 +14,7 @@ export default function LandingPage() {
   const { navigation, setNavigation } = useContext(StateContext);
 
   const [divHeight, setDivHeight] = useState(null);
+  const [categories, setCategories] = useState(false);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -21,6 +22,9 @@ export default function LandingPage() {
     setBar(false);
     setContainer(true);
     setDivHeight(window.innerHeight - 50);
+    setTimeout(() => {
+      setCategories(true);
+    }, 200);
   }, [setBar, setContainer]);
 
   useEffect(() => {
@@ -28,19 +32,6 @@ export default function LandingPage() {
       setToggleContainer("screen");
     }
   }, [setToggleContainer]);
-
-  const imagesArray = [
-    "one.jpg",
-    "two.jpg",
-    "three.jpg",
-    "five.jpg",
-    "six.jpg",
-    "seven.jpg",
-    "eight.jpg",
-    "nine.jpg",
-    "ten.jpg",
-    "eleven.jpg",
-  ];
 
   const loginAction = () => {
     setToggleContainer("");
@@ -61,45 +52,34 @@ export default function LandingPage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.actions}>
-        <div
-          className={classes.call}
-          onClick={() => activateNav("/collections/bloggers", "بلاگرز")}
-        >
-          <p>بلاگرز</p>
-        </div>
-        <div
-          className={classes.call}
-          onClick={() => Router.push("/collections")}
-        >
-          <p>کالکشن</p>
-        </div>
-        {!userLogIn ? (
-          <div className={classes.call} onClick={() => loginAction()}>
-            <p>ورود / ​ثبت نام</p>
-          </div>
-        ) : (
-          <div
-            className={classes.call}
-            onClick={() => activateNav("/collections/gallery", "گالری")}
-          >
-            <p>گالری</p>
+      <div className={classes.imageContainer} style={{ height: divHeight }}>
+        {categories && (
+          <div className={classes.categories}>
+            <div onClick={() => activateNav("/collections/gallery", "گالری")}>
+              <p>گالری</p>
+            </div>
+            <div onClick={() => Router.push("/collections")}>
+              <p>کالکشن</p>
+            </div>
+            <div onClick={() => activateNav("/collections/bloggers", "بلاگرز")}>
+              <p>بلاگرز</p>
+            </div>
+            {!userLogIn ? (
+              <div className={classes.beat} onClick={() => loginAction()}>
+                <p>ورود / ​ثبت نام</p>
+              </div>
+            ) : (
+              <div onClick={() => activateNav("/collections/sale", "تخفیف")}>
+                <p>تخفیف</p>
+              </div>
+            )}
           </div>
         )}
-      </div>
-      <div
-        className={classes.imageContainer}
-        style={{ height: divHeight }}
-        onClick={() => Router.push("/collections")}
-      >
         <Image
+          onClick={() => Router.push("/collections")}
           className={classes.image}
-          src={`${sourceLink}${
-            imagesArray[Math.floor(Math.random() * imagesArray.length)]
-          }`}
-          blurDataURL={`${sourceLink}${
-            imagesArray[Math.floor(Math.random() * imagesArray.length)]
-          }`}
+          src={`${sourceLink}graphic.jpg`}
+          blurDataURL={`${sourceLink}graphic.jpg`}
           placeholder="blur"
           alt="image"
           layout="fill"
@@ -107,13 +87,21 @@ export default function LandingPage() {
           priority
           loading="eager"
         />
-      </div>
-      <div
-        className={classes.message}
-        onClick={() => Router.push("/collections")}
-      >
-        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-        <p>با دلماره متفاوت دیده شوید</p>
+        <div
+          className={classes.message}
+          onClick={() => Router.push("/collections")}
+        >
+          <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+          <p>با دلماره متفاوت دیده شوید</p>
+        </div>
+        {!userLogIn && (
+          <div className={classes.discount}>
+            <div onClick={() => loginAction()}>
+              <p>هدیه %15 تخفیف خرید اول برای مشتریان جدید</p>
+              <p>اعتبار تا پایان خرداد 1402</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

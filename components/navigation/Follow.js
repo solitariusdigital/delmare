@@ -18,13 +18,18 @@ export default function Follow() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bloggersData = await getBloggersApi();
-      const user = await getUserApi(currentUser["_id"]);
-      setBloggers(
-        bloggersData.filter((blogger) => user.follows.includes(blogger["_id"]))
-      );
+      try {
+        const bloggersData = await getBloggersApi();
+        const user = await getUserApi(currentUser["_id"]);
+        const filteredBloggers = bloggersData.filter((blogger) =>
+          user.follows.includes(blogger["_id"])
+        );
+        setBloggers(filteredBloggers);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    fetchData().catch(console.error);
+    fetchData();
   }, [currentUser]);
 
   return (

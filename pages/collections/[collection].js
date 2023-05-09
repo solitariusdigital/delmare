@@ -19,16 +19,7 @@ export default function CollectionPage({ products, brands, bloggers }) {
         <title>Fashion Clothing</title>
         <meta name="description" content="Fashion clothing" />
       </Head>
-      {collection === "gallery" && (
-        <Collection collectionType={collection} galleryData={products} />
-      )}
-      {collection === "sale" && (
-        <Collection collectionType={collection} galleryData={products} />
-      )}
-      {collection === "accessories" && (
-        <Collection collectionType={collection} galleryData={products} />
-      )}
-      {collection === "shoes" && (
+      {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
         <Collection collectionType={collection} galleryData={products} />
       )}
       {collection === "brands" && <Brands brandsData={brands} />}
@@ -41,11 +32,14 @@ export default function CollectionPage({ products, brands, bloggers }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
+
     let products = null;
     let brands = null;
     let bloggers = null;
 
-    switch (context.params.collection) {
+    const { collection } = context.params;
+
+    switch (collection) {
       case "gallery":
         products = await Product.find({ sale: false });
         break;
@@ -53,22 +47,12 @@ export async function getServerSideProps(context) {
         products = await Product.find({ sale: true });
         break;
       case "accessories":
-        products = await Product.find();
-        products = products.filter((product) => {
-          return (
-            product.category === "اکسسوری" ||
-            product.category === "ساعت" ||
-            product.category === "عینک" ||
-            product.category === "کلاه" ||
-            product.category === "کیف"
-          );
+        products = await Product.find({
+          category: { $in: ["اکسسوری", "ساعت", "عینک", "کلاه", "کیف"] },
         });
         break;
       case "shoes":
-        products = await Product.find();
-        products = products.filter((product) => {
-          return product.category === "کفش";
-        });
+        products = await Product.find({ category: "کفش" });
         break;
       case "brands":
         brands = await Brand.find();
@@ -77,6 +61,7 @@ export async function getServerSideProps(context) {
         bloggers = await Blogger.find();
         break;
     }
+
     return {
       props: {
         products: JSON.parse(JSON.stringify(products)),
@@ -85,6 +70,8 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
+    console.error(error);
+
     return {
       notFound: true,
     };
