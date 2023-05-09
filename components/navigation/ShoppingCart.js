@@ -363,6 +363,12 @@ export default function ShoppingCart() {
           <div className={classes.details}>
             <div className={classes.row}>
               <p className={classes.value}>{shoppingCart.length}</p>
+              {discount && discount !== "" && (
+                <div className={classes.discountRow}>
+                  <p className={classes.title}>هدیه خرید اول</p>
+                  <span className={classes.percentage}>{discount}%</span>
+                </div>
+              )}
               <p className={classes.title}>تعداد آیتم</p>
             </div>
             <div className={classes.row}>
@@ -385,12 +391,6 @@ export default function ShoppingCart() {
                 </p>
               )}
               <div className={classes.discountRow}>
-                {discount && discount !== "" && (
-                  <Fragment>
-                    <p className={classes.title}>هدیه خرید اول</p>
-                    <span className={classes.percentage}>{discount}%</span>
-                  </Fragment>
-                )}
                 <p className={classes.title}>مبلغ پرداخت</p>
               </div>
             </div>
