@@ -87,11 +87,8 @@
   justify-content: center;
 
   .button {
-    border-radius: 50px;
     margin-bottom: 10px;
-    width: 120px;
-    height: 40px;
-    font-weight: bold;
+    @include mixins.ctaButton();
     @include mixins.heartbeat();
   }
 
@@ -106,6 +103,10 @@
   align-items: center;
   width: 100%;
   padding: 0px 10px;
+
+  button {
+    @include mixins.ctaButton();
+  }
 
   .row,
   .social {

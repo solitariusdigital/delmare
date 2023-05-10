@@ -287,6 +287,10 @@ a {
       margin-top: 10px;
     }
   }
+
+  button {
+    @include mixins.ctaButton();
+  }
 }
 
 .user-page {

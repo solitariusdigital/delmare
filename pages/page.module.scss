@@ -210,10 +210,7 @@
 .confirmPage {
   button {
     margin-top: 20px;
-    border-radius: 50px;
-    margin-bottom: 10px;
-    height: 40px;
-    font-weight: bold;
+    @include mixins.ctaButton();
   }
 
   .confirmationContainer {
@@ -304,8 +301,7 @@
 
     button {
       margin: 0px;
-      border-radius: 50px;
-      font-weight: bold;
+      @include mixins.ctaButton();
     }
   }
 

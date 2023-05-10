@@ -9,6 +9,7 @@
 
   button {
     margin-top: 20px;
+    @include mixins.ctaButton();
   }
 
   .alert {

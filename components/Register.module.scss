@@ -29,6 +29,7 @@
 
   button {
     margin: 10px;
+    @include mixins.ctaButton();
   }
 }
 
@@ -67,6 +68,10 @@
   display: flex;
   justify-content: center;
   margin: 10px 0px;
+
+  button {
+    @include mixins.ctaButton();
+  }
 }
 
 .activationCode {
