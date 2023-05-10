@@ -276,6 +276,7 @@
 
     button {
       margin-top: 10px;
+      @include mixins.ctaButton();
     }
   }
 
