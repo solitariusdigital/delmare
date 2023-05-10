@@ -65,7 +65,7 @@ export default function Collection({
         setCategories(accessoriesCategories);
         break;
     }
-
+    setMessage(false);
     setBar(true);
   }, [
     collectionType,
@@ -92,7 +92,6 @@ export default function Collection({
       setRegister(true);
       return;
     }
-
     if (currentUser) {
       setLike(!like);
       if (currentUser.favourites.includes(product["_id"])) {
@@ -117,7 +116,6 @@ export default function Collection({
   const filterCategoryCollection = (type) => {
     setCategoryFilter(type);
     setCategorySelector(false);
-    setMessage(false);
     setReqNumber(20);
     switch (collectionType) {
       case "gallery":
@@ -148,7 +146,6 @@ export default function Collection({
   const filterSeasonCollection = (type) => {
     setSeasonFilter(type);
     setSeasonSelector(false);
-    setMessage(false);
     setReqNumber(20);
     switch (collectionType) {
       case "gallery":
