@@ -35,8 +35,7 @@
       box-shadow: config.$image-shadow;
       margin: auto;
       @include mixins.border-radius();
-      opacity: 0.8;
-      background: linear-gradient(config.$brand, config.$lemon);
+      @include mixins.gradientBackground();
 
       &:hover {
         cursor: pointer;

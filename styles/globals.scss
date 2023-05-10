@@ -85,8 +85,7 @@ a {
       height: 30px;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
-      background: linear-gradient(to left, config.$brand, config.$lemon);
-      opacity: 0.8;
+      @include mixins.gradientBackground();
 
       p {
         font-weight: bold;

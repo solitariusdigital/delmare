@@ -38,8 +38,7 @@
       padding-right: 10px;
       border-top-right-radius: 50px;
       border-bottom-right-radius: 50px;
-      background: linear-gradient(to left, config.$brand, config.$lemon);
-      opacity: 0.8;
+      @include mixins.gradientBackground();
     }
   }
 
