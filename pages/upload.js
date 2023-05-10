@@ -417,19 +417,26 @@ export default function Upload() {
 
     let delmareIdFolder = `${delmareId}${sixGenerator()}`;
 
-    const processImage = async (image, imageType, images, delmareIdFolder) => {
-      if (image !== "") {
-        let imageId = `img${sixGenerator()}`;
-        images[
-          imageType
-        ] = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
-        await uploadImages(image, imageId, delmareIdFolder);
-      }
-    };
-    processImage(mainImage, "main", images, delmareIdFolder);
-    processImage(imageOne, "one", images, delmareIdFolder);
-    processImage(imageTwo, "two", images, delmareIdFolder);
-    processImage(imageThree, "three", images, delmareIdFolder);
+    if (mainImage !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(mainImage, imageId, delmareIdFolder);
+    }
+    if (imageOne !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageOne, imageId, delmareIdFolder);
+    }
+    if (imageTwo !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageTwo, imageId, delmareIdFolder);
+    }
+    if (imageThree !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageThree, imageId, delmareIdFolder);
+    }
     if (table !== "") {
       let imageId = `img${sixGenerator()}`;
       images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
