@@ -11,7 +11,9 @@
   div {
     display: flex;
     border-radius: 50%;
-    border: 2px solid config.$brand;
+    background: linear-gradient(config.$white, config.$white) padding-box,
+      linear-gradient(45deg, config.$lemon, config.$brand) border-box;
+    border: 2px solid transparent;
   }
   .image {
     border-radius: 50%;

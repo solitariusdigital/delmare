@@ -109,18 +109,14 @@ function Register() {
   const handleRegister = async () => {
     if (token === Number(checkToken)) {
       setIsLoading(true);
-      let userExist = false;
       // Check if user already exists in the database
       const existingUser = appUsers.find((user) => user.phone === phone);
       if (existingUser) {
-        userExist = true;
         setUserLogin(true);
         setCurrentUser(existingUser);
         secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
         setRegister(false);
-      }
-      // if user does not exist create a new one
-      if (!userExist) {
+      } else {
         await createUser();
         // send dsicount offer for new users
         const api = Kavenegar.KavenegarApi({

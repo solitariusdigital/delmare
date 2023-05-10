@@ -12,12 +12,14 @@
     flex-direction: column;
     text-align: center;
     justify-content: space-between;
+    position: relative;
     width: 100%;
     padding: 10px;
     box-shadow: config.$card-shadow;
-    background: config.$white;
+    background: linear-gradient(config.$white, config.$white) padding-box,
+      linear-gradient(45deg, config.$lemon, config.$brand) border-box;
+    border: 2px solid transparent;
     @include mixins.border-radius();
-    position: relative;
   }
 
   .row {

@@ -56,7 +56,12 @@ export default function Bloggers({ bloggersData }) {
                 Router.push(`/collections/bloggers/${blogger.delmareId}`)
               }
             />
-            <div className={classes.info}>
+            <div
+              className={classes.info}
+              onClick={() =>
+                Router.push(`/collections/bloggers/${blogger.delmareId}`)
+              }
+            >
               <div className={classes.row}>
                 <div className={classes.social}>
                   <p className={classes.value}>{blogger.followers.length}</p>

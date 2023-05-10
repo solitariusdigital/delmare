@@ -38,7 +38,8 @@
       padding-right: 10px;
       border-top-right-radius: 50px;
       border-bottom-right-radius: 50px;
-      @include mixins.transparentBackground(0.8, config.$cream);
+      background: linear-gradient(to left, config.$brand, config.$lemon);
+      opacity: 0.8;
     }
   }
 
