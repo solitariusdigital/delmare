@@ -106,6 +106,7 @@
 
   button {
     @include mixins.ctaButton();
+    width: 100px;
   }
 
   .row,
