@@ -49,6 +49,7 @@ export default function ShoppingCart() {
         const isActivated = getProduct.activate;
         const colorCount = getProduct.size[product.size].colors[product.color];
         const message = isActivated && colorCount > 0 ? "" : "اتمام موجودی";
+        product.price = getProduct.price;
         product.message = message;
         setAvailability(!availability);
       } catch (error) {
@@ -65,8 +66,7 @@ export default function ShoppingCart() {
       }
     };
     checkAllProductsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shoppingCart, checkout]);
+  }, [shoppingCart, checkout, availability]);
 
   // remove bloggerId from shopping cart on deleteCart
   const deleteBloggerId = (productId) => {
@@ -113,7 +113,6 @@ export default function ShoppingCart() {
             obj.size === o.size
         )
     );
-
     if (uniqueShoppingCart.length !== shoppingCart.length) {
       setShoppingCart(uniqueShoppingCart);
       setAlert("آیتم مشابه از سبد حذف شد");
@@ -121,7 +120,6 @@ export default function ShoppingCart() {
         setAlert("");
       }, 3000);
     }
-
     setCheckout(true);
   };
 
@@ -151,9 +149,8 @@ export default function ShoppingCart() {
     }
   };
 
-  const allAreTrue = (array) => array.every((item) => item);
-
   // check if product count exist and is available
+  const allAreTrue = (array) => array.every((item) => item);
   const initializePayment = async () => {
     try {
       const itemCheck = await Promise.all(

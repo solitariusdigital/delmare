@@ -31,9 +31,10 @@
       align-items: center;
       width: 70%;
       height: 100px;
+      margin: auto;
       font-weight: bold;
       box-shadow: config.$image-shadow;
-      margin: auto;
+      opacity: 0.8;
       @include mixins.border-radius();
       @include mixins.gradientBackground();
 

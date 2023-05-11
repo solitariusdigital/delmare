@@ -78,7 +78,7 @@ a {
       text-align: center;
       justify-content: center;
       position: absolute;
-      bottom: 20px;
+      bottom: 10px;
       right: 0px;
       z-index: 1;
       width: 100px;
@@ -178,6 +178,10 @@ a {
 
     .new,
     .activate {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
       position: absolute;
       top: 10px;
       right: 0px;
@@ -187,11 +191,6 @@ a {
       border-bottom-left-radius: 50px;
       padding: 3px;
       width: 70px;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
     }
 
     .sale {
@@ -202,11 +201,11 @@ a {
       top: 10px;
       right: 0px;
       z-index: 1;
+      font-weight: bold;
       font-size: config.$tiny-font;
       color: config.$red;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
-      font-weight: bold;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       width: 50px;
@@ -236,7 +235,7 @@ a {
       top: 180px;
       color: config.$black;
       width: 50px;
-      @include mixins.transparentBackground(0.8, config.$brand);
+      @include mixins.gradientBackground();
     }
   }
 }

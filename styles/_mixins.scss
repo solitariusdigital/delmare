@@ -102,7 +102,6 @@ $screen-xl-min: 1200px;
 
 @mixin gradientBackground() {
   background: linear-gradient(to left, config.$brand, config.$lemon);
-  opacity: 0.8;
 }
 
 // animations

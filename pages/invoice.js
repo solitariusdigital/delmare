@@ -69,18 +69,12 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                 onClick={() => Router.push("/")}
                 sx={{ fontSize: 30 }}
               />
-              <p
-                onClick={() => setposted(false)}
-                className={posted ? classes.nav : classes.navActive}
-              >
+              <button className="mainButton" onClick={() => setposted(false)}>
                 سفارشات
-              </p>
-              <p
-                onClick={() => setposted(true)}
-                className={!posted ? classes.nav : classes.navActive}
-              >
+              </button>
+              <button className="mainButton" onClick={() => setposted(true)}>
                 ارسال شده
-              </p>
+              </button>
               <RefreshIcon
                 className="icon"
                 onClick={() => Router.reload(window.location.pathname)}

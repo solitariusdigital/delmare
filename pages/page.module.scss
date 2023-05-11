@@ -73,22 +73,8 @@
     align-items: center;
     justify-content: space-between;
 
-    .nav,
-    .navActive {
-      padding: 10px;
-      height: 40px;
-      width: 120px;
-      text-align: center;
-      background: config.$white;
-      @include mixins.border-radius();
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .navActive {
-      background: config.$brand;
+    button {
+      @include mixins.ctaButton();
     }
   }
 }
