@@ -14,6 +14,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import qs from "querystring";
 import secureLocalStorage from "react-secure-storage";
 import Kavenegar from "kavenegar";
+import { calculatePercentage } from "../../services/utility";
 
 export default function Confirmation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -81,7 +82,11 @@ export default function Confirmation({ props }) {
       delmareId: product.delmareId,
       refId: refId,
       title: product.title,
-      price: product.price,
+      price:
+        currentUser.discount && currentUser.discount !== ""
+          ? product.price -
+            calculatePercentage(currentUser.discount, product.price)
+          : product.price,
       color: product.color,
       size: product.size,
       image: product.image,

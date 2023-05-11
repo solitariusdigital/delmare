@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { getProductApi, getMellatApi } from "../../services/api";
+import { getProductApi, getMellatApi, getUserApi } from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
@@ -33,11 +33,20 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     if (currentUser) {
-      setName(currentUser.name);
-      setPhone(currentUser.phone);
-      setAddress(currentUser.address);
-      setPost(currentUser.post);
-      setDiscount(currentUser.discount);
+      const fetchData = async () => {
+        try {
+          const user = await getUserApi(currentUser["_id"]);
+          setName(user.name);
+          setPhone(user.phone);
+          setAddress(user.address);
+          setPost(user.post);
+          setDiscount(user.discount);
+          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchData();
     }
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   }, [shoppingCart, currentUser]);
