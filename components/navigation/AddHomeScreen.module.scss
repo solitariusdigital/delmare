@@ -5,17 +5,17 @@
   position: absolute;
   width: 100%;
   height: calc(100vh - 50px);
-  @include mixins.transparentBackground(0.4, config.$cream);
+  @include mixins.transparentBackground(0.9, config.$cream);
 
   .content {
     position: relative;
     transform: translateY(50%);
-    padding: 10px;
+    padding: 12px;
     background: config.$white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
+    margin: 12px;
     @include mixins.border-radius();
   }
 

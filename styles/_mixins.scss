@@ -60,7 +60,7 @@ $screen-xl-min: 1200px;
 }
 
 @mixin input() {
-  padding: 10px;
+  padding: 12px;
   height: 40px;
   background: config.$cream;
   color: config.$black;
@@ -79,7 +79,7 @@ $screen-xl-min: 1200px;
 }
 
 @mixin border-radius() {
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 @mixin ctaButton() {
@@ -97,7 +97,7 @@ $screen-xl-min: 1200px;
   background: linear-gradient(config.$white, config.$white) padding-box,
     linear-gradient(45deg, config.$lemon, config.$brand) border-box;
   border: 2px solid transparent;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 @mixin gradientBackground() {

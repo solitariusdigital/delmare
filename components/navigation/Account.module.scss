@@ -47,7 +47,7 @@
     p {
       display: flex;
       flex-direction: row-reverse;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
   }
 
@@ -80,7 +80,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  margin: 10px 0px;
+  margin: 12px 0px;
 }
 
 .navigation {
@@ -93,7 +93,7 @@
 
   .nav,
   .navActive {
-    padding: 10px;
+    padding: 12px;
     height: 40px;
     width: 100px;
     text-align: center;
@@ -111,13 +111,13 @@
 }
 
 .invoiceContainer {
-  padding: 10px;
+  padding: 12px;
   padding-top: 0px;
 
   .text {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 12px;
     color: config.$grey;
     font-size: config.$tiny-font;
   }
@@ -141,7 +141,7 @@
     flex-direction: row;
 
     p {
-      margin-right: 10px;
+      margin-right: 12px;
       font-weight: 300;
     }
   }

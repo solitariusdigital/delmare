@@ -8,11 +8,11 @@
   justify-content: space-between;
 
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   right: 0px;
   z-index: 1;
   height: 40px;
-  padding: 10px;
+  padding: 12px;
   @include mixins.transparentBackground(0.8, config.$cream);
   border-bottom-left-radius: 50px;
   border-top-left-radius: 50px;
@@ -63,14 +63,14 @@
   position: absolute;
   cursor: pointer;
   z-index: 1;
-  top: 10px;
+  top: 12px;
 }
 
 .productContainer {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0px 10px;
+  padding: 0px 12px;
 
   .sale {
     font-size: config.$small-font;
@@ -102,7 +102,7 @@
 
 .topBar {
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
   .sectionId {
     display: flex;
@@ -132,7 +132,7 @@
 .productImages {
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
+  margin: 12px 0px;
   height: 600px;
 
   .product {
@@ -174,7 +174,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: bold;
   font-size: config.$med-font;
 
@@ -194,7 +194,7 @@
       color: config.$grey;
       font-weight: 300;
       font-size: config.$small-font;
-      margin: 0px 10px;
+      margin: 0px 12px;
     }
   }
 }
@@ -204,7 +204,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0px;
+  margin: 12px 0px;
 
   .description {
     font-size: config.$small-font;
@@ -224,7 +224,7 @@
   }
 
   .sectionId {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .title {
@@ -303,7 +303,7 @@
     font-weight: bold;
 
     p {
-      margin-left: 10px;
+      margin-left: 12px;
       font-weight: 300;
     }
   }
@@ -326,7 +326,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
   .deactivate {
     @include mixins.button(config.$orange, config.$white, 100%);
@@ -358,13 +358,13 @@
   flex-direction: column;
   width: 100%;
   max-width: config.$max-width;
-  margin-top: 10px;
+  margin-top: 12px;
 
   .section {
     background: config.$white;
     box-shadow: config.$card-shadow;
     margin: 5px 0px;
-    padding: 10px;
+    padding: 12px;
     @include mixins.border-radius();
   }
 
@@ -389,7 +389,7 @@
   .description {
     text-align: right;
     font-size: config.$tiny-font;
-    margin: 10px 0px;
+    margin: 12px 0px;
   }
 
   .information {
@@ -401,7 +401,7 @@
     .row {
       display: flex;
       flex-direction: row-reverse;
-      margin: 10px 0px;
+      margin: 12px 0px;
 
       .description {
         margin: 0px;
@@ -419,7 +419,7 @@
   .title {
     font-size: config.$med-font;
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 12px;
   }
 }
 
@@ -442,7 +442,7 @@
   justify-content: space-around;
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
   p {
     font-size: config.$tiny-font;

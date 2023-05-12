@@ -23,7 +23,7 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
 
     div {
       display: flex;
@@ -55,7 +55,7 @@
     position: absolute;
     bottom: 30px;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     box-shadow: config.$image-shadow;
     max-width: config.$max-width;
     @include mixins.transparentBackground(0.8, config.$cream);
@@ -68,7 +68,7 @@
     position: absolute;
     top: 0px;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     box-shadow: config.$image-shadow;
     max-width: config.$max-width;
     color: config.$orange;
