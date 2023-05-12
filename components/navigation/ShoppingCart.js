@@ -367,6 +367,23 @@ export default function ShoppingCart() {
             </div>
           )}
           <div className={classes.details}>
+            {!checkout ? (
+              <button
+                className={`mainButton ${classes.button}`}
+                disabled={shoppingCart.length === 0}
+                onClick={() => continueShopping()}
+              >
+                {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
+              </button>
+            ) : (
+              <button
+                className={`mainButton ${classes.button}`}
+                disabled={checkoutClicked}
+                onClick={() => handleCheckout()}
+              >
+                {userLogIn ? "درگاه پرداخت بانکی" : "ورود ​/ ثبت نام"}
+              </button>
+            )}
             <div className={classes.row}>
               <p className={classes.value}>{shoppingCart.length}</p>
               {discount && discount !== "" && (
@@ -412,23 +429,6 @@ export default function ShoppingCart() {
               )}
               <p className={classes.title}>هزینه ارسال</p>
             </div>
-            {!checkout ? (
-              <button
-                className={`mainButton ${classes.button}`}
-                disabled={shoppingCart.length === 0}
-                onClick={() => continueShopping()}
-              >
-                {shoppingCart.length > 0 ? "ادامه" : "سبد خرید خالی"}
-              </button>
-            ) : (
-              <button
-                className={`mainButton ${classes.button}`}
-                disabled={checkoutClicked}
-                onClick={() => handleCheckout()}
-              >
-                {userLogIn ? "درگاه پرداخت بانکی" : "ورود ​/ ثبت نام"}
-              </button>
-            )}
           </div>
         </div>
       ) : (
