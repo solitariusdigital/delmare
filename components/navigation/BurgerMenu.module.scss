@@ -39,7 +39,7 @@
       flex-direction: row-reverse;
       align-items: center;
       height: 35px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
 
       p {
         font-size: config.$small-font;
@@ -63,6 +63,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 12px;
+    margin-bottom: 16px;
 
     .user {
       display: flex;
