@@ -17,6 +17,7 @@ import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
 import secureLocalStorage from "react-secure-storage";
+import { updateUserApi } from "../../services/api";
 
 function Container() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -39,6 +40,7 @@ function Container() {
         if (currentUserData) {
           setUserLogin(true);
           setCurrentUser(currentUserData);
+          await updateUserApi(currentUserData);
         }
       } catch (error) {
         console.error(error);
