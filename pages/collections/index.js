@@ -8,7 +8,10 @@ import Highlight from "../../components/Highlight";
 import dbConnect from "../../services/dbConnect";
 import productModel from "../../models/Product";
 
-export default function CollectionsPage({ products }) {
+export default function CollectionsPage({
+  springCollection,
+  summerCollection,
+}) {
   const { navigation, setNavigation } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -63,7 +66,13 @@ export default function CollectionsPage({ products }) {
         <title>Collections</title>
         <meta name="description" content="Select from Delmareh's collections" />
       </Head>
-      <Highlight products={products} />
+      <div className="highlight">
+        <h3>بیشترین بازدید</h3>
+        <p>کالکشن بهار</p>
+        <Highlight products={springCollection} />
+        <p>کالکشن تابستان</p>
+        <Highlight products={summerCollection} />
+      </div>
       <div className="collections-type">
         {collections.map((collection, index) => (
           <div
@@ -108,9 +117,17 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const products = await productModel.find();
-    const filterProducts = products
+    const springCollection = products
       .filter((product) => {
         return product.activate && product.season === "بهار";
+      })
+      .sort((a, b) => {
+        return b.views - a.views;
+      })
+      .slice(0, 6);
+    const summerCollection = products
+      .filter((product) => {
+        return product.activate && product.season === "تابستان";
       })
       .sort((a, b) => {
         return b.views - a.views;
@@ -119,7 +136,8 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        products: JSON.parse(JSON.stringify(filterProducts)),
+        springCollection: JSON.parse(JSON.stringify(springCollection)),
+        summerCollection: JSON.parse(JSON.stringify(summerCollection)),
       },
     };
   } catch (error) {

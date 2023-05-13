@@ -49,6 +49,29 @@ a {
   @include mixins.button(config.$cream, config.$black, 100px);
 }
 
+.highlight {
+  position: relative;
+  padding: 12px;
+  background: linear-gradient(
+    config.$cream,
+    config.$brand,
+    config.$lemon,
+    config.$cream
+  );
+
+  h3 {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  p {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 12px 0px;
+  }
+}
+
 .collections-type {
   padding: 12px;
   padding-bottom: 0px;
