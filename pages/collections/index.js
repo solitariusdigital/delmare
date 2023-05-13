@@ -67,7 +67,7 @@ export default function CollectionsPage({
         <meta name="description" content="Select from Delmareh's collections" />
       </Head>
       <div className="highlight">
-        <h3>بیشترین بازدید</h3>
+        <h4>بیشترین بازدید</h4>
         <p>کالکشن بهار</p>
         <Highlight products={springCollection} />
         <p>کالکشن تابستان</p>
