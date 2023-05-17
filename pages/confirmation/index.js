@@ -148,7 +148,9 @@ export default function Confirmation({ props }) {
       },
       function (response, status) {}
     );
-    setToggleContainer("orders");
+    setTimeout(() => {
+      setToggleContainer("orders");
+    }, 500);
   };
 
   return (
