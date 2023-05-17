@@ -38,11 +38,11 @@ function Container() {
           secureLocalStorage.getItem("currentUser")
         );
         if (currentUserData) {
+          setUserLogin(true);
           const user = await getUserApi(currentUserData["_id"]);
           await updateUserApi(user);
-          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
           setCurrentUser(user);
-          setUserLogin(true);
+          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
         }
       } catch (error) {
         console.error(error);
