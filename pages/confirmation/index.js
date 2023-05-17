@@ -135,8 +135,8 @@ export default function Confirmation({ props }) {
 
   const confirmMessage = async () => {
     setClickConfirm(true);
-    Router.push("/");
     await generateInvoice();
+    Router.push("/");
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
     });
