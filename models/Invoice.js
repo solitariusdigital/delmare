@@ -3,31 +3,15 @@ import { Schema, model, models } from "mongoose";
 const InvoiceSchema = new Schema(
   {
     // user info
-    name: {
-      type: String,
-    },
-    phone: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
-    post: {
-      type: String,
-    },
-    userId: {
-      type: String,
-    },
+    name: String,
+    phone: String,
+    address: String,
+    post: String,
+    userId: String,
     // product info
-    productId: {
-      type: String,
-    },
-    delmareId: {
-      type: String,
-    },
-    title: {
-      type: String,
-    },
+    productId: String,
+    delmareId: String,
+    title: String,
     image: String,
     price: Number,
     color: String,
