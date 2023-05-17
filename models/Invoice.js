@@ -5,36 +5,28 @@ const InvoiceSchema = new Schema(
     // user info
     name: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
-      required: true,
     },
     address: {
       type: String,
-      required: true,
     },
     post: {
       type: String,
-      required: true,
     },
     userId: {
       type: String,
-      required: true,
     },
     // product info
     productId: {
       type: String,
-      required: true,
     },
     delmareId: {
       type: String,
-      required: true,
     },
     title: {
       type: String,
-      required: true,
     },
     image: String,
     price: Number,
