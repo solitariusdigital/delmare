@@ -167,7 +167,7 @@ export default function Confirmation({ props }) {
                 disabled={clickConfirm}
                 onClick={() => confirmMessage()}
               >
-                کمد من
+                صدور فاکتور
               </button>
             </div>
           </div>
