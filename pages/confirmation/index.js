@@ -25,8 +25,8 @@ export default function Confirmation({ props }) {
 
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [clickConfirm, setClickConfirm] = useState(true);
   const [refId, setRefId] = useState("");
-  const [clickConfirm, setClickConfirm] = useState(false);
 
   useEffect(() => {
     document.body.style.background = "#ffffff";
@@ -134,9 +134,8 @@ export default function Confirmation({ props }) {
   };
 
   const confirmMessage = async () => {
-    setClickConfirm(true);
+    setClickConfirm(false);
     await generateInvoice();
-    Router.push("/");
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
     });
@@ -149,30 +148,37 @@ export default function Confirmation({ props }) {
       function (response, status) {}
     );
     setTimeout(() => {
+      Router.push("/");
+    }, 4000);
+    setTimeout(() => {
       setToggleContainer("orders");
-    }, 500);
+    }, 4500);
   };
 
   return (
     <div className={classes.confirmPage}>
       {displayConfirmation && (
         <div className={classes.confirmationContainer}>
-          <div>
-            <p className={classes.title}>دلماره از خرید شما تشکر میکند</p>
-            <div className={classes.row}>
-              <p>کد رهگیری</p>
-              <p className={classes.title}>{refId}</p>
+          {clickConfirm ? (
+            <div>
+              <p className={classes.title}>
+                ثبت نهایی سفارش و دریافت کد رهگیری
+              </p>
+              <div className={classes.row}>
+                <button className="mainButton" onClick={() => confirmMessage()}>
+                  کد رهگیری
+                </button>
+              </div>
             </div>
-            <div className={classes.row}>
-              <button
-                className="mainButton"
-                disabled={clickConfirm}
-                onClick={() => confirmMessage()}
-              >
-                تکمیل خرید
-              </button>
+          ) : (
+            <div>
+              <p className={classes.title}>دلماره از خرید شما تشکر میکند</p>
+              <div className={classes.row}>
+                <p>کد رهگیری</p>
+                <p className={classes.title}>{refId}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
       {displayReject && (
