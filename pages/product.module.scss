@@ -150,7 +150,7 @@
   .subItemProduct {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
 
     .subProduct {
@@ -180,21 +180,21 @@
 
   .title {
     text-align: right;
-    width: 30%;
+    width: 40%;
   }
 
   .discount {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 65%;
+    width: 100%;
 
     .price {
       text-decoration: line-through;
-      color: config.$grey;
       font-weight: 300;
-      font-size: config.$small-font;
       margin: 0px 12px;
+      color: config.$grey;
+      font-size: config.$small-font;
     }
   }
 }

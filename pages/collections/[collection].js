@@ -44,7 +44,10 @@ export async function getServerSideProps(context) {
         products = await Product.find({ sale: false });
         break;
       case "sale":
-        products = await Product.find({ sale: true });
+        let data = await Product.find({ sale: true });
+        products = data.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
         break;
       case "accessories":
         products = await Product.find({
