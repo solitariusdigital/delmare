@@ -89,12 +89,7 @@ export default function About() {
               <Image width={90} height={140} src={logo} alt="logo" />
             </div>
             <div>
-              <a
-                referrerPolicy="origin"
-                rel="noopener"
-                target="_blank"
-                href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-              >
+              <a>
                 <img
                   referrerPolicy="origin"
                   src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"

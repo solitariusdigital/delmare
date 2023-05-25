@@ -1135,14 +1135,8 @@ export default function Product({ product, favourite }) {
             </div>
           </div>
         )}
-
         <div className={classes.graphic}>
-          <a
-            referrerPolicy="origin"
-            rel="noopener"
-            target="_blank"
-            href="https://trustseal.enamad.ir/?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
-          >
+          <a>
             <img
               referrerPolicy="origin"
               src="https://Trustseal.eNamad.ir/logo.aspx?id=311141&amp;Code=GPyVAMJIOJVa0l6MNns2"
