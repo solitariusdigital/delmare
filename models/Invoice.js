@@ -13,6 +13,7 @@ const InvoiceSchema = new Schema(
     delmareId: String,
     title: String,
     image: String,
+    originalPrice: Number,
     price: Number,
     color: String,
     size: String,

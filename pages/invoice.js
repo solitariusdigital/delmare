@@ -144,8 +144,17 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{invoice.post}</p>
                     </div>
                     <div className={classes.row}>
-                      <p className={classes.title}>قیمت</p>
+                      <p className={classes.title}>قیمت فروش</p>
                       <p>{convertNumber(invoice.price)} T</p>
+                    </div>
+                    <div className={classes.row}>
+                      <p className={classes.title}>قیمت اصلی</p>
+                      <p>
+                        {invoice.originalPrice
+                          ? convertNumber(invoice.originalPrice)
+                          : "-"}{" "}
+                        T
+                      </p>
                     </div>
                     <div className={classes.row}>
                       <p className={classes.title}>درصد بلاگر</p>
@@ -267,8 +276,17 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{invoice.post}</p>
                     </div>
                     <div className={classes.row}>
-                      <p className={classes.title}>قیمت</p>
+                      <p className={classes.title}>قیمت فروش</p>
                       <p>{convertNumber(invoice.price)} T</p>
+                    </div>
+                    <div className={classes.row}>
+                      <p className={classes.title}>قیمت اصلی</p>
+                      <p>
+                        {invoice.originalPrice
+                          ? convertNumber(invoice.originalPrice)
+                          : "-"}{" "}
+                        T
+                      </p>
                     </div>
                     <div className={classes.row}>
                       <p className={classes.title}>درصد بلاگر</p>

@@ -82,6 +82,7 @@ export default function Confirmation({ props }) {
       delmareId: product.delmareId,
       refId: refId,
       title: product.title,
+      originalPrice: product.price,
       price:
         currentUser.discount && currentUser.discount !== ""
           ? product.price -
