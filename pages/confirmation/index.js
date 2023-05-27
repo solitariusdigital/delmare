@@ -149,10 +149,10 @@ export default function Confirmation({ props }) {
     );
     setTimeout(() => {
       Router.push("/");
+      setTimeout(() => {
+        setToggleContainer("orders");
+      }, 700);
     }, 4000);
-    setTimeout(() => {
-      setToggleContainer("orders");
-    }, 4500);
   };
 
   return (
@@ -161,12 +161,10 @@ export default function Confirmation({ props }) {
         <div className={classes.confirmationContainer}>
           {clickConfirm ? (
             <div>
-              <p className={classes.title}>
-                ثبت نهایی سفارش و دریافت کد رهگیری
-              </p>
+              <p className={classes.title}>ثبت نهایی سفارش</p>
               <div className={classes.row}>
                 <button className="mainButton" onClick={() => confirmMessage()}>
-                  کد رهگیری
+                  ادامه
                 </button>
               </div>
             </div>
@@ -174,7 +172,7 @@ export default function Confirmation({ props }) {
             <div>
               <p className={classes.title}>دلماره از خرید شما تشکر میکند</p>
               <div className={classes.row}>
-                <p>کد رهگیری</p>
+                <p>کد رهگیری دلماره</p>
                 <p className={classes.title}>{refId}</p>
               </div>
             </div>

@@ -38,12 +38,16 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   }, [setContainer]);
 
   const postInvoice = async (invoice) => {
+    let positionY = window.scrollY;
     let data = {
       ...invoice,
       posted: true,
     };
     await updateInvoiceApi(data);
     Router.push("/invoice");
+    setTimeout(() => {
+      window.scrollTo(0, positionY);
+    }, 500);
   };
 
   const calculateTotalSale = () => {
@@ -187,7 +191,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{invoice.delmareId}</p>
                     </div>
                     <div className={classes.row}>
-                      <p className={classes.title}>کد رهگیری</p>
+                      <p className={classes.title}>کد رهگیری دلماره</p>
                       <p>{invoice.refId}</p>
                     </div>
                     <button
@@ -310,7 +314,7 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{invoice.delmareId}</p>
                     </div>
                     <div className={classes.row}>
-                      <p className={classes.title}>کد رهگیری</p>
+                      <p className={classes.title}>کد رهگیری دلماره</p>
                       <p>{invoice.refId}</p>
                     </div>
                   </div>

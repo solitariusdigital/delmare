@@ -76,16 +76,16 @@ export default function Orders() {
                     <p>{order.title}</p>
                   </div>
                   <div className={ShoppingCart.row}>
+                    <p className={ShoppingCart.title}>قیمت</p>
+                    <p>{convertNumber(order.price)} T</p>
+                  </div>
+                  <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>کد آیتم</p>
                     <p>{order.delmareId}</p>
                   </div>
                   <div className={ShoppingCart.row}>
-                    <p className={ShoppingCart.title}>کد رهگیری</p>
+                    <p className={ShoppingCart.title}>کد رهگیری دلماره</p>
                     <p>{order.refId}</p>
-                  </div>
-                  <div className={ShoppingCart.row}>
-                    <p className={ShoppingCart.title}>قیمت</p>
-                    <p>{convertNumber(order.price)} T</p>
                   </div>
                   <div className={ShoppingCart.row}>
                     <p className={ShoppingCart.title}>تاریخ خرید</p>

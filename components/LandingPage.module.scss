@@ -11,10 +11,6 @@
   display: flex;
   position: relative;
 
-  .image {
-    @include mixins.background-anime();
-  }
-
   .categories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
