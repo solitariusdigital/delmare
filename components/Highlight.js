@@ -16,8 +16,8 @@ export default function Highlight({ products }) {
             blurDataURL={product.images.main}
             placeholder="blur"
             alt="image"
-            width={55}
-            height={55}
+            width={80}
+            height={80}
             objectFit="cover"
             loading="eager"
             priority

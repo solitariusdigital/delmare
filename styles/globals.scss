@@ -50,25 +50,13 @@ a {
 }
 
 .highlight {
-  position: relative;
   padding: 12px;
-  background: linear-gradient(
-    config.$cream,
-    config.$brand,
-    config.$lemon,
-    config.$cream
-  );
+  padding-bottom: 0px;
 
   h4 {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-  }
-
-  p {
     display: flex;
     flex-direction: row-reverse;
-    margin: 8px 0px;
+    margin-bottom: 8px;
   }
 }
 

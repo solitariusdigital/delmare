@@ -8,10 +8,7 @@ import Highlight from "../../components/Highlight";
 import dbConnect from "../../services/dbConnect";
 import productModel from "../../models/Product";
 
-export default function CollectionsPage({
-  springCollection,
-  summerCollection,
-}) {
+export default function CollectionsPage({ highlightCollection }) {
   const { navigation, setNavigation } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
@@ -68,10 +65,7 @@ export default function CollectionsPage({
       </Head>
       <div className="highlight">
         <h4>بیشترین بازدید</h4>
-        <p>کالکشن بهار</p>
-        <Highlight products={springCollection} />
-        <p>کالکشن تابستان</p>
-        <Highlight products={summerCollection} />
+        <Highlight products={highlightCollection} />
       </div>
       <div className="collections-type">
         {collections.map((collection, index) => (
@@ -117,27 +111,18 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const products = await productModel.find();
-    const springCollection = products
+    const highlightCollection = products
       .filter((product) => {
         return product.activate && product.season === "بهار";
       })
       .sort((a, b) => {
         return b.views - a.views;
       })
-      .slice(0, 6);
-    const summerCollection = products
-      .filter((product) => {
-        return product.activate && product.season === "تابستان";
-      })
-      .sort((a, b) => {
-        return b.views - a.views;
-      })
-      .slice(0, 6);
+      .slice(0, 8);
 
     return {
       props: {
-        springCollection: JSON.parse(JSON.stringify(springCollection)),
-        summerCollection: JSON.parse(JSON.stringify(summerCollection)),
+        highlightCollection: JSON.parse(JSON.stringify(highlightCollection)),
       },
     };
   } catch (error) {
