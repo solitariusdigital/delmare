@@ -118,7 +118,7 @@ export async function getServerSideProps(context) {
       .sort((a, b) => {
         return b.views - a.views;
       })
-      .slice(0, 8);
+      .slice(0, 5);
 
     return {
       props: {
