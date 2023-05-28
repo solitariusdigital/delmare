@@ -26,6 +26,7 @@ export default function Confirmation({ props }) {
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [clickConfirm, setClickConfirm] = useState(true);
+  const [confirmClicked, setConfirmClicked] = useState(false);
   const [refId, setRefId] = useState("");
 
   useEffect(() => {
@@ -133,6 +134,7 @@ export default function Confirmation({ props }) {
   };
 
   const confirmMessage = async () => {
+    setConfirmClicked(true);
     await generateInvoice();
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
@@ -162,7 +164,11 @@ export default function Confirmation({ props }) {
             <div>
               <p className={classes.title}>ثبت نهایی سفارش</p>
               <div className={classes.row}>
-                <button className="mainButton" onClick={() => confirmMessage()}>
+                <button
+                  className="mainButton"
+                  disabled={confirmClicked}
+                  onClick={() => confirmMessage()}
+                >
                   ادامه
                 </button>
               </div>
