@@ -49,7 +49,7 @@ export default function ShoppingCart() {
       fetchData();
     }
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-  }, [shoppingCart, currentUser]);
+  }, [currentUser, shoppingCart]);
 
   useEffect(() => {
     const checkProductsData = async (product) => {
@@ -58,7 +58,9 @@ export default function ShoppingCart() {
         const isActivated = getProduct.activate;
         const colorCount = getProduct.size[product.size].colors[product.color];
         const message = isActivated && colorCount > 0 ? "" : "اتمام موجودی";
-        product.price = getProduct.price;
+        product.price = getProduct.sale
+          ? getProduct.discount
+          : getProduct.price;
         product.message = message;
         setAvailability(!availability);
       } catch (error) {
