@@ -22,6 +22,10 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const [startDate, setStartDate] = useState(new Date());
   const [displayPage, setDisplayPage] = useState(false);
 
+  const deliveryCouriers = ["TIPAX", "Snapp"];
+  const [deliveryCourier, setDeliveryCourier] = useState("");
+  const [deliveryId, setDeliveryId] = useState("");
+
   useEffect(() => {
     if (
       !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
@@ -42,9 +46,13 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
     let data = {
       ...invoice,
       posted: true,
+      deliveryCourier: deliveryCourier,
+      deliveryId: deliveryId,
     };
     await updateInvoiceApi(data);
     Router.push("/invoice");
+    setDeliveryId("");
+    setDeliveryCourier("");
     setTimeout(() => {
       window.scrollTo(0, positionY);
     }, 500);
@@ -203,6 +211,32 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p className={classes.title}>کد رهگیری دلماره</p>
                       <p>{invoice.refId}</p>
                     </div>
+                    <div className={classes.row}>
+                      <select
+                        defaultValue={"default"}
+                        onChange={(e) => setDeliveryCourier(e.target.value)}
+                      >
+                        <option value="default" disabled>
+                          نوع ارسال
+                        </option>
+                        {deliveryCouriers.map((courier, index) => {
+                          return (
+                            <option key={index} value={courier}>
+                              {courier}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <input
+                        type="text"
+                        id="deliveryId"
+                        name="deliveryId"
+                        placeholder="کد رهگیری"
+                        onChange={(e) => setDeliveryId(e.target.value)}
+                        value={deliveryId}
+                        autoComplete="off"
+                      />
+                    </div>
                     <button
                       className={classes.button}
                       onClick={() => postInvoice(invoice)}
@@ -335,6 +369,14 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p className={classes.title}>کد رهگیری دلماره</p>
                       <p>{invoice.refId}</p>
                     </div>
+                    {invoice.deliveryCourier && (
+                      <div className={classes.row}>
+                        <p className={classes.title}>مشخصات ارسال</p>
+                        <p>
+                          {invoice.deliveryCourier} {invoice.deliveryId}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
