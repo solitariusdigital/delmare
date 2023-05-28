@@ -135,7 +135,6 @@ export default function Confirmation({ props }) {
   };
 
   const confirmMessage = async () => {
-    setClickConfirm(false);
     await generateInvoice();
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
@@ -148,6 +147,7 @@ export default function Confirmation({ props }) {
       },
       function (response, status) {}
     );
+    setClickConfirm(false);
     setTimeout(() => {
       Router.push("/");
       setTimeout(() => {
