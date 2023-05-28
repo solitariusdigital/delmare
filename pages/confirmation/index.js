@@ -100,14 +100,12 @@ export default function Confirmation({ props }) {
   const updateProductCount = async (product) => {
     try {
       let getProduct = await getProductApi(product["_id"]);
-      const size = getProduct.size[product.size];
-      const colorCount = size.colors[product.color];
-      if (colorCount > 0) {
-        size.colors[product.color]--;
+      if (getProduct.size[product.size].colors[product.color] > 0) {
+        getProduct.size[product.size].colors[product.color]--;
         if (
           Object.keys(getProduct.size).length === 1 &&
-          Object.keys(size.colors).length === 1 &&
-          colorCount === 0
+          Object.keys(getProduct.size[product.size].colors).length === 1 &&
+          getProduct.size[product.size].colors[product.color] === 0
         ) {
           getProduct.activate = false;
         }
