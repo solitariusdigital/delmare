@@ -102,8 +102,8 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 5px 0px;
-    padding: 5px 0px;
+    margin: 4px 0px;
+    padding: 4px 0px;
     border-bottom: 1px solid config.$cream;
 
     .title {
@@ -137,6 +137,17 @@
   .button {
     @include mixins.button(config.$brand, config.$black, 100%);
     margin-top: 20px;
+  }
+
+  select,
+  input {
+    @include mixins.input();
+    height: 50px;
+    background: config.$white;
+  }
+
+  input {
+    width: 200px;
   }
 }
 

@@ -98,7 +98,7 @@ export default function Orders() {
                     <p>{order.deliveryType}</p>
                   </div>
                   <div className={ShoppingCart.row}>
-                    <p className={ShoppingCart.title}>وضعیت</p>
+                    <p className={ShoppingCart.title}>وضعیت ارسال</p>
                     {order.posted ? (
                       <div className={ShoppingCart.status}>
                         <p suppressHydrationWarning>
@@ -109,6 +109,14 @@ export default function Orders() {
                       <p>آماده سازی</p>
                     )}
                   </div>
+                  {order.posted && order.deliveryCourier && (
+                    <div className={ShoppingCart.row}>
+                      <p className={ShoppingCart.title}>مشخصات ارسال</p>
+                      <p>
+                        {order.deliveryCourier} {order.deliveryId}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             ))
