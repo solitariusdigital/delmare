@@ -19,10 +19,8 @@ import secureLocalStorage from "react-secure-storage";
 export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
   const [posted, setposted] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
   const [displayPage, setDisplayPage] = useState(false);
 
-  const deliveryCouriers = ["TIPAX", "Snapp"];
   const [deliveryCourier, setDeliveryCourier] = useState("");
   const [deliveryId, setDeliveryId] = useState("");
 
@@ -50,9 +48,9 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
       deliveryId: deliveryId,
     };
     await updateInvoiceApi(data);
-    Router.push("/invoice");
     setDeliveryId("");
     setDeliveryCourier("");
+    Router.push("/invoice");
     setTimeout(() => {
       window.scrollTo(0, positionY);
     }, 500);
@@ -212,21 +210,26 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
                       <p>{invoice.refId}</p>
                     </div>
                     <div className={classes.row}>
-                      <select
-                        defaultValue={"default"}
-                        onChange={(e) => setDeliveryCourier(e.target.value)}
-                      >
-                        <option value="default" disabled>
-                          نوع ارسال
-                        </option>
-                        {deliveryCouriers.map((courier, index) => {
-                          return (
-                            <option key={index} value={courier}>
-                              {courier}
-                            </option>
-                          );
-                        })}
-                      </select>
+                      <div className={classes.radioContainer}>
+                        <div className={classes.radio}>
+                          <input
+                            type="radio"
+                            value="TIPAX"
+                            checked={deliveryCourier === "TIPAX"}
+                            onChange={(e) => setDeliveryCourier(e.target.value)}
+                          />
+                          <p>TIPAX</p>
+                        </div>
+                        <div className={classes.radio}>
+                          <input
+                            type="radio"
+                            value="Snapp"
+                            checked={deliveryCourier === "Snapp"}
+                            onChange={(e) => setDeliveryCourier(e.target.value)}
+                          />
+                          <p>Snapp</p>
+                        </div>
+                      </div>
                       <input
                         type="text"
                         id="deliveryId"
