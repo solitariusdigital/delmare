@@ -1,4 +1,4 @@
-import { connect, connection } from "mongoose";
+import { connect, connection, set } from "mongoose";
 
 const conn = {
   isConneted: false,
@@ -7,8 +7,12 @@ const conn = {
 async function dbConnect() {
   if (conn.isConneted) return;
 
+  set("strictQuery", true);
+
   const db = await connect(process.env.NEXT_PUBLIC_MONGO_URI, {
     authSource: "admin",
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
   conn.isConneted = db.connections[0].readyState;
 
