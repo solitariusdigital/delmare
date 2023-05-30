@@ -1,5 +1,35 @@
 import { Schema, model, models } from "mongoose";
 
+const ImageSchema = new Schema({
+  main: String,
+  one: String,
+  two: String,
+  three: String,
+  table: String,
+  graph: String,
+});
+
+const SizeSchema = new Schema({
+  XS: {},
+  S: {},
+  M: {},
+  L: {},
+  XL: {},
+  FS: {},
+  34: {},
+  35: {},
+  36: {},
+  37: {},
+  38: {},
+  39: {},
+  40: {},
+  41: {},
+  42: {},
+  43: {},
+  44: {},
+  45: {},
+});
+
 const ProductSchema = new Schema(
   {
     delmareId: {
@@ -15,32 +45,12 @@ const ProductSchema = new Schema(
       required: true,
     },
     images: {
-      main: String,
-      one: String,
-      two: String,
-      three: String,
-      table: String,
-      graph: String,
+      type: ImageSchema,
+      required: true,
     },
     size: {
-      XS: {},
-      S: {},
-      M: {},
-      L: {},
-      XL: {},
-      FS: {},
-      34: {},
-      35: {},
-      36: {},
-      37: {},
-      38: {},
-      39: {},
-      40: {},
-      41: {},
-      42: {},
-      43: {},
-      44: {},
-      45: {},
+      type: SizeSchema,
+      required: true,
     },
     category: String,
     season: String,
