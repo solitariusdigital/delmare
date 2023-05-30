@@ -1,56 +1,49 @@
 import { Schema, model, models } from "mongoose";
 
-const ImageSchema = new Schema({
-  main: String,
-  one: String,
-  two: String,
-  three: String,
-  table: String,
-  graph: String,
-});
-
-const SizeSchema = new Schema({
-  XS: {},
-  S: {},
-  M: {},
-  L: {},
-  XL: {},
-  FS: {},
-  34: {},
-  35: {},
-  36: {},
-  37: {},
-  38: {},
-  39: {},
-  40: {},
-  41: {},
-  42: {},
-  43: {},
-  44: {},
-  45: {},
-});
-
 const ProductSchema = new Schema(
   {
     delmareId: {
       type: String,
       required: true,
+      maxlength: 30,
     },
     title: {
       type: String,
       required: true,
+      maxlength: 20,
     },
     description: {
       type: String,
       required: true,
+      maxlength: 250,
     },
     images: {
-      type: ImageSchema,
-      required: true,
+      main: String,
+      one: String,
+      two: String,
+      three: String,
+      table: String,
+      graph: String,
     },
     size: {
-      type: SizeSchema,
-      required: true,
+      XS: {},
+      S: {},
+      M: {},
+      L: {},
+      XL: {},
+      FS: {},
+      34: {},
+      35: {},
+      36: {},
+      37: {},
+      38: {},
+      39: {},
+      40: {},
+      41: {},
+      42: {},
+      43: {},
+      44: {},
+      45: {},
     },
     category: String,
     season: String,
