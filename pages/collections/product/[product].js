@@ -79,6 +79,9 @@ export default function Product({ product, favourite }) {
     const handleBeforePopState = ({ as }) => {
       if (as !== router.asPath) {
         window.scrollTo(0, 0);
+        setTimeout(() => {
+          sessionStorage.removeItem("positionY");
+        }, 2000);
       }
       return true;
     };

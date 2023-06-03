@@ -40,14 +40,17 @@ export default function LandingPage() {
   };
 
   const activateNav = (link, title) => {
-    const updatedNavigation = navigation.map((nav) => {
+    sessionStorage.removeItem("reqNumber");
+    sessionStorage.removeItem("positionY");
+    navigation.map((nav) => {
       if (title === nav.title) {
         Router.push(link);
-        return { ...nav, active: true };
+        nav.active = true;
+      } else {
+        nav.active = false;
       }
-      return { ...nav, active: false };
     });
-    setNavigation(updatedNavigation);
+    setNavigation([...navigation]);
   };
 
   return (

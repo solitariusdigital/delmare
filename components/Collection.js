@@ -44,6 +44,18 @@ export default function Collection({
   const [reqNumber, setReqNumber] = useState(20);
   const [categories, setCategories] = useState([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // manage scroll position and number of items on the page
+    if (sessionStorage.getItem("reqNumber")) {
+      setReqNumber(reqNumber);
+    }
+    if (sessionStorage.getItem("positionY")) {
+      window.scrollTo(0, sessionStorage.getItem("positionY"));
+    }
+    window.addEventListener("scroll", loadMore);
+  });
+
   useEffect(() => {
     if (collectionType === "brands") {
       setGallery(brandGallery);
@@ -68,22 +80,33 @@ export default function Collection({
     setMessage(false);
     setBar(true);
   }, [
-    collectionType,
-    brandGallery,
-    galleryData,
-    setBar,
-    generalCategories,
     accessoriesCategories,
-    setSearchControl,
+    brandGallery,
+    collectionType,
+    galleryData,
+    generalCategories,
+    setBar,
     setGallery,
     setSearch,
+    setSearchControl,
   ]);
+
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.scrollingElement.scrollHeight
+    ) {
+      setReqNumber(reqNumber + 20);
+    }
+  };
 
   const selectProduct = async (product) => {
     setMessage(false);
-    Router.push(`/collections/product/${product["_id"]}`);
     setSearchControl(false);
     setGallery([]);
+    sessionStorage.setItem("positionY", window.scrollY);
+    sessionStorage.setItem("reqNumber", reqNumber);
+    Router.push(`/collections/product/${product["_id"]}`);
   };
 
   const favourProduct = async (product) => {
@@ -340,11 +363,6 @@ export default function Collection({
           .reverse()
           .slice(0, reqNumber)}
       </div>
-      {gallery.length >= 20 && (
-        <div className={classes.more}>
-          <p onClick={() => setReqNumber(reqNumber + 20)}>آیتم بیشتر</p>
-        </div>
-      )}
     </Fragment>
   );
 }

@@ -61,10 +61,12 @@ function Container() {
   }, []);
 
   const activateNav = (link, index) => {
+    sessionStorage.removeItem("reqNumber");
+    sessionStorage.removeItem("positionY");
     setGallery([]);
-    Router.push(link);
     navigation.map((nav, i) => {
       if (i === index) {
+        Router.push(link);
         nav.active = true;
       } else {
         nav.active = false;
