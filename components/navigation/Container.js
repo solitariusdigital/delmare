@@ -61,7 +61,6 @@ function Container() {
   }, []);
 
   const activateNav = (link, index) => {
-    sessionStorage.removeItem("reqNumber");
     sessionStorage.removeItem("positionY");
     setGallery([]);
     navigation.map((nav, i) => {

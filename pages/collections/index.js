@@ -46,7 +46,6 @@ export default function CollectionsPage({ highlightCollection }) {
   ];
 
   const activateNav = (link, index) => {
-    sessionStorage.removeItem("reqNumber");
     sessionStorage.removeItem("positionY");
     navigation.forEach((nav, i) => {
       if (i === index) {

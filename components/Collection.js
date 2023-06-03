@@ -34,6 +34,7 @@ export default function Collection({
   const { seasons, setSeasons } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
+  const { reqNumber, setReqNumber } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
@@ -41,15 +42,11 @@ export default function Collection({
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
-  const [reqNumber, setReqNumber] = useState(40);
   const [categories, setCategories] = useState([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // manage scroll position and number of items on the page
-    if (sessionStorage.getItem("reqNumber")) {
-      setReqNumber(sessionStorage.getItem("reqNumber"));
-    }
     if (sessionStorage.getItem("positionY")) {
       window.scrollTo(0, sessionStorage.getItem("positionY"));
     }
@@ -96,7 +93,7 @@ export default function Collection({
       window.innerHeight + document.documentElement.scrollTop ===
       document.scrollingElement.scrollHeight
     ) {
-      setReqNumber(reqNumber + 40);
+      setReqNumber(reqNumber + 20);
     }
   };
 
@@ -105,7 +102,6 @@ export default function Collection({
     setSearchControl(false);
     setGallery([]);
     sessionStorage.setItem("positionY", window.scrollY);
-    sessionStorage.setItem("reqNumber", reqNumber);
     Router.push(`/collections/product/${product["_id"]}`);
   };
 
@@ -139,7 +135,7 @@ export default function Collection({
   const filterCategoryCollection = (type) => {
     setCategoryFilter(type);
     setCategorySelector(false);
-    setReqNumber(40);
+    setReqNumber(20);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -169,7 +165,7 @@ export default function Collection({
   const filterSeasonCollection = (type) => {
     setSeasonFilter(type);
     setSeasonSelector(false);
-    setReqNumber(40);
+    setReqNumber(20);
     switch (collectionType) {
       case "gallery":
         setGallery(

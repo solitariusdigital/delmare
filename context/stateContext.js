@@ -108,8 +108,11 @@ export const StateProvider = (props) => {
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [gallery, setGallery] = useState([]);
+  const [reqNumber, setReqNumber] = useState(20);
 
   const stateContext = {
+    setReqNumber,
+    reqNumber,
     menu,
     setMenu,
     bar,

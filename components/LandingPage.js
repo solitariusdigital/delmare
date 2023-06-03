@@ -40,7 +40,6 @@ export default function LandingPage() {
   };
 
   const activateNav = (link, title) => {
-    sessionStorage.removeItem("reqNumber");
     sessionStorage.removeItem("positionY");
     navigation.map((nav) => {
       if (title === nav.title) {

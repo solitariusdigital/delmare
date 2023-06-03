@@ -81,7 +81,7 @@ export default function Product({ product, favourite }) {
         window.scrollTo(0, 0);
         setTimeout(() => {
           sessionStorage.removeItem("positionY");
-        }, 4000);
+        }, 3000);
       }
       return true;
     };
