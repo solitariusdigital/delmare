@@ -41,7 +41,7 @@ export default function Collection({
   const [categoryFilter, setCategoryFilter] = useState("دسته بندی");
   const [seasonFilter, setSeasonFilter] = useState("فصل");
   const [message, setMessage] = useState(false);
-  const [reqNumber, setReqNumber] = useState(20);
+  const [reqNumber, setReqNumber] = useState(40);
   const [categories, setCategories] = useState([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,7 +96,7 @@ export default function Collection({
       window.innerHeight + document.documentElement.scrollTop ===
       document.scrollingElement.scrollHeight
     ) {
-      setReqNumber(reqNumber + 20);
+      setReqNumber(reqNumber + 40);
     }
   };
 
@@ -139,7 +139,7 @@ export default function Collection({
   const filterCategoryCollection = (type) => {
     setCategoryFilter(type);
     setCategorySelector(false);
-    setReqNumber(20);
+    setReqNumber(40);
     switch (collectionType) {
       case "gallery":
         setGallery(
@@ -169,7 +169,7 @@ export default function Collection({
   const filterSeasonCollection = (type) => {
     setSeasonFilter(type);
     setSeasonSelector(false);
-    setReqNumber(20);
+    setReqNumber(40);
     switch (collectionType) {
       case "gallery":
         setGallery(
