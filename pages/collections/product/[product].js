@@ -68,7 +68,7 @@ export default function Product({ product, favourite }) {
   const [percentage, setPercentage] = useState(product.percentage);
 
   const [like, setLike] = useState(favourite);
-  const [displayPopup, setDisplayPopuo] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState(false);
   const [active, setActive] = useState(true);
   const [display, setDisplay] = useState(true);
 
@@ -207,6 +207,7 @@ export default function Product({ product, favourite }) {
     setSelectedSize("");
     clearDetails();
     colors.length = 0;
+    window.scrollTo(0, 0);
     router.back();
   };
 
@@ -441,7 +442,7 @@ export default function Product({ product, favourite }) {
               priority
               loading="eager"
               onClick={() => {
-                setDisplayPopuo(true);
+                setDisplayPopup(true);
                 window.scrollTo(0, 0);
               }}
             />
@@ -560,7 +561,7 @@ export default function Product({ product, favourite }) {
                 priority
                 loading="eager"
                 onClick={() => {
-                  setDisplayPopuo(false);
+                  setDisplayPopup(false);
                   window.scrollTo(0, 0);
                 }}
               />
