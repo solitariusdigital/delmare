@@ -48,7 +48,7 @@ export default function Collection({
   useEffect(() => {
     // manage scroll position and number of items on the page
     if (sessionStorage.getItem("reqNumber")) {
-      setReqNumber(reqNumber);
+      setReqNumber(sessionStorage.getItem("reqNumber"));
     }
     if (sessionStorage.getItem("positionY")) {
       window.scrollTo(0, sessionStorage.getItem("positionY"));
