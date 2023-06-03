@@ -42,9 +42,10 @@ $screen-xl-min: 1200px;
 
 @mixin button($color, $subColor, $size) {
   width: $size;
-  height: 35px;
+  height: 40px;
+  border-radius: 50px;
+  font-weight: bold;
   background: $color;
-  border-radius: 5px;
   color: $subColor;
   font-size: 14px;
   margin: auto;
@@ -52,7 +53,6 @@ $screen-xl-min: 1200px;
   padding-left: 8px;
   padding-right: 8px;
   box-shadow: config.$button-shadow;
-  font-weight: 300;
 
   &:hover {
     cursor: pointer;
