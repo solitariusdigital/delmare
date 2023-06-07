@@ -224,7 +224,7 @@ export default function ShoppingCart() {
             {!checkout && (
               <div className={classes.title}>
                 <p className={classes.count}>{shoppingCart.length}</p>
-                <p>سبد خرید</p>
+                <p>آیتم</p>
               </div>
             )}
             {checkout && (

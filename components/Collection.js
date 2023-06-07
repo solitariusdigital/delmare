@@ -44,7 +44,6 @@ export default function Collection({
   const [message, setMessage] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // manage scroll position and number of items on the page
     if (sessionStorage.getItem("positionY")) {
