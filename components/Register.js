@@ -29,7 +29,7 @@ function Register() {
   const [displayCounter, setDisplayCounter] = useState(false);
   const [counter, setCounter] = useState(59);
   const [notification, setNotification] = useState({});
-  const [discount, setDiscount] = useState("15");
+  const [discount, setDiscount] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,18 +119,18 @@ function Register() {
       } else {
         await createUser();
         // send dsicount offer for new users
-        const api = Kavenegar.KavenegarApi({
-          apikey: kavenegarKey,
-        });
-        api.VerifyLookup(
-          {
-            receptor: phone,
-            token: discount,
-            token2: phone,
-            template: "discount",
-          },
-          function (response, status) {}
-        );
+        // const api = Kavenegar.KavenegarApi({
+        //   apikey: kavenegarKey,
+        // });
+        // api.VerifyLookup(
+        //   {
+        //     receptor: phone,
+        //     token: discount,
+        //     token2: phone,
+        //     template: "discount",
+        //   },
+        //   function (response, status) {}
+        // );
       }
     } else {
       setAlert("کد تایید اشتباه است");

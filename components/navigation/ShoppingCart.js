@@ -388,7 +388,7 @@ export default function ShoppingCart() {
             )}
             <div className={classes.row}>
               <p className={classes.value}>{shoppingCart.length}</p>
-              {discount && discount !== "" && (
+              {discount && (
                 <div className={classes.discountRow}>
                   <p className={classes.title}>هدیه خرید اول</p>
                   <span className={classes.percentage}>{discount}%</span>
@@ -397,7 +397,7 @@ export default function ShoppingCart() {
               <p className={classes.title}>تعداد آیتم</p>
             </div>
             <div className={classes.row}>
-              {discount && discount !== "" ? (
+              {discount ? (
                 <div className={classes.discountRow}>
                   <p className={classes.price}>
                     {convertNumber(calculateTotal())} T

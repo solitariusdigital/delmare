@@ -40,6 +40,7 @@ function Container() {
         if (currentUserData) {
           setUserLogin(true);
           const user = await getUserApi(currentUserData["_id"]);
+          user.discount = "";
           await updateUserApi(user);
           setCurrentUser(user);
           secureLocalStorage.setItem("currentUser", JSON.stringify(user));

@@ -96,14 +96,6 @@ export default function LandingPage() {
           <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
           <p>با دلماره متفاوت دیده شوید</p>
         </div>
-        {!userLogIn && (
-          <div className={classes.discount}>
-            <div onClick={() => loginAction()}>
-              <p>هدیه %15 تخفیف خرید اول برای مشتریان جدید</p>
-              <p>اعتبار تا پایان خرداد 1402</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

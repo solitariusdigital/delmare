@@ -56,18 +56,4 @@
     max-width: config.$max-width;
     @include mixins.transparentBackground(0.8, config.$cream);
   }
-
-  .discount {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    padding: 12px;
-    box-shadow: config.$image-shadow;
-    max-width: config.$max-width;
-    color: config.$orange;
-    @include mixins.transparentBackground(0.8, config.$cream);
-  }
 }
