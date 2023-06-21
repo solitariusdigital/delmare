@@ -1,16 +1,32 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
 import Head from "next/head";
-import sale from "../../assets/sale.png";
 import Highlight from "../../components/Highlight";
-import dbConnect from "../../services/dbConnect";
-import productModel from "../../models/Product";
 
-export default function CollectionsPage({ highlightCollection }) {
+export default function CollectionsPage({ highlightCollection, newItems }) {
   const { navigation, setNavigation } = useContext(StateContext);
+  const { bar, setBar } = useContext(StateContext);
+  const { container, setContainer } = useContext(StateContext);
+  const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
+
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
+
+  useEffect(() => {
+    document.body.style.background = "#f9f7f2";
+    setBar(false);
+    setContainer(true);
+  }, [setBar, setContainer]);
+
+  useEffect(() => {
+    if (!window.matchMedia("(display-mode: standalone)").matches) {
+      setToggleContainer("screen");
+    }
+  }, [setToggleContainer]);
 
   const collections = [
     {
@@ -34,14 +50,14 @@ export default function CollectionsPage({ highlightCollection }) {
       imageSrc: `${sourceLink}shoes.jpg`,
     },
     {
-      title: "بلاگرز",
-      link: "/collections/bloggers",
-      imageSrc: `${sourceLink}four.jpg`,
-    },
-    {
       title: "برندز",
       link: "/collections/brands",
       imageSrc: `${sourceLink}ten.jpg`,
+    },
+    {
+      title: "بلاگرز",
+      link: "/collections/bloggers",
+      imageSrc: `${sourceLink}four.jpg`,
     },
   ];
 
@@ -58,6 +74,12 @@ export default function CollectionsPage({ highlightCollection }) {
     setNavigation([...navigation]);
   };
 
+  const loginAction = () => {
+    setToggleContainer("");
+    setMenu(true);
+    setRegister(true);
+  };
+
   return (
     <Fragment>
       <Head>
@@ -65,9 +87,14 @@ export default function CollectionsPage({ highlightCollection }) {
         <meta name="description" content="Select from Delmareh's collections" />
       </Head>
       <div className="highlight">
-        <h4>بیشترین بازدید</h4>
-        <Highlight products={highlightCollection} />
+        <h4>جدید</h4>
+        <Highlight products={newItems} />
       </div>
+      {!userLogIn && (
+        <div onClick={() => loginAction()} className="ctaButton">
+          <p>ورود / ​ثبت نام</p>
+        </div>
+      )}
       <div className="collections-type">
         {collections.map((collection, index) => (
           <div
@@ -75,20 +102,9 @@ export default function CollectionsPage({ highlightCollection }) {
             className="card"
             onClick={() => activateNav(collection.link, index)}
           >
-            <div className="banner">
+            <div className="ctaCollection">
               <p>{collection.title}</p>
             </div>
-            {collection.title === "تخفیف" && (
-              <div className="sale">
-                <Image
-                  src={sale}
-                  alt="sale"
-                  objectFit="contain"
-                  width={70}
-                  height={70}
-                />
-              </div>
-            )}
             <Image
               className={"image"}
               src={collection.imageSrc}
@@ -103,32 +119,14 @@ export default function CollectionsPage({ highlightCollection }) {
           </div>
         ))}
       </div>
+      <div className="highlight">
+        <h4>بیشترین بازدید</h4>
+        <Highlight products={highlightCollection} />
+      </div>
+      <div className="message" onClick={() => Router.push("/collections")}>
+        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+        <p>با دلماره متفاوت دیده شوید</p>
+      </div>
     </Fragment>
   );
-}
-
-// initial connection to db
-export async function getServerSideProps(context) {
-  try {
-    await dbConnect();
-    const products = await productModel.find();
-    const highlightCollection = products
-      .filter((product) => {
-        return product.activate && product.season === "بهار";
-      })
-      .sort((a, b) => {
-        return b.views - a.views;
-      })
-      .slice(0, 5);
-
-    return {
-      props: {
-        highlightCollection: JSON.parse(JSON.stringify(highlightCollection)),
-      },
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
 }

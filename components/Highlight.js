@@ -8,16 +8,16 @@ export default function Highlight({ products }) {
       {products.map((product, index) => (
         <div key={index}>
           <Image
-            onClick={() =>
-              Router.push(`/collections/product/${product["_id"]}`)
-            }
+            onClick={() => {
+              Router.push(`/collections/product/${product["_id"]}`);
+            }}
             className={classes.image}
             src={product.images.main}
             blurDataURL={product.images.main}
             placeholder="blur"
             alt="image"
-            width={80}
-            height={80}
+            width={100}
+            height={140}
             objectFit="cover"
             loading="eager"
             priority
