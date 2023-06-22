@@ -5,7 +5,11 @@ import Image from "next/image";
 import Head from "next/head";
 import Highlight from "../../components/Highlight";
 
-export default function CollectionsPage({ highlightCollection, newItems }) {
+export default function CollectionsPage({
+  highlightCollection,
+  newItems,
+  cheapestItems,
+}) {
   const { navigation, setNavigation } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
@@ -97,26 +101,33 @@ export default function CollectionsPage({ highlightCollection, newItems }) {
       )}
       <div className="collections-type">
         {collections.map((collection, index) => (
-          <div
-            key={index}
-            className="card"
-            onClick={() => activateNav(collection.link, index)}
-          >
-            <div className="ctaCollection">
-              <p>{collection.title}</p>
+          <Fragment key={index}>
+            <div
+              className="card"
+              onClick={() => activateNav(collection.link, index)}
+            >
+              <div className="ctaCollection">
+                <p>{collection.title}</p>
+              </div>
+              <Image
+                className={"image"}
+                src={collection.imageSrc}
+                blurDataURL={collection.imageSrc}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority
+                loading="eager"
+              />
             </div>
-            <Image
-              className={"image"}
-              src={collection.imageSrc}
-              blurDataURL={collection.imageSrc}
-              placeholder="blur"
-              alt="image"
-              layout="fill"
-              objectFit="cover"
-              priority
-              loading="eager"
-            />
-          </div>
+            {index === 2 && (
+              <div className="highlight">
+                <h4>ارزان ترین</h4>
+                <Highlight products={cheapestItems} />
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
       <div className="highlight">

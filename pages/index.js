@@ -4,7 +4,11 @@ import CollectionsPage from "../pages/collections/index";
 import dbConnect from "../services/dbConnect";
 import productModel from "../models/Product";
 
-export default function HomePage({ highlightCollection, newItems }) {
+export default function HomePage({
+  highlightCollection,
+  newItems,
+  cheapestItems,
+}) {
   return (
     <Fragment>
       <Head>
@@ -13,6 +17,7 @@ export default function HomePage({ highlightCollection, newItems }) {
       <CollectionsPage
         highlightCollection={highlightCollection}
         newItems={newItems}
+        cheapestItems={cheapestItems}
       ></CollectionsPage>
     </Fragment>
   );
@@ -32,11 +37,18 @@ export async function getServerSideProps(context) {
       })
       .slice(0, 5);
     const newItems = products.reverse().slice(0, 5);
+    const cheapestItems = products
+      .filter((product) => {
+        return product.activate;
+      })
+      .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      .slice(0, 5);
 
     return {
       props: {
         highlightCollection: JSON.parse(JSON.stringify(highlightCollection)),
         newItems: JSON.parse(JSON.stringify(newItems)),
+        cheapestItems: JSON.parse(JSON.stringify(cheapestItems)),
       },
     };
   } catch (error) {
