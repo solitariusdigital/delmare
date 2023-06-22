@@ -157,87 +157,103 @@ a {
       align-items: center;
       justify-content: space-between;
       position: absolute;
-      bottom: 12px;
+      bottom: 0px;
       right: 0px;
       z-index: 1;
       padding: 5px;
       width: 100%;
       @include mixins.transparentBackground(0.8, config.$cream);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
 
-      .title {
+      .title,
+      .value {
         margin: 0px;
         font-weight: bold;
+        text-align: right;
         font-size: config.$tiny-font;
-        text-align: left;
+        width: 50%;
       }
 
-      .social {
+      .value {
+        width: 50%;
+        text-align: left;
+      }
+    }
+
+    .social {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: absolute;
+      top: 12px;
+      z-index: 1;
+      right: 0px;
+      padding: 0px 5px;
+      height: 30px;
+      @include mixins.transparentBackground(0.8, config.$cream);
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+
+      div {
         display: flex;
-        flex-direction: row;
-        align-items: center;
+      }
 
-        div {
-          display: flex;
-        }
+      .icon,
+      .iconRed,
+      .iconPink {
+        font-size: config.$med-font;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+      }
 
-        .icon,
-        .iconRed,
-        .iconPink {
-          font-size: config.$med-font;
-          width: 20px;
-          height: 20px;
-          margin-right: 5px;
-        }
+      .iconRed {
+        color: config.$red;
+        @include mixins.favour();
+      }
 
-        .iconRed {
-          color: config.$red;
-          @include mixins.favour();
-        }
+      .iconPink {
+        color: config.$pink;
+        @include mixins.favour();
+      }
 
-        .iconPink {
-          color: config.$pink;
-          @include mixins.favour();
-        }
-
-        .count {
-          font-size: config.$tiny-font;
-        }
+      .count {
+        font-size: config.$tiny-font;
       }
     }
 
     .new,
+    .sale,
     .activate {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 12px;
-      right: 0px;
       z-index: 1;
+      width: 50px;
+      height: 30px;
       font-size: config.$tiny-font;
+    }
+
+    .new {
+      top: 190px;
+      right: 0px;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       padding: 3px;
-      width: 70px;
+      color: config.$black;
+      @include mixins.gradientBackground();
     }
 
     .sale {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      position: absolute;
       top: 12px;
-      right: 0px;
-      z-index: 1;
+      left: 0px;
       font-weight: bold;
-      font-size: config.$tiny-font;
       color: config.$red;
-      border-top-left-radius: 50px;
-      border-bottom-left-radius: 50px;
-      border-top-left-radius: 50px;
-      border-bottom-left-radius: 50px;
-      width: 50px;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
       padding: 3px;
       @include mixins.transparentBackground(0.8, config.$cream);
 
@@ -247,24 +263,14 @@ a {
       }
     }
 
-    .activate,
-    .blogger {
-      left: 0px;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-top-right-radius: 50px;
-      border-bottom-right-radius: 50px;
-      width: 50px;
+    .activate {
+      top: 190px;
+      right: 0px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      padding: 3px;
       color: config.$white;
       @include mixins.transparentBackground(0.8, config.$orange);
-    }
-
-    .new {
-      position: absolute;
-      top: 180px;
-      color: config.$black;
-      width: 50px;
-      @include mixins.gradientBackground();
     }
   }
 }

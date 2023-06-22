@@ -36,7 +36,12 @@ export async function getServerSideProps(context) {
         return b.views - a.views;
       })
       .slice(0, 5);
-    const newItems = products.reverse().slice(0, 5);
+    const newItems = products
+      .filter((product) => {
+        return product.activate;
+      })
+      .reverse()
+      .slice(0, 5);
     const cheapestItems = products
       .filter((product) => {
         return product.activate && product.display;

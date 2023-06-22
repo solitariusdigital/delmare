@@ -386,7 +386,9 @@ export default function Product({ product, favourite }) {
   };
 
   const productArchive = async (type) => {
-    const confirmationMessage = "وارد آرکایو میشه و پنهان، مطمئنی؟";
+    const confirmationMessage = `${
+      type === "hide" ? "پنهان" : "نمایش"
+    } مطمئنی؟`;
     const confirm = window.confirm(confirmationMessage);
     if (confirm) {
       const updatedProduct = await getProductApi(product["_id"]);
@@ -1074,43 +1076,42 @@ export default function Product({ product, favourite }) {
             <div className={`collection-grid ${classes.grid}`}>
               {similarProducts.map((product, index) => (
                 <div key={index} className="product">
-                  <div className="banner">
-                    <p className="title">{product.title}</p>
-                    <div className="social">
-                      {currentUser && currentUser.permission === "blogger" ? (
-                        <div>
-                          {checFavourites(product) ? (
-                            <StarIcon
-                              className="iconPink"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <StarBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      ) : (
-                        <div>
-                          {checFavourites(product) ? (
-                            <FavoriteIcon
-                              className="iconRed"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <FavoriteBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      )}
-                      <div className="social">
-                        <VisibilityIcon className="icon" />
-                        <p>{abbreviateNumber(Math.round(product.views))}</p>
+                  <div className="social">
+                    {currentUser && currentUser.permission === "blogger" ? (
+                      <div>
+                        {checFavourites(product) ? (
+                          <StarIcon
+                            className="iconPink"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <StarBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
                       </div>
-                    </div>
+                    ) : (
+                      <div>
+                        {checFavourites(product) ? (
+                          <FavoriteIcon
+                            className="iconRed"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
+                      </div>
+                    )}
+                    <VisibilityIcon className="icon" />
+                    <p>{abbreviateNumber(Math.round(product.views))}</p>
+                  </div>
+                  <div className="banner">
+                    <p className="value">{convertNumber(product.price)} T</p>
+                    <p className="title">{product.title}</p>
                   </div>
                   <Image
                     onClick={() => selectProduct(product["_id"])}

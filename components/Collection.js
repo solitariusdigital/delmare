@@ -14,7 +14,7 @@ import secureLocalStorage from "react-secure-storage";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ShareIcon from "@mui/icons-material/Share";
-import { abbreviateNumber } from "../services/utility";
+import { convertNumber, abbreviateNumber } from "../services/utility";
 
 export default function Collection({
   galleryData,
@@ -284,45 +284,44 @@ export default function Collection({
             <Fragment key={index}>
               {product.display && (
                 <div className="product">
-                  <div className="banner">
-                    <p className="title">{product.title}</p>
-                    <div className="social">
-                      {currentUser && currentUser.permission === "blogger" ? (
-                        <div>
-                          {checFavourites(product) ? (
-                            <StarIcon
-                              className="iconPink"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <StarBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      ) : (
-                        <div>
-                          {checFavourites(product) ? (
-                            <FavoriteIcon
-                              className="iconRed"
-                              onClick={() => favourProduct(product)}
-                            />
-                          ) : (
-                            <FavoriteBorderIcon
-                              className="icon"
-                              onClick={() => favourProduct(product)}
-                            />
-                          )}
-                        </div>
-                      )}
-                      <div className="social">
-                        <VisibilityIcon className="icon" />
-                        <p className="count">
-                          {abbreviateNumber(Math.round(product.views))}
-                        </p>
+                  <div className="social">
+                    {currentUser && currentUser.permission === "blogger" ? (
+                      <div>
+                        {checFavourites(product) ? (
+                          <StarIcon
+                            className="iconPink"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <StarBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
                       </div>
-                    </div>
+                    ) : (
+                      <div>
+                        {checFavourites(product) ? (
+                          <FavoriteIcon
+                            className="iconRed"
+                            onClick={() => favourProduct(product)}
+                          />
+                        ) : (
+                          <FavoriteBorderIcon
+                            className="icon"
+                            onClick={() => favourProduct(product)}
+                          />
+                        )}
+                      </div>
+                    )}
+                    <VisibilityIcon className="icon" />
+                    <p className="count">
+                      {abbreviateNumber(Math.round(product.views))}
+                    </p>
+                  </div>
+                  <div className="banner">
+                    <p className="value">{convertNumber(product.price)} T</p>
+                    <p className="title">{product.title}</p>
                   </div>
                   <Image
                     onClick={() => selectProduct(product)}
@@ -346,7 +345,7 @@ export default function Collection({
                       <p>تمام</p>
                     </div>
                   )}
-                  {checkDate(product.createdAt) && (
+                  {checkDate(product.createdAt) && product.activate && (
                     <div className="new">
                       <p>جدید</p>
                     </div>
