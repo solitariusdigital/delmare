@@ -60,16 +60,17 @@ a {
 }
 
 .collections-type {
-  padding: 0px 12px;
+  display: flex;
+  flex-direction: column;
 
   .card {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 100%;
+    width: calc(100% - 24px);
+    margin: 6px 12px;
     height: 60vh;
-    margin: 6px 0px;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
     @include mixins.gradientBorder();
@@ -110,10 +111,9 @@ a {
   align-items: center;
   width: 50%;
   height: 40px;
-  margin: auto;
   border-radius: 50px;
   font-weight: bold;
-  margin-top: 8px;
+  margin: 8px auto;
   box-shadow: config.$image-shadow;
   @include mixins.gradientBackground();
 }
