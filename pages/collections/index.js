@@ -54,14 +54,14 @@ export default function CollectionsPage({
       imageSrc: `${sourceLink}shoes.jpg`,
     },
     {
-      title: "برندز",
-      link: "/collections/brands",
-      imageSrc: `${sourceLink}ten.jpg`,
-    },
-    {
       title: "بلاگرز",
       link: "/collections/bloggers",
       imageSrc: `${sourceLink}four.jpg`,
+    },
+    {
+      title: "برندز",
+      link: "/collections/brands",
+      imageSrc: `${sourceLink}ten.jpg`,
     },
   ];
 
