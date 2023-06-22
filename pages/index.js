@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
     const newItems = products.reverse().slice(0, 5);
     const cheapestItems = products
       .filter((product) => {
-        return product.activate;
+        return product.activate && product.display;
       })
       .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
       .slice(0, 5);
