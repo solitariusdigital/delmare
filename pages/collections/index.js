@@ -123,7 +123,7 @@ export default function CollectionsPage({
             </div>
             {index === 2 && (
               <div className="highlight">
-                <h4>ارزان ترین</h4>
+                <h4>ارزانترین</h4>
                 <Highlight products={cheapestItems} />
               </div>
             )}
