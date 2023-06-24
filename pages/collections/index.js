@@ -123,16 +123,16 @@ export default function CollectionsPage({
             </div>
             {index === 2 && (
               <div className="highlight">
-                <h4>ارزانترین</h4>
-                <Highlight products={cheapestItems} />
+                <h4>بیشترین بازدید</h4>
+                <Highlight products={highlightCollection} />
               </div>
             )}
           </Fragment>
         ))}
       </div>
       <div className="highlight">
-        <h4>بیشترین بازدید</h4>
-        <Highlight products={highlightCollection} />
+        <h4>ارزانترین</h4>
+        <Highlight products={cheapestItems} />
       </div>
       <div className="message" onClick={() => Router.push("/collections")}>
         <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
