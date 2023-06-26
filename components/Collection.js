@@ -320,7 +320,12 @@ export default function Collection({
                     </p>
                   </div>
                   <div className="banner">
-                    <p className="value">{convertNumber(product.price)} T</p>
+                    <p className="value">
+                      {product.sale
+                        ? convertNumber(product.discount)
+                        : convertNumber(product.price)}{" "}
+                      T
+                    </p>
                     <p className="title">{product.title}</p>
                   </div>
                   <Image
