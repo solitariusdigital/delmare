@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
     const products = await productModel.find();
     const highlightCollection = products
       .filter((product) => {
-        return product.activate && product.season === "بهار";
+        return product.activate;
       })
       .sort((a, b) => {
         return b.views - a.views;
@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
       .slice(0, 5);
     const newItems = products
       .filter((product) => {
-        return product.activate;
+        return product.activate && !product.sale;
       })
       .reverse()
       .slice(0, 5);
