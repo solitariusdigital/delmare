@@ -824,14 +824,14 @@ export default function Product({ product, favourite }) {
                   <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                   <p className={classes.description}>
                     ارسال رایگان سفارش به تمام کشور در صورتی که جمع کل مبلغ
-                    پرداختی در سبد خرید مشتری برابر با 1,000,000 تومان یا بیشتر
+                    پرداختی در سبد خرید مشتری برابر با 2,000,000 تومان یا بیشتر
                     باشد
                   </p>
                 </div>
                 <div className={classes.row}>
                   <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                   <p className={classes.description}>
-                    ارسال سفارش از طریق تیپاکس برای خریدهای کمتر از 1,000,000
+                    ارسال سفارش از طریق تیپاکس برای خریدهای کمتر از 2,000,000
                     تومان به عهده مشتری خواهد بود و در درب منزل قابل پرداخت
                     خواهد بود
                   </p>
@@ -840,7 +840,7 @@ export default function Product({ product, favourite }) {
                   <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                   <p className={classes.description}>
                     ارسال سفارش از طریق پیک در تهران برای خریدهای کمتر از
-                    1,000,000 تومان به عهده مشتری خواهد بود و در درب منزل قابل
+                    2,000,000 تومان به عهده مشتری خواهد بود و در درب منزل قابل
                     پرداخت خواهد بود
                   </p>
                 </div>
