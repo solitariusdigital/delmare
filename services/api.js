@@ -68,6 +68,36 @@ export const updateProductApi = async (data) => {
   return await response.json();
 };
 
+// cares api
+export const getCareApi = async (id) => {
+  const response = await fetch(`/api/care?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getCarestApi = async () => {
+  const response = await fetch("/api/cares", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const updateCareApi = async (data) => {
+  const response = await fetch("/api/care", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // invoices api
 export const createInvoiceApi = async (data) => {
   const response = await fetch("/api/invoice", {
