@@ -80,7 +80,7 @@ export default function Upload() {
   const [size44, setSize44] = useState("");
   const [size45, setSize45] = useState("");
 
-  const [productCategory, setProductCategory] = useState("Clothes" || "Care");
+  const [productCategory, setProductCategory] = useState("clothes" || "care");
   const [categorySize, setCategorySize] = useState(
     "clothesSize" || "shoesSize"
   );
@@ -573,7 +573,7 @@ export default function Upload() {
 
   const checkUpload = async (upload) => {
     if (upload.ok) {
-      if (productCategory === "Clothes") {
+      if (productCategory === "clothes") {
         // save product ID to its brand collection
         const product = await upload.json();
         selectedBrand.products.push(product["_id"]);
@@ -670,16 +670,16 @@ export default function Upload() {
             <button
               className="mainButton"
               onClick={() => {
-                setProductCategory("Clothes");
+                setProductCategory("clothes");
               }}
             >
               Clothes
             </button>
-            <h4>{productCategory === "Clothes" ? "Clothes" : "Care"}</h4>
+            <h4>{productCategory === "clothes" ? "Clothes" : "Care"}</h4>
             <button
               className="mainButton"
               onClick={() => {
-                setProductCategory("Care");
+                setProductCategory("care");
               }}
             >
               Care
@@ -706,7 +706,7 @@ export default function Upload() {
                 maxLength="20"
               />
             </div>
-            {productCategory === "Clothes" ? (
+            {productCategory === "clothes" ? (
               <Fragment>
                 <div className={classes.input}>
                   <select
@@ -871,7 +871,7 @@ export default function Upload() {
                 })}
               </select>
             </div>
-            {productCategory === "Clothes" && (
+            {productCategory === "clothes" && (
               <Fragment>
                 <div className={classes.input}>
                   <select
@@ -994,7 +994,7 @@ export default function Upload() {
                 </div>
               </Fragment>
             )}
-            {productCategory === "Clothes" && (
+            {productCategory === "clothes" && (
               <Fragment>
                 <h3>سایز رنگ تعداد</h3>
                 <div className={classes.typeToggle}>
@@ -1159,7 +1159,7 @@ export default function Upload() {
                 />
               )}
             </div>
-            {productCategory === "Clothes" && (
+            {productCategory === "clothes" && (
               <Fragment>
                 <div className="input">
                   <div>
@@ -1234,7 +1234,7 @@ export default function Upload() {
             <button
               className="mainButton"
               onClick={() =>
-                productCategory === "Clothes"
+                productCategory === "clothes"
                   ? handleClothesUpload()
                   : handleCareUpload()
               }

@@ -26,10 +26,10 @@ export default function CollectionPage({
         <meta name="description" content="Fashion clothing" />
       </Head>
       {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
-        <Collection collectionType={collection} galleryData={products} />
+        <Collection collectionType={collection} collectionData={products} />
       )}
       {collection === "care" && (
-        <Collection collectionType={collection} galleryData={careProducts} />
+        <Collection collectionType={collection} collectionData={careProducts} />
       )}
       {collection === "brands" && <Brands brandsData={brands} />}
       {collection === "bloggers" && <Bloggers bloggersData={bloggers} />}

@@ -1,6 +1,8 @@
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 import Head from "next/head";
-import CollectionsPage from "../pages/collections/index";
+import ClothesPage from "./collections/ClothesPage";
+import CarePage from "./collections/CarePage";
+
 import dbConnect from "../services/dbConnect";
 import productModel from "../models/Product";
 
@@ -9,16 +11,45 @@ export default function HomePage({
   newItems,
   cheapestItems,
 }) {
+  const [productCategory, setProductCategory] = useState("clothes" || "care");
+
   return (
     <Fragment>
       <Head>
         <title>Delmareh</title>
       </Head>
-      <CollectionsPage
-        highlightCollection={highlightCollection}
-        newItems={newItems}
-        cheapestItems={cheapestItems}
-      ></CollectionsPage>
+      <div>
+        <button
+          className="mainButton"
+          onClick={() => {
+            setProductCategory("clothes");
+          }}
+        >
+          Clothes
+        </button>
+        <button
+          className="mainButton"
+          onClick={() => {
+            setProductCategory("care");
+          }}
+        >
+          Care
+        </button>
+      </div>
+      {productCategory === "clothes" && (
+        <ClothesPage
+          highlightCollection={highlightCollection}
+          newItems={newItems}
+          cheapestItems={cheapestItems}
+        ></ClothesPage>
+      )}
+      {productCategory === "care" && (
+        <CarePage
+          highlightCollection={highlightCollection}
+          newItems={newItems}
+          cheapestItems={cheapestItems}
+        ></CarePage>
+      )}
     </Fragment>
   );
 }

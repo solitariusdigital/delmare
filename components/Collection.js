@@ -17,7 +17,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { convertNumber, abbreviateNumber } from "../services/utility";
 
 export default function Collection({
-  galleryData,
+  collectionData,
   collectionType,
   brandGallery,
   brand,
@@ -57,7 +57,7 @@ export default function Collection({
       setGallery(brandGallery);
       setSearchControl(false);
     } else {
-      setGallery(galleryData);
+      setGallery(collectionData);
       setSearchControl(true);
       if (collectionType === "shoes") {
         setSearchControl(false);
@@ -84,7 +84,7 @@ export default function Collection({
     accessoriesCategories,
     brandGallery,
     collectionType,
-    galleryData,
+    collectionData,
     generalCategories,
     setBar,
     setGallery,
@@ -143,21 +143,21 @@ export default function Collection({
     switch (collectionType) {
       case "gallery":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type;
           })
         );
@@ -173,21 +173,21 @@ export default function Collection({
     switch (collectionType) {
       case "gallery":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type;
           })
         );
