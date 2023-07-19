@@ -5,7 +5,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Highlight from "../../components/Highlight";
 
-export default function CarePage({
+export default function Caring({
   highlightCollection,
   newItems,
   cheapestItems,

@@ -4,8 +4,10 @@ import Router from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import Highlight from "../../components/Highlight";
+import dbConnect from "../../services/dbConnect";
+import ProductModel from "../../models/Product";
 
-export default function ClothesPage({
+export default function Clothing({
   highlightCollection,
   newItems,
   cheapestItems,
@@ -140,4 +142,44 @@ export default function ClothesPage({
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const products = await ProductModel.find();
+    const highlightCollection = products
+      .filter((product) => {
+        return product.activate;
+      })
+      .sort((a, b) => {
+        return b.views - a.views;
+      })
+      .slice(0, 5);
+    const newItems = products
+      .filter((product) => {
+        return product.activate && !product.sale;
+      })
+      .reverse()
+      .slice(0, 5);
+    const cheapestItems = products
+      .filter((product) => {
+        return product.activate && product.display;
+      })
+      .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      .slice(0, 5);
+
+    return {
+      props: {
+        highlightCollection: JSON.parse(JSON.stringify(highlightCollection)),
+        newItems: JSON.parse(JSON.stringify(newItems)),
+        cheapestItems: JSON.parse(JSON.stringify(cheapestItems)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
