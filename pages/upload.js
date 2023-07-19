@@ -465,6 +465,7 @@ export default function Upload() {
         activate: true,
         display: true,
         views: Math.floor(Math.random() * 10) + 1,
+        group: "clothing",
       }),
       headers: {
         "Content-Type": "application/json",
