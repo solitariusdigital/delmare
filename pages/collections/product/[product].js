@@ -16,6 +16,7 @@ import {
   getProductApi,
   getProducstApi,
   updateProductApi,
+  updateCareApi,
 } from "../../../services/api";
 import payment from "../../../assets/payment.png";
 import quality from "../../../assets/quality.png";
@@ -23,6 +24,7 @@ import post from "../../../assets/post.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import dbConnect from "../../../services/dbConnect";
 import ProductModel from "../../../models/Product";
+import CareModel from "../../../models/Care";
 import Router from "next/router";
 import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
@@ -133,20 +135,24 @@ export default function Product({ product, favourite }) {
   useEffect(() => {
     setBar(false);
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-    Object.keys(productSizes).forEach((size) => {
-      productSizes[size]["type"] = size;
-      productSizes[size]["selected"] = false;
-    });
-  }, [setBar, shoppingCart, productSizes]);
+    if (product.group === "clothing") {
+      Object.keys(productSizes).forEach((size) => {
+        productSizes[size]["type"] = size;
+        productSizes[size]["selected"] = false;
+      });
+    }
+  }, [setBar, shoppingCart, productSizes, product.group]);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (
-        !currentUser ||
-        secureLocalStorage.getItem("currentUser").permission !== "admin"
-      ) {
-        const updatedProduct = { ...product, views: product.views + 1.5 };
-        await updateProductApi(updatedProduct);
+      const updatedProduct = { ...product, views: product.views + 1.5 };
+      switch (product.group) {
+        case "clothing":
+          await updateProductApi(updatedProduct);
+          break;
+        case "care":
+          await updateCareApi(updatedProduct);
+          break;
       }
     };
     fetchData().catch(console.error);
@@ -212,12 +218,14 @@ export default function Product({ product, favourite }) {
   };
 
   const clearDetails = () => {
-    colors.map((color) => {
-      color.selected = false;
-    });
-    Object.keys(productSizes).forEach((size) => {
-      productSizes[size].selected = false;
-    });
+    if (product.group === "clothing") {
+      colors.map((color) => {
+        color.selected = false;
+      });
+      Object.keys(productSizes).forEach((size) => {
+        productSizes[size].selected = false;
+      });
+    }
   };
 
   const selectDetails = (detail, type, i, count) => {
@@ -590,7 +598,7 @@ export default function Product({ product, favourite }) {
             <p className={classes.title}>{product.title}</p>
           </div>
           <p className={classes.description}>{product.description}</p>
-          {active && (
+          {active && product.group === "clothing" && (
             <Fragment>
               <div className={classes.section}>
                 <p className={classes.title}>انتخاب اندازه</p>
@@ -630,6 +638,18 @@ export default function Product({ product, favourite }) {
                     ></div>
                   ))}
                 </div>
+              </div>
+            </Fragment>
+          )}
+          {product.group === "care" && (
+            <Fragment>
+              <div className={classes.rowDetails}>
+                <p>اندازه</p>
+                <p className={classes.title}>{product.size} mm</p>
+              </div>
+              <div className={classes.rowDetails}>
+                <p>موجودی</p>
+                <p className={classes.title}>{product.count}</p>
               </div>
             </Fragment>
           )}
@@ -718,94 +738,118 @@ export default function Product({ product, favourite }) {
             </div>
           ))}
 
-        <div className={classes.designContainer}>
-          <div className={classes.rowDetails}>
-            <p>برند</p>
-            <p className={classes.title}>
-              {product.brandType === "اورجینال" ? "خارجی" : product.brand}
-            </p>
+        {product.group === "clothing" && (
+          <div className={classes.designContainer}>
+            <div className={classes.rowDetails}>
+              <p>برند</p>
+              <p className={classes.title}>
+                {product.brandType === "اورجینال" ? "خارجی" : product.brand}
+              </p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>نوع</p>
+              <p className={classes.title}>{product.brandType}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>دسته</p>
+              <p className={classes.title}>{product.category}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>فصل</p>
+              <p className={classes.title}>{product.season}</p>
+            </div>
           </div>
-          <div className={classes.rowDetails}>
-            <p>نوع</p>
-            <p className={classes.title}>{product.brandType}</p>
+        )}
+        {product.group === "care" && (
+          <div className={classes.designContainer}>
+            <div className={classes.rowDetails}>
+              <p>برند</p>
+              <p className={classes.title}>{product.brand}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>نوع</p>
+              <p className={classes.title}>{product.brandType}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>دسته</p>
+              <p className={classes.title}>{product.category}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>گروه</p>
+              <p className={classes.title}>{product.type}</p>
+            </div>
           </div>
-          <div className={classes.rowDetails}>
-            <p>دسته</p>
-            <p className={classes.title}>{product.category}</p>
-          </div>
-          <div className={classes.rowDetails}>
-            <p>فصل</p>
-            <p className={classes.title}>{product.season}</p>
-          </div>
-        </div>
+        )}
 
         <div className={classes.information}>
-          <div className={classes.section}>
-            <div
-              className={classes.item}
-              onClick={() => {
-                setSizeGuide(!sizeGuide);
-                setShipmentMethod(false);
-                setReturnPolicy(false);
-              }}
-            >
-              <p>راهنمای اندازه</p>
-              {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </div>
-            {sizeGuide && (
-              <div className={classes.information}>
-                <div className={classes.row}>
-                  <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                  <div>
-                    <p className={classes.description}>
-                      تک سایز - FS : Free Size
-                    </p>
-                    <p className={classes.description}>
-                      اسکارف، اکسسوری، ساعت، عینک، کلاه و کیف، تک سایز هستند
-                    </p>
-                  </div>
-                </div>
-                {product.images.table !== "" && (
-                  <Fragment>
-                    <div className={classes.row}>
-                      <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+          {product.group === "clothing" && (
+            <div className={classes.section}>
+              <div
+                className={classes.item}
+                onClick={() => {
+                  setSizeGuide(!sizeGuide);
+                  setShipmentMethod(false);
+                  setReturnPolicy(false);
+                }}
+              >
+                <p>راهنمای اندازه</p>
+                {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </div>
+              {sizeGuide && (
+                <div className={classes.information}>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <div>
                       <p className={classes.description}>
-                        اندازه در جدول به سانتی متر است
+                        تک سایز - FS : Free Size
+                      </p>
+                      <p className={classes.description}>
+                        اسکارف، اکسسوری، ساعت، عینک، کلاه و کیف، تک سایز هستند
                       </p>
                     </div>
-                    <div className={classes.table}>
-                      <Image
-                        src={product.images.table}
-                        blurDataURL={product.images.table}
-                        placeholder="blur"
-                        alt="image"
-                        layout="fill"
-                        objectFit="contain"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                  </Fragment>
-                )}
-                {product.images.graph !== "" && (
-                  <Fragment>
-                    <div className={classes.table}>
-                      <Image
-                        src={product.images.graph}
-                        blurDataURL={product.images.graph}
-                        placeholder="blur"
-                        alt="image"
-                        layout="fill"
-                        objectFit="contain"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                  </Fragment>
-                )}
-              </div>
-            )}
-          </div>
+                  </div>
+                  {product.images.table !== "" && (
+                    <Fragment>
+                      <div className={classes.row}>
+                        <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                        <p className={classes.description}>
+                          اندازه در جدول به سانتی متر است
+                        </p>
+                      </div>
+                      <div className={classes.table}>
+                        <Image
+                          src={product.images.table}
+                          blurDataURL={product.images.table}
+                          placeholder="blur"
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority
+                          loading="eager"
+                        />
+                      </div>
+                    </Fragment>
+                  )}
+                  {product.images.graph !== "" && (
+                    <Fragment>
+                      <div className={classes.table}>
+                        <Image
+                          src={product.images.graph}
+                          blurDataURL={product.images.graph}
+                          placeholder="blur"
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority
+                          loading="eager"
+                        />
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
           <div className={classes.section}>
             <div
               className={classes.item}
@@ -983,8 +1027,8 @@ export default function Product({ product, favourite }) {
                     درصورت عدم آگاهی، اطلاع و ناتوانی مشتری در استفاده از
                     محصولات آرایشی و بهداشتی و یا ایجاد خسارت نسبت به خود یا
                     محصول، تمامی مسئولیت‌‌های آن بر عهده مشتری است و فروشگاه
-                    دلماره در این خصوص هیچگونه تعهدی نخواهد داشت. - در صورت
-                    تایید معیوب بودن کالای مرجوعی توسط شرکت تامین یا تولیدکننده،
+                    دلماره در این خصوص هیچگونه تعهدی نخواهد داشت. در صورت تایید
+                    معیوب بودن کالای مرجوعی توسط شرکت تامین یا تولیدکننده،
                     دلماره صرفاً هزینه کالا یا سرویس را مطابق فاکتور (حداکثر تا
                     یک هفته از تاریخ فاکتور) به مشتری برمی‌گرداند
                   </p>
@@ -1167,7 +1211,9 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     let productId = context.params.product;
-    const product = await ProductModel.findById(productId);
+    const product =
+      (await ProductModel.findById(productId)) ||
+      (await CareModel.findById(productId));
 
     return {
       props: {

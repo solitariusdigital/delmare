@@ -387,7 +387,6 @@ export default function Upload() {
       title,
       description,
       price,
-      delmareId,
       brand,
       category,
       careType,
@@ -430,7 +429,7 @@ export default function Upload() {
       await uploadImages(imageThree, imageId, delmareIdFolder);
     }
 
-    const upload = await fetch(`/api/product`, {
+    const upload = await fetch(`/api/care`, {
       method: "POST",
       body: JSON.stringify({
         delmareId: delmareIdFolder,
@@ -451,6 +450,7 @@ export default function Upload() {
         activate: true,
         display: true,
         views: Math.floor(Math.random() * 10) + 1,
+        group: "care",
       }),
       headers: {
         "Content-Type": "application/json",
@@ -561,6 +561,7 @@ export default function Upload() {
         activate: true,
         display: true,
         views: Math.floor(Math.random() * 10) + 1,
+        group: "clothing",
       }),
       headers: {
         "Content-Type": "application/json",

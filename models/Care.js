@@ -37,6 +37,7 @@ const CareSchema = new Schema(
     activate: Boolean,
     display: Boolean,
     views: Number,
+    group: String,
   },
   { timestamps: true }
 );

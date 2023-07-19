@@ -414,7 +414,8 @@
 .rowDetails {
   display: flex;
   flex-direction: row-reverse;
-  margin: 5px 0px;
+  align-items: center;
+  margin: 4px 0px;
 
   .title {
     font-size: config.$med-font;

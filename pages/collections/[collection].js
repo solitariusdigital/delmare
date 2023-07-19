@@ -8,8 +8,14 @@ import dbConnect from "../../services/dbConnect";
 import Product from "../../models/Product";
 import Brand from "../../models/Brand";
 import Blogger from "../../models/Blogger";
+import Care from "../../models/Care";
 
-export default function CollectionPage({ products, brands, bloggers }) {
+export default function CollectionPage({
+  products,
+  careProducts,
+  brands,
+  bloggers,
+}) {
   const router = useRouter();
   let collection = router.query.collection;
 
@@ -21,6 +27,9 @@ export default function CollectionPage({ products, brands, bloggers }) {
       </Head>
       {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
         <Collection collectionType={collection} galleryData={products} />
+      )}
+      {collection === "care" && (
+        <Collection collectionType={collection} galleryData={careProducts} />
       )}
       {collection === "brands" && <Brands brandsData={brands} />}
       {collection === "bloggers" && <Bloggers bloggersData={bloggers} />}
@@ -36,8 +45,11 @@ export async function getServerSideProps(context) {
     let products = null;
     let brands = null;
     let bloggers = null;
+    let careProducts = null;
 
     const { collection } = context.params;
+
+    // await Product.updateMany({}, { $set: { group: "clothing" } });
 
     switch (collection) {
       case "gallery":
@@ -63,6 +75,9 @@ export async function getServerSideProps(context) {
       case "bloggers":
         bloggers = await Blogger.find();
         break;
+      case "care":
+        careProducts = await Care.find();
+        break;
     }
 
     return {
@@ -70,6 +85,7 @@ export async function getServerSideProps(context) {
         products: JSON.parse(JSON.stringify(products)),
         brands: JSON.parse(JSON.stringify(brands)),
         bloggers: JSON.parse(JSON.stringify(bloggers)),
+        careProducts: JSON.parse(JSON.stringify(careProducts)),
       },
     };
   } catch (error) {

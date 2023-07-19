@@ -75,6 +75,11 @@ export default function Collection({
     }
     setMessage(false);
     setBar(true);
+    if (collectionType === "care") {
+      setSearchControl(false);
+      setSearch(false);
+      setBar(false);
+    }
   }, [
     accessoriesCategories,
     brandGallery,
