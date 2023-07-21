@@ -63,14 +63,15 @@ a {
   display: flex;
   flex-direction: column;
 
-  .card {
+  .cardClothing,
+  .cardCare {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     width: calc(100% - 24px);
     margin: 6px 12px;
-    height: 60vh;
+    height: 50vh;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
     @include mixins.gradientBorder();
@@ -86,7 +87,8 @@ a {
       border-radius: 10px;
     }
 
-    .ctaCollection {
+    .ctaClothing,
+    .ctaCare {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -104,6 +106,15 @@ a {
       box-shadow: config.$image-shadow;
       @include mixins.gradientBackground();
     }
+
+    .ctaCare {
+      background: linear-gradient(to left, config.$brand, config.$magneta);
+    }
+  }
+
+  .cardCare {
+    background: linear-gradient(config.$white, config.$white) padding-box,
+      linear-gradient(45deg, config.$magneta, config.$brand) border-box;
   }
 }
 
@@ -117,7 +128,11 @@ a {
   font-weight: bold;
   margin: 8px auto;
   box-shadow: config.$image-shadow;
-  @include mixins.gradientBackground();
+  background: config.$brand;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .message {

@@ -51,10 +51,10 @@ export default function Care() {
         {collections.map((collection, index) => (
           <Fragment key={index}>
             <div
-              className="card"
+              className="cardCare"
               onClick={() => activateNav(collection.link, index)}
             >
-              <div className="ctaCollection">
+              <div className="ctaCare">
                 <p>{collection.title}</p>
               </div>
               <Image
@@ -71,6 +71,10 @@ export default function Care() {
             </div>
           </Fragment>
         ))}
+      </div>
+      <div className="message">
+        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+        <p>با دلماره متفاوت دیده شوید</p>
       </div>
     </Fragment>
   );

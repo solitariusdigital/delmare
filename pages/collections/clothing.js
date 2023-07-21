@@ -82,10 +82,10 @@ export default function Clothing({
         {collections.map((collection, index) => (
           <Fragment key={index}>
             <div
-              className="card"
+              className="cardClothing"
               onClick={() => activateNav(collection.link, index)}
             >
-              <div className="ctaCollection">
+              <div className="ctaClothing">
                 <p>{collection.title}</p>
               </div>
               <Image
@@ -113,7 +113,7 @@ export default function Clothing({
         <h4>ارزانترین</h4>
         <Highlight products={cheapestItems} />
       </div>
-      <div className="message" onClick={() => Router.push("/collections")}>
+      <div className="message">
         <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
         <p>با دلماره متفاوت دیده شوید</p>
       </div>

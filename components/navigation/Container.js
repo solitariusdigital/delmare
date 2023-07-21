@@ -24,12 +24,24 @@ function Container() {
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+  const { collectionsToggle, setCollectionsToggle } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
+
+  const collections = [
+    {
+      title: "لباس فشن",
+      link: "/collections/clothing",
+    },
+    {
+      title: "لوازم بهداشتی",
+      link: "/collections/care",
+    },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,6 +125,21 @@ function Container() {
         {bar && (
           <div className={classes.navigation}>
             {navigation
+              .map((nav, index) => (
+                <div
+                  key={index}
+                  className={!nav.active ? classes.nav : classes.navActive}
+                  onClick={() => activateNav(nav.link, index)}
+                >
+                  <p>{nav.title}</p>
+                </div>
+              ))
+              .reverse()}
+          </div>
+        )}
+        {collectionsToggle && (
+          <div className={classes.navigation}>
+            {collections
               .map((nav, index) => (
                 <div
                   key={index}
