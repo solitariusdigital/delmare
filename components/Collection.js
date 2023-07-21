@@ -75,16 +75,17 @@ export default function Collection({
     }
     setMessage(false);
     setBar(true);
-    if (collectionType === "care") {
+
+    if (collectionType === "hair" || collectionType === "skin") {
       setSearchControl(false);
       setSearch(false);
       setBar(false);
     }
   }, [
-    accessoriesCategories,
     brandGallery,
     collectionType,
     collectionData,
+    accessoriesCategories,
     generalCategories,
     setBar,
     setGallery,

@@ -107,6 +107,7 @@ export default function Upload() {
   // care products
   const [careType, setCareType] = useState("");
   const [careSize, setCareSize] = useState("");
+  const [careCountry, setCareCountry] = useState("");
   const [careCount, setCareCount] = useState("");
   const careCategories = ["مراقبت مو", "مراقبت پوست"];
   const careTypes = ["dark", "grey", "light"];
@@ -391,6 +392,7 @@ export default function Upload() {
       category,
       careType,
       careSize,
+      careCountry,
       careCount,
       brandType,
       deliveryType,
@@ -441,6 +443,7 @@ export default function Upload() {
         type: careType,
         count: parseInt(careCount),
         brand: brand,
+        country: careCountry.trim(),
         brandType: brandType,
         deliveryType: deliveryType,
         price: price.trim(),
@@ -796,6 +799,25 @@ export default function Upload() {
                       );
                     })}
                   </select>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setCareCountry("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <p className={classes.label}>کشور</p>
+                  </div>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    onChange={(e) => setCareCountry(e.target.value)}
+                    value={careSize}
+                    autoComplete="off"
+                    dir="rtl"
+                  />
                 </div>
                 <div className={classes.input}>
                   <div className={classes.bar}>

@@ -28,6 +28,7 @@ const CareSchema = new Schema(
     category: String,
     type: String,
     brand: String,
+    country: String,
     brandType: String,
     deliveryType: String,
     price: Number,

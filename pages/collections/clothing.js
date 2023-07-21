@@ -15,24 +15,13 @@ export default function Clothing({
   const { navigation, setNavigation } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
-  const { userLogIn, setUserLogin } = useContext(StateContext);
-  const { toggleContainer, setToggleContainer } = useContext(StateContext);
-  const { menu, setMenu } = useContext(StateContext);
-  const { register, setRegister } = useContext(StateContext);
 
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
-    document.body.style.background = "#f9f7f2";
     setBar(false);
     setContainer(true);
   }, [setBar, setContainer]);
-
-  useEffect(() => {
-    if (!window.matchMedia("(display-mode: standalone)").matches) {
-      setToggleContainer("screen");
-    }
-  }, [setToggleContainer]);
 
   const collections = [
     {
@@ -80,27 +69,16 @@ export default function Clothing({
     setNavigation([...navigation]);
   };
 
-  const loginAction = () => {
-    setToggleContainer("");
-    setMenu(true);
-    setRegister(true);
-  };
-
   return (
     <Fragment>
       <Head>
-        <title>Collections</title>
-        <meta name="description" content="Select from Delmareh's collections" />
+        <title>Clothing Products</title>
+        <meta name="description" content="Delmareh's clothing products" />
       </Head>
       <div className="highlight">
         <h4>جدید</h4>
         <Highlight products={newItems} />
       </div>
-      {!userLogIn && (
-        <div onClick={() => loginAction()} className="ctaButton">
-          <p>ورود / ​ثبت نام</p>
-        </div>
-      )}
       <div className="collections-type">
         {collections.map((collection, index) => (
           <Fragment key={index}>

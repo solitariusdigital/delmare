@@ -28,7 +28,7 @@ export default function CollectionPage({
       {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
         <Collection collectionType={collection} collectionData={products} />
       )}
-      {collection === "care" && (
+      {["hair", "skin"].includes(collection) && (
         <Collection collectionType={collection} collectionData={careProducts} />
       )}
       {collection === "brands" && <Brands brandsData={brands} />}
@@ -75,8 +75,15 @@ export async function getServerSideProps(context) {
       case "bloggers":
         bloggers = await Blogger.find();
         break;
-      case "care":
-        careProducts = await Care.find();
+      case "skin":
+        careProducts = await Care.find({
+          category: { $in: ["مراقبت پوست"] },
+        });
+        break;
+      case "hair":
+        careProducts = await Care.find({
+          category: { $in: ["مراقبت مو"] },
+        });
         break;
     }
 
