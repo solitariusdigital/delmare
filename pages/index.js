@@ -97,6 +97,10 @@ export default function HomePage() {
           </Fragment>
         ))}
       </div>
+      <div className="message">
+        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
+        <p>با دلماره متفاوت دیده شوید</p>
+      </div>
     </Fragment>
   );
 }
