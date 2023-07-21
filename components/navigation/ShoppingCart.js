@@ -6,7 +6,12 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { getProductApi, getMellatApi, getUserApi } from "../../services/api";
+import {
+  getProductApi,
+  getCareApi,
+  getMellatApi,
+  getUserApi,
+} from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
@@ -54,10 +59,20 @@ export default function ShoppingCart() {
   useEffect(() => {
     const checkProductsData = async (product) => {
       try {
-        const getProduct = await getProductApi(product["_id"]);
+        const getProduct =
+          (await getProductApi(product["_id"])) ||
+          (await getCareApi(product["_id"]));
         const isActivated = getProduct.activate;
-        const colorCount = getProduct.size[product.size].colors[product.color];
-        const message = isActivated && colorCount > 0 ? "" : "اتمام موجودی";
+        const count = null;
+        switch (getProduct.group) {
+          case "clothing":
+            count = getProduct.size[product.size].colors[product.color];
+            break;
+          case "care":
+            count = getProduct.count;
+            break;
+        }
+        const message = isActivated && count > 0 ? "" : "اتمام موجودی";
         product.price = getProduct.sale
           ? getProduct.discount
           : getProduct.price;
@@ -118,10 +133,10 @@ export default function ShoppingCart() {
       (obj, index) =>
         index ===
         shoppingCart.findIndex(
-          (o) =>
-            obj["_id"] === o["_id"] &&
-            obj.color === o.color &&
-            obj.size === o.size
+          (item) =>
+            obj["_id"] === item["_id"] &&
+            obj.color === item.color &&
+            obj.size === item.size
         )
     );
     if (uniqueShoppingCart.length !== shoppingCart.length) {
@@ -267,10 +282,12 @@ export default function ShoppingCart() {
                         </div>
                         <div className={classes.options}>
                           <div className={classes.size}>{cart.size}</div>
-                          <div
-                            className={classes.color}
-                            style={{ backgroundColor: `#${cart.color}` }}
-                          ></div>
+                          {cart.group === "clothing" && (
+                            <div
+                              className={classes.color}
+                              style={{ backgroundColor: `#${cart.color}` }}
+                            ></div>
+                          )}
                         </div>
                         <div className={classes.id}>
                           <p className={classes.code}>کد آیتم</p>

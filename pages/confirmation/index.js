@@ -89,7 +89,7 @@ export default function Confirmation({ props }) {
           ? product.price -
             calculatePercentage(currentUser.discount, product.price)
           : product.price,
-      color: product.color,
+      color: product.group === "clothing" ? product.color : "ffffff",
       size: product.size,
       image: product.image,
       deliveryType: product.deliveryType,

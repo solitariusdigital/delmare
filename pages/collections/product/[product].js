@@ -288,35 +288,58 @@ export default function Product({ product, favourite }) {
   };
 
   const addToCart = () => {
-    if (selectedColor === "" || selectedSize === "") {
-      setAlert("رنگ یا اندازه را انتخاب کنید");
-    } else {
-      let bloggerDelmareId = assignBloggerId();
-      // add item to shopping cart
-      const newItem = {
-        _id: product["_id"],
-        delmareId: product.delmareId,
-        title: product.title,
-        bloggerDelmareId: bloggerDelmareId,
-        size: selectedSize,
-        color: selectedColor,
-        price: product.sale ? product.discount : product.price,
-        image: product.images.main,
-        percentage: product.percentage,
-        deliveryType: product.deliveryType,
-        sale: product.sale,
-      };
-      setShoppingCart([...shoppingCart, newItem]);
-      clearDetails();
-      setSelectedColor("");
-      setSelectedSize("");
-      setToggleContainer("cart");
-      colors.length = 0;
-      window.scrollTo(0, 0);
+    let bloggerDelmareId = assignBloggerId();
+    const newItem = {};
+    switch (product.group) {
+      case "clothing":
+        if (!selectedColor || !selectedSize) {
+          setAlert("رنگ یا اندازه را انتخاب کنید");
+          setTimeout(() => {
+            setAlert("");
+          }, 3000);
+          return;
+        }
+        // add clothing to shopping cart
+        newItem = {
+          _id: product["_id"],
+          delmareId: product.delmareId,
+          title: product.title,
+          bloggerDelmareId: bloggerDelmareId,
+          size: selectedSize,
+          color: selectedColor,
+          price: product.sale ? product.discount : product.price,
+          image: product.images.main,
+          percentage: product.percentage,
+          deliveryType: product.deliveryType,
+          sale: product.sale,
+          group: product.group,
+        };
+
+        break;
+      case "care":
+        // add care to shopping cart
+        newItem = {
+          _id: product["_id"],
+          delmareId: product.delmareId,
+          title: product.title,
+          bloggerDelmareId: bloggerDelmareId,
+          size: product.size,
+          price: product.sale ? product.discount : product.price,
+          image: product.images.main,
+          percentage: product.percentage,
+          deliveryType: product.deliveryType,
+          sale: product.sale,
+          group: product.group,
+        };
+        break;
     }
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
+    setShoppingCart([...shoppingCart, newItem]);
+    clearDetails();
+    setSelectedColor("");
+    setSelectedSize("");
+    setToggleContainer("cart");
+    colors.length = 0;
+    window.scrollTo(0, 0);
   };
 
   const favourProduct = async (product) => {
