@@ -8,12 +8,16 @@ export default function Care() {
   const { navigation, setNavigation } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
+  const { search, setSearch } = useContext(StateContext);
+  const { searchControl, setSearchControl } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     setBar(false);
     setContainer(true);
-  }, [setBar, setContainer]);
+    setSearchControl(false);
+    setSearch(false);
+  }, [setBar, setContainer, setSearch, setSearchControl]);
 
   const collections = [
     {

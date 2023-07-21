@@ -7,13 +7,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CallIcon from "@mui/icons-material/Call";
 import Person4Icon from "@mui/icons-material/Person4";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StarsIcon from "@mui/icons-material/Stars";
 import Register from "../Register";
 import Image from "next/image";
 import logo from "../../assets/logo.svg";
 import Router from "next/router";
-import StoreIcon from "@mui/icons-material/Store";
+import HomeIcon from "@mui/icons-material/Home";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -84,7 +84,7 @@ export default function BurgerMenu() {
         currentUser && currentUser.permission === "blogger"
           ? "کمد بلاگر"
           : "کمد من",
-      icon: <CheckroomIcon />,
+      icon: <ShoppingBasketIcon />,
       call: () => {
         navigateMenu("orders");
         setContact(false);
@@ -92,7 +92,7 @@ export default function BurgerMenu() {
     },
     {
       title: "صفحه اصلی",
-      icon: <StoreIcon />,
+      icon: <HomeIcon />,
       call: () => {
         setMenu(false);
         setSearchControl(false);

@@ -35,10 +35,31 @@ a {
   color: config.$grey;
 }
 
-.navigation {
+.main {
+  min-height: 100vh;
+}
+.navigationTop {
   position: sticky;
   top: 0;
   z-index: 99;
+}
+
+.navigationBottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
 }
 
 .mainButton {
