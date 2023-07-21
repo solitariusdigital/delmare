@@ -19,12 +19,12 @@ export default function Care() {
     {
       title: "مراقبت مو",
       link: "/collections/hair",
-      imageSrc: `${sourceLink}one.jpg`,
+      imageSrc: `${sourceLink}hair.jpg`,
     },
     {
       title: "مراقبت پوست",
       link: "/collections/skin",
-      imageSrc: `${sourceLink}three.jpg`,
+      imageSrc: `${sourceLink}face.jpg`,
     },
   ];
 

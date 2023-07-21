@@ -34,12 +34,12 @@ export default function HomePage() {
     {
       title: "لباس فشن",
       link: "/collections/clothing",
-      imageSrc: `${sourceLink}two.jpg`,
+      imageSrc: `${sourceLink}eight.jpg`,
     },
     {
       title: "لوازم بهداشتی",
       link: "/collections/care",
-      imageSrc: `${sourceLink}ten.jpg`,
+      imageSrc: `${sourceLink}care.jpg`,
     },
   ];
 
