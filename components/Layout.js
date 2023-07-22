@@ -1,4 +1,4 @@
-import { useContext, useState, Fragment } from "react";
+import { useContext, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import Container from "./navigation/Container";
 import SanitizerIcon from "@mui/icons-material/Sanitizer";
@@ -35,40 +35,22 @@ function Layout(props) {
       {navigationBottom && (
         <div className="navigationBottom">
           <div>
-            {toggleType === "clothing" ? (
-              <CheckroomIcon
-                className="navigationActive"
-                onClick={() => {
-                  setToggleType("clothing");
-                  Router.push("/collections/clothing");
-                }}
-              />
-            ) : (
-              <CheckroomIcon
-                className="icon"
-                onClick={() => {
-                  setToggleType("clothing");
-                  Router.push("/collections/clothing");
-                }}
-              />
-            )}
-            {toggleType === "care" ? (
-              <SanitizerIcon
-                className="navigationActive"
-                onClick={() => {
-                  setToggleType("care");
-                  Router.push("/collections/care");
-                }}
-              />
-            ) : (
-              <SanitizerIcon
-                className="icon"
-                onClick={() => {
-                  setToggleType("care");
-                  Router.push("/collections/care");
-                }}
-              />
-            )}
+            <CheckroomIcon
+              className={
+                toggleType === "clothing" ? "navigationActive" : "icon"
+              }
+              onClick={() => {
+                setToggleType("clothing");
+                Router.push("/collections/clothing");
+              }}
+            />
+            <SanitizerIcon
+              className={toggleType === "care" ? "navigationActive" : "icon"}
+              onClick={() => {
+                setToggleType("care");
+                Router.push("/collections/care");
+              }}
+            />
             <FavoriteIcon
               className="icon"
               onClick={() => navigateMenu("wish")}
