@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, Fragment } from "react";
+import { useContext, useEffect, Fragment } from "react";
 import Head from "next/head";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
@@ -13,7 +13,6 @@ export default function HomePage() {
   const { navigation, setNavigation } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
-
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
