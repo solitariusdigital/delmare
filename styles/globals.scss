@@ -48,6 +48,7 @@ a {
   position: sticky;
   bottom: 0;
   z-index: 2;
+  @include mixins.slide-top();
 
   div {
     width: 100%;
