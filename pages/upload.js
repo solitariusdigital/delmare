@@ -81,7 +81,7 @@ export default function Upload() {
   const [size44, setSize44] = useState("");
   const [size45, setSize45] = useState("");
 
-  const [productCategory, setProductCategory] = useState("clothes" || "care");
+  const [productCategory, setProductCategory] = useState("clothing" || "care");
   const [categorySize, setCategorySize] = useState(
     "clothesSize" || "shoesSize"
   );
@@ -578,7 +578,7 @@ export default function Upload() {
 
   const checkUpload = async (upload) => {
     if (upload.ok) {
-      if (productCategory === "clothes") {
+      if (productCategory === "clothing") {
         // save product ID to its brand collection
         const product = await upload.json();
         selectedBrand.products.push(product["_id"]);
@@ -675,12 +675,12 @@ export default function Upload() {
             <button
               className="mainButton"
               onClick={() => {
-                setProductCategory("clothes");
+                setProductCategory("clothing");
               }}
             >
-              Clothes
+              Clothing
             </button>
-            <h4>{productCategory === "clothes" ? "Clothes" : "Care"}</h4>
+            <h4>{productCategory === "clothing" ? "Clothing" : "Care"}</h4>
             <button
               className="mainButton"
               onClick={() => {
@@ -711,7 +711,7 @@ export default function Upload() {
                 maxLength="20"
               />
             </div>
-            {productCategory === "clothes" ? (
+            {productCategory === "clothing" ? (
               <Fragment>
                 <div className={classes.input}>
                   <select
@@ -895,7 +895,7 @@ export default function Upload() {
                 })}
               </select>
             </div>
-            {productCategory === "clothes" && (
+            {productCategory === "clothing" && (
               <Fragment>
                 <div className={classes.input}>
                   <select
@@ -1018,7 +1018,7 @@ export default function Upload() {
                 </div>
               </Fragment>
             )}
-            {productCategory === "clothes" && (
+            {productCategory === "clothing" && (
               <Fragment>
                 <h3>سایز رنگ تعداد</h3>
                 <div className={classes.typeToggle}>
@@ -1028,7 +1028,7 @@ export default function Upload() {
                       setCategorySize("clothesSize");
                     }}
                   >
-                    Clothes size
+                    Clothing
                   </button>
                   <button
                     className="mainButton"
@@ -1037,7 +1037,7 @@ export default function Upload() {
                       resetSizes();
                     }}
                   >
-                    Shoes size
+                    Shoes
                   </button>
                 </div>
                 {categorySize === "clothesSize" && (
@@ -1183,7 +1183,7 @@ export default function Upload() {
                 />
               )}
             </div>
-            {productCategory === "clothes" && (
+            {productCategory === "clothing" && (
               <Fragment>
                 <div className="input">
                   <div>
@@ -1258,7 +1258,7 @@ export default function Upload() {
             <button
               className="mainButton"
               onClick={() =>
-                productCategory === "clothes"
+                productCategory === "clothing"
                   ? handleClothesUpload()
                   : handleCareUpload()
               }

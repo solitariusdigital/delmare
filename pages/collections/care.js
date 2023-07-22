@@ -10,6 +10,8 @@ export default function Care() {
   const { container, setContainer } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -17,7 +19,16 @@ export default function Care() {
     setContainer(true);
     setSearchControl(false);
     setSearch(false);
-  }, [setBar, setContainer, setSearch, setSearchControl]);
+    setNavigationBottom(true);
+    setToggleType("care");
+  }, [
+    setBar,
+    setContainer,
+    setNavigationBottom,
+    setSearch,
+    setSearchControl,
+    setToggleType,
+  ]);
 
   const collections = [
     {

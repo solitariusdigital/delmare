@@ -36,6 +36,7 @@ export default function Collection({
   const { gallery, setGallery } = useContext(StateContext);
   const { reqNumber, setReqNumber } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
@@ -77,10 +78,12 @@ export default function Collection({
     setMessage(false);
     setBar(true);
     setNavigationBottom(true);
+    setToggleType("clothing");
     if (collectionType === "hair" || collectionType === "skin") {
       setSearchControl(false);
       setSearch(false);
       setBar(false);
+      setToggleType("care");
     }
   }, [
     brandGallery,
@@ -93,6 +96,7 @@ export default function Collection({
     setSearch,
     setSearchControl,
     setNavigationBottom,
+    setToggleType,
   ]);
 
   const loadMore = () => {

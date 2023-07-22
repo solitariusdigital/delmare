@@ -61,6 +61,11 @@ a {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
   }
+
+  .navigationActive {
+    color: config.$pink;
+    @include mixins.favour();
+  }
 }
 
 .mainButton {

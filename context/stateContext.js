@@ -9,6 +9,7 @@ export const StateProvider = (props) => {
   const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
   const [navigationBottom, setNavigationBottom] = useState(true);
+  const [toggleType, setToggleType] = useState("clothing" || "care");
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -154,6 +155,8 @@ export const StateProvider = (props) => {
     setGallery,
     navigationBottom,
     setNavigationBottom,
+    toggleType,
+    setToggleType,
   };
 
   return (

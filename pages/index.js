@@ -13,13 +13,14 @@ export default function HomePage() {
   const { navigation, setNavigation } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     document.body.style.background = "#f9f7f2";
     setBar(false);
     setContainer(true);
-    setNavigationBottom(true);
+    setNavigationBottom(false);
   }, [setBar, setContainer, setNavigationBottom]);
 
   useEffect(() => {
@@ -37,18 +38,21 @@ export default function HomePage() {
   const collections = [
     {
       title: "لباس فشن",
+      type: "clothing",
       link: "/collections/clothing",
       imageSrc: `${sourceLink}eight.jpg`,
     },
     {
       title: "لوازم بهداشتی",
+      type: "care",
       link: "/collections/care",
       imageSrc: `${sourceLink}care.jpg`,
     },
   ];
 
-  const activateNav = (link, index) => {
+  const activateNav = (type, link, index) => {
     sessionStorage.removeItem("positionY");
+    setToggleType(type);
     navigation.forEach((nav, i) => {
       if (i === index) {
         Router.push(link);
@@ -77,7 +81,9 @@ export default function HomePage() {
               className={
                 collection.title === "لباس فشن" ? "cardClothing" : "cardCare"
               }
-              onClick={() => activateNav(collection.link, index)}
+              onClick={() =>
+                activateNav(collection.type, collection.link, index)
+              }
             >
               <div
                 className={
