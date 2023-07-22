@@ -39,7 +39,7 @@ export default function Care() {
     {
       title: "مراقبت پوست",
       link: "/collections/skin",
-      imageSrc: `${sourceLink}face.jpg`,
+      imageSrc: `${sourceLink}skin.jpg`,
     },
   ];
 
