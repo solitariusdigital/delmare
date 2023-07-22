@@ -48,6 +48,7 @@ export default function Upload() {
   const { container, setContainer } = useContext(StateContext);
   const { generalCategories, setGeneralCategories } = useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
@@ -359,10 +360,11 @@ export default function Upload() {
     ) {
       setContainer(false);
       setDisplayPage(true);
+      setNavigationBottom(false);
     } else {
       Router.push("/");
     }
-  }, [setContainer]);
+  }, [setContainer, setNavigationBottom]);
 
   useEffect(() => {
     const fetchData = async () => {

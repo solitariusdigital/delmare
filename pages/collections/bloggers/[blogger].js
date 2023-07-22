@@ -27,6 +27,7 @@ export default function Blogger() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, seCurrentUser } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [blogger, setBlogger] = useState([]);
   const [products, setProducts] = useState([]);
@@ -65,9 +66,10 @@ export default function Blogger() {
 
     setProducts([]);
     setBar(true);
+    setNavigationBottom(false);
     setDivHeight(window.innerHeight);
     fetchData().catch(console.error);
-  }, [bloggerDelmareId, setBar, currentUser]);
+  }, [bloggerDelmareId, setBar, currentUser, setNavigationBottom]);
 
   // check if user follows blogger
   useEffect(() => {

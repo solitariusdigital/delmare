@@ -41,6 +41,7 @@ export default function Product({ product, favourite }) {
   const { menue, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const [alert, setAlert] = useState("");
 
   // product image variables
@@ -134,6 +135,7 @@ export default function Product({ product, favourite }) {
 
   useEffect(() => {
     setBar(false);
+    setNavigationBottom(false);
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     if (product.group === "clothing") {
       Object.keys(productSizes).forEach((size) => {
@@ -141,7 +143,7 @@ export default function Product({ product, favourite }) {
         productSizes[size]["selected"] = false;
       });
     }
-  }, [setBar, shoppingCart, productSizes, product.group]);
+  }, [setBar, shoppingCart, productSizes, product.group, setNavigationBottom]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -212,6 +214,7 @@ export default function Product({ product, favourite }) {
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
+    setNavigationBottom(true);
     colors.length = 0;
     window.scrollTo(0, 0);
     router.back();

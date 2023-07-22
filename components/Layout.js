@@ -12,6 +12,7 @@ function Layout(props) {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const navigateMenu = (action) => {
     if (userLogIn) {
@@ -30,19 +31,24 @@ function Layout(props) {
         </div>
       )}
       <main className="main">{props.children}</main>
-      <div className="navigationBottom">
-        <div>
-          <CheckroomIcon
-            className="icon"
-            onClick={() => Router.push("/collections/clothing")}
-          />
-          <SanitizerIcon
-            className="icon"
-            onClick={() => Router.push("/collections/care")}
-          />
-          <FavoriteIcon className="icon" onClick={() => navigateMenu("wish")} />
+      {navigationBottom && (
+        <div className="navigationBottom">
+          <div>
+            <CheckroomIcon
+              className="icon"
+              onClick={() => Router.push("/collections/clothing")}
+            />
+            <SanitizerIcon
+              className="icon"
+              onClick={() => Router.push("/collections/care")}
+            />
+            <FavoriteIcon
+              className="icon"
+              onClick={() => navigateMenu("wish")}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </Fragment>
   );
 }

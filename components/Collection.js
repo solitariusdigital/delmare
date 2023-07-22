@@ -35,6 +35,7 @@ export default function Collection({
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
   const { reqNumber, setReqNumber } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
@@ -75,7 +76,7 @@ export default function Collection({
     }
     setMessage(false);
     setBar(true);
-
+    setNavigationBottom(true);
     if (collectionType === "hair" || collectionType === "skin") {
       setSearchControl(false);
       setSearch(false);
@@ -91,6 +92,7 @@ export default function Collection({
     setGallery,
     setSearch,
     setSearchControl,
+    setNavigationBottom,
   ]);
 
   const loadMore = () => {

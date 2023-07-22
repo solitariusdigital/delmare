@@ -11,12 +11,17 @@ export default function HomePage() {
   const { register, setRegister } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { navigation, setNavigation } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const { container, setContainer } = useContext(StateContext);
+
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
     document.body.style.background = "#f9f7f2";
     setBar(false);
-  }, [setBar]);
+    setContainer(true);
+    setNavigationBottom(true);
+  }, [setBar, setContainer, setNavigationBottom]);
 
   useEffect(() => {
     if (!window.matchMedia("(display-mode: standalone)").matches) {

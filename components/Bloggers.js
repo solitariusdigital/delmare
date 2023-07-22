@@ -9,9 +9,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { abbreviateNumber } from "../services/utility";
 
 export default function Bloggers({ bloggersData }) {
-  const [bloggers, setBloggers] = useState([]);
   const { bar, setBar } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const [bloggers, setBloggers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,13 +30,20 @@ export default function Bloggers({ bloggersData }) {
         setBloggers(sortedBloggers);
         setBar(true);
         setSearchControl(false);
+        setNavigationBottom(false);
       } catch (error) {
         console.error(error);
       }
     };
     setBloggers([]);
     fetchData();
-  }, [setBloggers, setBar, setSearchControl, bloggersData]);
+  }, [
+    setBloggers,
+    setBar,
+    setSearchControl,
+    bloggersData,
+    setNavigationBottom,
+  ]);
 
   return (
     <Fragment>

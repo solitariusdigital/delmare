@@ -8,6 +8,7 @@ export const StateProvider = (props) => {
   const [searchControl, setSearchControl] = useState(false);
   const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
+  const [navigationBottom, setNavigationBottom] = useState(true);
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -151,6 +152,8 @@ export const StateProvider = (props) => {
     setKavenegarKey,
     gallery,
     setGallery,
+    navigationBottom,
+    setNavigationBottom,
   };
 
   return (

@@ -18,6 +18,7 @@ import secureLocalStorage from "react-secure-storage";
 
 export default function Invoice({ invoices, newInvoices, postedInvoices }) {
   const { container, setContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const [posted, setposted] = useState(false);
   const [displayPage, setDisplayPage] = useState(false);
 
@@ -34,10 +35,11 @@ export default function Invoice({ invoices, newInvoices, postedInvoices }) {
     ) {
       setContainer(false);
       setDisplayPage(true);
+      setNavigationBottom(false);
     } else {
       Router.push("/");
     }
-  }, [setContainer]);
+  }, [setContainer, setNavigationBottom]);
 
   const postInvoice = async (invoice) => {
     let positionY = window.scrollY;

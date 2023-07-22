@@ -8,15 +8,17 @@ export default function Brands({ brandsData }) {
   const [brands, setBrands] = useState([]);
   const { bar, setBar } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   useEffect(() => {
     setBar(true);
     setSearchControl(false);
+    setNavigationBottom(false);
     const sortedBrands = brandsData.sort(
       (a, b) => b.products.length - a.products.length
     );
     setBrands(sortedBrands);
-  }, [setBrands, setBar, setSearchControl, brandsData]);
+  }, [setBrands, setBar, setSearchControl, brandsData, setNavigationBottom]);
 
   return (
     <Fragment>

@@ -12,6 +12,7 @@ import userModel from "../models/User";
 
 export default function Users({ sortedUsers }) {
   const { container, setContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const [displayPage, setDisplayPage] = useState(false);
 
   useEffect(() => {
@@ -22,10 +23,11 @@ export default function Users({ sortedUsers }) {
     ) {
       setContainer(false);
       setDisplayPage(true);
+      setNavigationBottom(false);
     } else {
       Router.push("/");
     }
-  }, [setContainer]);
+  }, [setContainer, setNavigationBottom]);
 
   return (
     <Fragment>
