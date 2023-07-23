@@ -50,6 +50,7 @@
       font-size: config.$small-font;
       color: config.$pink;
       font-weight: bold;
+      @include mixins.favour();
     }
 
     p {
