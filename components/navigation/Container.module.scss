@@ -44,13 +44,11 @@
     .nav {
       font-size: config.$small-font;
       color: config.$black;
-      border-bottom: 2px solid config.$cream;
     }
 
     .navActive {
       font-size: config.$small-font;
-      color: config.$black;
-      border-bottom: 2px solid config.$brand;
+      color: config.$pink;
       font-weight: bold;
     }
 
