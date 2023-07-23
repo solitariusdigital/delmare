@@ -2,6 +2,7 @@ import Notification from "../../models/Notification";
 import dbConnect from "../../services/dbConnect";
 
 export default async function notificationHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
 
   await dbConnect();

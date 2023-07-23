@@ -2,6 +2,7 @@ import Blogger from "../../models/Blogger";
 import dbConnect from "../../services/dbConnect";
 
 export default async function bloggersHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
 
   await dbConnect();

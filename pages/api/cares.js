@@ -2,6 +2,7 @@ import dbConnect from "../../services/dbConnect";
 import Care from "../../models/Care";
 
 export default async function caresHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method } = req;
   await dbConnect();
 

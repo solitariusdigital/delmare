@@ -1,6 +1,7 @@
 import Care from "../../models/Care";
 import dbConnect from "../../services/dbConnect";
 export default async function productHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
 
   await dbConnect();
