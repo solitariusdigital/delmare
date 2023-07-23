@@ -5,7 +5,7 @@ import Image from "next/image";
 import Head from "next/head";
 
 export default function Care() {
-  const { navigation, setNavigation } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
@@ -33,27 +33,29 @@ export default function Care() {
   const collections = [
     {
       title: "مراقبت مو",
+      collection: "hair",
       link: "/collections/hair",
       imageSrc: `${sourceLink}hair.jpg`,
     },
     {
       title: "مراقبت پوست",
+      collection: "skin",
       link: "/collections/skin",
       imageSrc: `${sourceLink}skin.jpg`,
     },
   ];
 
-  const activateNav = (link, index) => {
+  const activateNav = (link, collection) => {
     sessionStorage.removeItem("positionY");
-    navigation.forEach((nav, i) => {
-      if (i === index) {
+    navigationTopBar.forEach((nav) => {
+      if (nav.collection === collection) {
         Router.push(link);
         nav.active = true;
       } else {
         nav.active = false;
       }
     });
-    setNavigation([...navigation]);
+    setNavigationTopBar([...navigationTopBar]);
   };
 
   return (
@@ -67,7 +69,9 @@ export default function Care() {
           <Fragment key={index}>
             <div
               className="cardCare"
-              onClick={() => activateNav(collection.link, index)}
+              onClick={() =>
+                activateNav(collection.link, collection.collection)
+              }
             >
               <div className="ctaCare">
                 <p>{collection.title}</p>

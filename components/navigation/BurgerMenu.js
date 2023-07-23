@@ -35,7 +35,7 @@ export default function BurgerMenu() {
   const [admin, setAdmin] = useState(false);
   const [desktop, setDesktop] = useState(false);
 
-  const navigation = [
+  const menuOptions = [
     {
       title:
         currentUser && currentUser.permission === "blogger"
@@ -177,7 +177,7 @@ export default function BurgerMenu() {
           {!register ? (
             <div>
               <div className={classes.list}>
-                {navigation.map((nav, index) => (
+                {menuOptions.map((nav, index) => (
                   <div className={classes.item} key={index} onClick={nav.call}>
                     {nav.icon}
                     <p>{nav.title}</p>

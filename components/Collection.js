@@ -82,7 +82,6 @@ export default function Collection({
     if (collectionType === "hair" || collectionType === "skin") {
       setSearchControl(false);
       setSearch(false);
-      setBar(false);
       setToggleType("care");
     }
   }, [

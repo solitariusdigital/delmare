@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import BurgerMenu from "./BurgerMenu";
 import Account from "./Account";
@@ -26,11 +26,12 @@ function Container() {
   const { bar, setBar } = useContext(StateContext);
   const { collectionsToggle, setCollectionsToggle } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const { navigation, setNavigation } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
 
   const collections = [
     {
@@ -76,7 +77,7 @@ function Container() {
   const activateNav = (link, index) => {
     sessionStorage.removeItem("positionY");
     setGallery([]);
-    navigation.map((nav, i) => {
+    navigationTopBar.map((nav, i) => {
       if (i === index) {
         Router.push(link);
         nav.active = true;
@@ -84,7 +85,7 @@ function Container() {
         nav.active = false;
       }
     });
-    setNavigation([...navigation]);
+    setNavigationTopBar([...navigationTopBar]);
   };
 
   const navigateLandingPage = () => {
@@ -124,15 +125,18 @@ function Container() {
         </div>
         {bar && (
           <div className={classes.navigation}>
-            {navigation
+            {navigationTopBar
               .map((nav, index) => (
-                <div
-                  key={index}
-                  className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(nav.link, index)}
-                >
-                  <p>{nav.title}</p>
-                </div>
+                <Fragment key={index}>
+                  {nav.type === toggleType && (
+                    <div
+                      className={!nav.active ? classes.nav : classes.navActive}
+                      onClick={() => activateNav(nav.link, index)}
+                    >
+                      <p>{nav.title}</p>
+                    </div>
+                  )}
+                </Fragment>
               ))
               .reverse()}
           </div>

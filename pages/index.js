@@ -10,7 +10,7 @@ export default function HomePage() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
-  const { navigation, setNavigation } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
@@ -53,7 +53,7 @@ export default function HomePage() {
   const activateNav = (type, link, index) => {
     sessionStorage.removeItem("positionY");
     setToggleType(type);
-    navigation.forEach((nav, i) => {
+    navigationTopBar.forEach((nav, i) => {
       if (i === index) {
         Router.push(link);
         nav.active = true;
@@ -61,7 +61,7 @@ export default function HomePage() {
         nav.active = false;
       }
     });
-    setNavigation([...navigation]);
+    setNavigationTopBar([...navigationTopBar]);
   };
 
   return (

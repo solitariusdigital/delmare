@@ -12,7 +12,7 @@ export default function Clothing({
   newItems,
   cheapestItems,
 }) {
-  const { navigation, setNavigation } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
@@ -72,7 +72,7 @@ export default function Clothing({
 
   const activateNav = (link, index) => {
     sessionStorage.removeItem("positionY");
-    navigation.forEach((nav, i) => {
+    navigationTopBar.forEach((nav, i) => {
       if (i === index) {
         Router.push(link);
         nav.active = true;
@@ -80,7 +80,7 @@ export default function Clothing({
         nav.active = false;
       }
     });
-    setNavigation([...navigation]);
+    setNavigationTopBar([...navigationTopBar]);
   };
 
   return (

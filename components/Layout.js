@@ -14,6 +14,7 @@ function Layout(props) {
   const { register, setRegister } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
+  const { bar, setBar } = useContext(StateContext);
 
   const navigateMenu = (action) => {
     if (userLogIn) {
@@ -22,6 +23,12 @@ function Layout(props) {
       setMenu(true);
       setRegister(true);
     }
+  };
+
+  const controlNavigation = (type) => {
+    Router.push(`/collections/${type}`);
+    setToggleType(type);
+    setBar(false);
   };
 
   return (
@@ -40,15 +47,13 @@ function Layout(props) {
                 toggleType === "clothing" ? "navigationActive" : "icon"
               }
               onClick={() => {
-                setToggleType("clothing");
-                Router.push("/collections/clothing");
+                controlNavigation("clothing");
               }}
             />
             <SanitizerIcon
               className={toggleType === "care" ? "navigationActive" : "icon"}
               onClick={() => {
-                setToggleType("care");
-                Router.push("/collections/care");
+                controlNavigation("care");
               }}
             />
             <FavoriteIcon
