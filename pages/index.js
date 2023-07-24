@@ -37,7 +37,7 @@ export default function HomePage() {
 
   const collections = [
     {
-      title: "لباس فشن",
+      title: "کالکشن لباس",
       type: "clothing",
       link: "/collections/clothing",
       imageSrc: `${sourceLink}eight.jpg`,
@@ -79,7 +79,7 @@ export default function HomePage() {
           <Fragment key={index}>
             <div
               className={
-                collection.title === "لباس فشن" ? "cardClothing" : "cardCare"
+                collection.type === "clothing" ? "cardClothing" : "cardCare"
               }
               onClick={() =>
                 activateNav(collection.type, collection.link, index)
@@ -87,7 +87,7 @@ export default function HomePage() {
             >
               <div
                 className={
-                  collection.title === "لباس فشن" ? "ctaClothing" : "ctaCare"
+                  collection.type === "care" ? "ctaClothing" : "ctaCare"
                 }
               >
                 <p>{collection.title}</p>

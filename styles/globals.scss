@@ -98,7 +98,7 @@ a {
     position: relative;
     width: calc(100% - 24px);
     margin: 6px 12px;
-    height: 50vh;
+    height: 55vh;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
     @include mixins.gradientBorder();
