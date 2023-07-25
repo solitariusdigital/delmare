@@ -461,7 +461,7 @@ export default function Product({ product, favourite }) {
             </div>
           )}
           <div className={classes.sectionId}>
-            <p>{product.delmareId}</p>
+            <p className={classes.id}>{product.delmareId}</p>
             <p className={classes.title}>کد آیتم</p>
           </div>
         </div>

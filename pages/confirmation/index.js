@@ -5,7 +5,9 @@ import {
   postMellatApi,
   createInvoiceApi,
   getProductApi,
+  getCareApi,
   updateProductApi,
+  updateCareApi,
   getUserApi,
   updateUserApi,
 } from "../../services/api";
@@ -22,6 +24,7 @@ export default function Confirmation({ props }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [displayReject, setDisplayReject] = useState(false);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -32,7 +35,8 @@ export default function Confirmation({ props }) {
   useEffect(() => {
     document.body.style.background = "#ffffff";
     setContainer(false);
-  }, [setContainer]);
+    setNavigationBottom(false);
+  }, [setContainer, setNavigationBottom]);
 
   useEffect(() => {
     const processOrder = async () => {
@@ -100,17 +104,32 @@ export default function Confirmation({ props }) {
 
   const updateProductCount = async (product) => {
     try {
-      let getProduct = await getProductApi(product["_id"]);
-      if (getProduct.size[product.size].colors[product.color] > 0) {
-        getProduct.size[product.size].colors[product.color]--;
-        if (
-          Object.keys(getProduct.size).length === 1 &&
-          Object.keys(getProduct.size[product.size].colors).length === 1 &&
-          getProduct.size[product.size].colors[product.color] === 0
-        ) {
-          getProduct.activate = false;
-        }
-        await updateProductApi(getProduct);
+      let getProduct =
+        (await getProductApi(product["_id"])) ||
+        (await getCareApi(product["_id"]));
+      switch (getProduct.group) {
+        case "clothing":
+          if (getProduct.size[product.size].colors[product.color] > 0) {
+            getProduct.size[product.size].colors[product.color]--;
+            if (
+              Object.keys(getProduct.size).length === 1 &&
+              Object.keys(getProduct.size[product.size].colors).length === 1 &&
+              getProduct.size[product.size].colors[product.color] === 0
+            ) {
+              getProduct.activate = false;
+            }
+            await updateProductApi(getProduct);
+          }
+          break;
+        case "care":
+          if (getProduct.count > 0) {
+            getProduct.count--;
+            if (getProduct.count === 0) {
+              getProduct.activate = false;
+            }
+            await updateCareApi(getProduct);
+          }
+          break;
       }
     } catch (error) {
       console.error(error);
