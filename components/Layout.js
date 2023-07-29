@@ -5,11 +5,9 @@ import { getNotificationsApi } from "../services/api";
 import Image from "next/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
-import secureLocalStorage from "react-secure-storage";
 
 function Layout(props) {
   const { container, setContainer } = useContext(StateContext);
-  const { userLogIn, setUserLogin } = useContext(StateContext);
   const [loadAppUpdate, setLoadUpdate] = useState({});
 
   useEffect(() => {
@@ -22,10 +20,7 @@ function Layout(props) {
 
   return (
     <Fragment>
-      {(userLogIn &&
-        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
-          "admin") ||
-      !loadAppUpdate.active ? (
+      {loadAppUpdate.active ? (
         <Fragment>
           {container && (
             <div className="navigation">
