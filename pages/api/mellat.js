@@ -311,14 +311,12 @@ async function callBackCheck(req, res) {
   let saleReferenceId = -999;
   let saleOrderId = -999;
   let resultCode_bpPayRequest;
-  let currentUser = null;
-  let shoppingCart = null;
+  let currentUser = req.body.currentUser;
+  let shoppingCart = req.body.shoppingCart;
 
   saleReferenceId = parseInt(req.body.SaleReferenceId, 10);
   saleOrderId = parseInt(req.body.SaleOrderId, 10);
   resultCode_bpPayRequest = parseInt(req.body.ResCode);
-  currentUser = req.body.currentUser;
-  shoppingCart = req.body.shoppingCart;
 
   // Result Code
   let resultCode_bpinquiryRequest = "-9999";
@@ -369,14 +367,11 @@ async function callBackCheck(req, res) {
       );
       resultCode_bpSettleRequest = parseInt(resultCode_bpSettleRequest.return);
       console.log("bpSettleRequest:" + saleReferenceId);
-
       // Success
       if (
         resultCode_bpSettleRequest === 0 ||
         resultCode_bpSettleRequest === 45
       ) {
-        console.log(currentUser, shoppingCart, saleReferenceId, "xxx");
-
         let success = await generateInvoice(
           currentUser,
           shoppingCart,

@@ -1,11 +1,3 @@
-import {
-  createInvoiceApi,
-  getProductApi,
-  updateProductApi,
-  getUserApi,
-  updateUserApi,
-} from "./api";
-
 import { calculatePercentage } from "./utility";
 
 export const generateInvoice = async (
@@ -13,11 +5,8 @@ export const generateInvoice = async (
   shoppingCart,
   saleReferenceId
 ) => {
-  console.log(currentUser, shoppingCart, saleReferenceId, "zzz");
-
   try {
     await Promise.all(shoppingCart.map(updateProductData));
-    await updateUserDiscount();
     return 200;
   } catch (error) {
     console.error(error);
@@ -51,7 +40,16 @@ export const generateInvoice = async (
 
   async function updateProductCount(product) {
     try {
-      let getProduct = await getProductApi(product["_id"]);
+      let response = await fetch(
+        `https://delmareh.com/api/product?id=${product["_id"]}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let getProduct = await response.json();
       if (getProduct.size[product.size].colors[product.color] > 0) {
         getProduct.size[product.size].colors[product.color]--;
         if (
@@ -61,7 +59,14 @@ export const generateInvoice = async (
         ) {
           getProduct.activate = false;
         }
-        await updateProductApi(getProduct);
+        let response = await fetch("https://delmareh.com/api/product", {
+          method: "PUT",
+          body: JSON.stringify(getProduct),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        await response.json();
       }
     } catch (error) {
       console.error(error);
@@ -70,17 +75,14 @@ export const generateInvoice = async (
 
   async function updateProductData(product) {
     const invoice = createInvoiceObject(product);
-    await createInvoiceApi(invoice);
+    let response = await fetch("https://delmareh.com/api/invoice", {
+      method: "POST",
+      body: JSON.stringify(invoice),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    await response.json();
     await updateProductCount(product);
-  }
-
-  async function updateUserDiscount() {
-    try {
-      const user = await getUserApi(currentUser["_id"]);
-      user.discount = "";
-      await updateUserApi(user);
-    } catch (error) {
-      console.error(error);
-    }
   }
 };
