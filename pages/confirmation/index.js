@@ -36,25 +36,23 @@ export default function Confirmation({ props }) {
 
   useEffect(() => {
     const processOrder = async () => {
-      if (props.ResCode === "0") {
-        try {
-          const check = await postMellatApi(props);
-          if (check.code === 200) {
-            setRefId(check.refId);
-            setDisplayConfirmation(true);
-          } else {
-            setDisplayReject(true);
-          }
-        } catch (error) {
-          console.error(error);
+      props.shoppingCart = shoppingCart;
+      props.currentUser = currentUser;
+      const check = await postMellatApi(props);
+      try {
+        if (check.code === 200) {
+          setRefId(check.refId);
+          setDisplayConfirmation(true);
+        } else {
           setDisplayReject(true);
         }
-      } else {
+      } catch (error) {
+        console.error(error);
         setDisplayReject(true);
       }
     };
     processOrder().catch(console.error);
-  }, [props]);
+  }, [currentUser, props, shoppingCart]);
 
   const generateInvoice = async () => {
     try {
@@ -135,7 +133,7 @@ export default function Confirmation({ props }) {
 
   const confirmMessage = async () => {
     setConfirmClicked(true);
-    await generateInvoice();
+    clearShoppingCart();
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
     });

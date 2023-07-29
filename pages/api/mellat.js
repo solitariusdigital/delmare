@@ -1,6 +1,8 @@
-var soap = require("soap");
-var moment = require("moment");
+const soap = require("soap");
+const moment = require("moment");
 moment.locale("en");
+
+import { generateInvoice } from "../../services/generateInvoice";
 
 const mellatWsdl = "https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl";
 const PgwSite = "https://bpm.shaparak.ir/pgwchannel/startpay.mellat";
@@ -8,57 +10,6 @@ const callbackUrl = "https://delmareh.com/confirmation";
 const terminalId = process.env.MELLAT_TERMINAL_ID;
 const userName = process.env.MELLAT_USERNAME;
 const password = process.env.MELLAT_PASSWORD;
-const mellatBankReturnCode = {
-  0: "ﺗﺮاﻛﻨﺶ_ﺑﺎ_ﻣﻮﻓﻘﻴﺖ_اﻧﺠﺎم_ﺷﺪ",
-  11: "ﺷﻤﺎره_ﻛﺎرت_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  12: "ﻣﻮﺟﻮدي_ﻛﺎﻓﻲ_ﻧﻴﺴﺖ",
-  13: "رﻣﺰ_ﻧﺎدرﺳﺖ_اﺳﺖ",
-  14: "ﺗﻌﺪاد_دﻓﻌﺎت_وارد_ﻛﺮدن_رﻣﺰ_ﺑﻴﺶ_از_ﺣﺪ_ﻣﺠﺎز_اﺳﺖ",
-  15: "ﻛﺎرت_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  16: "دﻓﻌﺎت_ﺑﺮداﺷﺖ_وﺟﻪ_ﺑﻴﺶ_از_ﺣﺪ_ﻣﺠﺎز_اﺳﺖ",
-  17: "ﻛﺎرﺑﺮ_از_اﻧﺠﺎم_ﺗﺮاﻛﻨﺶ_ﻣﻨﺼﺮف_ﺷﺪه_اﺳﺖ",
-  18: "ﺗﺎرﻳﺦ_اﻧﻘﻀﺎي_ﻛﺎرت_ﮔﺬﺷﺘﻪ_اﺳﺖ",
-  19: "ﻣﺒﻠﻎ_ﺑﺮداﺷﺖ_وﺟﻪ_ﺑﻴﺶ_از_ﺣﺪ_ﻣﺠﺎز_اﺳﺖ",
-
-  111: "ﺻﺎدر_ﻛﻨﻨﺪه_ﻛﺎرت_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  112: "ﺧﻄﺎي_ﺳﻮﻳﻴﭻ_ﺻﺎدر_ﻛﻨﻨﺪه_ﻛﺎرت",
-  113: "ﭘﺎﺳﺨﻲ_از_ﺻﺎدر_ﻛﻨﻨﺪه_ﻛﺎرت_درﻳﺎﻓﺖ_ﻧﺸﺪ",
-  114: "دارﻧﺪه_ﻛﺎرت_ﻣﺠﺎز_ﺑﻪ_اﻧﺠﺎم_اﻳﻦ_ﺗﺮاﻛﻨﺶ_ﻧﻴﺴﺖ",
-
-  21: "ﭘﺬﻳﺮﻧﺪه_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  23: "ﺧﻄﺎي_اﻣﻨﻴﺘﻲ_رخ_داده_اﺳﺖ",
-  24: "اﻃﻼﻋﺎت_ﻛﺎرﺑﺮي_ﭘﺬﻳﺮﻧﺪه_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  25: "ﻣﺒﻠﻎ_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  31: "ﭘﺎﺳﺦ_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  32: "ﻓﺮﻣﺖ_اﻃﻼﻋﺎت_وارد_ﺷﺪه_ﺻﺤﻴﺢ_ﻧﻤﻲ_ﺑﺎﺷﺪ",
-  33: "ﺣﺴﺎب_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  34: "ﺧﻄﺎي_ﺳﻴﺴﺘﻤﻲ",
-  35: "ﺗﺎرﻳﺦ_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  41: "ﺷﻤﺎره_درﺧﻮاﺳﺖ_ﺗﻜﺮاري_اﺳﺖ",
-  42: "ﺗﺮاﻛﻨﺶ_Sale_یافت_نشد_",
-  43: "ﺒﻼ_Verify_درﺧﻮاﺳﺖ_داده_ﺷﺪه_اﺳﺖ",
-  44: "درخواست_verify_یافت_نشد",
-  45: "ﺗﺮاﻛﻨﺶ_Settle_ﺷﺪه_اﺳﺖ",
-  46: "ﺗﺮاﻛﻨﺶ_Settle_نشده_اﺳﺖ",
-  47: "ﺗﺮاﻛﻨﺶ_Settle_یافت_نشد",
-  48: "تراکنش_Reverse_شده_است",
-  49: "تراکنش_Refund_یافت_نشد",
-
-  412: "شناسه_قبض_نادرست_است",
-  413: "ﺷﻨﺎﺳﻪ_ﭘﺮداﺧﺖ_ﻧﺎدرﺳﺖ_اﺳﺖ",
-  414: "سازﻣﺎن_ﺻﺎدر_ﻛﻨﻨﺪه_ﻗﺒﺾ_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  415: "زﻣﺎن_ﺟﻠﺴﻪ_ﻛﺎري_ﺑﻪ_ﭘﺎﻳﺎن_رسیده_است",
-  416: "ﺧﻄﺎ_در_ﺛﺒﺖ_اﻃﻼﻋﺎت",
-  417: "ﺷﻨﺎﺳﻪ_ﭘﺮداﺧﺖ_ﻛﻨﻨﺪه_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  418: "اﺷﻜﺎل_در_ﺗﻌﺮﻳﻒ_اﻃﻼﻋﺎت_ﻣﺸﺘﺮي",
-  419: "ﺗﻌﺪاد_دﻓﻌﺎت_ورود_اﻃﻼﻋﺎت_از_ﺣﺪ_ﻣﺠﺎز_ﮔﺬﺷﺘﻪ_اﺳﺖ",
-  421: "IP_نامعتبر_است",
-
-  51: "ﺗﺮاﻛﻨﺶ_ﺗﻜﺮاري_اﺳﺖ",
-  54: "ﺗﺮاﻛﻨﺶ_ﻣﺮﺟﻊ_ﻣﻮﺟﻮد_ﻧﻴﺴﺖ",
-  55: "ﺗﺮاﻛﻨﺶ_ﻧﺎﻣﻌﺘﺒﺮ_اﺳﺖ",
-  61: "ﺧﻄﺎ_در_واریز",
-};
 
 function desribtionStatusCode(statusCode) {
   switch (statusCode) {
@@ -114,14 +65,12 @@ function desribtionStatusCode(statusCode) {
       return "ﺗﺮاﻛﻨﺶ_Sale_یافت_نشد_";
     case 43:
       return "ﻗﺒﻼ_Verify_درﺧﻮاﺳﺖ_داده_ﺷﺪه_اﺳﺖ";
-
     case 44:
       return "درخواست_verify_یافت_نشد";
     case 45:
       return "ﺗﺮاﻛﻨﺶ_Settle_ﺷﺪه_اﺳﺖ";
     case 46:
       return "ﺗﺮاﻛﻨﺶ_Settle_نشده_اﺳﺖ";
-
     case 47:
       return "ﺗﺮاﻛﻨﺶ_Settle_یافت_نشد";
     case 48:
@@ -146,7 +95,6 @@ function desribtionStatusCode(statusCode) {
       return "ﺗﻌﺪاد_دﻓﻌﺎت_ورود_اﻃﻼﻋﺎت_از_ﺣﺪ_ﻣﺠﺎز_ﮔﺬﺷﺘﻪ_اﺳﺖ";
     case 421:
       return "IP_نامعتبر_است";
-
     case 51:
       return "ﺗﺮاﻛﻨﺶ_ﺗﻜﺮاري_اﺳﺖ";
     case 54:
@@ -175,7 +123,7 @@ function bpPayRequest(orderId, priceAmount, additionalText, callbackUrl) {
     payerId: 0,
   };
 
-  var options = {
+  let options = {
     overrideRootElement: {
       namespace: "ns1",
     },
@@ -203,7 +151,7 @@ function bpVerifyRequest(orderId, saleOrderId, saleReferenceId) {
     saleReferenceId: saleReferenceId,
   };
 
-  var options = {
+  let options = {
     overrideRootElement: {
       namespace: "ns1",
     },
@@ -231,7 +179,7 @@ function bpInquiryRequest(orderId, saleOrderId, saleReferenceId) {
     saleReferenceId: saleReferenceId,
   };
 
-  var options = {
+  let options = {
     overrideRootElement: {
       namespace: "ns1",
     },
@@ -259,7 +207,7 @@ function bpSettleRequest(orderId, saleOrderId, saleReferenceId) {
     saleReferenceId: saleReferenceId,
   };
 
-  var options = {
+  let options = {
     overrideRootElement: {
       namespace: "ns1",
     },
@@ -287,7 +235,7 @@ function bpReversalRequest(orderId, saleOrderId, saleReferenceId) {
     saleReferenceId: saleReferenceId,
   };
 
-  var options = {
+  let options = {
     overrideRootElement: {
       namespace: "ns1",
     },
@@ -363,10 +311,14 @@ async function callBackCheck(req, res) {
   let saleReferenceId = -999;
   let saleOrderId = -999;
   let resultCode_bpPayRequest;
+  let currentUser = null;
+  let shoppingCart = null;
 
   saleReferenceId = parseInt(req.body.SaleReferenceId, 10);
   saleOrderId = parseInt(req.body.SaleOrderId, 10);
   resultCode_bpPayRequest = parseInt(req.body.ResCode);
+  currentUser = req.body.currentUser;
+  shoppingCart = req.body.shoppingCart;
 
   // Result Code
   let resultCode_bpinquiryRequest = "-9999";
@@ -423,10 +375,16 @@ async function callBackCheck(req, res) {
         resultCode_bpSettleRequest === 0 ||
         resultCode_bpSettleRequest === 45
       ) {
-        let refId = saleReferenceId;
+        console.log(currentUser, shoppingCart, saleReferenceId, "xxx");
+
+        let success = await generateInvoice(
+          currentUser,
+          shoppingCart,
+          saleReferenceId
+        );
         return res.json({
-          code: 200,
-          refId: refId,
+          code: success,
+          refId: saleReferenceId,
         });
       }
     } else {
