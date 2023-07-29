@@ -1,21 +1,15 @@
 import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { StateProvider } from "../context/stateContext";
-import Router from "next/router";
 import { getNotificationsApi } from "../services/api";
 import loadingImage from "../assets/loaderUpdate.png";
 import Image from "next/image";
 import logo from "../assets/logo.svg";
-import secureLocalStorage from "react-secure-storage";
 import { DefaultSeo } from "next-seo";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
   const [loadAppUpdate, setLoadUpdate] = useState({});
-
-  const handleRefresh = async () => {
-    Router.reload();
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +21,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <StateProvider>
-      {(JSON.parse(secureLocalStorage.getItem("currentUser")) &&
-        JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
-          "admin") ||
-      !loadAppUpdate.active ? (
+      {!loadAppUpdate.active ? (
         <Layout>
           <DefaultSeo
             title="با دلماره متفاوت دیده شوید"
