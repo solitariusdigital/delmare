@@ -39,6 +39,18 @@ export const getUserApi = async (id) => {
 };
 
 // products api
+export const getProductApiServer = async (id) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/product?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const getProductApi = async (id) => {
   const response = await fetch(`/api/product?id=${id}`, {
     method: "GET",
@@ -57,6 +69,19 @@ export const getProducstApi = async () => {
   });
   return await response.json();
 };
+export const updateProductApiServer = async (data) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/product`,
+    {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const updateProductApi = async (data) => {
   const response = await fetch("/api/product", {
     method: "PUT",
@@ -69,6 +94,18 @@ export const updateProductApi = async (data) => {
 };
 
 // cares api
+export const getCareApiServer = async (id) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/care?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const getCareApi = async (id) => {
   const response = await fetch(`/api/care?id=${id}`, {
     method: "GET",
@@ -87,6 +124,19 @@ export const getCarestApi = async () => {
   });
   return await response.json();
 };
+export const updateCareApiServer = async (data) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/care`,
+    {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const updateCareApi = async (data) => {
   const response = await fetch("/api/care", {
     method: "PUT",
@@ -99,6 +149,19 @@ export const updateCareApi = async (data) => {
 };
 
 // invoices api
+export const createInvoiceApiServer = async (data) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/invoice`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const createInvoiceApi = async (data) => {
   const response = await fetch("/api/invoice", {
     method: "POST",
