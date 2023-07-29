@@ -181,11 +181,18 @@ export default function ShoppingCart() {
     try {
       const itemCheck = await Promise.all(
         shoppingCart.map(async (product) => {
-          const getProduct = await getProductApi(product["_id"]);
-          return (
-            getProduct.size[product.size].colors[product.color] > 0 &&
-            getProduct.activate
-          );
+          const getProduct =
+            (await getProductApi(product["_id"])) ||
+            (await getCareApi(product["_id"]));
+          switch (getProduct.group) {
+            case "clothing":
+              return (
+                getProduct.size[product.size].colors[product.color] > 0 &&
+                getProduct.activate
+              );
+            case "care":
+              return getProduct.count > 0 && getProduct.activate;
+          }
         })
       );
       if (allAreTrue(itemCheck)) {
