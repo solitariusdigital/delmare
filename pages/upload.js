@@ -112,7 +112,16 @@ export default function Upload() {
   const [careCount, setCareCount] = useState("");
   const careCategories = ["مراقبت مو", "مراقبت پوست"];
   const careTypes = ["dark", "grey", "light"];
-  const careBrands = ["bmw", "audi", "tesla"];
+  const careBrands = [
+    "Avene",
+    "Clinique",
+    "E.I.F",
+    "Garnier",
+    "Kiko Milano",
+    "Ordinary",
+    "Revolution",
+    "Sephora",
+  ];
 
   const brandTypes = ["ایرانی", "اورجینال", "های کپی"];
   const deliveryTypes = [

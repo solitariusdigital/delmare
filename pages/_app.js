@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
       {(JSON.parse(secureLocalStorage.getItem("currentUser")) &&
         JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
           "admin") ||
-      !loadAppUpdate.active ? (
+      loadAppUpdate.active ? (
         <Layout>
           <DefaultSeo
             title="با دلماره متفاوت دیده شوید"
