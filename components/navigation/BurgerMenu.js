@@ -32,7 +32,7 @@ export default function BurgerMenu() {
   const { register, setRegister } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { referralData, setReferralData } = useContext(StateContext);
-  const [lotaltyPoint, setLoyaltyPoint] = useState(currentUser.loyalty);
+  const [lotaltyPoint, setLoyaltyPoint] = useState(0);
 
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
@@ -123,6 +123,9 @@ export default function BurgerMenu() {
   ];
 
   useEffect(() => {
+    if (currentUser) {
+      setLoyaltyPoint(currentUser.loyalty);
+    }
     const checkDeviceType = () => {
       if (
         !window.matchMedia("(display-mode: standalone)").matches &&
@@ -132,7 +135,7 @@ export default function BurgerMenu() {
       }
     };
     checkDeviceType();
-  }, [setDesktop]);
+  }, [currentUser, setDesktop]);
 
   const navigateMenu = (action) => {
     if (

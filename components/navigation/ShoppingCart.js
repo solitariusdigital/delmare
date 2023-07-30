@@ -25,7 +25,7 @@ export default function ShoppingCart() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
-  const [lotaltyPoint, setLoyaltyPoint] = useState(currentUser.loyalty);
+  const [lotaltyPoint, setLoyaltyPoint] = useState(0);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -40,6 +40,7 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     if (currentUser) {
+      setLoyaltyPoint(currentUser.loyalty);
       const fetchData = async () => {
         try {
           const user = await getUserApi(currentUser["_id"]);
@@ -249,7 +250,9 @@ export default function ShoppingCart() {
               <Fragment>
                 <div className={classes.row}>
                   <MonetizationOnIcon />
-                  <p>{convertNumber(lotaltyPoint)}</p>
+                  <p className={classes.loyalty}>
+                    {convertNumber(lotaltyPoint)}
+                  </p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.count}>{shoppingCart.length}</p>
