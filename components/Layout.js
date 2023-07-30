@@ -1,4 +1,4 @@
-import { useContext, Fragment } from "react";
+import { useContext, useState, useEffect, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import Container from "./navigation/Container";
 import SanitizerIcon from "@mui/icons-material/Sanitizer";
@@ -8,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Image from "next/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
+import { getNotificationsApi } from "../services/api";
 
 function Layout(props) {
   const { container, setContainer } = useContext(StateContext);
@@ -18,6 +19,15 @@ function Layout(props) {
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+  const [loadAppUpdate, setLoadUpdate] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getNotificationsApi();
+      setLoadUpdate(data[0].update);
+    };
+    fetchData().catch(console.error);
+  }, []);
 
   const navigateMenu = (action) => {
     if (userLogIn) {
