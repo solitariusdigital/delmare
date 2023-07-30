@@ -86,6 +86,16 @@ a {
   }
 }
 
+.referral {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .message {
+    color: config.$grey;
+  }
+}
+
 .collections-type {
   display: flex;
   flex-direction: column;

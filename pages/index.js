@@ -1,4 +1,4 @@
-import { useContext, useEffect, Fragment } from "react";
+import { useContext, useEffect, useState, Fragment } from "react";
 import Head from "next/head";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
@@ -14,6 +14,8 @@ export default function HomePage() {
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
+  const [referralLink, setReferralLink] = useState(false);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function HomePage() {
     setBar(false);
     setContainer(true);
     setNavigationBottom(false);
-  }, [setBar, setContainer, setNavigationBottom]);
+  }, [setBar, setContainer, setNavigationBottom, referralLink]);
 
   useEffect(() => {
     if (!window.matchMedia("(display-mode: standalone)").matches) {
@@ -33,6 +35,16 @@ export default function HomePage() {
     setToggleContainer("");
     setMenu(true);
     setRegister(true);
+  };
+
+  const generateReferralCode = () => {
+    navigator.clipboard.writeText(
+      `https://delmareh.com/referral/${currentUser.phone.slice(-5)}`
+    );
+    setReferralLink(true);
+    setTimeout(() => {
+      setReferralLink(false);
+    }, 3000);
   };
 
   const collections = [
@@ -69,7 +81,17 @@ export default function HomePage() {
       <Head>
         <title>Delmareh</title>
       </Head>
-      {!userLogIn && (
+      {userLogIn ? (
+        <div className="referral">
+          <div onClick={() => generateReferralCode()} className="ctaButton">
+            {referralLink ? <p>لینک ذخیره شد</p> : <p>دعوت دوستان</p>}
+          </div>
+          <p className="message">
+            به دوستان خود لینک ثبت نام ارسال کنید و با ورود هر کدام به دلماره
+            500 امتیاز خرید از دلماره دریافت کنید
+          </p>
+        </div>
+      ) : (
         <div onClick={() => loginAction()} className="ctaButton">
           <p>ورود / ​ثبت نام</p>
         </div>
