@@ -5,6 +5,9 @@ import SanitizerIcon from "@mui/icons-material/Sanitizer";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import Router from "next/router";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Image from "next/image";
+import loadingImage from "../assets/loaderUpdate.png";
+import logo from "../assets/logo.svg";
 
 function Layout(props) {
   const { container, setContainer } = useContext(StateContext);
@@ -33,34 +36,46 @@ function Layout(props) {
 
   return (
     <Fragment>
-      {container && (
-        <div className="navigationTop">
-          <Container />
-        </div>
-      )}
-      <main className="main">{props.children}</main>
-      {navigationBottom && (
-        <div className="navigationBottom">
-          <div>
-            <CheckroomIcon
-              className={
-                toggleType === "clothing" ? "navigationActive" : "icon"
-              }
-              onClick={() => {
-                controlNavigation("clothing");
-              }}
-            />
-            <SanitizerIcon
-              className={toggleType === "care" ? "navigationActive" : "icon"}
-              onClick={() => {
-                controlNavigation("care");
-              }}
-            />
-            <FavoriteIcon
-              className="icon"
-              onClick={() => navigateMenu("wish")}
-            />
-          </div>
+      {loadAppUpdate.active ? (
+        <Fragment>
+          {container && (
+            <div className="navigationTop">
+              <Container />
+            </div>
+          )}
+          <main className="main">{props.children}</main>
+          {navigationBottom && (
+            <div className="navigationBottom">
+              <div>
+                <CheckroomIcon
+                  className={
+                    toggleType === "clothing" ? "navigationActive" : "icon"
+                  }
+                  onClick={() => {
+                    controlNavigation("clothing");
+                  }}
+                />
+                <SanitizerIcon
+                  className={
+                    toggleType === "care" ? "navigationActive" : "icon"
+                  }
+                  onClick={() => {
+                    controlNavigation("care");
+                  }}
+                />
+                <FavoriteIcon
+                  className="icon"
+                  onClick={() => navigateMenu("wish")}
+                />
+              </div>
+            </div>
+          )}
+        </Fragment>
+      ) : (
+        <div className="loadAppUpdate">
+          <Image width={120} height={120} src={loadingImage} alt="isLoading" />
+          <p>{loadAppUpdate.text}</p>
+          <Image width={90} height={140} src={logo} alt="logo" />
         </div>
       )}
     </Fragment>
