@@ -10,8 +10,10 @@ import {
   createUserApi,
   getUsersApi,
   getNotificationsApi,
+  updateUserApi,
 } from "../services/api";
 import secureLocalStorage from "react-secure-storage";
+import Router from "next/router";
 
 function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -21,6 +23,7 @@ function Register() {
   const { appUsers, setAppUsers } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
+  const { referralData, setReferralData } = useContext(StateContext);
 
   const [phone, setPhone] = useState("");
   const [token, setToken] = useState("");
@@ -112,10 +115,11 @@ function Register() {
       // Check if user already exists in the database
       const existingUser = appUsers.find((user) => user.phone === phone);
       if (existingUser) {
+        setRegister(false);
         setUserLogin(true);
         setCurrentUser(existingUser);
         secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
-        setRegister(false);
+        Router.push("/");
       } else {
         await createUser();
         // send dsicount offer for new users
@@ -153,6 +157,7 @@ function Register() {
       birthday: "",
       permission: "customer",
       discount: discount,
+      loyalty: 0,
     };
     try {
       const data = await createUserApi(user);
@@ -163,6 +168,14 @@ function Register() {
         setUserLogin(true);
         setCurrentUser(data);
         secureLocalStorage.setItem("currentUser", JSON.stringify(data));
+        if (referralData.user) {
+          const userData = appUsers.find(
+            (user) => user.phone === referralData.user.phone
+          );
+          userData.loyalty = userData.loyalty + 500;
+          await updateUserApi(userData);
+        }
+        Router.push("/");
       }
     } catch (error) {
       setAlert("خطا در برقراری ارتباط");

@@ -5,7 +5,7 @@ import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
 import Head from "next/head";
 import dbConnect from "../../services/dbConnect";
-import Product from "../../models/Product";
+import ProductModel from "../../models/Product";
 import Brand from "../../models/Brand";
 import Blogger from "../../models/Blogger";
 import Care from "../../models/Care";
@@ -49,25 +49,25 @@ export async function getServerSideProps(context) {
 
     const { collection } = context.params;
 
-    // await Product.updateMany({}, { $set: { group: "clothing" } });
+    // await ProductModel.updateMany({}, { $set: { group: "clothing" } });
 
     switch (collection) {
       case "gallery":
-        products = await Product.find({ sale: false });
+        products = await ProductModel.find({ sale: false });
         break;
       case "sale":
-        let data = await Product.find({ sale: true });
+        let data = await ProductModel.find({ sale: true });
         products = data.sort(
           (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
         );
         break;
       case "accessories":
-        products = await Product.find({
+        products = await ProductModel.find({
           category: { $in: ["اکسسوری", "ساعت", "عینک", "کلاه", "کیف"] },
         });
         break;
       case "shoes":
-        products = await Product.find({ category: "کفش" });
+        products = await ProductModel.find({ category: "کفش" });
         break;
       case "brands":
         brands = await Brand.find();

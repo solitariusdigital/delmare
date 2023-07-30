@@ -27,6 +27,7 @@ const UserSchema = new Schema(
     follows: [String],
     birthday: String,
     discount: String,
+    loyalty: Number,
   },
   { timestamps: true }
 );

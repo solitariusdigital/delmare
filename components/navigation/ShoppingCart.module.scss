@@ -43,14 +43,13 @@
     height: 50px;
     background: linear-gradient(to bottom, config.$brand, config.$cream);
 
-    .title {
+    .row {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
 
       p {
-        font-size: config.$big-font;
+        font-size: config.$med-font;
       }
 
       .count {

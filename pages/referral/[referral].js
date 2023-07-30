@@ -1,13 +1,30 @@
-import React from "react";
+import { useEffect, useContext, useState } from "react";
+import { StateContext } from "../../context/stateContext";
 import UserModel from "../../models/User";
 import dbConnect from "../../services/dbConnect";
 
-export default function Referral({ user }) {
-  return (
-    <div>
-      <p>{user.name}</p>
-    </div>
-  );
+export default function Referral({ user, referral }) {
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const { menu, setMenu } = useContext(StateContext);
+  const { register, setRegister } = useContext(StateContext);
+  const { referralData, setReferralData } = useContext(StateContext);
+
+  useEffect(() => {
+    setNavigationBottom(false);
+    setMenu(true);
+    setRegister(true);
+    setReferralData({
+      user: user,
+      referral: referral,
+    });
+  }, [
+    user,
+    referral,
+    setMenu,
+    setNavigationBottom,
+    setReferralData,
+    setRegister,
+  ]);
 }
 
 // initial connection to db
@@ -21,6 +38,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
+        referral: JSON.parse(JSON.stringify(referral)),
       },
     };
   } catch (error) {

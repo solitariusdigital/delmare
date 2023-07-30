@@ -20,7 +20,9 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import secureLocalStorage from "react-secure-storage";
 import StarIcon from "@mui/icons-material/Star";
 import DownloadIcon from "@mui/icons-material/Download";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import { convertNumber } from "../../services/utility";
 
 export default function BurgerMenu() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -29,6 +31,8 @@ export default function BurgerMenu() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { referralData, setReferralData } = useContext(StateContext);
+  const [lotaltyPoint, setLoyaltyPoint] = useState(currentUser.loyalty);
 
   const [alert, setAlert] = useState("");
   const [contact, setContact] = useState(false);
@@ -147,6 +151,14 @@ export default function BurgerMenu() {
     }, 3000);
   };
 
+  const closeMenu = () => {
+    setMenu(false);
+    setRegister(false);
+    if (referralData.user) {
+      Router.push("/");
+    }
+  };
+
   return (
     <div className={classes.slider} style={{ height: window.innerHeight }}>
       <div className={classes.menu}>
@@ -154,23 +166,30 @@ export default function BurgerMenu() {
           <CloseIcon
             className="icon"
             onClick={() => {
-              setMenu(false);
-              setRegister(false);
+              closeMenu();
             }}
           />
           {currentUser && (
-            <div
-              className={classes.user}
-              onClick={() => navigateMenu("account")}
-            >
-              {currentUser.permission === "admin" && <MilitaryTechIcon />}
-              {currentUser.permission === "subadmin" && <MilitaryTechIcon />}
-              {currentUser.permission === "blogger" && <StarIcon />}
-              {currentUser.permission === "customer" && <Person4Icon />}
-              <p>
-                {currentUser.name === "" ? currentUser.phone : currentUser.name}
-              </p>
-            </div>
+            <Fragment>
+              <div className={classes.row}>
+                <MonetizationOnIcon />
+                <p>{convertNumber(lotaltyPoint)}</p>
+              </div>
+              <div
+                className={classes.row}
+                onClick={() => navigateMenu("account")}
+              >
+                {currentUser.permission === "admin" && <MilitaryTechIcon />}
+                {currentUser.permission === "subadmin" && <MilitaryTechIcon />}
+                {currentUser.permission === "blogger" && <StarIcon />}
+                {currentUser.permission === "customer" && <Person4Icon />}
+                <p>
+                  {currentUser.name === ""
+                    ? currentUser.phone
+                    : currentUser.name}
+                </p>
+              </div>
+            </Fragment>
           )}
         </div>
         <div className={classes.items}>

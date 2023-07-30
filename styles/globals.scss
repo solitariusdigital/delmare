@@ -90,10 +90,10 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
-
-  .message {
-    color: config.$grey;
-  }
+  margin: 0px 12px;
+  padding-top: 12px;
+  @include mixins.transparentBackground(0.5, config.$lemon);
+  @include mixins.border-radius();
 }
 
 .collections-type {

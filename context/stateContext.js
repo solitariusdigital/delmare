@@ -23,6 +23,7 @@ export const StateProvider = (props) => {
   );
   const [selectedProduct, setSelectedProduct] = useState({});
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [referralData, setReferralData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
@@ -177,6 +178,8 @@ export const StateProvider = (props) => {
     setNavigationBottom,
     toggleType,
     setToggleType,
+    referralData,
+    setReferralData,
   };
 
   return (

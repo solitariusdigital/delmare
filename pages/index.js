@@ -41,6 +41,7 @@ export default function HomePage() {
     navigator.clipboard.writeText(
       `https://delmareh.com/referral/${currentUser.phone.slice(-5)}`
     );
+    // Router.push(`/referral/${currentUser.phone.slice(-5)}`);
     setReferralLink(true);
     setTimeout(() => {
       setReferralLink(false);
@@ -84,11 +85,11 @@ export default function HomePage() {
       {userLogIn ? (
         <div className="referral">
           <div onClick={() => generateReferralCode()} className="ctaButton">
-            {referralLink ? <p>لینک ذخیره شد</p> : <p>دعوت دوستان</p>}
+            {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت</p>}
           </div>
           <p className="message">
-            به دوستان خود لینک ثبت نام ارسال کنید و با ورود هر کدام به دلماره
-            500 امتیاز خرید از دلماره دریافت کنید
+            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره 500
+            امتیاز خرید از دلماره دریافت کنید
           </p>
         </div>
       ) : (
@@ -109,7 +110,7 @@ export default function HomePage() {
             >
               <div
                 className={
-                  collection.type === "care" ? "ctaClothing" : "ctaCare"
+                  collection.type === "clothing" ? "ctaClothing" : "ctaCare"
                 }
               >
                 <p>{collection.title}</p>

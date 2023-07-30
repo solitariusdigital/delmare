@@ -16,6 +16,7 @@ import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
 import secureLocalStorage from "react-secure-storage";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -24,6 +25,7 @@ export default function ShoppingCart() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const [lotaltyPoint, setLoyaltyPoint] = useState(currentUser.loyalty);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -244,10 +246,16 @@ export default function ShoppingCart() {
               onClick={() => setToggleContainer("")}
             />
             {!checkout && (
-              <div className={classes.title}>
-                <p className={classes.count}>{shoppingCart.length}</p>
-                <p>آیتم</p>
-              </div>
+              <Fragment>
+                <div className={classes.row}>
+                  <MonetizationOnIcon />
+                  <p>{convertNumber(lotaltyPoint)}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.count}>{shoppingCart.length}</p>
+                  <p>آیتم</p>
+                </div>
+              </Fragment>
             )}
             {checkout && (
               <div className={classes.brand}>
