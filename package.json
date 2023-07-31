@@ -35,5 +35,9 @@
   "devDependencies": {
     "eslint": "^8.23.0",
     "eslint-config-next": "^12.3.4"
+  },
+  "overrides": {
+    "chokidar": "3.5.3",
+    "glob-parent": "6.0.2"
   }
 }

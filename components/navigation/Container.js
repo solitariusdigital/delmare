@@ -16,18 +16,14 @@ import classes from "./Container.module.scss";
 import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import secureLocalStorage from "react-secure-storage";
-import { getUserApi } from "../../services/api";
 
 function Container() {
-  const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
   const { collectionsToggle, setCollectionsToggle } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
-  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
@@ -43,34 +39,6 @@ function Container() {
       link: "/collections/care",
     },
   ];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentUserData = JSON.parse(
-          secureLocalStorage.getItem("currentUser")
-        );
-        if (currentUserData) {
-          setUserLogin(true);
-          const user = await getUserApi(currentUserData["_id"]);
-          setCurrentUser(user);
-          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [setUserLogin, setCurrentUser]);
-
-  useEffect(() => {
-    if (JSON.parse(secureLocalStorage.getItem("shoppingCart"))) {
-      setShoppingCart(JSON.parse(secureLocalStorage.getItem("shoppingCart")));
-    } else {
-      secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const activateNav = (link, index) => {
     sessionStorage.removeItem("positionY");
