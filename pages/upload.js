@@ -130,30 +130,31 @@ export default function Upload() {
     "هفت الی چهارده روز کاری",
   ];
 
+  const sourceLink = "https://delmare.storage.iran.liara.space";
   const graphInfo = [
     {
       title: "شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+      src: `${sourceLink}/sizegraph/sizegraphone.png`,
     },
     {
       title: "کاپشن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
+      src: `${sourceLink}/sizegraph/sizegraphtwo.png`,
     },
     {
       title: "پیراهن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
+      src: `${sourceLink}/sizegraph/sizegraphthree.png`,
     },
     {
       title: "بلوز",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+      src: `${sourceLink}/sizegraph/sizegraphfour.png`,
     },
     {
       title: "بلوز شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+      src: `${sourceLink}/sizegraph/sizegraphfive.png`,
     },
     {
       title: "کت شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
+      src: `${sourceLink}/sizegraph/sizegraphsix.png`,
     },
   ];
 
@@ -423,22 +424,22 @@ export default function Upload() {
 
     if (mainImage !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.main = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(mainImage, imageId, delmareIdFolder);
     }
     if (imageOne !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.one = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageOne, imageId, delmareIdFolder);
     }
     if (imageTwo !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.two = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageTwo, imageId, delmareIdFolder);
     }
     if (imageThree !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.three = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageThree, imageId, delmareIdFolder);
     }
 
@@ -530,27 +531,27 @@ export default function Upload() {
 
     if (mainImage !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.main = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(mainImage, imageId, delmareIdFolder);
     }
     if (imageOne !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.one = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageOne, imageId, delmareIdFolder);
     }
     if (imageTwo !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.two = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageTwo, imageId, delmareIdFolder);
     }
     if (imageThree !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.three = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageThree, imageId, delmareIdFolder);
     }
     if (table !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.table = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       images.graph = sizeGraph;
       await uploadImages(table, imageId, delmareIdFolder);
     }

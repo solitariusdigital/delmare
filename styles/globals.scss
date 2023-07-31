@@ -175,6 +175,7 @@ a {
   margin: 8px auto;
   box-shadow: config.$image-shadow;
   background: config.$brand;
+  @include mixins.heartbeat();
 
   &:hover {
     cursor: pointer;
