@@ -6,7 +6,7 @@ import Image from "next/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
 
-function Layout(props) {
+export default function Layout(props) {
   const { container, setContainer } = useContext(StateContext);
   const [loadAppUpdate, setLoadUpdate] = useState({});
 
@@ -20,7 +20,7 @@ function Layout(props) {
 
   return (
     <Fragment>
-      {loadAppUpdate.active ? (
+      {!loadAppUpdate.active ? (
         <Fragment>
           {container && (
             <div className="navigation">
@@ -39,5 +39,3 @@ function Layout(props) {
     </Fragment>
   );
 }
-
-export default Layout;
