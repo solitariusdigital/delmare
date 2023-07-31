@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState, Fragment } from "react";
-import Head from "next/head";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import { NextSeo } from "next-seo";
 
 export default function HomePage() {
   const { bar, setBar } = useContext(StateContext);
@@ -80,9 +80,16 @@ export default function HomePage() {
 
   return (
     <Fragment>
-      <Head>
-        <title>Delmareh</title>
-      </Head>
+      <NextSeo
+        title="Delmareh"
+        description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/",
+          siteName: "Delmareh",
+        }}
+      />
       {userLogIn ? (
         <div className="referral">
           <div

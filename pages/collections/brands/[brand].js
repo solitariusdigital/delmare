@@ -2,10 +2,10 @@ import { useEffect, useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import Collection from "../../../components/Collection";
 import { getBrandApi } from "../../../services/api";
-import Head from "next/head";
 import dbConnect from "../../../services/dbConnect";
 import BrandModel from "../../../models/Brand";
 import Product from "../../../models/Product";
+import { NextSeo } from "next-seo";
 
 export default function Brand({ products, brands }) {
   const [gallery, setGallery] = useState([]);
@@ -35,10 +35,16 @@ export default function Brand({ products, brands }) {
 
   return (
     <Fragment>
-      <Head>
-        <title>Fashion Brands</title>
-        <meta name="description" content="Fashion brands" />
-      </Head>
+      <NextSeo
+        title="برندز"
+        description="برندز همکار در دلماره"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections/brands",
+          siteName: "Delmareh",
+        }}
+      />
       <Collection
         collectionType={"brands"}
         brandGallery={gallery}

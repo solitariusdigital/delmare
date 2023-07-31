@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import Brands from "../../components/Brands";
 import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
-import Head from "next/head";
 import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";
 import Brand from "../../models/Brand";
 import Blogger from "../../models/Blogger";
 import Care from "../../models/Care";
+import { NextSeo } from "next-seo";
 
 export default function CollectionPage({
   products,
@@ -21,10 +21,16 @@ export default function CollectionPage({
 
   return (
     <Fragment>
-      <Head>
-        <title>Fashion Clothing</title>
-        <meta name="description" content="Fashion clothing" />
-      </Head>
+      <NextSeo
+        title="Delmareh"
+        description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/",
+          siteName: "Delmareh",
+        }}
+      />
       {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
         <Collection collectionType={collection} collectionData={products} />
       )}

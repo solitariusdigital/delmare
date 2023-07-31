@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 export default function Care() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
@@ -57,13 +57,18 @@ export default function Care() {
     });
     setNavigationTopBar([...navigationTopBar]);
   };
-
   return (
     <Fragment>
-      <Head>
-        <title>Care Products</title>
-        <meta name="description" content="Delmareh's care products" />
-      </Head>
+      <NextSeo
+        title="لوازم بهداشتی"
+        description="خرید لوازم بهداشتی از دلماره"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections/care",
+          siteName: "Delmareh",
+        }}
+      />
       <div className="collections-type">
         {collections.map((collection, index) => (
           <Fragment key={index}>

@@ -8,7 +8,6 @@ import {
   getUserApi,
   updateUserApi,
 } from "../../../services/api";
-import Head from "next/head";
 import { StateContext } from "../../../context/stateContext";
 import Image from "next/image";
 import classes from "../../page.module.scss";
@@ -20,6 +19,7 @@ import secureLocalStorage from "react-secure-storage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { abbreviateNumber } from "../../../services/utility";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { NextSeo } from "next-seo";
 
 export default function Blogger() {
   const { register, setRegister } = useContext(StateContext);
@@ -164,10 +164,16 @@ export default function Blogger() {
 
   return (
     <div style={{ height: divHeight }}>
-      <Head>
-        <title>Fashion Bloggers</title>
-        <meta name="description" content="Fashion bloggers" />
-      </Head>
+      <NextSeo
+        title="بلاگرز"
+        description="بلاگرز همکار در دلماره"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections/bloggers",
+          siteName: "Delmareh",
+        }}
+      />
       <div className={classes.topBar}>
         <ArrowBackIosNewIcon
           className="icon"

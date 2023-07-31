@@ -29,7 +29,7 @@ import Router from "next/router";
 import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -442,10 +442,16 @@ export default function Product({ product, favourite }) {
 
   return (
     <Fragment>
-      <Head>
-        <title>Fashion Product</title>
-        <meta name="description" content="Fashion product" />
-      </Head>
+      <NextSeo
+        title="مشخصات محصول"
+        description="مشخصات محصول"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections",
+          siteName: "Delmareh",
+        }}
+      />
       <div className={classes.productContainer}>
         <div className={classes.topBar}>
           <ArrowBackIosNewIcon

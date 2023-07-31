@@ -2,10 +2,10 @@ import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
-import Head from "next/head";
 import Highlight from "../../components/Highlight";
 import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";
+import { NextSeo } from "next-seo";
 
 export default function Clothing({
   newItems,
@@ -86,10 +86,16 @@ export default function Clothing({
 
   return (
     <Fragment>
-      <Head>
-        <title>Clothing Products</title>
-        <meta name="description" content="Delmareh's clothing products" />
-      </Head>
+      <NextSeo
+        title="کالکشن لباس"
+        description="خرید لباس از دلماره"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections/clothing",
+          siteName: "Delmareh",
+        }}
+      />
       <div className="highlight">
         <h4>جدید</h4>
         <Highlight products={newItems} />
