@@ -110,19 +110,45 @@ export default function Upload() {
   const [careSize, setCareSize] = useState("");
   const [careCountry, setCareCountry] = useState("");
   const [careCount, setCareCount] = useState("");
-  const careCategories = ["مراقبت مو", "مراقبت پوست"];
-  const careTypes = ["dark", "grey", "light"];
-  const careBrands = [
-    "Avene",
-    "Clinique",
-    "E.I.F",
-    "Garnier",
-    "Kiko Milano",
-    "Ordinary",
-    "Revolution",
-    "Sephora",
-  ];
-
+  const careCategories = ["مراقبت مو", "مراقبت صورت"];
+  const careTypes = {
+    "مراقبت صورت": {
+      group: [
+        "پاک کننده دور چشم",
+        "ماسک صورت",
+        "کرم و فابریک",
+        "ضد آفتاب",
+        "آب پاک کننده",
+        "پد پاک کننده آرایش",
+        "پاک کننده صورت",
+        "اکسسوری پاک کننده",
+        "تونیک",
+      ],
+      general: [
+        "اسکراب و لایه بردار صورت",
+        "درمان روزانه",
+        "درمان  شبانه",
+        "سروم",
+        "مراقبت چشم",
+        "روشن کننده",
+        "مرطوب کننده و آبرسان",
+        "ضد تحریک",
+        "ضد چین و چروک و اقزایش عمر",
+        "مراقبت و درمان منافذ و بافت پوست",
+        "هیالورنیک اسید",
+      ],
+    },
+  };
+  const careBrands = {
+    Avene: "France",
+    Clinique: "New York U.S.",
+    "E.I.F": "California U.S.",
+    Garnier: "France",
+    "Kiko Milano": "Italy",
+    Ordinary: "Toronto Canada",
+    Revolution: "U.K.",
+    Sephora: "Paris France",
+  };
   const brandTypes = ["ایرانی", "اورجینال", "های کپی"];
   const deliveryTypes = [
     "موجود در انبار",
@@ -758,6 +784,23 @@ export default function Upload() {
                     autoComplete="off"
                   />
                 </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBrandType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      نوع
+                    </option>
+                    {brandTypes.map((brand, index) => {
+                      return (
+                        <option key={index} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
               </Fragment>
             ) : (
               <Fragment>
@@ -767,7 +810,7 @@ export default function Upload() {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="default" disabled>
-                      دسته بندی
+                      دسته
                     </option>
                     {careCategories.map((category, index) => {
                       return (
@@ -786,7 +829,24 @@ export default function Upload() {
                     <option value="default" disabled>
                       گروه
                     </option>
-                    {careTypes.map((type, index) => {
+                    {careTypes[category]?.["group"].map((type, index) => {
+                      return (
+                        <option key={index} value={type}>
+                          {type}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBrandType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      نوع
+                    </option>
+                    {careTypes[category]?.["general"].map((type, index) => {
                       return (
                         <option key={index} value={type}>
                           {type}
@@ -803,24 +863,7 @@ export default function Upload() {
                     <option value="default" disabled>
                       برند
                     </option>
-                    {careBrands.map((brand, index) => {
-                      return (
-                        <option key={index} value={brand}>
-                          {brand}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                <div className={classes.input}>
-                  <select
-                    defaultValue={"default"}
-                    onChange={(e) => setBrandType(e.target.value)}
-                  >
-                    <option value="default" disabled>
-                      نوع برند
-                    </option>
-                    {brandTypes.map((brand, index) => {
+                    {Object.keys(careBrands).map((brand, index) => {
                       return (
                         <option key={index} value={brand}>
                           {brand}
@@ -843,9 +886,8 @@ export default function Upload() {
                     id="country"
                     name="country"
                     onChange={(e) => setCareCountry(e.target.value)}
-                    value={careSize}
+                    value={careBrands[brand]}
                     autoComplete="off"
-                    dir="rtl"
                   />
                 </div>
                 <div className={classes.input}>
@@ -913,7 +955,7 @@ export default function Upload() {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="default" disabled>
-                      دسته بندی
+                      دسته
                     </option>
                     {generalCategories.map((category, index) => {
                       return (

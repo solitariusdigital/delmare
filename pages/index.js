@@ -57,7 +57,7 @@ export default function HomePage() {
       imageSrc: `${sourceLink}eight.jpg`,
     },
     {
-      title: "لوازم بهداشتی",
+      title: "محصولات بهداشتی",
       type: "care",
       link: "/collections/care",
       imageSrc: `${sourceLink}care.jpg`,

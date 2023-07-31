@@ -38,7 +38,7 @@ export default function Care() {
       imageSrc: `${sourceLink}hair.jpg`,
     },
     {
-      title: "مراقبت پوست",
+      title: "مراقبت صورت",
       collection: "skin",
       link: "/collections/skin",
       imageSrc: `${sourceLink}skin.jpg`,
@@ -60,8 +60,8 @@ export default function Care() {
   return (
     <Fragment>
       <NextSeo
-        title="لوازم بهداشتی"
-        description="خرید لوازم بهداشتی از دلماره"
+        title="محصولات بهداشتی"
+        description="خرید محصولات بهداشتی از دلماره"
         openGraph={{
           type: "website",
           locale: "fa_IR",

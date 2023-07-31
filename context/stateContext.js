@@ -76,7 +76,7 @@ export const StateProvider = (props) => {
       type: "care",
     },
     {
-      title: "پوست",
+      title: "صورت",
       collection: "skin",
       link: "/collections/skin",
       active: false,

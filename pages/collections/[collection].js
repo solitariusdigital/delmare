@@ -83,7 +83,7 @@ export async function getServerSideProps(context) {
         break;
       case "skin":
         careProducts = await Care.find({
-          category: { $in: ["مراقبت پوست"] },
+          category: { $in: ["مراقبت صورت"] },
         });
         break;
       case "hair":

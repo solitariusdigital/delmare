@@ -39,7 +39,7 @@ function Container() {
       link: "/collections/clothing",
     },
     {
-      title: "لوازم بهداشتی",
+      title: "محصولات بهداشتی",
       link: "/collections/care",
     },
   ];

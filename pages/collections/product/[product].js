@@ -779,12 +779,12 @@ export default function Product({ product, favourite }) {
               </p>
             </div>
             <div className={classes.rowDetails}>
-              <p>نوع</p>
-              <p className={classes.title}>{product.brandType}</p>
-            </div>
-            <div className={classes.rowDetails}>
               <p>دسته</p>
               <p className={classes.title}>{product.category}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>نوع</p>
+              <p className={classes.title}>{product.brandType}</p>
             </div>
             <div className={classes.rowDetails}>
               <p>فصل</p>
@@ -807,12 +807,12 @@ export default function Product({ product, favourite }) {
               <p className={classes.title}>{product.type}</p>
             </div>
             <div className={classes.rowDetails}>
-              <p>کشور</p>
-              <p className={classes.title}>{product.country}</p>
-            </div>
-            <div className={classes.rowDetails}>
               <p>نوع</p>
               <p className={classes.title}>{product.brandType}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>کشور</p>
+              <p className={classes.title}>{product.country}</p>
             </div>
           </div>
         )}
@@ -1090,7 +1090,7 @@ export default function Product({ product, favourite }) {
                 <div className={classes.row}>
                   <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                   <p className={classes.description}>
-                    لوازم آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
+                    محصولات آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
                     به صورت پلمپ فروخته شده و امکان بازگشت ندارند
                   </p>
                 </div>
