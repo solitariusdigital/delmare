@@ -81,7 +81,7 @@ export default function Layout(props) {
 
   return (
     <Fragment>
-      {loadAppUpdate.active ||
+      {!loadAppUpdate.active ||
       (userLogIn && currentUser?.["permission"] === "admin") ? (
         <Fragment>
           {loader ? (
