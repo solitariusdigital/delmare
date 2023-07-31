@@ -91,9 +91,19 @@ a {
   flex-direction: column;
   text-align: center;
   margin: 0px 12px;
-  padding-top: 12px;
-  @include mixins.transparentBackground(0.5, config.$lemon);
+  @include mixins.transparentBackground(0.3, config.$brand);
   @include mixins.border-radius();
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.gold-icon {
+  margin: 0px 5px;
+  color: config.$gold;
 }
 
 .collections-type {
@@ -106,8 +116,7 @@ a {
     justify-content: center;
     align-items: center;
     position: relative;
-    width: calc(100% - 24px);
-    margin: 6px 12px;
+    margin: 8px 12px;
     height: 55vh;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
@@ -139,7 +148,6 @@ a {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       font-weight: bold;
-      opacity: 0.8;
       box-shadow: config.$image-shadow;
       @include mixins.gradientBackground();
     }
@@ -155,7 +163,8 @@ a {
   }
 }
 
-.ctaButton {
+.ctaButton,
+.ctaButton-referral {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,6 +179,10 @@ a {
   &:hover {
     cursor: pointer;
   }
+}
+
+.ctaButton-referral {
+  background: config.$lemon;
 }
 
 .message {

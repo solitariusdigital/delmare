@@ -266,7 +266,10 @@ export default function Account() {
                   <p>{convertNumber(calculateTotalSale())} T</p>
                   <div className={classes.row}>
                     <p>درآمد</p>
-                    <MonetizationOnIcon sx={{ fontSize: 22 }} />
+                    <MonetizationOnIcon
+                      className="gold-icon"
+                      sx={{ fontSize: 22 }}
+                    />
                   </div>
                 </div>
               </div>

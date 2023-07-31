@@ -3,6 +3,7 @@ import Head from "next/head";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
 import Image from "next/image";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 export default function HomePage() {
   const { bar, setBar } = useContext(StateContext);
@@ -84,12 +85,19 @@ export default function HomePage() {
       </Head>
       {userLogIn ? (
         <div className="referral">
-          <div onClick={() => generateReferralCode()} className="ctaButton">
+          <div
+            onClick={() => generateReferralCode()}
+            className="ctaButton-referral"
+          >
             {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت</p>}
           </div>
           <p className="message">
-            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره 500
-            امتیاز خرید از دلماره دریافت کنید
+            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره{" "}
+            <span className="row">
+              اعتبار خرید از دلماره دریافت کنید
+              <MonetizationOnIcon className="gold-icon" sx={{ fontSize: 20 }} />
+              <span>500</span>
+            </span>
           </p>
         </div>
       ) : (

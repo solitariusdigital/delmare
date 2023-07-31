@@ -249,10 +249,8 @@ export default function ShoppingCart() {
             {!checkout && (
               <Fragment>
                 <div className={classes.row}>
-                  <MonetizationOnIcon />
-                  <p className={classes.loyalty}>
-                    {convertNumber(lotaltyPoint)}
-                  </p>
+                  <MonetizationOnIcon className="gold-icon" />
+                  <p>{convertNumber(lotaltyPoint)}</p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.count}>{shoppingCart.length}</p>

@@ -8,8 +8,9 @@ import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";
 
 export default function Clothing({
-  highlightCollection,
   newItems,
+  newSales,
+  mostViews,
   cheapestItems,
 }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
@@ -115,10 +116,16 @@ export default function Clothing({
                 loading="eager"
               />
             </div>
-            {index === 2 && (
+            {index === 1 && (
+              <div className="highlight">
+                <h4>تخفیف ویژه</h4>
+                <Highlight products={newSales} />
+              </div>
+            )}
+            {index === 3 && (
               <div className="highlight">
                 <h4>بیشترین بازدید</h4>
-                <Highlight products={highlightCollection} />
+                <Highlight products={mostViews} />
               </div>
             )}
           </Fragment>
@@ -141,19 +148,25 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const products = await ProductModel.find();
-    const highlightCollection = products
+    const newItems = products
+      .filter((product) => {
+        return product.activate && !product.sale;
+      })
+      .reverse()
+      .slice(0, 5);
+    const newSales = products
+      .filter((product) => {
+        return product.activate && product.sale;
+      })
+      .reverse()
+      .slice(0, 5);
+    const mostViews = products
       .filter((product) => {
         return product.activate;
       })
       .sort((a, b) => {
         return b.views - a.views;
       })
-      .slice(0, 5);
-    const newItems = products
-      .filter((product) => {
-        return product.activate && !product.sale;
-      })
-      .reverse()
       .slice(0, 5);
     const cheapestItems = products
       .filter((product) => {
@@ -164,8 +177,9 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        highlightCollection: JSON.parse(JSON.stringify(highlightCollection)),
         newItems: JSON.parse(JSON.stringify(newItems)),
+        newSales: JSON.parse(JSON.stringify(newSales)),
+        mostViews: JSON.parse(JSON.stringify(mostViews)),
         cheapestItems: JSON.parse(JSON.stringify(cheapestItems)),
       },
     };

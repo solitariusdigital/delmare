@@ -175,7 +175,7 @@ export default function BurgerMenu() {
           {currentUser && (
             <Fragment>
               <div className={classes.row}>
-                <MonetizationOnIcon />
+                <MonetizationOnIcon className="gold-icon" />
                 <p>{convertNumber(lotaltyPoint)}</p>
               </div>
               <div

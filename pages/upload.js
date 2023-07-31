@@ -9,11 +9,11 @@ import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
 import secureLocalStorage from "react-secure-storage";
 import { convertNumber } from "../services/utility";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 export default function Upload() {
   const sizeInitialState = {
@@ -783,7 +783,7 @@ export default function Upload() {
                     onChange={(e) => setCareType(e.target.value)}
                   >
                     <option value="default" disabled>
-                      نوع
+                      گروه
                     </option>
                     {careTypes.map((type, index) => {
                       return (
@@ -803,6 +803,23 @@ export default function Upload() {
                       برند
                     </option>
                     {careBrands.map((brand, index) => {
+                      return (
+                        <option key={index} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBrandType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      نوع برند
+                    </option>
+                    {brandTypes.map((brand, index) => {
                       return (
                         <option key={index} value={brand}>
                           {brand}
@@ -870,23 +887,6 @@ export default function Upload() {
                 </div>
               </Fragment>
             )}
-            <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => setBrandType(e.target.value)}
-              >
-                <option value="default" disabled>
-                  نوع برند
-                </option>
-                {brandTypes.map((brand, index) => {
-                  return (
-                    <option key={index} value={brand}>
-                      {brand}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
             <div className={classes.input}>
               <select
                 defaultValue={"default"}
@@ -969,10 +969,10 @@ export default function Upload() {
                   onClick={() => setPrice("")}
                   sx={{ fontSize: 16 }}
                 />
-                <MonetizationOnIcon
+                <LocalOfferIcon
                   className="icon"
                   onClick={() => setSale(!sale)}
-                  sx={{ color: "#d40d12", fontSize: 25 }}
+                  sx={{ color: "#d40d12", fontSize: 22 }}
                 />
                 <p>{convertNumber(Number(price))} T</p>
                 <p className={classes.label}>قیمت تومان</p>
