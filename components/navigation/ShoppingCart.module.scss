@@ -183,7 +183,6 @@
   .details {
     position: absolute;
     bottom: 0px;
-    height: 180px;
     width: 100%;
     padding: 12px;
     display: flex;
@@ -195,6 +194,7 @@
       height: 40px;
       max-width: config.$max-width;
       font-size: config.$med-font;
+      margin-bottom: 4px;
     }
 
     .row {
@@ -211,6 +211,7 @@
       .title {
         color: config.$grey;
         margin-left: 12px;
+        text-align: right;
       }
 
       .discountRow {
@@ -223,7 +224,7 @@
           color: config.$grey;
           font-weight: 300;
           font-size: config.$small-font;
-          margin-right: 12px;
+          margin-left: 12px;
         }
 
         .percentage {

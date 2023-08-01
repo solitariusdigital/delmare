@@ -429,32 +429,33 @@ export default function ShoppingCart() {
               <p className={classes.value}>{shoppingCart.length}</p>
               <p className={classes.title}>تعداد آیتم</p>
             </div>
+            {loyaltyPoint !== 0 && (
+              <div className={classes.row}>
+                <p className={classes.value}>
+                  {convertNumber(calculateLoyaltyDiscount(loyaltyPoint))} T
+                </p>
+                <p className={classes.title}>اعتبار قابل استفاده</p>
+              </div>
+            )}
             <div className={classes.row}>
               {loyaltyPoint !== 0 &&
+              shoppingCart.length > 0 &&
               calculateLoyaltyDiscount(loyaltyPoint) <= 200000 ? (
                 <div className={classes.discountRow}>
-                  <p className={classes.price}>
-                    {convertNumber(calculateTotal())} T
-                  </p>
                   <p className={classes.value}>
                     {convertNumber(
                       calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint)
                     )}{" "}
                     T
                   </p>
+                  <p className={classes.price}>
+                    {convertNumber(calculateTotal())} T
+                  </p>
                 </div>
               ) : (
                 <p className={classes.value}>
                   {convertNumber(calculateTotal())} T
                 </p>
-              )}
-              {loyaltyPoint !== 0 && (
-                <div className={classes.discountRow}>
-                  <p>
-                    {convertNumber(calculateLoyaltyDiscount(loyaltyPoint))} T
-                  </p>
-                  <p className={classes.title}>اعتبار قابل استفاده</p>
-                </div>
               )}
               <div className={classes.discountRow}>
                 <p className={classes.title}>مبلغ پرداخت</p>

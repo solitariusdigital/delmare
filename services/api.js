@@ -9,6 +9,19 @@ export const updateUserApi = async (data) => {
   });
   return await response.json();
 };
+export const updateUserApiServer = async (data) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/users`,
+    {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 export const createUserApi = async (data) => {
   const response = await fetch("/api/users", {
     method: "POST",
@@ -35,6 +48,18 @@ export const getUserApi = async (id) => {
       "Content-Type": "application/json",
     },
   });
+  return await response.json();
+};
+export const getUserApiServer = async (id) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MAIN_DOMAIN}/api/user?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return await response.json();
 };
 

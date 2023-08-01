@@ -96,7 +96,7 @@ export default function HomePage() {
             onClick={() => generateReferralCode()}
             className="ctaButton-referral"
           >
-            {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت</p>}
+            {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان </p>}
           </div>
           <p className="message">
             به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره{" "}

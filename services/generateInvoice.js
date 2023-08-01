@@ -1,10 +1,11 @@
-import { calculatePercentage } from "./utility";
 import {
   createInvoiceApiServer,
   updateCareApiServer,
   getCareApiServer,
   updateProductApiServer,
   getProductApiServer,
+  updateUserApiServer,
+  getUserApiServer,
 } from "./api";
 
 export const generateInvoice = async (
@@ -15,6 +16,7 @@ export const generateInvoice = async (
 ) => {
   try {
     await Promise.all(shoppingCart.map(updateProductData));
+    await updateUser();
     return 200;
   } catch (error) {
     console.error(error);
@@ -80,5 +82,15 @@ export const generateInvoice = async (
     const invoice = createInvoiceObject(product);
     await createInvoiceApiServer(invoice);
     await updateProductCount(product);
+  }
+
+  async function updateUser() {
+    try {
+      const user = await getUserApiServer(currentUser["_id"]);
+      user.loyalty = user.loyalty - parseInt(loyaltyPoint);
+      await updateUserApiServer(user);
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
