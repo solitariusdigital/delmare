@@ -626,7 +626,7 @@ export default function Upload() {
     }
     setTimeout(() => {
       Router.reload(window.location.pathname);
-    }, 3000);
+    }, 1000);
   };
 
   // upload images into s3 bucket
@@ -657,11 +657,21 @@ export default function Upload() {
   };
 
   const assignBrand = (value) => {
-    const selectedBrand = clothesBrands.find((brand) => brand.title === value);
-    if (selectedBrand) {
-      setBrand(value);
-      setDelmareId(selectedBrand.delmareId);
-      setSelectedBrand(selectedBrand);
+    switch (productCategory) {
+      case "clothing":
+        const selectedBrand = clothesBrands.find(
+          (brand) => brand.title === value
+        );
+        if (selectedBrand) {
+          setBrand(value);
+          setDelmareId(selectedBrand.delmareId);
+          setSelectedBrand(selectedBrand);
+        }
+        break;
+      case "care":
+        setBrand(value);
+        setCareCountry(careBrands[value]);
+        break;
     }
   };
 
@@ -858,7 +868,7 @@ export default function Upload() {
                 <div className={classes.input}>
                   <select
                     defaultValue={"default"}
-                    onChange={(e) => setBrand(e.target.value)}
+                    onChange={(e) => assignBrand(e.target.value)}
                   >
                     <option value="default" disabled>
                       برند
@@ -886,7 +896,7 @@ export default function Upload() {
                     id="country"
                     name="country"
                     onChange={(e) => setCareCountry(e.target.value)}
-                    value={careBrands[brand]}
+                    value={careCountry}
                     autoComplete="off"
                   />
                 </div>
