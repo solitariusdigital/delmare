@@ -29,6 +29,9 @@ export default function Confirmation({ props }) {
     if (shoppingCart && currentUser) {
       props.shoppingCart = shoppingCart;
       props.currentUser = currentUser;
+      props.loyaltyPoint = JSON.parse(
+        secureLocalStorage.getItem("useLoyaltyPoint")
+      );
       const processOrder = async () => {
         if (props.ResCode === "0") {
           const check = await postMellatApi(props);

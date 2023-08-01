@@ -172,7 +172,7 @@ function Register() {
           const userData = appUsers.find(
             (user) => user.phone === referralData.user.phone
           );
-          userData.loyalty = userData.loyalty + 500;
+          userData.loyalty = userData.loyalty + 50000;
           await updateUserApi(userData);
         }
         Router.push("/");

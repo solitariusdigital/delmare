@@ -10,6 +10,7 @@ import {
 export const generateInvoice = async (
   currentUser,
   shoppingCart,
+  loyaltyPoint,
   saleReferenceId
 ) => {
   try {
@@ -31,11 +32,7 @@ export const generateInvoice = async (
       refId: saleReferenceId,
       title: product.title,
       originalPrice: product.price,
-      price:
-        currentUser.discount && currentUser.discount !== ""
-          ? product.price -
-            calculatePercentage(currentUser.discount, product.price)
-          : product.price,
+      price: product.price - parseInt(loyaltyPoint),
       color: product.group === "clothing" ? product.color : "ffffff",
       size: product.size,
       image: product.image,

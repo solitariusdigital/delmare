@@ -103,7 +103,7 @@ export default function HomePage() {
             <span className="row">
               اعتبار خرید از دلماره دریافت کنید
               <MonetizationOnIcon className="gold-icon" sx={{ fontSize: 20 }} />
-              <span>500</span>
+              <span>50,000 T</span>
             </span>
           </p>
         </div>

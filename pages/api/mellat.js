@@ -313,6 +313,7 @@ async function callBackCheck(req, res) {
   let resultCode_bpPayRequest;
   let currentUser = req.body.currentUser;
   let shoppingCart = req.body.shoppingCart;
+  let loyaltyPoint = req.body.loyaltyPoint;
 
   saleReferenceId = parseInt(req.body.SaleReferenceId, 10);
   saleOrderId = parseInt(req.body.SaleOrderId, 10);
@@ -375,6 +376,7 @@ async function callBackCheck(req, res) {
         let success = await generateInvoice(
           currentUser,
           shoppingCart,
+          loyaltyPoint,
           saleReferenceId
         );
         return res.json({

@@ -25,13 +25,12 @@ export default function ShoppingCart() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
-  const [lotaltyPoint, setLoyaltyPoint] = useState(0);
+  const [loyaltyPoint, setLoyaltyPoint] = useState(0);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
-  const [discount, setDiscount] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -48,7 +47,6 @@ export default function ShoppingCart() {
           setPhone(user.phone);
           setAddress(user.address);
           setPost(user.post);
-          setDiscount(user.discount);
           secureLocalStorage.setItem("currentUser", JSON.stringify(user));
         } catch (error) {
           console.error(error);
@@ -130,8 +128,18 @@ export default function ShoppingCart() {
     return total;
   };
 
+  const calculateLoyaltyDiscount = (loyaltyPoint) => {
+    let max = 200000;
+    let useLoyaltyPoint = loyaltyPoint <= max ? loyaltyPoint : max;
+    return useLoyaltyPoint;
+  };
+
   // clear shopping cart from duplicate selections based on id and color and size
   const continueShopping = () => {
+    secureLocalStorage.setItem(
+      "useLoyaltyPoint",
+      JSON.stringify(calculateLoyaltyDiscount(loyaltyPoint))
+    );
     const uniqueShoppingCart = shoppingCart.filter(
       (obj, index) =>
         index ===
@@ -217,9 +225,7 @@ export default function ShoppingCart() {
     try {
       setPayment(true);
       const totalAmount =
-        calculateTotal() -
-        calculatePercentage(discount, calculateTotal()) +
-        "0";
+        calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) + "0";
       const pay = await getMellatApi(totalAmount);
       const refId = pay.RefId;
       if (pay.hasOwnProperty("error")) {
@@ -250,7 +256,7 @@ export default function ShoppingCart() {
               <Fragment>
                 <div className={classes.row}>
                   <MonetizationOnIcon className="gold-icon" />
-                  <p>{convertNumber(lotaltyPoint)}</p>
+                  <p>{convertNumber(loyaltyPoint)} T</p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.count}>{shoppingCart.length}</p>
@@ -421,24 +427,18 @@ export default function ShoppingCart() {
             )}
             <div className={classes.row}>
               <p className={classes.value}>{shoppingCart.length}</p>
-              {discount && (
-                <div className={classes.discountRow}>
-                  <p className={classes.title}>هدیه خرید اول</p>
-                  <span className={classes.percentage}>{discount}%</span>
-                </div>
-              )}
               <p className={classes.title}>تعداد آیتم</p>
             </div>
             <div className={classes.row}>
-              {discount ? (
+              {loyaltyPoint !== 0 &&
+              calculateLoyaltyDiscount(loyaltyPoint) <= 200000 ? (
                 <div className={classes.discountRow}>
                   <p className={classes.price}>
                     {convertNumber(calculateTotal())} T
                   </p>
                   <p className={classes.value}>
                     {convertNumber(
-                      calculateTotal() -
-                        calculatePercentage(discount, calculateTotal())
+                      calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint)
                     )}{" "}
                     T
                   </p>
@@ -448,13 +448,20 @@ export default function ShoppingCart() {
                   {convertNumber(calculateTotal())} T
                 </p>
               )}
+              {loyaltyPoint !== 0 && (
+                <div className={classes.discountRow}>
+                  <p>
+                    {convertNumber(calculateLoyaltyDiscount(loyaltyPoint))} T
+                  </p>
+                  <p className={classes.title}>اعتبار قابل استفاده</p>
+                </div>
+              )}
               <div className={classes.discountRow}>
                 <p className={classes.title}>مبلغ پرداخت</p>
               </div>
             </div>
             <div className={classes.row}>
-              {calculateTotal() -
-                calculatePercentage(discount, calculateTotal()) >=
+              {calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) >=
               2000000 ? (
                 <p className={classes.value}>رایگان</p>
               ) : (
