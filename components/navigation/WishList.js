@@ -76,7 +76,7 @@ export default function WishList() {
     setBar(false);
     setTimeout(() => {
       setToggleContainer("");
-    }, 200);
+    }, 500);
   };
 
   return (
