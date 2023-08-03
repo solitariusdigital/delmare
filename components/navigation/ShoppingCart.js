@@ -328,6 +328,7 @@ export default function ShoppingCart() {
                     <div className={classes.close}>
                       <CloseIcon
                         className="icon icon-grey"
+                        sx={{ fontSize: 20 }}
                         onClick={() => deleteCart(index, cart["_id"])}
                       />
                     </div>

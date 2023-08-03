@@ -81,7 +81,7 @@
         flex-direction: row-reverse;
         position: absolute;
         right: 12px;
-        bottom: 5px;
+        bottom: 12px;
       }
 
       .sale {
@@ -90,11 +90,10 @@
       }
 
       .message {
-        margin-top: 12px;
-        color: config.$orange;
         position: absolute;
         right: 0px;
-        bottom: 12px;
+        bottom: 10px;
+        color: config.$orange;
       }
 
       .cart {
