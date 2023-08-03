@@ -77,7 +77,7 @@ export default function WishList() {
     Router.push(`/collections/product/${id}`);
     setTimeout(() => {
       setToggleContainer("");
-    }, 200);
+    }, 500);
   };
 
   return (

@@ -33,6 +33,11 @@
     }
   }
 
+  .menuIcon {
+    background: config.$lemon;
+    display: flex;
+  }
+
   .navigation {
     display: flex;
     align-items: center;

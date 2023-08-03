@@ -86,7 +86,9 @@ function Container() {
                 sx={{ fontSize: 28 }}
               />
             )}
-            <MenuIcon className="icon" onClick={() => setMenu(true)} />
+            <div className={classes.menuIcon}>
+              <MenuIcon className="icon" onClick={() => setMenu(true)} />
+            </div>
           </div>
         </div>
         {bar && (

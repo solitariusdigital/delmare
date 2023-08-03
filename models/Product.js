@@ -31,6 +31,8 @@ const ProductSchema = new Schema(
       M: {},
       L: {},
       XL: {},
+      "2X": {},
+      "3X": {},
       FS: {},
       34: {},
       35: {},
