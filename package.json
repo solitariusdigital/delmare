@@ -12,10 +12,11 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.10.4",
     "@hapi/hapi": "^21.3.2",
-    "@mui/material": "^5.13.7",
-    "@mui/icons-material": "^5.13.7",
+    "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.14.0",
     "@mui/styled-engine-sc": "^5.10.3",
-    "aws-sdk": "^2.1413.0",
+    "aws-sdk": "^2.1415.0",
+    "chokidar": "^3.5.3",
     "get-node-cli": "^8.1.0",
     "kavenegar": "^1.1.4",
     "moment": "^2.29.4",
@@ -36,9 +37,5 @@
   "devDependencies": {
     "eslint": "^8.23.0",
     "eslint-config-next": "^12.3.4"
-  },
-  "overrides": {
-    "chokidar": "3.5.3",
-    "glob-parent": "6.0.2"
   }
 }
