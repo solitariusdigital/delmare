@@ -14,7 +14,7 @@
     "@mui/material": "^5.13.7",
     "@mui/icons-material": "^5.13.7",
     "@mui/styled-engine-sc": "^5.10.3",
-    "aws-sdk": "^2.1413.0",
+    "aws-sdk": "^2.1415.0",
     "get-node-cli": "^8.1.0",
     "kavenegar": "^1.1.4",
     "moment": "^2.29.4",
