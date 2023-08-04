@@ -35,7 +35,7 @@ export default function Layout(props) {
     fetchData().catch(console.error);
     setTimeout(() => {
       setLoader(true);
-    }, 1000);
+    }, 1700);
   }, []);
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function Layout(props) {
             </Fragment>
           ) : (
             <div className="loadAppUpdate">
-              <Image width={200} height={120} src={brand} alt="brand" />
+              <Image width={200} height={100} src={brand} alt="brand" />
             </div>
           )}
         </Fragment>
