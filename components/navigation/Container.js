@@ -63,7 +63,6 @@ function Container() {
 
   const activateNav = (link, index) => {
     sessionStorage.removeItem("positionY");
-    setGallery([]);
     navigation.map((nav, i) => {
       if (i === index) {
         Router.push(link);
