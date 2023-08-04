@@ -274,11 +274,6 @@ a {
         margin-right: 5px;
       }
 
-      .iconRed {
-        color: config.$red;
-        @include mixins.favour();
-      }
-
       .iconPink {
         color: config.$pink;
         @include mixins.favour();
@@ -339,6 +334,11 @@ a {
       @include mixins.transparentBackground(0.8, config.$orange);
     }
   }
+}
+
+.iconRed {
+  color: config.$red;
+  @include mixins.favour();
 }
 
 .container-list {

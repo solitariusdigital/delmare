@@ -42,7 +42,6 @@ export default function HomePage() {
     navigator.clipboard.writeText(
       `https://delmareh.com/referral/${currentUser.phone.slice(-5)}`
     );
-    // Router.push(`/referral/${currentUser.phone.slice(-5)}`);
     setReferralLink(true);
     setTimeout(() => {
       setReferralLink(false);
@@ -99,9 +98,9 @@ export default function HomePage() {
             {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان </p>}
           </div>
           <p className="message">
-            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره{" "}
+            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره
             <span className="row">
-              اعتبار خرید از دلماره دریافت کنید
+              اعتبار خرید دریافت کنید
               <MonetizationOnIcon className="gold-icon" sx={{ fontSize: 20 }} />
               <span>50,000 T</span>
             </span>

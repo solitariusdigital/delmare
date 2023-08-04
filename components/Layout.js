@@ -112,7 +112,7 @@ export default function Layout(props) {
                       }}
                     />
                     <FavoriteIcon
-                      className="icon"
+                      className="icon iconRed"
                       onClick={() => navigateMenu("wish")}
                     />
                   </div>

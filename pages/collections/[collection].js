@@ -1,5 +1,6 @@
+import { Fragment, useContext, useEffect } from "react";
+import { StateContext } from "../../context/stateContext";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
 import Brands from "../../components/Brands";
 import Bloggers from "../../components/Bloggers";
 import Collection from "../../components/Collection";
@@ -18,17 +19,31 @@ export default function CollectionPage({
 }) {
   const router = useRouter();
   let collection = router.query.collection;
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      if (nav.collection === collection) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>
       <NextSeo
-        title="Delmareh"
+        title="Delmreh دلماره"
         description="خرید امن و راحت از بهترین برندهای ایران و دنیا"
         openGraph={{
+          siteName: "Delmareh",
+          title: "دلماره",
+          url: "https://delmareh.com/",
           type: "website",
           locale: "fa_IR",
-          url: "https://delmareh.com/",
-          siteName: "Delmareh",
         }}
       />
       {["gallery", "sale", "accessories", "shoes"].includes(collection) && (
