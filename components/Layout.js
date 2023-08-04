@@ -8,6 +8,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Image from "next/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
+import brand from "../assets/brandanime.png";
+
 import { getNotificationsApi, getUserApi } from "../services/api";
 import secureLocalStorage from "react-secure-storage";
 
@@ -121,8 +123,7 @@ export default function Layout(props) {
             </Fragment>
           ) : (
             <div className="loadAppUpdate">
-              <Image width={90} height={140} src={logo} alt="logo" />
-              <p>با دلماره متفاوت دیده شوید</p>
+              <Image width={200} height={120} src={brand} alt="brand" />
             </div>
           )}
         </Fragment>
