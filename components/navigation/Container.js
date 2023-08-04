@@ -29,7 +29,6 @@ function Container() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
-  const { gallery, setGallery } = useContext(StateContext);
 
   useEffect(() => {
     const fetchData = async () => {
