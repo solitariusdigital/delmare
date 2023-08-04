@@ -16,7 +16,6 @@
     "@mui/styled-engine-sc": "^5.10.3",
     "aws-sdk": "^2.1415.0",
     "chokidar": "^3.5.3",
-    "fsevents": "^2.3.2",
     "get-node-cli": "^8.1.0",
     "kavenegar": "^1.1.4",
     "moment": "^2.29.4",
