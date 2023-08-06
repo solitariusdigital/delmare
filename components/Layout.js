@@ -123,15 +123,21 @@ export default function Layout(props) {
             </Fragment>
           ) : (
             <div className="loadAppUpdate">
-              <Image width={200} height={100} src={brand} alt="brand" />
+              <Image width={200} height={90} src={brand} alt="brand" priority />
             </div>
           )}
         </Fragment>
       ) : (
         <div className="loadAppUpdate">
-          <Image width={120} height={120} src={loadingImage} alt="isLoading" />
+          <Image
+            width={120}
+            height={120}
+            src={loadingImage}
+            alt="isLoading"
+            priority
+          />
           <p>{loadAppUpdate.text}</p>
-          <Image width={90} height={140} src={logo} alt="logo" />
+          <Image width={90} height={140} src={logo} alt="logo" priority />
         </div>
       )}
     </Fragment>
