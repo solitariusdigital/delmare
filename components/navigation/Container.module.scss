@@ -53,7 +53,7 @@
 
     .navActive {
       font-size: config.$small-font;
-      color: config.$pink;
+      border-bottom: 2px solid config.$brand;
       font-weight: bold;
       @include mixins.favour();
     }

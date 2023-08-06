@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import BurgerMenu from "./BurgerMenu";
 import Account from "./Account";
@@ -26,7 +26,6 @@ function Container() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
-  const { gallery, setGallery } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
 
   const collections = [
