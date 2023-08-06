@@ -283,8 +283,8 @@ async function pay(req, res) {
     "ok",
     callbackUrl
   );
-  console.log(payRequestResult);
   payRequestResult = payRequestResult.return;
+  console.log(payRequestResult);
   payRequestResult = payRequestResult.split(",");
 
   if (parseInt(payRequestResult[0]) === 0) {
@@ -294,14 +294,15 @@ async function pay(req, res) {
     });
   } else {
     if (payRequestResult[0] === null) {
-      return res.json({
-        error: "هیچ شماره پیگیری برای پرداخت از سمت بانک ارسال نشده است",
-      });
+      const error = "هیچ شماره پیگیری برای پرداخت از سمت بانک ارسال نشده است";
+      console.log(error);
+      return res.json({ error });
     } else {
-      let error = desribtionStatusCode(parseInt(payRequestResult)).replace(
+      const error = desribtionStatusCode(parseInt(payRequestResult)).replace(
         /_/g,
         " "
       );
+      console.log(error);
       return res.json({ error });
     }
   }
@@ -352,7 +353,8 @@ async function callBackCheck(req, res) {
       if (resultCode_bpinquiryRequest !== 0) {
         reversePay(saleOrderId, saleOrderId, saleReferenceId);
         const error = desribtionStatusCode(resultCode_bpinquiryRequest);
-        return res.json({ msg: error.message });
+        console.log("reversePay", error);
+        return res.json({ error });
       }
     }
 
@@ -390,14 +392,16 @@ async function callBackCheck(req, res) {
           reversePay(saleOrderId, saleOrderId, saleReferenceId);
       }
       const error = desribtionStatusCode(resultCode_bpVerifyRequest);
-      return res.json({ msg: error.message });
+      console.log("reversePay", error);
+      return res.json({ error });
     }
   } else {
     if (saleOrderId != -999 && saleReferenceId != -999) {
       if (resultCode_bpPayRequest !== 17)
         reversePay(saleOrderId, saleOrderId, saleReferenceId);
       const error = desribtionStatusCode(resultCode_bpPayRequest);
-      return res.json({ msg: error.message });
+      console.log("reversePay", error);
+      return res.json({ error });
     }
   }
 }
