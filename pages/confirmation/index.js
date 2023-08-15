@@ -56,7 +56,6 @@ export default function Confirmation({ props }) {
   };
 
   const confirmMessage = async () => {
-    clearShoppingCart();
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
     });
@@ -71,6 +70,7 @@ export default function Confirmation({ props }) {
     Router.push("/");
     setTimeout(() => {
       setToggleContainer("orders");
+      clearShoppingCart();
     }, 700);
   };
 
