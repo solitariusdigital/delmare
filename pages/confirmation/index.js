@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, Fragment } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
 import { postMellatApi } from "../../services/api";
@@ -7,6 +7,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import qs from "querystring";
 import secureLocalStorage from "react-secure-storage";
 import Kavenegar from "kavenegar";
+import loadingImage from "../../assets/loader.png";
+import Image from "next/image";
 
 export default function Confirmation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -59,7 +61,6 @@ export default function Confirmation({ props }) {
   };
 
   const confirmMessage = async () => {
-    clearShoppingCart();
     const api = Kavenegar.KavenegarApi({
       apikey: kavenegarKey,
     });
@@ -74,6 +75,7 @@ export default function Confirmation({ props }) {
     Router.push("/");
     setTimeout(() => {
       setToggleContainer("orders");
+      clearShoppingCart();
     }, 700);
   };
 
@@ -83,15 +85,34 @@ export default function Confirmation({ props }) {
         <div className={classes.confirmationContainer}>
           <div>
             <p className={classes.title}>دلماره از خرید شما تشکر میکند</p>
-            <div className={classes.row}>
-              <p>کد رهگیری دلماره</p>
-              <p className={classes.title}>{refId}</p>
-            </div>
-            <div className={classes.row}>
-              <button className="mainButton" onClick={() => confirmMessage()}>
-                ادامه
-              </button>
-            </div>
+            {refId ? (
+              <Fragment>
+                <div className={classes.row}>
+                  <p>کد رهگیری دلماره</p>
+                  <p className={classes.title}>{refId}</p>
+                </div>
+                <div className={classes.row}>
+                  <button
+                    className="mainButton"
+                    onClick={() => confirmMessage()}
+                  >
+                    ادامه
+                  </button>
+                </div>
+              </Fragment>
+            ) : (
+              <div className={classes.row}>
+                <div className={classes.loading}>
+                  <p>لطفا صبر کنید و صفحه را نبندید </p>
+                  <Image
+                    width={50}
+                    height={50}
+                    src={loadingImage}
+                    alt="isLoading"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ) : (
