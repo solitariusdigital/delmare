@@ -5,7 +5,7 @@ import classes from "./BurgerMenu.module.scss";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import CallIcon from "@mui/icons-material/Call";
+import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 import Person4Icon from "@mui/icons-material/Person4";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StarsIcon from "@mui/icons-material/Stars";
@@ -113,7 +113,7 @@ export default function BurgerMenu() {
     },
     {
       title: "تماس با دلماره",
-      icon: <CallIcon />,
+      icon: <PhoneIphoneOutlinedIcon />,
       call: () => {
         setContact(!contact);
         setAdmin(false);
