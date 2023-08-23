@@ -73,12 +73,25 @@ function Container() {
             className={classes.brandContainer}
             onClick={() => navigateLandingPage()}
           >
-            <Image width={40} height={40} src={lemon} alt="lemon" />
+            <Image
+              className="animate__animated animate__jackInTheBox"
+              width={40}
+              height={40}
+              src={lemon}
+              alt="lemon"
+            />
             <div className={classes.brand}>
               <Image src={brand} alt="brand" />
             </div>
-            <Image width={40} height={40} src={lemon} alt="lemon" />
+            <Image
+              className="animate__animated animate__jackInTheBox"
+              width={40}
+              height={40}
+              src={lemon}
+              alt="lemon"
+            />
           </div>
+
           <div className="shoppingcart-icon">
             {searchControl && (
               <SearchIcon
