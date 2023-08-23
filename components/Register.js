@@ -116,6 +116,7 @@ function Register() {
       const existingUser = appUsers.find((user) => user.phone === phone);
       if (existingUser) {
         setRegister(false);
+        setMenu(false);
         setUserLogin(true);
         setCurrentUser(existingUser);
         secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
@@ -152,6 +153,7 @@ function Register() {
         setAlert("خطا در برقراری ارتباط");
       } else {
         setRegister(false);
+        setMenu(false);
         setUserLogin(true);
         setCurrentUser(data);
         secureLocalStorage.setItem("currentUser", JSON.stringify(data));
