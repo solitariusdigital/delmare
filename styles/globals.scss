@@ -92,7 +92,7 @@ a {
   .info {
     margin: 8px 0px;
     padding: 4px;
-    @include mixins.transparentBackground(0.3, config.$brand);
+    @include mixins.transparentBackground(0.5, config.$brand);
     @include mixins.border-radius();
   }
 
@@ -427,6 +427,6 @@ a {
   }
 
   .lemon {
-    @include mixins.favour();
+    margin: 0px 12px;
   }
 }
