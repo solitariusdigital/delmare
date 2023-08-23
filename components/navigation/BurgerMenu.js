@@ -259,6 +259,7 @@ export default function BurgerMenu() {
               <div className={classes.social}>
                 <InstagramIcon
                   className="icon"
+                  sx={{ fontSize: 28 }}
                   onClick={() =>
                     window.open(
                       "https://www.instagram.com/delmarehofficial/",
@@ -267,6 +268,7 @@ export default function BurgerMenu() {
                   }
                 />
                 <TelegramIcon
+                  sx={{ fontSize: 28 }}
                   className="icon"
                   onClick={() =>
                     window.open("https://t.me/odinhallofficial", "_ blank")
