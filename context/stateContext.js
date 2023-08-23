@@ -68,13 +68,13 @@ export const StateProvider = (props) => {
       active: false,
       type: "clothing",
     },
-    {
-      title: "مو",
-      collection: "hair",
-      link: "/collections/hair",
-      active: false,
-      type: "care",
-    },
+    // {
+    //   title: "مو",
+    //   collection: "hair",
+    //   link: "/collections/hair",
+    //   active: false,
+    //   type: "care",
+    // },
     {
       title: "صورت",
       collection: "skin",

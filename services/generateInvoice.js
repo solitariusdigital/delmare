@@ -34,7 +34,7 @@ export const generateInvoice = async (
       refId: saleReferenceId,
       title: product.title,
       originalPrice: product.price,
-      price: product.price - parseInt(loyaltyPoint),
+      price: product.price - parseInt(loyaltyPoint) / shoppingCart.length,
       color: product.group === "clothing" ? product.color : "ffffff",
       size: product.size,
       image: product.image,

@@ -122,19 +122,6 @@ function Register() {
         Router.push("/");
       } else {
         await createUser();
-        // send dsicount offer for new users
-        // const api = Kavenegar.KavenegarApi({
-        //   apikey: kavenegarKey,
-        // });
-        // api.VerifyLookup(
-        //   {
-        //     receptor: phone,
-        //     token: discount,
-        //     token2: phone,
-        //     template: "discount",
-        //   },
-        //   function (response, status) {}
-        // );
       }
     } else {
       setAlert("کد تایید اشتباه است");
@@ -157,7 +144,7 @@ function Register() {
       birthday: "",
       permission: "customer",
       discount: discount,
-      loyalty: 0,
+      loyalty: referralData.user ? 50000 : 0,
     };
     try {
       const data = await createUserApi(user);
@@ -172,7 +159,7 @@ function Register() {
           const userData = appUsers.find(
             (user) => user.phone === referralData.user.phone
           );
-          userData.loyalty = userData.loyalty + 50000;
+          userData.loyalty = userData.loyalty + 100000;
           await updateUserApi(userData);
         }
         Router.push("/");

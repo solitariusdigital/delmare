@@ -31,12 +31,12 @@ export default function Care() {
   ]);
 
   const collections = [
-    {
-      title: "مراقبت مو",
-      collection: "hair",
-      link: "/collections/hair",
-      imageSrc: `${sourceLink}hair.jpg`,
-    },
+    // {
+    //   title: "مراقبت مو",
+    //   collection: "hair",
+    //   link: "/collections/hair",
+    //   imageSrc: `${sourceLink}hair.jpg`,
+    // },
     {
       title: "مراقبت صورت",
       collection: "skin",
@@ -95,10 +95,6 @@ export default function Care() {
             </div>
           </Fragment>
         ))}
-      </div>
-      <div className="message">
-        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-        <p>با دلماره متفاوت دیده شوید</p>
       </div>
     </Fragment>
   );

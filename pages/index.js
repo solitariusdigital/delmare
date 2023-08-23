@@ -17,6 +17,7 @@ export default function HomePage() {
   const { toggleType, setToggleType } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [referralLink, setReferralLink] = useState(false);
+  const [displayDesc, setDisplayDesc] = useState(false);
   const sourceLink = `https://delmare.storage.iran.liara.space/landingpage/`;
 
   useEffect(() => {
@@ -24,7 +25,8 @@ export default function HomePage() {
     setBar(false);
     setContainer(true);
     setNavigationBottom(false);
-  }, [setBar, setContainer, setNavigationBottom, referralLink]);
+    setDisplayDesc(false);
+  }, [setBar, setContainer, setNavigationBottom]);
 
   useEffect(() => {
     if (!window.matchMedia("(display-mode: standalone)").matches) {
@@ -50,7 +52,7 @@ export default function HomePage() {
 
   const collections = [
     {
-      title: "کالکشن لباس",
+      title: "کالکشن مد",
       type: "clothing",
       link: "/collections/clothing",
       imageSrc: `${sourceLink}eight.jpg`,
@@ -91,20 +93,57 @@ export default function HomePage() {
       />
       {userLogIn ? (
         <div className="referral">
-          <div
-            onClick={() => generateReferralCode()}
-            className="ctaButton-referral"
-          >
-            {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان </p>}
+          <div className="row">
+            <div
+              onClick={() => setDisplayDesc(!displayDesc)}
+              className="ctaButton"
+            >
+              <p>با دوستات خرید کن</p>
+            </div>
           </div>
-          <p className="message">
-            به دوستان خود لینک دعوت ارسال کنید و با ورود هر کدام به دلماره
-            <span className="row">
-              اعتبار خرید دریافت کنید
-              <MonetizationOnIcon className="gold-icon" sx={{ fontSize: 20 }} />
-              <span>50,000 T</span>
-            </span>
-          </p>
+          {displayDesc && (
+            <div className="info">
+              <p className="message">
+                دعوت دوستان و دریافت اعتبار ویژه تا پایان آبان ماه
+              </p>
+              <p className="message">
+                <span className="row">
+                  اعتبار خرید برای هر دعوت موفق
+                  <MonetizationOnIcon
+                    className="gold-icon"
+                    sx={{ fontSize: 20 }}
+                  />
+                  <span>100,000 T</span>
+                </span>
+              </p>
+              <p className="message">
+                <span className="row">
+                  اعتبار خرید برای دوستان دعوت شده
+                  <MonetizationOnIcon
+                    className="gold-icon"
+                    sx={{ fontSize: 20 }}
+                  />
+                  <span>50,000 T</span>
+                </span>
+              </p>
+              <p className="message">
+                <span className="row">
+                  سقف استفاده اعتبار برای محصولات بدون تخفیف
+                  <MonetizationOnIcon
+                    className="gold-icon"
+                    sx={{ fontSize: 20 }}
+                  />
+                  <span>200,000 T</span>
+                </span>
+              </p>
+              <div
+                onClick={() => generateReferralCode()}
+                className="ctaButton-referral"
+              >
+                {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان </p>}
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div onClick={() => loginAction()} className="ctaButton">

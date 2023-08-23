@@ -87,7 +87,7 @@ export default function Clothing({
   return (
     <Fragment>
       <NextSeo
-        title="کالکشن لباس"
+        title="کالکشن مد"
         description="خرید لباس از دلماره"
         openGraph={{
           type: "website",
@@ -140,10 +140,6 @@ export default function Clothing({
       <div className="highlight">
         <h4>ارزانترین</h4>
         <Highlight products={cheapestItems} />
-      </div>
-      <div className="message">
-        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-        <p>با دلماره متفاوت دیده شوید</p>
       </div>
     </Fragment>
   );

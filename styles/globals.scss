@@ -87,17 +87,23 @@ a {
 }
 
 .referral {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
   margin: 0px 12px;
-  @include mixins.transparentBackground(0.3, config.$brand);
-  @include mixins.border-radius();
+
+  .info {
+    margin-top: 8px;
+    padding: 4px;
+    @include mixins.transparentBackground(0.3, config.$brand);
+    @include mixins.border-radius();
+  }
 
   .row {
     display: flex;
     flex-direction: row;
     justify-content: center;
+  }
+
+  .icon {
+    margin-left: 12px;
   }
 }
 
@@ -175,7 +181,6 @@ a {
   margin: 8px auto;
   box-shadow: config.$image-shadow;
   background: config.$brand;
-  @include mixins.heartbeat();
 
   &:hover {
     cursor: pointer;
@@ -184,6 +189,7 @@ a {
 
 .ctaButton-referral {
   background: config.$lemon;
+  @include mixins.heartbeat();
 }
 
 .message {
@@ -191,7 +197,7 @@ a {
   flex-direction: column;
   text-align: center;
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   max-width: config.$max-width;
   font-size: config.$tiny-font;
 }

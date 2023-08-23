@@ -220,6 +220,10 @@ export default function ShoppingCart() {
     }
   };
 
+  const checkSaleItemsClearForCredit = () => {
+    return shoppingCart.every((item) => !item.sale);
+  };
+
   // make a request to bank to get refId then direct user to payment page
   const openPaymentPortal = async () => {
     try {
@@ -430,7 +434,7 @@ export default function ShoppingCart() {
               <p className={classes.value}>{shoppingCart.length}</p>
               <p className={classes.title}>تعداد آیتم</p>
             </div>
-            {loyaltyPoint !== 0 && (
+            {loyaltyPoint !== 0 && checkSaleItemsClearForCredit() && (
               <div className={classes.row}>
                 <p className={classes.value}>
                   {convertNumber(calculateLoyaltyDiscount(loyaltyPoint))} T
@@ -441,6 +445,7 @@ export default function ShoppingCart() {
             <div className={classes.row}>
               {loyaltyPoint !== 0 &&
               shoppingCart.length > 0 &&
+              checkSaleItemsClearForCredit() &&
               calculateLoyaltyDiscount(loyaltyPoint) <= 200000 ? (
                 <div className={classes.discountRow}>
                   <p className={classes.value}>

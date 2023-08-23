@@ -103,7 +103,7 @@ export default function Confirmation({ props }) {
             ) : (
               <div className={classes.row}>
                 <div className={classes.loading}>
-                  <p>لطفا صبر کنید و صفحه را نبندید </p>
+                  <p>لطفا صبر کنید و صفحه را نبندید</p>
                   <Image
                     width={50}
                     height={50}

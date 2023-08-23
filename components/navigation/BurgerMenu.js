@@ -2,7 +2,6 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./BurgerMenu.module.scss";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
@@ -45,7 +44,7 @@ export default function BurgerMenu() {
         currentUser && currentUser.permission === "blogger"
           ? "حساب بلاگر"
           : "حساب من",
-      icon: <AccountBoxIcon />,
+      icon: <Person4Icon />,
       call: () => {
         navigateMenu("account");
         setContact(false);
@@ -68,10 +67,13 @@ export default function BurgerMenu() {
       },
     },
     {
-      title: "بلاگرز من",
-      icon: <StarsIcon />,
+      title:
+        currentUser && currentUser.permission === "blogger"
+          ? "کمد بلاگر"
+          : "کمد من",
+      icon: <ShoppingBasketIcon />,
       call: () => {
-        navigateMenu("follow");
+        navigateMenu("orders");
         setContact(false);
       },
     },
@@ -84,13 +86,10 @@ export default function BurgerMenu() {
       },
     },
     {
-      title:
-        currentUser && currentUser.permission === "blogger"
-          ? "کمد بلاگر"
-          : "کمد من",
-      icon: <ShoppingBasketIcon />,
+      title: "بلاگرز من",
+      icon: <StarsIcon />,
       call: () => {
-        navigateMenu("orders");
+        navigateMenu("follow");
         setContact(false);
       },
     },
@@ -112,7 +111,7 @@ export default function BurgerMenu() {
       },
     },
     {
-      title: "تماس با دلماره",
+      title: "تماس",
       icon: <PhoneIphoneOutlinedIcon />,
       call: () => {
         setContact(!contact);

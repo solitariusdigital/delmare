@@ -30,7 +30,7 @@ function Container() {
 
   const collections = [
     {
-      title: "کالکشن لباس",
+      title: "کالکشن مد",
       link: "/collections/clothing",
     },
     {
