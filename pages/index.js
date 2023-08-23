@@ -102,7 +102,7 @@ export default function HomePage() {
             </div>
           </div>
           {displayDesc && (
-            <div className="info animate__animated animate__fadeInLeft">
+            <div className="info animate__animated animate__fadeInUp">
               <p className="message">
                 دعوت دوستان و دریافت اعتبار ویژه تا پایان آبان ماه
               </p>
