@@ -48,8 +48,8 @@ export default function Collection({
 
   useEffect(() => {
     // manage scroll position and number of items on the page
+    window.scrollTo(0, sessionStorage.getItem("positionY"));
     if (sessionStorage.getItem("positionY")) {
-      window.scrollTo(0, sessionStorage.getItem("positionY"));
     }
     window.addEventListener("scroll", loadMore);
   });
@@ -219,7 +219,9 @@ export default function Collection({
   return (
     <Fragment>
       {search && collectionType !== "brands" && (
-        <div className={classes.category}>
+        <div
+          className={`${classes.category} animate__animated animate__slideInDown`}
+        >
           <div className={classes.selectContainer}>
             <div
               className={classes.select}

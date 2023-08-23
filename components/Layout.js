@@ -129,7 +129,7 @@ export default function Layout(props) {
               </div>
               <Image
                 className="lemon animate__animated animate__zoomIn"
-                width={200}
+                width={160}
                 height={90}
                 src={brand}
                 alt="brand"
