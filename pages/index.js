@@ -108,39 +108,39 @@ export default function HomePage() {
               </p>
               <p className="message">
                 <span className="row">
-                  اعتبار خرید برای هر دعوت موفق
                   <MonetizationOnIcon
                     className="gold-icon"
                     sx={{ fontSize: 20 }}
                   />
                   <span>100,000 T</span>
                 </span>
+                اعتبار خرید برای هر دعوت موفق
               </p>
               <p className="message">
                 <span className="row">
-                  اعتبار خرید برای دوستان دعوت شده
                   <MonetizationOnIcon
                     className="gold-icon"
                     sx={{ fontSize: 20 }}
                   />
                   <span>50,000 T</span>
                 </span>
+                اعتبار خرید برای دوستان دعوت شده
               </p>
               <p className="message">
                 <span className="row">
-                  سقف استفاده اعتبار برای محصولات بدون تخفیف
                   <MonetizationOnIcon
                     className="gold-icon"
                     sx={{ fontSize: 20 }}
                   />
                   <span>200,000 T</span>
                 </span>
+                سقف استفاده هر خرید برای محصولات بدون تخفیف
               </p>
               <div
                 onClick={() => generateReferralCode()}
                 className="ctaButton-referral"
               >
-                {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان </p>}
+                {referralLink ? <p>لینک کپی شد</p> : <p>لینک دعوت دوستان</p>}
               </div>
             </div>
           )}

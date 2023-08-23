@@ -16,6 +16,7 @@ import classes from "./Container.module.scss";
 import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
+import lemon from "../../assets/lemon.png";
 
 function Container() {
   const { menu, setMenu } = useContext(StateContext);
@@ -72,9 +73,11 @@ function Container() {
             className={classes.brandContainer}
             onClick={() => navigateLandingPage()}
           >
+            <Image width={40} height={40} src={lemon} alt="lemon" />
             <div className={classes.brand}>
               <Image src={brand} alt="brand" />
             </div>
+            <Image width={40} height={40} src={lemon} alt="lemon" />
           </div>
           <div className="shoppingcart-icon">
             {searchControl && (

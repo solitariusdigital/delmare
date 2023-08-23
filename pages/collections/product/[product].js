@@ -211,13 +211,13 @@ export default function Product({ product, favourite }) {
   };
 
   const back = () => {
+    router.back();
+    window.scrollTo(0, 0);
+    colors.length = 0;
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
     setNavigationBottom(true);
-    colors.length = 0;
-    window.scrollTo(0, 0);
-    router.back();
   };
 
   const clearDetails = () => {

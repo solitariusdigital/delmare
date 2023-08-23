@@ -9,6 +9,7 @@ import Image from "next/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
 import brand from "../assets/brandanime.png";
+import lemon from "../assets/lemon.png";
 
 import { getNotificationsApi, getUserApi } from "../services/api";
 import secureLocalStorage from "react-secure-storage";
@@ -123,7 +124,21 @@ export default function Layout(props) {
             </Fragment>
           ) : (
             <div className="loadAppUpdate">
+              <Image
+                className="lemon"
+                width={50}
+                height={50}
+                src={lemon}
+                alt="lemon"
+              />
               <Image width={200} height={90} src={brand} alt="brand" priority />
+              <Image
+                className="lemon"
+                width={50}
+                height={50}
+                src={lemon}
+                alt="lemon"
+              />
             </div>
           )}
         </Fragment>

@@ -90,7 +90,7 @@ a {
   margin: 0px 12px;
 
   .info {
-    margin-top: 8px;
+    margin: 8px 0px;
     padding: 4px;
     @include mixins.transparentBackground(0.3, config.$brand);
     @include mixins.border-radius();
@@ -416,17 +416,17 @@ a {
 
 .loadAppUpdate {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  margin: auto;
   height: 100vh;
 
   p {
     margin-top: 12px;
     margin-bottom: 30px;
     font-weight: bold;
+  }
+
+  .lemon {
+    @include mixins.favour();
   }
 }
