@@ -31,17 +31,17 @@ export default function Care() {
   ]);
 
   const collections = [
-    // {
-    //   title: "مراقبت مو",
-    //   collection: "hair",
-    //   link: "/collections/hair",
-    //   imageSrc: `${sourceLink}hair.jpg`,
-    // },
     {
       title: "مراقبت صورت",
       collection: "skin",
       link: "/collections/skin",
       imageSrc: `${sourceLink}skin.jpg`,
+    },
+    {
+      title: "مراقبت مو",
+      collection: "hair",
+      link: "/collections/hair",
+      imageSrc: `${sourceLink}hair.jpg`,
     },
   ];
 
