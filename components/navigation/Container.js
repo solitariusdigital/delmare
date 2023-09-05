@@ -36,7 +36,7 @@ function Container() {
     },
     {
       title: "محصولات بهداشتی",
-      link: "/collections/care",
+      link: "/collections/skin",
     },
   ];
 

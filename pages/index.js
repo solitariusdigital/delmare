@@ -60,7 +60,7 @@ export default function HomePage() {
     {
       title: "محصولات بهداشتی",
       type: "care",
-      link: "/collections/care",
+      link: "/collections/skin",
       imageSrc: `${sourceLink}care.jpg`,
     },
   ];

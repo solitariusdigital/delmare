@@ -111,7 +111,7 @@ export default function Layout(props) {
                         toggleType === "care" ? "navigationActive" : "icon"
                       }
                       onClick={() => {
-                        controlNavigation("care");
+                        controlNavigation("skin");
                       }}
                     />
                     <FavoriteIcon

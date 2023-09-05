@@ -69,7 +69,7 @@ export const StateProvider = (props) => {
       type: "clothing",
     },
     {
-      title: "صورت",
+      title: "محصولات بهداشتی",
       collection: "skin",
       link: "/collections/skin",
       active: false,
