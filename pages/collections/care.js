@@ -37,12 +37,12 @@ export default function Care() {
       link: "/collections/skin",
       imageSrc: `${sourceLink}skin.jpg`,
     },
-    {
-      title: "مراقبت مو",
-      collection: "hair",
-      link: "/collections/hair",
-      imageSrc: `${sourceLink}hair.jpg`,
-    },
+    // {
+    //   title: "مراقبت مو",
+    //   collection: "hair",
+    //   link: "/collections/hair",
+    //   imageSrc: `${sourceLink}hair.jpg`,
+    // },
   ];
 
   const activateNav = (link, collection) => {

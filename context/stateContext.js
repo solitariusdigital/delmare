@@ -75,13 +75,13 @@ export const StateProvider = (props) => {
       active: false,
       type: "care",
     },
-    {
-      title: "مو",
-      collection: "hair",
-      link: "/collections/hair",
-      active: false,
-      type: "care",
-    },
+    // {
+    //   title: "مو",
+    //   collection: "hair",
+    //   link: "/collections/hair",
+    //   active: false,
+    //   type: "care",
+    // },
   ]);
   const [generalCategories, setGeneralCategories] = useState([
     "اسکارف",
