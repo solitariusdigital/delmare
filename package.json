@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
-    "@mui/styled-engine-sc": "^5.10.3",
+    "@mui/styled-engine-sc": "^5.14.6",
     "aws-sdk": "^2.1416.0",
     "chokidar": "^3.5.3",
     "get-node-cli": "^8.1.0",
