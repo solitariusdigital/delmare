@@ -2,6 +2,7 @@ import Brand from "../../models/Brand";
 import dbConnect from "../../services/dbConnect";
 
 export default async function brandHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method } = req;
 
   await dbConnect();

@@ -17,7 +17,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { convertNumber, abbreviateNumber } from "../services/utility";
 
 export default function Collection({
-  galleryData,
+  collectionData,
   collectionType,
   brandGallery,
   brand,
@@ -35,6 +35,8 @@ export default function Collection({
   const { searchControl, setSearchControl } = useContext(StateContext);
   const { gallery, setGallery } = useContext(StateContext);
   const { reqNumber, setReqNumber } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
 
   const [categorySelector, setCategorySelector] = useState(false);
   const [seasonSelector, setSeasonSelector] = useState(false);
@@ -46,8 +48,8 @@ export default function Collection({
 
   useEffect(() => {
     // manage scroll position and number of items on the page
+    window.scrollTo(0, sessionStorage.getItem("positionY"));
     if (sessionStorage.getItem("positionY")) {
-      window.scrollTo(0, sessionStorage.getItem("positionY"));
     }
     window.addEventListener("scroll", loadMore);
   });
@@ -57,7 +59,7 @@ export default function Collection({
       setGallery(brandGallery);
       setSearchControl(false);
     } else {
-      setGallery(galleryData);
+      setGallery(collectionData);
       setSearchControl(true);
       if (collectionType === "shoes") {
         setSearchControl(false);
@@ -75,16 +77,25 @@ export default function Collection({
     }
     setMessage(false);
     setBar(true);
+    setNavigationBottom(true);
+    setToggleType("clothing");
+    if (collectionType === "hair" || collectionType === "skin") {
+      setSearchControl(false);
+      setSearch(false);
+      setToggleType("care");
+    }
   }, [
-    accessoriesCategories,
     brandGallery,
     collectionType,
-    galleryData,
+    collectionData,
+    accessoriesCategories,
     generalCategories,
     setBar,
     setGallery,
     setSearch,
     setSearchControl,
+    setNavigationBottom,
+    setToggleType,
   ]);
 
   const loadMore = () => {
@@ -138,21 +149,21 @@ export default function Collection({
     switch (collectionType) {
       case "gallery":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.category === type;
           })
         );
@@ -168,21 +179,21 @@ export default function Collection({
     switch (collectionType) {
       case "gallery":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type && !product.sale;
           })
         );
         break;
       case "sale":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type && product.sale;
           })
         );
         break;
       case "accessories":
         setGallery(
-          galleryData.filter((product) => {
+          collectionData.filter((product) => {
             return product.season === type;
           })
         );
@@ -208,7 +219,9 @@ export default function Collection({
   return (
     <Fragment>
       {search && collectionType !== "brands" && (
-        <div className={classes.category}>
+        <div
+          className={`${classes.category} animate__animated animate__slideInDown`}
+        >
           <div className={classes.selectContainer}>
             <div
               className={classes.select}

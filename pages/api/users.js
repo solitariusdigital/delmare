@@ -2,6 +2,7 @@ import dbConnect from "../../services/dbConnect";
 import User from "../../models/User";
 
 export default async function usersHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
   await dbConnect();
 

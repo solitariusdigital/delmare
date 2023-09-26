@@ -25,12 +25,17 @@
       &:hover {
         cursor: pointer;
       }
-    }
 
-    .brand {
-      display: flex;
-      margin: 0px 12px;
+      .brand {
+        display: flex;
+        margin: 0px 4px;
+      }
     }
+  }
+
+  .menuIcon {
+    background: config.$lemon;
+    display: flex;
   }
 
   .navigation {
@@ -44,14 +49,13 @@
     .nav {
       font-size: config.$small-font;
       color: config.$black;
-      border-bottom: 2px solid config.$cream;
     }
 
     .navActive {
       font-size: config.$small-font;
-      color: config.$black;
       border-bottom: 2px solid config.$brand;
       font-weight: bold;
+      @include mixins.favour();
     }
 
     p {

@@ -12,6 +12,10 @@
     border-radius: 12px;
     border: 2px solid transparent;
     margin: 4px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .image {

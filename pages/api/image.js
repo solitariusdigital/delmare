@@ -1,6 +1,7 @@
 import aws from "aws-sdk";
 // upload images to s3 bucket on liara
 export default async function imageHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   aws.config.update({
     endpoint: process.env.NEXT_PUBLIC_LIARA_ENDPOINT,
     accessKeyId: process.env.LIARA_ACCESS_KEY,

@@ -1,12 +1,22 @@
-import { calculatePercentage } from "./utility";
+import {
+  createInvoiceApiServer,
+  updateCareApiServer,
+  getCareApiServer,
+  updateProductApiServer,
+  getProductApiServer,
+  updateUserApiServer,
+  getUserApiServer,
+} from "./api";
 
 export const generateInvoice = async (
   currentUser,
   shoppingCart,
+  loyaltyPoint,
   saleReferenceId
 ) => {
   try {
     await Promise.all(shoppingCart.map(updateProductData));
+    await updateUser();
     return 200;
   } catch (error) {
     console.error(error);
@@ -24,12 +34,8 @@ export const generateInvoice = async (
       refId: saleReferenceId,
       title: product.title,
       originalPrice: product.price,
-      price:
-        currentUser.discount && currentUser.discount !== ""
-          ? product.price -
-            calculatePercentage(currentUser.discount, product.price)
-          : product.price,
-      color: product.color,
+      price: product.price - parseInt(loyaltyPoint) / shoppingCart.length,
+      color: product.group === "clothing" ? product.color : "ffffff",
       size: product.size,
       image: product.image,
       deliveryType: product.deliveryType,
@@ -40,33 +46,32 @@ export const generateInvoice = async (
 
   async function updateProductCount(product) {
     try {
-      let response = await fetch(
-        `https://delmareh.com/api/product?id=${product["_id"]}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      let getProduct = await response.json();
-      if (getProduct.size[product.size].colors[product.color] > 0) {
-        getProduct.size[product.size].colors[product.color]--;
-        if (
-          Object.keys(getProduct.size).length === 1 &&
-          Object.keys(getProduct.size[product.size].colors).length === 1 &&
-          getProduct.size[product.size].colors[product.color] === 0
-        ) {
-          getProduct.activate = false;
-        }
-        let response = await fetch("https://delmareh.com/api/product", {
-          method: "PUT",
-          body: JSON.stringify(getProduct),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        await response.json();
+      let getProduct =
+        (await getProductApiServer(product["_id"])) ||
+        (await getCareApiServer(product["_id"]));
+      switch (getProduct.group) {
+        case "clothing":
+          if (getProduct.size[product.size].colors[product.color] > 0) {
+            getProduct.size[product.size].colors[product.color]--;
+            if (
+              Object.keys(getProduct.size).length === 1 &&
+              Object.keys(getProduct.size[product.size].colors).length === 1 &&
+              getProduct.size[product.size].colors[product.color] === 0
+            ) {
+              getProduct.activate = false;
+            }
+            await updateProductApiServer(getProduct);
+          }
+          break;
+        case "care":
+          if (getProduct.count > 0) {
+            getProduct.count--;
+            if (getProduct.count === 0) {
+              getProduct.activate = false;
+            }
+            await updateCareApiServer(getProduct);
+          }
+          break;
       }
     } catch (error) {
       console.error(error);
@@ -75,14 +80,17 @@ export const generateInvoice = async (
 
   async function updateProductData(product) {
     const invoice = createInvoiceObject(product);
-    let response = await fetch("https://delmareh.com/api/invoice", {
-      method: "POST",
-      body: JSON.stringify(invoice),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    await response.json();
+    await createInvoiceApiServer(invoice);
     await updateProductCount(product);
+  }
+
+  async function updateUser() {
+    try {
+      const user = await getUserApiServer(currentUser["_id"]);
+      user.loyalty = user.loyalty - parseInt(loyaltyPoint);
+      await updateUserApiServer(user);
+    } catch (error) {
+      console.error(error);
+    }
   }
 };

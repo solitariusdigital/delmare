@@ -9,20 +9,20 @@ import Router from "next/router";
 import dbConnect from "../services/dbConnect";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
 import secureLocalStorage from "react-secure-storage";
 import { convertNumber } from "../services/utility";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 export default function Upload() {
   const sizeInitialState = {
+    FS: { colors: {} },
     XS: { colors: {} },
     S: { colors: {} },
     M: { colors: {} },
     L: { colors: {} },
     XL: { colors: {} },
-    FS: { colors: {} },
     34: { colors: {} },
     35: { colors: {} },
     36: { colors: {} },
@@ -48,6 +48,7 @@ export default function Upload() {
   const { container, setContainer } = useContext(StateContext);
   const { generalCategories, setGeneralCategories } = useContext(StateContext);
   const { seasons, setSeasons } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [uploadClicked, setUploadClicked] = useState(false);
   const [alert, setAlert] = useState("");
@@ -60,12 +61,12 @@ export default function Upload() {
   const [table, setTable] = useState("");
 
   // clothing size
+  const [FS, setFS] = useState("");
   const [XS, setXS] = useState("");
   const [S, setS] = useState("");
   const [M, setM] = useState("");
   const [L, setL] = useState("");
   const [XL, setXL] = useState("");
-  const [FS, setFS] = useState("");
   // shoes size
   const [size34, setSize34] = useState("");
   const [size35, setSize35] = useState("");
@@ -80,8 +81,9 @@ export default function Upload() {
   const [size44, setSize44] = useState("");
   const [size45, setSize45] = useState("");
 
+  const [productCategory, setProductCategory] = useState("clothing" || "care");
   const [categorySize, setCategorySize] = useState(
-    "clothesSize" || "clothesSize" || "shoesSize"
+    "clothesSize" || "shoesSize"
   );
 
   // data to save into db
@@ -100,10 +102,53 @@ export default function Upload() {
 
   const [size, setSize] = useState(sizeInitialState);
   const [images, setImages] = useState(imageInitialState);
-  const [brands, setBrands] = useState([]);
+  const [clothesBrands, setClothesBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [sizeGraph, setSizeGraph] = useState("");
-
+  // care products
+  const [careType, setCareType] = useState("");
+  const [careSize, setCareSize] = useState("");
+  const [careCountry, setCareCountry] = useState("");
+  const [careCount, setCareCount] = useState("");
+  const careCategories = ["مراقبت مو", "مراقبت صورت"];
+  const careTypes = {
+    "مراقبت صورت": {
+      group: [
+        "پاک کننده دور چشم",
+        "ماسک صورت",
+        "کرم و فابریک",
+        "ضد آفتاب",
+        "آب پاک کننده",
+        "پد پاک کننده آرایش",
+        "پاک کننده صورت",
+        "اکسسوری پاک کننده",
+        "تونیک",
+      ],
+      general: [
+        "اسکراب و لایه بردار صورت",
+        "درمان روزانه",
+        "درمان  شبانه",
+        "سروم",
+        "مراقبت چشم",
+        "روشن کننده",
+        "مرطوب کننده و آبرسان",
+        "ضد تحریک",
+        "ضد چین و چروک و اقزایش عمر",
+        "مراقبت و درمان منافذ و بافت پوست",
+        "هیالورنیک اسید",
+      ],
+    },
+  };
+  const careBrands = {
+    Avene: "France",
+    Clinique: "New York U.S.",
+    "E.I.F": "California U.S.",
+    Garnier: "France",
+    "Kiko Milano": "Italy",
+    Ordinary: "Toronto Canada",
+    Revolution: "U.K.",
+    Sephora: "Paris France",
+  };
   const brandTypes = ["ایرانی", "اورجینال", "های کپی"];
   const deliveryTypes = [
     "موجود در انبار",
@@ -111,34 +156,46 @@ export default function Upload() {
     "هفت الی چهارده روز کاری",
   ];
 
+  const sourceLink = "https://delmare.storage.iran.liara.space";
   const graphInfo = [
     {
       title: "شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+      src: `${sourceLink}/sizegraph/sizegraphone.png`,
     },
     {
       title: "کاپشن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
+      src: `${sourceLink}/sizegraph/sizegraphtwo.png`,
     },
     {
       title: "پیراهن",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
+      src: `${sourceLink}/sizegraph/sizegraphthree.png`,
     },
     {
       title: "بلوز",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+      src: `${sourceLink}/sizegraph/sizegraphfour.png`,
     },
     {
       title: "بلوز شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+      src: `${sourceLink}/sizegraph/sizegraphfive.png`,
     },
     {
       title: "کت شلوار",
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
+      src: `${sourceLink}/sizegraph/sizegraphsix.png`,
     },
   ];
 
-  const clothesSize = [
+  const clothesSizeType = [
+    {
+      type: "FS",
+      value: FS,
+      clear: () => {
+        setFS("");
+        size["FS"] = {};
+      },
+      change: (value) => {
+        setFS(value);
+      },
+    },
     {
       type: "XS",
       value: XS,
@@ -196,7 +253,7 @@ export default function Upload() {
     },
   ];
 
-  const shoesSize = [
+  const shoesSizeType = [
     {
       type: "34",
       value: size34,
@@ -339,18 +396,19 @@ export default function Upload() {
     ) {
       setContainer(false);
       setDisplayPage(true);
+      setNavigationBottom(false);
     } else {
       Router.push("/");
     }
-  }, [setContainer]);
+  }, [setContainer, setNavigationBottom]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getBrandsApi();
-      setBrands(data);
+      setClothesBrands(data);
     };
     fetchData().catch(console.error);
-  }, [setBrands]);
+  }, [setClothesBrands]);
 
   const transformDataSize = (value, type) => {
     let split = value.split(",");
@@ -363,7 +421,87 @@ export default function Upload() {
     });
   };
 
-  const handleUpload = async () => {
+  const handleCareUpload = async () => {
+    const validateFields = [
+      title,
+      description,
+      price,
+      brand,
+      category,
+      careType,
+      careSize,
+      careCountry,
+      careCount,
+      brandType,
+      deliveryType,
+    ];
+
+    if (validateFields.some((field) => !field)) {
+      setAlert("Fill in all fields");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+
+    setUploadClicked(true);
+
+    let delmareIdFolder = `CARE${sixGenerator()}`;
+
+    if (mainImage !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.main = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(mainImage, imageId, delmareIdFolder);
+    }
+    if (imageOne !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.one = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageOne, imageId, delmareIdFolder);
+    }
+    if (imageTwo !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.two = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageTwo, imageId, delmareIdFolder);
+    }
+    if (imageThree !== "") {
+      let imageId = `img${sixGenerator()}`;
+      images.three = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
+      await uploadImages(imageThree, imageId, delmareIdFolder);
+    }
+
+    const upload = await fetch(`/api/care`, {
+      method: "POST",
+      body: JSON.stringify({
+        delmareId: delmareIdFolder,
+        title: title.trim(),
+        description: description.trim(),
+        images: images,
+        size: careSize,
+        category: category,
+        type: careType,
+        count: parseInt(careCount),
+        brand: brand,
+        country: careCountry.trim(),
+        brandType: brandType,
+        deliveryType: deliveryType,
+        price: price.trim(),
+        discount: discount.trim(),
+        percentage: percentage.trim(),
+        sale: sale,
+        activate: true,
+        display: true,
+        views: Math.floor(Math.random() * 10) + 1,
+        group: "care",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    checkUpload(upload);
+  };
+
+  const handleClothesUpload = async () => {
     const validateFields = [
       title,
       description,
@@ -388,6 +526,7 @@ export default function Upload() {
 
     const sizeTransforms = {
       clothesSize: [
+        { sizeData: FS, label: "FS" },
         { sizeData: XS, label: "XS" },
         { sizeData: S, label: "S" },
         { sizeData: M, label: "M" },
@@ -408,7 +547,6 @@ export default function Upload() {
         { sizeData: size44, label: "44" },
         { sizeData: size45, label: "45" },
       ],
-      freeSize: [{ sizeData: FS, label: "FS" }],
     };
     const selectedSizeTransform = sizeTransforms[categorySize];
     selectedSizeTransform.forEach(({ sizeData, label }) => {
@@ -419,32 +557,31 @@ export default function Upload() {
 
     if (mainImage !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.main = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.main = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(mainImage, imageId, delmareIdFolder);
     }
     if (imageOne !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.one = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.one = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageOne, imageId, delmareIdFolder);
     }
     if (imageTwo !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.two = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.two = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageTwo, imageId, delmareIdFolder);
     }
     if (imageThree !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.three = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.three = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       await uploadImages(imageThree, imageId, delmareIdFolder);
     }
     if (table !== "") {
       let imageId = `img${sixGenerator()}`;
-      images.table = `https://delmare.storage.iran.liara.space/${delmareIdFolder}/${imageId}.jpg`;
+      images.table = `${sourceLink}/${delmareIdFolder}/${imageId}.jpg`;
       images.graph = sizeGraph;
       await uploadImages(table, imageId, delmareIdFolder);
     }
 
-    // upload product data into db
     const upload = await fetch(`/api/product`, {
       method: "POST",
       body: JSON.stringify({
@@ -472,19 +609,24 @@ export default function Upload() {
       },
     });
 
+    checkUpload(upload);
+  };
+
+  const checkUpload = async (upload) => {
     if (upload.ok) {
-      // save product ID to its brand collection
-      const product = await upload.json();
-      selectedBrand.products.push(product["_id"]);
-      await updateBrandApi(selectedBrand);
+      if (productCategory === "clothing") {
+        // save product ID to its brand collection
+        const product = await upload.json();
+        selectedBrand.products.push(product["_id"]);
+        await updateBrandApi(selectedBrand);
+      }
       setAlert("Product saved successfully");
     } else {
       setAlert("Data save failed, try again");
     }
-
     setTimeout(() => {
       Router.reload(window.location.pathname);
-    }, 3000);
+    }, 1000);
   };
 
   // upload images into s3 bucket
@@ -515,15 +657,26 @@ export default function Upload() {
   };
 
   const assignBrand = (value) => {
-    const selectedBrand = brands.find((brand) => brand.title === value);
-    if (selectedBrand) {
-      setBrand(value);
-      setDelmareId(selectedBrand.delmareId);
-      setSelectedBrand(selectedBrand);
+    switch (productCategory) {
+      case "clothing":
+        const selectedBrand = clothesBrands.find(
+          (brand) => brand.title === value
+        );
+        if (selectedBrand) {
+          setBrand(value);
+          setDelmareId(selectedBrand.delmareId);
+          setSelectedBrand(selectedBrand);
+        }
+        break;
+      case "care":
+        setBrand(value);
+        setCareCountry(careBrands[value]);
+        break;
     }
   };
 
   const resetSizes = () => {
+    setFS("");
     setXS("");
     setS("");
     setM("");
@@ -564,6 +717,25 @@ export default function Upload() {
               sx={{ fontSize: 30 }}
             />
           </div>
+          <div className={classes.typeToggle}>
+            <button
+              className="mainButton"
+              onClick={() => {
+                setProductCategory("clothing");
+              }}
+            >
+              Clothing
+            </button>
+            <h4>{productCategory === "clothing" ? "Clothing" : "Care"}</h4>
+            <button
+              className="mainButton"
+              onClick={() => {
+                setProductCategory("care");
+              }}
+            >
+              Care
+            </button>
+          </div>
           <div className="upload-form">
             <div className={classes.input}>
               <div className={classes.bar}>
@@ -585,58 +757,189 @@ export default function Upload() {
                 maxLength="20"
               />
             </div>
-            <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => assignBrand(e.target.value)}
-              >
-                <option value="default" disabled>
-                  برند
-                </option>
-                {brands.map((brand, index) => {
-                  return (
-                    <option key={index} value={brand.title}>
-                      {brand.title}
+            {productCategory === "clothing" ? (
+              <Fragment>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => assignBrand(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      برند
                     </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setDelmareId("")}
-                  sx={{ fontSize: 16 }}
-                />
-                <p className={classes.label}>کد برند</p>
-              </div>
-              <input
-                type="text"
-                id="delmareId"
-                name="delmareId"
-                onChange={(e) => setDelmareId(e.target.value)}
-                value={delmareId}
-                autoComplete="off"
-              />
-            </div>
-            <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => setBrandType(e.target.value)}
-              >
-                <option value="default" disabled>
-                  نوع برند
-                </option>
-                {brandTypes.map((brand, index) => {
-                  return (
-                    <option key={index} value={brand}>
-                      {brand}
+                    {clothesBrands.map((brand, index) => {
+                      return (
+                        <option key={index} value={brand.title}>
+                          {brand.title}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setDelmareId("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <p className={classes.label}>کد برند</p>
+                  </div>
+                  <input
+                    type="text"
+                    id="delmareId"
+                    name="delmareId"
+                    onChange={(e) => setDelmareId(e.target.value)}
+                    value={delmareId}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBrandType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      نوع
                     </option>
-                  );
-                })}
-              </select>
-            </div>
+                    {brandTypes.map((brand, index) => {
+                      return (
+                        <option key={index} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      دسته
+                    </option>
+                    {careCategories.map((category, index) => {
+                      return (
+                        <option key={index} value={category}>
+                          {category}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setCareType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      گروه
+                    </option>
+                    {careTypes[category]?.["group"].map((type, index) => {
+                      return (
+                        <option key={index} value={type}>
+                          {type}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setBrandType(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      نوع
+                    </option>
+                    {careTypes[category]?.["general"].map((type, index) => {
+                      return (
+                        <option key={index} value={type}>
+                          {type}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => assignBrand(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      برند
+                    </option>
+                    {Object.keys(careBrands).map((brand, index) => {
+                      return (
+                        <option key={index} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setCareCountry("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <p className={classes.label}>کشور</p>
+                  </div>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    onChange={(e) => setCareCountry(e.target.value)}
+                    value={careCountry}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setCareSize("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <p className={classes.label}>اندازه</p>
+                  </div>
+                  <input
+                    type="tel"
+                    id="size"
+                    name="size"
+                    onChange={(e) => setCareSize(e.target.value)}
+                    value={careSize}
+                    autoComplete="off"
+                    placeholder="120"
+                  />
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setCareCount("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <p className={classes.label}>تعداد</p>
+                  </div>
+                  <input
+                    type="tel"
+                    id="count"
+                    name="count"
+                    onChange={(e) => setCareCount(e.target.value)}
+                    value={careCount}
+                    autoComplete="off"
+                    placeholder="4"
+                  />
+                </div>
+              </Fragment>
+            )}
             <div className={classes.input}>
               <select
                 defaultValue={"default"}
@@ -654,40 +957,44 @@ export default function Upload() {
                 })}
               </select>
             </div>
-            <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="default" disabled>
-                  دسته بندی
-                </option>
-                {generalCategories.map((category, index) => {
-                  return (
-                    <option key={index} value={category}>
-                      {category}
+            {productCategory === "clothing" && (
+              <Fragment>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      دسته
                     </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className={classes.input}>
-              <select
-                defaultValue={"default"}
-                onChange={(e) => setSeason(e.target.value)}
-              >
-                <option value="default" disabled>
-                  فصل
-                </option>
-                {seasons.map((season, index) => {
-                  return (
-                    <option key={index} value={season}>
-                      {season}
+                    {generalCategories.map((category, index) => {
+                      return (
+                        <option key={index} value={category}>
+                          {category}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className={classes.input}>
+                  <select
+                    defaultValue={"default"}
+                    onChange={(e) => setSeason(e.target.value)}
+                  >
+                    <option value="default" disabled>
+                      فصل
                     </option>
-                  );
-                })}
-              </select>
-            </div>
+                    {seasons.map((season, index) => {
+                      return (
+                        <option key={index} value={season}>
+                          {season}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </Fragment>
+            )}
             <div className={classes.input}>
               <div className={classes.bar}>
                 <CloseIcon
@@ -715,10 +1022,10 @@ export default function Upload() {
                   onClick={() => setPrice("")}
                   sx={{ fontSize: 16 }}
                 />
-                <MonetizationOnIcon
+                <LocalOfferIcon
                   className="icon"
                   onClick={() => setSale(!sale)}
-                  sx={{ color: "#d40d12", fontSize: 25 }}
+                  sx={{ color: "#d40d12", fontSize: 22 }}
                 />
                 <p>{convertNumber(Number(price))} T</p>
                 <p className={classes.label}>قیمت تومان</p>
@@ -773,114 +1080,81 @@ export default function Upload() {
                 </div>
               </Fragment>
             )}
-            <h3>رنگ، سایز، تعداد</h3>
-            <div className={classes.sizeNav}>
-              <button
-                className="mainButton"
-                onClick={() => {
-                  setCategorySize("clothesSize");
-                  setFS("");
-                }}
-              >
-                Clothes size
-              </button>
-              <button
-                className="mainButton"
-                onClick={() => {
-                  setCategorySize("freeSize");
-                  resetSizes();
-                }}
-              >
-                Free size
-              </button>
-              <button
-                className="mainButton"
-                onClick={() => {
-                  setCategorySize("shoesSize");
-                  resetSizes();
-                }}
-              >
-                Shoes size
-              </button>
-            </div>
-            {categorySize === "freeSize" && (
-              <div className={classes.sizeContainer}>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>Free Size - FS</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => {
-                        setFS("");
-                        size["FS"] = {};
-                      }}
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    placeholder="b21c1c 5, 514242 9"
-                    className={classes.size}
-                    type="text"
-                    id="FS"
-                    name="FS"
-                    onChange={(e) => setFS(e.target.value)}
-                    value={FS}
-                    autoComplete="off"
-                  />
+            {productCategory === "clothing" && (
+              <Fragment>
+                <h3>سایز رنگ تعداد</h3>
+                <div className={classes.typeToggle}>
+                  <button
+                    className="mainButton"
+                    onClick={() => {
+                      setCategorySize("clothesSize");
+                    }}
+                  >
+                    Clothing
+                  </button>
+                  <button
+                    className="mainButton"
+                    onClick={() => {
+                      setCategorySize("shoesSize");
+                      resetSizes();
+                    }}
+                  >
+                    Shoes
+                  </button>
                 </div>
-              </div>
-            )}
-            {categorySize === "clothesSize" && (
-              <div className={classes.sizeContainer}>
-                {clothesSize.map((size, index) => (
-                  <div className={classes.input} key={index}>
-                    <div className={classes.bar}>
-                      <p className={classes.label}>{size.type}</p>
-                      <CloseIcon
-                        className="icon"
-                        onClick={size.clear}
-                        sx={{ fontSize: 16 }}
-                      />
-                    </div>
-                    <input
-                      placeholder="b21c1c 5, 514242 9"
-                      className={classes.size}
-                      type="text"
-                      id={size.type}
-                      name={size.type}
-                      onChange={(e) => size.change(e.target.value)}
-                      value={size.value}
-                      autoComplete="off"
-                    />
+                {categorySize === "clothesSize" && (
+                  <div className={classes.sizeContainer}>
+                    {clothesSizeType.map((size, index) => (
+                      <div className={classes.input} key={index}>
+                        <div className={classes.bar}>
+                          <p className={classes.label}>{size.type}</p>
+                          <CloseIcon
+                            className="icon"
+                            onClick={size.clear}
+                            sx={{ fontSize: 16 }}
+                          />
+                        </div>
+                        <input
+                          placeholder="b21c1c 5, 514242 9"
+                          className={classes.size}
+                          type="text"
+                          id={size.type}
+                          name={size.type}
+                          onChange={(e) => size.change(e.target.value)}
+                          value={size.value}
+                          autoComplete="off"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
-            {categorySize === "shoesSize" && (
-              <div className={classes.sizeContainer}>
-                {shoesSize.map((size, index) => (
-                  <div className={classes.input} key={index}>
-                    <div className={classes.bar}>
-                      <p className={classes.label}>{size.type}</p>
-                      <CloseIcon
-                        className="icon"
-                        onClick={size.clear}
-                        sx={{ fontSize: 16 }}
-                      />
-                    </div>
-                    <input
-                      placeholder="b21c1c 5, 514242 9"
-                      className={classes.size}
-                      type="text"
-                      id={size.type}
-                      name={size.type}
-                      onChange={(e) => size.change(e.target.value)}
-                      value={size.value}
-                      autoComplete="off"
-                    />
+                )}
+                {categorySize === "shoesSize" && (
+                  <div className={classes.sizeContainer}>
+                    {shoesSizeType.map((size, index) => (
+                      <div className={classes.input} key={index}>
+                        <div className={classes.bar}>
+                          <p className={classes.label}>{size.type}</p>
+                          <CloseIcon
+                            className="icon"
+                            onClick={size.clear}
+                            sx={{ fontSize: 16 }}
+                          />
+                        </div>
+                        <input
+                          placeholder="b21c1c 5, 514242 9"
+                          className={classes.size}
+                          type="text"
+                          id={size.type}
+                          name={size.type}
+                          onChange={(e) => size.change(e.target.value)}
+                          value={size.value}
+                          autoComplete="off"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                )}
+              </Fragment>
             )}
             <h3>انتخاب عکس</h3>
             <div className="input">
@@ -971,62 +1245,66 @@ export default function Upload() {
                 />
               )}
             </div>
-            <div className="input">
-              <div>
-                <p className={classes.label}>Size table</p>
-                <input
-                  onChange={(e) => {
-                    setTable(e.target.files[0]);
-                  }}
-                  type="file"
-                  accept="image/png, image/jpeg"
-                />
-              </div>
-              {table !== "" && (
-                <Image
-                  width={150}
-                  height={70}
-                  objectFit="cover"
-                  src={URL.createObjectURL(table)}
-                  alt="image"
-                />
-              )}
-            </div>
-            {table !== "" && (
+            {productCategory === "clothing" && (
               <Fragment>
-                <div className={classes.sizeGraphContainer}>
-                  {graphInfo.map((info, index) => (
-                    <div
-                      className={classes.graph}
-                      key={index}
-                      onClick={() => setSizeGraph(info.src)}
-                    >
-                      <Image
-                        src={info.src}
-                        alt="graph"
-                        objectFit="contain"
-                        width={50}
-                        height={50}
-                      />
-                      <p>{info.title}</p>
-                    </div>
-                  ))}
-                </div>
-                {sizeGraph !== "" && (
-                  <div className={classes.sizeGraph}>
-                    <Image
-                      src={sizeGraph}
-                      alt="graph"
-                      objectFit="contain"
-                      width={80}
-                      height={80}
-                    />
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setSizeGraph("")}
-                      sx={{ fontSize: 16 }}
+                <div className="input">
+                  <div>
+                    <p className={classes.label}>Size table</p>
+                    <input
+                      onChange={(e) => {
+                        setTable(e.target.files[0]);
+                      }}
+                      type="file"
+                      accept="image/png, image/jpeg"
                     />
                   </div>
+                  {table !== "" && (
+                    <Image
+                      width={150}
+                      height={70}
+                      objectFit="cover"
+                      src={URL.createObjectURL(table)}
+                      alt="image"
+                    />
+                  )}
+                </div>
+                {table !== "" && (
+                  <Fragment>
+                    <div className={classes.sizeGraphContainer}>
+                      {graphInfo.map((info, index) => (
+                        <div
+                          className={classes.graph}
+                          key={index}
+                          onClick={() => setSizeGraph(info.src)}
+                        >
+                          <Image
+                            src={info.src}
+                            alt="graph"
+                            objectFit="contain"
+                            width={50}
+                            height={50}
+                          />
+                          <p>{info.title}</p>
+                        </div>
+                      ))}
+                    </div>
+                    {sizeGraph !== "" && (
+                      <div className={classes.sizeGraph}>
+                        <Image
+                          src={sizeGraph}
+                          alt="graph"
+                          objectFit="contain"
+                          width={80}
+                          height={80}
+                        />
+                        <CloseIcon
+                          className="icon"
+                          onClick={() => setSizeGraph("")}
+                          sx={{ fontSize: 16 }}
+                        />
+                      </div>
+                    )}
+                  </Fragment>
                 )}
               </Fragment>
             )}
@@ -1041,7 +1319,11 @@ export default function Upload() {
             )}
             <button
               className="mainButton"
-              onClick={() => handleUpload()}
+              onClick={() =>
+                productCategory === "clothing"
+                  ? handleClothesUpload()
+                  : handleCareUpload()
+              }
               disabled={uploadClicked}
             >
               Upload

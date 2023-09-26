@@ -6,11 +6,17 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber, calculatePercentage } from "../../services/utility";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import { getProductApi, getMellatApi, getUserApi } from "../../services/api";
+import {
+  getProductApi,
+  getCareApi,
+  getMellatApi,
+  getUserApi,
+} from "../../services/api";
 import graphic from "../../assets/shoppingCart.png";
 import Router from "next/router";
 import loadingImage from "../../assets/loader.png";
 import secureLocalStorage from "react-secure-storage";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 export default function ShoppingCart() {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -19,12 +25,12 @@ export default function ShoppingCart() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
+  const [loyaltyPoint, setLoyaltyPoint] = useState(0);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [post, setPost] = useState("");
-  const [discount, setDiscount] = useState("");
   const [alert, setAlert] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -33,6 +39,7 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     if (currentUser) {
+      setLoyaltyPoint(currentUser.loyalty);
       const fetchData = async () => {
         try {
           const user = await getUserApi(currentUser["_id"]);
@@ -40,7 +47,6 @@ export default function ShoppingCart() {
           setPhone(user.phone);
           setAddress(user.address);
           setPost(user.post);
-          setDiscount(user.discount);
           secureLocalStorage.setItem("currentUser", JSON.stringify(user));
         } catch (error) {
           console.error(error);
@@ -54,10 +60,20 @@ export default function ShoppingCart() {
   useEffect(() => {
     const checkProductsData = async (product) => {
       try {
-        const getProduct = await getProductApi(product["_id"]);
+        const getProduct =
+          (await getProductApi(product["_id"])) ||
+          (await getCareApi(product["_id"]));
         const isActivated = getProduct.activate;
-        const colorCount = getProduct.size[product.size].colors[product.color];
-        const message = isActivated && colorCount > 0 ? "" : "اتمام موجودی";
+        const count = null;
+        switch (getProduct.group) {
+          case "clothing":
+            count = getProduct.size[product.size].colors[product.color];
+            break;
+          case "care":
+            count = getProduct.count;
+            break;
+        }
+        const message = isActivated && count > 0 ? "" : "اتمام موجودی";
         product.price = getProduct.sale
           ? getProduct.discount
           : getProduct.price;
@@ -112,16 +128,26 @@ export default function ShoppingCart() {
     return total;
   };
 
+  const calculateLoyaltyDiscount = (loyaltyPoint) => {
+    let max = 200000;
+    let useLoyaltyPoint = loyaltyPoint <= max ? loyaltyPoint : max;
+    return useLoyaltyPoint;
+  };
+
   // clear shopping cart from duplicate selections based on id and color and size
   const continueShopping = () => {
+    secureLocalStorage.setItem(
+      "useLoyaltyPoint",
+      JSON.stringify(calculateLoyaltyDiscount(loyaltyPoint))
+    );
     const uniqueShoppingCart = shoppingCart.filter(
       (obj, index) =>
         index ===
         shoppingCart.findIndex(
-          (o) =>
-            obj["_id"] === o["_id"] &&
-            obj.color === o.color &&
-            obj.size === o.size
+          (item) =>
+            obj["_id"] === item["_id"] &&
+            obj.color === item.color &&
+            obj.size === item.size
         )
     );
     if (uniqueShoppingCart.length !== shoppingCart.length) {
@@ -166,11 +192,18 @@ export default function ShoppingCart() {
     try {
       const itemCheck = await Promise.all(
         shoppingCart.map(async (product) => {
-          const getProduct = await getProductApi(product["_id"]);
-          return (
-            getProduct.size[product.size].colors[product.color] > 0 &&
-            getProduct.activate
-          );
+          const getProduct =
+            (await getProductApi(product["_id"])) ||
+            (await getCareApi(product["_id"]));
+          switch (getProduct.group) {
+            case "clothing":
+              return (
+                getProduct.size[product.size].colors[product.color] > 0 &&
+                getProduct.activate
+              );
+            case "care":
+              return getProduct.count > 0 && getProduct.activate;
+          }
         })
       );
       if (allAreTrue(itemCheck)) {
@@ -187,14 +220,16 @@ export default function ShoppingCart() {
     }
   };
 
+  const checkSaleItemsClearForCredit = () => {
+    return shoppingCart.every((item) => !item.sale);
+  };
+
   // make a request to bank to get refId then direct user to payment page
   const openPaymentPortal = async () => {
     try {
       setPayment(true);
       const totalAmount =
-        calculateTotal() -
-        calculatePercentage(discount, calculateTotal()) +
-        "0";
+        calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) + "0";
       const pay = await getMellatApi(totalAmount);
       const refId = pay.RefId;
       if (pay.hasOwnProperty("error")) {
@@ -222,10 +257,16 @@ export default function ShoppingCart() {
               onClick={() => setToggleContainer("")}
             />
             {!checkout && (
-              <div className={classes.title}>
-                <p className={classes.count}>{shoppingCart.length}</p>
-                <p>آیتم</p>
-              </div>
+              <Fragment>
+                <div className={classes.row}>
+                  <MonetizationOnIcon className="gold-icon" />
+                  <p>{convertNumber(loyaltyPoint)} T</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.count}>{shoppingCart.length}</p>
+                  <p>آیتم</p>
+                </div>
+              </Fragment>
             )}
             {checkout && (
               <div className={classes.brand}>
@@ -267,10 +308,12 @@ export default function ShoppingCart() {
                         </div>
                         <div className={classes.options}>
                           <div className={classes.size}>{cart.size}</div>
-                          <div
-                            className={classes.color}
-                            style={{ backgroundColor: `#${cart.color}` }}
-                          ></div>
+                          {cart.group === "clothing" && (
+                            <div
+                              className={classes.color}
+                              style={{ backgroundColor: `#${cart.color}` }}
+                            ></div>
+                          )}
                         </div>
                         <div className={classes.id}>
                           <p className={classes.code}>کد آیتم</p>
@@ -289,6 +332,7 @@ export default function ShoppingCart() {
                     <div className={classes.close}>
                       <CloseIcon
                         className="icon icon-grey"
+                        sx={{ fontSize: 20 }}
                         onClick={() => deleteCart(index, cart["_id"])}
                       />
                     </div>
@@ -388,26 +432,30 @@ export default function ShoppingCart() {
             )}
             <div className={classes.row}>
               <p className={classes.value}>{shoppingCart.length}</p>
-              {discount && (
-                <div className={classes.discountRow}>
-                  <p className={classes.title}>هدیه خرید اول</p>
-                  <span className={classes.percentage}>{discount}%</span>
-                </div>
-              )}
               <p className={classes.title}>تعداد آیتم</p>
             </div>
+            {loyaltyPoint !== 0 && checkSaleItemsClearForCredit() && (
+              <div className={classes.row}>
+                <p className={classes.value}>
+                  {convertNumber(calculateLoyaltyDiscount(loyaltyPoint))} T
+                </p>
+                <p className={classes.title}>اعتبار قابل استفاده</p>
+              </div>
+            )}
             <div className={classes.row}>
-              {discount ? (
+              {loyaltyPoint !== 0 &&
+              shoppingCart.length > 0 &&
+              checkSaleItemsClearForCredit() &&
+              calculateLoyaltyDiscount(loyaltyPoint) <= 200000 ? (
                 <div className={classes.discountRow}>
-                  <p className={classes.price}>
-                    {convertNumber(calculateTotal())} T
-                  </p>
                   <p className={classes.value}>
                     {convertNumber(
-                      calculateTotal() -
-                        calculatePercentage(discount, calculateTotal())
+                      calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint)
                     )}{" "}
                     T
+                  </p>
+                  <p className={classes.price}>
+                    {convertNumber(calculateTotal())} T
                   </p>
                 </div>
               ) : (
@@ -420,8 +468,7 @@ export default function ShoppingCart() {
               </div>
             </div>
             <div className={classes.row}>
-              {calculateTotal() -
-                calculatePercentage(discount, calculateTotal()) >=
+              {calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) >=
               2000000 ? (
                 <p className={classes.value}>رایگان</p>
               ) : (

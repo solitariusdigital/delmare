@@ -2,6 +2,7 @@ import Invoice from "../../models/Invoice";
 import dbConnect from "../../services/dbConnect";
 
 export default async function invoicesHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
 
   await dbConnect();

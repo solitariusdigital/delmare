@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 import BurgerMenu from "./BurgerMenu";
 import Account from "./Account";
@@ -16,53 +16,33 @@ import classes from "./Container.module.scss";
 import Router from "next/router";
 import Image from "next/image";
 import brand from "../../assets/brand.svg";
-import secureLocalStorage from "react-secure-storage";
-import { updateUserApi, getUserApi } from "../../services/api";
+import lemon from "../../assets/lemon.png";
 
 function Container() {
-  const { userLogIn, setUserLogin } = useContext(StateContext);
   const { menu, setMenu } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { bar, setBar } = useContext(StateContext);
+  const { collectionsToggle, setCollectionsToggle } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
-  const { navigation, setNavigation } = useContext(StateContext);
-  const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { search, setSearch } = useContext(StateContext);
   const { searchControl, setSearchControl } = useContext(StateContext);
+  const { toggleType, setToggleType } = useContext(StateContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentUserData = JSON.parse(
-          secureLocalStorage.getItem("currentUser")
-        );
-        if (currentUserData) {
-          setUserLogin(true);
-          const user = await getUserApi(currentUserData["_id"]);
-          user.discount = "";
-          await updateUserApi(user);
-          setCurrentUser(user);
-          secureLocalStorage.setItem("currentUser", JSON.stringify(user));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [setUserLogin, setCurrentUser]);
-
-  useEffect(() => {
-    if (JSON.parse(secureLocalStorage.getItem("shoppingCart"))) {
-      setShoppingCart(JSON.parse(secureLocalStorage.getItem("shoppingCart")));
-    } else {
-      secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const collections = [
+    {
+      title: "کالکشن مد",
+      link: "/collections/clothing",
+    },
+    {
+      title: "محصولات بهداشتی",
+      link: "/collections/skin",
+    },
+  ];
 
   const activateNav = (link, index) => {
     sessionStorage.removeItem("positionY");
-    navigation.map((nav, i) => {
+    navigationTopBar.map((nav, i) => {
       if (i === index) {
         Router.push(link);
         nav.active = true;
@@ -70,7 +50,7 @@ function Container() {
         nav.active = false;
       }
     });
-    setNavigation([...navigation]);
+    setNavigationTopBar([...navigationTopBar]);
   };
 
   const navigateLandingPage = () => {
@@ -93,10 +73,25 @@ function Container() {
             className={classes.brandContainer}
             onClick={() => navigateLandingPage()}
           >
+            <Image
+              className="animate__animated animate__jackInTheBox"
+              width={40}
+              height={40}
+              src={lemon}
+              alt="lemon"
+            />
             <div className={classes.brand}>
               <Image src={brand} alt="brand" />
             </div>
+            <Image
+              className="animate__animated animate__jackInTheBox"
+              width={40}
+              height={40}
+              src={lemon}
+              alt="lemon"
+            />
           </div>
+
           <div className="shoppingcart-icon">
             {searchControl && (
               <SearchIcon
@@ -105,12 +100,32 @@ function Container() {
                 sx={{ fontSize: 28 }}
               />
             )}
-            <MenuIcon className="icon" onClick={() => setMenu(true)} />
+            <div className={classes.menuIcon}>
+              <MenuIcon className="icon" onClick={() => setMenu(true)} />
+            </div>
           </div>
         </div>
         {bar && (
           <div className={classes.navigation}>
-            {navigation
+            {navigationTopBar
+              .map((nav, index) => (
+                <Fragment key={index}>
+                  {nav.type === toggleType && (
+                    <div
+                      className={!nav.active ? classes.nav : classes.navActive}
+                      onClick={() => activateNav(nav.link, index)}
+                    >
+                      <p>{nav.title}</p>
+                    </div>
+                  )}
+                </Fragment>
+              ))
+              .reverse()}
+          </div>
+        )}
+        {collectionsToggle && (
+          <div className={classes.navigation}>
+            {collections
               .map((nav, index) => (
                 <div
                   key={index}

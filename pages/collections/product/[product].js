@@ -16,6 +16,7 @@ import {
   getProductApi,
   getProducstApi,
   updateProductApi,
+  updateCareApi,
 } from "../../../services/api";
 import payment from "../../../assets/payment.png";
 import quality from "../../../assets/quality.png";
@@ -23,11 +24,12 @@ import post from "../../../assets/post.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import dbConnect from "../../../services/dbConnect";
 import ProductModel from "../../../models/Product";
+import CareModel from "../../../models/Care";
 import Router from "next/router";
 import { useRouter } from "next/router";
 import ShareIcon from "@mui/icons-material/Share";
 import secureLocalStorage from "react-secure-storage";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -39,6 +41,7 @@ export default function Product({ product, favourite }) {
   const { menue, setMenu } = useContext(StateContext);
   const { register, setRegister } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const [alert, setAlert] = useState("");
 
   // product image variables
@@ -132,21 +135,26 @@ export default function Product({ product, favourite }) {
 
   useEffect(() => {
     setBar(false);
+    setNavigationBottom(false);
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-    Object.keys(productSizes).forEach((size) => {
-      productSizes[size]["type"] = size;
-      productSizes[size]["selected"] = false;
-    });
-  }, [setBar, shoppingCart, productSizes]);
+    if (product.group === "clothing") {
+      Object.keys(productSizes).forEach((size) => {
+        productSizes[size]["type"] = size;
+        productSizes[size]["selected"] = false;
+      });
+    }
+  }, [setBar, shoppingCart, productSizes, product.group, setNavigationBottom]);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (
-        !currentUser ||
-        secureLocalStorage.getItem("currentUser").permission !== "admin"
-      ) {
-        const updatedProduct = { ...product, views: product.views + 1.5 };
-        await updateProductApi(updatedProduct);
+      const updatedProduct = { ...product, views: product.views + 1.5 };
+      switch (product.group) {
+        case "clothing":
+          await updateProductApi(updatedProduct);
+          break;
+        case "care":
+          await updateCareApi(updatedProduct);
+          break;
       }
     };
     fetchData().catch(console.error);
@@ -203,21 +211,24 @@ export default function Product({ product, favourite }) {
   };
 
   const back = () => {
+    router.back();
+    window.scrollTo(0, 0);
+    colors.length = 0;
     setSelectedColor("");
     setSelectedSize("");
     clearDetails();
-    colors.length = 0;
-    window.scrollTo(0, 0);
-    router.back();
+    setNavigationBottom(true);
   };
 
   const clearDetails = () => {
-    colors.map((color) => {
-      color.selected = false;
-    });
-    Object.keys(productSizes).forEach((size) => {
-      productSizes[size].selected = false;
-    });
+    if (product.group === "clothing") {
+      colors.map((color) => {
+        color.selected = false;
+      });
+      Object.keys(productSizes).forEach((size) => {
+        productSizes[size].selected = false;
+      });
+    }
   };
 
   const selectDetails = (detail, type, i, count) => {
@@ -280,35 +291,58 @@ export default function Product({ product, favourite }) {
   };
 
   const addToCart = () => {
-    if (selectedColor === "" || selectedSize === "") {
-      setAlert("رنگ یا اندازه را انتخاب کنید");
-    } else {
-      let bloggerDelmareId = assignBloggerId();
-      // add item to shopping cart
-      const newItem = {
-        _id: product["_id"],
-        delmareId: product.delmareId,
-        title: product.title,
-        bloggerDelmareId: bloggerDelmareId,
-        size: selectedSize,
-        color: selectedColor,
-        price: product.sale ? product.discount : product.price,
-        image: product.images.main,
-        percentage: product.percentage,
-        deliveryType: product.deliveryType,
-        sale: product.sale,
-      };
-      setShoppingCart([...shoppingCart, newItem]);
-      clearDetails();
-      setSelectedColor("");
-      setSelectedSize("");
-      setToggleContainer("cart");
-      colors.length = 0;
-      window.scrollTo(0, 0);
+    let bloggerDelmareId = assignBloggerId();
+    const newItem = {};
+    switch (product.group) {
+      case "clothing":
+        if (!selectedColor || !selectedSize) {
+          setAlert("رنگ یا اندازه را انتخاب کنید");
+          setTimeout(() => {
+            setAlert("");
+          }, 3000);
+          return;
+        }
+        // add clothing to shopping cart
+        newItem = {
+          _id: product["_id"],
+          delmareId: product.delmareId,
+          title: product.title,
+          bloggerDelmareId: bloggerDelmareId,
+          size: selectedSize,
+          color: selectedColor,
+          price: product.sale ? product.discount : product.price,
+          image: product.images.main,
+          percentage: product.percentage,
+          deliveryType: product.deliveryType,
+          sale: product.sale,
+          group: product.group,
+        };
+
+        break;
+      case "care":
+        // add care to shopping cart
+        newItem = {
+          _id: product["_id"],
+          delmareId: product.delmareId,
+          title: product.title,
+          bloggerDelmareId: bloggerDelmareId,
+          size: product.size,
+          price: product.sale ? product.discount : product.price,
+          image: product.images.main,
+          percentage: product.percentage,
+          deliveryType: product.deliveryType,
+          sale: product.sale,
+          group: product.group,
+        };
+        break;
     }
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
+    setShoppingCart([...shoppingCart, newItem]);
+    clearDetails();
+    setSelectedColor("");
+    setSelectedSize("");
+    setToggleContainer("cart");
+    colors.length = 0;
+    window.scrollTo(0, 0);
   };
 
   const favourProduct = async (product) => {
@@ -408,10 +442,16 @@ export default function Product({ product, favourite }) {
 
   return (
     <Fragment>
-      <Head>
-        <title>Fashion Product</title>
-        <meta name="description" content="Fashion product" />
-      </Head>
+      <NextSeo
+        title="مشخصات محصول"
+        description="مشخصات محصول"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://delmareh.com/collections",
+          siteName: "Delmareh",
+        }}
+      />
       <div className={classes.productContainer}>
         <div className={classes.topBar}>
           <ArrowBackIosNewIcon
@@ -427,7 +467,7 @@ export default function Product({ product, favourite }) {
             </div>
           )}
           <div className={classes.sectionId}>
-            <p>{product.delmareId}</p>
+            <p className={classes.id}>{product.delmareId}</p>
             <p className={classes.title}>کد آیتم</p>
           </div>
         </div>
@@ -590,7 +630,7 @@ export default function Product({ product, favourite }) {
             <p className={classes.title}>{product.title}</p>
           </div>
           <p className={classes.description}>{product.description}</p>
-          {active && (
+          {active && product.group === "clothing" && (
             <Fragment>
               <div className={classes.section}>
                 <p className={classes.title}>انتخاب اندازه</p>
@@ -630,6 +670,18 @@ export default function Product({ product, favourite }) {
                     ></div>
                   ))}
                 </div>
+              </div>
+            </Fragment>
+          )}
+          {product.group === "care" && (
+            <Fragment>
+              <div className={classes.rowDetails}>
+                <p>اندازه</p>
+                <p className={classes.title}>{product.size} mm</p>
+              </div>
+              <div className={classes.rowDetails}>
+                <p>موجودی</p>
+                <p className={classes.title}>{product.count}</p>
               </div>
             </Fragment>
           )}
@@ -718,94 +770,122 @@ export default function Product({ product, favourite }) {
             </div>
           ))}
 
-        <div className={classes.designContainer}>
-          <div className={classes.rowDetails}>
-            <p>برند</p>
-            <p className={classes.title}>
-              {product.brandType === "اورجینال" ? "خارجی" : product.brand}
-            </p>
+        {product.group === "clothing" && (
+          <div className={classes.designContainer}>
+            <div className={classes.rowDetails}>
+              <p>برند</p>
+              <p className={classes.title}>
+                {product.brandType === "اورجینال" ? "خارجی" : product.brand}
+              </p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>دسته</p>
+              <p className={classes.title}>{product.category}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>نوع</p>
+              <p className={classes.title}>{product.brandType}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>فصل</p>
+              <p className={classes.title}>{product.season}</p>
+            </div>
           </div>
-          <div className={classes.rowDetails}>
-            <p>نوع</p>
-            <p className={classes.title}>{product.brandType}</p>
+        )}
+        {product.group === "care" && (
+          <div className={classes.designContainer}>
+            <div className={classes.rowDetails}>
+              <p>برند</p>
+              <p className={classes.title}>{product.brand}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>دسته</p>
+              <p className={classes.title}>{product.category}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>گروه</p>
+              <p className={classes.title}>{product.type}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>نوع</p>
+              <p className={classes.title}>{product.brandType}</p>
+            </div>
+            <div className={classes.rowDetails}>
+              <p>کشور</p>
+              <p className={classes.title}>{product.country}</p>
+            </div>
           </div>
-          <div className={classes.rowDetails}>
-            <p>دسته</p>
-            <p className={classes.title}>{product.category}</p>
-          </div>
-          <div className={classes.rowDetails}>
-            <p>فصل</p>
-            <p className={classes.title}>{product.season}</p>
-          </div>
-        </div>
+        )}
 
         <div className={classes.information}>
-          <div className={classes.section}>
-            <div
-              className={classes.item}
-              onClick={() => {
-                setSizeGuide(!sizeGuide);
-                setShipmentMethod(false);
-                setReturnPolicy(false);
-              }}
-            >
-              <p>راهنمای اندازه</p>
-              {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </div>
-            {sizeGuide && (
-              <div className={classes.information}>
-                <div className={classes.row}>
-                  <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
-                  <div>
-                    <p className={classes.description}>
-                      تک سایز - FS : Free Size
-                    </p>
-                    <p className={classes.description}>
-                      اسکارف، اکسسوری، ساعت، عینک، کلاه و کیف، تک سایز هستند
-                    </p>
-                  </div>
-                </div>
-                {product.images.table !== "" && (
-                  <Fragment>
-                    <div className={classes.row}>
-                      <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+          {product.group === "clothing" && (
+            <div className={classes.section}>
+              <div
+                className={classes.item}
+                onClick={() => {
+                  setSizeGuide(!sizeGuide);
+                  setShipmentMethod(false);
+                  setReturnPolicy(false);
+                }}
+              >
+                <p>راهنمای اندازه</p>
+                {sizeGuide ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </div>
+              {sizeGuide && (
+                <div className={classes.information}>
+                  <div className={classes.row}>
+                    <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                    <div>
                       <p className={classes.description}>
-                        اندازه در جدول به سانتی متر است
+                        تک سایز - FS : Free Size
+                      </p>
+                      <p className={classes.description}>
+                        اسکارف، اکسسوری، ساعت، عینک، کلاه و کیف، تک سایز هستند
                       </p>
                     </div>
-                    <div className={classes.table}>
-                      <Image
-                        src={product.images.table}
-                        blurDataURL={product.images.table}
-                        placeholder="blur"
-                        alt="image"
-                        layout="fill"
-                        objectFit="contain"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                  </Fragment>
-                )}
-                {product.images.graph !== "" && (
-                  <Fragment>
-                    <div className={classes.table}>
-                      <Image
-                        src={product.images.graph}
-                        blurDataURL={product.images.graph}
-                        placeholder="blur"
-                        alt="image"
-                        layout="fill"
-                        objectFit="contain"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                  </Fragment>
-                )}
-              </div>
-            )}
-          </div>
+                  </div>
+                  {product.images.table !== "" && (
+                    <Fragment>
+                      <div className={classes.row}>
+                        <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
+                        <p className={classes.description}>
+                          اندازه در جدول به سانتی متر است
+                        </p>
+                      </div>
+                      <div className={classes.table}>
+                        <Image
+                          src={product.images.table}
+                          blurDataURL={product.images.table}
+                          placeholder="blur"
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority
+                          loading="eager"
+                        />
+                      </div>
+                    </Fragment>
+                  )}
+                  {product.images.graph !== "" && (
+                    <Fragment>
+                      <div className={classes.table}>
+                        <Image
+                          src={product.images.graph}
+                          blurDataURL={product.images.graph}
+                          placeholder="blur"
+                          alt="image"
+                          layout="fill"
+                          objectFit="contain"
+                          priority
+                          loading="eager"
+                        />
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
           <div className={classes.section}>
             <div
               className={classes.item}
@@ -983,8 +1063,8 @@ export default function Product({ product, favourite }) {
                     درصورت عدم آگاهی، اطلاع و ناتوانی مشتری در استفاده از
                     محصولات آرایشی و بهداشتی و یا ایجاد خسارت نسبت به خود یا
                     محصول، تمامی مسئولیت‌‌های آن بر عهده مشتری است و فروشگاه
-                    دلماره در این خصوص هیچگونه تعهدی نخواهد داشت. - در صورت
-                    تایید معیوب بودن کالای مرجوعی توسط شرکت تامین یا تولیدکننده،
+                    دلماره در این خصوص هیچگونه تعهدی نخواهد داشت. در صورت تایید
+                    معیوب بودن کالای مرجوعی توسط شرکت تامین یا تولیدکننده،
                     دلماره صرفاً هزینه کالا یا سرویس را مطابق فاکتور (حداکثر تا
                     یک هفته از تاریخ فاکتور) به مشتری برمی‌گرداند
                   </p>
@@ -1010,7 +1090,7 @@ export default function Product({ product, favourite }) {
                 <div className={classes.row}>
                   <FiberManualRecordOutlined sx={{ fontSize: 8 }} />
                   <p className={classes.description}>
-                    لوازم آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
+                    محصولات آرایشی، کرم ها و لوسیون ها مطابق قوانین وزارت بهداشت
                     به صورت پلمپ فروخته شده و امکان بازگشت ندارند
                   </p>
                 </div>
@@ -1167,7 +1247,9 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     let productId = context.params.product;
-    const product = await ProductModel.findById(productId);
+    const product =
+      (await ProductModel.findById(productId)) ||
+      (await CareModel.findById(productId));
 
     return {
       props: {

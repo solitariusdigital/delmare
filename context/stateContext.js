@@ -8,6 +8,8 @@ export const StateProvider = (props) => {
   const [searchControl, setSearchControl] = useState(false);
   const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
+  const [navigationBottom, setNavigationBottom] = useState(true);
+  const [toggleType, setToggleType] = useState("clothing" || "care");
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -21,44 +23,65 @@ export const StateProvider = (props) => {
   );
   const [selectedProduct, setSelectedProduct] = useState({});
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [referralData, setReferralData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [navigation, setNavigation] = useState([
+  const [navigationTopBar, setNavigationTopBar] = useState([
     {
       title: "گالری",
       collection: "gallery",
       link: "/collections/gallery",
       active: false,
+      type: "clothing",
     },
     {
       title: "تخفیف",
       collection: "sale",
       link: "/collections/sale",
       active: false,
+      type: "clothing",
     },
     {
       title: "اکسسوری",
       collection: "accessories",
       link: "/collections/accessories",
       active: false,
+      type: "clothing",
     },
     {
       title: "کفش",
       collection: "shoes",
       link: "/collections/shoes",
       active: false,
+      type: "clothing",
     },
     {
       title: "بلاگرز",
       collection: "bloggers",
       link: "/collections/bloggers",
       active: false,
+      type: "clothing",
     },
     {
       title: "برندز",
       collection: "brands",
       link: "/collections/brands",
       active: false,
+      type: "clothing",
     },
+    {
+      title: "محصولات بهداشتی",
+      collection: "skin",
+      link: "/collections/skin",
+      active: false,
+      type: "care",
+    },
+    // {
+    //   title: "مو",
+    //   collection: "hair",
+    //   link: "/collections/hair",
+    //   active: false,
+    //   type: "care",
+    // },
   ]);
   const [generalCategories, setGeneralCategories] = useState([
     "اسکارف",
@@ -119,8 +142,8 @@ export const StateProvider = (props) => {
     setBar,
     shoppingCart,
     setShoppingCart,
-    navigation,
-    setNavigation,
+    navigationTopBar,
+    setNavigationTopBar,
     toggleContainer,
     setToggleContainer,
     selectedProduct,
@@ -151,6 +174,12 @@ export const StateProvider = (props) => {
     setKavenegarKey,
     gallery,
     setGallery,
+    navigationBottom,
+    setNavigationBottom,
+    toggleType,
+    setToggleType,
+    referralData,
+    setReferralData,
   };
 
   return (

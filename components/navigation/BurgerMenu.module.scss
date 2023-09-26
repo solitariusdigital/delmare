@@ -65,13 +65,14 @@
     padding: 0px 12px;
     margin-bottom: 16px;
 
-    .user {
+    .row {
       display: flex;
       flex-direction: row;
+      align-items: center;
 
       p {
         font-size: config.$med-font;
-        margin-left: 12px;
+        margin: 0px 5px;
 
         &:hover {
           cursor: pointer;

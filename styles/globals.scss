@@ -35,10 +35,37 @@ a {
   color: config.$grey;
 }
 
-.navigation {
+.main {
+  min-height: 100vh;
+}
+.navigationTop {
   position: sticky;
   top: 0;
   z-index: 99;
+}
+
+.navigationBottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  @include mixins.slide-top();
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .navigationActive {
+    color: config.$pink;
+    @include mixins.favour();
+  }
 }
 
 .mainButton {
@@ -59,18 +86,40 @@ a {
   }
 }
 
+.referral {
+  margin: 0px 12px;
+
+  .info {
+    margin: 8px 0px;
+    padding: 4px;
+    @include mixins.transparentBackground(0.5, config.$brand);
+    @include mixins.border-radius();
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.gold-icon {
+  margin: 0px 4px;
+  color: config.$gold;
+}
+
 .collections-type {
   display: flex;
   flex-direction: column;
 
-  .card {
+  .cardClothing,
+  .cardCare {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    width: calc(100% - 24px);
-    margin: 6px 12px;
-    height: 60vh;
+    margin: 8px 12px;
+    height: 55vh;
     box-shadow: config.$image-shadow;
     @include mixins.border-radius();
     @include mixins.gradientBorder();
@@ -86,7 +135,8 @@ a {
       border-radius: 10px;
     }
 
-    .ctaCollection {
+    .ctaClothing,
+    .ctaCare {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -100,24 +150,42 @@ a {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       font-weight: bold;
-      opacity: 0.8;
       box-shadow: config.$image-shadow;
       @include mixins.gradientBackground();
     }
+
+    .ctaCare {
+      background: linear-gradient(to left, config.$brand, config.$magneta);
+    }
+  }
+
+  .cardCare {
+    background: linear-gradient(config.$white, config.$white) padding-box,
+      linear-gradient(45deg, config.$magneta, config.$brand) border-box;
   }
 }
 
-.ctaButton {
+.ctaButton,
+.ctaButton-referral {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 45%;
   height: 40px;
   border-radius: 50px;
   font-weight: bold;
   margin: 8px auto;
   box-shadow: config.$image-shadow;
-  @include mixins.gradientBackground();
+  background: config.$brand;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ctaButton-referral {
+  background: config.$lemon;
+  @include mixins.heartbeat();
 }
 
 .message {
@@ -125,7 +193,7 @@ a {
   flex-direction: column;
   text-align: center;
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   max-width: config.$max-width;
   font-size: config.$tiny-font;
 }
@@ -208,11 +276,6 @@ a {
         margin-right: 5px;
       }
 
-      .iconRed {
-        color: config.$red;
-        @include mixins.favour();
-      }
-
       .iconPink {
         color: config.$pink;
         @include mixins.favour();
@@ -273,6 +336,11 @@ a {
       @include mixins.transparentBackground(0.8, config.$orange);
     }
   }
+}
+
+.iconRed {
+  color: config.$red;
+  @include mixins.favour();
 }
 
 .container-list {
@@ -344,17 +412,17 @@ a {
 
 .loadAppUpdate {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  margin: auto;
   height: 100vh;
 
   p {
     margin-top: 12px;
     margin-bottom: 30px;
     font-weight: bold;
+  }
+
+  .lemon {
+    margin: 0px 12px;
   }
 }

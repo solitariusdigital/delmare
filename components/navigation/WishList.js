@@ -8,7 +8,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Image from "next/image";
 import classes from "./WishList.module.scss";
-import { updateUserApi, getProducstApi } from "../../services/api";
+import {
+  updateUserApi,
+  getProducstApi,
+  getCarestApi,
+} from "../../services/api";
 import likeGraphic from "../../assets/wishlist.png";
 import starGraphic from "../../assets/star.png";
 import Router from "next/router";
@@ -18,9 +22,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { convertNumber, abbreviateNumber } from "../../services/utility";
 
 export default function WishList() {
-  const { menue, setMenu } = useContext(StateContext);
   const { selectedProduct, setSelectedProduct } = useContext(StateContext);
-  const { bar, setBar } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -30,14 +32,14 @@ export default function WishList() {
 
   useEffect(() => {
     setSelectedProduct({});
-    setBar(true);
-  }, [setSelectedProduct, , setBar]);
+  }, [setSelectedProduct]);
 
   useEffect(() => {
-    Router.push(`/collections/gallery`);
     const fetchData = async () => {
       try {
-        const data = await getProducstApi();
+        const clothing = await getProducstApi();
+        const care = await getCarestApi();
+        const data = clothing.concat(care);
         setWishList(
           data.filter((product) =>
             currentUser.favourites.includes(product["_id"])
@@ -73,7 +75,6 @@ export default function WishList() {
 
   const selectProduct = async (id) => {
     Router.push(`/collections/product/${id}`);
-    setBar(false);
     setTimeout(() => {
       setToggleContainer("");
     }, 500);

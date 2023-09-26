@@ -16,6 +16,7 @@ export default function Confirmation({ props }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
   const { container, setContainer } = useContext(StateContext);
+  const { navigationBottom, setNavigationBottom } = useContext(StateContext);
 
   const [displayConfirmation, setDisplayConfirmation] = useState(true);
   const [refId, setRefId] = useState("");
@@ -23,12 +24,16 @@ export default function Confirmation({ props }) {
   useEffect(() => {
     document.body.style.background = "#ffffff";
     setContainer(false);
-  }, [setContainer]);
+    setNavigationBottom(false);
+  }, [setContainer, setNavigationBottom]);
 
   useEffect(() => {
     if (shoppingCart && currentUser) {
       props.shoppingCart = shoppingCart;
       props.currentUser = currentUser;
+      props.loyaltyPoint = JSON.parse(
+        secureLocalStorage.getItem("useLoyaltyPoint")
+      );
       const processOrder = async () => {
         if (props.ResCode === "0") {
           const check = await postMellatApi(props);
@@ -98,7 +103,7 @@ export default function Confirmation({ props }) {
             ) : (
               <div className={classes.row}>
                 <div className={classes.loading}>
-                  <p>لطفا صبر کنید و صفحه را نبندید </p>
+                  <p>لطفا صبر کنید و صفحه را نبندید</p>
                   <Image
                     width={50}
                     height={50}
