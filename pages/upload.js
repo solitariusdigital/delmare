@@ -145,7 +145,7 @@ export default function Upload() {
     "E.I.F": "California U.S.",
     Garnier: "France",
     "Kiko Milano": "Italy",
-    "L'Oreal": "Paris",
+    Loreal: "Paris",
     Ordinary: "Toronto Canada",
     Revolution: "U.K.",
     Sephora: "Paris France",

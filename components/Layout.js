@@ -125,7 +125,13 @@ export default function Layout(props) {
           ) : (
             <div className="loadEntry">
               <div className="lemon animate__animated animate__jackInTheBox">
-                <Image width={50} height={50} src={lemon} alt="lemon" />
+                <Image
+                  width={50}
+                  height={50}
+                  src={lemon}
+                  alt="lemon"
+                  priority
+                />
               </div>
               <Image
                 className="lemon animate__animated animate__zoomIn"
@@ -136,7 +142,13 @@ export default function Layout(props) {
                 priority
               />
               <div className="lemon animate__animated animate__jackInTheBox">
-                <Image width={50} height={50} src={lemon} alt="lemon" />
+                <Image
+                  width={50}
+                  height={50}
+                  src={lemon}
+                  alt="lemon"
+                  priority
+                />
               </div>
             </div>
           )}
