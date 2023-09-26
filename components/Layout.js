@@ -123,7 +123,7 @@ export default function Layout(props) {
               )}
             </Fragment>
           ) : (
-            <div className="loadAppUpdate">
+            <div className="loadEntry">
               <div className="lemon animate__animated animate__jackInTheBox">
                 <Image width={50} height={50} src={lemon} alt="lemon" />
               </div>

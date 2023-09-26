@@ -410,7 +410,8 @@ a {
   padding: 12px;
 }
 
-.loadAppUpdate {
+.loadAppUpdate,
+.loadEntry {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -425,4 +426,8 @@ a {
   .lemon {
     margin: 0px 12px;
   }
+}
+
+.loadAppUpdate {
+  flex-direction: column;
 }
