@@ -8,6 +8,7 @@ import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";
 import Brand from "../../models/Brand";
 import Blogger from "../../models/Blogger";
+
 import Care from "../../models/Care";
 import { NextSeo } from "next-seo";
 
@@ -70,7 +71,7 @@ export async function getServerSideProps(context) {
 
     const { collection } = context.params;
 
-    // await ProductModel.updateMany({}, { $set: { group: "clothing" } });
+    // await UserModel.updateMany({}, { $set: { loyalty: 0 } });
 
     switch (collection) {
       case "gallery":
