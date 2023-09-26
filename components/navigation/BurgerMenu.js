@@ -275,12 +275,12 @@ export default function BurgerMenu() {
                   }
                 />
               </div>
-              <div className={classes.row}>
+              {/* <div className={classes.row}>
                 <p>
                   خیابان ولیعصر، ۱۰۰ متر پایینتر از سه راه توانیر، نبش بخشندگان،
                   مجتمع مدیکوسنتر، طبقه ۴، واحد ۴۰۶
                 </p>
-              </div>
+              </div> */}
               {/* <div className={classes.row}>
                 <p>0933 336 3411</p>
                 <p>021 8879 3585</p>
