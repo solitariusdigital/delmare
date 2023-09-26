@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/stateContext";
 import secureLocalStorage from "react-secure-storage";
 import Head from "next/head";
-import { convertDate } from "../services/utility";
+import { convertDate, convertNumber } from "../services/utility";
 import classes from "./page.module.scss";
 import Router from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -66,8 +66,8 @@ export default function Users({ sortedUsers }) {
                   <p>{user.phone}</p>
                 </div>
                 <div className={classes.row}>
-                  <p className={classes.title}>آیتم آرزو</p>
-                  <p>{user.favourites.length}</p>
+                  <p className={classes.title}>اعتبار</p>
+                  <p>{convertNumber(user.loyalty)} T</p>
                 </div>
                 <div className={classes.row}>
                   <p className={classes.title}>عضویت</p>
