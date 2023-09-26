@@ -228,8 +228,13 @@ export default function ShoppingCart() {
   const openPaymentPortal = async () => {
     try {
       setPayment(true);
-      const totalAmount =
-        calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) + "0";
+      let totalAmount = null;
+      if (checkSaleItemsClearForCredit()) {
+        totalAmount =
+          calculateTotal() - calculateLoyaltyDiscount(loyaltyPoint) + "0";
+      } else {
+        totalAmount = calculateTotal() + "0";
+      }
       const pay = await getMellatApi(totalAmount);
       const refId = pay.RefId;
       if (pay.hasOwnProperty("error")) {
