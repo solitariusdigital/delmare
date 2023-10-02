@@ -8,7 +8,6 @@ import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";
 import Brand from "../../models/Brand";
 import Blogger from "../../models/Blogger";
-
 import Care from "../../models/Care";
 import { NextSeo } from "next-seo";
 
