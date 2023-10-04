@@ -152,19 +152,19 @@ export async function getServerSideProps(context) {
     const products = await ProductModel.find();
     const newItems = products
       .filter((product) => {
-        return product.activate && !product.sale;
+        return product.activate && product.display && !product.sale;
       })
       .reverse()
       .slice(0, 5);
     const newSales = products
       .filter((product) => {
-        return product.activate && product.sale;
+        return product.activate && product.display && product.sale;
       })
       .reverse()
       .slice(0, 5);
     const mostViews = products
       .filter((product) => {
-        return product.activate;
+        return product.activate && product.display;
       })
       .sort((a, b) => {
         return b.views - a.views;

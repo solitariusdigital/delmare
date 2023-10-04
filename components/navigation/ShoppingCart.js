@@ -64,7 +64,7 @@ export default function ShoppingCart() {
           (await getProductApi(product["_id"])) ||
           (await getCareApi(product["_id"]));
         const isActivated = getProduct.activate;
-        const count = null;
+        let count = null;
         switch (getProduct.group) {
           case "clothing":
             count = getProduct.size[product.size].colors[product.color];

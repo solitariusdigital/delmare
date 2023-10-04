@@ -292,7 +292,7 @@ export default function Product({ product, favourite }) {
 
   const addToCart = () => {
     let bloggerDelmareId = assignBloggerId();
-    const newItem = {};
+    let newItem = {};
     switch (product.group) {
       case "clothing":
         if (!selectedColor || !selectedSize) {

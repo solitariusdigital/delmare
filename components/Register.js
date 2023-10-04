@@ -30,7 +30,7 @@ function Register() {
   const [checkToken, setCheckToken] = useState("");
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
-  const [counter, setCounter] = useState(59);
+  let [counter, setCounter] = useState(59);
   const [notification, setNotification] = useState({});
   const [discount, setDiscount] = useState("");
 
