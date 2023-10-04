@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./Container.module.scss";
 import Router from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import brand from "../../assets/brand.svg";
 import lemon from "../../assets/lemon.png";
 

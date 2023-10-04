@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Bloggers.module.scss";
 import { getUserApi } from "../services/api";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Router from "next/router";
 import { StateContext } from "../context/stateContext";
 import Person4Icon from "@mui/icons-material/Person4";

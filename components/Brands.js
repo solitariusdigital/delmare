@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment, useContext } from "react";
 import classes from "./Brands.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Router from "next/router";
 import { StateContext } from "../context/stateContext";
 

@@ -7,7 +7,7 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./About.module.scss";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import logo from "../../assets/logo.svg";
 
 export default function About() {

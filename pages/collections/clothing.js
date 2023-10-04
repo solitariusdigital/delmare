@@ -1,7 +1,7 @@
 import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "../../context/stateContext";
 import Router from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Highlight from "../../components/Highlight";
 import dbConnect from "../../services/dbConnect";
 import ProductModel from "../../models/Product";

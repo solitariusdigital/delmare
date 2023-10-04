@@ -14,7 +14,7 @@ import secureLocalStorage from "react-secure-storage";
 import Person4Icon from "@mui/icons-material/Person4";
 import SellIcon from "@mui/icons-material/Sell";
 import classesPage from "../../pages/page.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import {
   convertNumber,
   convertDate,

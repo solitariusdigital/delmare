@@ -9,7 +9,7 @@ import Person4Icon from "@mui/icons-material/Person4";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StarsIcon from "@mui/icons-material/Stars";
 import Register from "../Register";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import logo from "../../assets/logo.svg";
 import Router from "next/router";
 import HomeIcon from "@mui/icons-material/Home";

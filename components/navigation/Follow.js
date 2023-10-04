@@ -4,7 +4,7 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getBloggersApi, getUserApi } from "../../services/api";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import classes from "./Follow.module.scss";
 import Router from "next/router";
 import starGraphic from "../../assets/star.png";

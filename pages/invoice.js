@@ -13,7 +13,7 @@ import { updateInvoiceApi } from "../services/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import secureLocalStorage from "react-secure-storage";
 
 export default function Invoice({ invoices, newInvoices, postedInvoices }) {

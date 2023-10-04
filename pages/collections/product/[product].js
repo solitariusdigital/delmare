@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "../../../context/stateContext";
 import classes from "../../product.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";

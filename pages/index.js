@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, Fragment } from "react";
 import { StateContext } from "../context/stateContext";
 import Router from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { NextSeo } from "next-seo";
 

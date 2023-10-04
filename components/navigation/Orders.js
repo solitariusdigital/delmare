@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCart from "./ShoppingCart.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getInvoiceApi } from "../../services/api";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import graphic from "../../assets/wardrobe.png";
 import { convertNumber, convertDate } from "../../services/utility";
 

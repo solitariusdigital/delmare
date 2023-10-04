@@ -8,7 +8,7 @@ import qs from "querystring";
 import secureLocalStorage from "react-secure-storage";
 import Kavenegar from "kavenegar";
 import loadingImage from "../../assets/loader.png";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function Confirmation({ props }) {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);

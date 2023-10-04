@@ -9,7 +9,7 @@ import {
   updateUserApi,
 } from "../../../services/api";
 import { StateContext } from "../../../context/stateContext";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import classes from "../../page.module.scss";
 import Router from "next/router";
 import StarIcon from "@mui/icons-material/Star";

@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import classes from "./ShoppingCart.module.scss";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { convertNumber, calculatePercentage } from "../../services/utility";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import brand from "../../assets/brand.svg";
 import {
   getProductApi,

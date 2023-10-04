@@ -1,6 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/stateContext";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./page.module.scss";
 import { sixGenerator } from "../services/utility";

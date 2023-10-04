@@ -4,7 +4,7 @@ import classes from "./Register.module.scss";
 import Kavenegar from "kavenegar";
 import { fourGenerator } from "../services/utility";
 import CloseIcon from "@mui/icons-material/Close";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import loadingImage from "../assets/loader.png";
 import {
   createUserApi,

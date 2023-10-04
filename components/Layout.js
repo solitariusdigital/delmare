@@ -5,7 +5,7 @@ import SanitizerIcon from "@mui/icons-material/Sanitizer";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import Router from "next/router";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
 import brand from "../assets/brand.svg";
