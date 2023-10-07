@@ -25,6 +25,7 @@ export default function Layout(props) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { toggleType, setToggleType } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [loadAppUpdate, setLoadUpdate] = useState({});
   const [loader, setLoader] = useState(false);
 
@@ -78,6 +79,14 @@ export default function Layout(props) {
 
   const controlNavigation = (type) => {
     Router.push(`/collections/${type}`);
+    navigationTopBar.map((nav, i) => {
+      if (nav.collection === type) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
     setToggleType(type);
     setBar(false);
   };
