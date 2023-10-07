@@ -32,7 +32,7 @@ function Container() {
   const collections = [
     {
       title: "کالکشن مد",
-      link: "/collections/clothing",
+      link: "/collections/gallery",
     },
     {
       title: "محصولات بهداشتی",

@@ -4,8 +4,16 @@ import Router from "next/router";
 import Image from "next/legacy/image";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { NextSeo } from "next-seo";
+import dbConnect from "../services/dbConnect";
+import ProductModel from "../models/Product";
+import Highlight from "../components/Highlight";
 
-export default function HomePage() {
+export default function HomePage({
+  newItems,
+  newSales,
+  mostViews,
+  cheapestItems,
+}) {
   const { bar, setBar } = useContext(StateContext);
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -53,8 +61,8 @@ export default function HomePage() {
   const collections = [
     {
       title: "کالکشن مد",
-      type: "clothing",
-      link: "/collections/clothing",
+      type: "gallery",
+      link: "/collections/gallery",
       imageSrc: `${sourceLink}eight.jpg`,
     },
     {
@@ -150,6 +158,10 @@ export default function HomePage() {
           <p>ورود / ​ثبت نام</p>
         </div>
       )}
+      <div className="highlight">
+        <h4>جدید</h4>
+        <Highlight products={newItems} />
+      </div>
       <div className="collections-type">
         {collections.map((collection, index) => (
           <Fragment key={index}>
@@ -180,13 +192,77 @@ export default function HomePage() {
                 loading="eager"
               />
             </div>
+            {index === 0 && (
+              <div className="highlight">
+                <h4>تخفیف ویژه</h4>
+                <Highlight products={newSales} />
+              </div>
+            )}{" "}
+            {index === 0 && (
+              <div className="highlight">
+                <h4>بیشترین بازدید</h4>
+                <Highlight products={mostViews} />
+              </div>
+            )}
           </Fragment>
         ))}
       </div>
+
+      <div className="highlight">
+        <h4>ارزانترین</h4>
+        <Highlight products={cheapestItems} />
+      </div>
       <div className="message">
-        <p>خرید امن و راحت از بهترین برندهای ایران و دنیا</p>
-        <p>با دلماره متفاوت دیده شوید</p>
+        <h4>خرید امن و راحت از بهترین برندهای ایران و دنیا</h4>
+        <h2>دِل، مارا خواهد بُرد</h2>
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const products = await ProductModel.find();
+    const newItems = products
+      .filter((product) => {
+        return product.activate && product.display && !product.sale;
+      })
+      .reverse()
+      .slice(0, 5);
+    const newSales = products
+      .filter((product) => {
+        return product.activate && product.display && product.sale;
+      })
+      .reverse()
+      .slice(0, 5);
+    const mostViews = products
+      .filter((product) => {
+        return product.activate && product.display;
+      })
+      .sort((a, b) => {
+        return b.views - a.views;
+      })
+      .slice(0, 5);
+    const cheapestItems = products
+      .filter((product) => {
+        return product.activate && product.display;
+      })
+      .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      .slice(0, 5);
+
+    return {
+      props: {
+        newItems: JSON.parse(JSON.stringify(newItems)),
+        newSales: JSON.parse(JSON.stringify(newSales)),
+        mostViews: JSON.parse(JSON.stringify(mostViews)),
+        cheapestItems: JSON.parse(JSON.stringify(cheapestItems)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }

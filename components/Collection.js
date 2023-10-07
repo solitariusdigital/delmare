@@ -78,7 +78,7 @@ export default function Collection({
     setMessage(false);
     setBar(true);
     setNavigationBottom(true);
-    setToggleType("clothing");
+    setToggleType("gallery");
     if (collectionType === "hair" || collectionType === "skin") {
       setSearchControl(false);
       setSearch(false);

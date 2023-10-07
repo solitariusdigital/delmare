@@ -28,7 +28,7 @@ export default function Clothing({
     setSearchControl(false);
     setSearch(false);
     setNavigationBottom(true);
-    setToggleType("clothing");
+    setToggleType("gallery");
   }, [
     setBar,
     setContainer,

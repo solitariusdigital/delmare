@@ -100,10 +100,10 @@ export default function Layout(props) {
                   <div>
                     <CheckroomIcon
                       className={
-                        toggleType === "clothing" ? "navigationActive" : "icon"
+                        toggleType === "gallery" ? "navigationActive" : "icon"
                       }
                       onClick={() => {
-                        controlNavigation("clothing");
+                        controlNavigation("gallery");
                       }}
                     />
                     <SanitizerIcon
@@ -123,33 +123,38 @@ export default function Layout(props) {
               )}
             </Fragment>
           ) : (
-            <div className="loadEntry">
-              <div className="lemon animate__animated animate__jackInTheBox">
+            <div className="loadEntryContainer">
+              <div className="loadEntry">
+                <div className="lemon animate__animated animate__jackInTheBox">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={lemon}
+                    alt="lemon"
+                    priority
+                  />
+                </div>
                 <Image
-                  width={50}
-                  height={50}
-                  src={lemon}
-                  alt="lemon"
+                  className="lemon animate__animated animate__zoomIn"
+                  width={160}
+                  height={90}
+                  src={brand}
+                  alt="brand"
                   priority
                 />
+                <div className="lemon animate__animated animate__jackInTheBox">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={lemon}
+                    alt="lemon"
+                    priority
+                  />
+                </div>
               </div>
-              <Image
-                className="lemon animate__animated animate__zoomIn"
-                width={160}
-                height={90}
-                src={brand}
-                alt="brand"
-                priority
-              />
-              <div className="lemon animate__animated animate__jackInTheBox">
-                <Image
-                  width={50}
-                  height={50}
-                  src={lemon}
-                  alt="lemon"
-                  priority
-                />
-              </div>
+              <h2 className="lemon animate__animated animate__zoomIn">
+                دِل، مارا خواهد بُرد
+              </h2>
             </div>
           )}
         </Fragment>

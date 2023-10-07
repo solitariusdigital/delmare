@@ -9,7 +9,7 @@ export const StateProvider = (props) => {
   const [bar, setBar] = useState(false);
   const [container, setContainer] = useState(true);
   const [navigationBottom, setNavigationBottom] = useState(true);
-  const [toggleType, setToggleType] = useState("clothing" || "care");
+  const [toggleType, setToggleType] = useState("gallery" || "care");
   const [toggleContainer, setToggleContainer] = useState(
     "empty" ||
       "screen" ||
@@ -31,42 +31,42 @@ export const StateProvider = (props) => {
       collection: "gallery",
       link: "/collections/gallery",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "تخفیف",
       collection: "sale",
       link: "/collections/sale",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "اکسسوری",
       collection: "accessories",
       link: "/collections/accessories",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "کفش",
       collection: "shoes",
       link: "/collections/shoes",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "بلاگرز",
       collection: "bloggers",
       link: "/collections/bloggers",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "برندز",
       collection: "brands",
       link: "/collections/brands",
       active: false,
-      type: "clothing",
+      type: "gallery",
     },
     {
       title: "محصولات بهداشتی",

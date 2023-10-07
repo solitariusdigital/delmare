@@ -196,6 +196,10 @@ a {
   padding: 8px;
   max-width: config.$max-width;
   font-size: config.$tiny-font;
+
+  h2 {
+    margin: 12px;
+  }
 }
 
 .collection-grid {
@@ -410,12 +414,19 @@ a {
   padding: 12px;
 }
 
+.loadEntryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .loadAppUpdate,
 .loadEntry {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
   p {
     margin-top: 12px;
