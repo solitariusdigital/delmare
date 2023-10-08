@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: config.$cream;
+  @include mixins.border-radius();
 
   div {
     position: relative;

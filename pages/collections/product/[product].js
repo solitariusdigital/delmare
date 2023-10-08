@@ -134,7 +134,7 @@ export default function Product({ product, favourite }) {
   }, [setSimilarProducts, product]);
 
   useEffect(() => {
-    setBar(false);
+    setBar(true);
     setNavigationBottom(false);
     secureLocalStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     if (product.group === "clothing") {

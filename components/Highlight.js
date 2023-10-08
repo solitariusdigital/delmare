@@ -1,9 +1,20 @@
+import { useContext, useState, useEffect, Fragment } from "react";
+import { StateContext } from "../context/stateContext";
 import classes from "./Highlight.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
-import { Fragment } from "react";
 
 export default function Highlight({ products }) {
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+
+  const selectProduct = (id) => {
+    Router.push(`/collections/product/${id}`);
+    navigationTopBar.map((nav, i) => {
+      nav.active = false;
+    });
+    setNavigationTopBar([...navigationTopBar]);
+  };
+
   return (
     <div className={classes.container}>
       {products && (
@@ -12,7 +23,7 @@ export default function Highlight({ products }) {
             <div key={index}>
               <Image
                 onClick={() => {
-                  Router.push(`/collections/product/${product["_id"]}`);
+                  selectProduct(product["_id"]);
                 }}
                 className={classes.image}
                 src={product.images.main}
