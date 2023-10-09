@@ -10,9 +10,12 @@ import loadingImage from "../assets/loaderUpdate.png";
 import logo from "../assets/logo.svg";
 import brand from "../assets/brand.svg";
 import lemon from "../assets/lemon.png";
-
-import { getNotificationsApi, getUserApi } from "../services/api";
 import secureLocalStorage from "react-secure-storage";
+import {
+  getNotificationsApi,
+  getUserApi,
+  updateUserApi,
+} from "../services/api";
 
 export default function Layout(props) {
   const { container, setContainer } = useContext(StateContext);
@@ -51,6 +54,7 @@ export default function Layout(props) {
           const user = await getUserApi(currentUserData["_id"]);
           setCurrentUser(user);
           secureLocalStorage.setItem("currentUser", JSON.stringify(user));
+          await updateUserApi(user);
         }
       } catch (error) {
         console.error(error);
