@@ -14,6 +14,15 @@ export default function Users({ sortedUsers }) {
   const { container, setContainer } = useContext(StateContext);
   const { navigationBottom, setNavigationBottom } = useContext(StateContext);
   const [displayPage, setDisplayPage] = useState(false);
+  const [reqNumber, setReqNumber] = useState(50);
+
+  useEffect(() => {
+    // manage scroll position and number of items on the page
+    if (sessionStorage.getItem("positionY")) {
+      window.scrollTo(0, sessionStorage.getItem("positionY"));
+    }
+    window.addEventListener("scroll", loadMore);
+  });
 
   useEffect(() => {
     if (
@@ -28,6 +37,15 @@ export default function Users({ sortedUsers }) {
       Router.push("/");
     }
   }, [setContainer, setNavigationBottom]);
+
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.scrollingElement.scrollHeight
+    ) {
+      setReqNumber(reqNumber + 50);
+    }
+  };
 
   return (
     <Fragment>
@@ -51,34 +69,40 @@ export default function Users({ sortedUsers }) {
             />
           </div>
           <div className="user-page">
-            {sortedUsers.map((user, index) => (
-              <div
-                key={index}
-                className={classes.infoCard}
-                style={{ marginTop: "0px" }}
-              >
-                <div className={classes.row}>
-                  <p className={classes.title}>نام</p>
-                  <p>{user.name === "" ? "-" : user.name}</p>
+            {sortedUsers
+              .map((user, index) => (
+                <div
+                  key={index}
+                  className={classes.infoCard}
+                  style={{ marginTop: "0px" }}
+                >
+                  <div className={classes.row}>
+                    <p className={classes.title}>نام</p>
+                    <p>{user.name === "" ? "-" : user.name}</p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.title}>موبایل</p>
+                    <p>{user.phone}</p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.title}>اعتبار</p>
+                    <p>{convertNumber(user.loyalty)} T</p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.title}>عضویت</p>
+                    <p suppressHydrationWarning>
+                      {convertDate(user.createdAt)}
+                    </p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.title}>فعالیت</p>
+                    <p suppressHydrationWarning>
+                      {convertDate(user.updatedAt)}
+                    </p>
+                  </div>
                 </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>موبایل</p>
-                  <p>{user.phone}</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>اعتبار</p>
-                  <p>{convertNumber(user.loyalty)} T</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>عضویت</p>
-                  <p suppressHydrationWarning>{convertDate(user.createdAt)}</p>
-                </div>
-                <div className={classes.row}>
-                  <p className={classes.title}>فعالیت</p>
-                  <p suppressHydrationWarning>{convertDate(user.updatedAt)}</p>
-                </div>
-              </div>
-            ))}
+              ))
+              .slice(0, reqNumber)}
           </div>
         </Fragment>
       )}
