@@ -163,6 +163,7 @@ function Register() {
           );
           userData.loyalty = userData.loyalty + 100000;
           await updateUserApi(userData);
+          setReferralData({});
         }
         Router.push("/");
       }
