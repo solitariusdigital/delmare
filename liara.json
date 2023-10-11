@@ -1,8 +1,8 @@
 {
   "disks": [
     {
-      "name": "photos",
-      "mountTo": "storage"
+      "name": "disk",
+      "mountTo": "tmp"
     }
   ]
 }
