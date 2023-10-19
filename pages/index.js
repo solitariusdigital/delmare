@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 import dbConnect from "../services/dbConnect";
 import ProductModel from "../models/Product";
 import Highlight from "../components/Highlight";
+import Footer from "../components/navigation/Footer";
 
 export default function HomePage({
   newItems,
@@ -175,7 +176,7 @@ export default function HomePage({
             >
               <div
                 className={
-                  collection.type === "clothing" ? "ctaClothing" : "ctaCare"
+                  collection.type === "gallery" ? "ctaClothing" : "ctaCare"
                 }
               >
                 <p>{collection.title}</p>
@@ -207,15 +208,15 @@ export default function HomePage({
           </Fragment>
         ))}
       </div>
-
       <div className="highlight">
         <h4>ارزانترین</h4>
         <Highlight products={cheapestItems} />
       </div>
       <div className="message">
-        <h4>خرید امن و راحت از بهترین برندهای ایران و دنیا</h4>
         <h2>دِل، مارا خواهد بُرد</h2>
+        <h4>خرید امن و راحت از بهترین برندهای ایران و دنیا</h4>
       </div>
+      {/* <Footer /> */}
     </Fragment>
   );
 }

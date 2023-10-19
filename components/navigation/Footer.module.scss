@@ -1,0 +1,38 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+  padding: 12px;
+  background: linear-gradient(config.$cream, config.$brand);
+}
+
+.copyright {
+  font-size: 12px;
+  text-align: center;
+
+  p {
+    margin: 12px 0px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .action {
+      margin: 0px 8px;
+    }
+  }
+}
