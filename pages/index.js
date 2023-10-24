@@ -216,7 +216,7 @@ export default function HomePage({
         <h2>دِل، مارا خواهد بُرد</h2>
         <h4>خرید امن و راحت از بهترین برندهای ایران و دنیا</h4>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </Fragment>
   );
 }

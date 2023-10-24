@@ -5,6 +5,7 @@ import ShoppingCart from "./ShoppingCart.module.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./About.module.scss";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
+import Footer from "./Footer";
 
 export default function About() {
   const { toggleContainer, setToggleContainer } = useContext(StateContext);
@@ -80,6 +81,7 @@ export default function About() {
               باشد
             </p>
           </div>
+          <Footer />
         </div>
       </div>
     </div>
