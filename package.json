@@ -14,7 +14,7 @@
     "@mui/icons-material": "^5.14.6",
     "@mui/material": "^5.14.11",
     "aws-sdk": "^2.1467.0",
-    "@mui/styled-engine-sc": "^5.14.11",
+    "@mui/styled-engine-sc": "^5.14.12",
     "chokidar": "^3.5.3",
     "get-node-cli": "^8.1.0",
     "kavenegar": "^1.1.4",
