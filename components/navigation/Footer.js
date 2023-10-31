@@ -21,16 +21,10 @@ export default function Footer() {
         <Image width={90} height={140} src={logo} alt="logo" />
       </div>
       <div className={classes.copyright}>
-        <p>کليه حقوق اين وب اپلیکیشن به دلماره تعلق دارد</p>
         <p>delmareh.com @Copyright 2023</p>
         <div
           className={classes.row}
-          onClick={() =>
-            window.open(
-              "https://docs.google.com/forms/d/e/1FAIpQLSdqKHLBydQIfm06LTtw0wELHaDJJFGU3GNQFsVWNd3t0jz5hA/viewform?usp=sf_link",
-              "_ self"
-            )
-          }
+          onClick={() => window.open("https://musetechlab.com/")}
         >
           <Image
             className={classes.image}

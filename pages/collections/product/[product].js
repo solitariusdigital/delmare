@@ -32,6 +32,7 @@ import secureLocalStorage from "react-secure-storage";
 import { NextSeo } from "next-seo";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
+import Footer from "../../../components/navigation/Footer";
 
 export default function Product({ product, favourite }) {
   const { shoppingCart, setShoppingCart } = useContext(StateContext);
@@ -1237,6 +1238,7 @@ export default function Product({ product, favourite }) {
           </a>
           <p>نماد اعتماد الکترونیکی</p>
         </div>
+        <Footer />
       </div>
     </Fragment>
   );
