@@ -231,13 +231,13 @@ export async function getServerSideProps(context) {
         return product.activate && product.display && !product.sale;
       })
       .reverse()
-      .slice(0, 5);
+      .slice(0, 15);
     const newSales = products
       .filter((product) => {
         return product.activate && product.display && product.sale;
       })
       .reverse()
-      .slice(0, 5);
+      .slice(0, 15);
     const mostViews = products
       .filter((product) => {
         return product.activate && product.display;
@@ -245,13 +245,13 @@ export async function getServerSideProps(context) {
       .sort((a, b) => {
         return b.views - a.views;
       })
-      .slice(0, 5);
+      .slice(0, 15);
     const cheapestItems = products
       .filter((product) => {
         return product.activate && product.display;
       })
       .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-      .slice(0, 5);
+      .slice(0, 15);
 
     return {
       props: {
