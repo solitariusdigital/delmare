@@ -11,9 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.10.4",
-    "aws-sdk": "^2.1472.0",
     "@mui/material": "^5.14.13",
     "@mui/icons-material": "^5.14.13",
+    "aws-sdk": "^2.1473.0",
     "@mui/styled-engine-sc": "^5.14.12",
     "chokidar": "^3.5.3",
     "get-node-cli": "^8.1.0",
