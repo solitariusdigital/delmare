@@ -107,7 +107,7 @@ export default function HomePage({
               onClick={() => setDisplayDesc(!displayDesc)}
               className="ctaButton"
             >
-              <p>با دوستات خرید کن</p>
+              <p>با دوستات جایزه بگیر</p>
             </div>
           </div>
           {displayDesc && (
