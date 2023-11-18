@@ -54,11 +54,6 @@ function Container() {
     setNavigationTopBar([...navigationTopBar]);
   };
 
-  const navigateLandingPage = () => {
-    setSearchControl(false);
-    Router.push("/");
-  };
-
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -72,7 +67,7 @@ function Container() {
           </div>
           <div
             className={classes.brandContainer}
-            onClick={() => navigateLandingPage()}
+            onClick={() => window.location.assign("/")}
           >
             <Image width={40} height={40} src={lemon} alt="lemon" priority />
             <div className={classes.brand}>
