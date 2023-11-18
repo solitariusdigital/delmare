@@ -393,7 +393,9 @@ export default function Upload() {
     if (
       !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
       JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
-        "admin"
+        "admin" ||
+      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
+        "agent"
     ) {
       setContainer(false);
       setDisplayPage(true);

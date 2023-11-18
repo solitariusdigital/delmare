@@ -61,13 +61,13 @@ export default function HomePage({
 
   const collections = [
     {
-      title: "کالکشن مد",
+      title: ["لباس", "کفش", "کیف"],
       type: "gallery",
       link: "/collections/gallery",
       imageSrc: `${sourceLink}eight.jpg`,
     },
     {
-      title: "محصولات بهداشتی",
+      title: ["ضد آفتاب", "روشن کننده", "پاک کننده"],
       type: "care",
       link: "/collections/skin",
       imageSrc: `${sourceLink}care.jpg`,
@@ -160,7 +160,7 @@ export default function HomePage({
         </div>
       )}
       <div className="highlight">
-        <h4>جدید</h4>
+        <h3>جدید</h3>
         <Highlight products={newItems} />
       </div>
       <div className="collections-type">
@@ -179,7 +179,9 @@ export default function HomePage({
                   collection.type === "gallery" ? "ctaClothing" : "ctaCare"
                 }
               >
-                <p>{collection.title}</p>
+                <h3>{collection.title[0]}</h3>
+                <h3>{collection.title[1]}</h3>
+                <h3>{collection.title[2]}</h3>
               </div>
               <Image
                 className={"image"}
@@ -195,13 +197,13 @@ export default function HomePage({
             </div>
             {index === 0 && (
               <div className="highlight">
-                <h4>تخفیف ویژه</h4>
+                <h3>تخفیف ویژه</h3>
                 <Highlight products={newSales} />
               </div>
-            )}{" "}
+            )}
             {index === 0 && (
               <div className="highlight">
-                <h4>بیشترین بازدید</h4>
+                <h3>بیشترین بازدید</h3>
                 <Highlight products={mostViews} />
               </div>
             )}
@@ -209,7 +211,7 @@ export default function HomePage({
         ))}
       </div>
       <div className="highlight">
-        <h4>ارزانترین</h4>
+        <h3>ارزانترین</h3>
         <Highlight products={cheapestItems} />
       </div>
       <div className="message">

@@ -182,7 +182,7 @@ export default function BurgerMenu() {
                 onClick={() => navigateMenu("account")}
               >
                 {currentUser.permission === "admin" && <MilitaryTechIcon />}
-                {currentUser.permission === "subadmin" && <MilitaryTechIcon />}
+                {currentUser.permission === "agent" && <MilitaryTechIcon />}
                 {currentUser.permission === "blogger" && <StarIcon />}
                 {currentUser.permission === "customer" && <Person4Icon />}
                 <p>
@@ -222,7 +222,7 @@ export default function BurgerMenu() {
                   ] === "admin" ||
                     JSON.parse(secureLocalStorage.getItem("currentUser"))[
                       "permission"
-                    ] === "subadmin") && (
+                    ] === "agent") && (
                     <div
                       className={classes.item}
                       onClick={() => {
@@ -296,9 +296,9 @@ export default function BurgerMenu() {
                   <Fragment>
                     <button
                       className="mainButton"
-                      onClick={() => Router.push("/upload")}
+                      onClick={() => Router.push("/invoice")}
                     >
-                      Upload
+                      Invoices
                     </button>
                     <button
                       className="mainButton"
@@ -310,9 +310,9 @@ export default function BurgerMenu() {
                 )}
                 <button
                   className="mainButton"
-                  onClick={() => Router.push("/invoice")}
+                  onClick={() => Router.push("/upload")}
                 >
-                  Invoices
+                  Upload
                 </button>
               </div>
             </div>
