@@ -9,7 +9,8 @@ import About from "./About";
 import Download from "./Download";
 import Follow from "./Follow";
 import AddHomeScreen from "./AddHomeScreen";
-import SearchIcon from "@mui/icons-material/Search";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import classes from "./Container.module.scss";
@@ -82,7 +83,7 @@ function Container() {
 
           <div className="shoppingcart-icon">
             {searchControl && (
-              <SearchIcon
+              <UnfoldMoreIcon
                 className="icon search"
                 onClick={() => setSearch(!search)}
                 sx={{ fontSize: 28 }}
