@@ -363,9 +363,16 @@ export default function Collection({
                       <p>تمام</p>
                     </div>
                   )}
-                  {checkDate(product.createdAt) && product.activate && (
-                    <div className="new">
-                      <p>جدید</p>
+                  {checkDate(product.createdAt) &&
+                    product.activate &&
+                    product.brandType !== "اورجینال" && (
+                      <div className="new">
+                        <p>جدید</p>
+                      </div>
+                    )}
+                  {product.brandType === "اورجینال" && (
+                    <div className="orginal">
+                      <p>اورجینال</p>
                     </div>
                   )}
                 </div>

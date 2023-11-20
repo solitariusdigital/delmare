@@ -296,7 +296,8 @@ a {
 
     .new,
     .sale,
-    .activate {
+    .activate,
+    .orginal {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -308,14 +309,20 @@ a {
       font-size: config.$tiny-font;
     }
 
-    .new {
+    .new,
+    .orginal {
       top: 190px;
       right: 0px;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       padding: 3px;
+      font-weight: bold;
       color: config.$black;
       @include mixins.gradientBackground();
+    }
+
+    .orginal {
+      width: 70px;
     }
 
     .sale {
