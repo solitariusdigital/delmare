@@ -112,9 +112,7 @@ export default function HomePage({
           </div>
           {displayDesc && (
             <div className="info animate__animated animate__fadeInUp">
-              <p className="message">
-                دعوت دوستان و دریافت اعتبار ویژه تا پایان آبان ماه
-              </p>
+              <p className="message">دعوت دوستان و دریافت اعتبار ویژه</p>
               <p className="message">
                 <span className="row">
                   <MonetizationOnIcon
