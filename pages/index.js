@@ -166,7 +166,7 @@ export default function HomePage({
           <Fragment key={index}>
             <div
               className={
-                collection.type === "clothing" ? "cardClothing" : "cardCare"
+                collection.type === "gallery" ? "cardClothing" : "cardCare"
               }
               onClick={() =>
                 activateNav(collection.type, collection.link, index)

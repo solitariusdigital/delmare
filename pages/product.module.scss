@@ -6,7 +6,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   position: absolute;
   bottom: 12px;
   right: 0px;
@@ -347,39 +346,29 @@
     @include mixins.button(config.$red, config.$white, 100%);
     width: 100px;
   }
+
+  .discount {
+    @include mixins.button(config.$magneta, config.$white, 100%);
+    width: 100px;
+  }
 }
 
 .adminDiscount {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 
   .input {
-    margin: 12px 0;
-
-    .bar {
-      display: flex;
-    }
+    margin: 20px 0;
 
     .label {
       color: config.$grey;
       font-size: config.$small-font;
       margin-bottom: 5px;
-
-      span {
-        color: config.$orange;
-        font-size: config.$tiny-font;
-      }
     }
 
     input {
       @include mixins.input();
-      width: 200px;
-    }
-
-    p {
-      display: flex;
-      flex-direction: row-reverse;
     }
   }
 

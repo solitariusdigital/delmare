@@ -126,7 +126,9 @@ export default function Product({ product, favourite }) {
         const similarProducts = data
           .filter(
             (pro) =>
-              pro.category === product.category && pro["_id"] !== product["_id"]
+              pro.category === product.category &&
+              pro["_id"] !== product["_id"] &&
+              pro.activate
           )
           .sort(() => 0.5 - Math.random())
           .slice(0, 2);
@@ -803,6 +805,18 @@ export default function Product({ product, favourite }) {
                   </button>
                 )}
               </Fragment>
+              <Fragment>
+                {product.sale && product.activate && (
+                  <button
+                    className={classes.discount}
+                    onClick={() => {
+                      removeProductDiscountPercentage();
+                    }}
+                  >
+                    حذف تخفیف
+                  </button>
+                )}
+              </Fragment>
             </div>
           ))}
 
@@ -814,9 +828,7 @@ export default function Product({ product, favourite }) {
               {!product.sale && product.activate && (
                 <Fragment>
                   <div className={classes.input}>
-                    <div className={classes.bar}>
-                      <p className={classes.label}>درصد تخفیف</p>
-                    </div>
+                    <p className={classes.label}>درصد تخفیف</p>
                     <input
                       type="tel"
                       id="discount"
@@ -834,15 +846,6 @@ export default function Product({ product, favourite }) {
                     تخفیف
                   </button>
                 </Fragment>
-              )}
-              {product.sale && product.activate && (
-                <button
-                  onClick={() => {
-                    removeProductDiscountPercentage();
-                  }}
-                >
-                  حذف تخفیف
-                </button>
               )}
             </div>
           ))}
