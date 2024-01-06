@@ -349,6 +349,46 @@
   }
 }
 
+.adminDiscount {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .input {
+    margin: 12px 0;
+
+    .bar {
+      display: flex;
+    }
+
+    .label {
+      color: config.$grey;
+      font-size: config.$small-font;
+      margin-bottom: 5px;
+
+      span {
+        color: config.$orange;
+        font-size: config.$tiny-font;
+      }
+    }
+
+    input {
+      @include mixins.input();
+      width: 200px;
+    }
+
+    p {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+
+  button {
+    @include mixins.button(config.$magneta, config.$white, 100%);
+    width: 100px;
+  }
+}
+
 .alert {
   display: flex;
   flex-direction: row-reverse;

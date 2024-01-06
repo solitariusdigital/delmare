@@ -10,7 +10,11 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { convertNumber, abbreviateNumber } from "../../../services/utility";
+import {
+  convertNumber,
+  abbreviateNumber,
+  calculatePercentage,
+} from "../../../services/utility";
 import {
   updateUserApi,
   getProductApi,
@@ -70,6 +74,7 @@ export default function Product({ product, favourite }) {
   const [discount, setDiscount] = useState(product.discount);
   const [price, setPrice] = useState(product.price);
   const [percentage, setPercentage] = useState(product.percentage);
+  const [percentageDiscount, setPercentageDiscount] = useState(0);
 
   const [like, setLike] = useState(favourite);
   const [displayPopup, setDisplayPopup] = useState(false);
@@ -441,6 +446,35 @@ export default function Product({ product, favourite }) {
     }
   };
 
+  const updateProductDiscountPercentage = async () => {
+    if (percentageDiscount > 0) {
+      const getProduct = await getProductApi(product["_id"]);
+      let updatedProduct = {
+        ...getProduct,
+        sale: true,
+        percentage: percentageDiscount,
+        discount:
+          product.price -
+          calculatePercentage(percentageDiscount, product.price),
+        createdAt: new Date(),
+      };
+      await updateProductApi(updatedProduct);
+      window.scrollTo(0, 0);
+      window.location.assign("/collections/sale");
+    }
+  };
+
+  const removeProductDiscountPercentage = async () => {
+    const getProduct = await getProductApi(product["_id"]);
+    let updatedProduct = {
+      ...getProduct,
+      sale: false,
+    };
+    await updateProductApi(updatedProduct);
+    window.scrollTo(0, 0);
+    window.location.assign("/collections/sale");
+  };
+
   return (
     <Fragment>
       <NextSeo
@@ -721,6 +755,7 @@ export default function Product({ product, favourite }) {
             افزودن به سبد خرید
           </button>
         )}
+
         {!currentUser ||
           (JSON.parse(secureLocalStorage.getItem("currentUser"))[
             "permission"
@@ -768,6 +803,47 @@ export default function Product({ product, favourite }) {
                   </button>
                 )}
               </Fragment>
+            </div>
+          ))}
+
+        {!currentUser ||
+          (JSON.parse(secureLocalStorage.getItem("currentUser"))[
+            "permission"
+          ] === "admin" && (
+            <div className={classes.adminDiscount}>
+              {!product.sale && product.activate && (
+                <Fragment>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <p className={classes.label}>درصد تخفیف</p>
+                    </div>
+                    <input
+                      type="tel"
+                      id="discount"
+                      name="discount"
+                      onChange={(e) => setPercentageDiscount(e.target.value)}
+                      value={percentageDiscount}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      updateProductDiscountPercentage();
+                    }}
+                  >
+                    تخفیف
+                  </button>
+                </Fragment>
+              )}
+              {product.sale && product.activate && (
+                <button
+                  onClick={() => {
+                    removeProductDiscountPercentage();
+                  }}
+                >
+                  حذف تخفیف
+                </button>
+              )}
             </div>
           ))}
 

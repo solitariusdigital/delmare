@@ -12,7 +12,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { getBrandsApi, updateBrandApi } from "../services/api";
 import Head from "next/head";
 import secureLocalStorage from "react-secure-storage";
-import { convertNumber } from "../services/utility";
+import { convertNumber, calculatePercentage } from "../services/utility";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 export default function Upload() {
@@ -90,7 +90,6 @@ export default function Upload() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [discount, setDiscount] = useState("");
   const [percentage, setPercentage] = useState("");
   const [sale, setSale] = useState(false);
   const [delmareId, setDelmareId] = useState("");
@@ -488,7 +487,7 @@ export default function Upload() {
         brandType: brandType,
         deliveryType: deliveryType,
         price: price.trim(),
-        discount: discount.trim(),
+        discount: price - calculatePercentage(percentage, price),
         percentage: percentage.trim(),
         sale: sale,
         activate: true,
@@ -599,7 +598,7 @@ export default function Upload() {
         brandType: brandType,
         deliveryType: deliveryType,
         price: price.trim(),
-        discount: discount.trim(),
+        discount: price - calculatePercentage(percentage, price),
         percentage: percentage.trim(),
         sale: sale,
         activate: true,
@@ -1044,25 +1043,6 @@ export default function Upload() {
             </div>
             {sale && (
               <Fragment>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setDiscount("")}
-                      sx={{ fontSize: 16 }}
-                    />
-                    <p>{convertNumber(Number(discount))} T</p>
-                    <p className={classes.label}>قیمت تخفیف تومان</p>
-                  </div>
-                  <input
-                    type="tel"
-                    id="discount"
-                    name="discount"
-                    onChange={(e) => setDiscount(e.target.value)}
-                    value={discount}
-                    autoComplete="off"
-                  />
-                </div>
                 <div className={classes.input}>
                   <div className={classes.bar}>
                     <CloseIcon

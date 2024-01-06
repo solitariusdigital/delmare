@@ -370,7 +370,7 @@ export default function Collection({
                         <p>جدید</p>
                       </div>
                     )}
-                  {product.brandType === "اورجینال" && (
+                  {product.brandType === "اورجینال" && product.activate && (
                     <div className="orginal">
                       <p>اورجینال</p>
                     </div>
