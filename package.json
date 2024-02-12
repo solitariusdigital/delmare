@@ -20,7 +20,7 @@
     "kavenegar": "^1.1.4",
     "moment": "^2.29.4",
     "mongodb-shell": "^1.0.1",
-    "mongoose": "^6.12.3",
+    "mongoose": "^8.0.0",
     "next": "13.5.6",
     "next-pwa": "^5.6.0",
     "next-seo": "^5.15.0",
